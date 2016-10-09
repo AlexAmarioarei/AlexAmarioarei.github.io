@@ -142,10 +142,12 @@ h1 {
 	height: 220px;
 	padding-top: 20px;
 	box-sizing: border-box;
-	-webkit-animation: slide 50s linear infinite;/*header animation*/
+	/*
+	-webkit-animation: slide 50s linear infinite;
 	-moz-animation: slide 50s linear infinite;
 	-o-animation: slide 50s linear infinite;
 	-ms-animation: slide 50s linear infinite;
+	*/
 }
 
 /* animation for chrome and firefox*/
@@ -159,12 +161,12 @@ h1 {
     to { background-position: -400px 0; }
 }
 
-/*
+
 @-o-keyframes slide {
     from { background-position: 0 0; }
     to { background-position: -400px 0; }
 }
-*/
+
 
 @-ms-keyframes slide {
     from { background-position: 0 0; }
