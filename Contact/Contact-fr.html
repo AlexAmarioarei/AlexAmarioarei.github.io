@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+
+<html lang='fr'>
+<head>
+    <title>
+        Alexandru Amărioarei 
+    </title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" /> 
+    <meta id="viewport" name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" /> 
+    <link rel="stylesheet" type="text/css" href="../styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/main.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://malsup.github.com/jquery.cycle.all.js"></script>
+    <!--
+    <script type="text/javascript"
+	   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
+	</script>
+	-->
+    <!--[if lt IE 9]>
+<style>
+/* For IE < 9 (trigger hasLayout) */
+.clearfix {
+    zoom:1;
+}
+</style>
+<![endif]-->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#slider').cycle({
+		fx: 'fade',
+		next: '#next', 
+    	prev: '#prev' 
+	});
+});
+</script>
+
+</head>
+
+<body>
+	
+<div class="container">
+	
+    <header class="mainHeader"> 
+    	
+    	<div class="header"> 
+    		
+    		<h1>Le Site de Alexandru Amărioarei</h1>
+    		<a href="Contact-en.html" title="English"> <img src="../images/flag-UK.png" alt="english" /></a>
+    	
+    	</div>
+    	
+    	<div id="slideShow">
+	    	
+	    </div>
+    	
+    	<nav class="navMenu"> 
+		
+			<ul>
+				<li><a href="../index-fr.html"> Accueil </a></li>
+				<li><a href="../Research/Research-fr.html"> Recherche </a></li>
+				<li><a href="../Teaching/Teaching-fr.html"> Cours </a></li>
+				<!--<li><a href="Photos-fr.html"> Photos </a></li>-->
+				<li><a class="active" href="../Contact/Contact-fr.html"> Contact </a></li>
+			</ul>
+				
+		</nav>	
+    	
+    </header>
+	
+
+	<div class="content"> 
+		
+		<div class="leftSideContact"> 
+			
+			<h2>Web et telephone</h2>
+			
+			<ul>
+			 	<li><span>Email:</span> alexandru[dot]amarioarei[at] incdsb [dot] ro </li>
+			 	<li><span>URL:</span> http://alexamarioarei.appspot.com/</li>
+			 	<li><span>Telephone:</span> +40(0)21-220.77.80</li>
+			 	
+			</ul>
+		 
+			 <h2>Adresse de courier</h2>
+			 
+			 <ul>
+			 	<li><a href = "http://www.incdsb.ro/en/" target="_blank"> Institut de R&amp;D des Sciences Biologiques</a>
+			 		<ul>
+			 			<li> 296 Independetei Bldv., Arrondissement 6</li>
+			 			<li> 060031 Bucarest, Roumanie </li>	
+			 		</ul>
+			 	</li>	
+			 </ul>
+		 
+		</div>
+			
+		<div class="rightSideContact"> 
+			<h2>Location</h2> 
+		 
+			 <div id= "my-map">
+			 </div>
+			<!--<div id="visitorsMap">
+		 		<script type="text/javascript" src="http://ji.revolvermaps.com/2/1.js?i=8k0d49cjpwe&amp;s=220&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=ff0000" async="async"></script> 
+			</div>-->
+				
+		</div>
+		
+	</div>
+
+	<footer class="pageFooter">
+		<!--
+		<a href="http://www.univ-lille1.fr/" target="_blank"><img class="logoF" src="images/logo_ustl_01.png" alt="Univ. Lille 1"/></a>
+		<a href="http://www.inria.fr/centre/lille" target="_blank"><img class="logoF" src="images/inr_logo_cherch_FR_coul.png" alt="Inria"/></a>
+		<a href="https://math.univ-lille1.fr/" target="_blank"><img class="logoF" src="images/logoPaulPainleve.png" alt="Lab. Paul Painleve"/></a>
+		-->
+		<a href="http://www.dbioro.eu/" target="_blank"><img class="logoF" src="../images/logoincdsb.png" alt="National Institute of R-D for Biological Sciences"/></a>
+		<p><span id="pageFooterSpan1">Copyright</span> &copy; 2015-2016 <span id="pageFooterSpan2">Alexandru</span> Amărioarei</p>
+	</footer>
+</div>
+
+
+<!-- Map Script -->
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCERoGFOlRHVSDNHgm8c34mpfqbyuoUNXw&sensor=false">
+</script>
+
+<script>
+	'use strict';
+	document.addEventListener('DOMContentLoaded', drawMap);
+	
+	//make map available in global scope
+	
+	var map;
+	
+	function drawMap() {
+		var storeLocation = new google.maps.LatLng(44.447472, 26.045971);/*(50.6101372, 3.1434315);*/
+		
+        var mapOptions = {
+          'center': storeLocation,
+          'zoom': 19,
+          'mapTypeId': google.maps.MapTypeId.HYBRID,/*ROADMAP,*/
+          'draggable': true
+        };
+        
+        map = new google.maps.Map(document.getElementById("my-map"),
+            mapOptions);
+            
+         var marker = new google.maps.Marker({
+	      	position: new google.maps.LatLng(44.447272, 26.045971),
+	      	map: map,
+	      	title: 'INCDSB'
+	  	});
+	  		
+	  	var popupContent = '<p style = "margin: 0px; padding: 0px;"><img style="float: left; margin: 0px;" src="../images/incdsb_small.png" /><strong style="margin: 15px 5px; font-size: 16px; display: inline-block;"><a href = "http://www.incdsb.ro/" target= "blank">INCDSB</a></strong> <br style="clear: both;" /></p>'; 
+	  	popupContent += '<div style = "width: 100%; font-size: 9pt;">Splaiul Independentei, Nr. 296, Sector 6, Bucuresti, Romania</div>'; 
+ 
+	  		
+	  	var infowindow = new google.maps.InfoWindow({
+	        content: popupContent,
+	        maxWidth: 150
+	 	});
+	 	
+	 	google.maps.event.addListener(marker, 'click', function() {
+   	 		infowindow.open(map,marker);
+  		});
+  		
+  		infowindow.open(map,marker);
+	 	
+      }
+      
+</script>
+
+</body>
+</html>
