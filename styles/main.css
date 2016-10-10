@@ -396,13 +396,13 @@ h2{
 	text-indent: 1em;
 }
 
-.leftSideTeaching p a{
+.leftSideTeaching a{
 		color: #874F00;
 		text-decoration: none;
 		font-weight: bold;
 }
 
-.leftSideTeaching p a:hover{
+.leftSideTeaching a:hover{
 	color: #025587;
 }
 
