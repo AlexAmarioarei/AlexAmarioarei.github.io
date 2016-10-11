@@ -1,0 +1,402 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Tema 1},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Probabilit\u a\c ti \c si Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, G. Popovici}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 241, 242, 243, 244}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Tema 1}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+\subtitle{Câmp de probabilitate, operații cu evenimente, probabilitate
+conditionată și formula lui Bayes}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+1}{Exerciiul 1}}\label{exerciiul-1}
+
+Fie \(A\), \(B\) \c si \(C\) trei evenimente. Exprima\c ti \(\^ i\)n
+func\c tie de \(A\), \(B\), \(C\) \c si de opera\c tiile cu mul\c timi
+urm\u atoarele evenimente:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  \(A\) singur se realizeaz\u a
+\item
+  \(A\) \c si \(C\) se realizeaz\u a dar nu \c si \(B\)
+\item
+  cele trei evenimente se produc
+\item
+  cel pu\c tin unul dintre cele trei evenimente se produce
+\item
+  cel pu\c tin dou\u a evenimente din cele trei se produc
+\item
+  cel mult un eveniment se produce
+\item
+  niciunul din cele trei evenimente nu se produce
+\item
+  exact dou\u a evenimente din cele trei se produc
+\item
+  nu mai mult de dou\u a evenimente nu se realizeaz\u a
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+2}{Exerciiul 2}}\label{exerciiul-2}
+
+Fie \(\Om\) mul\c timea tuturor cuplurilor c\u as\u atorite dintr-un
+ora\c s dat. Consider\u am evenimentele urm\u atoare:
+
+\(A\): ``b\u arbatul are mai mult de 40 de ani''
+
+\(B\): ``femeia este mai t\(\^ a\)n\u ar\u a dec\(\^ a\)t b\u arbatul''
+
+\(C\): ``femeia are mai mult de 40 de ani''
+
+Se cere:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Interpreta\c ti in func\c tie de \(A\), \(B\) \c si \(C\) evenimentul
+  ``so\c tul are mai mult de 40 de ani dar nu \c si so\c tia sa''.
+\item
+  Descrie\c ti in limbaj natural evenimentele: \(A\cap B\cap C^{c}\),
+  \(A\setminus{(A\cap B)}\) , \(A\cap B^{c}\cap C\), \(A\cup B\)
+\item
+  Verifica\c ti c\u a \(A\cap C^{c} \subset B\)
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+3}{Exerciiul 3}}\label{exerciiul-3}
+
+Fie \((\Om, \MF, \PP)\) un c\(\^a\)mp de probabilitate. Diferen\c ta
+simetric\u a dintre dou\u a evenimente \(A, B\in \MF\) este definit\u a
+prin \(A \triangle B=(A\cap B^{c})\cup(A^{c}\cap B)\). Ar\u ata\c ti
+c\u a:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  func\c tia \(d(A,B)=\PP(A\triangle B)\) este o distan\c t\u a pe
+  \(\MF\)
+\item
+  \(|\PP(A)-\PP(B)|\leq\PP(A\triangle B)\)
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+4}{Exerciiul 4}}\label{exerciiul-4}
+
+Fie \(n\), \(r>1\) numere naturale \c si consider\u am ecua\c tia cu
+\(r\) necunoscute: \[
+x_1+x_2+\cdots+x_r=n.
+\] O solu\c tie a acestei ecua\c tii este un \(r\)-tuplu
+\((x_1, \dots, x_r)\) a c\u arui sum\u a a componentelor este \(n\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  C\(\^a\)te solu\c tii are ecua\c tia de mai sus, cu componente
+  naturale strict pozitive ?
+\item
+  C\(\^a\)te solu\c tii are ecua\c tia de mai sus, cu componente
+  naturale pozitive ?
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+5}{Exerciiul 5}}\label{exerciiul-5}
+
+Un administrator de spital codific\u a pacien\c tii cu r\u ani prin
+\(\^i\)mpu\c scare \(\^i\)n func\c tie de asigurarea (\(D\) dac\u a
+pacientul are asigurare \c si \(N\) dac\u a nu are) \c si de starea
+acestora (\(b\) pentru bun\u a, \(m\) pentru medie \c si \(s\) pentru
+serioas\u a). Consider\u am experien\c ta aleatoare care consist\u a in
+codificarea pacien\c tilor.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    Determina\c ti \(\Om\) mul\c timea spa\c tiului st\u arilor acestui
+    experiment
+  \item
+    Fie \(A\) evenimentul \emph{starea de s\u an\u atate a pacientului
+    este serioas\u a}. Descrie\c ti evenimentele elementare care il
+    compun pe \(A\). Aceea\c si intrebare pentru evenimentul \(B\)
+    \emph{pacientul nu este asigurat} \c si pentru evenimentul
+    \(B^c\cup A\).
+  \end{enumerate}
+\item
+  Consider\u am echiprobabilitatea pe \(\Om\). Calcula\c ti
+  probabilit\u a\c tile: \(\PP(A)\), \(\PP(B)\) \c si \(\PP(B^c\cup A)\)
+\item
+  Aceea\c si intrebare pentru probabilitatea \(\PP'\) definit\u a prin
+\end{enumerate}
+
+\begin{center}
+    \begin{tabular}{c|ccc}
+        & $b$ & $m$ & $s$ \\
+      \hline
+      $O$ & $0,2$ & $0,2$ & $0,1$ \\
+      $N$ & $0,1$ & $0,3$ & $0,1$ \\
+    \end{tabular}
+  \end{center}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul 6 (Jocul de
+Poker)}{Exerciiul 6 (Jocul de Poker)}}\label{exerciiul-6-jocul-de-poker}
+
+Consider\u am experimentul in care extragem o man\u a de \(5\)
+c\u ar\c ti dintr-un pachet de c\u ar\c ti de \(52\) de c\u ar\c ti.
+S\u a se calculeze probabilitatea ca:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  S\u a avem careu (patru c\u ar\c ti de acela\c si tip) ?
+\item
+  S\u a avem full-house (trei c\u ar\c ti de un tip \c si dou\u a de
+  altul) ?
+\item
+  S\u a avem trei c\u ar\c ti de acela\c si tip ?
+\item
+  S\u a avem dou\u a perechi ?
+\item
+  S\u a avem o pereche ?
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+7}{Exerciiul 7}}\label{exerciiul-7}
+
+Se dore\c ste verificarea fiabilit\u a\c tii unui test de pentru
+depistarea nivelului de alcool al automobili\c stilor. In urma studiilor
+statistice pe un num\u ar mare de automobili\c sti, s-a observat c\u a
+in general \(0.5\%\) dintre ace\c stia dep\u a\c sesc nivelul de alcool
+autorizat. Niciun test nu este fiabil \(100\%\). Probabilitatea ca
+testul considerat s\u a fie pozitiv atunci cand doza de alcool
+autorizat\u a este dep\u a\c sit\u a precum \c si probabilitatea ca
+testul s\u a fie negativ atunci cand doza autorizat\u a nu este
+dep\u a\c sit\u a sunt egale cu \(p=0.99\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Care este probabilitatea ca un automobilist care a fost testat pozitiv
+  s\u a fi dep\u a\c sit in realitate nivelul de alcool autorizat ?
+\item
+  C\(\^a\)t devine valoarea parametrului \(p\) pentru ca aceast\u a
+  probabilitate s\u a fie de \(95\%\) ?
+\item
+  Un poli\c tist afirm\u a c\u a testul este mai fiabil samb\u ata seara
+  (atunci c\(\^a\)nd tinerii ies din cluburi). \c Stiind c\u a
+  propor\c tia de automobili\c sti care au b\u aut prea mult in acest
+  context este de \(30\%\), determina\c ti dac\u a poli\c tistul are
+  dreptate.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+8}{Exerciiul 8}}\label{exerciiul-8}
+
+Efectu\u am arunc\u ari succesive a dou\u a zaruri echilibrate \c si
+suntem interesa\c ti in g\u asirea probabilit\u a\c tii evenimentului ca
+suma \(5\) (a fe\c telor celor dou\u a zaruri) s\u a apar\u a inaintea
+sumei \(7\). Pentru aceasta presupunem c\u a arunc\u arile sunt
+\emph{independente}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Calcula\c ti pentru inceput probabilitatea evenimentului \(E_n\):
+  \emph{in primele \(n-1\) arunc\u ari nu a ap\u arut nici suma \(5\)
+  \c si nici suma \(7\) iar in a \(n\)-a aruncare a ap\u arut suma
+  \(5\)}. Concluziona\c ti.
+\item
+  Aceea\c si intrebare, dar inlocuind \(5\) cu \(2\).
+\end{enumerate}
+
+\subsubsection[Exerci\c tiul 9* ]{\texorpdfstring{Exerci\c tiul 9*
+\footnote{Exerci\c tiile cu * sunt suplimentare \c si nu sunt
+  obligatorii}}{Exerciiul 9* }}\label{exerciiul-9}
+
+Fie \((A_1, A_2, \dots, A_n)\), \(n\geq0\) un \c sir de p\u ar\c ti ale
+lui \(\Om\) \c si \(\MF\) algebra generat\u a de acesta (cea mai mic\u a
+algebr\u a in sensul incluziunii care con\c tine \c mul\c timile
+\(\{A_1, A_2, \dots, A_n\}\)). Fie \((c_1, \dots,c_m)\) un \c sir de
+numere reale \c si \((B_1, B_2, \dots, B_m)\) un \c sir de elemente din
+\(\MF\) (\(m\geq 0\)). Consider\u am inegalitatea
+
+\begin{equation}\label{eq1}
+  \displaystyle\sum_{k=1}^{m}c_k\PP(B_k)\geq 0
+\end{equation}
+
+unde \(\PP\) este o m\u asur\u a de probabiilitate pe \(\MF\).
+Urm\u atoarele propriet\u a\c ti sunt echivalente:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Inegalitatea \((\ref{eq1})\) este adev\u arat\u a pentru toate
+  m\u asurile de probabilitate \(\PP\) pe \(\MF\)
+\item
+  Inegalitatea \((\ref{eq1})\) este adev\u arat\u a pentru toate
+  m\u asurile de probabilitate \(\PP\) pe \(\MF\) care verific\u a
+  \(\PP(A_i)=0\) sau \(1\), pentru to\c ti \(i\in\{1,2,\dots,n\}\).
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+10*}{Exerciiul 10*}}\label{exerciiul-10}
+
+Fie \(S_{0}^{n}=1\),
+\(S_{k}^{n}=\displaystyle\sum_{1\leq i_1<\cdots<i_k\leq n}\PP\left(A_{i_1}\cap\cdots\cap A_{i_k}\right)\)
+\c si not\u am cu \(V_{n}^{r}\) (respectiv cu \(W_{n}^{r}\))
+probabilitatea ca exact \(r\) (respectiv cel pu\c tin \(r\)) dintre
+evenimentele \(A_1, A_2, \dots, A_n\) se realizeaz\u a. Ar\u ata\c ti
+c\u a:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  \(V_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n}\)
+\item
+  \(W_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k-1}{k}S_{r+k}^{n}\)
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,280 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Tema 1},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\VV{{\mathbb V}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, G. Popovici}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 301, 311, 321}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Tema 1}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+1}{Exerciiul 1}}\label{exerciiul-1}
+
+Se dore\c ste verificarea fiabilit\u a\c tii unui test de pentru
+depistarea nivelului de alcool al automobili\c stilor. In urma studiilor
+statistice pe un num\u ar mare de automobili\c sti, s-a observat c\u a
+in general \(0.5\%\) dintre ace\c stia dep\u a\c sesc nivelul de alcool
+autorizat. Niciun test nu este fiabil \(100\%\). Probabilitatea ca
+testul considerat s\u a fie pozitiv atunci cand doza de alcool
+autorizat\u a este dep\u a\c sit\u a precum \c si probabilitatea ca
+testul s\u a fie negativ atunci cand doza autorizat\u a nu este
+dep\u a\c sit\u a sunt egale cu \(p=0.99\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Care este probabilitatea ca un automobilist care a fost testat pozitiv
+  s\u a fi dep\u a\c sit in realitate nivelul de alcool autorizat ?
+\item
+  C\(\^a\)t devine valoarea parametrului \(p\) pentru ca aceast\u a
+  probabilitate s\u a fie de \(95\%\) ?
+\item
+  Un poli\c tist afirm\u a c\u a testul este mai fiabil samb\u ata seara
+  (atunci c\(\^a\)nd tinerii ies din cluburi). \c Stiind c\u a
+  propor\c tia de automobili\c sti care au b\u aut prea mult in acest
+  context este de \(30\%\), determina\c ti dac\u a poli\c tistul are
+  dreptate.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+2}{Exerciiul 2}}\label{exerciiul-2}
+
+Efectu\u am arunc\u ari succesive a dou\u a zaruri echilibrate \c si
+suntem interesa\c ti in g\u asirea probabilit\u a\c tii evenimentului ca
+suma \(5\) (a fe\c telor celor dou\u a zaruri) s\u a apar\u a inaintea
+sumei \(7\). Pentru aceasta presupunem c\u a arunc\u arile sunt
+\emph{independente}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Calcula\c ti pentru inceput probabilitatea evenimentului \(E_n\):
+  \emph{in primele \(n-1\) arunc\u ari nu a ap\u arut nici suma \(5\)
+  \c si nici suma \(7\) iar in a \(n\)-a aruncare a ap\u arut suma
+  \(5\)}. Concluziona\c ti.
+\item
+  Aceea\c si intrebare, dar inlocuind \(5\) cu \(2\).
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+3}{Exerciiul 3}}\label{exerciiul-3}
+
+Un administrator de reprezentan\c t\u a de ma\c sini comand\u a uzinei
+Dacia \(N\) ma\c sini, num\u arul aleator \(X\) de ma\c sini pe care il
+poate vinde reprezentan\c ta sa intr-un an fiind un num\u ar intreg
+intre \(0\) \c si \(n\geq N\), toate avand aceea\c si probabilitate.
+Ma\c sinile vandute de administrator ii aduc acestuia un beneficiu de
+\(a\) unit\u a\c ti monetare pe ma\c sin\u a iar ma\c sinile nevandute
+ii aduc o pierdere de \(b\) unit\u a\c ti. Calcula\c ti valoarea medie a
+ca\c stigului \(G\) reprezentan\c tei de ma\c sini \c si deduce\c ti
+care este comanda optim\u a.
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+4}{Exerciiul 4}}\label{exerciiul-4}
+
+Fie \(X\) variabila aleatoare (v.a.) care reprezint\u a cifra
+ob\c tinut\u a in urma arunc\u arii unui zar (echilibrat) cu \c sase
+fe\c te. Determina\c ti legea de probabilitate a v.a. \(Y=X(7-X)\) apoi
+calcula\c ti \(\EE[Y]\) \c si \(\VV[Y]\). Not\u am cu
+\(Y_1, \dots, Y_n\) valorile observate dup\u a \(n\) lans\u ari
+independente. Determina\c ti legea de probabilitate a v.a. \(M_n\)
+egal\u a cu valoarea cea mai mare a acestora.
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+5}{Exerciiul 5}}\label{exerciiul-5}
+
+Fie \(Y\) o variabil\u a aleatoare (v.a.) \c si \(m\) mediana ei, i.e.
+\(\PP(Y\leq m)\geq\frac{1}{2}\) \c si \(\PP(Y\geq m)\geq\frac{1}{2}\).
+Ar\u ata\c ti c\u a pentru orice numere reale \(a\) \c si \(b\) a\c sa
+incat \(m\leq a\leq b\) sau \(m\geq a\geq b\) avem \[
+\EE|Y-a|\leq\EE|Y-b|.
+\]
+
+\subsubsection[Exerci\c tiul 6* ]{\texorpdfstring{Exerci\c tiul 6*
+\footnote{Exerci\c tiile cu * sunt suplimentare \c si nu sunt
+  obligatorii}}{Exerciiul 6* }}\label{exerciiul-6}
+
+Fie \((A_1, A_2, \dots, A_n)\), \(n\geq0\) un \c sir de p\u ar\c ti ale
+lui \(\Om\) \c si \(\MF\) algebra generat\u a de acesta (cea mai mic\u a
+algebr\u a in sensul incluziunii care con\c tine \c mul\c timile
+\(\{A_1, A_2, \dots, A_n\}\)). Fie \((c_1, \dots,c_m)\) un \c sir de
+numere reale \c si \((B_1, B_2, \dots, B_m)\) un \c sir de elemente din
+\(\MF\) (\(m\geq 0\)). Consider\u am inegalitatea
+
+\begin{equation}\label{eq1}
+  \displaystyle\sum_{k=1}^{m}c_k\PP(B_k)\geq 0
+\end{equation}
+
+unde \(\PP\) este o m\u asur\u a de probabiilitate pe \(\MF\).
+Urm\u atoarele propriet\u a\c ti sunt echivalente:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Inegalitatea \((\ref{eq1})\) este adev\u arat\u a pentru toate
+  m\u asurile de probabilitate \(\PP\) pe \(\MF\)
+\item
+  Inegalitatea \((\ref{eq1})\) este adev\u arat\u a pentru toate
+  m\u asurile de probabilitate \(\PP\) pe \(\MF\) care verific\u a
+  \(\PP(A_i)=0\) sau \(1\), pentru to\c ti \(i\in\{1,2,\dots,n\}\).
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+7*}{Exerciiul 7*}}\label{exerciiul-7}
+
+Fie \(S_{0}^{n}=1\),
+\(S_{k}^{n}=\displaystyle\sum_{1\leq i_1<\cdots<i_k\leq n}\PP\left(A_{i_1}\cap\cdots\cap A_{i_k}\right)\)
+\c si not\u am cu \(V_{n}^{r}\) (respectiv cu \(W_{n}^{r}\))
+probabilitatea ca exact \(r\) (respectiv cel pu\c tin \(r\)) dintre
+evenimentele \(A_1, A_2, \dots, A_n\) se realizeaz\u a. Ar\u ata\c ti
+c\u a:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  \(V_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n}\)
+\item
+  \(W_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k-1}{k}S_{r+k}^{n}\)
+\end{enumerate}
+
+
+\end{document}
