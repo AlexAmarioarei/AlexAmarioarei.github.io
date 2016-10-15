@@ -47,6 +47,7 @@ Temele vor fi postate la aproximativ două săptămâni. Este încurajată colab
 
   1. [Tema 1](homework/Tema_1.pdf) pentru *Joi 27 Octombrie*
   
+Trimiterea temelor se poate face pe adresa de [Dropbox](https://www.dropbox.com/sh/yn87qp9arpocb04/AAASIDcXVId30M7VN8_EhWxva?dl=0). Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
 <!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
 
 ### Proiecte de laborator
