@@ -1,6 +1,6 @@
 ---
 title: "Tema 1"
-subtitle: "CÃ¢mp de probabilitate, operaÈii cu evenimente, probabilitate conditionatÄ Èi formula lui Bayes"
+subtitle: "Camp de probabilitate, opertii cu evenimente, probabilitate conditionata si formula lui Bayes"
 output:
   pdf_document:
     includes:

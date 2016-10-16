@@ -1,0 +1,261 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Tema 2},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Tema 2}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\VV{{\mathbb V}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, G. Popovici}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 301, 311, 321}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+1}{Exerciiul 1}}\label{exerciiul-1}
+
+Fie \(g:[0,\infty)\to[0, \infty)\) o func\c tie strict cresc\u atoare.
+Ar\u ata\c ti c\u a \[
+  \PP\left(|X|\geq a\right)\leq\frac{\EE\left[g(|X|)\right]}{g(a)}, \; \mbox{pentru $a>0$.}
+\]
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+2}{Exerciiul 2}}\label{exerciiul-2}
+
+Fie \(X\) o variabil\u a aleatoare cu valori in \(\NN\), a\c sa incat
+\(p_n=\PP(X=n)>0\) pentru to\c ti \(n\in\NN\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Ar\u ata\c ti c\u a pentru \(\l>0\) urm\u atoarele afirma\c tii sunt
+  echivalente:
+
+  \begin{enumerate}
+  \def\labelenumii{\roman{enumii})}
+  \item
+    \(X\) este o variabil\u Poisson de parametru \(\l\)
+  \item
+    Pentru to\c ti \(n\geq1\) avem \(\frac{p_n}{p_{n-1}}=\frac{\l}{n}\)
+  \end{enumerate}
+\item
+  Dac\u a \(X\sim\MP(\l)\) determina\c ti
+
+  \begin{enumerate}
+  \def\labelenumii{\roman{enumii})}
+  \item
+    Valoarea \(k\) pentru care \(\PP(X=k)\) este maxim\u a.
+  \item
+    Valoarea lui \(\l\) care maximizeaz\u a \(\PP(X=k)\), pentru \(k\)
+    fixat.
+  \end{enumerate}
+\item
+  Dac\u a \(X\sim Geom(p)\), \(0<p<1\) calcula\c ti
+  \(\EE\left[\frac{1}{X}\right]\).
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+3}{Exerciiul 3}}\label{exerciiul-3}
+
+Ar\u ata\c ti c\u a:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Dac\u a \(X\) este o variabil\u a aleatoare cu valori in \(\NN\)
+  atunci \[
+    \EE[X] = \displaystyle\sum_{n\geq 1}\PP(X\geq n).
+  \]
+\item
+  Dac\u a \(X\) este o variabil\u a aleatoare cu valori pozitive atunci
+  \[
+    \EE[X] = \displaystyle\int_{0}^{+\infty}\PP(X\geq x)\, dx.
+  \]
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+4}{Exerciiul 4}}\label{exerciiul-4}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Fie \(X\) o variabil\u a repartizat\u a exponen\c tial (de parametru
+  \(\a\)). Ar\u ata\c ti c\u a are loc urm\u atoarea relat\c tie
+  (proprietatea lipsei de memorie):
+
+  \begin{equation}\label{eq1}
+    \PP(X>s+t|X>s) = \PP(X>t) 
+  \end{equation}
+\item
+  Fie \(X\) o variabil\u a aleatoare care verific\u a rela\c tia
+  \((\ref{eq1})\). Ar\u ata\c ti c\u a \(X\) este repartizat\u a
+  exponen\c tial.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+5}{Exerciiul 5}}\label{exerciiul-5}
+
+Un proces Bernoulli de parametru \(p\) este un \c sir de variabile
+aleatoare independente \((X_n)_{n\geq1}\) cu \(X_n\in\{0,1\}\) \c si
+\(\PP(X_n=1)=p\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Ar\u ata\c ti c\u a v.a. \(S_n=X_1+X_2+\cdots+X_n\) este
+  repartizat\u a \(\MB(n,p)\) \c si calcula\u ti media \c si varian\c ta
+  acesteia.
+\item
+  Fie \(L\) cel mai mare num\u ar natural pentru care
+  \(X_1=X_2=\cdots=X_L\) \c si \(M\) cel mai mare num\u ar natural
+  a\c sa incat \(X_{L+1}=X_{L+2}=\cdots=X_{L+M}\). G\u asi\c ti
+  distribu\c tiile v.a. \(L\) \c si \(M\).
+\item
+  Ar\u ata\c ti c\u a \(\EE[L]\geq\EE[M]\), \(\VV[L]\geq\VV[M]\geq2\)
+  \c si calcula\c ti \(Cov[L,M]\).
+\item
+  Calcula\c ti \(\displaystyle\lim_{k\to\infty}\PP(M=n\,|\,L=k)\).
+\end{enumerate}
+
+\subsubsection[Exerci\c tiul 6* ]{\texorpdfstring{Exerci\c tiul 6*
+\footnote{Exerci\c tiile cu * sunt suplimentare \c si nu sunt
+  obligatorii}}{Exerciiul 6* }}\label{exerciiul-6}
+
+\end{document}

@@ -9,7 +9,6 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Alex Amarioarei, Georgiana Popovici" />
 
 
 <title>Tema 1</title>
@@ -220,19 +219,130 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Tema 1</h1>
-<h4 class="author"><em>Alex Amarioarei, Georgiana Popovici</em></h4>
+<h3 class="subtitle"><em>CÃ¢mp de probabilitate, operații cu evenimente, probabilitate conditionată și formula lui Bayes</em></h3>
 
 </div>
 
 
 <div id="exerciiul-1" class="section level3">
 <h3>Exerciiul 1</h3>
+<p>Fie <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> i <span class="math inline">\(C\)</span> trei evenimente. Exprimai <span class="math inline">\(\^ i\)</span>n funcie de <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> i de operaiile cu mulimi urmtoarele evenimente:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(A\)</span> singur se realizeaz</p></li>
+<li><p><span class="math inline">\(A\)</span> i <span class="math inline">\(C\)</span> se realizeaz dar nu i <span class="math inline">\(B\)</span></p></li>
+<li><p>cele trei evenimente se produc</p></li>
+<li><p>cel puin unul dintre cele trei evenimente se produce</p></li>
+<li><p>cel puin dou evenimente din cele trei se produc</p></li>
+<li><p>cel mult un eveniment se produce</p></li>
+<li><p>niciunul din cele trei evenimente nu se produce</p></li>
+<li><p>exact dou evenimente din cele trei se produc</p></li>
+<li><p>nu mai mult de dou evenimente nu se realizeaz</p></li>
+</ol>
 </div>
 <div id="exerciiul-2" class="section level3">
 <h3>Exerciiul 2</h3>
+<p>Fie <span class="math inline">\(\Om\)</span> mulimea tuturor cuplurilor cstorite dintr-un ora dat. Considerm evenimentele urmtoare:</p>
+<p><span class="math inline">\(A\)</span>: “brbatul are mai mult de 40 de ani”</p>
+<p><span class="math inline">\(B\)</span>: “femeia este mai t<span class="math inline">\(\^ a\)</span>nr dec<span class="math inline">\(\^ a\)</span>t brbatul”</p>
+<p><span class="math inline">\(C\)</span>: “femeia are mai mult de 40 de ani”</p>
+<p>Se cere:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Interpretai in funcie de <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> i <span class="math inline">\(C\)</span> evenimentul “soul are mai mult de 40 de ani dar nu i soia sa”.</p></li>
+<li><p>Descriei in limbaj natural evenimentele: <span class="math inline">\(A\cap B\cap C^{c}\)</span>, <span class="math inline">\(A\setminus{(A\cap B)}\)</span> , <span class="math inline">\(A\cap B^{c}\cap C\)</span>, <span class="math inline">\(A\cup B\)</span></p></li>
+<li><p>Verificai c <span class="math inline">\(A\cap C^{c} \subset B\)</span></p></li>
+</ol>
 </div>
 <div id="exerciiul-3" class="section level3">
 <h3>Exerciiul 3</h3>
+<p>Fie <span class="math inline">\((\Om, \MF, \PP)\)</span> un c<span class="math inline">\(\^a\)</span>mp de probabilitate. Diferena simetric dintre dou evenimente <span class="math inline">\(A, B\in \MF\)</span> este definit prin <span class="math inline">\(A \triangle B=(A\cap B^{c})\cup(A^{c}\cap B)\)</span>. Artai c:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>funcia <span class="math inline">\(d(A,B)=\PP(A\triangle B)\)</span> este o distan pe <span class="math inline">\(\MF\)</span></p></li>
+<li><p><span class="math inline">\(|\PP(A)-\PP(B)|\leq\PP(A\triangle B)\)</span></p></li>
+</ol>
+</div>
+<div id="exerciiul-4" class="section level3">
+<h3>Exerciiul 4</h3>
+<p>Fie <span class="math inline">\(n\)</span>, <span class="math inline">\(r&gt;1\)</span> numere naturale i considerm ecuaia cu <span class="math inline">\(r\)</span> necunoscute: <span class="math display">\[
+x_1+x_2+\cdots+x_r=n.
+\]</span> O soluie a acestei ecuaii este un <span class="math inline">\(r\)</span>-tuplu <span class="math inline">\((x_1, \dots, x_r)\)</span> a crui sum a componentelor este <span class="math inline">\(n\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>C<span class="math inline">\(\^a\)</span>te soluii are ecuaia de mai sus, cu componente naturale strict pozitive ?</p></li>
+<li><p>C<span class="math inline">\(\^a\)</span>te soluii are ecuaia de mai sus, cu componente naturale pozitive ?</p></li>
+</ol>
+</div>
+<div id="exerciiul-5" class="section level3">
+<h3>Exerciiul 5</h3>
+<p>Un administrator de spital codific pacienii cu rni prin <span class="math inline">\(\^i\)</span>mpucare <span class="math inline">\(\^i\)</span>n funcie de asigurarea (<span class="math inline">\(D\)</span> dac pacientul are asigurare i <span class="math inline">\(N\)</span> dac nu are) i de starea acestora (<span class="math inline">\(b\)</span> pentru bun, <span class="math inline">\(m\)</span> pentru medie i <span class="math inline">\(s\)</span> pentru serioas). Considerm experiena aleatoare care consist in codificarea pacienilor.</p>
+<ol style="list-style-type: decimal">
+<li><ol style="list-style-type: lower-alpha">
+<li>Determinai <span class="math inline">\(\Om\)</span> mulimea spaiului strilor acestui experiment</li>
+<li>Fie <span class="math inline">\(A\)</span> evenimentul <em>starea de sntate a pacientului este serioas</em>. Descriei evenimentele elementare care il compun pe <span class="math inline">\(A\)</span>. Aceeai intrebare pentru evenimentul <span class="math inline">\(B\)</span> <em>pacientul nu este asigurat</em> i pentru evenimentul <span class="math inline">\(B^c\cup A\)</span>.</li>
+</ol></li>
+<li><p>Considerm echiprobabilitatea pe <span class="math inline">\(\Om\)</span>. Calculai probabilitile: <span class="math inline">\(\PP(A)\)</span>, <span class="math inline">\(\PP(B)\)</span> i <span class="math inline">\(\PP(B^c\cup A)\)</span></p></li>
+<li><p>Aceeai intrebare pentru probabilitatea <span class="math inline">\(\PP'\)</span> definit prin</p></li>
+</ol>
+\begin{center}
+    \begin{tabular}{c|ccc}
+        &amp; $b$ &amp; $m$ &amp; $s$ \\
+      \hline
+      $O$ &amp; $0,2$ &amp; $0,2$ &amp; $0,1$ \\
+      $N$ &amp; $0,1$ &amp; $0,3$ &amp; $0,1$ \\
+    \end{tabular}
+  \end{center}
+</div>
+<div id="exerciiul-6-jocul-de-poker" class="section level3">
+<h3>Exerciiul 6 (Jocul de Poker)</h3>
+<p>Considerm experimentul in care extragem o man de <span class="math inline">\(5\)</span> cri dintr-un pachet de cri de <span class="math inline">\(52\)</span> de cri. S se calculeze probabilitatea ca:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>S avem careu (patru cri de acelai tip) ?</p></li>
+<li><p>S avem full-house (trei cri de un tip i dou de altul) ?</p></li>
+<li><p>S avem trei cri de acelai tip ?</p></li>
+<li><p>S avem dou perechi ?</p></li>
+<li><p>S avem o pereche ?</p></li>
+</ol>
+</div>
+<div id="exerciiul-7" class="section level3">
+<h3>Exerciiul 7</h3>
+<p>Se dorete verificarea fiabilitii unui test de pentru depistarea nivelului de alcool al automobilitilor. In urma studiilor statistice pe un numr mare de automobiliti, s-a observat c in general <span class="math inline">\(0.5\%\)</span> dintre acetia depesc nivelul de alcool autorizat. Niciun test nu este fiabil <span class="math inline">\(100\%\)</span>. Probabilitatea ca testul considerat s fie pozitiv atunci cand doza de alcool autorizat este depit precum i probabilitatea ca testul s fie negativ atunci cand doza autorizat nu este depit sunt egale cu <span class="math inline">\(p=0.99\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Care este probabilitatea ca un automobilist care a fost testat pozitiv s fi depit in realitate nivelul de alcool autorizat ?</p></li>
+<li><p>C<span class="math inline">\(\^a\)</span>t devine valoarea parametrului <span class="math inline">\(p\)</span> pentru ca aceast probabilitate s fie de <span class="math inline">\(95\%\)</span> ?</p></li>
+<li><p>Un poliist afirm c testul este mai fiabil sambta seara (atunci c<span class="math inline">\(\^a\)</span>nd tinerii ies din cluburi). tiind c proporia de automobiliti care au but prea mult in acest context este de <span class="math inline">\(30\%\)</span>, determinai dac poliistul are dreptate.</p></li>
+</ol>
+</div>
+<div id="exerciiul-8" class="section level3">
+<h3>Exerciiul 8</h3>
+<p>Efectum aruncri succesive a dou zaruri echilibrate i suntem interesai in gsirea probabilitii evenimentului ca suma <span class="math inline">\(5\)</span> (a feelor celor dou zaruri) s apar inaintea sumei <span class="math inline">\(7\)</span>. Pentru aceasta presupunem c aruncrile sunt <em>independente</em>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Calculai pentru inceput probabilitatea evenimentului <span class="math inline">\(E_n\)</span>: <em>in primele <span class="math inline">\(n-1\)</span> aruncri nu a aprut nici suma <span class="math inline">\(5\)</span> i nici suma <span class="math inline">\(7\)</span> iar in a <span class="math inline">\(n\)</span>-a aruncare a aprut suma <span class="math inline">\(5\)</span></em>. Concluzionai.</p></li>
+<li><p>Aceeai intrebare, dar inlocuind <span class="math inline">\(5\)</span> cu <span class="math inline">\(2\)</span>.</p></li>
+</ol>
+</div>
+<div id="exerciiul-9" class="section level3">
+<h3>Exerciiul 9* <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></h3>
+Fie <span class="math inline">\((A_1, A_2, \dots, A_n)\)</span>, <span class="math inline">\(n\geq0\)</span> un ir de pri ale lui <span class="math inline">\(\Om\)</span> i <span class="math inline">\(\MF\)</span> algebra generat de acesta (cea mai mic algebr in sensul incluziunii care conine ulimile <span class="math inline">\(\{A_1, A_2, \dots, A_n\}\)</span>). Fie <span class="math inline">\((c_1, \dots,c_m)\)</span> un ir de numere reale i <span class="math inline">\((B_1, B_2, \dots, B_m)\)</span> un ir de elemente din <span class="math inline">\(\MF\)</span> (<span class="math inline">\(m\geq 0\)</span>). Considerm inegalitatea
+\begin{equation}\label{eq1}
+  \displaystyle\sum_{k=1}^{m}c_k\PP(B_k)\geq 0
+\end{equation}
+<p>unde <span class="math inline">\(\PP\)</span> este o msur de probabiilitate pe <span class="math inline">\(\MF\)</span>. Urmtoarele proprieti sunt echivalente:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Inegalitatea <span class="math inline">\((\ref{eq1})\)</span> este adevrat pentru toate msurile de probabilitate <span class="math inline">\(\PP\)</span> pe <span class="math inline">\(\MF\)</span></p></li>
+<li><p>Inegalitatea <span class="math inline">\((\ref{eq1})\)</span> este adevrat pentru toate msurile de probabilitate <span class="math inline">\(\PP\)</span> pe <span class="math inline">\(\MF\)</span> care verific <span class="math inline">\(\PP(A_i)=0\)</span> sau <span class="math inline">\(1\)</span>, pentru toi <span class="math inline">\(i\in\{1,2,\dots,n\}\)</span>.</p></li>
+</ol>
+</div>
+<div id="exerciiul-10" class="section level3">
+<h3>Exerciiul 10*</h3>
+<p>Fie <span class="math inline">\(S_{0}^{n}=1\)</span>, <span class="math inline">\(S_{k}^{n}=\displaystyle\sum_{1\leq i_1&lt;\cdots&lt;i_k\leq n}\PP\left(A_{i_1}\cap\cdots\cap A_{i_k}\right)\)</span> i notm cu <span class="math inline">\(V_{n}^{r}\)</span> (respectiv cu <span class="math inline">\(W_{n}^{r}\)</span>) probabilitatea ca exact <span class="math inline">\(r\)</span> (respectiv cel puin <span class="math inline">\(r\)</span>) dintre evenimentele <span class="math inline">\(A_1, A_2, \dots, A_n\)</span> se realizeaz. Artai c:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(V_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n}\)</span></p></li>
+<li><p><span class="math inline">\(W_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k-1}{k}S_{r+k}^{n}\)</span></p></li>
+</ol>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Exerciiile cu * sunt suplimentare i nu sunt obligatorii<a href="#fnref1">↩</a></p></li>
+</ol>
 </div>
 
 

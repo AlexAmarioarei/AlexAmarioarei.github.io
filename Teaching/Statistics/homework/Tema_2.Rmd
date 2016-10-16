@@ -1,0 +1,77 @@
+---
+title: "Tema 2"
+subtitle: ""
+output:
+  pdf_document:
+    includes:
+      before_body: Defs/body.tex
+      in_header: Defs/FormatAndDefs.tex
+    keep_tex: yes
+    toc: no
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Exerci\c tiul 1
+Fie $g:[0,\infty)\to[0, \infty)$ o func\c tie strict cresc\u atoare. Ar\u ata\c ti c\u a
+$$
+  \PP\left(|X|\geq a\right)\leq\frac{\EE\left[g(|X|)\right]}{g(a)}, \; \mbox{pentru $a>0$.}
+$$
+
+### Exerci\c tiul 2
+Fie $X$ o variabil\u a aleatoare cu valori in $\NN$, a\c sa incat $p_n=\PP(X=n)>0$ pentru to\c ti $n\in\NN$.
+
+  a) Ar\u ata\c ti c\u a pentru $\l>0$ urm\u atoarele afirma\c tii sunt echivalente:
+  
+    i) $X$ este o variabil\u Poisson de parametru $\l$
+    
+    ii) Pentru to\c ti $n\geq1$ avem $\frac{p_n}{p_{n-1}}=\frac{\l}{n}$
+    
+  b) Dac\u a $X\sim\MP(\l)$ determina\c ti 
+  
+    i) Valoarea $k$ pentru care $\PP(X=k)$ este maxim\u a.
+    
+    ii) Valoarea lui $\l$ care maximizeaz\u a $\PP(X=k)$, pentru $k$ fixat.
+    
+  c) Dac\u a $X\sim Geom(p)$, $0<p<1$ calcula\c ti $\EE\left[\frac{1}{X}\right]$.
+  
+### Exerci\c tiul 3
+Ar\u ata\c ti c\u a:
+
+  a) Dac\u a $X$ este o variabil\u a aleatoare cu valori in $\NN$ atunci 
+    $$
+      \EE[X] = \displaystyle\sum_{n\geq 1}\PP(X\geq n).
+    $$
+    
+  b) Dac\u a $X$ este o variabil\u a aleatoare cu valori pozitive atunci 
+    $$
+      \EE[X] = \displaystyle\int_{0}^{+\infty}\PP(X\geq x)\, dx.
+    $$
+
+### Exerci\c tiul 4
+  a) Fie $X$ o variabil\u a repartizat\u a exponen\c tial (de parametru $\a$). Ar\u ata\c ti c\u a are loc urm\u atoarea relat\c tie (proprietatea lipsei de memorie): 
+    \begin{equation}\label{eq1}
+      \PP(X>s+t|X>s) = \PP(X>t) 
+    \end{equation}
+  
+  b) Fie $X$ o variabil\u a aleatoare care verific\u a rela\c tia $(\ref{eq1})$. Ar\u ata\c ti c\u a $X$ este repartizat\u a exponen\c tial.
+
+### Exerci\c tiul 5
+Un proces Bernoulli de parametru $p$ este un \c sir de variabile aleatoare independente $(X_n)_{n\geq1}$ cu $X_n\in\{0,1\}$ \c si $\PP(X_n=1)=p$.
+
+  a) Ar\u ata\c ti c\u a v.a. $S_n=X_1+X_2+\cdots+X_n$ este repartizat\u a $\MB(n,p)$ \c si calcula\u ti media \c si varian\c ta acesteia.
+  
+  b) Fie $L$ cel mai mare num\u ar natural pentru care $X_1=X_2=\cdots=X_L$ \c si $M$ cel mai mare num\u ar natural a\c sa incat $X_{L+1}=X_{L+2}=\cdots=X_{L+M}$. G\u asi\c ti distribu\c tiile v.a. $L$ \c si $M$. 
+  
+  c) Ar\u ata\c ti c\u a $\EE[L]\geq\EE[M]$, $\VV[L]\geq\VV[M]\geq2$ \c si calcula\c ti $Cov[L,M]$.
+  
+  d) Calcula\c ti $\displaystyle\lim_{k\to\infty}\PP(M=n\,|\,L=k)$.
+
+### Exerci\c tiul 6* ^[Exerci\c tiile cu * sunt suplimentare \c si nu sunt obligatorii]

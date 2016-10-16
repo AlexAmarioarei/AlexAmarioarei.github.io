@@ -1,6 +1,7 @@
 ---
 title: "Statistică"
 author: "Alex Amărioarei, Georgiana Popovici"
+date: "2016-2017"
 output:
   html_document:
     fig_caption: yes
@@ -36,7 +37,7 @@ Acest curs reprezintă o introducere în statistica matematică.
 
 #### Seminar/Laborator
 
- *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Georgiana Popovici
+ *  _Instructori_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Georgiana Popovici
 
  *  _Email_ : amarioareialexandru [at] gmail [dot] com 
 
@@ -62,10 +63,11 @@ Notarea se va face după cum urmează: teme (25%), mini proiecte (25%) și exame
 
   1. Monica Dumitrescu, Anton Batatorescu - *Applied statistics using the R system*, Ed. Univ. Buc., 2006
   2. Virgil Craiu - *Statistică Matematică*, Ed. Univ. Buc., 1997
-  3. George Casella, Roger Berger - *Statistical Inference*, Duxbury
-  4. George Roussas - *A Course in Mathematical Statistics*, Academic Press, 1997
-  5. Geoffrey Grimmett, David Stirzaker - *Probability and Random Processes*
-  6. John Rice - *Mathematical Statistics and Data Analysis*, Duxbury
+  3. Georgiana Popovici - *Statistical Labs using R-system*, Ed. Univ. Buc.
+  4. George Casella, Roger Berger - *Statistical Inference*, Duxbury
+  5. George Roussas - *A Course in Mathematical Statistics*, Academic Press, 1997
+  6. Geoffrey Grimmett, David Stirzaker - *Probability and Random Processes*
+  7. John Rice - *Mathematical Statistics and Data Analysis*, Duxbury
   
 
 ### Link-uri utile
