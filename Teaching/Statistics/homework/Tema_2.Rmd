@@ -73,5 +73,3 @@ Un proces Bernoulli de parametru $p$ este un \c sir de variabile aleatoare indep
   c) Ar\u ata\c ti c\u a $\EE[L]\geq\EE[M]$, $\VV[L]\geq\VV[M]\geq2$ \c si calcula\c ti $Cov[L,M]$.
   
   d) Calcula\c ti $\displaystyle\lim_{k\to\infty}\PP(M=n\,|\,L=k)$.
-
-### Exerci\c tiul 6* ^[Exerci\c tiile cu * sunt suplimentare \c si nu sunt obligatorii]

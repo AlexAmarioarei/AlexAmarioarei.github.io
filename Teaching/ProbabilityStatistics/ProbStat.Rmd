@@ -1,6 +1,7 @@
 ---
 title: "Probabilități și Statistică"
 author: "Alex Amărioarei, Georgiana Popovici"
+date: "2016-2017"
 output:
   html_document:
     fig_caption: yes
@@ -36,7 +37,7 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 
 #### Seminar/Laborator
 
- *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Georgiana Popovici
+ *  _Instructori_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Georgiana Popovici
 
  *  _Email_ : amarioareialexandru [at] gmail [dot] com 
 
