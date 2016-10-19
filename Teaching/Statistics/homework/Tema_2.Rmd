@@ -30,7 +30,7 @@ Fie $X$ o variabil\u a aleatoare cu valori in $\NN$, a\c sa incat $p_n=\PP(X=n)>
 
   a) Ar\u ata\c ti c\u a pentru $\l>0$ urm\u atoarele afirma\c tii sunt echivalente:
   
-    i) $X$ este o variabil\u Poisson de parametru $\l$
+    i) $X$ este o variabil\u a Poisson de parametru $\l$
     
     ii) Pentru to\c ti $n\geq1$ avem $\frac{p_n}{p_{n-1}}=\frac{\l}{n}$
     
