@@ -32,6 +32,7 @@
 \def\ZZ{{\mathbb Z}}
 \def\PP{{\mathbb P}}
 \def\EE{{\mathbb E}}
+\def\VV{{\mathbb V}}
 \def\NN{{\mathbb N}}
 \def\FF{{\mathbb F}}
 %\def\SS{{\mathbb S}}

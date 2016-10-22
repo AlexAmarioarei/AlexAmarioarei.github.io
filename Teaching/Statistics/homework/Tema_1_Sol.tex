@@ -1,0 +1,414 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Tema 1},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\VV{{\mathbb V}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MO{{\mathcal O}}
+\def\MA{{\mathcal A}}
+\def\MF{{\mathcal F}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, G. Popovici}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 301, 311, 321}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Tema 1}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+\subtitle{Soluții}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+1}{Exerciiul 1}}\label{exerciiul-1}
+
+Consider\u am evenimentele urm\u atoare:
+
+\begin{itemize}
+  \item[-] $A=\{\mbox{testul considerat este pozitiv}\}$ 
+  \item[-] $B=\{\mbox{automobilistul a dep\u a\c sit nivelul de alcool autorizat}\}$
+\end{itemize}
+
+\begin{enumerate}
+    \item Din ipotez\u a \c stim c\u a $\PP(B) = 0.005$, $\PP(A|B) = \PP(A^c|B^c) = 0.99$. Vrem s\u a g\u asim probabilitatea $\PP(B|A)$. Avem
+\begin{align*}
+    \PP(B|A) &= \frac{\PP(A\cap B)}{\PP(B)} = \frac{\PP(A|B)\PP(B)}{\PP(B)} = \frac{\PP(A|B)\PP(B)}{\PP(A|B)\PP(B)+\PP(A|B^c)\PP(B^c)}\\
+             &= \frac{\PP(A|B)\PP(B)}{\PP(A|B)\PP(B)+\left[1-\PP(A^c|B^c)\right](1-\PP(B))} = \frac{0.99\times0.005}{0.99\times0.005+0.01\times0.995} \approx 0.332.
+\end{align*}
+    \item C\u aut\u am $p$ a\c sa incat $\PP(B|A)=0.95$. Am v\u azut c\u a $\PP(B|A) = \frac{p\PP(B)}{p\PP(B)+(1-p)(1-\PP(B))}$ de unde
+\begin{equation*}
+    p = \frac{(1-\PP(B))\PP(B|A)}{(1-\PP(B))\PP(B|A)+(1-\PP(B|A))\PP(B)} = \frac{0.995\times0.95}{0.995\times0.95+0.05\times0.005}\approx0.99973.
+\end{equation*}
+    \item \c Stim c\u a $\PP(B)=0.3$, prin urmare $\PP(A) = \PP(A|B)\PP(B)+\PP(A|B^c)\PP(B^c) = 0.99\times0.3+0.01\times0.7\approx0.304$ \c si
+\begin{equation*}
+    \PP(B|A) = \frac{\PP(A|B)\PP(B)}{\PP(A|B)\PP(B)+\PP(A|B^c)\PP(B^c)}\approx 0.9769,
+\end{equation*}
+de unde tragem concluzia c\u a testul este mult mai fiabil in aceast\u a situa\c tie.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+2}{Exerciiul 2}}\label{exerciiul-2}
+
+\begin{enumerate}
+\item Consider\u am evenimentele urm\u atoare: 
+  \begin{itemize}
+    \item[-] $A_i=\{\mbox{suma celor dou\u a zaruri la cea de- a $i$-a aruncare este $5$}\}$
+    \item[-] $B_i=\{\mbox{suma celor dou\u a zaruri la cea de- a $i$-a aruncare este $7$}\}$
+  \end{itemize}  
+Evenimentul $E_n$ se scrie
+    \begin{equation*}
+        E_n = (A_1^c\cap B_1^c)\cap(A_2^c\cap B_2^c)\cap\dots\cap(A_{n-1}^c\cap B_{n-1}^c)\cap A_n.
+    \end{equation*}
+Aplicand independen\c ta avem c\u a
+    \begin{align*}
+        \PP(E_n) &= \PP((A_1^c\cap B_1^c)\cap(A_2^c\cap B_2^c)\cap\dots\cap(A_{n-1}^c\cap B_{n-1}^c)\cap A_n)\\
+                 &\overset{indep.}{=} \PP(A_1^c\cap B_1^c)\times \PP(A_2^c\cap B_2^c)\times\dots\times \PP(A_{n-1}^c\cap B_{n-1}^c)\times \PP(A_n)\\
+                 &= \PP(A_1^c\cap B_1^c)^{n-1}\PP(A_n).
+    \end{align*}
+Observ\u am c\u a spa\c tiul st\u arilor la cea de-a $n$-a lansare este $\Om=\{(i,j)|1\leq i,j\leq6\}$ \c si probabilitatea ca suma celor dou\u a zaruri s\u a fie $5$ este $\PP(A_n) = \frac{4}{36}$, deoarece cazurile favorabile sunt $\{(1,4),(2,3),(4,1),(3,2)\}$. Ob\c tinem de asemenea c\u a probabilitatea ca suma s\u a nu fie nici $5$ \c si nici $7$ la prima lansare este $\PP(A_1^c\cap B_1^c) = \frac{26}{36}$, deoarece situa\c tiile in care suma este $7$ sunt $\{(1,6),(2,3),(3,4),(4,3),(5,2),(6,1)\}$.
+\par \noindent
+In concluzie, probabilitatea evenimentului 
+$$
+  A=\{\mbox{suma $5$ (a fe\c telor celor dou\u a zaruri) s\u a apar\u a inaintea sumei $7$}\}
+$$ 
+este 
+\begin{align*}
+    \PP(A) &= \displaystyle\PP\left(\bigcup_{n=1}^{\infty}E_n\right)=\sum_{n=1}^{\infty}\PP(E_n)=\sum_{n=1}^{\infty}\left(\frac{26}{36}\right)^{n-1}\frac{4}{36}\\
+            &= \frac{1}{9}\sum_{n=0}^{\infty}\left(\frac{13}{18}\right)^{n} = \frac{1}{9}\frac{1}{1-\frac{13}{18}}=\frac{2}{5}.
+\end{align*}
+\item Fie $F_n$ evenimentul ce corespunde la: \textit{in primele $n-1$ arunc\u ari nu a ap\u arut nici suma $2$ \c si nici suma $7$ iar in a $n$-a aruncare a ap\u arut suma $2$} \c si $C_i$ evenimentul ce corespunde la suma celor dou\u a zaruri la cea de-a $i$-a aruncare este $2$. Avem
+    \begin{equation*}
+        F_n = (C_1^c\cap B_1^c)\cap(C_2^c\cap B_2^c)\cap\dots\cap(C_{n-1}^c\cap B_{n-1}^c)\cap C_n
+    \end{equation*}
+\c si probabilitatea lui $\PP(F_n)$ este
+    \begin{align*}
+        \PP(F_n) &= \PP((C_1^c\cap B_1^c)\cap(C_2^c\cap B_2^c)\cap\dots\cap(C_{n-1}^c\cap B_{n-1}^c)\cap C_n)\\
+                 &\overset{indep.}{=} \PP(C_1^c\cap B_1^c)\times \PP(C_2^c\cap B_2^c)\times\dots\times \PP(C_{n-1}^c\cap B_{n-1}^c)\times \PP(C_n)\\
+                 &= \PP(C_1^c\cap B_1^c)^{n-1}\PP(C_n).
+    \end{align*}
+Avem $\PP(C_n) = \frac{1}{36}$ (deoarece doar $(1,1)$ ne d\u a suma $2$) \c si $\PP(C_1^c\cap B_1^c) = \frac{36-7}{36} = \frac{29}{36}$. Prin urmare probabilitatea evenimentului c\u autat, pe care il not\u a cu $B$, este
+\begin{align*}
+    \PP(B) &= \displaystyle\PP\left(\bigcup_{n=1}^{\infty}F_n\right)=\sum_{n=1}^{\infty}\PP(F_n)=\sum_{n=1}^{\infty}\left(\frac{29}{36}\right)^{n-1}\frac{1}{36}\\
+            &= \frac{1}{36}\sum_{n=0}^{\infty}\left(\frac{29}{36}\right)^{n} = \frac{1}{36}\frac{1}{1-\frac{29}{36}}=\frac{1}{7}.
+\end{align*}
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+3}{Exerciiul 3}}\label{exerciiul-3}
+
+Dac\u a num\u arul de ma\c sini vandute intr-un an de
+reprezentan\c t\u a este mai mare decat \(N\), \(X\geq N\), atunci
+ca\c stigul administratorului este \(G=aN\). Dac\u a \(X<N\), atunci
+administratorul vinde \(X\) ma\c sini \c si ii r\u aman \(N-X\), deci
+ca\c stigul devine \(G=aX-b(N-X)\). Prin urmare avem \[
+  G = \left\{\begin{array}{ll}
+    aN & \mbox{dac\u a } X\geq N\\
+    aX-b(N-X) & \mbox{dac\u a } X<N
+  \end{array}\right.
+\] deci \[
+  \EE[G] = aN\PP(X\geq N)+ \displaystyle\sum_{x=0}^{N-1}[ax-b(N-x)]\PP(X=x).
+\] Din ipotez\u a \c stim c\u a to\c ti intregii \(x\in\{0,1,\dots,n\}\)
+sunt de aceea\c si probabilitate, mai exact \c stim c\u a \(X\) este o
+variabil\u a aleatoare uniform\u a, deci \(\PP(X=x)=\frac{1}{n+1}\)
+(administratorul vinde acelasi num\u ar de ma\c sini cu aceea\c si
+probabilitate - in realitate nu este cazul !). Ob\c tinem c\u a:
+
+\begin{align*}
+  \EE[G] &= aN\displaystyle\sum_{x=N}^{n}\frac{1}{n+1}+\sum_{x=0}^{N}\frac{(a+b)x-bN}{n+1}\\
+  &= \frac{aN(n-N+1)}{n+1}+(a+b)\frac{N(N-1)}{2(n+1)}-\frac{bN^2}{n+1}\\
+  &=\frac{N[(2n+1)a-b-(a+b)N]}{2(n+1)}.
+\end{align*}
+
+Pentru a g\u asi valoarea optim\u a a num\u arului de ma\c sini pe care
+administratorul ar trebui s\u a le comande este suficient s\u a g\u asim
+maximul num\u ar\u atorului lui \(\EE[G]\). Fie
+\(g(N)=N[(2n+1)a-b-(a+b)N]\) atunci \(g'(N)=(2n+1)a-b-2(a+b)N\) de unde
+rezolvand ecua\c tia \(g'(N)=0\) deducem c\u a
+\(N=\frac{(2n+1)a-b}{2(a+b)}\). Mai mult derivata a doua ne d\u a
+\(g''(N) = -2(a+b)<0\) ceea ce ne arat\u a c\u a valoarea g\u asit\u a
+corespunde maximului.
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+4}{Exerciiul 4}}\label{exerciiul-4}
+
+Avem c\u a legea lui \(X\) este uniform\u a pe mul\c timea
+\(\{1,2,3,4,5,6\}\) iar din defini\c tia lui \(Y=X(7-X)\) observ\u am
+c\u a \(Y\in\{6,10,12\}\) cu
+\(\PP(Y=6)=\PP(Y=10)=\PP(Y=12)=\frac{1}{3}\). Ob\c tinem c\u a
+
+\begin{align*}
+  \EE[Y] &= \frac{1}{3}(6+10+12)=\frac{28}{3}\\
+  \EE[Y^2] &=  \frac{1}{3}(36+100+144)=\frac{280}{3}\\
+  \VV[Y] &= \EE[Y^2] - \EE[Y]^2 = \frac{56}{9}.
+\end{align*}
+
+Variabila aleatoare \(M_n\) ia valori in aceea\c si mul\c time ca \c si
+\(Y\), \(M_n\in\{6,10,12\}\). Pentru a g\u asi legea lui \(M_n\) trebuie
+s\u a calcul\u am \(\PP(M_n=x)\) cu \(x\in\{6,10,12\}\).
+
+Pentru evenimentul \(\{M_n=6\}\) este necesar ca toate variabilele
+\(Y_i=6\) deci \[
+  \PP(M_n=6)=\PP\left(\bigcap_{i=1}^{n}\{Y_i=6\}\right)=\left(\frac{1}{3}\right)^n.
+\] Dac\u a \(\{M_n=12\}\) atunci cel pu\c tin unul din evenimentele
+\(\{Y_i=12\}\) se realizeaz\u a, prin urmare \[
+   \PP(M_n=12)=\PP\left(\bigcup_{i=1}^{n}\{Y_i=12\}\right)=1-\PP\left(\bigcap_{i=1}^{n}\{Y_i\leq 10\}\right)=1-\left(\frac{2}{3}\right)^n.
+\] Pentru a calcula \(\PP(M_n=10)\) (f\u ar\u a a face diferen\c ta
+\(1-\PP(M_n=6)-\PP(M_n=12)\)) observ\u am c\u a realizarea evenimentului
+\(\{M_n=10\}\) implic\u a realizarea tuturor evenimentelor
+\(\{Y_i\leq10\}\) dar excludem evenimentul in care to\c ti
+\(\{Y_i=6\}\). Astfel
+
+\begin{align*}
+  \PP(M_n=10) &= \PP\left(\bigcap_{i=1}^{n}\{Y_i\leq10\}\bigcap\left(\bigcap_{i=1}^{n}\{Y_i=6\}\right)^c\right)\\
+  &= \PP\left(\bigcap_{i=1}^{n}\{Y_i\leq10\}\right)-\PP\left(\left(\bigcap_{i=1}^{n}\{Y_i=6\}\right)^c\right)\\
+  &=\left(\frac{2}{3}\right)^n-\left(\frac{1}{3}\right)^n.
+\end{align*}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+5}{Exerciiul 5}}\label{exerciiul-5}
+
+Putem presupune c\u a \(\EE[|Y|]<\infty\) deoarece in caz contrar am
+avea \(\infty=\EE[|Y-a|]\leq\EE[|Y-b|]=\infty\).
+
+S\u a consider\u am cazul in care \(m\leq a\leq b\). Avem
+
+\begin{align*}
+  \EE[|Y-b|]-\EE[|Y-a|] &= \EE[(b-Y)\1_{\{Y\leq b\}}]+\EE[(Y-b)\1_{\{Y> b\}}] - \EE[(a-Y)\1_{\{Y\leq a\}}]-\EE[(Y-a)\1_{\{Y> a\}}]\\
+  &= (b-a)\EE[\1_{\{Y\leq a\}}]+\EE[(a+b-2Y)\1_{\{a<Y\leq b\}}] + (a-b)\EE[\1_{\{Y\geq b\}}]\\
+  &= 2\EE[(b-Y)\1_{\{a<Y\leq b\}}]+(b-a)\left[\EE[\1_{\{Y\leq a\}}]-\EE[\1_{\{Y> a\}}]\right]\\
+  &\geq (b-a)\left[2\PP(Y\leq a)-1\right]\geq 0
+\end{align*}
+
+deoarece \(\PP(Y\leq a)\geq \PP(Y\leq m)\geq \frac{1}{2}\). Dac\u a
+\(m\geq a\geq b\) atunci \(-m\leq -a\leq -b\) \c si \(-m\) este mediana
+lui \(-Y\) de unde avem concluzia.
+
+\subsubsection[Exerci\c tiul 6*
+\label{Ex6}]{\texorpdfstring{Exerci\c tiul 6* \footnote{Exerci\c tiile
+  cu * sunt suplimentare \c si nu sunt obligatorii}
+\label{Ex6}}{Exerciiul 6*  }}\label{exerciiul-6}
+
+Fie parti\c tia
+\(\Pi=\{A_1^{\e_1}\cap A_2^{\e_2}\cap\cdots\cap A_n^{\e_n}\,|\,\e_1,\dots,\e_n=0,1\}\),
+unde \(A^{\e}=A\) dac\u a \(\e=1\) \c si \(A^{\e}=A^c\) dac\u a
+\(\e = 0\). Atunci \(\MF=\MA(\{A_1,\dots, A_n\})\) (algebra generat\u a
+de \(\{A_1,\dots,A_n\}\)) coincide cu algebra generat\u a de \(\Pi\),
+prin urmare orice element din \(\MF\) poate fi scris ca o reuniune
+finit\u a (\c si disjunct\u a) de elemente din \(\Pi\) (De ce?). Astfel,
+pentru \(B_1, \dots, B_m\in\MF\) exist\u a \(\a_1,\dots,\a_{m'}\in\Pi\)
+a\c sa incat s\u a avem \[
+  \displaystyle\sum_{i=1}^{m}c_i\PP(B_i)=\sum_{i=1}^{m'}c'_{i}\PP(\a_i').
+\] Este evident c\u a implica\c tia \(a)\implies b)\) este
+adev\u arat\u a. Reciproc, s\u a presupunem c\u a inegalitatea dorit\u a
+este adev\u arat\u a pentru orice m\u asur\u a de probabilitate cu
+\(\PP(A_i)=0\) sau \(1\) pentru to\c ti \(i\in\{1,2,\dots,n\}\). Avem
+deci c\u a
+
+\begin{equation}\label{eqEx6}
+  \sum_{i=1}^{m'}c'_{i}\PP(\a_i')\geq 0 
+\end{equation}
+
+pentru toate m\u asurile de probabilitate cu \(\PP(A_i)=0\) sau \(1\),
+\(\forall\, i\in\{1,2,\dots,n\}\), prin urmare \(\PP(\a_i)=0\) sau \(1\)
+pentru toate elementele \(\a_i\) din \(\Pi\) (to\c ti atomii). Alegand
+\(P\) a\c sa incat \(\PP(\a_i)=1\), pentru un \(i\) fixat, \c si
+\(\PP(\b)=0\) pentru \(\b\in\Pi, \, \b\neq\a\) \footnote{putem g\u asi o
+  asemenea m\u asur\u a de probabilitate deoarece odat\u a ce am ales
+  \(\PP(\a_i)=1\) am ales \c si valorile pentru \(\PP(A_j)\)} avem
+\(c'_i\geq 0\) (\(i=1,2\dots,m'\)). Asta garanteaz\u a c\u a rela\c tia
+(\ref{eqEx6}) r\u amane valabil\u a pentru orice m\u asur\u a de
+probabilitate.
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+7*}{Exerciiul 7*}}\label{exerciiul-7}
+
+Conform rezultatului demonstrat in exerci\c tiul anterior, este
+suficient s\u a verific\u am rela\c tiile din enun\c t pentru
+m\u asurile de probabilitate \(\PP\) care verific\u a
+\(\PP(A_1)=\cdots=\PP(A_l)=1\) \c si \(\PP(A_{l+1})=\cdots=\PP(A_n)=0\),
+cu \(0\leq l\leq n\).
+
+Prin urmare, fie \(0\leq l\leq n\) \c si \(\PP\) care verific\u a
+rela\c tiile de mai sus. Dac\u a \(l=0\) atunci cele dou\u a formule
+sunt evident adev\u arate (\(0=0\)). S\u a presupunem c\u a \(l\geq1\)
+\c si c\u a \(1\leq i_1<i_2<\cdots<i_k\leq n\), \(k\geq 1\). Dac\u a
+\(i_k\leq l\) atunci \(\PP(A_{i_1})=\PP(A_{i_1})=\cdots=\PP(A_{i_k})=1\)
+de unde avem c\u a \[
+  \PP(A_{i_1}\cap A_{i_2})=\PP(A_{i_1})+\PP(A_{i_2})-\PP(A_{i_1}\cup A_{i_2})=2-1=1
+\] \c si prin induc\c tie se poate ar\u ata c\u a
+\(\PP(A_{i_1}\cap\cdots\cap A_{i_k})=1\) (altfel se poate folosi
+inegalitatea lui Bonferroni). Dac\u a \(i_k\geq l+1\) atunci
+\(0\leq \PP(A_{i_1}\cap\cdots\cap A_{i_k})\leq \PP(A_{i_k})=0\). Prin
+urmare \(\PP(A_{i_1}\cap\cdots\cap A_{i_k})=0\) sau \(1\) dup\u a cum
+\(\{i_1,i_2,\cdots,i_k\}\) este sau nu submul\c time a lui
+\(\{1,2,\cdots,l\}\). Ob\c tinem astfel c\u a suma \(S_{k}^{n}\) este
+egal\u a cu num\u arul de submul\c timi
+\(\{i_1,i_2,\cdots,i_k\}\subset\{1,2,\cdots,l\}\), adic\u a
+\(S_{k}^{n}=\binom{l}{k}\).
+
+Pentru a ar\u ata identitatea de la punctul a) s\u a observ\u am c\u a
+pentru \(l<r\) avem \(V_{n}^{r}=0\), pentru c\u a
+\(LHS=V_{n}^{r}=\PP(B)\) unde
+
+\begin{align*}
+  B &= \{\mbox{exact $r$ dintre $A_1,\dots, A_n$ se realizeaz\u a }\}\\
+  &= \bigcup_{1\leq i_1<i_2<\cdots<i_r\leq n}\left[\bigcap_{i\in\{i_1,\dots,i_r\}}A_i\cap\bigcap_{j\in\{1,2,\dots,n\}\setminus\{i_1,\dots,i_r\}}A_j^c\right]
+\end{align*}
+
+iar
+\(\PP\left(\bigcap_{i\in\{i_1,\dots,i_r\}}A_i\cap\bigcap_{j\in\{1,2,\dots,n\}\setminus\{i_1,\dots,i_r\}}A_j^c\right)=0\)
+(cum \(l<r\) cel pu\c tin una din \(A_i\) are probabilitate \(0\)). De
+asemenea, s\u a observ\u am c\u a \(S_{r+k}^{n}=\binom{l}{r+k}=0\) deci
+membrul drept \[
+  RHS=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n}=0
+\] \c si concluzion\u am c\u a \(LHS=RHS=0\).
+
+Dac\u a \(l\geq r\) atunci membrul drept devine
+
+\begin{align*}
+  RHS &= \displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n} = \displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}\binom{l}{r+k}\\
+  &= \displaystyle\sum_{k=0}^{l-r}(-1)^k\binom{r+k}{k}\binom{l}{r+k}= \binom{l}{r}\displaystyle\sum_{k=0}^{l-r}(-1)^k\binom{l-r}{k}
+\end{align*}
+
+unde pentru \(r=l\) avem \(RHS=1\) iar pentru \(r<l\) avem \(RHS=0\). In
+acela\c si timp membrul stang este tot egal cu \(1\) atunci cand
+\(l=r\), pentru c\u a \(\PP(A_1\cap A_l)=1\) \c si \(0\) atunci cand
+\(l>r\). Ultima egalitate rezult\u a din faptul c\u a in descompunerea
+evenimentului \(B\) apar evenimentele de tipul
+\(\bigcap_{i\in\{i_1,\dots,i_r\}}A_i\cap\bigcap_{j\in\{1,2,\dots,n\}\setminus\{i_1,\dots,i_r\}}A_j^c\)
+in care cel pu\c tin unul dintre \(A_i\) \c si \(A_j^c\) este de
+probabilitate \(0\). Conform problemei precedente avem rezultatul dorit.
+
+Punctul b) se face in mod similar.
+
+
+\end{document}

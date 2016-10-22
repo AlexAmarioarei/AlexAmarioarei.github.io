@@ -48,7 +48,7 @@ $$
 $$
 
 ### Exerci\c tiul 6* ^[Exerci\c tiile cu * sunt suplimentare \c si nu sunt obligatorii]
-Fie $(A_1, A_2, \dots, A_n)$, $n\geq0$ un \c sir de p\u ar\c ti ale lui $\Om$ \c si $\MF$ algebra generat\u a de acesta (cea mai mic\u a algebr\u a in sensul incluziunii care con\c tine \c mul\c timile $\{A_1, A_2, \dots, A_n\}$). Fie $(c_1, \dots,c_m)$ un \c sir de numere reale \c si $(B_1, B_2, \dots, B_m)$ un \c sir de elemente din $\MF$ ($m\geq 0$). Consider\u am inegalitatea
+Fie $(A_1, A_2, \dots, A_n)$, $n\geq0$ un \c sir de p\u ar\c ti ale lui $\Om$ \c si $\MF$ algebra generat\u a de acestea (cea mai mic\u a algebr\u a in sensul incluziunii care con\c tine mul\c timile $\{A_1, A_2, \dots, A_n\}$). Fie $(c_1, \dots,c_m)$ un \c sir de numere reale \c si $(B_1, B_2, \dots, B_m)$ un \c sir de elemente din $\MF$ ($m\geq 0$). Consider\u am inegalitatea
 \begin{equation}\label{eq1}
   \displaystyle\sum_{k=1}^{m}c_k\PP(B_k)\geq 0
 \end{equation}
@@ -62,7 +62,7 @@ unde $\PP$ este o m\u asur\u a de probabiilitate pe $\MF$. Urm\u atoarele propri
 
 Fie $S_{0}^{n}=1$, $S_{k}^{n}=\displaystyle\sum_{1\leq i_1<\cdots<i_k\leq n}\PP\left(A_{i_1}\cap\cdots\cap A_{i_k}\right)$ \c si not\u am cu $V_{n}^{r}$ (respectiv cu $W_{n}^{r}$) probabilitatea ca exact $r$ (respectiv cel pu\c tin $r$) dintre evenimentele $A_1, A_2, \dots, A_n$ se realizeaz\u a. Ar\u ata\c ti c\u a: 
 
-  a) $V_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n}$
+  a) $V_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k}{k}S_{r+k}^{n}$ (Identitatea lui Waring^[Mai este intalnit\u a \c si sub numele de de Moivre-Jordan])
   
   b) $W_{n}^{r}=\displaystyle\sum_{k=0}^{n-r}(-1)^k\binom{r+k-1}{k}S_{r+k}^{n}$
 

@@ -1,0 +1,264 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Tema 2},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\VV{{\mathbb V}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Probabilit\u a\c ti \c si Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, G. Popovici}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 241, 242, 243, 244}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Tema 2}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+1}{Exerciiul 1}}\label{exerciiul-1}
+
+O urn\u a con\c tine \(r\) bile ro\c sii \c si \(b\) bile albastre. O
+bil\u a este extras\u a la intamplare din urn\u a, i se noteaz\u a
+culoarea \c si este intoars\u a in urn\u a impreun\u a cu alte \(d\)
+bile de aceea\c si culoare. Repet\u am acest proces la nesfar\c sit.
+Calcula\c ti:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Probabilitatea ca a doua bil\u a extras\u a s\u a fie albastr\u a.
+\item
+  Probabilitatea ca prima bil\u a s\u a fie albastr\u a \c stiind c\u a
+  a doua bil\u a este albastr\u a.
+\item
+  Fie \(B_n\) evenimentul ca a \(n\)-a bil\u a extras\u a s\u a fie
+  albastr\u a. Ar\u ata\c ti c\u a \(\PP(B_n)=\PP(B_1)\),
+  \(\forall\, n\geq1\).
+\item
+  Probabilitatea ca prima bil\u a este albastr\u a \c stiind c\u a
+  urm\u atoarele \(n\) bile extrase sunt albastre. G\u asi\c ti valoarea
+  limit\u a a acestei probabilit\u a\c ti.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+2}{Exerciiul 2}}\label{exerciiul-2}
+
+O companie de asigur\u ari asigur\u a acela\c si num\u ar de
+b\u arba\c ti \c si de femei. Intr-un an dat, probabilitatea ca un
+b\u arbat s\u a fac\u a accident \c si s\u a aib\u a nevoie de asigurare
+este de \(\a\), independent de al\c ti ani. In mod similar,
+probabilitatea ca o femeie s\u a fac\u a accident \c si s\u a
+beneficieze de asigurare este \(\b\). S\u a presupunem c\u a firma de
+asigur\u ri alege la intamplare o persoan\u a.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Care este probabilitatea ca \c soferul ales s\u a aib\u a nevoie de o
+  poli\c t\u a de asigurare anul acesta ?
+\item
+  Care este probabilitatea ca \c soferul ales s\u a aib\u a nevoie de
+  asigurare doi ani la rand ?
+\item
+  Fie \(A_1, A_2\) evenimentele prin care \c soferul ales are nevoie de
+  asigurare in primul, respectiv cel de-al doilea an. Ar\u ata\c ti
+  c\u a \(\PP(A_2|A_1)\geq\PP(A_1)\).
+\item
+  G\u asi\c ti probabilitatea ca persoana care are nevoie de asigurare
+  s\u a fie o femeie.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+3}{Exerciiul 3}}\label{exerciiul-3}
+
+Fie \(X\) o variabil\u a aleatoare de densitate: \[
+  f(x) = \left\{\begin{array}{ll}
+    \frac{2x}{\t^2}, & \mbox{dac\u a $0\leq x\leq \t$}\\
+    0, & \mbox{altfel}
+  \end{array}\right.
+\] unde \(\t\) este un num\u ar pozitiv dat. Determina\c ti func\c tia
+de reparti\c tie, media \c si varian\c ta lui \(X\).
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+4}{Exerciiul 4}}\label{exerciiul-4}
+
+Fie \(X\) o variabil\u a aleatoare a c\u arei func\c tie de
+reparti\c tie este
+
+\[
+  F(x) = \left\{\begin{array}{lll}
+    0, & \mbox{dac\u a $x\leq1$}\\
+    \ln(x), & \mbox{dac\u a $1<x\leq e$}\\
+    1, & \mbox{dac\u a $e<x$}
+  \end{array}\right.
+\]
+
+Calcula\c ti \(\EE[X]\) \c si \(\VV[X]\).
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+5}{Exerciiul 5}}\label{exerciiul-5}
+
+Fie \(X\) o variabil\u a aleatoare de densitate: \[
+  f(x) = \left\{\begin{array}{ll}
+    e^{-(x-\t)}, & \mbox{dac\u a $x>\t$}\\
+    0, & \mbox{altfel}
+  \end{array}\right.
+\] unde \(\t\) este un num\u ar real dat.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Determina\c ti func\c tia de reparti\c tie, media, varian\c ta \c si
+  mediana acestei variabile
+\item
+  Fie \(X_1,\cdots,X_n\) variabile aleatoare independente de aceea\c si
+  lege ca \c si \(X\) \c si fie \(m_n=\min(X_1,\cdots,X_n)\).
+  Determina\c ti func\c tia de reparti\c tie \c si densitatea variabilei
+  aleatoare \(m_n\).
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{Exerci\c tiul
+6}{Exerciiul 6}}\label{exerciiul-6}
+
+Fie \(X\) o variabil\u a aleatoare de densitate: \[
+  f(x) = \left\{\begin{array}{ll}
+    \frac{1}{\t}x^{\frac{1}{\t}-1}, & \mbox{dac\u a $0\leq x\leq 1$}\\
+    0, & \mbox{altfel}
+  \end{array}\right.
+\] unde \(\t\) este un num\u ar pozitiv dat. Determina\c ti legea
+variabilei aleatoare \(Y=-\ln(X)\).
+
+
+\end{document}
