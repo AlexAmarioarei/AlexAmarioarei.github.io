@@ -55,17 +55,21 @@ t1sol = "[Solutie Tema 1](homework/Tema_1_Sol.pdf)"
 t1data = "Vineri 21 Octombrie"
 
 t2 = "[Tema 2](homework/Tema_2.pdf)"
-t2sol = ""
+t2sol = "[Solutie Tema 2](homework/Tema_2_Sol.pdf)"
 t2data = "Vineri 28 Octombrie"
 
-tab = data.frame(Tema = c(t1,t2), Data = c(t1data,t2data), Solution = c(t1sol,t2sol))
+t3 = "[Tema 3](homework/Tema_3.pdf)"
+t3sol = ""
+t3data = "Vineri 04 Noiembrie"
+
+tab = data.frame(Tema = c(t1,t2,t3), Data = c(t1data,t2data,t3data), Solution = c(t1sol,t2sol,t3sol))
 
 kable(tab, 
       col.names = c("Tema", "Data de predare", "Solutii"),
       align = "ccc")
 ```
   
-Trimiterea temelor se poate face pe adresa de [Dropbox](https://www.dropbox.com/sh/il9vakxnex13qw5/AAAGi7ykDU1mtVFxunutwkBha?dl=0). Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
+Trimiterea temelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
 <!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
 
 ### Proiecte de laborator

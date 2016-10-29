@@ -38,7 +38,7 @@ Fie $A$, $B$ \c si $C$ trei evenimente. Exprima\c ti $\^ i$n func\c tie de $A$, 
   
   h) exact dou\u a evenimente din cele trei se produc 
   
-  i) nu mai mult de dou\u a evenimente nu se realizeaz\u a 
+  i) nu mai mult de dou\u a evenimente se realizeaz\u a 
 
 ### Exerci\c tiul 2
 Fie $\Om$ mul\c timea tuturor cuplurilor c\u as\u atorite dintr-un ora\c s dat. Consider\u am evenimentele urm\u atoare: 

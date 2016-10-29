@@ -18,6 +18,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r echo=FALSE, include=FALSE}
+library(knitr)
+```
+
 ### Informații generale
 
 Acest curs reprezintă o introducere în teoria probabilităților și a statisticii matematice. Pentru parcurgerea acestui curs nu sunt necesare cunoștinte de teoria măsurii. 
@@ -46,9 +51,23 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 Temele vor fi postate la aproximativ două săptămâni. Este încurajată colaborarea între studenți dar fiecare trebuie să 
 își scrie propriile soluții. Copierea temei este __interzisă__.
 
-  1. [Tema 1](homework/Tema_1.pdf) pentru *Joi 27 Octombrie*
-  
-Trimiterea temelor se poate face pe adresa de [Dropbox](https://www.dropbox.com/sh/yn87qp9arpocb04/AAASIDcXVId30M7VN8_EhWxva?dl=0). Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
+```{r echo = FALSE}
+t1 = "[Tema 1](homework/Tema_1.pdf)"
+t1sol = "[Solutie Tema 1](homework/Tema1_Sol.pdf)"
+t1data = "Joi 27 Octombrie"
+
+t2 = "[Tema 2](homework/Tema_2.pdf)"
+t2sol = ""
+t2data = "Joi 10 Noiembrie"
+
+tab = data.frame(Tema = c(t1,t2), Data = c(t1data,t2data), Solution = c(t1sol,t2sol))
+
+kable(tab, 
+      col.names = c("Tema Nr.", "Data de predare", "Solutii"),
+      align = "ccc")
+```
+
+Trimiterea temelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
 <!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
 
 ### Proiecte de laborator

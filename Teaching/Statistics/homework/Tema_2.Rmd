@@ -66,7 +66,7 @@ Ar\u ata\c ti c\u a:
 ### Exerci\c tiul 5
 Un proces Bernoulli de parametru $p$ este un \c sir de variabile aleatoare independente $(X_n)_{n\geq1}$ cu $X_n\in\{0,1\}$ \c si $\PP(X_n=1)=p$.
 
-  a) Ar\u ata\c ti c\u a v.a. $S_n=X_1+X_2+\cdots+X_n$ este repartizat\u a $\MB(n,p)$ \c si calcula\u ti media \c si varian\c ta acesteia.
+  a) Ar\u ata\c ti c\u a v.a. $S_n=X_1+X_2+\cdots+X_n$ este repartizat\u a $\MB(n,p)$ \c si calcula\c ti media \c si varian\c ta acesteia.
   
   b) Fie $L$ cel mai mare num\u ar natural pentru care $X_1=X_2=\cdots=X_L$ \c si $M$ cel mai mare num\u ar natural a\c sa incat $X_{L+1}=X_{L+2}=\cdots=X_{L+M}$. G\u asi\c ti distribu\c tiile v.a. $L$ \c si $M$. 
   
