@@ -55,7 +55,7 @@ t1sol = "[Solutie Tema 1](homework/Tema_1_Sol.pdf)"
 t1data = "Vineri 21 Octombrie"
 
 t2 = "[Tema 2](homework/Tema_2.pdf)"
-t2sol = "[Solutie Tema 2](homework/Tema_2_Sol.pdf)"
+t2sol = "[Solutie Tema 2](homework/Tema_2_sol.pdf)"
 t2data = "Vineri 28 Octombrie"
 
 t3 = "[Tema 3](homework/Tema_3.pdf)"
