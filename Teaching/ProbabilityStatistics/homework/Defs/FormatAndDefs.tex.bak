@@ -36,6 +36,7 @@
 \def\NN{{\mathbb N}}
 \def\FF{{\mathbb F}}
 %\def\SS{{\mathbb S}}
+\def\MA{{\mathcal A}}
 \def\MO{{\mathcal O}}
 \def\MF{{\mathcal F}}
 \def\MR{{\mathcal R}}

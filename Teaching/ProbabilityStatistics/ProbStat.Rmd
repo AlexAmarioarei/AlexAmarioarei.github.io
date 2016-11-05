@@ -1,6 +1,6 @@
 ---
 title: "Probabilități și Statistică"
-author: "Alex Amărioarei, Georgiana Popovici"
+author: "Alex Amărioarei"
 date: "2016-2017"
 output:
   html_document:
@@ -42,7 +42,7 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 
 #### Seminar/Laborator
 
- *  _Instructori_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Georgiana Popovici
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
 
  *  _Email_ : amarioareialexandru [at] gmail [dot] com 
 
@@ -58,7 +58,7 @@ t1data = "Joi 27 Octombrie"
 
 t2 = "[Tema 2](homework/Tema_2.pdf)"
 t2sol = ""
-t2data = "Joi 10 Noiembrie"
+t2data = "Duminica 13 Noiembrie"
 
 tab = data.frame(Tema = c(t1,t2), Data = c(t1data,t2data), Solution = c(t1sol,t2sol))
 
