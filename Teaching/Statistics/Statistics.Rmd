@@ -76,6 +76,10 @@ kable(tab,
 Trimiterea temelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
 <!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
 
+### Orar
+
+<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=400&amp;wkst=2&amp;hl=ro&amp;bgcolor=%23FFFFFF&amp;src=bhbdeogr1ojv4msuvoij6ubigk%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=Europe%2FBucharest" style="border-width:0" width="800" height="400" frameborder="0" scrolling="no"></iframe>
+
 ### Proiecte de laborator
 
 Informații suplimentare se vor afișa în curând...
