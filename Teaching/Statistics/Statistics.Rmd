@@ -79,7 +79,7 @@ Trimiterea temelor se poate face pe adresa de **Dropbox**. StudenÈ›ii trebuie sÄ
 ### Orar
 
 <div>
-<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=400&amp;wkst=2&amp;hl=ro&amp;bgcolor=%23FFFFFF&amp;src=bhbdeogr1ojv4msuvoij6ubigk%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=Europe%2FBucharest" style="border-width:0" width="800" height="400" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen">&nbsp;</iframe>
+<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=400&amp;wkst=2&amp;hl=ro&amp;bgcolor=%23FFFFFF&amp;src=bhbdeogr1ojv4msuvoij6ubigk%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=Europe%2FBucharest" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no" allowfullscreen>&nbsp;</iframe>
 </div>
 
 ### Proiecte de laborator
