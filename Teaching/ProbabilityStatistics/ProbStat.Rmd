@@ -1,6 +1,6 @@
 ---
 title: "Probabilități și Statistică"
-author: "Alex Amărioarei"
+author: "Alex Amărioarei, Simona Cojocea"
 date: "2016-2017"
 output:
   html_document:
@@ -42,7 +42,7 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 
 #### Seminar/Laborator
 
- *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+ *  _Instructori_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Simona Cojocea
 
  *  _Email_ : amarioareialexandru [at] gmail [dot] com 
 
