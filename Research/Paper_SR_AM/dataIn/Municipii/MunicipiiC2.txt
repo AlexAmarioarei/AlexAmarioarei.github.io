@@ -1,0 +1,89 @@
+﻿City
+Bacau
+Bac.*u
+Barlad
+B.*rlad
+Balanesti
+B.*l.*ne.*ti
+Bistrita
+Bistri.*a
+Botosani
+Boto.*ani
+Braila
+Br.*ila
+Brasov
+Bra.*ov
+Bucharest
+Bucure.*ti
+Bucharest
+academy
+Bucharest
+davila
+Bucharest
+cantacuzino
+Bucharest
+floreasca
+Bucharest
+Buchare.*
+Buftea
+Buftea
+Buzau
+Buz.*u
+Buzau
+Buz.*
+Calarasi
+Cal.*ra.*i
+Campulung Moldovenesc
+C.*mpulung Moldo.*
+Campulung
+C.*mpulung
+Cluj Napoca
+Clujnapoca
+Cluj Napoca
+bolyai
+Constanta
+Constan.*a
+Galati
+Gala.*i
+Iasi
+Ia.*i
+Iasi
+^la.*i
+Iasi
+^jassy
+Iasi
+^cuza$
+Iasi
+^asachi$
+Magurele
+M.*gurele
+Orastie
+Or.*tie
+Piatra Neamt
+Piatra Neam.*
+Piatra Neamt
+Neam.*
+Pitesti
+Pite.*ti
+Ploiesti
+Ploie.*ti
+Sfantu Gheorghe
+Sf.*ntu Gheorghe
+Dambovita
+D.*mbovi.*a
+Targoviste
+T.*rgovi.*te
+Targu Mures
+T.*rgu Mure.*
+Targu Mures
+Mure.*
+Ramnicu Valcea
+R.*mnicu V.*lcea
+Ramnicu Valcea
+V.*lcea
+Timisoara
+Tim.*ara
+Voinesti
+Voine.*ti
+Voluntari
+Volunt.*

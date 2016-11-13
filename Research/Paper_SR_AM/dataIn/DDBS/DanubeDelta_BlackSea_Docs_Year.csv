@@ -1,0 +1,25 @@
+﻿Scopus-1982-Analyze-Year
+
+"Your query : (AUTHKEY({Danube Delta} OR {Black Sea}) AND PUBYEAR > 1998 AND PUBYEAR < 2016 AND ( LIMIT-TO(DOCTYPE,""ar"" ) OR LIMIT-TO(DOCTYPE,""cp"" ) OR LIMIT-TO(DOCTYPE,""re"" ) OR LIMIT-TO(DOCTYPE,""bk"" ) ) )"
+
+
+Number of results : 1982
+
+"YEAR",
+"2015","207"
+"2014","229"
+"2013","181"
+"2012","171"
+"2011","174"
+"2010","156"
+"2009","130"
+"2008","116"
+"2007","91"
+"2006","87"
+"2005","67"
+"2004","68"
+"2003","58"
+"2002","87"
+"2001","68"
+"2000","42"
+"1999","50"
