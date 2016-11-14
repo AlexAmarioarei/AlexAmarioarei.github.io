@@ -57,10 +57,14 @@ t1sol = "[Solutie Tema 1](homework/Tema1_Sol.pdf)"
 t1data = "Joi 27 Octombrie"
 
 t2 = "[Tema 2](homework/Tema_2.pdf)"
-t2sol = ""
+t2sol = "[Solutie Tema 2](homework/Tema1_Sol.pdf)"
 t2data = "Duminica 13 Noiembrie"
 
-tab = data.frame(Tema = c(t1,t2), Data = c(t1data,t2data), Solution = c(t1sol,t2sol))
+t3 = "[Tema 3](homework/Tema_3.pdf)"
+t3sol = ""
+t3data = "Joi 24 Noiembrie"
+
+tab = data.frame(Tema = c(t1,t2,t3), Data = c(t1data,t2data,t3data), Solution = c(t1sol,t2sol,t3sol))
 
 kable(tab, 
       col.names = c("Tema Nr.", "Data de predare", "Solutii"),
