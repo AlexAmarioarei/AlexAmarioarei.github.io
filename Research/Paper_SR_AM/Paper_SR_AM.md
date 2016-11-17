@@ -1,5 +1,5 @@
 # TWO DECADES OF RESEARCH COLLABORATION: A KEYWORD SCOPUS EVALUATION 
-Alexandru Amarioarei (alexandru.amarioarei@incdsb.ro), Mihaela Paun^[Corresponding Author - to whom all correspondence should be directed] (mihaela.paun@incdsb.ro)  
+Researcher, Alexandru Amarioarei (alexandru.amarioarei@incdsb.ro), Senior Researcher, Mihaela Paun^[Corresponding Author - to whom all correspondence should be directed] (mihaela.paun@incdsb.ro)  
 Bioinformatics Department, National Institute of Research and Development for Biological Sciences, Bucharest, Romania  
 
 
@@ -10,7 +10,7 @@ Bioinformatics Department, National Institute of Research and Development for Bi
 
 # Abstract
 
-One issue that has become more important over the years is to evaluate the capability for worldwide research networks on different areas of research, especially in the areas that are identified as being worldwide significant. The study investigated the research output, citations impact and collaborations on publications listed in *Scopus* authored by researchers all over the world, research published between *1999-2014*, selected by a group of keywords identified by authors. The results of the analysis identified an increasing trend in scientific publications starting with *2006*, especially on three of the analyzed keywords. We also found differences in the citations patterns for the *Black Sea* and *Danube Delta* keywords in the contributing countries. The results of this study revealed a steady increase of the collaboration output and an increasing trend in the collaboration behavior, both at the European and national level.
+One issue that has become more important over the years is to evaluate the capability for worldwide research networks on different areas of research, especially in the areas that are identified as being worldwide significant. The study investigated the research output, citations impact and collaborations on publications listed in *Scopus* authored by researchers all over the world, research published between *1999-2014*, selected by a group of keywords identified by authors. The results of the analysis identified an increasing trend in scientific publications starting with *2006*, especially on three of the analyzed keywords. We also found differences in the citations patterns for the *Black Sea* and *Danube Delta* keywords in the contributing countries. The results of this study revealed a steady increase of the collaboration output and an increasing trend in the collaboration behavior, both at the European and national level. Additionally, at the national level the study identified the collaboration network between Romanian institutions per counties.
 
 **Keywords: Statistical software R, data collection, research, citations, articles, collaboration networks**
 
@@ -20,11 +20,11 @@ One issue that has become more important over the years is to evaluate the capab
 
 Governments and non-governmental organizations and companies worldwide have been increasingly explored how the publication and use of open and linked data can have impacts not only on knowledge, but also on policy, governance, economic growth and societal challenges. Environmental research has exhibited an increasing trend in the number of publications in the last two decades, as well as the number of researchers involved in this research area and consequently the impact of the environmental research in the academic community has greatly increased. (*Halevi, 2014*) conducted a comprehensive search in *Scopus* data between *2001-2011* on a list of limited subject categories to identify the highly cited articles, performing an in-depth analysis in the top *5* articles in each area. 
 
-In 2013, the UK department of Business, Innovation and Skills commissioned Elsevier to assess the performance of UK's research with respect to the performance of seven other selected countries (*Elsevier, 2013*), addressing publications trend, global research collaboration, research impact, strength and vulnerable areas and the share of global articles. In 2012, on all published articles, UK ranked third after United States and China, consistent with our findings for the keywords identified. (*Kim, 2016*) presented the results of the investigation of the research trends and collaboration status of China, Japan and South Korea regarding marine biodiversity through a bibliometric analysis of scientific articles on Web of Science data for a 20-year period. The study focused on identifying the countriesâ research trends and collaboration trend, since it was considered significant for the strategic policy-making, economic and political environment. 
+In 2013, the UK department of Business, Innovation and Skills commissioned Elsevier to assess the performance of UK's research with respect to the performance of seven other selected countries (*Elsevier, 2013*), addressing publications trend, global research collaboration, research impact, strength and vulnerable areas and the share of global articles. In 2012, on all published articles, UK ranked third after United States and China, consistent with our findings for the keywords identified. (*Kim, 2016*) presented the results of the investigation of the research trends and collaboration status of China, Japan and South Korea regarding marine biodiversity through a bibliometric analysis of scientific articles on Web of Science data for a 20-year period. The study focused on identifying the countries’ research trends and collaboration trend, since it was considered significant for the strategic policy-making, economic and political environment. 
 
 The European Commission invests for the 2014-2020 funding period, through the LIFE financial instrument over 34 billion euros in nature conservation and climate change research projects (*LIFE, 2013*), with three priority areas nature and biodiversity, environment and resource efficiency, climate change adaptation, encouraging the participation of countries outside EU, as well. When involved in science policies, scientific collaboration and interactions among research institutions and scientists is viewed as an essential characteristic. In the last two decades one can see a trend of a remarkable increase in collaboration between countries, between and within institutions, both in the scope of scientific output, as well as policy initiatives (*Melin, 1996*). Through funded projects with more institutional participation, the research produced is a result of a collaborative network, where costly experiments and studies can be conducted by the joint effort of the participants and where the entities involved are not only universities, but also research institutes and industry. 
 
-The present study presents the summarized information regarding funded research and research collaboration in the past two and a half decades, focusing on environmental sciences and identifying a set of priority research actions among the conducted research analyzed. 
+The present study presents the summarized information regarding funded research and research collaboration in the past two and a half decades, focusing on environmental sciences and identifying a set of priority research actions among the conducted research analyzed. The analysis is conducted on *Scopus* data, identifying a set of keywords of interest, using the *R* environment for the statistical analysis and the generation of figures and tables. 
 
 Once the set of keywords is identified (the process is described in the next section), the focus of the paper is on the analysis of research and collaboration on biodiversity, climate change at the global level and zoomed inside these areas on the research on *Danube Delta* and *Black Sea* at the national level.
 
@@ -35,7 +35,7 @@ Given the preparatory phase of the strategic national project *DANUBIUS-RI* that
 
 Through the effort funded under the European Commission FP7 - Environment project, "_DANube macroregion: Capacity building and Excellence in River Systems (basin, delta and sea)_" - *DANCERS*, data has been gathered on what has been accomplished in the Danube basin in the last two decades. While performing analysis on the metadatabase  ([http://www.dancers-fp7.eu/](http://www.dancers-fp7.eu/)) created under this project, database that  gathered information about all existing projects and programmes regarding water management and environmental issues in the Danube Basin in the last two decades, strengths, weaknesses of the outcomes of two decades of research in this area were identified, as well as solutions to the gaps identified by a comprehensive analysis of the data.
 
-Out of the *478* projects entered in the metadatabase, *397* were projects with complete information that were analyzed. The projects were collected with the help of an especially designed online questionnaire ([http://bioinformatica.dbioro.eu/doc/QUESTIONNAIRE.pdf](http://bioinformatica.dbioro.eu/doc/QUESTIONNAIRE.pdf)) and by using internet search tools. The mapping and analysis in this article^[This article was created in [_Rmarkdown_](http://rmarkdown.rstudio.com/) and it is reproducible. All tables and figures that appear in this article are automatically created (follow this [_link_](https://github.com/AlexAmarioarei/AlexAmarioarei.github.io/tree/master/Research/Paper_SR_AM) for the source code).] were performed using the open source software R ([https://cran.r-project.org/](https://cran.r-project.org/)). These projects were projects coordinated during *1993-2014* and were catalogued as projects with thematic areas in _Life Sciences_, _Earth Sciences_, _Socio Economics_ and _Multidisciplinary Sciences_. The thematic focus of the evaluated projects in total was distributed as follows: `Figure 1` presents the projects distribution by thematic areas. One can note that *26.1%* of the projects are projects that were subscribed in more than one of the four categories presented above, *26.1%* were multidisciplinary projects, and about *22.3%* of the projects were Life Science projects, and the rest Earth Sciences and Socio Economics projects.
+Out of the *478* projects entered in the metadatabase, *397* were projects with complete information that were analyzed. The projects were collected with the help of an especially designed online questionnaire ([http://bioinformatica.dbioro.eu/doc/QUESTIONNAIRE.pdf](http://bioinformatica.dbioro.eu/doc/QUESTIONNAIRE.pdf)) and by using internet search tools. These projects were projects coordinated during *1993-2014* and were catalogued as projects with thematic areas in _Life Sciences_, _Earth Sciences_, _Socio Economics_ and _Multidisciplinary Sciences_. The thematic focus of the evaluated projects in total was distributed as follows: `Figure 1` presents the projects distribution by thematic areas. One can note that *26.1%* of the projects are projects that were subscribed in more than one of the four categories presented above, *26.1%* were multidisciplinary projects, and about *22.3%* of the projects were Life Science projects, and the rest Earth Sciences and Socio Economics projects.
 
 
 
@@ -43,15 +43,25 @@ Out of the *478* projects entered in the metadatabase, *397* were projects with 
 
 Investigating the top keywords associated with each project entered in the database for the collected *397* projects, a set of keywords, consistently associated with the research performed and outcomes was selected. The set of representative keywords to Danube research contains the following: *water management*, *pollution control*, *ecosystem*, *Danube*, *Danube Delta*, *climate change*, *environmental protection*, *biodiversity*, *flood risk*, *sustainable development*, *biomaterials*, *biofuels*, *nanomaterials*, *bioeconomy*, *biobanking* and *Black Sea*.
 
-The analysis carried out in this manuscript is focused on evaluating quantitatively (number of publications) and qualitatively (impact through the citations number) the research having one or more of the above keywords in the interval *1999-2015*. Once the keywords set was selected from the projects records, the evaluation analysis was performed on data from the [Scopus](www.scopus.com) database. For each keyword in the data set, a search was performed in *Scopus*, **selecting keywords assigned to the document by the author, function AUTHKEY()**. 
+The analysis carried out in this manuscript is focused on evaluating quantitatively (number of publications) and qualitatively (impact through the citations number) the research having one or more of the above keywords in the interval *1999-2015*. Once the keywords set was selected from the projects records, the evaluation analysis was performed on data from the [Scopus](www.scopus.com) database. The *Scopus* database is one of the largest database of peer-review literature (articles and reviews) containing more than 60 million journal records as is stated on the official webpage. The desired information was retrieved using the *Advanced Search* interface where for each identified keyword a search was performed **selecting keywords assigned to the document by the author, i.e. function AUTHKEY()**. 
 
-A search example:
+A search example is given by the following command:
 
 ```
 ## [1] "AUTHKEY(\"water management\") AND PUBYEAR > 1998 AND PUBYEAR < 2016"
 ```
 
+The obtained results were exported as `csv` (comma separated value) and `bib` (bibliographic information) files. Each such file contains information about the authors, title of publication, year of publication, abstract, author’s affiliations, volume of publication, journal, etc. To remove errors and other inconsistencies (for example duplications) all the data was cleaned.
+
 The *DANCERS* databases collected projects on two decades, starting from *1993* and ending in *2015*, however [Scopus](https://www.scopus.com/) contains incomplete data on research before 1996. The qualitative analysis was adjusted to the *1996-2015* period, since *Scopus* does not have complete citation information for articles published before *1996*; hence the number of citations was investigated only for the period *1999-2015*.
+
+To measure the research impact for each keyword, the H-index (*Hirsch, 2005*) and G-index (*Egghe 2006*) were computed. Both metrics are used to measure the scientific productivity and citation impact of the publications records at the researcher’s level. In this study the indices will be used to evaluate the scientific output of the keyword.
+
+The collaboration networks between countries have been generated using information from the *Authors with Affiliation* field. For each paper, the information regarding the affiliation countries of all authors was extracted and used to compute a collaboration matrix that counts for each pair of countries the number of scientific publications co-written between these countries. Both the sizes of nodes and edges in the resulted collaboration networks are proportional to the values given by this matrix. It should be noted that self-collaborations were not included in the network plots.
+
+For the collaboration map between Romanian counties, only publications with at least one Romanian author were taken into consideration. A data mining algorithm that extracts from the affiliation of the Romanian authors, the address, and generates automatically the corresponding county along with its geographical references, was implemented. The resulted collaboration matrix between counties was used to establish the network nodes size.   
+
+All the mapping and analysis in this article^[This article was created in [_Rmarkdown_](http://rmarkdown.rstudio.com/) and it is reproducible. All tables and figures that appear in this article are automatically created (follow this [_link_](https://github.com/AlexAmarioarei/AlexAmarioarei.github.io/tree/master/Research/Paper_SR_AM) for the source code).] were performed using the open source software R ([https://cran.r-project.org/](https://cran.r-project.org/)) and are dynamically generated.
 
 # Results and discussion 
 
@@ -194,7 +204,6 @@ Table: Table 4: Top 7 collaborations between contries (including self collaborat
 ![Figure 9: Collaboration network between Romania and other countries](Paper_SR_AM_files/figure-docx/Rom_network_plot-1.png)
 
 
-
 Table: Table 5: Romania and its collaborations with other countries (including itself)
 
    Countries       Number of articles 
@@ -212,13 +221,21 @@ Table: Table 5: Romania and its collaborations with other countries (including i
 
 
 
+It can be seen from `Table 5` that most of the Romanian authors have their collaborators within Romanian’s institutions. `Figure 10` illustrates the collaboration network between Romanian institutions per counties. The size of the nodes is given by the number of scientific publications within the institutions belonging to that county.
 
+![Figure 10: Romanian counties collaboration map](Paper_SR_AM_files/figure-docx/unnamed-chunk-18-1.png)
 
 # Conclusions
 
 Increase in the number of publications at the intersection of biodiversity, climate change and environmental issues has been tremendously increasing over the last two decades, indicating that scientists both in Europe and in the world have recognized the importance of studying the connections between among these fields. The percentage of publications in these areas of publications has also significantly increased between 2006 and 2014; the increase in publication in the three topics was higher than that for other topics presented in `Table 1`.
 
 Our study reveals significant differences in collaboration patterns within the countries performing research on *Danube Delta* and *Black Sea* area, most of the publications and multi-authored. Our study results indicate that the collaboration of geographically specific areas, such as *Danube Delta* and *Black Sea*, is biased towards a few countries, which tend to exhibit specific behavior in term of citations and self-citations. An extended analysis will follow over all the keywords identified as significant for the analysis.
+
+The results of this study revealed a steady increase of the collaboration output and an increasing trend in the collaboration behavior, both at the European and national level.
+
+As it can be seen from `Table 4`, *Romania* has an 77.32% collaboration within its institutions in the published papers, after *Turkey* with an 83.48% within its institutions collaboration and followed by *Ukraine* with 71.01% and *Germany* with 67.72%. `Figure 10` illustrates the collaboration network inside Romania, between its institutions per counties. The size of the nodes is given by the number of scientific publications within the institutions belonging to that county. One can note that publications with keywords *Danube Delta* and *Black Sea* come from research co-authored mainly by institutions in *Bucharest*, *Constanta*, *Tulcea*, *Galati*, *Cluj* and *Iasi*, the figure also giving you the degree of collaboration in each county, based on the number of edges from each node.  
+
+The analysis presented in this study is followed by the recommendation that the Romanian institutions have to increase their collaboration network outside Romania. From the analysis on keywords presented in `Figures 11-18`, and considering the actions of the European Commission to invest on climate change, biodiversity and nature conservation research, Romania has to increase its efforts, have scientific results and be visible in these areas, the figures mentions highlighting the gaps identified in the national research conducted in the last two decades on these topics, hence it may serve as a reference for where future funding should be provided.
 
 **Acknowledgements:** This work was financially supported by the Institutional Core Program `BIODIVERS-105 Project`.
 
@@ -229,61 +246,63 @@ Our study reveals significant differences in collaboration patterns within the c
 For the keywords: water management, pollution control 
 
 
-![Figure 10: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-20-1.png)
+![Figure 11: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-20-1.png)
 
 For the keywords: ecosystem, Danube 
 
 
-![Figure 11: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-21-1.png)
+![Figure 12: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-21-1.png)
 
 For the keywords: Danube Delta, climate change 
 
 
-![Figure 12: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-22-1.png)
+![Figure 13: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-22-1.png)
 
 For the keywords: environmental protection, biodiversity 
 
 
-![Figure 13: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-23-1.png)
+![Figure 14: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-23-1.png)
 
 
 For the keywords: flood risk, sustainable development 
 
 
-![Figure 14: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-24-1.png)
+![Figure 15: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-24-1.png)
 
 
 For the keywords: biomaterials, biofuels 
 
 
-![Figure 15: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-25-1.png)
+![Figure 16: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-25-1.png)
 
 
 For the keywords: nanomaterials, bioeconomy 
 
 
-![Figure 16: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-26-1.png)
+![Figure 17: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-26-1.png)
 
 
 For the keywords: biobanking, Black Sea 
 
 
-![Figure 17: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-27-1.png)
+![Figure 18: Documents per country](Paper_SR_AM_files/figure-docx/unnamed-chunk-27-1.png)
 
 
 # References
 
 1. Bar-Ilan, J., (2009), "A closer look at the sources of informetric research", International Journal of Scientometrics, Infometrics Bibliometrics, 13(1), 1-9. 
 2. Dangles., Loirat, J., Freour, C., Serre, S., Vacher, J., Le Roux, X., (2016), "Research on Biodiversity and Climate Change at a Distance: Collaboration Networks between Europe and Latin America and the Caribbean", PLOS ONE, June 15, 2016 http://dx.doi.org/10.1371/journal.pone.0157441.
-3. Elsevier, (2013), "International Comparative Performance of the UK Research Base", Elsevier, 1-117.
-4. Felton A, Fischer J, Lindenmayer DB, Montague-Drake R, Lowe AR, Saunders D, Felton AM, Steffen W, Munro NT, Youngentob K, Gillen J, Gibbons P, Bruzgul JE, Fazey I, Bond SJ, Elliott CP, Macdonald BCT, Porfirio LL, Westgate M, Worthy M (2009),  "Climate change, conservation and management: an assessment of the peer-reviewed scientific journal literature. Biodiversity and Conservation", 18, 2243-2253.
-5. Ghane, M. R., (2011), "To What Extent Are Highly Cited Papers Influenced by Author Self-citation ? A Comparison between Iran and Turkey", International Journal of Information Science and Management, 9(1), 33-46.
-6. Halevi, G., Moed, H.F., (2014), "10 years of research impact: top cited papers in Scopus 2001-2011", Research Trends, 38, 3-9.
-7. Jaeschke, A., Bittner, T., Jentsch, A., Beierkuhnlein, C., (2014), "The last decade in ecological climate change impact research: where are we now ?", Naturwissenschaften, 101(1), 1-9.
-8. Kim, J.,  Lee, S.,  Shim , W., Kang, J.,  A Mapping of Marine Biodiversity Research Trends and Collaboration in the East Asia Region from 1996â2015,  Sustainability 2016, 8(10), 1075; doi:10.3390/su8101075
-9. Melin G, Persson O. Studying research collaboration using co-authorships, Scientometrics. 1996; 36: 363â377. doi: 10.1007/bf02129600
-10. RELX, "The Climate Change Challenge: the global research landscape, RELX group 2015 report", (2015), http://www.relx.com/corporateresponsibility/Documents/climatechangescience.pdf
-11. Sangwal, K., (2013), "Some citation-related characteristics of scientific journals published in individual countries", Scientometrics, 97(3), 719-741.
-12. Taskin, Z., Al, U., (2014), "Standardization problem of author affiliations in citation indexes", Scientometrics 98(1), 347-368.
-13. Zhang, Y.J.,  Liao, H., Li, G., i Yu, S.W., Wang, Z.H.,  Wei ,Y.M., (2012) "Climate Change Research Institute Rankings 2012", Center for Energy and Environmental Policy Research Beijing Institute of Technology, 2012, National Basic Research Program of China (973 Program) (No. 2010CB955805).
-14. The LIFE 2014-2020 Regulation (EC) No 1293/2013 was published in the Official Journal L 347/185 of 20 December 2013.
+3. Egghe, L., (2006), Theory and practice of the g-index. Scientometrics. 2006, 69(1): pp. 131-152, DOI:10.1007/s11192-006-0144-7.
+4. Elsevier, (2013), "International Comparative Performance of the UK Research Base", Elsevier, 1-117.
+5. Felton A, Fischer J, Lindenmayer DB, Montague-Drake R, Lowe AR, Saunders D, Felton AM, Steffen W, Munro NT, Youngentob K, Gillen J, Gibbons P, Bruzgul JE, Fazey I, Bond SJ, Elliott CP, Macdonald BCT, Porfirio LL, Westgate M, Worthy M (2009),  "Climate change, conservation and management: an assessment of the peer-reviewed scientific journal literature. Biodiversity and Conservation", 18, 2243-2253.
+6. Ghane, M. R., (2011), "To What Extent Are Highly Cited Papers Influenced by Author Self-citation ? A Comparison between Iran and Turkey", International Journal of Information Science and Management, 9(1), 33-46.
+7. Halevi, G., Moed, H.F., (2014), "10 years of research impact: top cited papers in Scopus 2001-2011", Research Trends, 38, 3-9.
+8. Hirsch, J.E., (2005), An index to quantify an individual's scientific research output. Proc. Nat. Acad.Sci, 102(46): pp. 16569–16572, DOI: 10.1073/pnas.0507655102.
+9. Jaeschke, A., Bittner, T., Jentsch, A., Beierkuhnlein, C., (2014), "The last decade in ecological climate change impact research: where are we now ?", Naturwissenschaften, 101(1), 1-9.
+10. Kim, J.,  Lee, S.,  Shim , W., Kang, J.,  A Mapping of Marine Biodiversity Research Trends and Collaboration in the East Asia Region from 1996–2015,  Sustainability 2016, 8(10), 1075; doi:10.3390/su8101075
+11. Melin G, Persson O. Studying research collaboration using co-authorships, Scientometrics. 1996; 36: 363–377. doi: 10.1007/bf02129600
+12. RELX, "The Climate Change Challenge: the global research landscape, RELX group 2015 report", (2015), http://www.relx.com/corporateresponsibility/Documents/climatechangescience.pdf
+13. Sangwal, K., (2013), "Some citation-related characteristics of scientific journals published in individual countries", Scientometrics, 97(3), 719-741.
+14. Taskin, Z., Al, U., (2014), "Standardization problem of author affiliations in citation indexes", Scientometrics 98(1), 347-368.
+15. Zhang, Y.J.,  Liao, H., Li, G., i Yu, S.W., Wang, Z.H.,  Wei ,Y.M., (2012) "Climate Change Research Institute Rankings 2012", Center for Energy and Environmental Policy Research Beijing Institute of Technology, 2012, National Basic Research Program of China (973 Program) (No. 2010CB955805).
+16. The LIFE 2014-2020 Regulation (EC) No 1293/2013 was published in the Official Journal L 347/185 of 20 December 2013.
