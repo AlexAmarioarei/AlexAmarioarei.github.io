@@ -1,27 +1,28 @@
 ---
 title: 'TWO DECADES OF RESEARCH COLLABORATION: A KEYWORD SCOPUS EVALUATION '
-author: Researcher, Alexandru Amarioarei (alexandru.amarioarei@incdsb.ro), Senior Researcher, Mihaela Paun^[Corresponding
-  Author - to whom all correspondence should be directed] (mihaela.paun@incdsb.ro)
+author: Researcher, Alexandru Amarioarei (alexandru.amarioarei@incdsb.ro), Senior
+  Researcher, Mihaela Paun^[Corresponding Author - to whom all correspondence should
+  be directed] (mihaela.paun@incdsb.ro)
 date: Bioinformatics Department, National Institute of Research and Development for
   Biological Sciences, Bucharest, Romania
 output:
-  word_document:
-    fig_caption: yes
-    highlight: pygments
-    keep_md: yes
-    reference_docx: template/template.docx
-    toc: no
-  pdf_document:
-    keep_tex: yes
-    number_sections: yes
-    toc: yes
-    toc_depth: 3
   html_document:
     fig_caption: yes
     number_sections: yes
     toc: yes
     toc_float:
       collapsed: no
+  pdf_document:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
 ---
 
 ```{r setup, include=FALSE}
