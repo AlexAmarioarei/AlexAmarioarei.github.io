@@ -67,7 +67,7 @@ t4sol = "--"
 t4data = "Vineri 11 Noiembrie"
 
 t5 = "[Tema 4](homework/Tema_4.pdf)"
-t5sol = ""
+t5sol = "[Solutie Tema 4](homework/Tema_4_Sol.pdf)"
 t5data = "Sambata 26 Noiembrie"
 
 tab = data.frame(Tema = c(t1,t2,t3,t4,t5), 
