@@ -64,7 +64,11 @@ t3 = "[Tema 3](homework/Tema_3.pdf)"
 t3sol = "[Solutie Tema 3](homework/Tema3_Sol.pdf)"
 t3data = "Duminica 27 Noiembrie"
 
-tab = data.frame(Tema = c(t1,t2,t3), Data = c(t1data,t2data,t3data), Solution = c(t1sol,t2sol,t3sol))
+t4 = "[Tema 4](homework/Tema_4.pdf)"
+t4sol = ""
+t4data = "Sambata 10 Decembrie"
+
+tab = data.frame(Tema = c(t1,t2,t3,t4), Data = c(t1data,t2data,t3data,t4data), Solution = c(t1sol,t2sol,t3sol,t4sol))
 
 kable(tab, 
       col.names = c("Tema Nr.", "Data de predare", "Solutii"),
