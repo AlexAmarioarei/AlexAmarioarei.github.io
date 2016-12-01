@@ -78,15 +78,32 @@ kable(tab,
 Trimiterea temelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
 <!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
 
+### Proiecte de laborator
+
+Mai jos găsiți proiectele cursului de *Probabilități și Statistică*. Proiectele sunt individuale iar copierea proiectelor este __strict interzisă__.
+
+```{r echo = FALSE}
+gproj1 = "241, 242, 243, 244"
+proj1 = "[Proiect 1](projects/Proiect_1.pdf)"
+proj1data = "Miercuri 27 Decembrie"
+
+
+tabProiecte = data.frame(Tema = c(gproj1), Data = c(proj1), Solution = c(proj1data))
+
+kable(tabProiecte, 
+      col.names = c("Grupa", "Proiect Nr.", "Data de predare"),
+      align = "ccc")
+```
+
+
+Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. 
+
 ### Orar
 
 <div>
 <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=400&amp;wkst=2&amp;hl=ro&amp;bgcolor=%23FFFFFF&amp;src=5je54j12sbcds7mgglbit9r2co%40group.calendar.google.com&amp;color=%23ffffff&amp;ctz=Europe%2FBucharest" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no" allowfullscreen>&nbsp;</iframe>
 </div>
 
-### Proiecte de laborator
-
-Informații suplimentare se vor afișa în curând...
 
 ### Notarea
 
