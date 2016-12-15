@@ -91,7 +91,7 @@ Mai jos găsiți proiectele cursului de *Probabilități și Statistică*. Proie
 ```{r echo = FALSE}
 gproj1 = "241, 242, 243, 244"
 proj1 = "[Proiect 1](projects/Proiect_1.pdf)"
-proj1data = "Miercuri 27 Decembrie"
+proj1data = "VINERI 30 Decembrie"
 
 
 tabProiecte = data.frame(Tema = c(gproj1), Data = c(proj1), Solution = c(proj1data))

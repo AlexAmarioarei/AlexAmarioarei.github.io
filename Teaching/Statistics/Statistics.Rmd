@@ -97,11 +97,11 @@ Mai jos găsiți proiectele cursului de *Statistică*. Proiectele sunt individua
 ```{r echo = FALSE}
 gproj1_301 = "301"
 proj1_301 = "[Proiect 1](projects/Proiect1_301.pdf)"
-proj1data_301 = "Miercuri 27 Decembrie"
+proj1data_301 = "VINERI 30 Decembrie"
 
 gproj1_311_321 = "311, 321"
 proj1_311_321 = "[Proiect 1](projects/Proiect1_311_321.pdf)"
-proj1data_311_321 = "Miercuri 27 Decembrie"
+proj1data_311_321 = "VINERI 30 Decembrie"
 
 
 tabProiecte = data.frame(Tema = c(gproj1_301, gproj1_311_321), 
