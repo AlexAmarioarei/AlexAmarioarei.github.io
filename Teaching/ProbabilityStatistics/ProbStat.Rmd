@@ -21,6 +21,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE, include=FALSE}
 library(knitr)
+library(DT)
+library(tidyverse)
 ```
 
 ### Informații generale
@@ -103,6 +105,24 @@ kable(tabProiecte,
 
 
 Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. 
+
+### Rezultate
+
+```{r, echo= FALSE}
+proba_tab = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
+
+# fix some left 2 columns and right 1 column
+datatable(
+  proba_tab, class = 'cell-border stripe',
+  extensions = c('FixedColumns', 'Buttons'),
+  options = list(
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print')
+  )
+)
+```
 
 ### Orar
 
