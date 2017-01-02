@@ -108,22 +108,6 @@ Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebui
 
 ### Rezultate
 
-```{r, echo= FALSE}
-proba_tab = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
-
-# fix some left 2 columns and right 1 column
-datatable(
-  proba_tab, class = 'cell-border stripe',
-  extensions = c('FixedColumns', 'Buttons'),
-  options = list(
-    dom = c('Bfrtip'),
-    scrollX = TRUE,
-    fixedColumns = list(leftColumns = 2, rightColumns = 1),
-    buttons = c('csv', 'excel', 'pdf', 'print')
-  )
-)
-```
-
 ```{r, echo=FALSE, include=FALSE}
 # Script for graphical illustration of the results 
 library(tidyverse)
@@ -161,6 +145,23 @@ p1 = ggplot(data.melt, aes(x = variable, y = value))+
 ```{r, echo=FALSE, fig.align='center'}
 ggplotly(p1)
 ```
+
+```{r, echo= FALSE}
+proba_tab = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
+
+# fix some left 2 columns and right 1 column
+datatable(
+  proba_tab, class = 'cell-border stripe',
+  extensions = c('FixedColumns', 'Buttons'),
+  options = list(
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print')
+  )
+)
+```
+
 
 ### Orar
 
