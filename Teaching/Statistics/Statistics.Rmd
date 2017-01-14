@@ -80,9 +80,17 @@ t7 = "--"
 t7sol = "--"
 t7data = "**Vacanta de iarna**"
 
-tab = data.frame(Tema = c(t1,t2,t3,t4,t5,t6,t7), 
-                 Data = c(t1data,t2data,t3data, t4data, t5data,t6data, t7data), 
-                 Solution = c(t1sol,t2sol,t3sol, t4sol, t5sol,t6sol, t7sol))
+t8 = "[Tema 6](homework/Tema_6.pdf)"
+t8sol = ""
+t8data = "Marti 31 Ianuarie"
+
+t9 = "[**Tema Speciala**](homework/Tema_Speciala.pdf)"
+t9sol = ""
+t9data = "Marti 31 Ianuarie"
+
+tab = data.frame(Tema = c(t1,t2,t3,t4,t5,t6,t7,t8,t9), 
+                 Data = c(t1data,t2data,t3data, t4data, t5data,t6data, t7data, t8data, t9data), 
+                 Solution = c(t1sol,t2sol,t3sol, t4sol, t5sol,t6sol, t7sol, t8sol, t9sol))
 
 kable(tab, 
       col.names = c("Tema", "Data de predare", "Solutii"),
@@ -90,6 +98,9 @@ kable(tab,
 ```
   
 Trimiterea temelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
+
+> **ATENȚIE !!!** Tema specială este destinată în special studenților care nu au predat nicio temă până în acest moment și poate valora până la **2.5 puncte**. Cu toate acestea îi încurajez și pe ceilalți studenți să o facă, aceștia din urmă pot cumula cu temele trimise anterior până la un maxim de **3.5 puncte** (proporțional). Astfel un student care a făcut temele 1-6 corect și mai face încă 7 exerciții (exceptându-le pe cele din Tema 6) din tema specială poate obține 3.5 puncte.
+
 <!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
 
 ### Proiecte de laborator
