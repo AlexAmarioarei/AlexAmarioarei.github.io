@@ -76,11 +76,11 @@ t5data = "**Vacanta de iarna**"
 
 t6 = "[Tema 5](homework/Tema_5.pdf)"
 t6sol = ""
-t6data = "Marti 31 Ianuarie"
+t6data = "Sambata 4 Februarie"
 
 t7 = "[**Tema Speciala**](homework/Tema_Speciala.pdf)"
 t7sol = ""
-t7data = "Marti 31 Ianuarie"
+t7data = "Sambata 4 Februarie"
 
 tab = data.frame(Tema = c(t1,t2,t3,t4,t5,t6,t7), 
                  Data = c(t1data,t2data,t3data,t4data,t5data,t6data,t7data), 
