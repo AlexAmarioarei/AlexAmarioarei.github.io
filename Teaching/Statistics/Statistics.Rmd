@@ -133,6 +133,53 @@ Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebui
 
 ### Rezultate
 
+
+```{r, echo=FALSE, include=FALSE, warning=FALSE}
+options(warn=-1)
+# Script for graphical illustration of the results 
+library(tidyverse)
+library(reshape2)
+library(plotly)
+library(stringr)
+
+data = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
+
+data2 = data %>% select(Grupa, Total)
+data2$Grupa = paste("Grupa", data2$Grupa)
+
+p1 = ggplot(data2[!data2$Grupa %in% c("Grupa ERASMUS", "Grupa "),], aes(Total, fill = Grupa))+
+  geom_histogram(color = "#888888")+
+  scale_x_continuous(breaks = 1:10)+
+  scale_color_brewer(palette = "Set2")+
+  facet_grid(Grupa~.)+
+  coord_flip()+
+  theme_minimal()+
+  labs(x = "", y = "", colour = "")+
+  theme(legend.position = "none",
+        strip.text = element_text(face = "bold", size = "12"))
+
+data2b = data %>% select(Grupa, Examen, Total)
+data2b$Grupa = paste("Grupa", data2b$Grupa)
+
+data3 = data2b
+
+data3 = data3[!data3$Grupa%in%c("Grupa ERASMUS", "Grupa "), ]
+
+# Grupa 301
+gr301 = data3[data3$Grupa == "Grupa 301",]
+
+# Grupa 311
+gr311 = data3[data3$Grupa == "Grupa 311",]
+
+# Grupa 321
+gr321 = data3[data3$Grupa == "Grupa 321",]
+
+```
+
+```{r, echo=FALSE, fig.align='center', warning=FALSE}
+suppressMessages(ggplotly(p1))
+```
+
 ```{r, echo= FALSE}
 stat_tab = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
 
@@ -148,6 +195,12 @@ datatable(
   )
 )
 ```
+
+> **Grupa 301**: dintr-un total de `r length(gr301$Total)` stundeți înscriși, `r sum(gr301$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr301$Total>4)/(length(gr301$Total)-sum(gr301$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 311**: dintr-un total de `r length(gr311$Total)` stundeți înscriși, `r sum(gr311$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr311$Total>4)/(length(gr311$Total)-sum(gr311$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 321**: dintr-un total de `r length(gr321$Total)` stundeți înscriși, `r sum(gr321$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr321$Total>4)/(length(gr321$Total)-sum(gr321$Examen == 0))*100, digits = 2), "%")`.
 
 ### Orar
 
