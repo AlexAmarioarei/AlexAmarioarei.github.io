@@ -147,6 +147,8 @@ data = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
 data2 = data %>% select(Grupa, Total)
 data2$Grupa = paste("Grupa", data2$Grupa)
 
+data2$Total[data2$Total<5] = 4
+
 p1 = ggplot(data2[!data2$Grupa %in% c("Grupa ERASMUS", "Grupa "),], aes(Total, fill = Grupa))+
   geom_histogram(color = "#888888")+
   scale_x_continuous(breaks = 1:10)+
@@ -162,6 +164,8 @@ data2b = data %>% select(Grupa, Examen, Total)
 data2b$Grupa = paste("Grupa", data2b$Grupa)
 
 data3 = data2b
+
+data3$Total[data3$Total<5] = 4
 
 data3 = data3[!data3$Grupa%in%c("Grupa ERASMUS", "Grupa "), ]
 
@@ -182,6 +186,8 @@ suppressMessages(ggplotly(p1))
 
 ```{r, echo= FALSE}
 stat_tab = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
+
+stat_tab$Total[stat_tab$Total<5] = 4
 
 # fix some left 2 columns and right 1 column
 datatable(
