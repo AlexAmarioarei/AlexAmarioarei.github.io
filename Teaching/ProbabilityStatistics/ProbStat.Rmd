@@ -119,7 +119,58 @@ Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebui
 
 ### Rezultate
 
-```{r, echo=FALSE, include=FALSE}
+
+```{r, echo=FALSE, include=FALSE, warning=FALSE}
+options(warn=-1)
+# Script for graphical illustration of the results 
+library(tidyverse)
+library(reshape2)
+library(plotly)
+library(stringr)
+
+data = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
+
+data2 = data %>% select(Grupa, Total)
+data2$Grupa = paste("Grupa", data2$Grupa)
+
+p1 = ggplot(data2[!data2$Grupa %in% c("Grupa ERASMUS", "Grupa "),], aes(Total, fill = Grupa))+
+  geom_histogram(color = "#888888")+
+  scale_x_continuous(breaks = 1:10)+
+  scale_color_brewer(palette = "Set2")+
+  facet_grid(Grupa~.)+
+  coord_flip()+
+  theme_minimal()+
+  labs(x = "", y = "", colour = "")+
+  theme(legend.position = "none",
+        strip.text = element_text(face = "bold", size = "12"))
+
+data2b = data %>% select(Grupa, Examen, Total)
+data2b$Grupa = paste("Grupa", data2b$Grupa)
+
+data3 = data2b
+
+data3 = data3[!data3$Grupa%in%c("Grupa ERASMUS", "Grupa "), ]
+
+# Grupa 241
+gr241 = data3[data3$Grupa == "Grupa 241",]
+
+# Grupa 242
+gr242 = data3[data3$Grupa == "Grupa 242",]
+
+# Grupa 243
+gr243 = data3[data3$Grupa == "Grupa 243",]
+
+# Grupa 243
+gr244 = data3[data3$Grupa == "Grupa 244",]
+
+```
+
+```{r, echo=FALSE, fig.align='center', warning=FALSE}
+suppressMessages(ggplotly(p1))
+```
+
+
+```{r, echo=FALSE, include=FALSE, eval = FALSE}
 # Script for graphical illustration of the results 
 library(tidyverse)
 library(reshape2)
@@ -153,13 +204,12 @@ p1 = ggplot(data.melt, aes(x = variable, y = value))+
         strip.text = element_text(face = "bold", size = "12"))
 ```
 
-```{r, echo=FALSE, fig.align='center'}
-ggplotly(p1)
-```
 
 ```{r, echo= FALSE}
 proba_tab = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
 
+proba_tab = proba_tab[, c("Nume", "Grupa", "Tema_1", "Tema_2", "Tema_3", "Tema_4", "Tema_5",
+                          "Tema_Speciala", "Proiect_1", "Examen", "Total")]
 # fix some left 2 columns and right 1 column
 datatable(
   proba_tab, class = 'cell-border stripe',
@@ -173,6 +223,13 @@ datatable(
 )
 ```
 
+> **Grupa 241**: dintr-un total de `r length(gr241$Total)` stundeți înscriși, `r sum(gr241$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr241$Total>4)/(length(gr241$Total)-sum(gr241$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 242**: dintr-un total de `r length(gr242$Total)` stundeți înscriși, `r sum(gr242$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr242$Total>4)/(length(gr242$Total)-sum(gr242$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 243**: dintr-un total de `r length(gr243$Total)` stundeți înscriși, `r sum(gr243$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr243$Total>4)/(length(gr243$Total)-sum(gr243$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 244**: dintr-un total de `r length(gr244$Total)` stundeți înscriși, `r sum(gr244$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr244$Total>4)/(length(gr244$Total)-sum(gr244$Examen == 0))*100, digits = 2), "%")`.
 
 ### Orar
 
