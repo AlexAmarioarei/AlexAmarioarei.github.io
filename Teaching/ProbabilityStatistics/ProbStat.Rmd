@@ -133,6 +133,8 @@ data = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
 data2 = data %>% select(Grupa, Total)
 data2$Grupa = paste("Grupa", data2$Grupa)
 
+data2$Total[data2$Total<5] = 4
+
 p1 = ggplot(data2[!data2$Grupa %in% c("Grupa ERASMUS", "Grupa "),], aes(Total, fill = Grupa))+
   geom_histogram(color = "#888888")+
   scale_x_continuous(breaks = 1:10)+
@@ -150,6 +152,8 @@ data2b$Grupa = paste("Grupa", data2b$Grupa)
 data3 = data2b
 
 data3 = data3[!data3$Grupa%in%c("Grupa ERASMUS", "Grupa "), ]
+
+# data3$Total[data3$Total<5] = 4
 
 # Grupa 241
 gr241 = data3[data3$Grupa == "Grupa 241",]
@@ -210,6 +214,9 @@ proba_tab = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
 
 proba_tab = proba_tab[, c("Nume", "Grupa", "Tema_1", "Tema_2", "Tema_3", "Tema_4", "Tema_5",
                           "Tema_Speciala", "Proiect_1", "Examen", "Total")]
+
+proba_tab$Total[proba_tab$Total<5] = 4
+
 # fix some left 2 columns and right 1 column
 datatable(
   proba_tab, class = 'cell-border stripe',
