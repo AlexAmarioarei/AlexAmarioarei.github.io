@@ -1,0 +1,104 @@
+---
+title: "Biostatistică I"
+author: "Alex Amărioarei"
+date: "2017"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, include=FALSE}
+library(knitr)
+library(DT)
+library(tidyverse)
+```
+### Informații generale
+
+Acest curs reprezintă o introducere în biostatistică.  
+
+### Informații de contact 
+
+#### Curs 
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : amarioareialexandru [at] gmail [dot] com
+
+ *  _Orar_ : Joi 18:00 - 20:00
+
+ *  _Sala_ : Amf. Țițeica (Etaj 3) - Grupa 503
+
+
+#### Seminar/Laborator
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Orar_ : Joi 17:00 - 18:00
+
+ *  _Sala_ : Sala 315 (Etaj 3) - Grupa 503
+ 
+### Exerciții de laborator
+
+
+```{r echo = FALSE}
+lab1 = "[Lab_1_2](labs/Lab_1_2.html)"
+data_lab1 = "[normtemp.txt](labs/data/normtemp.txt)"
+readings_lab1 = "[articol 1](labs/readings/BodyTemp.pdf)"
+
+
+tabLab = data.frame(Lab = c(lab1), 
+                    data = c(data_lab1), 
+                    readings = c(readings_lab1))
+
+
+kable(tabLab, 
+      col.names = c("Laborator", "Date", "Readings"),
+      align = "ccc")
+```
+ 
+### Proiect de laborator
+
+Informații suplimentare vor fi afișate în scurt timp.
+
+
+### Notarea
+
+Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
+
+### Bibliografie
+
+  1. Monica Dumitrescu, Anton Batatorescu - *Applied statistics using the R system*, Ed. Univ. Buc., 2006
+  2. Bernard Rosner - *Fundamentals of Biostatistics*, Cengage Learning, 2016
+  3. Gerald van Belle et al. - *Biostatistics: A Methodology for the Health Sciences*, Wiley, 2004
+  4. John Rice - *Mathematical Statistics and Data Analysis*, Duxbury
+  
+
+### Link-uri utile
+
+#### R
+  1. Programul R - [CRAN](https://cran.r-project.org/)
+  2. Interfața grafică [RStudio](https://www.rstudio.com/)
+  3. Documentație R (în engleză) - [R-Intro](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+  4. Documentație R (în română) - [R pentru începători ](ftp://cran.r-project.org/pub/R/doc/contrib/Paradis-rdebuts_RO.pdf)
+  5. Documentație R (în română) - [Inițiere în R pentru persoane cu pregătire matematică ](http://www.edumanager.ro/community/documente/initiere_in_r.pdf)
+  
+#### Latex
+  1. Introducere în Latex (în romană) - [Manual Wikibooks](https://ro.wikibooks.org/wiki/LaTeX_(carte))
+  2. Introducere în Latex (în engleză) - [Wikibooks Latex Manual](https://en.wikibooks.org/wiki/LaTeX) în special secțiunile de [matematică](https://en.wikibooks.org/wiki/LaTeX/Mathematics), [liste](https://en.wikibooks.org/wiki/LaTeX/List_Structures), [grafice](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics) și [figuri](https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions)
+  3. Tutoriale Latex (în engleză) - [video](https://www.youtube.com/playlist?list=PLDD406480D35CE390)
+  4. Editoarele: [Texmaker](http://www.xm1math.net/texmaker/download.html) și [TeXnicCenter](http://www.texniccenter.org/) 
+  5. Mediul latex [MiKTeX](https://miktex.org/)
+
+#### Rmarkdown
+  1. Pachetul [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile

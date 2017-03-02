@@ -1,0 +1,76 @@
+## Curs Biostatistică 2017
+
+### Testarea ipotezelor statistice: inferență asupra unui eșantion 
+
+#### Exemplul 1
+
+Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](data/normtemp.txt) (sursa originală a datelor este *Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlich. Journal of the American Medical Association, 268, 1578-1580*).
+
+Pentru a citi datele putem folosi două metode: sau să le citim direct din pagina de internet (prin comanda `read.table`)
+
+```{r}
+file = "https://alexamarioarei.github.io/Teaching/Biostatistics/labs/data/normtemp.txt"
+normtemp = read.table(file, header=F, col.names=c("temp","sex","hr"))
+
+head(normtemp)
+```
+
+sau descărcând local fișierul cu date și înlocuind adresa de internet din `file` cu cea locală.
+
+Temperatura apare în grade Fahrenheit și am dori să transformăm în grade Celsius folosind formula:
+
+$$
+  T_C = 5(T_F-32)/9
+$$
+
+```{r}
+normtemp$tempC = (normtemp$temp - 32)*5/9 
+degreesC = normtemp$tempC
+```
+
+Testul t-student presupune că eșantionul (independent) a provenit dintr-o populație normală și pentru aceasta putem verifica ipoteza de normalitate (`QQ plot`):
+
+```{r}
+qqnorm(degreesC)
+qqline(degreesC)
+```
+
+Trasăm histograma:
+
+```{r}
+hist(degreesC, probability = T)
+degM = mean(degreesC)
+degSD = sd(degreesC)
+curve(dnorm(x, degM, degSD), add = T, col = "red")
+```
+
+Trasăm densitatea:
+
+```{r}
+plot(density(degreesC))
+curve(dnorm(x, degM, degSD), add = T, col = "red")
+```
+
+Testăm ipoteza de normalitate (folosind testul `Shapiro-Wilk`):
+
+```{r}
+shapiro.test(degreesC)# distributia pare sa fie aproape de normala si testul nu detecteaza 
+                      # o abatere semnificativa fata de normala
+
+```
+
+Distribuția pare să fie aproape de normală, testul Shapiro-Wilk nu detectează o deviație semnificantă de la normalitate.
+
+```{r}
+t.test(degreesC, mu = 37, alternative = "two.sided") # respingem H0
+```
+
+```{r}
+ttest_deg$statistic
+ttest_deg$p.value
+ttest_deg$conf.int
+```
+
+
+
+### Testarea ipotezelor statistice: inferență asupra a două eșantioane
