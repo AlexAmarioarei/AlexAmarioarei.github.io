@@ -48,8 +48,9 @@ Acest curs reprezintă o introducere în biostatistică.
 
  *  _Sala_ : Sala 315 (Etaj 3) - Grupa 503
  
-### Exerciții de laborator
+### Laboratoare
 
+Mai jos găsiți o parte din laboratoarele cursului. 
 
 ```{r echo = FALSE}
 lab1 = "[Lab_1_2](labs/Lab_1_2.html)"
