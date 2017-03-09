@@ -1,7 +1,7 @@
 ---
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
 ## Curs Biostatistică 2017 - Laborator 1 & 2
 
@@ -329,4 +329,28 @@ segments(1-c(0.23,0.23,0.2),c(yci,mean(y)),1-c(0.27,0.27,0.3),c(yci,mean(y)),lwd
 u <- par("usr")
 segments(0:1,u[3],0:1,u[3]-diff(u[3:4])*0.03,xpd=TRUE)
 text(0:1,u[3]-diff(u[3:4])*0.08,c("A","B"),xpd=TRUE)
+```
+
+### Testarea ipotezelor statistice: inferență asupra a două eșantioane dependente (perechi)
+  
+Considerăm următorul set de date din pachetul `MASS` (luarea in greutate de catre femei anorexice):
+
+```{r}
+data(anorexia, package="MASS")      
+attach(anorexia)
+str(anorexia)
+
+ft=subset(anorexia,Treat="FT") # family treatment
+```
+
+Testăm dacă există diferențe între luarea în greutate înainte de tratament și după tratament:
+
+```{r}
+with(ft, t.test(Postwt-Prewt, mu=0, alternative="greater"))
+```
+
+sau
+
+```{r}
+with(ft, t.test(Postwt, Prewt, paired=T, alternative="greater"))
 ```
