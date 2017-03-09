@@ -54,18 +54,23 @@ Mai jos găsiți o parte din laboratoarele cursului.
 
 ```{r echo = FALSE}
 lab1 = "[Lab_1_2](labs/Lab_1_2.html)"
+labn = ""
 data_lab1 = "[normtemp.txt](labs/data/normtemp.txt)"
-readings_lab1 = "[articol 1](labs/readings/BodyTemp.pdf)"
+data_n = ""
+readings_lab1 = "[Body temperature](labs/readings/BodyTemp.pdf)"
+readings_lab1_b = "[Significance, p values, t tests](labs/readings/nmeth.2698.pdf)"
 
 
-tabLab = data.frame(Lab = c(lab1), 
-                    data = c(data_lab1), 
-                    readings = c(readings_lab1))
+tabLab = data.frame(Nr = c(1,""),
+                    Lab = c(lab1, labn), 
+                    data = c(data_lab1, data_n), 
+                    readings = c(readings_lab1, readings_lab1_b))
 
 
 kable(tabLab, 
-      col.names = c("Laborator", "Date", "Readings"),
-      align = "ccc")
+      col.names = c("Nr", "Laborator", "Date", "Readings"),
+      align = "ccc", 
+      booktabs = TRUE)
 ```
  
 ### Proiect de laborator
