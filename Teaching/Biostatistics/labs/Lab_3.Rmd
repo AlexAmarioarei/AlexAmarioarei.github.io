@@ -320,10 +320,14 @@ LRT1 = function(dat){
   expected <- outer(rs,cs,"*")/n
   
   lrt <- -2*sum(dat * log(expected/dat)) 
-  pval = 1-pchisq(lrt,1)
+  
+  dm = dim(dat) # dimensiunea tabloului pentru a calcula gradele de libertate
+  pval = 1-pchisq(lrt,(dm[1]-1)*(dm[2]-1))
   
   cat("Statistica LRT este ", lrt, "\n")
   cat("P-valoarea testului bazat pe raportul de verosimilitate este ", pval)
+  
+  return(list(statistic = lrt, pvalue = pval))
 }
 
 Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
@@ -488,5 +492,122 @@ mcnemar.test(M1)
 
 # Tabele de contingență $r\times c$
 ***
+
+> Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație $\alpha = 0.5$ dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state. 
+
+
+```{r, echo=FALSE}
+matAA = rbind(c(122, 117, 19, 244),
+           c(1781, 1351, 288,3301),
+           c(353, 269, 60, 713))
+
+matAA2 = rbind(c(122, 117, 19, 244, 502),
+           c(1781, 1351, 288,3301, 6721),
+           c(353, 269, 60, 713, 1395),
+           c(2256, 1737, 367, 4258, 8618))
+
+dimnames(matAA2) = list(c("Florida", "Iowa", "Missouri", "Total"),
+                        c("A", "B", "AB", "O", "Total"))
+
+kable(matAA2, align = "cccc")
+```
+
+## Testul $\chi^2$ al lui Pearson 
+
+Tabelul pe care ne așteptăm să-l observat atunci când ipoteza nulă este adevărată:
+
+```{r}
+  matAA_observed = rbind(c(122, 117, 19, 244),
+           c(1781, 1351, 288, 3301),
+           c(353, 269, 60, 713))
+
+  rs = rowSums(matAA_observed) 
+  cs = colSums(matAA_observed) 
+  
+  n = sum(matAA_observed)
+  
+  matAA_expected <- outer(rs,cs,"*")/n
+```
+
+```{r, echo=FALSE}
+matAA_expected2 = matrix(rep(0, 20), ncol = 5)
+
+matAA_expected2[1:3,1:4] = matAA_expected
+matAA_expected2[4,1:4] = colSums(matAA_expected)
+matAA_expected2[1:3,5] = rowSums(matAA_expected) 
+matAA_expected2[4,5] = sum(matAA_expected)
+
+dimnames(matAA_expected2) = list(c("Florida", "Iowa", "Missouri", "Total"),
+                                c("A", "B", "AB", "O", "Total"))
+
+kable(matAA_expected2, align = "cccc")
+```
+
+Aplicând funcția `chisq.test` obținem:
+
+```{r}
+chisq.test(matAA_observed)
+```
+
+## Testul bazat pe raportul de verosimilitate
+
+Aplicând funcția `LRT1` construită anterior obținem p-valoarea testului bazat pe raportul de verosimilitate: 
+
+```{r}
+LRT1(matAA_observed)
+```
+
+## Testul aproximat al lui Fisher
+
+Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip $r\times c$ (pentru o generalizare a testului prezentat la curs puteți consulta [http://mathworld.wolfram.com/FishersExactTest.html](http://mathworld.wolfram.com/FishersExactTest.html)) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo. 
+
+Generalizând raționamentul din cazul $2 \times 2$ obținem că probabilitatea (condiționată) de a observa un tabel dat fiind marginalele (pe rânduri și pe coloane) este dată de:
+
+$$
+  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{j=1}^{c}n_{ij}!}
+$$
+
+```{r}
+fisher <- function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
+  bot0 <- sum(lgamma(tab+1))# lgamma - logaritm natural din gamma - logaritm din factorial
+
+  bot <- 1:n.sim
+  a <- list(rep(row(tab),tab), rep(col(tab),tab))
+  for(i in 1:n.sim) {
+    a[[1]] <- sample(a[[1]])
+    bot[i] <- sum(lgamma(table(a)+1))
+    if(prnt) { if(i == round(i/10)*10) cat(i,"\n") }
+  }
+  if(return.all) return(list(bot0, bot, mean(bot0 <= bot)))
+  cat("P-valoarea aproximata cu Monte Carlo este ", mean(bot0 <= bot))
+}
+
+set.seed(5)
+fisher(matAA_observed)
+```
+
+```{r, echo=FALSE, fig.align='center'}
+set.seed(5)
+a = fisher(matAA_observed, return.all = TRUE)
+
+hist(a[[2]], 
+     breaks = 25, 
+     freq = FALSE, 
+     main = "",
+     ylab = "",
+     xlab = expression(sum(log( n[ij] * "!" ))),
+     col = "lightgray")
+abline(v = a[[1]], col = "red", lwd = 2)
+text(a[[1]]+2.3, 0.25, "Valoare observata", col = "red")
+text(a[[1]]+3.5, 0.2, paste("P-valoarea =", a[[3]]), col = "blue")
+```
+
+Același rezultat îl obținem și dacă folosim funcția `fisher.test` (care este mai rapidă):
+
+```{r}
+fisher.test(matAA_observed, simulate.p.value = TRUE, B = 1000)
+```
+
+
 
 
