@@ -139,7 +139,7 @@ $(document).ready(function () {
 
 <style type="text/css">
 .table {
-
+    margin: auto;
     width: 40%;
 
 }
@@ -739,6 +739,7 @@ mcnemar.test(M1)</code></pre>
 </table>
 <div id="testul-chi2-al-lui-pearson" class="section level2">
 <h2><span class="header-section-number">2.1</span> Testul <span class="math inline">\(\chi^2\)</span> al lui Pearson</h2>
+<hr />
 <p>Tabelul pe care ne așteptăm să-l observat atunci când ipoteza nulă este adevărată:</p>
 <pre class="r"><code>  matAA_observed = rbind(c(122, 117, 19, 244),
            c(1781, 1351, 288, 3301),
@@ -806,6 +807,7 @@ mcnemar.test(M1)</code></pre>
 </div>
 <div id="testul-bazat-pe-raportul-de-verosimilitate" class="section level2">
 <h2><span class="header-section-number">2.2</span> Testul bazat pe raportul de verosimilitate</h2>
+<hr />
 <p>Aplicând funcția <code>LRT1</code> construită anterior obținem p-valoarea testului bazat pe raportul de verosimilitate:</p>
 <pre class="r"><code>LRT1(matAA_observed)</code></pre>
 <pre><code>## Statistica LRT este  5.548169 
@@ -818,6 +820,7 @@ mcnemar.test(M1)</code></pre>
 </div>
 <div id="testul-aproximat-al-lui-fisher" class="section level2">
 <h2><span class="header-section-number">2.3</span> Testul aproximat al lui Fisher</h2>
+<hr />
 <p>Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip <span class="math inline">\(r\times c\)</span> (pentru o generalizare a testului prezentat la curs puteți consulta <a href="http://mathworld.wolfram.com/FishersExactTest.html" class="uri">http://mathworld.wolfram.com/FishersExactTest.html</a>) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo.</p>
 <p>Generalizând raționamentul din cazul <span class="math inline">\(2 \times 2\)</span> obținem că probabilitatea (condiționată) de a observa un tabel dat fiind marginalele (pe rânduri și pe coloane) este dată de:</p>
 <p><span class="math display">\[
