@@ -1,0 +1,363 @@
+---
+title: "Curs Biostatistică 2017 - Laborator 5"
+output:
+  html_document:
+    code_folding: show
+    number_sections: yes
+  word_document: default
+---
+<style type="text/css">
+.table {
+    margin: auto;
+    width: 40%;
+
+}
+</style>
+
+# Analiză de varianță
+***
+
+## Analiză de varianță cu un factor (one-way ANOVA)
+***
+
+### Exemplul 1
+***
+
+> Vom analiza setul de date `Cushings` din pachetul `MASS`. Sindromul *Cushing* reprezintă o serie de semne și simptome ca urmare a expunerii organismului pentru o perioadă îndelungată de timp la o concentrație ridicată de cortizon (mai multe detalii [aici](http://www.csid.ro/boli-afectiuni/endocrinologie/sindromul-cushing-12821884/) și [aici](https://en.wikipedia.org/wiki/Cushing%27s_syndrome)). Pentru fiecare individ din eșantion, ratele de excreție urinară
+a doi metaboliți steroizi sunt înregistrate: *Tetrahydrocortisone* și *Pregnanetriol*. Variabila *Type* arată tipul de sindrom Cushing, acesta putând lua una din următoarele patru categorii: *adenom* ([a](http://www.sfatulmedicului.ro/dictionar-medical/adenom_119)), *hiperplazia bilaterală* ([b](http://www.sfatulmedicului.ro/Afectiunile-suprarenalelor/hiperplazia-congenitala-a-glandelor-suprarenale_8123)), *carcinom* ([c](http://www.sfatulmedicului.ro/Cancer/ce-este-carcinomul_15473)) și *necunoscut* (u). Obiectivul este să investigăm dacă cele patru tipuri de sindrom sunt diferite în raport cu excreția urinară de *Tetrahydrocortisone*.
+
+Începem prin a atașa setul de date `Cushings`:
+
+```{r}
+library(MASS)
+data("Cushings")
+attach(Cushings)
+```
+
+
+```{r, echo=FALSE}
+library(knitr)
+row.names(Cushings) = NULL
+kable(Cushings, align = "cc")
+```
+
+Notăm cu $Y$ excreția urinară de *Tetrahydrocortisone* (variabila răspuns) și cu $X$ variabila *Type* (variabila factor), cu $X\in\{1,2,3,4\}$ după cum $Type\in\{a,b,c,u\}$. Astfel obiectivul este de a investiga dacă media variabilei răspuns $Y$ diferă pentru valori diferite ale nivelelor variabilei factor $X$. Dacă notăm observațiile individuale cu $y_{ij}$ (excreția urinară de *Tetrahydrocortisone* a individului $j$ cu tipul de sindrom $i$) atunci putem determina 
+
+  * numărul de observații din fiecare grup ($n_i$)
+
+```{r}
+n = length(Cushings$Tetrahydrocortisone)
+
+# varianta 1 - nr de observatii pe grup
+ng = table(Cushings$Type)
+ng
+
+# varianta 2 - nr de observatii pe grup
+ng2 = tapply(Cushings$Tetrahydrocortisone, Cushings$Type, length)
+ng2
+```
+
+  * media fiecărui grup ($\bar{y}_i$)
+  
+```{r}
+# media globala
+my = mean(Cushings$Tetrahydrocortisone)
+
+# varianta 1 - media pe grup 
+myg = tapply(Cushings$Tetrahydrocortisone, Cushings$Type, mean)
+myg
+
+# varianta 2 - media pe grup 
+myg2 = aggregate(Cushings$Tetrahydrocortisone, by = list(Cushings$Type), mean)
+myg2
+
+```
+  
+  * deviația standard a fiecărui grup
+  
+```{r}
+
+# varianta 1 - media pe grup 
+syg = tapply(Cushings$Tetrahydrocortisone, Cushings$Type, sd)
+syg
+
+# varianta 2 - media pe grup 
+syg2 = aggregate(Cushings$Tetrahydrocortisone, by = list(Cushings$Type), sd)
+syg2
+
+```
+
+Considerăm următorul grafic unde fiecare observație este reprezentată printr-un punct (gol în figura din stânga și plin în cea din dreapta) iar media globală este ilustrată printr-o linie punctată. În figura din stânga avem *boxplot*-ul pentru fiecare categorie a lui $X$ iar în figura din dreapta (*stripchart*) mediile eșantioanelor din fiecare grup sunt ilustrate cu o cruce de culoare neagră:
+
+```{r, fig.align='center', echo=FALSE}
+par(mfrow = c(1,2))
+
+boxplot(Cushings$Tetrahydrocortisone~Cushings$Type,
+        col = "lightgray",
+        xlab="Tipul de sindrom",
+        ylab="Tetrahydrocortisone")
+
+points(Cushings$Tetrahydrocortisone~Cushings$Type,
+       col = "brown3")
+abline(h = my, lty = 2)
+
+
+stripchart(Cushings$Tetrahydrocortisone~Cushings$Type,
+ data=airquality,
+ # main="Strip chart pentru fiecare sindrom",
+ xlab="Tipul de sindrom",
+ ylab="Tetrahydrocortisone",
+ col="brown3",
+ # group.names=c("May","June","July","August","September"),
+ vertical=TRUE,
+ pch=16
+)
+
+points(1:4, myg, cex = 2.2, pch = 3)
+abline(h = my, lty = 2)
+```
+
+Din figura de mai sus putem observa că avem o variație considerabilă între mediile grupurilor de-a lungul celor 4 categorii de sindrom *Cushing*. De asemenea, în interiorul grupurilor, avem grade diferite de variație a observațiilor (vezi figura din stânga). Ambele surse de variabilitate contribuie la variabilitatea totală a observațiilor în jurul mediei globale (linia punctată). 
+
+Calculăm **variabilitatea dintre grupuri** ($r$ este numărul de grupuri):
+
+$$
+  SS_{B}=\sum_{i=1}^{r}n_i(\bar{y}_i-\bar{y})^2
+$$
+
+```{r}
+# avem ng nr de observatii din fiecare grup, myg media lui y din fiecare grup si my media totala
+
+SS_B = ng%*%(myg-my)^2 # unde %*% este produs de matrice
+SS_B
+```
+
+Calculăm **variabilitatea reziduală** (din grupuri):
+
+$$
+  SS_{W}=\sum_{i=1}^{r}\sum_{j = 1}^{n_i}(y_{ij}-\bar{y}_i)^2
+$$
+
+```{r}
+y = Cushings$Tetrahydrocortisone # y_{ij}
+ryi = rep(myg, ng)
+
+SS_W = sum((y-ryi)^2)
+SS_W
+```
+
+Calculăm **variabilitatea totală**:
+
+$$
+  SS_{T} = \sum_{i=1}^{r}\sum_{j = 1}^{n_i}(y_{ij}-\bar{y})^2 = SS_{B}+SS_{W}
+$$
+
+```{r}
+# calculat cu SS_B+SS_W
+SS_T = SS_B + SS_W
+SS_T
+
+# calculat cu sume (verificam formula)
+SS_T2 = sum((y-my)^2)
+SS_T2
+```
+
+Observăm că *variabilitatea totală poate fi atribuită parțial variabilității dintre grupuri și parțial variabilității din interiorul grupurilor*. 
+
+Considerăm ipoteza nulă:
+
+$$
+  H_0:\, \mu_1=\cdots=\mu_i=\mu
+$$
+unde $\mu$ este media populației $Y$ iar $\mu_1, \dots, \mu_i$ sunt mediile populațiilor din fiecare grup.
+
+Statistica de test este:
+
+$$
+  F = \frac{\frac{SS_B}{r-1}}{\frac{SS_W}{n-r}}
+$$
+
+unde $\frac{SS_B}{r-1}$ și $\frac{SS_W}{n-r}$ sunt mediile pătrate pentru grupuri (mean square) și respectiv reziduri. Dacă condițiile *ANOVA* (datele din fiecare grup sunt i.i.d. și sunt normal distribuite) sunt satisfăcute și presupunând că $H_0$ este adevărată avem că $F\sim F(r-1, n-r)$. 
+
+Avem modelul *ANOVA*:
+
+```{r}
+anova_model = aov(Tetrahydrocortisone~Type, data = Cushings)
+
+summary(anova_model)
+```
+
+
+```{r, echo=FALSE, fig.align='center'}
+a = 0.05
+
+df1 = length(unique(Cushings$Type))-1
+df2 = n-length(unique(Cushings$Type))
+
+z1 = qf(1-a, df1, df2)
+
+par(bty="n")
+x <- seq(0,10,length=501)
+plot(x,df(x, df1, df2),type="l",main = paste("Repartitia Fisher cu df1 =", df1,"si df2 =", df2,"grade de libertate"),
+     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
+
+abline(h=-0.01, lty = 2)
+x <- c(0:2, 4:10) 
+segments(x,-0.01,x,-0.03,xpd=TRUE)
+
+#desenezi regiunea pe care vrei sa o colorezi
+cord.x=c(z1,seq(z1,10,0.01),10)
+cord.y=c(-0.01,df(seq(z1,10,0.01), df1, df2),-0.01)
+# polygon(cord.x,cord.y,col=rgb(0,191/255,255/255, 0.5))
+polygon(cord.x,cord.y,col="lightgray")
+
+segments(z1,-0.01,z1,-0.04,xpd=TRUE)
+text(z1-0.3,-0.05,expression(f[1-alpha]),xpd=TRUE)
+
+# liniile verticale care delimiteaza regiunile
+abline(v=z1, untf = FALSE, lty=3)
+
+#textul corespunzator lor 
+text(z1+2, 0.6, "Respinge H0")
+
+#adauga valoarea observata
+f_obs = (SS_B/df1)/(SS_W/df2)
+z = f_obs
+segments(z,-0.01,z,-0.04,xpd=TRUE, col="brown3")
+text(z+0.3,-0.05,expression(f[obs]),xpd=TRUE, cex = 1, col = "brown3")
+
+arrows(z+1,0.3, x1=z+0.05, y1=-0.01, lty = 2, col = "brown3")
+text(z+1.2, 0.34, "valoarea observata", col = "brown3")
+
+```
+
+#### Verificarea ipotezelor ANOVA
+
+```{r, echo=FALSE, fig.align='center'}
+source("functions/summarySE.R")
+source("functions/plot_means.R")
+
+dat1 = summarySE(Cushings, measurevar="Tetrahydrocortisone", groupvars=c("Type"))
+
+CI.up = as.numeric(dat1$Tetrahydrocortisone)+as.numeric(dat1$ci)
+CI.dn = as.numeric(dat1$Tetrahydrocortisone)-as.numeric(dat1$ci)
+
+plot.means(means = dat1$Tetrahydrocortisone,
+          # SEs = dat1$se*3,
+          CI.lo = CI.dn,
+          CI.hi = CI.up,
+          categories = dat1$Type,
+          x.axis.label = "Tipul de sindrom",
+          y.axis.label = "Tetrahydrocortisone")
+```
+
+Aplicăm *testul lui Bartlett* pentru a testa homoscedasticitatea modelului (i.e. verificăm $H_0: \sigma_1=\cdots=\sigma_r$):
+
+```{r}
+bartlett.test(Tetrahydrocortisone~Type, data = Cushings)
+```
+
+Observăm că ipoteza de omogenitate este respinsă în favoarea alternativei prin urmare ipoteza de omogenitate din ANOVA este invalidată.
+
+Transformăm variabila răspuns ($\log(Y)=\log(Tetrahydrocortisone)$):
+
+```{r, echo=FALSE, fig.align='center'}
+Cushings_tr = Cushings
+
+Cushings_tr$Tetrahydrocortisone = log(Cushings_tr$Tetrahydrocortisone)
+
+dat2 = summarySE(Cushings_tr, measurevar="Tetrahydrocortisone", groupvars=c("Type"))
+
+CI.up2 = as.numeric(dat2$Tetrahydrocortisone)+as.numeric(dat2$ci)
+CI.dn2 = as.numeric(dat2$Tetrahydrocortisone)-as.numeric(dat2$ci)
+
+plot.means(means = dat2$Tetrahydrocortisone,
+          # SEs = dat1$se*3,
+          CI.lo = CI.dn2,
+          CI.hi = CI.up2,
+          categories = dat2$Type,
+          x.axis.label = "Tipul de sindrom",
+          y.axis.label = "log(Tetrahydrocortisone)")
+```
+
+Verificăm ipoteza de omogenitate (homoscedasticitatea):
+
+```{r}
+bartlett.test(log(Tetrahydrocortisone)~Type, data = Cushings)
+```
+
+Testăm normalitatea modelului transformat (*testul lui Shapiro-Wilks* sau *Shapiro-Francia*):
+
+```{r}
+anova_model_tr = aov(log(Tetrahydrocortisone)~Type, data = Cushings)
+shapiro.test(residuals(anova_model_tr))
+```
+
+Verificăm normalitatea și grafic cu `Q-Q Plot`:
+
+```{r, echo=FALSE, fig.align='center'}
+library(car)
+
+qqPlot(lm(log(Tetrahydrocortisone)~Type, data = Cushings), 
+       simulate = TRUE,
+       main = "Q-Q plot",
+       xlab = "Cuantile teoretice", 
+       ylab = "Reziduurile standardizate")
+```
+
+ANOVA pentru modelul transformat:
+
+```{r}
+summary(anova_model_tr)
+```
+
+```{r, echo=FALSE, fig.align='center'}
+a = 0.05
+
+df1 = length(unique(Cushings$Type))-1
+df2 = n-length(unique(Cushings$Type))
+
+z1 = qf(1-a, df1, df2)
+
+par(bty="n")
+x <- seq(0,10,length=501)
+plot(x,df(x, df1, df2),type="l",main = paste("Repartitia Fisher cu df1 =", df1,"si df2 =", df2,"grade de libertate\nModelul transformat"),
+     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
+
+abline(h=-0.01, lty = 2)
+x <- c(0:2, 4:10) 
+segments(x,-0.01,x,-0.03,xpd=TRUE)
+
+#desenezi regiunea pe care vrei sa o colorezi
+cord.x=c(z1,seq(z1,10,0.01),10)
+cord.y=c(-0.01,df(seq(z1,10,0.01), df1, df2),-0.01)
+# polygon(cord.x,cord.y,col=rgb(0,191/255,255/255, 0.5))
+polygon(cord.x,cord.y,col="lightgray")
+
+segments(z1,-0.01,z1,-0.04,xpd=TRUE)
+text(z1-0.3,-0.05,expression(f[1-alpha]),xpd=TRUE)
+
+# liniile verticale care delimiteaza regiunile
+abline(v=z1, untf = FALSE, lty=3)
+
+#textul corespunzator lor 
+text(z1+2, 0.6, "Respinge H0")
+
+#adauga valoarea observata
+f_obs2 = summary(anova_model_tr)
+
+f_obs2 = unlist(f_obs2)
+
+f_obs2 = f_obs2[[7]]
+
+z = f_obs2
+segments(z,-0.01,z,-0.04,xpd=TRUE, col="brown3")
+text(z+0.3,-0.05,expression(f[obs]),xpd=TRUE, cex = 1, col = "brown3")
+
+arrows(z+1,0.3, x1=z+0.05, y1=-0.01, lty = 2, col = "brown3")
+text(z+1.2, 0.34, "valoarea observata", col = "brown3")
+
+```
+
+### Exemplul 2
+***

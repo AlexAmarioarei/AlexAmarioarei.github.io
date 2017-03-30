@@ -66,11 +66,16 @@ data_lab2 = ""
 readings_lab2 = "[Confidence intervals for proportions](labs/readings/agresti_caffo_2000.pdf)"
 readings_lab2_b = "[Exact analysis of contingency tables ](labs/readings/Mehta_1998.pdf)"
 
+lab3 = "[Lab_5](labs/Lab_5.html)"
+data_lab3 = ""
 
-tabLab = data.frame(Nr = c(1,"",2, ""),
-                    Lab = c(lab1, labn,lab2, labn), 
-                    data = c(data_lab1, data_n,data_lab2, data_n), 
-                    readings = c(readings_lab1, readings_lab1_b,readings_lab2, readings_lab2_b))
+readings_lab3 = ""
+
+
+tabLab = data.frame(Nr = c(1,"",2, "", 3),
+                    Lab = c(lab1, labn,lab2, labn, lab3), 
+                    data = c(data_lab1, data_n,data_lab2, data_n, data_lab3), 
+                    readings = c(readings_lab1, readings_lab1_b,readings_lab2, readings_lab2_b, readings_lab3))
 
 
 kable(tabLab, 
