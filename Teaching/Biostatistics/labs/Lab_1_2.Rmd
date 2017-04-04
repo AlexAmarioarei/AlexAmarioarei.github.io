@@ -1,6 +1,11 @@
 ---
 output:
-  html_document: default
+  html_document: 
+    code_folding: show
+    number_sections: yes
+    includes:
+      after_body: include/include_footer.html
+    css: css/rmarkdown.css
   word_document: default
 ---
 ## Curs Biostatistică 2017 - Laborator 1 & 2

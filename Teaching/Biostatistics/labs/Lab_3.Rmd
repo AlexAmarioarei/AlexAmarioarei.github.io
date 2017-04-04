@@ -2,8 +2,11 @@
 title: "Curs Biostatistică 2017 - Laborator 3 & 4"
 output:
   html_document:
-    code_folding: hide
+    code_folding: show
     number_sections: yes
+    includes:
+      after_body: include/include_footer.html
+    css: css/rmarkdown.css
   word_document: default
 ---
 <style type="text/css">
