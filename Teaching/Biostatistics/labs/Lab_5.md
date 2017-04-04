@@ -1,23 +1,4 @@
----
-title: "Curs Biostatistică 2017 - Laborator 5 & 6"
-subtitle: Analiză de varianță - ANOVA
-output:
-  html_document:
-    code_folding: show
-    number_sections: yes
-    includes:
-      in_header:: include/include_head.html
-      before_body: include/include_header_navpage.html
-      after_body: include/include_footer.html
-      css: css/rmarkdown.css
-  pdf_document: default
-  word_document:
-    fig_caption: yes
-    highlight: pygments
-    keep_md: yes
-    reference_docx: template/template.docx
-    toc: no
----
+# Curs Biostatistică 2017 - Laborator 5&6
 <style type="text/css">
 .table {
     margin: auto;
@@ -37,94 +18,137 @@ a doi metaboliți steroizi sunt înregistrate: *Tetrahydrocortisone* și *Pregna
 
 Începem prin a atașa setul de date `Cushings`:
 
-```{r}
+
+```r
 library(MASS)
 data("Cushings")
 attach(Cushings)
 ```
 
 
-```{r, echo=FALSE}
-library(knitr)
-row.names(Cushings) = NULL
-kable(Cushings, align = "cc")
-```
+
+ Tetrahydrocortisone    Pregnanetriol    Type 
+---------------------  ---------------  ------
+         3.1                11.70         a   
+         3.0                1.30          a   
+         1.9                0.10          a   
+         3.8                0.04          a   
+         4.1                1.10          a   
+         1.9                0.40          a   
+         8.3                1.00          b   
+         3.8                0.20          b   
+         3.9                0.60          b   
+         7.8                1.20          b   
+         9.1                0.60          b   
+        15.4                3.60          b   
+         7.7                1.60          b   
+         6.5                0.40          b   
+         5.7                0.40          b   
+        13.6                1.60          b   
+        10.2                6.40          c   
+         9.2                7.90          c   
+         9.6                3.10          c   
+        53.8                2.50          c   
+        15.8                7.60          c   
+         5.1                0.40          u   
+        12.9                5.00          u   
+        13.0                0.80          u   
+         2.6                0.10          u   
+        30.0                0.10          u   
+        20.5                0.80          u   
 
 Notăm cu $Y$ excreția urinară de *Tetrahydrocortisone* (variabila răspuns) și cu $X$ variabila *Type* (variabila factor), cu $X\in\{1,2,3,4\}$ după cum $Type\in\{a,b,c,u\}$. Astfel obiectivul este de a investiga dacă media variabilei răspuns $Y$ diferă pentru valori diferite ale nivelelor variabilei factor $X$. Dacă notăm observațiile individuale cu $y_{ij}$ (excreția urinară de *Tetrahydrocortisone* a individului $j$ cu tipul de sindrom $i$) atunci putem determina 
 
   * numărul de observații din fiecare grup ($n_i$)
 
-```{r}
+
+```r
 n = length(Cushings$Tetrahydrocortisone)
 
 # varianta 1 - nr de observatii pe grup
 ng = table(Cushings$Type)
 ng
+```
 
+```
+## 
+##  a  b  c  u 
+##  6 10  5  6
+```
+
+```r
 # varianta 2 - nr de observatii pe grup
 ng2 = tapply(Cushings$Tetrahydrocortisone, Cushings$Type, length)
 ng2
 ```
 
+```
+##  a  b  c  u 
+##  6 10  5  6
+```
+
   * media fiecărui grup ($\bar{y}_i$)
   
-```{r}
+
+```r
 # media globala
 my = mean(Cushings$Tetrahydrocortisone)
 
 # varianta 1 - media pe grup 
 myg = tapply(Cushings$Tetrahydrocortisone, Cushings$Type, mean)
 myg
+```
 
+```
+##         a         b         c         u 
+##  2.966667  8.180000 19.720000 14.016667
+```
+
+```r
 # varianta 2 - media pe grup 
 myg2 = aggregate(Cushings$Tetrahydrocortisone, by = list(Cushings$Type), mean)
 myg2
+```
 
+```
+##   Group.1         x
+## 1       a  2.966667
+## 2       b  8.180000
+## 3       c 19.720000
+## 4       u 14.016667
 ```
   
   * deviația standard a fiecărui grup
   
-```{r}
 
+```r
 # varianta 1 - media pe grup 
 syg = tapply(Cushings$Tetrahydrocortisone, Cushings$Type, sd)
 syg
+```
 
+```
+##          a          b          c          u 
+##  0.9244818  3.7891072 19.2388149 10.0958242
+```
+
+```r
 # varianta 2 - media pe grup 
 syg2 = aggregate(Cushings$Tetrahydrocortisone, by = list(Cushings$Type), sd)
 syg2
+```
 
+```
+##   Group.1          x
+## 1       a  0.9244818
+## 2       b  3.7891072
+## 3       c 19.2388149
+## 4       u 10.0958242
 ```
 
 Considerăm următorul grafic unde fiecare observație este reprezentată printr-un punct (gol în figura din stânga și plin în cea din dreapta) iar media globală este ilustrată printr-o linie punctată. În figura din stânga avem *boxplot*-ul pentru fiecare categorie a lui $X$ iar în figura din dreapta (*stripchart*) mediile eșantioanelor din fiecare grup sunt ilustrate cu o cruce de culoare neagră:
 
-```{r, fig.align='center', echo=FALSE}
-par(mfrow = c(1,2))
-
-boxplot(Cushings$Tetrahydrocortisone~Cushings$Type,
-        col = "lightgray",
-        xlab="Tipul de sindrom",
-        ylab="Tetrahydrocortisone")
-
-points(Cushings$Tetrahydrocortisone~Cushings$Type,
-       col = "brown3")
-abline(h = my, lty = 2)
-
-
-stripchart(Cushings$Tetrahydrocortisone~Cushings$Type,
- data=airquality,
- # main="Strip chart pentru fiecare sindrom",
- xlab="Tipul de sindrom",
- ylab="Tetrahydrocortisone",
- col="brown3",
- # group.names=c("May","June","July","August","September"),
- vertical=TRUE,
- pch=16
-)
-
-points(1:4, myg, cex = 2.2, pch = 3)
-abline(h = my, lty = 2)
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-6-1.png)<!-- -->
 
 Din figura de mai sus putem observa că avem o variație considerabilă între mediile grupurilor de-a lungul celor 4 categorii de sindrom *Cushing*. De asemenea, în interiorul grupurilor, avem grade diferite de variație a observațiilor (vezi figura din stânga). Ambele surse de variabilitate contribuie la variabilitatea totală a observațiilor în jurul mediei globale (linia punctată). 
 
@@ -134,11 +158,17 @@ $$
   SS_{B}=\sum_{i=1}^{r}n_i(\bar{y}_i-\bar{y})^2
 $$
 
-```{r}
+
+```r
 # avem ng nr de observatii din fiecare grup, myg media lui y din fiecare grup si my media totala
 
 SS_B = ng%*%(myg-my)^2 # unde %*% este produs de matrice
 SS_B
+```
+
+```
+##         [,1]
+## [1,] 893.521
 ```
 
 Calculăm **variabilitatea reziduală** (din grupuri):
@@ -147,12 +177,17 @@ $$
   SS_{W}=\sum_{i=1}^{r}\sum_{j = 1}^{n_i}(y_{ij}-\bar{y}_i)^2
 $$
 
-```{r}
+
+```r
 y = Cushings$Tetrahydrocortisone # y_{ij}
 ryi = rep(myg, ng)
 
 SS_W = sum((y-ryi)^2)
 SS_W
+```
+
+```
+## [1] 2123.646
 ```
 
 Calculăm **variabilitatea totală**:
@@ -161,14 +196,26 @@ $$
   SS_{T} = \sum_{i=1}^{r}\sum_{j = 1}^{n_i}(y_{ij}-\bar{y})^2 = SS_{B}+SS_{W}
 $$
 
-```{r}
+
+```r
 # calculat cu SS_B+SS_W
 SS_T = SS_B + SS_W
 SS_T
+```
 
+```
+##          [,1]
+## [1,] 3017.167
+```
+
+```r
 # calculat cu sume (verificam formula)
 SS_T2 = sum((y-my)^2)
 SS_T2
+```
+
+```
+## [1] 3017.167
 ```
 
 Observăm că *variabilitatea totală poate fi atribuită parțial variabilității dintre grupuri și parțial variabilității din interiorul grupurilor*. 
@@ -190,184 +237,101 @@ unde $\frac{SS_B}{r-1}$ și $\frac{SS_W}{n-r}$ sunt mediile pătrate pentru grup
 
 Avem modelul *ANOVA*:
 
-```{r}
+
+```r
 anova_model = aov(Tetrahydrocortisone~Type, data = Cushings)
 
 summary(anova_model)
 ```
 
-
-```{r, echo=FALSE, fig.align='center'}
-a = 0.05
-
-df1 = length(unique(Cushings$Type))-1
-df2 = n-length(unique(Cushings$Type))
-
-z1 = qf(1-a, df1, df2)
-
-par(bty="n")
-x <- seq(0,10,length=501)
-plot(x,df(x, df1, df2),type="l",main = paste("Repartitia Fisher cu df1 =", df1,"si df2 =", df2,"grade de libertate"),
-     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
-
-abline(h=-0.01, lty = 2)
-x <- c(0:2, 4:10) 
-segments(x,-0.01,x,-0.03,xpd=TRUE)
-
-#desenezi regiunea pe care vrei sa o colorezi
-cord.x=c(z1,seq(z1,10,0.01),10)
-cord.y=c(-0.01,df(seq(z1,10,0.01), df1, df2),-0.01)
-# polygon(cord.x,cord.y,col=rgb(0,191/255,255/255, 0.5))
-polygon(cord.x,cord.y,col="lightgray")
-
-segments(z1,-0.01,z1,-0.04,xpd=TRUE)
-text(z1-0.3,-0.05,expression(f[1-alpha]),xpd=TRUE)
-
-# liniile verticale care delimiteaza regiunile
-abline(v=z1, untf = FALSE, lty=3)
-
-#textul corespunzator lor 
-text(z1+2, 0.6, "Respinge H0")
-
-#adauga valoarea observata
-f_obs = (SS_B/df1)/(SS_W/df2)
-z = f_obs
-segments(z,-0.01,z,-0.04,xpd=TRUE, col="brown3")
-text(z+0.3,-0.05,expression(f[obs]),xpd=TRUE, cex = 1, col = "brown3")
-
-arrows(z+1,0.3, x1=z+0.05, y1=-0.01, lty = 2, col = "brown3")
-text(z+1.2, 0.34, "valoarea observata", col = "brown3")
-
 ```
+##             Df Sum Sq Mean Sq F value Pr(>F)  
+## Type         3  893.5  297.84   3.226 0.0412 *
+## Residuals   23 2123.6   92.33                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+![](Lab_5_files/figure-docx/unnamed-chunk-11-1.png)<!-- -->
 
 ### Verificarea ipotezelor ANOVA {-}
 ***
 
-```{r, echo=FALSE, fig.align='center'}
-source("functions/summarySE.R")
-source("functions/plot_means.R")
-
-dat1 = summarySE(Cushings, measurevar="Tetrahydrocortisone", groupvars=c("Type"))
-
-CI.up = as.numeric(dat1$Tetrahydrocortisone)+as.numeric(dat1$ci)
-CI.dn = as.numeric(dat1$Tetrahydrocortisone)-as.numeric(dat1$ci)
-
-plot.means(means = dat1$Tetrahydrocortisone,
-          # SEs = dat1$se*3,
-          CI.lo = CI.dn,
-          CI.hi = CI.up,
-          categories = dat1$Type,
-          x.axis.label = "Tipul de sindrom",
-          y.axis.label = "Tetrahydrocortisone")
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
 
 Aplicăm *testul lui Bartlett* pentru a testa homoscedasticitatea modelului (i.e. verificăm $H_0: \sigma_1=\cdots=\sigma_r$):
 
-```{r}
+
+```r
 bartlett.test(Tetrahydrocortisone~Type, data = Cushings)
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  Tetrahydrocortisone by Type
+## Bartlett's K-squared = 31.595, df = 3, p-value = 6.37e-07
 ```
 
 Observăm că ipoteza de omogenitate este respinsă în favoarea alternativei prin urmare ipoteza de omogenitate din ANOVA este invalidată.
 
 Transformăm variabila răspuns ($\log(Y)=\log(Tetrahydrocortisone)$):
 
-```{r, echo=FALSE, fig.align='center'}
-Cushings_tr = Cushings
-
-Cushings_tr$Tetrahydrocortisone = log(Cushings_tr$Tetrahydrocortisone)
-
-dat2 = summarySE(Cushings_tr, measurevar="Tetrahydrocortisone", groupvars=c("Type"))
-
-CI.up2 = as.numeric(dat2$Tetrahydrocortisone)+as.numeric(dat2$ci)
-CI.dn2 = as.numeric(dat2$Tetrahydrocortisone)-as.numeric(dat2$ci)
-
-plot.means(means = dat2$Tetrahydrocortisone,
-          # SEs = dat1$se*3,
-          CI.lo = CI.dn2,
-          CI.hi = CI.up2,
-          categories = dat2$Type,
-          x.axis.label = "Tipul de sindrom",
-          y.axis.label = "log(Tetrahydrocortisone)")
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->
 
 Verificăm ipoteza de omogenitate (homoscedasticitatea):
 
-```{r}
+
+```r
 bartlett.test(log(Tetrahydrocortisone)~Type, data = Cushings)
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  log(Tetrahydrocortisone) by Type
+## Bartlett's K-squared = 5.7249, df = 3, p-value = 0.1258
 ```
 
 Testăm normalitatea modelului transformat (*testul lui Shapiro-Wilks* sau *Shapiro-Francia*):
 
-```{r}
+
+```r
 anova_model_tr = aov(log(Tetrahydrocortisone)~Type, data = Cushings)
 shapiro.test(residuals(anova_model_tr))
 ```
 
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuals(anova_model_tr)
+## W = 0.97953, p-value = 0.8515
+```
+
 Verificăm normalitatea și grafic cu `Q-Q Plot`:
 
-```{r, echo=FALSE, fig.align='center'}
-library(car)
-
-qqPlot(lm(log(Tetrahydrocortisone)~Type, data = Cushings), 
-       simulate = TRUE,
-       main = "Q-Q plot",
-       xlab = "Cuantile teoretice", 
-       ylab = "Reziduurile standardizate")
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-17-1.png)<!-- -->
 
 ANOVA pentru modelul transformat:
 
-```{r}
+
+```r
 summary(anova_model_tr)
 ```
 
-```{r, echo=FALSE, fig.align='center'}
-a = 0.05
-
-df1 = length(unique(Cushings$Type))-1
-df2 = n-length(unique(Cushings$Type))
-
-z1 = qf(1-a, df1, df2)
-
-par(bty="n")
-x <- seq(0,10,length=501)
-plot(x,df(x, df1, df2),type="l",main = paste("Repartitia Fisher cu df1 =", df1,"si df2 =", df2,"grade de libertate\nModelul transformat"),
-     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
-
-abline(h=-0.01, lty = 2)
-x <- c(0:2, 4:10) 
-segments(x,-0.01,x,-0.03,xpd=TRUE)
-
-#desenezi regiunea pe care vrei sa o colorezi
-cord.x=c(z1,seq(z1,10,0.01),10)
-cord.y=c(-0.01,df(seq(z1,10,0.01), df1, df2),-0.01)
-# polygon(cord.x,cord.y,col=rgb(0,191/255,255/255, 0.5))
-polygon(cord.x,cord.y,col="lightgray")
-
-segments(z1,-0.01,z1,-0.04,xpd=TRUE)
-text(z1-0.3,-0.05,expression(f[1-alpha]),xpd=TRUE)
-
-# liniile verticale care delimiteaza regiunile
-abline(v=z1, untf = FALSE, lty=3)
-
-#textul corespunzator lor 
-text(z1+2, 0.6, "Respinge H0")
-
-#adauga valoarea observata
-f_obs2 = summary(anova_model_tr)
-
-f_obs2 = unlist(f_obs2)
-
-f_obs2 = f_obs2[[7]]
-
-z = f_obs2
-segments(z,-0.01,z,-0.04,xpd=TRUE, col="brown3")
-text(z+0.3,-0.05,expression(f[obs]),xpd=TRUE, cex = 1, col = "brown3")
-
-arrows(z+1,0.3, x1=z+0.05, y1=-0.01, lty = 2, col = "brown3")
-text(z+1.2, 0.34, "valoarea observata", col = "brown3")
-
 ```
+##             Df Sum Sq Mean Sq F value  Pr(>F)   
+## Type         3  8.766  2.9220   7.647 0.00102 **
+## Residuals   23  8.789  0.3821                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+![](Lab_5_files/figure-docx/unnamed-chunk-19-1.png)<!-- -->
 
 ## Exemplul 2
 ***
@@ -376,15 +340,33 @@ text(z+1.2, 0.34, "valoarea observata", col = "brown3")
 
 Începem prin a citi setul de date:
 
-```{r}
+
+```r
 cholesterol = read.csv("data/cholesterol.csv", stringsAsFactors = FALSE)
 head(cholesterol)
 ```
 
+```
+##     trt response
+## 1 1time   3.8612
+## 2 1time  10.3868
+## 3 1time   5.9059
+## 4 1time   3.0609
+## 5 1time   7.7204
+## 6 1time   2.7139
+```
+
 Vedem câte observații avem pentru fiecare tratament:
 
-```{r}
+
+```r
 table(cholesterol$trt)
+```
+
+```
+## 
+##  1time 2times 4times  drugD  drugE 
+##     10     10     10     10     10
 ```
 
 Observăm că fiecare tratament a fost administrat la câte 10 pacienți (suntem în contextul unui *plan de experiență echilibrat*). 
@@ -393,7 +375,8 @@ Calculăm:
 
   * numărul total de observații ($n$) și numărul de observații din fiecare grup ($n_i$)
 
-```{r}
+
+```r
 n = length(cholesterol$trt) # nr total de observații
 
 # nr de observatii pe grup
@@ -402,136 +385,131 @@ ng = table(cholesterol$trt)
 
   * media fiecărui grup ($\bar{y}_i$)
   
-```{r}
+
+```r
 # media globala
 my = mean(cholesterol$response)
 
 # media pe grup 
 myg = tapply(cholesterol$response, cholesterol$trt, mean)
 myg
-
 ```
 
-Se observă că `r names(myg)[which(myg == max(myg))]` a produs (în medie) cea mai mare reducere a colesterolului pe când `r names(myg)[which(myg == min(myg))]` a produs-o pe cea mai mică.
+```
+##    1time   2times   4times    drugD    drugE 
+##  5.78197  9.22497 12.37478 15.36117 20.94752
+```
+
+Se observă că drugE a produs (în medie) cea mai mare reducere a colesterolului pe când 1time a produs-o pe cea mai mică.
   
   * abaterea standard a fiecărui grup
   
-```{r}
+
+```r
 # sd pe grup 
 syg = tapply(cholesterol$response, cholesterol$trt, sd)
 syg
 ```
 
-Se observă că abaterile standard sunt relativ constante pentru cele 5 tratamente, luând valori între `r format(min(syg), digits = 2)` și `r format(max(syg), digits = 2)`.
-
-
-```{r, fig.align='center', echo=FALSE}
-par(mfrow = c(1,2))
-
-boxplot(cholesterol$response~cholesterol$trt,
-        col = "lightgray",
-        xlab="",
-        xaxt = "n",
-        ylab="Reducerea de colesterol",
-        las = 2,
-        space = 2)
-
-text(seq(1,5.5,by=1.1), par("usr")[3]-0.25, 
-     srt = 60, adj= 1, xpd = TRUE,
-     labels = unique(cholesterol$trt), cex = 0.8)
-
-points(cholesterol$response~as.factor(cholesterol$trt),
-       col = "brown3")
-abline(h = my, lty = 2)
-
-
-stripchart(response~trt,
- data=cholesterol,
- # main="Strip chart pentru fiecare sindrom",
- xaxt = "n",
- xlab="",
- ylab="Reducerea de colesterol",
- col="brown3",
- # group.names=c("May","June","July","August","September"),
- vertical=TRUE,
- pch=16,
- las = 2
-)
-
-text(seq(1,5,by=1), par("usr")[3]-0.25, 
-     srt = 60, adj= 1, xpd = TRUE,
-     labels = unique(cholesterol$trt), cex = 0.8)
-
-points(1:5, myg, cex = 2.2, pch = 3)
-abline(h = my, lty = 2)
 ```
+##    1time   2times   4times    drugD    drugE 
+## 2.878113 3.483054 2.923119 3.454636 3.345003
+```
+
+Se observă că abaterile standard sunt relativ constante pentru cele 5 tratamente, luând valori între 2.9 și 3.5.
+
+
+![](Lab_5_files/figure-docx/unnamed-chunk-25-1.png)<!-- -->
 
 Avem tabelul *ANOVA*:
 
-```{r}
+
+```r
 anova_model = aov(response~trt, data = cholesterol)
 
 summary(anova_model)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(>F)    
+## trt          4 1351.4   337.8   32.43 9.82e-13 ***
+## Residuals   45  468.8    10.4                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 Testul ANOVA (F) pentru tratament (trt) este semnificativ ($p<0.001$), ilustrând că cele 5 tratamente nu sunt la fel de eficiente.  
 
 Reducerea medie de colesterol pentru cele 5 tratamente împreună cu intervalele de încredere de nivel de încredere de $95\%$ corespunzătoare:
 
-```{r, echo=FALSE, fig.align='center'}
-dat_chol = summarySE(cholesterol, measurevar="response", groupvars=c("trt"))
-
-CI.up = as.numeric(dat_chol$response)+as.numeric(dat_chol$ci)
-CI.dn = as.numeric(dat_chol$response)-as.numeric(dat_chol$ci)
-
-plot.means(means = dat_chol$response,
-          # SEs = dat1$se*3,
-          CI.lo = CI.dn,
-          CI.hi = CI.up,
-          categories = dat_chol$trt,
-          x.axis.label = "Tratamentul",
-          y.axis.label = "Reducerea de colesterol")
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-27-1.png)<!-- -->
 
 ### Verificarea ipotezelor ANOVA {-}
 
 În ANOVA cu un factor, se presupune că variabila răspuns este repartizată normal cu aceeași varianță în fiecare grup. Pentru testarea normalității putem folosi ca metodă grafică `Q-Q plot`-ul:
 
-```{r, echo=FALSE, fig.align='center'}
-library(car)
-
-qqPlot(lm(response~trt, data = cholesterol), 
-       simulate = TRUE,
-       main = "Q-Q plot",
-       xlab = "Cuantile teoretice", 
-       ylab = "Reziduurile standardizate")
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-28-1.png)<!-- -->
 
 De asemenea ipoteza de normalitate poate fi testată și cu testul *Shapiro-Wilks* sau *Shapiro-Francia*:
 
-```{r}
+
+```r
 anova_model_chol = aov(response~trt, data = cholesterol)
 shapiro.test(residuals(anova_model_chol))
 ```
 
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuals(anova_model_chol)
+## W = 0.98864, p-value = 0.9094
+```
+
 Pentru testarea ipotezei de homoscedasticitate aplicăm *testul lui Bartlett*(i.e. verificăm $H_0: \sigma_1=\cdots=\sigma_r$):
 
-```{r}
+
+```r
 bartlett.test(response~trt, data = cholesterol)
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  response by trt
+## Bartlett's K-squared = 0.57975, df = 4, p-value = 0.9653
 ```
 
 Testul lui Bartlett ne indică faptul că varianțele în cele 5 grupuri nu diferă semnificativ ($p = 0.97$). Pentru testarea ipotezei de omogenitate se mai pot folosi și alte teste printre care includem *testul lui Fligner-Killeen* (`fligner.test`) și *testul Brown-Forsythe* (funcția `hov()` din pachetul `HH`). Ambele teste întorc același rezultat:
 
-```{r}
+
+```r
 fligner.test(response~as.factor(trt), data = cholesterol)
 ```
 
-```{r, include=FALSE}
-library(HH)
+```
+## 
+## 	Fligner-Killeen test of homogeneity of variances
+## 
+## data:  response by as.factor(trt)
+## Fligner-Killeen:med chi-squared = 0.74277, df = 4, p-value = 0.946
 ```
 
-```{r}
+
+
+
+```r
 hov(response~trt, data = cholesterol) # hov = homogeneity of variance
+```
+
+```
+## 
+## 	hov: Brown-Forsyth
+## 
+## data:  response
+## F = 0.075477, df:trt = 4, df:Residuals = 45, p-value = 0.9893
+## alternative hypothesis: variances are not identical
 ```
 
 
@@ -540,19 +518,36 @@ hov(response~trt, data = cholesterol) # hov = homogeneity of variance
 
 Testul F din ANOVA pentru tratamente ne spune că cele 5 tipuri de medicamente nu sunt la fel de eficiente, însă nu ne spune care dintre ele diferă față de celelalte. Pentru a răspunde la această întrebare vom folosi metodologia testării multiple. Ca exemplu vom folosi *Testul lui Tukey HSD* (Honestly Significant Difference), test care permite compararea tuturor perechilor de diferențe dintre mediile grupurilor: 
 
-```{r}
+
+```r
 TukeyHSD(anova_model_chol)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = response ~ trt, data = cholesterol)
+## 
+## $trt
+##                   diff        lwr       upr     p adj
+## 2times-1time   3.44300 -0.6582817  7.544282 0.1380949
+## 4times-1time   6.59281  2.4915283 10.694092 0.0003542
+## drugD-1time    9.57920  5.4779183 13.680482 0.0000003
+## drugE-1time   15.16555 11.0642683 19.266832 0.0000000
+## 4times-2times  3.14981 -0.9514717  7.251092 0.2050382
+## drugD-2times   6.13620  2.0349183 10.237482 0.0009611
+## drugE-2times  11.72255  7.6212683 15.823832 0.0000000
+## drugD-4times   2.98639 -1.1148917  7.087672 0.2512446
+## drugE-4times   8.57274  4.4714583 12.674022 0.0000037
+## drugE-drugD    5.58635  1.4850683  9.687632 0.0030633
 ```
 
 Observăm că reducerea medie a colesterolului pentru tratamentele *1time* și *2times* nu este semnificativă ($p=0.138$) pe când reducerea medie a colesterolului pentru tratamentele *1time* și *4times* este semnificativă ($p<0.001$). 
 
 Aceste diferențe se pot observa și grafic:
 
-```{r, echo=FALSE, fig.align='center'}
-par(las=2)
-par(mar=c(5,8,4,2))
-plot(TukeyHSD(anova_model_chol))
-```
+![](Lab_5_files/figure-docx/unnamed-chunk-35-1.png)<!-- -->
 
 Trebuie menționat că sunt mai multe metode pentru comparări multiple: *metoda Bonferroni*, *metoda contrastelor liniare*, *metoda bazată pe statistici de rang*, *metoda Newman Keuls* etc.
 
