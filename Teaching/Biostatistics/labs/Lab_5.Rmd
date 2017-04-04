@@ -6,10 +6,8 @@ output:
     code_folding: show
     number_sections: yes
     includes:
-      in_header:: include/include_head.html
-      before_body: include/include_header_navpage.html
       after_body: include/include_footer.html
-      css: css/rmarkdown.css
+    css: css/rmarkdown.css
   pdf_document: default
   word_document:
     fig_caption: yes
