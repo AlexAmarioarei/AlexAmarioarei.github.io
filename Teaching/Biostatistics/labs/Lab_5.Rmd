@@ -555,3 +555,242 @@ plot(TukeyHSD(anova_model_chol))
 Trebuie menționat că sunt mai multe metode pentru comparări multiple: *metoda Bonferroni*, *metoda contrastelor liniare*, *metoda bazată pe statistici de rang*, *metoda Newman Keuls* etc.
 
 # Analiză de varianță cu doi factori (two-way ANOVA)
+***
+***
+
+Analiza de varianță cu doi factori poate fi văzută ca o generalizare a analizei de varianță cu un factor, în acest model subiecții fiind distribuiți în grupe rezultate din încrucișarea modalităților celor doi factori. 
+
+Ca și în cazul one-way ANOVA, condițiile de aplicare rămân aceleași: populații normale de aceeași varianță și eșantioane independente.
+
+## Exemplul 1
+***
+
+> În acest exemplu vom folosi setul de date [`ToothGrowth`](http://jn.nutrition.org/content/33/5/491.full.pdf) din pachetul de bază. Datele fac referire la 60 de porcușori de guinea care sunt repartizați aleator să primească unul din cele trei nivele de Vitamina C (0.5, 1 și 2 mg) prin una din cele două modalități propuse (suc de portocale - OJ sau o soluție apoasă de acid ascorbic - VC), cu restricția ca fiecare combinație de tratament să fie atribuită la 10 porcușori. Vrem să investigăm efectul Vitaminei C asupra creșterii dinților porcușorilor de guinea prin cele două metode de livrare. 
+
+Atașăm setul de date `ToothGrowth`:
+
+```{r}
+data("ToothGrowth")
+attach(ToothGrowth)
+
+head(ToothGrowth)
+```
+
+Structura setului de date este:
+
+```{r}
+str(ToothGrowth)
+```
+
+unde `len` este variabila dependentă (variabila răspuns) iar `supp` și `dose` sunt variabilele explicative (cei doi factori). 
+
+Descompunerea erorii în modelul ANOVA cu doi factori este: 
+
+$$
+\begin{aligned}
+  \underbrace{\sum_{i=1}^{r}\sum_{j=1}^{c}\sum_{k=1}^{s}(Y_{ijk}-\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_T} &= \underbrace{sc\sum_{i=1}^{r}(\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_A}+\underbrace{sr\sum_{j=1}^{c}(\bar{Y}_{\cdot j\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_B}\\
+  &\;\;\;\;\; + \underbrace{s\sum_{i=1}^{r}\sum_{j=1}^{c}(\bar{Y}_{i j\cdot}-\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot j\cdot}+\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_{A\times B}} + \underbrace{\sum_{i=1}^{r}\sum_{j=1}^{c}\sum_{k=1}^{s}(Y_{ijk}-\bar{Y}_{i j\cdot})^2}_{SS_W}
+\end{aligned}
+$$
+
+Tabelul ANOVA devine:
+
+```{r, echo=FALSE}
+tab_anova2 = data.frame(Sursa = rep("",5), DF = rep("",5), SS = rep("",5), 
+                        MS = rep("",5), F = rep("",5))
+
+tab_anova2$Sursa = c("$A$", "$B$", "$A\\times B$", "$W$", "$Total$")
+tab_anova2$DF = c("$r-1$", "$c-1$", "$(r-1)(c-1)$", "$rc(s-1)$", "$rcs-1$")
+tab_anova2$SS = c("$SS_A$", "$SS_B$", "$SS_{A\\times B}$", "$SS_W$", "$SS_T$")
+tab_anova2$MS = c("$MS_A$", "$MS_B$", "$MS_{A\\times B}$", "$MS_W$", "")
+tab_anova2$F = c("$\\frac{MS_A}{MS_W}$", "$\\frac{MS_B}{MS_W}$", "$\\frac{MS_{A\\times B}}{MS_W}$", "", "")
+
+kable(tab_anova2, 
+      align = 'ccccc')
+```
+
+Pentru a calcula numărul de observații din fiecare încrucișare de categorii vom folosi funcția `table`:
+
+```{r}
+# nr de categorii pentru fiecare factor
+r = 2
+c = 3
+s = 10
+
+# nr de observatii pentru factorul A
+n_i = table(supp)
+n_i
+```
+
+```{r}
+# nr de observatii pentru factorul B
+n_j = table(dose)
+n_j
+```
+
+```{r}
+# nr de observatii pentru fiecare incrucisare a factorilor A si B
+n_ij = table(supp, dose)
+n_ij
+```
+
+de unde observăm că suntem în contextul unui plan de experiență echilibrat ($r = 2$, $c = 3$ și $s = 10$).
+
+Vom calcula mediile $\bar{Y}_{i j\cdot}$, $\bar{Y}_{i \cdot\cdot}$, $\bar{Y}_{\cdot j\cdot}$ și $\bar{Y}_{\cdot\cdot\cdot}$:
+
+  * pentru $\bar{Y}_{\cdot\cdot\cdot}$
+  
+```{r}
+m_T = mean(len)
+m_T
+```
+  
+  * pentru $\bar{Y}_{i \cdot\cdot}$
+  
+```{r}
+m_i = tapply(len, supp, mean)
+m_i
+```
+  
+  * pentru $\bar{Y}_{\cdot j\cdot}$
+  
+```{r}
+m_j = tapply(len, dose, mean)
+m_j
+```
+  
+  * pentru $\bar{Y}_{i j\cdot}$
+  
+```{r}
+m_ij = tapply(len, list(supp, dose), mean)
+m_ij
+```
+
+```{r, fig.align='center', echo=FALSE}
+boxplot(len ~ dose,
+        boxwex = 0.25, at = 1:3 - 0.2,
+        subset = supp == "VC", col = "darkgray",
+        main = "Lungimea dintilor pentru porcusorii de guinea",
+        xlab = "Doza de Vitamina C in mg",
+        ylab = "Lungimea dintilor",
+        xlim = c(0.5, 3.5), ylim = c(0, 35), yaxs = "i")
+
+boxplot(len ~ dose, add = TRUE,
+        boxwex = 0.25, at = 1:3 + 0.2,
+        subset = supp == "OJ", col = "brown3")
+
+legend("bottomright" ,c("Acid ascorbic", "Suc de portocale"),
+       fill = c("lightgray", "brown3"), bty = "n")
+```
+
+Calculăm $SS_W$, $df_W$ și $MS_W$:
+
+```{r}
+y = len
+
+rep_ij = c(rep(m_ij["VC",], n_ij["VC",]), rep(m_ij["OJ",], n_ij["OJ",]))
+
+SS_W = sum((y-rep_ij)^2)
+cat("SS_W = ", SS_W,"\n")
+
+df_W = r*c*(s-1)
+cat("df_W = ", df_W,"\n")
+
+MS_W = SS_W/df_W
+cat("MS_W = ", MS_W,"\n")
+```
+
+Calculăm $SS_A$, $df_A$ și $MS_A$:
+
+```{r}
+SS_A = s*c*sum((m_i-m_T)^2)
+cat("SS_A = ", SS_A,"\n")
+
+df_A = r-1
+cat("df_A = ", df_A,"\n")
+
+MS_A = SS_A/df_A
+cat("MS_A = ", MS_A,"\n")
+```
+
+Calculăm $SS_B$, $df_B$ și $MS_B$:
+
+```{r}
+SS_B = s*r*sum((m_j-m_T)^2)
+cat("SS_B = ", SS_B,"\n")
+
+df_B = c-1
+cat("df_B = ", df_B,"\n")
+
+MS_B = SS_B/df_B
+cat("MS_B = ", SS_B,"\n")
+```
+
+Calculăm $SS_{A\times B}$, $df_{A\times B}$ și $MS_{A\times B}$:
+
+```{r}
+v = m_ij - matrix(rep(m_i, c), ncol = c) - matrix(rep(m_j, r), nrow = r, byrow = T) + m_T
+SS_AB = s*sum(v^2)
+cat("SS_AB = ", SS_AB,"\n")
+
+df_AB = (r-1)*(c-1)
+cat("df_AB = ", df_AB,"\n")
+
+MS_AB = SS_AB/df_AB
+cat("MS_AB = ", SS_AB,"\n")
+```
+
+Calculăm $SS_T$:
+
+```{r}
+SS_T = SS_A + SS_B + SS_AB + SS_W
+cat("SS_T = ", SS_T,"\n")
+
+# verificam prin formula
+sum((y-m_T)^2)
+```
+
+Calculăm tabelul ANOVA cu funcția `aov`:
+
+```{r}
+model_anova2 = aov(len~supp*dose)
+
+summary(model_anova2)
+```
+
+Tabelul ANOVA de mai sus ne arată că atât efectele principale (`supp` și `dose`) cât și interacția dintre cei doi factori (`supp:dose`) sunt semnificative. 
+
+Pentru a vedea interacția dintre cei doi factori putem să folosim funcția `interaction.plot`:
+
+```{r, fig.align='center'}
+interaction.plot(dose, supp, len, type="b",
+        col=c("brown3","darkgray"), pch=c(16, 18),
+        main = "Interactia dintre doza de Vitamina C si tipul de suplement",
+        xlab = "Doza de Vitamina C in mg",
+        ylab = "Media lungimii dintilor")
+```
+
+Dacă vrem să includem și intervalele de încredere atunci avem:
+
+```{r, fig.align='center', echo=FALSE}
+library(ggplot2)
+
+ToothGrowth$dose.cat <- factor(ToothGrowth$dose)
+df <- with(ToothGrowth , aggregate(len, list(supp=supp, dose=dose.cat), mean))
+df$se <- with(ToothGrowth , aggregate(len, list(supp=supp, dose=dose.cat), 
+              function(x) sd(x)/sqrt(s)))[,3]
+
+gp <- ggplot(df, aes(x=dose, y=x, colour=supp, group=supp))
+gp + geom_line(aes(linetype=supp), size=.6) + 
+     geom_point(aes(shape=supp), size=3) + 
+     geom_errorbar(aes(ymax=x+se, ymin=x-se), width=.1)+
+  theme_minimal()+
+  scale_color_manual(values = c("brown3", "darkgray"))+
+  labs(y = "Media lungimii dintilor", 
+       x = "Doza de Vitamina C in mg")
+
+```
+
+Graficele ne arată că dinții de la porcușorii de guinea cresc cu doza de Vitamina C atât pentru sucul de portocale cât și pentru soluția de acid ascorbic. Pentru dozele de 0.5 și 1 mg, sucul de portocale produce în medie o creștere mai mare a dinților decât soluția de acid ascorbic. Pentru doza de 2 mg, ambele metode produc aceeași creștere. 
+
+
