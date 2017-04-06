@@ -772,7 +772,7 @@ interaction.plot(dose, supp, len, type="b",
 
 Dacă vrem să includem și intervalele de încredere atunci avem:
 
-```{r, fig.align='center', echo=FALSE}
+```{r, fig.align='center', echo=FALSE, warning=FALSE, message=FALSE}
 library(ggplot2)
 
 ToothGrowth$dose.cat <- factor(ToothGrowth$dose)
@@ -788,7 +788,6 @@ gp + geom_line(aes(linetype=supp), size=.6) +
   scale_color_manual(values = c("brown3", "darkgray"))+
   labs(y = "Media lungimii dintilor", 
        x = "Doza de Vitamina C in mg")
-
 ```
 
 Graficele ne arată că dinții de la porcușorii de guinea cresc cu doza de Vitamina C atât pentru sucul de portocale cât și pentru soluția de acid ascorbic. Pentru dozele de 0.5 și 1 mg, sucul de portocale produce în medie o creștere mai mare a dinților decât soluția de acid ascorbic. Pentru doza de 2 mg, ambele metode produc aceeași creștere. 
