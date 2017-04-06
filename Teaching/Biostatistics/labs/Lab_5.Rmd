@@ -597,13 +597,13 @@ Tabelul ANOVA devine:
 
 ```{r, echo=FALSE}
 tab_anova2 = data.frame(Sursa = rep("",5), DF = rep("",5), SS = rep("",5), 
-                        MS = rep("",5), F = rep("",5))
+                        MS = rep("",5), F_test = rep("",5))
 
 tab_anova2$Sursa = c("$A$", "$B$", "$A\\times B$", "$W$", "$Total$")
 tab_anova2$DF = c("$r-1$", "$c-1$", "$(r-1)(c-1)$", "$rc(s-1)$", "$rcs-1$")
 tab_anova2$SS = c("$SS_A$", "$SS_B$", "$SS_{A\\times B}$", "$SS_W$", "$SS_T$")
 tab_anova2$MS = c("$MS_A$", "$MS_B$", "$MS_{A\\times B}$", "$MS_W$", "")
-tab_anova2$F = c("$\\frac{MS_A}{MS_W}$", "$\\frac{MS_B}{MS_W}$", "$\\frac{MS_{A\\times B}}{MS_W}$", "", "")
+tab_anova2$F_test = c("$\\frac{MS_A}{MS_W}$", "$\\frac{MS_B}{MS_W}$", "$\\frac{MS_{A\\times B}}{MS_W}$", "", "")
 
 kable(tab_anova2, 
       align = 'ccccc')
@@ -753,9 +753,12 @@ sum((y-m_T)^2)
 Calculăm tabelul ANOVA cu funcția `aov`:
 
 ```{r}
-model_anova2 = aov(len~supp*dose)
+ToothGrowth$dose = as.factor(ToothGrowth$dose)
+ToothGrowth$supp = as.factor(ToothGrowth$supp)
 
-summary(model_anova2)
+model_anova_2w = aov(len~supp*dose, data = ToothGrowth)
+
+summary(model_anova_2w)
 ```
 
 Tabelul ANOVA de mai sus ne arată că atât efectele principale (`supp` și `dose`) cât și interacția dintre cei doi factori (`supp:dose`) sunt semnificative. 
@@ -774,6 +777,8 @@ Dacă vrem să includem și intervalele de încredere atunci avem:
 
 ```{r, fig.align='center', echo=FALSE, warning=FALSE, message=FALSE}
 library(ggplot2)
+
+detach(ToothGrowth)
 
 ToothGrowth$dose.cat <- factor(ToothGrowth$dose)
 df <- with(ToothGrowth , aggregate(len, list(supp=supp, dose=dose.cat), mean))
