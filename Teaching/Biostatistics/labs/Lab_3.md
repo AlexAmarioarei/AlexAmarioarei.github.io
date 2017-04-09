@@ -1,19 +1,4 @@
----
-title: "Curs Biostatistică 2017 - Laborator 3 & 4"
-output:
-  html_document:
-    keep_md: true
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
-    code_folding: show
-    number_sections: yes
-    includes:
-      after_body: include/include_footer.html
-    css: css/rmarkdown.css
-  word_document: default
----
+# Curs Biostatistică 2017 - Laborator 3 & 4
 <style type="text/css">
 .table {
     margin: auto;
@@ -52,7 +37,8 @@ $$
   \end{array}
 $$
 
-```{r}
+
+```r
 n1 = 5000 # nr total cazuri OC
 n11 = 13 # nr cazuri cu MI
 
@@ -66,76 +52,64 @@ p = (n11+n21)/(n1+n2) # proportia comuna - pooled p
 
 # Verificam daca putem aplica aproximarea normala 
 n1*p*(1-p)>5
-n2*p*(1-p)>5
+```
 
+```
+## [1] TRUE
+```
+
+```r
+n2*p*(1-p)>5
+```
+
+```
+## [1] TRUE
+```
+
+```r
 # Calculam statistica de test cu corectia de continuitate
 z = (abs(p1-p2)-0.5*(1/n1+1/n2))/sqrt(p*(1-p)*(1/n1+1/n2))
 z
+```
 
+```
+## [1] 2.768839
+```
+
+```r
 # Calcul de p-valoare: test bilateral
 pval = min(2*(1-pnorm(z)),1)
 pval
+```
 
+```
+## [1] 0.005625635
+```
+
+```r
 # Intervalul de incredere
 
 cat("Intervalul de incredere pentru p1-p2 la pragul de semnificatie 95% este ","IC = [", p1-p2 - qnorm(0.975) *sqrt(p*(1-p)*(1/n1+1/n2)), ",", p1-p2 + qnorm(0.9755) *sqrt(p*(1-p)*(1/n1+1/n2)),"]")
+```
 
+```
+## Intervalul de incredere pentru p1-p2 la pragul de semnificatie 95% este  IC = [ 0.0006612366 , 0.003144216 ]
+```
+
+```r
 # Intervalul de incredere Agresti & Caffo 2000
 
 p1b = (n11+1)/(n1+2)
 p2b = (n21+1)/(n2+2)
 
 cat("Intervalul de incredere (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este ","IC = [", p1b-p2b - qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)), ",", p1b-p2b + qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)),"]")
-
 ```
 
-```{r, echo=FALSE, fig.align='center'}
-a = 0.05
-
-z1 = qnorm(a/2)
-z2 = -z1
-
-par(bty="n")
-x <- seq(-4,4,length=501)
-plot(x,dnorm(x),type="l",main = expression(paste("Normala ", N(0,1))),
-     xaxt="n",yaxt="n",xlab="",ylab="",lwd=2)
-
-abline(h=0)
-x <- c(z1,-1,1,z2)
-segments(x,0,x,-0.01,xpd=TRUE)
-
-#desenezi regiunea pe care vrei sa o colorezi
-cord.x1=c(-4,seq(-4,z1,0.01),z1)
-cord.y1=c(0,dnorm(seq(-4,z1,0.01)),0)
-polygon(cord.x1,cord.y1,col="lightgray")
-
-text(z1,-0.04,expression(-z[1-frac(alpha,2)]),xpd=TRUE)
-
-
-#desenezi regiunea pe care vrei sa o colorezi
-cord.x2=c(z2,seq(z2,4,0.01),4)
-cord.y2=c(0,dnorm(seq(z2,4,0.01)),0)
-polygon(cord.x2,cord.y2,col="lightgray")
-
-text(z2,-0.04,expression(z[1-frac(alpha,2)]),xpd=TRUE)
-
-# liniile verticale care delimiteaza regiunile
-abline(v=z1,untf = FALSE, lty=3)
-abline(v=z2,untf = FALSE, lty=3)
-
-#textul corespunzator lor 
-text(-3, 0.3, "Respinge H0")
-text(3, 0.3, "Respinge H0")
-
-#adauga valoarea observata
-
-segments(z,0,z,-0.01,xpd=TRUE, col="brown3")
-text(z,-0.04,expression(z),xpd=TRUE, cex = 1.3, col = "brown3")
-
-arrows(z+0.3,0.15, x1=z, y1=0.01, lty = 2, col = "brown3")
-text(3.3, 0.17, "valoarea observata", col = "brown3")
-
 ```
+## Intervalul de incredere (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este  IC = [ 0.0004336558 , 0.003564425 ]
+```
+
+<img src="Lab_3_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
 Concluzionăm că folosirea de anticoncepționale pe cale orală este semnificativ asociat cu incidența crescută de cazuri de MI pe perioada de 3 ani. 
 Puteți crea o funcție care să automatizeze procesul ?
@@ -145,17 +119,17 @@ Puteți crea o funcție care să automatizeze procesul ?
 
 Considerăm aceeași problemă de mai sus dar o scriem sub formă de tabel de contingență $2\times2$ (tabelul observat):
 
-```{r, echo=FALSE}
-mat = matrix(c(13,4987,5000, 7, 9993, 10000, 20, 14980, 15000),ncol = 3, byrow = T, 
-             dimnames = list(c("OC", "non-OC", "Total"),c("MI", "non-MI", "Total")))
 
-library(knitr)
-kable(mat, align = "ccc")
-```
+          MI    non-MI    Total 
+-------  ----  --------  -------
+OC        13     4987     5000  
+non-OC    7      9993     10000 
+Total     20    14980     15000 
 
 Calculul tabelului de pe care ne așteptăm să-l observăm ($E_{ij}=\frac{n_{i\cdot}n_{\cdot j}}{n}$):
 
-```{r}
+
+```r
 # Observat
 n11 = 13
 n1o = 5000
@@ -182,9 +156,17 @@ Mexp = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, dimnames = list(c("OC","no
 Mexp
 ```
 
-```{r, echo=FALSE}
-kable(Mexp, align = "cc")
 ```
+##               MI   non-MI
+## OC      6.666667 4993.333
+## non-OC 13.333333 9986.667
+```
+
+
+             MI         non-MI  
+-------  -----------  ----------
+OC        6.666667     4993.333 
+non-OC    13.333333    9986.667 
 
 Calculul statisticii de test cu corecția lui Yates:
 
@@ -192,62 +174,62 @@ $$
   X^2 = \sum_{i=1}^{2}\sum_{j=1}^{2}\frac{\left(|O_{ij}-E_{ij}|-0.5\right)^2}{E_{ij}}\sim_{H_0}\chi_1^2
 $$
 
-```{r}
+
+```r
 X2 = (abs(n11-e11)-0.5)^2/e11 + (abs(n12-e12)-0.5)^2/e12 + (abs(n21-e21)-0.5)^2/e21 + (abs(n22-e22)-0.5)^2/e22
 X2
+```
 
+```
+## [1] 7.666472
+```
+
+```r
 pval = 1-pchisq(X2,1) #df = 1
 pval
 ```
 
+```
+## [1] 0.005625635
+```
+
 Sau folosind testul lui Pearson cu corecția lui Yates `chisq.test` avem:
 
-```{r}
+
+```r
 chisq.test(Mobs)
 ```
 
-```{r, echo=FALSE, fig.align='center'}
-a = 0.05
-df = 1
-
-z1 = qchisq(1-a, df)
-
-par(bty="n")
-x <- seq(0,10,length=501)
-plot(x,dchisq(x, df),type="l",main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate")),
-     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
-
-abline(h=-0.05)
-x <- 0:10 
-segments(x,-0.05,x,-0.06,xpd=TRUE)
-
-#desenezi regiunea pe care vrei sa o colorezi
-cord.x=c(z1,seq(z1,10,0.01),10)
-cord.y=c(-0.05,dchisq(seq(z1,10,0.01), df),-0.05)
-polygon(cord.x,cord.y,col="lightgray")
-
-text(z1,-0.2,expression(z[1-alpha]),xpd=TRUE)
-
-# liniile verticale care delimiteaza regiunile
-abline(v=z1,untf = FALSE, lty=3)
-
-#textul corespunzator lor 
-text(z1+2, 2, "Respinge H0")
-
-#adauga valoarea observata
-z = X2
-segments(z,-0.05,z,-0.08,xpd=TRUE, col="brown3")
-text(z,-0.2,expression(z),xpd=TRUE, cex = 1.3, col = "brown3")
-
-arrows(z-0.3,1.15, x1=z, y1=0.01, lty = 2, col = "brown3")
-text(z-0.35, 1.25, "valoarea observata", col = "brown3")
-
 ```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  Mobs
+## X-squared = 7.6665, df = 1, p-value = 0.005626
+```
+
+<img src="Lab_3_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 Același rezultat se obține și dacă folosim testul `prop.test`, acesta fiind un caz particular al testului hi-pătrat: 
 
-```{r}
+
+```r
 prop.test(Mobs)
+```
+
+```
+## 
+## 	2-sample test for equality of proportions with continuity
+## 	correction
+## 
+## data:  Mobs
+## X-squared = 7.6665, df = 1, p-value = 0.005626
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  0.0002463116 0.0035536884
+## sample estimates:
+## prop 1 prop 2 
+## 0.0026 0.0007
 ```
 
 ## Raportul de verosimilitate maximă
@@ -268,7 +250,8 @@ $$
 $$
 unde $p_i$ și $q_j$ sunt repartițiile marginale. Obținem că $\dim(\Theta)=4-1$ iar $\dim(\Theta_0)=4-2$, deci $-2\log\Lambda\to\chi^2(1)$.
 
-```{r}
+
+```r
 # Observat
 n11 = 13
 n1o = 5000
@@ -284,52 +267,27 @@ no2 = n12+n22
 LRT = n11*log((n1o*no1)/(n*n11)) + n12*log((n1o*no2)/(n*n12)) + n21*log((n2o*no1)/(n*n21)) + n22*log((n2o*no2)/(n*n22))
 LRT = -2*LRT
 LRT
+```
 
+```
+## [1] 8.354617
+```
+
+```r
 pval = 1-pchisq(LRT,1) #df = 1
 pval
 ```
 
-```{r, echo=FALSE, fig.align='center'}
-a = 0.05
-df = 1
-
-z1 = qchisq(1-a, df)
-
-par(bty="n")
-x <- seq(0,10,length=501)
-plot(x,dchisq(x, df),type="l",main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate (LRT)")),
-     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
-
-abline(h=-0.05)
-x <- 0:10 
-segments(x,-0.05,x,-0.06,xpd=TRUE)
-
-#desenezi regiunea pe care vrei sa o colorezi
-cord.x=c(z1,seq(z1,10,0.01),10)
-cord.y=c(-0.05,dchisq(seq(z1,10,0.01), df),-0.05)
-polygon(cord.x,cord.y,col="lightgray")
-
-text(z1,-0.2,expression(z[1-alpha]),xpd=TRUE)
-
-# liniile verticale care delimiteaza regiunile
-abline(v=z1,untf = FALSE, lty=3)
-
-#textul corespunzator lor 
-text(z1+2, 2, "Respinge H0")
-
-#adauga valoarea observata
-z = LRT
-segments(z,-0.05,z,-0.08,xpd=TRUE, col="brown3")
-text(z,-0.2,expression(z),xpd=TRUE, cex = 1.3, col = "brown3")
-
-arrows(z-0.3,1.15, x1=z, y1=0.01, lty = 2, col = "brown3")
-text(z-0.35, 1.25, "valoarea observata", col = "brown3")
-
 ```
+## [1] 0.003847085
+```
+
+<img src="Lab_3_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 Să creăm o funcție care automatizează procesul:
 
-```{r}
+
+```r
 LRT1 = function(dat){
   # dat este sub forma de matrice 
   rs = rowSums(dat) # apply(dat, 1, sum)
@@ -355,22 +313,36 @@ Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("OC","no
 LRT1(Mobs) 
 ```
 
+```
+## Statistica LRT este  8.354617 
+## P-valoarea testului bazat pe raportul de verosimilitate este  0.003847085
+```
+
+```
+## $statistic
+## [1] 8.354617
+## 
+## $pvalue
+## [1] 0.003847085
+```
+
 
 ## Testul exact al lui Fisher 
 ***
 
 > Să presupunem că vrem să investigăm legătura dintre regimul bogat în sare și decesul datorat unei boli cardiovasculare (CVD). Să presupunem că suntem în contextul unui studiu retrospectiv efectuat pe un grup de bărbați cu vârste cuprinse între 50 și 54 de ani dintr-o anumită regiune geografică care au decedat pe parcursul unui luni. S-a încercat introducerea în studiu a unui grup cât mai omogen (s-a încercat includerea în studiu a unui număr egal de persoane care au decedat din cauză de CVD și care au decedat din alte cauze). S-a obținut următorul tabel:
 
-```{r, echo=FALSE}
-matF = matrix(c(2,23,25, 5, 30, 35, 7, 53, 60),ncol = 3, byrow = T, 
-             dimnames = list(c("non-CVD", "CVD", "Total"),c("Ridicat Sare", "Scazut Sare", "Total")))
 
-kable(matF, align = "ccc")
-```
+           Ridicat Sare    Scazut Sare    Total 
+--------  --------------  -------------  -------
+non-CVD         2              23          25   
+CVD             5              30          35   
+Total           7              53          60   
 
 Tabelul pe care ne așteptam să-l obținem ($H_0$) este:
 
-```{r}
+
+```r
 # Observat
 n11 = 2
 n1o = 25
@@ -397,25 +369,62 @@ MexpF = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, dimnames = list(c("non-CV
 MexpF
 ```
 
-```{r, echo=FALSE}
-kable(MexpF, align = "cc")
 ```
+##         Ridicat Sare Scazut Sare
+## non-CVD     2.916667    22.08333
+## CVD         4.083333    30.91667
+```
+
+
+           Ridicat Sare    Scazut Sare 
+--------  --------------  -------------
+non-CVD      2.916667       22.08333   
+CVD          4.083333       30.91667   
 
 Observăm că avem două celule în tabelul așteptat care conțin mai puțin de 5 observații prin urmare nu putem folosi metodele de mai sus (aproximarea normală, testul lui Pearson sau testul bazat pe raportul de verosimilitate). Dacă am încerca am obține:
 
-```{r}
+
+```r
 # Testul lui Pearson (Hi patrat)
 
 chisq.test(MobsF)
+```
 
+```
+## Warning in chisq.test(MobsF): Chi-squared approximation may be incorrect
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  MobsF
+## X-squared = 0.11552, df = 1, p-value = 0.7339
+```
+
+```r
 # Testul bazat pe raportul de verosimilitate
 
 LRT1(MobsF)
 ```
 
+```
+## Statistica LRT este  0.5810517 
+## P-valoarea testului bazat pe raportul de verosimilitate este  0.4459004
+```
+
+```
+## $statistic
+## [1] 0.5810517
+## 
+## $pvalue
+## [1] 0.4459004
+```
+
 Enumerăm tabelele și probabilitățile lor de apariție:
 
-```{r}
+
+```r
 # Fixez marginalele
 
 n1o = 25
@@ -443,10 +452,84 @@ for (i in 0:7){
 }
 ```
 
+```
+## -------------------------------------
+## Tabelul  1  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            0          25
+## CVD                7          28
+## Probabilitatea de a obtine tabelul  1  este  0.0174117 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  2  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            1          24
+## CVD                6          29
+## Probabilitatea de a obtine tabelul  2  este  0.1050706 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  3  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            2          23
+## CVD                5          30
+## Probabilitatea de a obtine tabelul  3  este  0.2521695 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  4  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            3          22
+## CVD                4          31
+## Probabilitatea de a obtine tabelul  4  este  0.3118225 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  5  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            4          21
+## CVD                3          32
+## Probabilitatea de a obtine tabelul  5  este  0.214378 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  6  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            5          20
+## CVD                2          33
+## Probabilitatea de a obtine tabelul  6  este  0.0818534 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  7  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            6          19
+## CVD                1          34
+## Probabilitatea de a obtine tabelul  7  este  0.01604969 
+## -------------------------------------
+## -------------------------------------
+## Tabelul  8  :
+##         Ridicat Sare Scazut Sare
+## non-CVD            7          18
+## CVD                0          35
+## Probabilitatea de a obtine tabelul  8  este  0.00124467 
+## -------------------------------------
+```
+
 Aplicăm testul exact al lui Fisher `fisher.test`:
 
-```{r}
+
+```r
 fisher.test(MobsF)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  MobsF
+## p-value = 0.6882
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.04625243 3.58478157
+## sample estimates:
+## odds ratio 
+##   0.527113
 ```
 
 P-valoarea în `R` este calculată după formula:
@@ -456,7 +539,8 @@ $$
 $$
 care în cazul nostru devine 
 
-```{r}
+
+```r
 n1o = 25
 n2o = 35
   
@@ -472,42 +556,64 @@ pval = sum(ps[ps<=pobs])
 pval
 ```
 
+```
+## [1] 0.6881775
+```
+
 ## Date pereche - Testul lui McNemar
 ***
 
 > Ne propunem să comparăm două regimuri de chimioterapie pentru pacienții cu cancer la sân care au efectuat operația de mastectomie. Cele două grupuri de tratament investigate ar trebui să fie cât mai comparabile din punct de vedere al celorlalți factori. Presupunem că un studiu de potrivire (matched study) a fost pregătit așa încât din fiecare pereche (potrivită din punct de vedere al vârstei și a condițiilor clinice) s-a selectat aleator un membru căruia i-a fost administrat tratamentul A iar celuilalt membru tratamentul B. Pacienții au fost urmăriți pe o perioadă de 5 ani, iar variabila de interes a fost supraviețuirea în această perioadă. S-au obșinut următoarele date:
 
-```{r, echo=FALSE}
-matMN = matrix(c(526,95,621, 515, 106, 621, 1041, 201, 1242),ncol = 3, byrow = T, 
-             dimnames = list(c("A", "B", "Total"),c("Supravietuit", "Decedat", "Total")))
 
-kable(matMN, align = "ccc")
-```
+         Supravietuit    Decedat    Total 
+------  --------------  ---------  -------
+A            526           95        621  
+B            515           106       621  
+Total        1041          201      1242  
 
 Observăm că nu putem folosi testul lui Pearson (cu corecția lui Yates) deoarece datele nu sunt *independente*. Dacă am folosi am obține:
 
-```{r}
+
+```r
 M1csq = matrix(c(526,95,515,106),ncol = 2, byrow = T)
 chisq.test(M1csq)
 ```
 
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  M1csq
+## X-squared = 0.59357, df = 1, p-value = 0.441
+```
+
 Construim următorul tabel, în care unitatea de analiză nu mai este *pacientul* ci *perechea* iar perechile sunt clasificate după cum membrii acelei perechi au supraviețuit sau nu o perioadă post-operatorie de 5 ani (liniile tabelului sunt rezultatele pacientului care a urmat tratamentul A iar coloanele sunt rezultatele pacientului care a urmat tratamentul B):
 
-```{r, echo=FALSE}
-matMN2 = matrix(c(510,16,526, 5, 90, 95, 515, 106, 621),ncol = 3, byrow = T, 
-             dimnames = list(c("Supravietuit", "Decedat", "Total"),c("Supravietuit", "Decedat", "Total")))
 
-kable(matMN2, align = "ccc")
-```
+                Supravietuit    Decedat    Total 
+-------------  --------------  ---------  -------
+Supravietuit        510           16        526  
+Decedat              5            90        95   
+Total               515           106       621  
 
 Observăm că 600 (510+90) de perechi au avut același rezultat (perechi concordante) și doar 21 de perechi au avut rezultate diferite (perechi neconcordante).
 
 Aplicăm testul lui McNemar `mcnemar.test` :
 
-```{r}
+
+```r
 M1 = matrix(c(510,16,5,90),ncol = 2, byrow = T, 
            dimnames = list(c("Supravietuit", "Decedat"), c("Supravietuit", "Decedat")))
 mcnemar.test(M1)
+```
+
+```
+## 
+## 	McNemar's Chi-squared test with continuity correction
+## 
+## data:  M1
+## McNemar's chi-squared = 4.7619, df = 1, p-value = 0.0291
 ```
 
 # Tabele de contingență $r\times c$
@@ -516,28 +622,21 @@ mcnemar.test(M1)
 > Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație $\alpha = 0.5$ dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state. 
 
 
-```{r, echo=FALSE}
-matAA = rbind(c(122, 117, 19, 244),
-           c(1781, 1351, 288,3301),
-           c(353, 269, 60, 713))
 
-matAA2 = rbind(c(122, 117, 19, 244, 502),
-           c(1781, 1351, 288,3301, 6721),
-           c(353, 269, 60, 713, 1395),
-           c(2256, 1737, 367, 4258, 8618))
-
-dimnames(matAA2) = list(c("Florida", "Iowa", "Missouri", "Total"),
-                        c("A", "B", "AB", "O", "Total"))
-
-kable(matAA2, align = "cccc")
-```
+             A       B      AB      O      Total 
+---------  ------  ------  -----  ------  -------
+Florida     122     117     19     244      502  
+Iowa        1781    1351    288    3301    6721  
+Missouri    353     269     60     713     1395  
+Total       2256    1737    367    4258    8618  
 
 ## Testul $\chi^2$ al lui Pearson 
 ***
 
 Tabelul pe care ne așteptăm să-l observat atunci când ipoteza nulă este adevărată:
 
-```{r}
+
+```r
   matAA_observed = rbind(c(122, 117, 19, 244),
            c(1781, 1351, 288, 3301),
            c(353, 269, 60, 713))
@@ -550,24 +649,27 @@ Tabelul pe care ne așteptăm să-l observat atunci când ipoteza nulă este ade
   matAA_expected <- outer(rs,cs,"*")/n
 ```
 
-```{r, echo=FALSE}
-matAA_expected2 = matrix(rep(0, 20), ncol = 5)
 
-matAA_expected2[1:3,1:4] = matAA_expected
-matAA_expected2[4,1:4] = colSums(matAA_expected)
-matAA_expected2[1:3,5] = rowSums(matAA_expected) 
-matAA_expected2[4,5] = sum(matAA_expected)
-
-dimnames(matAA_expected2) = list(c("Florida", "Iowa", "Missouri", "Total"),
-                                c("A", "B", "AB", "O", "Total"))
-
-kable(matAA_expected2, align = "cccc")
-```
+                A            B           AB            O        Total 
+---------  -----------  -----------  -----------  -----------  -------
+Florida     131.4124     101.1806     21.37781     248.0292      502  
+Iowa        1759.4078    1354.6504    286.21571    3320.7262    6721  
+Missouri    365.1799     281.1691     59.40647     689.2446     1395  
+Total       2256.0000    1737.0000    367.00000    4258.0000    8618  
 
 Aplicând funcția `chisq.test` obținem:
 
-```{r}
+
+```r
 chisq.test(matAA_observed)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  matAA_observed
+## X-squared = 5.6382, df = 6, p-value = 0.4649
 ```
 
 ## Testul bazat pe raportul de verosimilitate
@@ -575,8 +677,22 @@ chisq.test(matAA_observed)
 
 Aplicând funcția `LRT1` construită anterior obținem p-valoarea testului bazat pe raportul de verosimilitate: 
 
-```{r}
+
+```r
 LRT1(matAA_observed)
+```
+
+```
+## Statistica LRT este  5.548169 
+## P-valoarea testului bazat pe raportul de verosimilitate este  0.475654
+```
+
+```
+## $statistic
+## [1] 5.548169
+## 
+## $pvalue
+## [1] 0.475654
 ```
 
 ## Testul aproximat al lui Fisher
@@ -590,7 +706,8 @@ $$
   \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{j=1}^{c}n_{ij}!}
 $$
 
-```{r}
+
+```r
 fisher <- function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
   bot0 <- sum(lgamma(tab+1))# lgamma - logaritm natural din gamma - logaritm din factorial
 
@@ -609,29 +726,27 @@ set.seed(5)
 fisher(matAA_observed)
 ```
 
-```{r, echo=FALSE, fig.align='center'}
-set.seed(5)
-a = fisher(matAA_observed, return.all = TRUE)
-
-# x = seq(0,20, 0.01)
-
-hist(a[[2]], 
-     breaks = 25, 
-     freq = FALSE, 
-     main = "",
-     ylab = "",
-     xlab = expression(sum(log( n[ij] * "!" ))),
-     col = "lightgray")
-abline(v = a[[1]], col = "brown3", lwd = 2)
-text(a[[1]]+2.3, 0.25, "Valoare observata", col = "brown3")
-text(a[[1]]+3.5, 0.2, paste("P-valoarea =", a[[3]]), col = "darkgray")
-# lines(x+min(a[[2]]), dchisq(x, 6))
 ```
+## P-valoarea aproximata cu Monte Carlo este  0.482
+```
+
+<img src="Lab_3_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" />
 
 Același rezultat îl obținem și dacă folosim funcția `fisher.test` (care este mai rapidă):
 
-```{r}
+
+```r
 fisher.test(matAA_observed, simulate.p.value = TRUE, B = 1000)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data with simulated p-value (based
+## 	on 1000 replicates)
+## 
+## data:  matAA_observed
+## p-value = 0.4975
+## alternative hypothesis: two.sided
 ```
 
 

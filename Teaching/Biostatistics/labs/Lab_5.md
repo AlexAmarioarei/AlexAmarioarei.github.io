@@ -1,9 +1,21 @@
-# Curs Biostatistică 2017 - Laborator 5&6
+# Curs Biostatistică 2017 - Laborator 5 & 6
 <style type="text/css">
 .table {
     margin: auto;
     width: 40%;
 
+}
+
+.tocify{
+  border: 0px solid;
+}
+
+.list-group-item.active{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+
+.list-group-item.active:hover{
+  background-color: rgba(64, 64, 64, 0.72);
 }
 </style>
 
@@ -148,7 +160,7 @@ syg2
 
 Considerăm următorul grafic unde fiecare observație este reprezentată printr-un punct (gol în figura din stânga și plin în cea din dreapta) iar media globală este ilustrată printr-o linie punctată. În figura din stânga avem *boxplot*-ul pentru fiecare categorie a lui $X$ iar în figura din dreapta (*stripchart*) mediile eșantioanelor din fiecare grup sunt ilustrate cu o cruce de culoare neagră:
 
-![](Lab_5_files/figure-docx/unnamed-chunk-6-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 Din figura de mai sus putem observa că avem o variație considerabilă între mediile grupurilor de-a lungul celor 4 categorii de sindrom *Cushing*. De asemenea, în interiorul grupurilor, avem grade diferite de variație a observațiilor (vezi figura din stânga). Ambele surse de variabilitate contribuie la variabilitatea totală a observațiilor în jurul mediei globale (linia punctată). 
 
@@ -253,12 +265,12 @@ summary(anova_model)
 ```
 
 
-![](Lab_5_files/figure-docx/unnamed-chunk-11-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 ### Verificarea ipotezelor ANOVA {-}
 ***
 
-![](Lab_5_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
 
 Aplicăm *testul lui Bartlett* pentru a testa homoscedasticitatea modelului (i.e. verificăm $H_0: \sigma_1=\cdots=\sigma_r$):
 
@@ -279,7 +291,7 @@ Observăm că ipoteza de omogenitate este respinsă în favoarea alternativei pr
 
 Transformăm variabila răspuns ($\log(Y)=\log(Tetrahydrocortisone)$):
 
-![](Lab_5_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
 
 Verificăm ipoteza de omogenitate (homoscedasticitatea):
 
@@ -314,7 +326,7 @@ shapiro.test(residuals(anova_model_tr))
 
 Verificăm normalitatea și grafic cu `Q-Q Plot`:
 
-![](Lab_5_files/figure-docx/unnamed-chunk-17-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
 
 ANOVA pentru modelul transformat:
 
@@ -331,7 +343,7 @@ summary(anova_model_tr)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-![](Lab_5_files/figure-docx/unnamed-chunk-19-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
 
 ## Exemplul 2
 ***
@@ -419,7 +431,7 @@ syg
 Se observă că abaterile standard sunt relativ constante pentru cele 5 tratamente, luând valori între 2.9 și 3.5.
 
 
-![](Lab_5_files/figure-docx/unnamed-chunk-25-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" />
 
 Avem tabelul *ANOVA*:
 
@@ -442,13 +454,13 @@ Testul ANOVA (F) pentru tratament (trt) este semnificativ ($p<0.001$), ilustrân
 
 Reducerea medie de colesterol pentru cele 5 tratamente împreună cu intervalele de încredere de nivel de încredere de $95\%$ corespunzătoare:
 
-![](Lab_5_files/figure-docx/unnamed-chunk-27-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" />
 
 ### Verificarea ipotezelor ANOVA {-}
 
 În ANOVA cu un factor, se presupune că variabila răspuns este repartizată normal cu aceeași varianță în fiecare grup. Pentru testarea normalității putem folosi ca metodă grafică `Q-Q plot`-ul:
 
-![](Lab_5_files/figure-docx/unnamed-chunk-28-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" />
 
 De asemenea ipoteza de normalitate poate fi testată și cu testul *Shapiro-Wilks* sau *Shapiro-Francia*:
 
@@ -547,8 +559,583 @@ Observăm că reducerea medie a colesterolului pentru tratamentele *1time* și *
 
 Aceste diferențe se pot observa și grafic:
 
-![](Lab_5_files/figure-docx/unnamed-chunk-35-1.png)<!-- -->
+<img src="Lab_5_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" />
 
 Trebuie menționat că sunt mai multe metode pentru comparări multiple: *metoda Bonferroni*, *metoda contrastelor liniare*, *metoda bazată pe statistici de rang*, *metoda Newman Keuls* etc.
 
 # Analiză de varianță cu doi factori (two-way ANOVA)
+***
+***
+
+Analiza de varianță cu doi factori poate fi văzută ca o generalizare a analizei de varianță cu un factor, în acest model subiecții fiind distribuiți în grupe rezultate din încrucișarea modalităților celor doi factori. 
+
+Ca și în cazul one-way ANOVA, condițiile de aplicare rămân aceleași: populații normale de aceeași varianță și eșantioane independente.
+
+## Exemplul 1
+***
+
+> În acest exemplu vom folosi setul de date [`ToothGrowth`](http://jn.nutrition.org/content/33/5/491.full.pdf) din pachetul de bază. Datele fac referire la 60 de porcușori de guinea care sunt repartizați aleator să primească unul din cele trei nivele de Vitamina C (0.5, 1 și 2 mg) prin una din cele două modalități propuse (suc de portocale - OJ sau o soluție apoasă de acid ascorbic - VC), cu restricția ca fiecare combinație de tratament să fie atribuită la 10 porcușori. Vrem să investigăm efectul Vitaminei C asupra creșterii dinților porcușorilor de guinea prin cele două metode de livrare. 
+
+Atașăm setul de date `ToothGrowth`:
+
+
+```r
+data("ToothGrowth")
+attach(ToothGrowth)
+
+head(ToothGrowth)
+```
+
+```
+##    len supp dose
+## 1  4.2   VC  0.5
+## 2 11.5   VC  0.5
+## 3  7.3   VC  0.5
+## 4  5.8   VC  0.5
+## 5  6.4   VC  0.5
+## 6 10.0   VC  0.5
+```
+
+Structura setului de date este:
+
+
+```r
+str(ToothGrowth)
+```
+
+```
+## 'data.frame':	60 obs. of  3 variables:
+##  $ len : num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...
+##  $ supp: Factor w/ 2 levels "OJ","VC": 2 2 2 2 2 2 2 2 2 2 ...
+##  $ dose: num  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+```
+
+unde `len` este variabila dependentă (variabila răspuns) iar `supp` și `dose` sunt variabilele explicative (cei doi factori). 
+
+Descompunerea erorii în modelul ANOVA cu doi factori este: 
+
+$$
+\begin{aligned}
+  \underbrace{\sum_{i=1}^{r}\sum_{j=1}^{c}\sum_{k=1}^{s}(Y_{ijk}-\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_T} &= \underbrace{sc\sum_{i=1}^{r}(\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_A}+\underbrace{sr\sum_{j=1}^{c}(\bar{Y}_{\cdot j\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_B}\\
+  &\;\;\;\;\; + \underbrace{s\sum_{i=1}^{r}\sum_{j=1}^{c}(\bar{Y}_{i j\cdot}-\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot j\cdot}+\bar{Y}_{\cdot\cdot\cdot})^2}_{SS_{A\times B}} + \underbrace{\sum_{i=1}^{r}\sum_{j=1}^{c}\sum_{k=1}^{s}(Y_{ijk}-\bar{Y}_{i j\cdot})^2}_{SS_W}
+\end{aligned}
+$$
+
+Tabelul ANOVA devine:
+
+
+    Sursa            DF                SS                  MS                      F_test             
+-------------  --------------  ------------------  ------------------  -------------------------------
+     $A$           $r-1$             $SS_A$              $MS_A$              $\frac{MS_A}{MS_W}$      
+     $B$           $c-1$             $SS_B$              $MS_B$              $\frac{MS_B}{MS_W}$      
+ $A\times B$    $(r-1)(c-1)$    $SS_{A\times B}$    $MS_{A\times B}$    $\frac{MS_{A\times B}}{MS_W}$ 
+     $W$         $rc(s-1)$           $SS_W$              $MS_W$                                       
+   $Total$        $rcs-1$            $SS_T$                                                           
+
+Pentru a calcula numărul de observații din fiecare încrucișare de categorii vom folosi funcția `table`:
+
+
+```r
+# nr de categorii pentru fiecare factor
+r = 2
+c = 3
+s = 10
+
+# nr de observatii pentru factorul A
+n_i = table(supp)
+n_i
+```
+
+```
+## supp
+## OJ VC 
+## 30 30
+```
+
+
+```r
+# nr de observatii pentru factorul B
+n_j = table(dose)
+n_j
+```
+
+```
+## dose
+## 0.5   1   2 
+##  20  20  20
+```
+
+
+```r
+# nr de observatii pentru fiecare incrucisare a factorilor A si B
+n_ij = table(supp, dose)
+n_ij
+```
+
+```
+##     dose
+## supp 0.5  1  2
+##   OJ  10 10 10
+##   VC  10 10 10
+```
+
+de unde observăm că suntem în contextul unui plan de experiență echilibrat ($r = 2$, $c = 3$ și $s = 10$).
+
+Vom calcula mediile $\bar{Y}_{i j\cdot}$, $\bar{Y}_{i \cdot\cdot}$, $\bar{Y}_{\cdot j\cdot}$ și $\bar{Y}_{\cdot\cdot\cdot}$:
+
+  * pentru $\bar{Y}_{\cdot\cdot\cdot}$
+  
+
+```r
+m_T = mean(len)
+m_T
+```
+
+```
+## [1] 18.81333
+```
+  
+  * pentru $\bar{Y}_{i \cdot\cdot}$
+  
+
+```r
+m_i = tapply(len, supp, mean)
+m_i
+```
+
+```
+##       OJ       VC 
+## 20.66333 16.96333
+```
+  
+  * pentru $\bar{Y}_{\cdot j\cdot}$
+  
+
+```r
+m_j = tapply(len, dose, mean)
+m_j
+```
+
+```
+##    0.5      1      2 
+## 10.605 19.735 26.100
+```
+  
+  * pentru $\bar{Y}_{i j\cdot}$
+  
+
+```r
+m_ij = tapply(len, list(supp, dose), mean)
+m_ij
+```
+
+```
+##      0.5     1     2
+## OJ 13.23 22.70 26.06
+## VC  7.98 16.77 26.14
+```
+
+<img src="Lab_5_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" />
+
+Calculăm $SS_W$, $df_W$ și $MS_W$:
+
+
+```r
+y = len
+
+rep_ij = c(rep(m_ij["VC",], n_ij["VC",]), rep(m_ij["OJ",], n_ij["OJ",]))
+
+SS_W = sum((y-rep_ij)^2)
+cat("SS_W = ", SS_W,"\n")
+```
+
+```
+## SS_W =  712.106
+```
+
+```r
+df_W = r*c*(s-1)
+cat("df_W = ", df_W,"\n")
+```
+
+```
+## df_W =  54
+```
+
+```r
+MS_W = SS_W/df_W
+cat("MS_W = ", MS_W,"\n")
+```
+
+```
+## MS_W =  13.18715
+```
+
+Calculăm $SS_A$, $df_A$ și $MS_A$:
+
+
+```r
+SS_A = s*c*sum((m_i-m_T)^2)
+cat("SS_A = ", SS_A,"\n")
+```
+
+```
+## SS_A =  205.35
+```
+
+```r
+df_A = r-1
+cat("df_A = ", df_A,"\n")
+```
+
+```
+## df_A =  1
+```
+
+```r
+MS_A = SS_A/df_A
+cat("MS_A = ", MS_A,"\n")
+```
+
+```
+## MS_A =  205.35
+```
+
+Calculăm $SS_B$, $df_B$ și $MS_B$:
+
+
+```r
+SS_B = s*r*sum((m_j-m_T)^2)
+cat("SS_B = ", SS_B,"\n")
+```
+
+```
+## SS_B =  2426.434
+```
+
+```r
+df_B = c-1
+cat("df_B = ", df_B,"\n")
+```
+
+```
+## df_B =  2
+```
+
+```r
+MS_B = SS_B/df_B
+cat("MS_B = ", SS_B,"\n")
+```
+
+```
+## MS_B =  2426.434
+```
+
+Calculăm $SS_{A\times B}$, $df_{A\times B}$ și $MS_{A\times B}$:
+
+
+```r
+v = m_ij - matrix(rep(m_i, c), ncol = c) - matrix(rep(m_j, r), nrow = r, byrow = T) + m_T
+SS_AB = s*sum(v^2)
+cat("SS_AB = ", SS_AB,"\n")
+```
+
+```
+## SS_AB =  108.319
+```
+
+```r
+df_AB = (r-1)*(c-1)
+cat("df_AB = ", df_AB,"\n")
+```
+
+```
+## df_AB =  2
+```
+
+```r
+MS_AB = SS_AB/df_AB
+cat("MS_AB = ", SS_AB,"\n")
+```
+
+```
+## MS_AB =  108.319
+```
+
+Calculăm $SS_T$:
+
+
+```r
+SS_T = SS_A + SS_B + SS_AB + SS_W
+cat("SS_T = ", SS_T,"\n")
+```
+
+```
+## SS_T =  3452.209
+```
+
+```r
+# verificam prin formula
+sum((y-m_T)^2)
+```
+
+```
+## [1] 3452.209
+```
+
+Calculăm tabelul ANOVA cu funcția `aov`:
+
+
+```r
+ToothGrowth$dose = as.factor(ToothGrowth$dose)
+ToothGrowth$supp = as.factor(ToothGrowth$supp)
+
+model_anova_2w = aov(len~supp*dose, data = ToothGrowth)
+
+summary(model_anova_2w)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(>F)    
+## supp         1  205.4   205.4  15.572 0.000231 ***
+## dose         2 2426.4  1213.2  92.000  < 2e-16 ***
+## supp:dose    2  108.3    54.2   4.107 0.021860 *  
+## Residuals   54  712.1    13.2                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+Tabelul ANOVA de mai sus ne arată că atât efectele principale (`supp` și `dose`) cât și interacția dintre cei doi factori (`supp:dose`) sunt semnificative. 
+
+Pentru a vedea interacția dintre cei doi factori putem să folosim funcția `interaction.plot`:
+
+
+```r
+interaction.plot(dose, supp, len, type="b",
+        col=c("brown3","darkgray"), pch=c(16, 18),
+        main = "Interactia dintre doza de Vitamina C si tipul de suplement",
+        xlab = "Doza de Vitamina C in mg",
+        ylab = "Media lungimii dintilor")
+```
+
+<img src="Lab_5_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" />
+
+Dacă vrem să includem și intervalele de încredere atunci avem:
+
+<img src="Lab_5_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" />
+
+Graficele ne arată că dinții de la porcușorii de guinea cresc cu doza de Vitamina C atât pentru sucul de portocale cât și pentru soluția de acid ascorbic. Pentru dozele de 0.5 și 1 mg, sucul de portocale produce în medie o creștere mai mare a dinților decât soluția de acid ascorbic. Pentru doza de 2 mg, ambele metode produc aceeași creștere. 
+
+### Verificarea ipotezelor ANOVA 
+***
+
+Vom începe prin a testa **condiția de normalitate** a observațiilor. Pentru aceasta vom folosi testul `Shapiro-Wilks` (funcția `shapiro.test`) și metoda grafică a *dreptei lui Henry* (Q-Q plot). Ca și în cazul ANOVA cu un factor, vom testa normalitatea datelor pentru toate datele și nu pentru fiecare eșantion în parte. În acest sens va trebui să calculăm reziduurile:
+
+$$
+  \hat{e}_{ijk} = y_{ijk}-\bar{y}_{ij\cdot}
+$$
+
+lucru care poate fi realizat sau prin calcul direct:
+
+
+```r
+res_model_direct = y-rep_ij
+```
+
+sau folosind funcția residuals:
+
+
+```r
+res_model = residuals(model_anova_2w)
+```
+
+Aplicăm testul Shapiro-Wilks pentru reziduuri și obținem:
+
+
+```r
+shapiro.test(res_model)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  res_model
+## W = 0.98499, p-value = 0.6694
+```
+
+de unde concluzionăm că ipoteza de normalitate este satisfăcută. Aceeași concluzie o obținem și prin metoda grafică:
+
+
+```r
+qqPlot(lm(len~supp*dose, data = ToothGrowth), 
+       simulate = TRUE,
+       main = "Q-Q plot",
+       xlab = "Cuantile teoretice", 
+       ylab = "Reziduurile standardizate")
+```
+
+![](Lab_5_files/figure-html/unnamed-chunk-58-1.png)<!-- -->
+
+Trebuie menționat că în cazul în care ipoteza de normalitate era respinsă atunci puteam folosi testul neparametric `Kruskal-Wallis` (funcția `kruskal.test`) ca alternativă la ANOVA. 
+
+Pentru a verifica **condiția de omogenitate** a datelor (homoscedasticitatea) pentru fiecare factor în parte folosim unul din testele următoare: *testul lui Bartlett* (funcția `bartlett.test`), *testul lui Fligner-Killeen* (funcția `fligner.test`), *testul lui Levene* (funcția `leveneTest` din pachetul `car`) sau *testul Brown-Forsythe* (funcția `leveneTest` din pachetul `car` sau funcția `hov()` din pachetul `HH`). Obținem:
+
+  * testul lui Bartlett
+
+
+```r
+bartlett.test(len~supp, data = ToothGrowth)
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  len by supp
+## Bartlett's K-squared = 1.4217, df = 1, p-value = 0.2331
+```
+
+```r
+bartlett.test(len~dose, data = ToothGrowth)
+```
+
+```
+## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  len by dose
+## Bartlett's K-squared = 0.66547, df = 2, p-value = 0.717
+```
+
+  * testul lui Fligner
+
+
+```r
+fligner.test(len~supp, data = ToothGrowth)
+```
+
+```
+## 
+## 	Fligner-Killeen test of homogeneity of variances
+## 
+## data:  len by supp
+## Fligner-Killeen:med chi-squared = 0.97034, df = 1, p-value =
+## 0.3246
+```
+
+```r
+fligner.test(len~dose, data = ToothGrowth)
+```
+
+```
+## 
+## 	Fligner-Killeen test of homogeneity of variances
+## 
+## data:  len by dose
+## Fligner-Killeen:med chi-squared = 1.3879, df = 2, p-value = 0.4996
+```
+
+  * testul lui Levene (clasic)
+
+
+```r
+leveneTest(len~supp, data = ToothGrowth, center = mean)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = mean)
+##       Df F value Pr(>F)
+## group  1  1.0973 0.2992
+##       58
+```
+
+```r
+leveneTest(len~dose, data = ToothGrowth, center = mean)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = mean)
+##       Df F value Pr(>F)
+## group  2  0.7328  0.485
+##       57
+```
+
+  * testul lui Brown-Forsythe (similar cu testul lui Levene numai că folosește mediana în loc de medie și este mai robust)
+
+
+```r
+leveneTest(len~supp, data = ToothGrowth)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)
+## group  1  1.2136 0.2752
+##       58
+```
+
+```r
+leveneTest(len~dose, data = ToothGrowth)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)
+## group  2  0.6457 0.5281
+##       57
+```
+
+### Comparări multiple
+***
+
+Am văzut din tabelul ANOVA cu doi factori că atât efectele principale (`supp` și `dose`) cât și interacția dintre cei doi factori (`supp:dose`) sunt semnificative. Pentru a vedea care interacțiune este semnificativă vom folosi metodologia testării multiple. Vom folosi *Testul lui Tukey HSD* (Honestly Significant Difference) deoarece suntem în situația unui plan de experiență echilibrat (în caz contrar am putea folosi *testul lui Scheffe*), test care permite compararea tuturor perechilor de diferențe dintre mediile grupurilor: 
+
+
+```r
+TukeyHSD(model_anova_2w)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = len ~ supp * dose, data = ToothGrowth)
+## 
+## $supp
+##       diff       lwr       upr     p adj
+## VC-OJ -3.7 -5.579828 -1.820172 0.0002312
+## 
+## $dose
+##         diff       lwr       upr   p adj
+## 1-0.5  9.130  6.362488 11.897512 0.0e+00
+## 2-0.5 15.495 12.727488 18.262512 0.0e+00
+## 2-1    6.365  3.597488  9.132512 2.7e-06
+## 
+## $`supp:dose`
+##                diff        lwr        upr     p adj
+## VC:0.5-OJ:0.5 -5.25 -10.048124 -0.4518762 0.0242521
+## OJ:1-OJ:0.5    9.47   4.671876 14.2681238 0.0000046
+## VC:1-OJ:0.5    3.54  -1.258124  8.3381238 0.2640208
+## OJ:2-OJ:0.5   12.83   8.031876 17.6281238 0.0000000
+## VC:2-OJ:0.5   12.91   8.111876 17.7081238 0.0000000
+## OJ:1-VC:0.5   14.72   9.921876 19.5181238 0.0000000
+## VC:1-VC:0.5    8.79   3.991876 13.5881238 0.0000210
+## OJ:2-VC:0.5   18.08  13.281876 22.8781238 0.0000000
+## VC:2-VC:0.5   18.16  13.361876 22.9581238 0.0000000
+## VC:1-OJ:1     -5.93 -10.728124 -1.1318762 0.0073930
+## OJ:2-OJ:1      3.36  -1.438124  8.1581238 0.3187361
+## VC:2-OJ:1      3.44  -1.358124  8.2381238 0.2936430
+## OJ:2-VC:1      9.29   4.491876 14.0881238 0.0000069
+## VC:2-VC:1      9.37   4.571876 14.1681238 0.0000058
+## VC:2-OJ:2      0.08  -4.718124  4.8781238 1.0000000
+```
+
+Observăm, de exemplu, că diferența dintre mediile lungimii dinților pentru porcușorii de gunineea care au primit o doză de 1 mg de Vitamina C prin suplementul de suc de portocale și prin suplementul de soluție de acid ascorbic este semnificativă (VC:1-OJ:1 $p=0.0073$) pe când diferența dintre mediile lungimii dinților pentru porcușorii de gunineea care au primit o doză  de 2 mg și una de 1 mg de Vitamina C prin suplementul de suc de portocale nu este semnificativă (OJ:2-OJ:1 $p = 0.318$). 
+
+Aceste diferențe se pot observa și grafic:
+
+<img src="Lab_5_files/figure-html/unnamed-chunk-64-1.png" style="display: block; margin: auto;" /><img src="Lab_5_files/figure-html/unnamed-chunk-64-2.png" style="display: block; margin: auto;" /><img src="Lab_5_files/figure-html/unnamed-chunk-64-3.png" style="display: block; margin: auto;" />
+
+
+

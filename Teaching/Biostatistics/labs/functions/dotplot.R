@@ -31,12 +31,12 @@ dotplot <- function(x,y,includeCI=TRUE,labels=c("A","B"),xlim)
   
   # add confidence intervals, if requested
   if(includeCI) {
-    segments(xci[1],1.2,xci[2],1.2,lwd=2,col="blue")
-    segments(xci,1.18,xci,1.22,lwd=2,col="blue")
-    segments(mean(x),1.15,mean(x),1.25,lwd=2,col="blue")
+    segments(xci[1],1.2,xci[2],1.2,lwd=2,col="darkgray")
+    segments(xci,1.18,xci,1.22,lwd=2,col="darkgray")
+    segments(mean(x),1.15,mean(x),1.25,lwd=2,col="darkgray")
     
-    segments(yci[1],0.2,yci[2],0.2,lwd=2,col="red")
-    segments(yci,0.18,yci,0.22,lwd=2,col="red")
-    segments(mean(y),0.15,mean(y),0.25,lwd=2,col="red")
+    segments(yci[1],0.2,yci[2],0.2,lwd=2,col="brown3")
+    segments(yci,0.18,yci,0.22,lwd=2,col="brown3")
+    segments(mean(y),0.15,mean(y),0.25,lwd=2,col="brown3")
   }
 }
