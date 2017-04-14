@@ -93,6 +93,29 @@ Informații suplimentare vor fi afișate în scurt timp.
 
 Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
 
+
+### Rezultate
+
+```{r, echo= FALSE}
+stat_tab = read.csv("results/Tabel_Biostatistica.csv", stringsAsFactors = FALSE)
+
+stat_tab = stat_tab[,-1]
+# stat_tab$Total[stat_tab$Total<5] = 4
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab, class = 'cell-border stripe',
+  extensions = c('FixedColumns', 'Buttons'),
+  options = list(
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print')
+  )
+)
+```
+
+
 ### Bibliografie
 
   1. Monica Dumitrescu, Anton Batatorescu - *Applied statistics using the R system*, Ed. Univ. Buc., 2006
