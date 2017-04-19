@@ -33,7 +33,7 @@ Acest curs reprezintă o introducere în biostatistică.
 
  *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
 
- *  _Email_ : amarioareialexandru [at] gmail [dot] com
+ *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
 
  *  _Orar_ : Joi 18:00 - 20:00
 
@@ -86,8 +86,24 @@ kable(tabLab,
  
 ### Proiect de laborator
 
-Informații suplimentare vor fi afișate în scurt timp.
+Mai jos găsiți proiectul cursului de *Biostatistică*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
 
+```{r echo = FALSE}
+proj1_503 = "[Proiect](projects/Proiect_503.pdf)"
+dproj1_503 = "[wing.dat](projects/Data/wing.dat)"
+proj1data_503 = "SAMBATA 6 Mai"
+
+
+tabProiecte = data.frame(Proiect = c(proj1_503), 
+                         Data = c(dproj1_503), 
+                         Time = c(proj1data_503))
+
+kable(tabProiecte, 
+      col.names = c("Proiect", "Date", "Data de predare"),
+      align = "ccc")
+```
+
+Trimiterea proiectelor se poate face pe adresa de email de mai sus. Fiecare mesaj va avea titlul: **Proiect Biostatistica 503 - Nume Prenume**. 
 
 ### Notarea
 
