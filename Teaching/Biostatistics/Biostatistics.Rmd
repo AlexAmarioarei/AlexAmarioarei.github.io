@@ -71,11 +71,16 @@ data_lab3 = ""
 
 readings_lab3 = "[ANOVA - why it is more important than ever](labs/readings/Gelman_anova.pdf)"
 
+lab4 = "[Lab_7_8](labs/Lab_7_8.html)"
+data_lab4 = "[saltBP.txt](labs/data/saltBP.txt)"
 
-tabLab = data.frame(Nr = c(1,"",2, "", 3),
-                    Lab = c(lab1, labn,lab2, labn, lab3), 
-                    data = c(data_lab1, data_n,data_lab2, data_n, data_lab3), 
-                    readings = c(readings_lab1, readings_lab1_b,readings_lab2, readings_lab2_b, readings_lab3))
+readings_lab4 = ""
+
+
+tabLab = data.frame(Nr = c(1,"",2, "", 3, 4),
+                    Lab = c(lab1, labn,lab2, labn, lab3, lab4), 
+                    data = c(data_lab1, data_n,data_lab2, data_n, data_lab3, data_lab4), 
+                    readings = c(readings_lab1, readings_lab1_b,readings_lab2, readings_lab2_b, readings_lab3, readings_lab4))
 
 
 kable(tabLab, 
