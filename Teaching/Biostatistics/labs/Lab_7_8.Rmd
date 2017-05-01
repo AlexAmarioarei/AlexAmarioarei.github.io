@@ -1,19 +1,24 @@
 ---
-title: "Curs Biostatistică 2017 - Laborator 7 & 8"
+title: "Curs Biostatistica 2017 - Laborator 7 & 8"
 subtitle: Regresie
 output:
   html_document:
-    keep_md: true
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
     code_folding: show
-    number_sections: yes
+    css: css/rmarkdown.css
     includes:
       after_body: include/include_footer.html
-    css: css/rmarkdown.css
-  pdf_document: default
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -182,7 +187,7 @@ $$
 \hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
 $$
 
-## Exercițiul 1
+## Exemplul 1
 
 > În acest exercițiu vrem să investigăm relația dintre consumul de clorură de sodiu (sarea de bucătărie) și tensiunea arterială la persoanele trecute de 65 de ani. Pentru aceasta vom folosi setul de date [`saltBP`](data/saltBP.txt) care conține informații despre tensiunea arterială a 25 de pacienți. 
 
@@ -461,6 +466,34 @@ Tabelul ANOVA se obține prin
 anova(saltBP_model)
 ```
 
+Definiția *coeficientului de determinare* $R^2$ este strâns legată de descompunerea ANOVA:
+
+$$
+R^2 = \frac{SS_{reg}}{SS_T}=\frac{SS_T-RSS}{SS_T} = 1 - \frac{RSS}{SS_T}
+$$
+
+$R^2$ măsoară **proporția din variația** variabilei răspuns $Y$ **explicată** de variabila predictor $X$ prin regresie. Proporția din variația totală a lui $Y$ care nu este explicată este $1-R^2 = \frac{RSS}{SS_T}$. Intuitiv, $R^2$ măsoară cât de bine modelul de regresie este în concordanță cu datele (cât de strâns este norul de puncte în jurul dreptei de regresie). Observăm că dacă datele concordă *perfect* cu modelul (adică $RSS=0$) atunci $R^2=1$.
+
+Putem vedea că $R^2=r_{xy}^2$, unde $r_{xy}$ este *coeficientul de corelație* empiric:
+
+$$
+r_{xy}=\frac{s_{xy}}{s_xs_y}=\frac{\sum_{i=1}^n \left(X_i-\bar X \right)\left(Y_i-\bar Y \right)}{\sqrt{\sum_{i=1}^n \left(X_i-\bar X \right)^2}\sqrt{\sum_{i=1}^n \left(Y_i-\bar Y \right)^2}}
+$$
+
+Mai mult se poate verifica și că $R^2=r^2_{y\hat y}$, adică *coeficientul de determinare este egal cu pătratul coeficientului de corelație empirică dintre $Y_1,\ldots,Y_n$ și $\hat Y_1,\ldots,\hat Y_n$*.
+
+Verificăm relația $R^2=r^2_{xy}=r^2_{y\hat y}$ numeric:
+
+```{r}
+yHat = saltBP_model$fitted.values
+
+saltBP_model_summary$r.squared # R^2
+cor(saltBP$salt, saltBP$BP)^2 # corelatia^2 dintre x si y
+cor(saltBP$BP, yHat)^2 # corelatia^2 dintre y si yHat
+```
+
+
+
 ### Inferență asupra parametrilor
 
 Este predictorul $X$ folositor în prezicerea răspunsului $Y$ ? Vrem să testăm ipoteza nulă $H_0:\;\beta_j=0$ (pentru $j=1$ spunem că predictorul `nivel de sare` nu are un efect *liniar* semnificativ asupra `tensiunii arteriale`). Pentru aceasta vom folosi statistica de test 
@@ -479,18 +512,18 @@ Observăm că ambele ipoteze sunt respinse în favoarea alternativelor bilateral
 
 ### Predicții
 
-Pentru un nou set de predictori, $x$, răspunsul prognozat este $\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x$ și vrem să investigăm incertitudinea din această predicție. Putem face distincția între două tipuri de predicție: predicție asupra răspunsului viitor mediu (inferență asupra mediei condiționate $\mathbb{E}[Y|X=x]$) sau predicție asupra observațiilor viitoare (inferență asupra răspunsului condiționat $Y|X=x$). 
+Pentru un nou set de predictori, $x_0$, răspunsul prognozat este $\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x_0$ și vrem să investigăm incertitudinea din această predicție. Putem face distincția între două tipuri de predicție: predicție asupra răspunsului viitor mediu (inferență asupra mediei condiționate $\mathbb{E}[Y|X=x_0]$) sau predicție asupra observațiilor viitoare (inferență asupra răspunsului condiționat $Y|X=x_0$). 
 
 Un interval de încredere pentru răspunsul viitor mediu este:
 
 $$
-\left(\hat y \pm t_{n-2:\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2:\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
 $$
 
 Un interval de încredere pentru valoarea prezisă (interval de predicție) este:
 
 $$
-\left(\hat y \pm t_{n-2:\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2:\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
 $$
 
 Pentru a găsi aceste intervale vom folosi funcția `predict`:
@@ -512,7 +545,7 @@ predict(saltBP_model, newdata = newData2, interval = "prediction")
 
 ```
 
-```{r, out.width = '90%', fig.align = 'center', fig.cap="Nivelul de sare prezis impreuna cu intervalul de incredere de nivel 95% pentru raspunsul mediu"}
+```{r, out.width = '90%', fig.align = 'center', fig.cap='Nivelul de sare prezis impreuna cu intervalul de incredere de nivel 95% pentru raspunsul mediu'}
 g = seq(1,15,0.5)
 
 p = predict(saltBP_model, data.frame(salt = g), se = T, interval = "confidence")
@@ -524,11 +557,105 @@ matplot(g, p$fit, type = "l", lty = c(1,2,2),
         bty = "n")
 rug(saltBP$salt)
 points(saltBP$salt, saltBP$BP, col = "brown3", pch = 16)
+abline(v = mean(saltBP$salt), lty = 3, col = "grey65")
+
+# Scheffe's bounds
+M = sqrt(2*qf(1-alpha, 2, n-2))
+
+s_xx = (n-1)*var(saltBP$salt)
+lw_scheffe = b0 + b1*g - M*sigma_hat*sqrt(1/n+(g-mean(saltBP$salt))^2/s_xx)
+up_scheffe = b0 + b1*g + M*sigma_hat*sqrt(1/n+(g-mean(saltBP$salt))^2/s_xx)
+
+lines(g, lw_scheffe, lty = 4, col = "brown4")
+lines(g, up_scheffe, lty = 4, col = "brown4")
+
+# Bonferroni bounds
+# x0 = c(7, 8, 13, 14)
+x0 = 1 + 14*runif(6)
+m = length(x0)
+
+t_bonf = qt(1-alpha/(2*m), n-2)
+
+lw_bonf = b0 + b1*x0 - t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
+up_bonf = b0 + b1*x0 + t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
+
+segments(x0 = x0, y0 = lw_bonf, x1 = x0, y1 = up_bonf, col = "orange", lty = 5)
+segments(x0 = x0-0.25, y0 = lw_bonf, x1 = x0+0.25, y1 = lw_bonf, col = "orange", lty = 1)
+segments(x0 = x0-0.25, y0 = up_bonf, x1 = x0+0.25, y1 = up_bonf, col = "orange", lty = 1)
+
+legend("topleft", legend = c("Dreapta de regresie", "95% t interval", 
+                                      "95% Scheffe interval", paste0(m, " intervale Bonferroni (95%)")), 
+       lwd = c(2, 1, 1, 1),
+       col = c("grey30", "grey50", "brown4", "orange"), 
+       lty = c(1, 2, 4, 5), 
+       bty = "n")
+
 ```
 
 ### Diagnostic
 
+În această secțiune vom vedea dacă setul nostru de date verifică ipotezele modelului de regresie liniară. 
 
-# Regresie liniară multiplă
+  - *Independența*
+  
+Ipoteza de independență a variabilei răspuns (prin urmare și a erorilor) reiese, de cele mai multe ori, din modalitatea în care s-a desfășurat experimentul.
+
+  - *Normalitatea*
+  
+Pentru a verifica dacă ipoteza de normalitate a erorilor este satisfăcută vom trasa dreapta lui Henry (sau Q-Q plot-ul):
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap='Q-Q plot'}
+library(car)
+
+qqPlot(saltBP_model, col = "brown3", col.lines = "grey50", pch = 16,
+       simulate = TRUE,
+       xlab = "Cuantile teoretice",
+       ylab = "Reziduuri studentizate", 
+       main = "Q-Q plot (Dreapta lui Henry)")
+```
+
+Putem folosi și testul `Shapiro-Wilk`:
+
+```{r}
+shapiro.test(residuals(saltBP_model))
+```
+
+```{r, eval=FALSE}
+residplot <- function(fit, nbreaks=15) {
+    z <- rstudent(fit)
+    hist(z, breaks=nbreaks, freq=FALSE,
+    xlab="Studentized Residual",
+    main="Distribution of Errors")
+    rug(jitter(z), col="brown")
+    curve(dnorm(x, mean=mean(z), sd=sd(z)),
+    add=TRUE, col="blue", lwd=2)
+    lines(density(z)$x, density(z)$y,
+    col="red", lwd=2, lty=2)
+    legend("topright",
+    legend = c( "Normal Curve", "Kernel Density Curve"),
+    lty=1:2, col=c("blue","red"), cex=.7)
+}
+
+residplot(saltBP_model)
+```
+
+  - *Homoscedasticitatea*
+  
+Pentru a verifica proprietatea de homoscedasticitate a erorilor vom trasa un grafic al reziduurilor versus valorile prezise (fitted), i.e. $\hat{\varepsilon}$ vs $\hat{y}$. Dacă avem homoscedasticitate a erorilor atunci ar trebui să vedem o variație constantă pe verticală ($\hat{\varepsilon}$).
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap='Reziduuri vs Valori prezise (Fitted)'}
+plot(residuals(saltBP_model)~fitted(saltBP_model),  col = "brown3", pch = 16, 
+     xlab = "Valori prezise (fitted)",
+     ylab = "Reziduuri", 
+     main = "Reziduuri vs Fitted",
+     bty = "n")
+
+abline(h = 0, col = "grey30")
+```
+
+Tot în acest grafic putem observa dacă ipoteza de liniaritate este verificată (în caz de liniaritate între variabila răspuns și variabila cauză nu are trebui să vedem o relație sistematică între reziduuri și valorile prezise - ceea ce se și întâmplă în cazul nostru) ori dacă există o altă legătură structurală între variabila dependentă (răspuns) și cea independentă (predictor).
+
+
+
 
 

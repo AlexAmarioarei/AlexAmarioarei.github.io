@@ -1,0 +1,57 @@
+---
+title: "Curs Biostatistica 2017 - Laborator 9 & 10"
+subtitle: Regresie
+output:
+  html_document:
+    code_folding: show
+    css: css/rmarkdown.css
+    includes:
+      after_body: include/include_footer.html
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
+---
+<style type="text/css">
+.table {
+    margin: auto;
+    width: 40%;
+
+}
+
+.tocify{
+  border: 0px solid;
+}
+
+.list-group-item.active{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+
+.list-group-item.active:hover{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+</style>
+
+# Regresie liniară multiplă
+***
+***
+
+## Introducere
+
+## Exemplul 1
+
+
