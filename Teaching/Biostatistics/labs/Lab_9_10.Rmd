@@ -2,6 +2,12 @@
 title: "Curs Biostatistica 2017 - Laborator 9 & 10"
 subtitle: Regresie
 output:
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
   html_document:
     code_folding: show
     css: css/rmarkdown.css
@@ -13,12 +19,6 @@ output:
     toc_float:
       collapsed: no
       smooth_scroll: yes
-  pdf_document:
-    includes:
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
-    toc: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -112,7 +112,7 @@ Y_n
 \end{pmatrix}_{n\times 1}.
 $$
 
-```{block2, type = 'rmdinsight'}
+```{block, type = 'rmdinsight'}
 Să observăm că pentru $k=1$ modelul se reduce la regresia liniară simplă. În acest caz:
 
 $$

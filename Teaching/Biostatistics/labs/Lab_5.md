@@ -1,4 +1,4 @@
-# Curs Biostatistică 2017 - Laborator 5 & 6
+# Curs Biostatistica 2017 - Laborator 5 & 6
 <style type="text/css">
 .table {
     margin: auto;
@@ -160,7 +160,7 @@ syg2
 
 Considerăm următorul grafic unde fiecare observație este reprezentată printr-un punct (gol în figura din stânga și plin în cea din dreapta) iar media globală este ilustrată printr-o linie punctată. În figura din stânga avem *boxplot*-ul pentru fiecare categorie a lui $X$ iar în figura din dreapta (*stripchart*) mediile eșantioanelor din fiecare grup sunt ilustrate cu o cruce de culoare neagră:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" />
 
 Din figura de mai sus putem observa că avem o variație considerabilă între mediile grupurilor de-a lungul celor 4 categorii de sindrom *Cushing*. De asemenea, în interiorul grupurilor, avem grade diferite de variație a observațiilor (vezi figura din stânga). Ambele surse de variabilitate contribuie la variabilitatea totală a observațiilor în jurul mediei globale (linia punctată). 
 
@@ -172,7 +172,8 @@ $$
 
 
 ```r
-# avem ng nr de observatii din fiecare grup, myg media lui y din fiecare grup si my media totala
+# avem ng nr de observatii din fiecare grup, myg media lui y 
+# din fiecare grup si my media totala
 
 SS_B = ng%*%(myg-my)^2 # unde %*% este produs de matrice
 SS_B
@@ -265,12 +266,12 @@ summary(anova_model)
 ```
 
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Verificarea ipotezelor ANOVA {-}
 ***
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
 
 Aplicăm *testul lui Bartlett* pentru a testa homoscedasticitatea modelului (i.e. verificăm $H_0: \sigma_1=\cdots=\sigma_r$):
 
@@ -291,7 +292,7 @@ Observăm că ipoteza de omogenitate este respinsă în favoarea alternativei pr
 
 Transformăm variabila răspuns ($\log(Y)=\log(Tetrahydrocortisone)$):
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" />
 
 Verificăm ipoteza de omogenitate (homoscedasticitatea):
 
@@ -326,7 +327,7 @@ shapiro.test(residuals(anova_model_tr))
 
 Verificăm normalitatea și grafic cu `Q-Q Plot`:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" />
 
 ANOVA pentru modelul transformat:
 
@@ -343,7 +344,7 @@ summary(anova_model_tr)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Exemplul 2
 ***
@@ -431,7 +432,7 @@ syg
 Se observă că abaterile standard sunt relativ constante pentru cele 5 tratamente, luând valori între 2.9 și 3.5.
 
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-25-1.png" width="90%" style="display: block; margin: auto;" />
 
 Avem tabelul *ANOVA*:
 
@@ -454,13 +455,13 @@ Testul ANOVA (F) pentru tratament (trt) este semnificativ ($p<0.001$), ilustrân
 
 Reducerea medie de colesterol pentru cele 5 tratamente împreună cu intervalele de încredere de nivel de încredere de $95\%$ corespunzătoare:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" />
 
 ### Verificarea ipotezelor ANOVA {-}
 
 În ANOVA cu un factor, se presupune că variabila răspuns este repartizată normal cu aceeași varianță în fiecare grup. Pentru testarea normalității putem folosi ca metodă grafică `Q-Q plot`-ul:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-28-1.png" width="90%" style="display: block; margin: auto;" />
 
 De asemenea ipoteza de normalitate poate fi testată și cu testul *Shapiro-Wilks* sau *Shapiro-Francia*:
 
@@ -559,7 +560,7 @@ Observăm că reducerea medie a colesterolului pentru tratamentele *1time* și *
 
 Aceste diferențe se pot observa și grafic:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
 
 Trebuie menționat că sunt mai multe metode pentru comparări multiple: *metoda Bonferroni*, *metoda contrastelor liniare*, *metoda bazată pe statistici de rang*, *metoda Newman Keuls* etc.
 
@@ -735,7 +736,7 @@ m_ij
 ## VC  7.98 16.77 26.14
 ```
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" />
 
 Calculăm $SS_W$, $df_W$ și $MS_W$:
 
@@ -835,7 +836,8 @@ Calculăm $SS_{A\times B}$, $df_{A\times B}$ și $MS_{A\times B}$:
 
 
 ```r
-v = m_ij - matrix(rep(m_i, c), ncol = c) - matrix(rep(m_j, r), nrow = r, byrow = T) + m_T
+v = m_ij - matrix(rep(m_i, c), ncol = c) - 
+  matrix(rep(m_j, r), nrow = r, byrow = T) + m_T
 SS_AB = s*sum(v^2)
 cat("SS_AB = ", SS_AB,"\n")
 ```
@@ -918,11 +920,11 @@ interaction.plot(dose, supp, len, type="b",
         ylab = "Media lungimii dintilor")
 ```
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-53-1.png" width="90%" style="display: block; margin: auto;" />
 
 Dacă vrem să includem și intervalele de încredere atunci avem:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-54-1.png" width="90%" style="display: block; margin: auto;" />
 
 Graficele ne arată că dinții de la porcușorii de guinea cresc cu doza de Vitamina C atât pentru sucul de portocale cât și pentru soluția de acid ascorbic. Pentru dozele de 0.5 și 1 mg, sucul de portocale produce în medie o creștere mai mare a dinților decât soluția de acid ascorbic. Pentru doza de 2 mg, ambele metode produc aceeași creștere. 
 
@@ -1135,7 +1137,7 @@ Observăm, de exemplu, că diferența dintre mediile lungimii dinților pentru p
 
 Aceste diferențe se pot observa și grafic:
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-64-1.png" style="display: block; margin: auto;" /><img src="Lab_5_files/figure-html/unnamed-chunk-64-2.png" style="display: block; margin: auto;" /><img src="Lab_5_files/figure-html/unnamed-chunk-64-3.png" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-64-1.png" width="90%" style="display: block; margin: auto;" /><img src="Lab_5_files/figure-html/unnamed-chunk-64-2.png" width="90%" style="display: block; margin: auto;" /><img src="Lab_5_files/figure-html/unnamed-chunk-64-3.png" width="90%" style="display: block; margin: auto;" />
 
 
 

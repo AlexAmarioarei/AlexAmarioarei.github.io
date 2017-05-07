@@ -411,7 +411,8 @@ abline(h = mean(saltBP$BP), col = "brown2", lty = 2)
 segments(x0 = saltBP$salt, y0 = mean(saltBP$BP), x1 = saltBP$salt, y1 = saltBP$BP, 
          col = "grey50", lwd = 2, lty = 2)
 
-legend("topleft", legend = expression("Dreapta de regresie", "Media esantionului " * bar(Y),
+legend("topleft", 
+       legend = expression("Dreapta de regresie", "Media esantionului " * bar(Y),
                                       (Y[i] - bar(Y))^2), 
        lwd = c(2, 1, 2),
        col = c("grey30", "brown2", "grey50"), 
@@ -428,7 +429,8 @@ points(saltBP$salt, saltBP$BP, pch = 16, col = "brown3")
 
 ```r
 plot(saltBP$salt, saltBP$BP, pch = 16, type = "n",
-     main = paste("SSreg =", round(sum((saltBP_model$fitted.values - mean(saltBP$BP))^2), 2)), 
+     main = paste("SSreg =", 
+                  round(sum((saltBP_model$fitted.values - mean(saltBP$BP))^2), 2)), 
      col.main = "forestgreen", 
      xlab = "nivelul de sare", 
      ylab = "tensiunea arteriala", 
@@ -442,7 +444,8 @@ segments(x0 = saltBP$salt, y0 = mean(saltBP$BP), x1 = saltBP$salt, y1 = saltBP_m
 
 points(saltBP$salt, saltBP_model$fitted.values, pch = 16, col = "forestgreen")
 
-legend("topleft", legend = expression("Dreapta de regresie", "Media esantionului " * bar(Y),
+legend("topleft", 
+       legend = expression("Dreapta de regresie", "Media esantionului " * bar(Y),
                                       (hat(Y)[i] - bar(Y))^2), 
        lwd = c(2, 1, 2),
        col = c("grey30", "brown2", "forestgreen"), 
@@ -459,7 +462,8 @@ points(saltBP$salt, saltBP$BP, pch = 16, col = "brown3")
 
 ```r
 plot(saltBP$salt, saltBP$BP, pch = 16, type = "n",
-     main = paste("RSS =", round(sum((saltBP$BP - saltBP_model$fitted.values)^2), 2)), 
+     main = paste("RSS =", 
+                  round(sum((saltBP$BP - saltBP_model$fitted.values)^2), 2)), 
      col.main = "orange", 
      xlab = "nivelul de sare", 
      ylab = "tensiunea arteriala", 
@@ -467,12 +471,14 @@ plot(saltBP$salt, saltBP$BP, pch = 16, type = "n",
 
 abline(saltBP_model$coefficients, col = "grey30", lwd = 2)
 
-segments(x0 = saltBP$salt, y0 = saltBP$BP, x1 = saltBP$salt, y1 = saltBP_model$fitted.values, 
+segments(x0 = saltBP$salt, y0 = saltBP$BP, 
+         x1 = saltBP$salt, y1 = saltBP_model$fitted.values, 
          col = "orange", lwd = 2, lty = 2)
 
 points(saltBP$salt, saltBP_model$fitted.values, pch = 16, col = "orange")
 
-legend("topleft", legend = expression("Dreapta de regresie", (hat(Y)[i] - Y[i])^2), 
+legend("topleft", 
+       legend = expression("Dreapta de regresie", (hat(Y)[i] - Y[i])^2), 
        lwd = c(2, 2),
        col = c("grey30", "orange"), 
        lty = c(1, 2), 
@@ -697,11 +703,14 @@ lw_bonf = b0 + b1*x0 - t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
 up_bonf = b0 + b1*x0 + t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
 
 segments(x0 = x0, y0 = lw_bonf, x1 = x0, y1 = up_bonf, col = "orange", lty = 5)
-segments(x0 = x0-0.25, y0 = lw_bonf, x1 = x0+0.25, y1 = lw_bonf, col = "orange", lty = 1)
-segments(x0 = x0-0.25, y0 = up_bonf, x1 = x0+0.25, y1 = up_bonf, col = "orange", lty = 1)
+segments(x0 = x0-0.25, y0 = lw_bonf, x1 = x0+0.25, y1 = lw_bonf, 
+         col = "orange", lty = 1)
+segments(x0 = x0-0.25, y0 = up_bonf, x1 = x0+0.25, y1 = up_bonf, 
+         col = "orange", lty = 1)
 
 legend("topleft", legend = c("Dreapta de regresie", "95% t interval", 
-                                      "95% Scheffe interval", paste0(m, " intervale Bonferroni (95%)")), 
+                                      "95% Scheffe interval", 
+                             paste0(m, " intervale Bonferroni (95%)")), 
        lwd = c(2, 1, 1, 1),
        col = c("grey30", "grey50", "brown4", "orange"), 
        lty = c(1, 2, 4, 5), 
@@ -770,24 +779,6 @@ shapiro.test(residuals(saltBP_model))
 ```
 
 
-```r
-residplot <- function(fit, nbreaks=15) {
-    z <- rstudent(fit)
-    hist(z, breaks=nbreaks, freq=FALSE,
-    xlab="Studentized Residual",
-    main="Distribution of Errors")
-    rug(jitter(z), col="brown")
-    curve(dnorm(x, mean=mean(z), sd=sd(z)),
-    add=TRUE, col="blue", lwd=2)
-    lines(density(z)$x, density(z)$y,
-    col="red", lwd=2, lty=2)
-    legend("topright",
-    legend = c( "Normal Curve", "Kernel Density Curve"),
-    lty=1:2, col=c("blue","red"), cex=.7)
-}
-
-residplot(saltBP_model)
-```
 
   - *Homoscedasticitatea*
   

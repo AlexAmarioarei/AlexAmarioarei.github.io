@@ -320,7 +320,7 @@ Estimatorul pentru \(\sigma^2\) este \[
 \hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
 \]
 
-\subsection{Exercițiul 1}\label{exercitiul-1}
+\subsection{Exemplul 1}\label{exemplul-1}
 
 \begin{quote}
 În acest exercițiu vrem să investigăm relația dintre consumul de clorură
@@ -551,7 +551,7 @@ unde
 \]
 
 prin urmare, intervalele de încredere de nivel \(1-\alpha\) pentru
-\(beta_0\) și \(beta_1\) sunt
+\(\beta_0\) și \(\beta_1\) sunt
 
 \[
 IC = \left(\hat\beta_j\pm\hat{\mathrm{SE}}(\hat\beta_j)t_{n-2;\alpha/2}\right),\quad j=0,1.
@@ -688,10 +688,12 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 \KeywordTok{abline}\NormalTok{(saltBP_model$coefficients, }\DataTypeTok{col =} \StringTok{"grey30"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(saltBP$BP), }\DataTypeTok{col =} \StringTok{"brown2"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{saltBP$salt, }\DataTypeTok{y0 =} \KeywordTok{mean}\NormalTok{(saltBP$BP), }\DataTypeTok{x1 =} \NormalTok{saltBP$salt, }\DataTypeTok{y1 =} \NormalTok{saltBP$BP, }
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{saltBP$salt, }\DataTypeTok{y0 =} \KeywordTok{mean}\NormalTok{(saltBP$BP), }
+         \DataTypeTok{x1 =} \NormalTok{saltBP$salt, }\DataTypeTok{y1 =} \NormalTok{saltBP$BP, }
          \DataTypeTok{col =} \StringTok{"grey50"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
-\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"Media esantionului "} \NormalTok{*}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y),}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"Media esantionului "} \NormalTok{*}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y),}
                                       \NormalTok{(Y[i] -}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y))^}\DecValTok{2}\NormalTok{), }
        \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey30"}\NormalTok{, }\StringTok{"brown2"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{), }
@@ -713,7 +715,8 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plot}\NormalTok{(saltBP$salt, saltBP$BP, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
-     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"SSreg ="}\NormalTok{, }\KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((saltBP_model$fitted.values -}\StringTok{ }\KeywordTok{mean}\NormalTok{(saltBP$BP))^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
+     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"SSreg ="}\NormalTok{, }
+                  \KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((saltBP_model$fitted.values -}\StringTok{ }\KeywordTok{mean}\NormalTok{(saltBP$BP))^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
      \DataTypeTok{col.main =} \StringTok{"forestgreen"}\NormalTok{, }
      \DataTypeTok{xlab =} \StringTok{"nivelul de sare"}\NormalTok{, }
      \DataTypeTok{ylab =} \StringTok{"tensiunea arteriala"}\NormalTok{, }
@@ -722,12 +725,14 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 \KeywordTok{abline}\NormalTok{(saltBP_model$coefficients, }\DataTypeTok{col =} \StringTok{"grey30"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(saltBP$BP), }\DataTypeTok{col =} \StringTok{"brown2"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{saltBP$salt, }\DataTypeTok{y0 =} \KeywordTok{mean}\NormalTok{(saltBP$BP), }\DataTypeTok{x1 =} \NormalTok{saltBP$salt, }\DataTypeTok{y1 =} \NormalTok{saltBP_model$fitted.values, }
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{saltBP$salt, }\DataTypeTok{y0 =} \KeywordTok{mean}\NormalTok{(saltBP$BP), }
+         \DataTypeTok{x1 =} \NormalTok{saltBP$salt, }\DataTypeTok{y1 =} \NormalTok{saltBP_model$fitted.values, }
          \DataTypeTok{col =} \StringTok{"forestgreen"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
 \KeywordTok{points}\NormalTok{(saltBP$salt, saltBP_model$fitted.values, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"forestgreen"}\NormalTok{)}
 
-\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"Media esantionului "} \NormalTok{*}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y),}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"Media esantionului "} \NormalTok{*}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y),}
                                       \NormalTok{(}\KeywordTok{hat}\NormalTok{(Y)[i] -}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y))^}\DecValTok{2}\NormalTok{), }
        \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey30"}\NormalTok{, }\StringTok{"brown2"}\NormalTok{, }\StringTok{"forestgreen"}\NormalTok{), }
@@ -749,7 +754,8 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plot}\NormalTok{(saltBP$salt, saltBP$BP, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
-     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"RSS ="}\NormalTok{, }\KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((saltBP$BP -}\StringTok{ }\NormalTok{saltBP_model$fitted.values)^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
+     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"RSS ="}\NormalTok{, }
+                  \KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((saltBP$BP -}\StringTok{ }\NormalTok{saltBP_model$fitted.values)^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
      \DataTypeTok{col.main =} \StringTok{"orange"}\NormalTok{, }
      \DataTypeTok{xlab =} \StringTok{"nivelul de sare"}\NormalTok{, }
      \DataTypeTok{ylab =} \StringTok{"tensiunea arteriala"}\NormalTok{, }
@@ -757,12 +763,14 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 
 \KeywordTok{abline}\NormalTok{(saltBP_model$coefficients, }\DataTypeTok{col =} \StringTok{"grey30"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
 
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{saltBP$salt, }\DataTypeTok{y0 =} \NormalTok{saltBP$BP, }\DataTypeTok{x1 =} \NormalTok{saltBP$salt, }\DataTypeTok{y1 =} \NormalTok{saltBP_model$fitted.values, }
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{saltBP$salt, }\DataTypeTok{y0 =} \NormalTok{saltBP$BP, }
+         \DataTypeTok{x1 =} \NormalTok{saltBP$salt, }\DataTypeTok{y1 =} \NormalTok{saltBP_model$fitted.values, }
          \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
 \KeywordTok{points}\NormalTok{(saltBP$salt, saltBP_model$fitted.values, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{)}
 
-\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, (}\KeywordTok{hat}\NormalTok{(Y)[i] -}\StringTok{ }\NormalTok{Y[i])^}\DecValTok{2}\NormalTok{), }
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, (}\KeywordTok{hat}\NormalTok{(Y)[i] -}\StringTok{ }\NormalTok{Y[i])^}\DecValTok{2}\NormalTok{), }
        \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{),}
        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey30"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }
        \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }
@@ -792,6 +800,67 @@ Tabelul ANOVA se obține prin
 ## Residuals 23 173.35    7.54                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Definiția \emph{coeficientului de determinare} \(R^2\) este strâns
+legată de descompunerea ANOVA:
+
+\[
+R^2 = \frac{SS_{reg}}{SS_T}=\frac{SS_T-RSS}{SS_T} = 1 - \frac{RSS}{SS_T}
+\]
+
+\(R^2\) măsoară \textbf{proporția din variația} variabilei răspuns \(Y\)
+\textbf{explicată} de variabila predictor \(X\) prin regresie. Proporția
+din variația totală a lui \(Y\) care nu este explicată este
+\(1-R^2 = \frac{RSS}{SS_T}\). Intuitiv, \(R^2\) măsoară cât de bine
+modelul de regresie este în concordanță cu datele (cât de strâns este
+norul de puncte în jurul dreptei de regresie). Observăm că dacă datele
+concordă \emph{perfect} cu modelul (adică \(RSS=0\)) atunci \(R^2=1\).
+
+Putem vedea că \(R^2=r_{xy}^2\), unde \(r_{xy}\) este \emph{coeficientul
+de corelație} empiric:
+
+\[
+r_{xy}=\frac{s_{xy}}{s_xs_y}=\frac{\sum_{i=1}^n \left(X_i-\bar X \right)\left(Y_i-\bar Y \right)}{\sqrt{\sum_{i=1}^n \left(X_i-\bar X \right)^2}\sqrt{\sum_{i=1}^n \left(Y_i-\bar Y \right)^2}}
+\]
+
+Mai mult se poate verifica și că \(R^2=r^2_{y\hat y}\), adică
+\emph{coeficientul de determinare este egal cu pătratul coeficientului
+de corelație empirică dintre \(Y_1,\ldots,Y_n\) și
+\(\hat Y_1,\ldots,\hat Y_n\)}.
+
+Verificăm relația \(R^2=r^2_{xy}=r^2_{y\hat y}\) numeric:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{yHat =}\StringTok{ }\NormalTok{saltBP_model$fitted.values}
+
+\NormalTok{saltBP_model_summary$r.squared }\CommentTok{# R^2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7035842
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(saltBP$salt, saltBP$BP)^}\DecValTok{2} \CommentTok{# corelatia^2 dintre x si y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7035842
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(saltBP$BP, yHat)^}\DecValTok{2} \CommentTok{# corelatia^2 dintre y si yHat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7035842
 \end{verbatim}
 
 \subsubsection{Inferență asupra
@@ -969,11 +1038,14 @@ Pentru a găsi aceste intervale vom folosi funcția \texttt{predict}:
 \NormalTok{up_bonf =}\StringTok{ }\NormalTok{b0 +}\StringTok{ }\NormalTok{b1*x0 +}\StringTok{ }\NormalTok{t_bonf*sigma_hat*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\NormalTok{/n+(x0-}\KeywordTok{mean}\NormalTok{(saltBP$salt))^}\DecValTok{2}\NormalTok{/s_xx)}
 
 \KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{x0, }\DataTypeTok{y0 =} \NormalTok{lw_bonf, }\DataTypeTok{x1 =} \NormalTok{x0, }\DataTypeTok{y1 =} \NormalTok{up_bonf, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{5}\NormalTok{)}
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{x0}\FloatTok{-0.25}\NormalTok{, }\DataTypeTok{y0 =} \NormalTok{lw_bonf, }\DataTypeTok{x1 =} \NormalTok{x0}\FloatTok{+0.25}\NormalTok{, }\DataTypeTok{y1 =} \NormalTok{lw_bonf, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{x0}\FloatTok{-0.25}\NormalTok{, }\DataTypeTok{y0 =} \NormalTok{up_bonf, }\DataTypeTok{x1 =} \NormalTok{x0}\FloatTok{+0.25}\NormalTok{, }\DataTypeTok{y1 =} \NormalTok{up_bonf, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{x0}\FloatTok{-0.25}\NormalTok{, }\DataTypeTok{y0 =} \NormalTok{lw_bonf, }\DataTypeTok{x1 =} \NormalTok{x0}\FloatTok{+0.25}\NormalTok{, }\DataTypeTok{y1 =} \NormalTok{lw_bonf, }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =} \NormalTok{x0}\FloatTok{-0.25}\NormalTok{, }\DataTypeTok{y0 =} \NormalTok{up_bonf, }\DataTypeTok{x1 =} \NormalTok{x0}\FloatTok{+0.25}\NormalTok{, }\DataTypeTok{y1 =} \NormalTok{up_bonf, }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
 
 \KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"95% t interval"}\NormalTok{, }
-                                      \StringTok{"95% Scheffe interval"}\NormalTok{, }\KeywordTok{paste0}\NormalTok{(m, }\StringTok{" intervale Bonferroni (95%)"}\NormalTok{)), }
+                                      \StringTok{"95% Scheffe interval"}\NormalTok{, }
+                             \KeywordTok{paste0}\NormalTok{(m, }\StringTok{" intervale Bonferroni (95%)"}\NormalTok{)), }
        \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey30"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{, }\StringTok{"brown4"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }
        \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{), }
@@ -983,13 +1055,13 @@ Pentru a găsi aceste intervale vom folosi funcția \texttt{predict}:
 
 \textbackslash{}begin\{figure\}
 
-\{\centering \includegraphics[width=0.9\linewidth]{Lab_7_8_files/figure-latex/unnamed-chunk-23-1}
+\{\centering \includegraphics[width=0.9\linewidth]{Lab_7_8_files/figure-latex/unnamed-chunk-24-1}
 
 \}
 
 \textbackslash{}caption\{Nivelul de sare prezis impreuna cu intervalul
 de incredere de nivel 95\% pentru raspunsul
-mediu\}\label{fig:unnamed-chunk-23} \textbackslash{}end\{figure\}
+mediu\}\label{fig:unnamed-chunk-24} \textbackslash{}end\{figure\}
 
 \subsubsection{Diagnostic}\label{diagnostic}
 
@@ -1044,11 +1116,11 @@ satisfăcută vom trasa dreapta lui Henry (sau Q-Q plot-ul):
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{Lab_7_8_files/figure-latex/unnamed-chunk-24-1} 
+{\centering \includegraphics[width=0.9\linewidth]{Lab_7_8_files/figure-latex/unnamed-chunk-25-1} 
 
 }
 
-\caption{Q-Q plot}\label{fig:unnamed-chunk-24}
+\caption{Q-Q plot}\label{fig:unnamed-chunk-25}
 \end{figure}
 
 Putem folosi și testul \texttt{Shapiro-Wilk}:
@@ -1093,11 +1165,11 @@ erorilor atunci ar trebui să vedem o variație constantă pe verticală
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{Lab_7_8_files/figure-latex/unnamed-chunk-27-1} 
+{\centering \includegraphics[width=0.9\linewidth]{Lab_7_8_files/figure-latex/unnamed-chunk-28-1} 
 
 }
 
-\caption{Reziduuri vs Valori prezise (Fitted)}\label{fig:unnamed-chunk-27}
+\caption{Reziduuri vs Valori prezise (Fitted)}\label{fig:unnamed-chunk-28}
 \end{figure}
 
 Tot în acest grafic putem observa dacă ipoteza de liniaritate este
@@ -1106,8 +1178,6 @@ cauză nu are trebui să vedem o relație sistematică între reziduuri și
 valorile prezise - ceea ce se și întâmplă în cazul nostru) ori dacă
 există o altă legătură structurală între variabila dependentă (răspuns)
 și cea independentă (predictor).
-
-\section{Regresie liniară multiplă}\label{regresie-liniara-multipla}
 
 
 \end{document}

@@ -1,4 +1,4 @@
-# Curs Biostatistică 2017 - Laborator 1 & 2
+# Curs Biostatistica 2017 - Laborator 1 & 2
 <style type="text/css">
 .table {
     margin: auto;
@@ -38,7 +38,7 @@ segments(c(0,0,1),c(0.04,0.03,0.03),c(1,0,1),c(0.04,0.05,0.05),lwd=2,col="brown3
 text(0.5,0.07,expression(sigma/sqrt(n)),cex=1.3,col="brown3")
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-1-1.png)<!-- -->
 
 ## Intervale de încredere pentru medie
 
@@ -90,11 +90,13 @@ for(i in 1:p) {
 
 par(mfrow=c(1,1))
 
-mtext(expression(paste("100 intervale de încredere pentru ",mu)),side=3,cex=1.5,xpd=TRUE,line=4)
-mtext(expression(paste("(",sigma," cunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2.7)
+mtext(expression(paste("100 intervale de încredere pentru ",mu)),
+      side=3,cex=1.5,xpd=TRUE,line=4)
+mtext(expression(paste("(",sigma," cunoscut)")),side=3,cex=1.3,
+      xpd=TRUE,line=2.7)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-3-1.png)<!-- -->
 
 Intervale de încredere **incorecte** atunci când $\sigma$ nu este cunoscut: 
 
@@ -110,10 +112,11 @@ for(i in 1:p) {
 }
 par(mfrow=c(1,1))
 mtext(expression(paste("100 intervale de încredere incorecte pentru ",mu)),side=3,cex=1.5,xpd=TRUE,line=4)
-mtext(expression(paste("(",sigma," necunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2.7)
+mtext(expression(paste("(",sigma," necunoscut)")),
+      side=3,cex=1.3,xpd=TRUE,line=2.7)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-4-1.png)<!-- -->
 
 Intervale de încredere **corecte** atunci când $\sigma$ nu este cunoscut: 
 
@@ -128,11 +131,13 @@ for(i in 1:p) {
   segments(lo3[[i]][o],o,hi3[[i]][o],o,lwd=2,col="orange")
 }
 par(mfrow=c(1,1))
-mtext(expression(paste("100 intervale de încredere pentru ",mu)),side=3,cex=1.5,xpd=TRUE,line=4)
-mtext(expression(paste("(",sigma," necunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2.7)
+mtext(expression(paste("100 intervale de încredere pentru ",mu)),
+      side=3,cex=1.5,xpd=TRUE,line=4)
+mtext(expression(paste("(",sigma," necunoscut)")),
+      side=3,cex=1.3,xpd=TRUE,line=2.7)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-5-1.png)<!-- -->
 
 
 # Testarea ipotezelor statistice: inferență asupra unui eșantion 
@@ -140,7 +145,7 @@ mtext(expression(paste("(",sigma," necunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2
 
 ## Exemplul 1
 
-Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](data/normtemp.txt) (sursa originală a datelor este *Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlich. Journal of the American Medical Association, 268, 1578-1580*).
+> Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](data/normtemp.txt) (sursa originală a datelor este *Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlich. Journal of the American Medical Association, 268, 1578-1580*).
 
 Pentru a citi datele putem folosi două metode: sau să le citim direct din pagina de internet (prin comanda `read.table`)
 
@@ -184,7 +189,7 @@ qqnorm(degreesC)
 qqline(degreesC)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
 
 Trasăm histograma:
 
@@ -196,7 +201,7 @@ degSD = sd(degreesC)
 curve(dnorm(x, degM, degSD), add = T, col = "brown3")
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
 
 Trasăm densitatea:
 
@@ -206,7 +211,7 @@ plot(density(degreesC))
 curve(dnorm(x, degM, degSD), add = T, col = "brown3")
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-10-1.png)<!-- -->
 
 Testăm ipoteza de normalitate (folosind testul `Shapiro-Wilk`):
 
@@ -366,7 +371,7 @@ plot(density(tempB), main="Temperatura Barbatilor")
 plot(density(tempF), main="Temperatura Femeilor")
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-17-1.png)<!-- -->
 
 Sub formă de `boxplot`:
 
@@ -374,11 +379,11 @@ Sub formă de `boxplot`:
 ```r
 par(mfrow = c(1,1))
 boxplot(tempB, tempF, ylab="Temperatura",     # plot and label y-axis
-                names=c("Barbati","Femei"),                           # group names on x-axis
-                main="Temperatura in functie de sex")         # main title
+                names=c("Barbati","Femei"),   # group names on x-axis
+                main="Temperatura in functie de sex")   # main title
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-18-1.png)<!-- -->
 
 Trasarea datelor împreună cu intervalele de încredere:
 
@@ -389,7 +394,7 @@ source("functions/dotplot.R")
 dotplot(tempB, tempF, labels=c("Barbati","Femei"))
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-19-1.png)<!-- -->
 
 Testarea ipotezelor statistice cu ajutorul testului t-student (corecția lui `Welch`):
 
@@ -484,7 +489,7 @@ t.test(x,y)
 dotplot(x,y)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-23-1.png)<!-- -->
 
 ## Exemplul 3
 
@@ -517,7 +522,7 @@ t.test(x,y,alt="less")
 dotplot(x,y)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-24-1.png)<!-- -->
 
 ## Exemplul 4
 
@@ -547,9 +552,9 @@ t.test(x,y,alt="less")
 dotplot(x,y)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-25-1.png)<!-- -->
 
-## Grafic bun / Grafic rau
+## Grafic recomandat
 
 
 ```r
@@ -567,22 +572,25 @@ segments(2.5,mean(y),2.5,mean(y)+sd(y),lwd=2)
 segments(2.3,mean(y)+sd(y),2.7,mean(y)+sd(y),lwd=2)
 mtext("Grafic nepotrivit",cex=1.5,line=0.5)
 
-plot(rep(0:1,c(3,3)),c(x,y),xaxt="n",ylim=c(0,76),xlim=c(-0.5,1.5),ylab="",xlab="")
+plot(rep(0:1,c(3,3)),c(x,y),xaxt="n",ylim=c(0,76),
+     xlim=c(-0.5,1.5),ylab="",xlab="")
 abline(v=0:1,col="gray40",lty=2)
 points(rep(0:1,c(3,3)),c(x,y),lwd=2)
 mtext("Grafic recomandat",cex=1.5,line=0.5)
 xci <- t.test(x)$conf.int
 yci <- t.test(y)$conf.int
 segments(0.25,xci[1],0.25,xci[2],lwd=2,col="darkgray")
-segments(c(0.23,0.23,0.2),c(xci,mean(x)),c(0.27,0.27,0.3),c(xci,mean(x)),lwd=2,col="darkgray")
+segments(c(0.23,0.23,0.2),c(xci,mean(x)),c(0.27,0.27,0.3),
+         c(xci,mean(x)),lwd=2,col="darkgray")
 segments(1-0.25,yci[1],1-0.25,yci[2],lwd=2,col="brown3")
-segments(1-c(0.23,0.23,0.2),c(yci,mean(y)),1-c(0.27,0.27,0.3),c(yci,mean(y)),lwd=2,col="brown3")
+segments(1-c(0.23,0.23,0.2),c(yci,mean(y)),1-c(0.27,0.27,0.3),
+         c(yci,mean(y)),lwd=2,col="brown3")
 u <- par("usr")
 segments(0:1,u[3],0:1,u[3]-diff(u[3:4])*0.03,xpd=TRUE)
 text(0:1,u[3]-diff(u[3:4])*0.08,c("A","B"),xpd=TRUE)
 ```
 
-<img src="Lab_1_2_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" />
+![](Lab_1_2_files/figure-docx/unnamed-chunk-26-1.png)<!-- -->
 
 # Testarea ipotezelor statistice: inferență asupra a două eșantioane dependente (perechi)
 ***

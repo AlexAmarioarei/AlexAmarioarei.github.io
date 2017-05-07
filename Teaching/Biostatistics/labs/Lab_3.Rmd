@@ -1,18 +1,29 @@
 ---
-title: "Curs Biostatistică 2017 - Laborator 3 & 4"
+title: "Curs Biostatistica 2017 - Laborator 3 & 4"
 output:
   html_document:
-    keep_md: true
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
     code_folding: show
-    number_sections: yes
+    css: css/rmarkdown.css
     includes:
       after_body: include/include_footer.html
-    css: css/rmarkdown.css
-  word_document: default
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
 ---
 <style type="text/css">
 .table {
@@ -78,18 +89,22 @@ pval
 
 # Intervalul de incredere
 
-cat("Intervalul de incredere pentru p1-p2 la pragul de semnificatie 95% este ","IC = [", p1-p2 - qnorm(0.975) *sqrt(p*(1-p)*(1/n1+1/n2)), ",", p1-p2 + qnorm(0.9755) *sqrt(p*(1-p)*(1/n1+1/n2)),"]")
+cat("IC pentru p1-p2 la pragul de semnificatie 95% este \n",
+    "IC = [", p1-p2 - qnorm(0.975) *sqrt(p*(1-p)*(1/n1+1/n2)), ",", 
+    p1-p2 + qnorm(0.9755) *sqrt(p*(1-p)*(1/n1+1/n2)),"]")
 
 # Intervalul de incredere Agresti & Caffo 2000
 
 p1b = (n11+1)/(n1+2)
 p2b = (n21+1)/(n2+2)
 
-cat("Intervalul de incredere (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este ","IC = [", p1b-p2b - qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)), ",", p1b-p2b + qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)),"]")
+cat("IC (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este \n",
+    "IC = [", p1b-p2b - qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)), ",",
+    p1b-p2b + qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)),"]")
 
 ```
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 a = 0.05
 
 z1 = qnorm(a/2)
@@ -146,8 +161,10 @@ Puteți crea o funcție care să automatizeze procesul ?
 Considerăm aceeași problemă de mai sus dar o scriem sub formă de tabel de contingență $2\times2$ (tabelul observat):
 
 ```{r, echo=FALSE}
-mat = matrix(c(13,4987,5000, 7, 9993, 10000, 20, 14980, 15000),ncol = 3, byrow = T, 
-             dimnames = list(c("OC", "non-OC", "Total"),c("MI", "non-MI", "Total")))
+mat = matrix(c(13,4987,5000, 7, 9993, 10000, 20, 14980, 15000),
+             ncol = 3, byrow = T, 
+             dimnames = list(c("OC", "non-OC", "Total"),
+                             c("MI", "non-MI", "Total")))
 
 library(knitr)
 kable(mat, align = "ccc")
@@ -176,9 +193,11 @@ e12 = n1o*no2/n
 e21 = n2o*no1/n
 e22 = n2o*no2/n
 
-Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
 
-Mexp = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mexp = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
 Mexp
 ```
 
@@ -193,7 +212,8 @@ $$
 $$
 
 ```{r}
-X2 = (abs(n11-e11)-0.5)^2/e11 + (abs(n12-e12)-0.5)^2/e12 + (abs(n21-e21)-0.5)^2/e21 + (abs(n22-e22)-0.5)^2/e22
+X2 = (abs(n11-e11)-0.5)^2/e11 + (abs(n12-e12)-0.5)^2/e12 + 
+  (abs(n21-e21)-0.5)^2/e21 + (abs(n22-e22)-0.5)^2/e22
 X2
 
 pval = 1-pchisq(X2,1) #df = 1
@@ -206,7 +226,7 @@ Sau folosind testul lui Pearson cu corecția lui Yates `chisq.test` avem:
 chisq.test(Mobs)
 ```
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 a = 0.05
 df = 1
 
@@ -214,7 +234,8 @@ z1 = qchisq(1-a, df)
 
 par(bty="n")
 x <- seq(0,10,length=501)
-plot(x,dchisq(x, df),type="l",main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate")),
+plot(x,dchisq(x, df),type="l",
+     main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate")),
      xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
 
 abline(h=-0.05)
@@ -281,7 +302,8 @@ n22 = n2o-n21
 no1 = n11+n21
 no2 = n12+n22
 
-LRT = n11*log((n1o*no1)/(n*n11)) + n12*log((n1o*no2)/(n*n12)) + n21*log((n2o*no1)/(n*n21)) + n22*log((n2o*no2)/(n*n22))
+LRT = n11*log((n1o*no1)/(n*n11)) + n12*log((n1o*no2)/(n*n12)) + 
+  n21*log((n2o*no1)/(n*n21)) + n22*log((n2o*no2)/(n*n22))
 LRT = -2*LRT
 LRT
 
@@ -289,7 +311,7 @@ pval = 1-pchisq(LRT,1) #df = 1
 pval
 ```
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 a = 0.05
 df = 1
 
@@ -297,7 +319,8 @@ z1 = qchisq(1-a, df)
 
 par(bty="n")
 x <- seq(0,10,length=501)
-plot(x,dchisq(x, df),type="l",main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate (LRT)")),
+plot(x,dchisq(x, df),type="l",
+     main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate (LRT)")),
      xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
 
 abline(h=-0.05)
@@ -350,7 +373,8 @@ LRT1 = function(dat){
   return(list(statistic = lrt, pvalue = pval))
 }
 
-Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
 
 LRT1(Mobs) 
 ```
@@ -363,7 +387,8 @@ LRT1(Mobs)
 
 ```{r, echo=FALSE}
 matF = matrix(c(2,23,25, 5, 30, 35, 7, 53, 60),ncol = 3, byrow = T, 
-             dimnames = list(c("non-CVD", "CVD", "Total"),c("Ridicat Sare", "Scazut Sare", "Total")))
+             dimnames = list(c("non-CVD", "CVD", "Total"),
+                             c("Ridicat Sare", "Scazut Sare", "Total")))
 
 kable(matF, align = "ccc")
 ```
@@ -391,9 +416,11 @@ e12 = n1o*no2/n
 e21 = n2o*no1/n
 e22 = n2o*no2/n
 
-MobsF = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+MobsF = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+               dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
 
-MexpF = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+MexpF = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, 
+               dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
 MexpF
 ```
 
@@ -434,11 +461,13 @@ for (i in 0:7){
   n21 = no1 - n11
   n22 = no2 - n12
   
-  MobsF1 = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+  MobsF1 = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+                  dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
   
   print(MobsF1)
   
-  cat("Probabilitatea de a obtine tabelul ", i+1, " este ", dhyper(i, no1, no2, n1o), "\n")
+  cat("Probabilitatea de a obtine tabelul ", i+1, " este ", 
+      dhyper(i, no1, no2, n1o), "\n")
   cat("-------------------------------------\n")
 }
 ```
@@ -478,8 +507,10 @@ pval
 > Ne propunem să comparăm două regimuri de chimioterapie pentru pacienții cu cancer la sân care au efectuat operația de mastectomie. Cele două grupuri de tratament investigate ar trebui să fie cât mai comparabile din punct de vedere al celorlalți factori. Presupunem că un studiu de potrivire (matched study) a fost pregătit așa încât din fiecare pereche (potrivită din punct de vedere al vârstei și a condițiilor clinice) s-a selectat aleator un membru căruia i-a fost administrat tratamentul A iar celuilalt membru tratamentul B. Pacienții au fost urmăriți pe o perioadă de 5 ani, iar variabila de interes a fost supraviețuirea în această perioadă. S-au obșinut următoarele date:
 
 ```{r, echo=FALSE}
-matMN = matrix(c(526,95,621, 515, 106, 621, 1041, 201, 1242),ncol = 3, byrow = T, 
-             dimnames = list(c("A", "B", "Total"),c("Supravietuit", "Decedat", "Total")))
+matMN = matrix(c(526,95,621, 515, 106, 621, 1041, 201, 1242),
+               ncol = 3, byrow = T, 
+             dimnames = list(c("A", "B", "Total"),
+                             c("Supravietuit", "Decedat", "Total")))
 
 kable(matMN, align = "ccc")
 ```
@@ -494,8 +525,10 @@ chisq.test(M1csq)
 Construim următorul tabel, în care unitatea de analiză nu mai este *pacientul* ci *perechea* iar perechile sunt clasificate după cum membrii acelei perechi au supraviețuit sau nu o perioadă post-operatorie de 5 ani (liniile tabelului sunt rezultatele pacientului care a urmat tratamentul A iar coloanele sunt rezultatele pacientului care a urmat tratamentul B):
 
 ```{r, echo=FALSE}
-matMN2 = matrix(c(510,16,526, 5, 90, 95, 515, 106, 621),ncol = 3, byrow = T, 
-             dimnames = list(c("Supravietuit", "Decedat", "Total"),c("Supravietuit", "Decedat", "Total")))
+matMN2 = matrix(c(510,16,526, 5, 90, 95, 515, 106, 621),
+                ncol = 3, byrow = T, 
+             dimnames = list(c("Supravietuit", "Decedat", "Total"),
+                             c("Supravietuit", "Decedat", "Total")))
 
 kable(matMN2, align = "ccc")
 ```
@@ -506,7 +539,8 @@ Aplicăm testul lui McNemar `mcnemar.test` :
 
 ```{r}
 M1 = matrix(c(510,16,5,90),ncol = 2, byrow = T, 
-           dimnames = list(c("Supravietuit", "Decedat"), c("Supravietuit", "Decedat")))
+           dimnames = list(c("Supravietuit", "Decedat"), 
+                           c("Supravietuit", "Decedat")))
 mcnemar.test(M1)
 ```
 
@@ -609,7 +643,7 @@ set.seed(5)
 fisher(matAA_observed)
 ```
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 set.seed(5)
 a = fisher(matAA_observed, return.all = TRUE)
 

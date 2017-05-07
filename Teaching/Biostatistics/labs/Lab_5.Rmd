@@ -1,19 +1,24 @@
 ---
-title: "Curs Biostatistică 2017 - Laborator 5 & 6"
-subtitle: Analiză de varianță - ANOVA
+title: "Curs Biostatistica 2017 - Laborator 5 & 6"
+subtitle: Analiza de varianta - ANOVA
 output:
-  html_document:
-    keep_md: true
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
-    code_folding: show
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
     number_sections: yes
+    toc: yes
+  html_document:
+    code_folding: show
+    css: css/rmarkdown.css
     includes:
       after_body: include/include_footer.html
-    css: css/rmarkdown.css
-  pdf_document: default
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -113,7 +118,7 @@ syg2
 
 Considerăm următorul grafic unde fiecare observație este reprezentată printr-un punct (gol în figura din stânga și plin în cea din dreapta) iar media globală este ilustrată printr-o linie punctată. În figura din stânga avem *boxplot*-ul pentru fiecare categorie a lui $X$ iar în figura din dreapta (*stripchart*) mediile eșantioanelor din fiecare grup sunt ilustrate cu o cruce de culoare neagră:
 
-```{r, fig.align='center', echo=FALSE}
+```{r, out.width = '90%', fig.align = 'center', echo=FALSE}
 par(mfrow = c(1,2))
 
 boxplot(Cushings$Tetrahydrocortisone~Cushings$Type,
@@ -150,7 +155,8 @@ $$
 $$
 
 ```{r}
-# avem ng nr de observatii din fiecare grup, myg media lui y din fiecare grup si my media totala
+# avem ng nr de observatii din fiecare grup, myg media lui y 
+# din fiecare grup si my media totala
 
 SS_B = ng%*%(myg-my)^2 # unde %*% este produs de matrice
 SS_B
@@ -212,7 +218,7 @@ summary(anova_model)
 ```
 
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 a = 0.05
 
 df1 = length(unique(Cushings$Type))-1
@@ -222,7 +228,9 @@ z1 = qf(1-a, df1, df2)
 
 par(bty="n")
 x <- seq(0,10,length=501)
-plot(x,df(x, df1, df2),type="l",main = paste("Repartitia Fisher cu df1 =", df1,"si df2 =", df2,"grade de libertate"),
+plot(x,df(x, df1, df2),type="l",
+     main = paste("Repartitia Fisher cu df1 =", 
+                  df1,"si df2 =", df2,"grade de libertate"),
      xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
 
 abline(h=-0.01, lty = 2)
@@ -258,11 +266,12 @@ text(z+1.2, 0.34, "valoarea observata", col = "brown3")
 ### Verificarea ipotezelor ANOVA {-}
 ***
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 source("functions/summarySE.R")
 source("functions/plot_means.R")
 
-dat1 = summarySE(Cushings, measurevar="Tetrahydrocortisone", groupvars=c("Type"))
+dat1 = summarySE(Cushings, measurevar="Tetrahydrocortisone", 
+                 groupvars=c("Type"))
 
 CI.up = as.numeric(dat1$Tetrahydrocortisone)+as.numeric(dat1$ci)
 CI.dn = as.numeric(dat1$Tetrahydrocortisone)-as.numeric(dat1$ci)
@@ -286,12 +295,13 @@ Observăm că ipoteza de omogenitate este respinsă în favoarea alternativei pr
 
 Transformăm variabila răspuns ($\log(Y)=\log(Tetrahydrocortisone)$):
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 Cushings_tr = Cushings
 
 Cushings_tr$Tetrahydrocortisone = log(Cushings_tr$Tetrahydrocortisone)
 
-dat2 = summarySE(Cushings_tr, measurevar="Tetrahydrocortisone", groupvars=c("Type"))
+dat2 = summarySE(Cushings_tr, measurevar="Tetrahydrocortisone", 
+                 groupvars=c("Type"))
 
 CI.up2 = as.numeric(dat2$Tetrahydrocortisone)+as.numeric(dat2$ci)
 CI.dn2 = as.numeric(dat2$Tetrahydrocortisone)-as.numeric(dat2$ci)
@@ -320,7 +330,7 @@ shapiro.test(residuals(anova_model_tr))
 
 Verificăm normalitatea și grafic cu `Q-Q Plot`:
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 library(car)
 
 qqPlot(lm(log(Tetrahydrocortisone)~Type, data = Cushings), 
@@ -336,7 +346,7 @@ ANOVA pentru modelul transformat:
 summary(anova_model_tr)
 ```
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 a = 0.05
 
 df1 = length(unique(Cushings$Type))-1
@@ -346,7 +356,10 @@ z1 = qf(1-a, df1, df2)
 
 par(bty="n")
 x <- seq(0,10,length=501)
-plot(x,df(x, df1, df2),type="l",main = paste("Repartitia Fisher cu df1 =", df1,"si df2 =", df2,"grade de libertate\nModelul transformat"),
+plot(x,df(x, df1, df2),type="l",
+     main = paste("Repartitia Fisher cu df1 =", 
+                  df1,"si df2 =", df2,
+                  "grade de libertate\nModelul transformat"),
      xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
 
 abline(h=-0.01, lty = 2)
@@ -440,7 +453,7 @@ syg
 Se observă că abaterile standard sunt relativ constante pentru cele 5 tratamente, luând valori între `r format(min(syg), digits = 2)` și `r format(max(syg), digits = 2)`.
 
 
-```{r, fig.align='center', echo=FALSE}
+```{r, out.width = '90%', fig.align = 'center', echo=FALSE}
 par(mfrow = c(1,2))
 
 boxplot(cholesterol$response~cholesterol$trt,
@@ -493,8 +506,9 @@ Testul ANOVA (F) pentru tratament (trt) este semnificativ ($p<0.001$), ilustrân
 
 Reducerea medie de colesterol pentru cele 5 tratamente împreună cu intervalele de încredere de nivel de încredere de $95\%$ corespunzătoare:
 
-```{r, echo=FALSE, fig.align='center'}
-dat_chol = summarySE(cholesterol, measurevar="response", groupvars=c("trt"))
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
+dat_chol = summarySE(cholesterol, measurevar="response", 
+                     groupvars=c("trt"))
 
 CI.up = as.numeric(dat_chol$response)+as.numeric(dat_chol$ci)
 CI.dn = as.numeric(dat_chol$response)-as.numeric(dat_chol$ci)
@@ -512,7 +526,7 @@ plot.means(means = dat_chol$response,
 
 În ANOVA cu un factor, se presupune că variabila răspuns este repartizată normal cu aceeași varianță în fiecare grup. Pentru testarea normalității putem folosi ca metodă grafică `Q-Q plot`-ul:
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 library(car)
 
 qqPlot(lm(response~trt, data = cholesterol), 
@@ -563,7 +577,7 @@ Observăm că reducerea medie a colesterolului pentru tratamentele *1time* și *
 
 Aceste diferențe se pot observa și grafic:
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 par(las=2)
 par(mar=c(5,8,4,2))
 plot(TukeyHSD(anova_model_chol))
@@ -620,7 +634,8 @@ tab_anova2$Sursa = c("$A$", "$B$", "$A\\times B$", "$W$", "$Total$")
 tab_anova2$DF = c("$r-1$", "$c-1$", "$(r-1)(c-1)$", "$rc(s-1)$", "$rcs-1$")
 tab_anova2$SS = c("$SS_A$", "$SS_B$", "$SS_{A\\times B}$", "$SS_W$", "$SS_T$")
 tab_anova2$MS = c("$MS_A$", "$MS_B$", "$MS_{A\\times B}$", "$MS_W$", "")
-tab_anova2$F_test = c("$\\frac{MS_A}{MS_W}$", "$\\frac{MS_B}{MS_W}$", "$\\frac{MS_{A\\times B}}{MS_W}$", "", "")
+tab_anova2$F_test = c("$\\frac{MS_A}{MS_W}$", "$\\frac{MS_B}{MS_W}$", 
+                      "$\\frac{MS_{A\\times B}}{MS_W}$", "", "")
 
 kable(tab_anova2, 
       align = 'ccccc')
@@ -683,7 +698,7 @@ m_ij = tapply(len, list(supp, dose), mean)
 m_ij
 ```
 
-```{r, fig.align='center', echo=FALSE}
+```{r, out.width = '90%', fig.align = 'center', echo=FALSE}
 boxplot(len ~ dose,
         boxwex = 0.25, at = 1:3 - 0.2,
         subset = supp == "VC", col = "darkgray",
@@ -746,7 +761,8 @@ cat("MS_B = ", SS_B,"\n")
 Calculăm $SS_{A\times B}$, $df_{A\times B}$ și $MS_{A\times B}$:
 
 ```{r}
-v = m_ij - matrix(rep(m_i, c), ncol = c) - matrix(rep(m_j, r), nrow = r, byrow = T) + m_T
+v = m_ij - matrix(rep(m_i, c), ncol = c) - 
+  matrix(rep(m_j, r), nrow = r, byrow = T) + m_T
 SS_AB = s*sum(v^2)
 cat("SS_AB = ", SS_AB,"\n")
 
@@ -782,7 +798,7 @@ Tabelul ANOVA de mai sus ne arată că atât efectele principale (`supp` și `do
 
 Pentru a vedea interacția dintre cei doi factori putem să folosim funcția `interaction.plot`:
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 interaction.plot(dose, supp, len, type="b",
         col=c("brown3","darkgray"), pch=c(16, 18),
         main = "Interactia dintre doza de Vitamina C si tipul de suplement",
@@ -792,7 +808,7 @@ interaction.plot(dose, supp, len, type="b",
 
 Dacă vrem să includem și intervalele de încredere atunci avem:
 
-```{r, fig.align='center', echo=FALSE, warning=FALSE, message=FALSE}
+```{r, out.width = '90%', fig.align = 'center', echo=FALSE, warning=FALSE, message=FALSE}
 library(ggplot2)
 
 detach(ToothGrowth)
@@ -900,7 +916,7 @@ Observăm, de exemplu, că diferența dintre mediile lungimii dinților pentru p
 
 Aceste diferențe se pot observa și grafic:
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
 par(las=2)
 par(mar=c(5,8,4,2))
 plot(TukeyHSD(model_anova_2w))

@@ -1,4 +1,4 @@
-# Curs Biostatistică 2017 - Laborator 3 & 4
+# Curs Biostatistica 2017 - Laborator 3 & 4
 <style type="text/css">
 .table {
     margin: auto;
@@ -89,11 +89,14 @@ pval
 ```r
 # Intervalul de incredere
 
-cat("Intervalul de incredere pentru p1-p2 la pragul de semnificatie 95% este ","IC = [", p1-p2 - qnorm(0.975) *sqrt(p*(1-p)*(1/n1+1/n2)), ",", p1-p2 + qnorm(0.9755) *sqrt(p*(1-p)*(1/n1+1/n2)),"]")
+cat("IC pentru p1-p2 la pragul de semnificatie 95% este \n",
+    "IC = [", p1-p2 - qnorm(0.975) *sqrt(p*(1-p)*(1/n1+1/n2)), ",", 
+    p1-p2 + qnorm(0.9755) *sqrt(p*(1-p)*(1/n1+1/n2)),"]")
 ```
 
 ```
-## Intervalul de incredere pentru p1-p2 la pragul de semnificatie 95% este  IC = [ 0.0006612366 , 0.003144216 ]
+## IC pentru p1-p2 la pragul de semnificatie 95% este 
+##  IC = [ 0.0006612366 , 0.003144216 ]
 ```
 
 ```r
@@ -102,14 +105,17 @@ cat("Intervalul de incredere pentru p1-p2 la pragul de semnificatie 95% este ","
 p1b = (n11+1)/(n1+2)
 p2b = (n21+1)/(n2+2)
 
-cat("Intervalul de incredere (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este ","IC = [", p1b-p2b - qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)), ",", p1b-p2b + qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)),"]")
+cat("IC (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este \n",
+    "IC = [", p1b-p2b - qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)), ",",
+    p1b-p2b + qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)),"]")
 ```
 
 ```
-## Intervalul de incredere (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este  IC = [ 0.0004336558 , 0.003564425 ]
+## IC (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este 
+##  IC = [ 0.0004336558 , 0.003564425 ]
 ```
 
-<img src="Lab_3_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="Lab_3_files/figure-html/unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" />
 
 Concluzionăm că folosirea de anticoncepționale pe cale orală este semnificativ asociat cu incidența crescută de cazuri de MI pe perioada de 3 ani. 
 Puteți crea o funcție care să automatizeze procesul ?
@@ -150,9 +156,11 @@ e12 = n1o*no2/n
 e21 = n2o*no1/n
 e22 = n2o*no2/n
 
-Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
 
-Mexp = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mexp = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
 Mexp
 ```
 
@@ -176,7 +184,8 @@ $$
 
 
 ```r
-X2 = (abs(n11-e11)-0.5)^2/e11 + (abs(n12-e12)-0.5)^2/e12 + (abs(n21-e21)-0.5)^2/e21 + (abs(n22-e22)-0.5)^2/e22
+X2 = (abs(n11-e11)-0.5)^2/e11 + (abs(n12-e12)-0.5)^2/e12 + 
+  (abs(n21-e21)-0.5)^2/e21 + (abs(n22-e22)-0.5)^2/e22
 X2
 ```
 
@@ -208,7 +217,7 @@ chisq.test(Mobs)
 ## X-squared = 7.6665, df = 1, p-value = 0.005626
 ```
 
-<img src="Lab_3_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="Lab_3_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
 
 Același rezultat se obține și dacă folosim testul `prop.test`, acesta fiind un caz particular al testului hi-pătrat: 
 
@@ -264,7 +273,8 @@ n22 = n2o-n21
 no1 = n11+n21
 no2 = n12+n22
 
-LRT = n11*log((n1o*no1)/(n*n11)) + n12*log((n1o*no2)/(n*n12)) + n21*log((n2o*no1)/(n*n21)) + n22*log((n2o*no2)/(n*n22))
+LRT = n11*log((n1o*no1)/(n*n11)) + n12*log((n1o*no2)/(n*n12)) + 
+  n21*log((n2o*no1)/(n*n21)) + n22*log((n2o*no2)/(n*n22))
 LRT = -2*LRT
 LRT
 ```
@@ -282,7 +292,7 @@ pval
 ## [1] 0.003847085
 ```
 
-<img src="Lab_3_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="Lab_3_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" />
 
 Să creăm o funcție care automatizează procesul:
 
@@ -308,7 +318,8 @@ LRT1 = function(dat){
   return(list(statistic = lrt, pvalue = pval))
 }
 
-Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
 
 LRT1(Mobs) 
 ```
@@ -363,9 +374,11 @@ e12 = n1o*no2/n
 e21 = n2o*no1/n
 e22 = n2o*no2/n
 
-MobsF = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+MobsF = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+               dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
 
-MexpF = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+MexpF = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, 
+               dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
 MexpF
 ```
 
@@ -443,11 +456,13 @@ for (i in 0:7){
   n21 = no1 - n11
   n22 = no2 - n12
   
-  MobsF1 = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+  MobsF1 = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+                  dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
   
   print(MobsF1)
   
-  cat("Probabilitatea de a obtine tabelul ", i+1, " este ", dhyper(i, no1, no2, n1o), "\n")
+  cat("Probabilitatea de a obtine tabelul ", i+1, " este ", 
+      dhyper(i, no1, no2, n1o), "\n")
   cat("-------------------------------------\n")
 }
 ```
@@ -604,7 +619,8 @@ Aplicăm testul lui McNemar `mcnemar.test` :
 
 ```r
 M1 = matrix(c(510,16,5,90),ncol = 2, byrow = T, 
-           dimnames = list(c("Supravietuit", "Decedat"), c("Supravietuit", "Decedat")))
+           dimnames = list(c("Supravietuit", "Decedat"), 
+                           c("Supravietuit", "Decedat")))
 mcnemar.test(M1)
 ```
 
@@ -730,7 +746,7 @@ fisher(matAA_observed)
 ## P-valoarea aproximata cu Monte Carlo este  0.482
 ```
 
-<img src="Lab_3_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" />
+<img src="Lab_3_files/figure-html/unnamed-chunk-30-1.png" width="90%" style="display: block; margin: auto;" />
 
 Același rezultat îl obținem și dacă folosim funcția `fisher.test` (care este mai rapidă):
 

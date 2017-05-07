@@ -560,7 +560,8 @@ abline(h = mean(saltBP$BP), col = &quot;brown2&quot;, lty = 2)
 segments(x0 = saltBP$salt, y0 = mean(saltBP$BP), x1 = saltBP$salt, y1 = saltBP$BP, 
          col = &quot;grey50&quot;, lwd = 2, lty = 2)
 
-legend(&quot;topleft&quot;, legend = expression(&quot;Dreapta de regresie&quot;, &quot;Media esantionului &quot; * bar(Y),
+legend(&quot;topleft&quot;, 
+       legend = expression(&quot;Dreapta de regresie&quot;, &quot;Media esantionului &quot; * bar(Y),
                                       (Y[i] - bar(Y))^2), 
        lwd = c(2, 1, 2),
        col = c(&quot;grey30&quot;, &quot;brown2&quot;, &quot;grey50&quot;), 
@@ -573,7 +574,8 @@ points(saltBP$salt, saltBP$BP, pch = 16, col = &quot;brown3&quot;)</code></pre>
 <li><em>suma abaterilor pătratice de regresie</em></li>
 </ul>
 <pre class="r"><code>plot(saltBP$salt, saltBP$BP, pch = 16, type = &quot;n&quot;,
-     main = paste(&quot;SSreg =&quot;, round(sum((saltBP_model$fitted.values - mean(saltBP$BP))^2), 2)), 
+     main = paste(&quot;SSreg =&quot;, 
+                  round(sum((saltBP_model$fitted.values - mean(saltBP$BP))^2), 2)), 
      col.main = &quot;forestgreen&quot;, 
      xlab = &quot;nivelul de sare&quot;, 
      ylab = &quot;tensiunea arteriala&quot;, 
@@ -587,7 +589,8 @@ segments(x0 = saltBP$salt, y0 = mean(saltBP$BP), x1 = saltBP$salt, y1 = saltBP_m
 
 points(saltBP$salt, saltBP_model$fitted.values, pch = 16, col = &quot;forestgreen&quot;)
 
-legend(&quot;topleft&quot;, legend = expression(&quot;Dreapta de regresie&quot;, &quot;Media esantionului &quot; * bar(Y),
+legend(&quot;topleft&quot;, 
+       legend = expression(&quot;Dreapta de regresie&quot;, &quot;Media esantionului &quot; * bar(Y),
                                       (hat(Y)[i] - bar(Y))^2), 
        lwd = c(2, 1, 2),
        col = c(&quot;grey30&quot;, &quot;brown2&quot;, &quot;forestgreen&quot;), 
@@ -600,7 +603,8 @@ points(saltBP$salt, saltBP$BP, pch = 16, col = &quot;brown3&quot;)</code></pre>
 <li><em>suma abaterilor pătratice reziduale</em></li>
 </ul>
 <pre class="r"><code>plot(saltBP$salt, saltBP$BP, pch = 16, type = &quot;n&quot;,
-     main = paste(&quot;RSS =&quot;, round(sum((saltBP$BP - saltBP_model$fitted.values)^2), 2)), 
+     main = paste(&quot;RSS =&quot;, 
+                  round(sum((saltBP$BP - saltBP_model$fitted.values)^2), 2)), 
      col.main = &quot;orange&quot;, 
      xlab = &quot;nivelul de sare&quot;, 
      ylab = &quot;tensiunea arteriala&quot;, 
@@ -608,12 +612,14 @@ points(saltBP$salt, saltBP$BP, pch = 16, col = &quot;brown3&quot;)</code></pre>
 
 abline(saltBP_model$coefficients, col = &quot;grey30&quot;, lwd = 2)
 
-segments(x0 = saltBP$salt, y0 = saltBP$BP, x1 = saltBP$salt, y1 = saltBP_model$fitted.values, 
+segments(x0 = saltBP$salt, y0 = saltBP$BP, 
+         x1 = saltBP$salt, y1 = saltBP_model$fitted.values, 
          col = &quot;orange&quot;, lwd = 2, lty = 2)
 
 points(saltBP$salt, saltBP_model$fitted.values, pch = 16, col = &quot;orange&quot;)
 
-legend(&quot;topleft&quot;, legend = expression(&quot;Dreapta de regresie&quot;, (hat(Y)[i] - Y[i])^2), 
+legend(&quot;topleft&quot;, 
+       legend = expression(&quot;Dreapta de regresie&quot;, (hat(Y)[i] - Y[i])^2), 
        lwd = c(2, 2),
        col = c(&quot;grey30&quot;, &quot;orange&quot;), 
        lty = c(1, 2), 
@@ -751,11 +757,14 @@ lw_bonf = b0 + b1*x0 - t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
 up_bonf = b0 + b1*x0 + t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
 
 segments(x0 = x0, y0 = lw_bonf, x1 = x0, y1 = up_bonf, col = &quot;orange&quot;, lty = 5)
-segments(x0 = x0-0.25, y0 = lw_bonf, x1 = x0+0.25, y1 = lw_bonf, col = &quot;orange&quot;, lty = 1)
-segments(x0 = x0-0.25, y0 = up_bonf, x1 = x0+0.25, y1 = up_bonf, col = &quot;orange&quot;, lty = 1)
+segments(x0 = x0-0.25, y0 = lw_bonf, x1 = x0+0.25, y1 = lw_bonf, 
+         col = &quot;orange&quot;, lty = 1)
+segments(x0 = x0-0.25, y0 = up_bonf, x1 = x0+0.25, y1 = up_bonf, 
+         col = &quot;orange&quot;, lty = 1)
 
 legend(&quot;topleft&quot;, legend = c(&quot;Dreapta de regresie&quot;, &quot;95% t interval&quot;, 
-                                      &quot;95% Scheffe interval&quot;, paste0(m, &quot; intervale Bonferroni (95%)&quot;)), 
+                                      &quot;95% Scheffe interval&quot;, 
+                             paste0(m, &quot; intervale Bonferroni (95%)&quot;)), 
        lwd = c(2, 1, 1, 1),
        col = c(&quot;grey30&quot;, &quot;grey50&quot;, &quot;brown4&quot;, &quot;orange&quot;), 
        lty = c(1, 2, 4, 5), 
@@ -802,22 +811,6 @@ Q-Q plot
 ## 
 ## data:  residuals(saltBP_model)
 ## W = 0.96871, p-value = 0.6125</code></pre>
-<pre class="r"><code>residplot &lt;- function(fit, nbreaks=15) {
-    z &lt;- rstudent(fit)
-    hist(z, breaks=nbreaks, freq=FALSE,
-    xlab=&quot;Studentized Residual&quot;,
-    main=&quot;Distribution of Errors&quot;)
-    rug(jitter(z), col=&quot;brown&quot;)
-    curve(dnorm(x, mean=mean(z), sd=sd(z)),
-    add=TRUE, col=&quot;blue&quot;, lwd=2)
-    lines(density(z)$x, density(z)$y,
-    col=&quot;red&quot;, lwd=2, lty=2)
-    legend(&quot;topright&quot;,
-    legend = c( &quot;Normal Curve&quot;, &quot;Kernel Density Curve&quot;),
-    lty=1:2, col=c(&quot;blue&quot;,&quot;red&quot;), cex=.7)
-}
-
-residplot(saltBP_model)</code></pre>
 <ul>
 <li><em>Homoscedasticitatea</em></li>
 </ul>
@@ -891,7 +884,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

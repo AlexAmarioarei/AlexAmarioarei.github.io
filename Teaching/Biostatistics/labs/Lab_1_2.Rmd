@@ -1,18 +1,29 @@
 ---
-title: "Curs Biostatistică 2017 - Laborator 1 & 2"
+title: "Curs Biostatistica 2017 - Laborator 1 & 2"
 output:
-  html_document: 
-    keep_md: true
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
-    code_folding: show
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
     number_sections: yes
+    toc: yes
+  html_document:
+    code_folding: show
+    css: css/rmarkdown.css
     includes:
       after_body: include/include_footer.html
-    css: css/rmarkdown.css
-  word_document: default
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
 ---
 <style type="text/css">
 .table {
@@ -82,7 +93,7 @@ for(i in 1:p) {
 
 Intervale de încredere atunci când $\sigma$ este cunoscut: 
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 r <- range(unlist(c(lo,hi,lo2,hi2,lo3,hi3)))
 
 par(mfrow=c(1,5), las=1, mar=c(5.1,2.1,6.1,2.1))
@@ -101,13 +112,15 @@ for(i in 1:p) {
 
 par(mfrow=c(1,1))
 
-mtext(expression(paste("100 intervale de încredere pentru ",mu)),side=3,cex=1.5,xpd=TRUE,line=4)
-mtext(expression(paste("(",sigma," cunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2.7)
+mtext(expression(paste("100 intervale de încredere pentru ",mu)),
+      side=3,cex=1.5,xpd=TRUE,line=4)
+mtext(expression(paste("(",sigma," cunoscut)")),side=3,cex=1.3,
+      xpd=TRUE,line=2.7)
 ```
 
 Intervale de încredere **incorecte** atunci când $\sigma$ nu este cunoscut: 
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 par(mfrow=c(1,5), las=1, mar=c(5.1,2.1,6.1,2.1))
 for(i in 1:p) {
   plot(0,0,type="n",ylim=0.5+c(0,n),xlim=r,ylab="",xlab="",yaxt="n")
@@ -118,12 +131,13 @@ for(i in 1:p) {
 }
 par(mfrow=c(1,1))
 mtext(expression(paste("100 intervale de încredere incorecte pentru ",mu)),side=3,cex=1.5,xpd=TRUE,line=4)
-mtext(expression(paste("(",sigma," necunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2.7)
+mtext(expression(paste("(",sigma," necunoscut)")),
+      side=3,cex=1.3,xpd=TRUE,line=2.7)
 ```
 
 Intervale de încredere **corecte** atunci când $\sigma$ nu este cunoscut: 
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 par(mfrow=c(1,5), las=1, mar=c(5.1,2.1,6.1,2.1))
 for(i in 1:p) {
   plot(0,0,type="n",ylim=0.5+c(0,n),xlim=r,ylab="",xlab="",yaxt="n")
@@ -133,8 +147,10 @@ for(i in 1:p) {
   segments(lo3[[i]][o],o,hi3[[i]][o],o,lwd=2,col="orange")
 }
 par(mfrow=c(1,1))
-mtext(expression(paste("100 intervale de încredere pentru ",mu)),side=3,cex=1.5,xpd=TRUE,line=4)
-mtext(expression(paste("(",sigma," necunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2.7)
+mtext(expression(paste("100 intervale de încredere pentru ",mu)),
+      side=3,cex=1.5,xpd=TRUE,line=4)
+mtext(expression(paste("(",sigma," necunoscut)")),
+      side=3,cex=1.3,xpd=TRUE,line=2.7)
 ```
 
 
@@ -143,7 +159,7 @@ mtext(expression(paste("(",sigma," necunoscut)")),side=3,cex=1.3,xpd=TRUE,line=2
 
 ## Exemplul 1
 
-Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](data/normtemp.txt) (sursa originală a datelor este *Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlich. Journal of the American Medical Association, 268, 1578-1580*).
+> Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](data/normtemp.txt) (sursa originală a datelor este *Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlich. Journal of the American Medical Association, 268, 1578-1580*).
 
 Pentru a citi datele putem folosi două metode: sau să le citim direct din pagina de internet (prin comanda `read.table`)
 
@@ -169,14 +185,14 @@ degreesC = normtemp$tempC
 
 Testul t-student presupune că eșantionul (independent) a provenit dintr-o populație normală și pentru aceasta putem verifica ipoteza de normalitate (`QQ plot`):
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 qqnorm(degreesC)
 qqline(degreesC)
 ```
 
 Trasăm histograma:
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 hist(degreesC, probability = T)
 degM = mean(degreesC)
 degSD = sd(degreesC)
@@ -185,7 +201,7 @@ curve(dnorm(x, degM, degSD), add = T, col = "brown3")
 
 Trasăm densitatea:
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 plot(density(degreesC))
 curve(dnorm(x, degM, degSD), add = T, col = "brown3")
 ```
@@ -253,7 +269,7 @@ tempF = normtemp$tempC[which(normtemp$sex == 2)]
 
 Ilustrare a temperaturii bărbaților și a femeilor:
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 par(mfrow=c(1,2))
 plot(density(tempB), main="Temperatura Barbatilor")
 plot(density(tempF), main="Temperatura Femeilor")
@@ -261,16 +277,16 @@ plot(density(tempF), main="Temperatura Femeilor")
 
 Sub formă de `boxplot`:
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 par(mfrow = c(1,1))
 boxplot(tempB, tempF, ylab="Temperatura",     # plot and label y-axis
-                names=c("Barbati","Femei"),                           # group names on x-axis
-                main="Temperatura in functie de sex")         # main title
+                names=c("Barbati","Femei"),   # group names on x-axis
+                main="Temperatura in functie de sex")   # main title
 ```
 
 Trasarea datelor împreună cu intervalele de încredere:
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 source("functions/dotplot.R")
 
 dotplot(tempB, tempF, labels=c("Barbati","Femei"))
@@ -296,7 +312,7 @@ t.test(tempB, tempF, var.equal = T) # without Welch correction
 
 ## Exemplul 2
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 # Example data
 x <- c(102.5, 106.6,  99.8, 106.5, 103.7, 105.5, 98.2, 104.1,  85.6, 105.5, 114.0, 112.2)
 y <- c( 93.7,  90.9, 100.4,  92.0, 100.2, 104.6, 95.4,  96.6,  99.2)
@@ -309,7 +325,7 @@ dotplot(x,y)
 
 ## Exemplul 3
 
-```{r, fig.align='center'}
+```{r,out.width = '90%', fig.align = 'center'}
 # One-tailed test example
 x <- c(59.4, 52.3, 42.6, 45.1, 65.9, 40.8)
 y <- c(82.7, 56.7, 46.9, 67.8, 74.8, 85.7)
@@ -323,7 +339,7 @@ dotplot(x,y)
 
 ## Exemplul 4
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 # another one-tailed test example
 x <- c(63.3, 58.6, 59.0, 60.5, 56.3, 57.4)
 y <- c(75.6, 65.9, 72.3, 58.0, 64.4, 66.2)
@@ -331,9 +347,9 @@ t.test(x,y,alt="less")
 dotplot(x,y)
 ```
 
-## Grafic bun / Grafic rau
+## Grafic recomandat
 
-```{r, fig.align='center'}
+```{r, out.width = '90%', fig.align = 'center'}
 x <- c(15.1, 13.1, 21.5)
 y <- c(35.1, 39.5, 58.8)
 
@@ -348,16 +364,19 @@ segments(2.5,mean(y),2.5,mean(y)+sd(y),lwd=2)
 segments(2.3,mean(y)+sd(y),2.7,mean(y)+sd(y),lwd=2)
 mtext("Grafic nepotrivit",cex=1.5,line=0.5)
 
-plot(rep(0:1,c(3,3)),c(x,y),xaxt="n",ylim=c(0,76),xlim=c(-0.5,1.5),ylab="",xlab="")
+plot(rep(0:1,c(3,3)),c(x,y),xaxt="n",ylim=c(0,76),
+     xlim=c(-0.5,1.5),ylab="",xlab="")
 abline(v=0:1,col="gray40",lty=2)
 points(rep(0:1,c(3,3)),c(x,y),lwd=2)
 mtext("Grafic recomandat",cex=1.5,line=0.5)
 xci <- t.test(x)$conf.int
 yci <- t.test(y)$conf.int
 segments(0.25,xci[1],0.25,xci[2],lwd=2,col="darkgray")
-segments(c(0.23,0.23,0.2),c(xci,mean(x)),c(0.27,0.27,0.3),c(xci,mean(x)),lwd=2,col="darkgray")
+segments(c(0.23,0.23,0.2),c(xci,mean(x)),c(0.27,0.27,0.3),
+         c(xci,mean(x)),lwd=2,col="darkgray")
 segments(1-0.25,yci[1],1-0.25,yci[2],lwd=2,col="brown3")
-segments(1-c(0.23,0.23,0.2),c(yci,mean(y)),1-c(0.27,0.27,0.3),c(yci,mean(y)),lwd=2,col="brown3")
+segments(1-c(0.23,0.23,0.2),c(yci,mean(y)),1-c(0.27,0.27,0.3),
+         c(yci,mean(y)),lwd=2,col="brown3")
 u <- par("usr")
 segments(0:1,u[3],0:1,u[3]-diff(u[3:4])*0.03,xpd=TRUE)
 text(0:1,u[3]-diff(u[3:4])*0.08,c("A","B"),xpd=TRUE)

@@ -54,29 +54,35 @@ Mai jos găsiți o parte din laboratoarele cursului.
 
 ```{r echo = FALSE}
 lab1 = "[Lab_1_2](labs/Lab_1_2.html)"
+pdf_lab1 = "[PDF](labs/Pdfs/Lab_1_2.pdf)"
 labn = ""
+pdf_labn = ""
 data_lab1 = "[normtemp.txt](labs/data/normtemp.txt)"
 data_n = ""
 readings_lab1 = "[Body temperature](labs/readings/BodyTemp.pdf)"
 readings_lab1_b = "[Significance, p values, t tests](labs/readings/nmeth.2698.pdf)"
 
 lab2 = "[Lab_3_4](labs/Lab_3.html)"
+pdf_lab2 = "[PDF](labs/Pdfs/Lab_3_4.pdf)"
 data_lab2 = ""
 
 readings_lab2 = "[Confidence intervals for proportions](labs/readings/agresti_caffo_2000.pdf)"
 readings_lab2_b = "[Exact analysis of contingency tables ](labs/readings/Mehta_1998.pdf)"
 
 lab3 = "[Lab_5_6](labs/Lab_5.html)"
+pdf_lab3 = "[PDF](labs/Pdfs/Lab_5_6.pdf)"
 data_lab3 = ""
 
 readings_lab3 = "[ANOVA - why it is more important than ever](labs/readings/Gelman_anova.pdf)"
 
 lab4 = "[Lab_7_8](labs/Lab_7_8.html)"
+pdf_lab4 = "[PDF](labs/Pdfs/Lab_7_8.pdf)"
 data_lab4 = "[saltBP.txt](labs/data/saltBP.txt)"
 
 readings_lab4 = ""
 
 lab5 = "[Lab_9_10](labs/Lab_9_10.html)"
+pdf_lab5 = "[PDF](labs/Pdfs/Lab_9_10.pdf)"
 data_lab5 = "[galapagos.csv](labs/data/galapagos.csv)"
 
 readings_lab5 = "[Species numbers and endemism](labs/readings/Species.pdf)"
@@ -84,13 +90,14 @@ readings_lab5 = "[Species numbers and endemism](labs/readings/Species.pdf)"
 
 tabLab = data.frame(Nr = c(1,"",2, "", 3, 4, 5),
                     Lab = c(lab1, labn,lab2, labn, lab3, lab4, lab5), 
+                    Pdfs = c(pdf_lab1, pdf_labn, pdf_lab2, pdf_labn, pdf_lab3, pdf_lab4, pdf_lab5),
                     data = c(data_lab1, data_n,data_lab2, data_n, data_lab3, data_lab4, data_lab5), 
                     readings = c(readings_lab1, readings_lab1_b,readings_lab2, readings_lab2_b, readings_lab3, readings_lab4, readings_lab5))
 
 
 kable(tabLab, 
-      col.names = c("Nr", "Laborator", "Date", "Readings"),
-      align = "clcl", 
+      col.names = c("Nr", "Laborator", "PDFs", "Set Date", "Readings"),
+      align = "clccl", 
       booktabs = TRUE)
 ```
  
@@ -101,7 +108,7 @@ Mai jos găsiți proiectul cursului de *Biostatistică*. Proiectul este individu
 ```{r echo = FALSE}
 proj1_503 = "[Proiect](projects/Proiect_503.pdf)"
 dproj1_503 = "[wing.dat](projects/Data/wing.dat)"
-proj1data_503 = "SAMBATA 6 Mai"
+proj1data_503 = "SAMBATA 13 Mai"
 
 
 tabProiecte = data.frame(Proiect = c(proj1_503), 
