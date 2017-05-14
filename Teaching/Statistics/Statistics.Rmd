@@ -46,6 +46,26 @@ Acest curs reprezintă o introducere în statistica matematică.
 
  *  _Email_ : amarioareialexandru [at] gmail [dot] com 
 
+### Rezultate sesiunea 8 - 13 mai 2017
+
+```{r, echo= FALSE}
+stat_tab_res1 = read.csv("results/Tabel_Statistica_Restanta1.csv", stringsAsFactors = FALSE)
+
+# stat_tab_res1$Total[stat_tab$Total<5] = 4
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab_res1, class = 'cell-border stripe',
+  extensions = c('FixedColumns', 'Buttons'),
+  options = list(
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print')
+  )
+)
+```
+
 ### Teme
 
 Temele vor fi postate săptămânal. Este încurajată colaborarea între studenți dar fiecare trebuie să 
@@ -130,6 +150,7 @@ kable(tabProiecte,
 
 
 Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. 
+
 
 ### Rezultate
 
