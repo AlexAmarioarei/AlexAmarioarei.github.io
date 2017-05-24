@@ -177,7 +177,7 @@ stat_tab = stat_tab[,-1]
 datatable(
   stat_tab, class = 'cell-border stripe',
   # style = 'bootstrap',
-  extensions = c('FixedColumns', 'Buttons'),
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
   options = list(
     columnDefs = list(list(className = 'dt-center', targets = 2:5)),
     dom = c('Bfrtip'),
@@ -187,11 +187,19 @@ datatable(
     initComplete = JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
-    "}")
+    "}"),
+    deferRender = TRUE,
+    scrollY = 300,
+    scroller = TRUE
   )
 )%>% formatStyle('Total', 
-                 backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
-                 fontWeight = 'bold')
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
 ```
 
 
