@@ -150,13 +150,15 @@ stat_tab = read.csv("results/Tabel_Biostatistica.csv", stringsAsFactors = FALSE)
 stat_tab = stat_tab[,-1]
 
 data2 = stat_tab %>% select(Grupa, Examen, Total)
+data2$Total[data2$Total == "Absent"] = 0
+data2$Total = as.numeric(data2$Total)
 
-data2$Total[data2$Total<5] = 4
+data2$Total[data2$Total<5 & data2$Total>0] = 4
 
 # Grupa 503
 gr503 = data2[data2$Grupa == "503",]
-gr503$Total[gr503$Total == "Absent"] = 0
-gr503$Total = as.numeric(gr503$Total)
+# gr503$Total[gr503$Total == "Absent"] = 0
+# gr503$Total = as.numeric(gr503$Total)
 ```
 
 > **Grupa 503**: dintr-un total de `r length(gr503$Total)` stundeți înscriși, `r sum(gr503$Total == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr503$Total>4)/(length(gr503$Total)-sum(gr503$Total == 0))*100, digits = 2), "%")`.
