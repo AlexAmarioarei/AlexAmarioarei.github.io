@@ -14,6 +14,14 @@ output:
     toc_depth: 3
 ---
 
+<style type="text/css">
+h1 {
+    color: #337ab7;
+    font-weight: bolder;
+
+}
+</style>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -23,6 +31,7 @@ library(knitr)
 library(DT)
 library(tidyverse)
 ```
+
 ### Informații generale
 
 Acest curs reprezintă o introducere în biostatistică.  
@@ -129,23 +138,60 @@ Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
 
 ### Rezultate
 
+```{r, echo=FALSE, include=FALSE, warning=FALSE}
+options(warn=-1)
+# Script for graphical illustration of the results 
+library(tidyverse)
+library(reshape2)
+library(stringr)
+
+stat_tab = read.csv("results/Tabel_Biostatistica.csv", stringsAsFactors = FALSE)
+
+stat_tab = stat_tab[,-1]
+
+data2 = stat_tab %>% select(Grupa, Examen, Total)
+
+data2$Total[data2$Total<5] = 4
+
+# Grupa 503
+gr503 = data2[data2$Grupa == "503",]
+gr503$Total[gr503$Total == "Absent"] = 0
+gr503$Total = as.numeric(gr503$Total)
+```
+
+> **Grupa 503**: dintr-un total de `r length(gr503$Total)` stundeți înscriși, `r sum(gr503$Total == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr503$Total>4)/(length(gr503$Total)-sum(gr503$Total == 0))*100, digits = 2), "%")`.
+
+
 ```{r, echo= FALSE}
 stat_tab = read.csv("results/Tabel_Biostatistica.csv", stringsAsFactors = FALSE)
 
 stat_tab = stat_tab[,-1]
 # stat_tab$Total[stat_tab$Total<5] = 4
 
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
 # fix some left 2 columns and right 1 column
 datatable(
   stat_tab, class = 'cell-border stripe',
+  # style = 'bootstrap',
   extensions = c('FixedColumns', 'Buttons'),
   options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
     dom = c('Bfrtip'),
     scrollX = TRUE,
     fixedColumns = list(leftColumns = 2, rightColumns = 1),
-    buttons = c('csv', 'excel', 'pdf', 'print')
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}")
   )
-)
+)%>% formatStyle('Total', 
+                 backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 fontWeight = 'bold')
 ```
 
 
