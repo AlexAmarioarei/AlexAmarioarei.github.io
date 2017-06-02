@@ -18,6 +18,7 @@ output:
 h1 {
     color: #337ab7;
     font-weight: bolder;
+    border-bottom: 2px solid #337ab7;
 
 }
 </style>
@@ -136,7 +137,45 @@ Trimiterea proiectelor se poate face pe adresa de email de mai sus. Fiecare mesa
 Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
 
 
-### Rezultate
+### Rezultate sesiunea 29 mai - 3 iunie 2017
+
+```{r, echo= FALSE}
+stat_tab_R1 = read.csv("results/Tabel_Biostatistica_R1.csv", stringsAsFactors = FALSE)
+
+stat_tab_R1 = stat_tab_R1[,-1]
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab_R1, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+### Rezultate sesiunea 14-27 mai 2017
 
 ```{r, echo=FALSE, include=FALSE, warning=FALSE}
 options(warn=-1)

@@ -14,6 +14,15 @@ output:
     toc_depth: 3
 ---
 
+<style type="text/css">
+h1 {
+    color: #337ab7;
+    font-weight: bolder;
+    border-bottom: 2px solid #337ab7;
+
+}
+</style>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -53,17 +62,43 @@ stat_tab_res1 = read.csv("results/Tabel_Statistica_Restanta1.csv", stringsAsFact
 
 # stat_tab_res1$Total[stat_tab$Total<5] = 4
 
+# # fix some left 2 columns and right 1 column
+# datatable(
+#   stat_tab_res1, class = 'cell-border stripe',
+#   extensions = c('FixedColumns', 'Buttons'),
+#   options = list(
+#     dom = c('Bfrtip'),
+#     scrollX = TRUE,
+#     fixedColumns = list(leftColumns = 2, rightColumns = 1),
+#     buttons = c('csv', 'excel', 'pdf', 'print')
+#   )
+# )
+
 # fix some left 2 columns and right 1 column
 datatable(
   stat_tab_res1, class = 'cell-border stripe',
-  extensions = c('FixedColumns', 'Buttons'),
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
   options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:3)),
     dom = c('Bfrtip'),
     scrollX = TRUE,
     fixedColumns = list(leftColumns = 2, rightColumns = 1),
-    buttons = c('csv', 'excel', 'pdf', 'print')
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
   )
-)
+)%>% formatStyle('Examen.Restanta', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Examen.Restanta', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
 ```
 
 ### Teme
@@ -201,26 +236,54 @@ gr321 = data3[data3$Grupa == "Grupa 321",]
 
 ```
 
-```{r, echo=FALSE, fig.align='center', warning=FALSE}
+```{r, echo=FALSE, fig.align='center', warning=FALSE, eval = FALSE}
 suppressMessages(ggplotly(p1))
 ```
 
 ```{r, echo= FALSE}
 stat_tab = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
 
-stat_tab$Total[stat_tab$Total<5] = 4
+stat_tab$Total[stat_tab$Total<5 & stat_tab$Total > 1] = 4
+
+stat_tab$Total[stat_tab$Examen == 0] = 'Absent'
+
+# # fix some left 2 columns and right 1 column
+# datatable(
+#   stat_tab, class = 'cell-border stripe',
+#   extensions = c('FixedColumns', 'Buttons'),
+#   options = list(
+#     dom = c('Bfrtip'),
+#     scrollX = TRUE,
+#     fixedColumns = list(leftColumns = 2, rightColumns = 1),
+#     buttons = c('csv', 'excel', 'pdf', 'print')
+#   )
+# )
 
 # fix some left 2 columns and right 1 column
 datatable(
   stat_tab, class = 'cell-border stripe',
-  extensions = c('FixedColumns', 'Buttons'),
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
   options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:11)),
     dom = c('Bfrtip'),
     scrollX = TRUE,
     fixedColumns = list(leftColumns = 2, rightColumns = 1),
-    buttons = c('csv', 'excel', 'pdf', 'print')
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
   )
-)
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
 ```
 
 > **Grupa 301**: dintr-un total de `r length(gr301$Total)` stundeți înscriși, `r sum(gr301$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr301$Total>4)/(length(gr301$Total)-sum(gr301$Examen == 0))*100, digits = 2), "%")`.
