@@ -244,6 +244,7 @@ div.tocify {
 
 
 <style type="text/css">
+
 .table {
     margin: auto;
     width: 40%;
@@ -313,21 +314,23 @@ Y_n
 \varepsilon_n
 \end{pmatrix}_{n\times 1}.
 \]</span></p>
-
 <div class="rmdinsight">
-<p>Să observăm că pentru <span class="math inline">\(k=1\)</span> modelul se reduce la regresia liniară simplă. În acest caz:</p>
-<span class="math display">\[
+<p>
+Să observăm că pentru <span class="math inline"><em>k</em> = 1</span> modelul se reduce la regresia liniară simplă. În acest caz:
+</p>
+<p>
+<br /><span class="math display"><span class="math display">\[
 \mathbf{X}=\begin{pmatrix}
-1 &amp; X_{11}\\
-\vdots &amp; \vdots\\
-1 &amp; X_{n1}
+1 &amp;amp; X_{11}\\
+\vdots &amp;amp; \vdots\\
+1 &amp;amp; X_{n1}
 \end{pmatrix}_{n\times2}\text{ și }\quad \beta=\begin{pmatrix}
 \beta_0 \\
 \beta_1 
 \end{pmatrix}_{2\times 1}
-\]</span>
+\]</span></span><br />
+</p>
 </div>
-<p></p>
 <p><em>Suma abaterilor pătratice reziduale</em> pentru modelul de regresie liniară multiplă este</p>
 <p><span class="math display">\[
 RSS(\boldsymbol\beta)=\sum_{i=1}^n(Y_i-\beta_0-\beta_1X_{i1}-\ldots-\beta_kX_{ik})^2=(\mathbf{Y}-\mathbf{X}\boldsymbol{\beta})^T(\mathbf{Y}-\mathbf{X}\boldsymbol{\beta})
@@ -743,7 +746,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
