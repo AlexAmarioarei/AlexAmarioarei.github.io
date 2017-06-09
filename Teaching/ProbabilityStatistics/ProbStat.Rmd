@@ -59,6 +59,38 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 
  *  _Email_ : amarioareialexandru [at] gmail [dot] com 
 
+### Rezultate sesiunea 6 - 11 iunie 2017
+
+```{r, echo= FALSE}
+probstat_tab_res1 = read.csv("results/Tabel_Prob_Stat_R1.csv", stringsAsFactors = FALSE)
+
+# fix some left 2 columns and right 1 column
+datatable(
+  probstat_tab_res1, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:3)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Examen.Restanta', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Examen.Restanta', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
 ### Teme
 
 Temele vor fi postate la aproximativ două săptămâni. Este încurajată colaborarea între studenți dar fiecare trebuie să 
