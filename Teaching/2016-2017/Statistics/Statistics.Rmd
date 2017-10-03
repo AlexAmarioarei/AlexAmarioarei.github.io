@@ -1,0 +1,367 @@
+---
+title: "Statistică"
+author: "Alex Amărioarei, Simona Cojocea"
+date: "2016-2017"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 3
+---
+
+<style type="text/css">
+h1 {
+    color: #337ab7;
+    font-weight: bolder;
+    border-bottom: 2px solid #337ab7;
+
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, include=FALSE}
+library(knitr)
+library(DT)
+library(tidyverse)
+```
+### Informații generale
+
+Acest curs reprezintă o introducere în statistica matematică.  
+
+### Informații de contact 
+
+#### Curs 
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : amarioareialexandru [at] gmail [dot] com
+
+ *  _Orar_ : Vineri 14:00 - 16:00
+
+ *  _Sala_ : Sala 219 (Etaj 2) - Grupele 301, 311, 321
+
+
+#### Seminar/Laborator
+
+ *  _Instructori_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/) și Simona Cojocea
+
+ *  _Email_ : amarioareialexandru [at] gmail [dot] com 
+ 
+### Rezultate sesiunea 2 - 9 iunie 2017
+
+```{r, echo= FALSE}
+stat_tab_res2 = read.csv("results/Tabel_Statistica_Restanta2.csv", stringsAsFactors = FALSE)
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab_res2, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:3)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Examen.Restanta', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Examen.Restanta', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+
+### Rezultate sesiunea 8 - 13 mai 2017
+
+```{r, echo= FALSE}
+stat_tab_res1 = read.csv("results/Tabel_Statistica_Restanta1.csv", stringsAsFactors = FALSE)
+
+# stat_tab_res1$Total[stat_tab$Total<5] = 4
+
+# # fix some left 2 columns and right 1 column
+# datatable(
+#   stat_tab_res1, class = 'cell-border stripe',
+#   extensions = c('FixedColumns', 'Buttons'),
+#   options = list(
+#     dom = c('Bfrtip'),
+#     scrollX = TRUE,
+#     fixedColumns = list(leftColumns = 2, rightColumns = 1),
+#     buttons = c('csv', 'excel', 'pdf', 'print')
+#   )
+# )
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab_res1, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:3)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Examen.Restanta', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Examen.Restanta', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+### Teme
+
+Temele vor fi postate săptămânal. Este încurajată colaborarea între studenți dar fiecare trebuie să 
+își scrie propriile soluții. Copierea temei este __interzisă__.
+
+```{r echo = FALSE}
+t1 = "[Tema 1](homework/Tema_1.pdf)"
+t1sol = "[Solutie Tema 1](homework/Tema_1_Sol.pdf)"
+t1data = "Vineri 21 Octombrie"
+
+t2 = "[Tema 2](homework/Tema_2.pdf)"
+t2sol = "[Solutie Tema 2](homework/Tema_2_sol.pdf)"
+t2data = "Vineri 28 Octombrie"
+
+t3 = "[Tema 3](homework/Tema_3.pdf)"
+t3sol = "[Solutie Tema 3](homework/Tema_3_Sol.pdf)"
+t3data = "Vineri 04 Noiembrie"
+
+t4 = "**Fără temă**"
+t4sol = "--"
+t4data = "Vineri 11 Noiembrie"
+
+t5 = "[Tema 4](homework/Tema_4.pdf)"
+t5sol = "[Solutie Tema 4](homework/Tema_4_Sol.pdf)"
+t5data = "Sambata 26 Noiembrie"
+
+t6 = "[Tema 5](homework/Tema_5.pdf)"
+t6sol = "[Solutie Tema 5](homework/Tema_5_Sol.pdf)"
+t6data = "Sambata 10 Decembrie"
+
+t7 = "--"
+t7sol = "--"
+t7data = "**Vacanta de iarna**"
+
+t8 = "[Tema 6](homework/Tema_6.pdf)"
+t8sol = ""
+t8data = "Sambata 4 Februarie"
+
+t9 = "[**Tema Speciala**](homework/Tema_Speciala.pdf)"
+t9sol = ""
+t9data = "Sambata 4 Februarie"
+
+tab = data.frame(Tema = c(t1,t2,t3,t4,t5,t6,t7,t8,t9), 
+                 Data = c(t1data,t2data,t3data, t4data, t5data,t6data, t7data, t8data, t9data), 
+                 Solution = c(t1sol,t2sol,t3sol, t4sol, t5sol,t6sol, t7sol, t8sol, t9sol))
+
+kable(tab, 
+      col.names = c("Tema", "Data de predare", "Solutii"),
+      align = "ccc")
+```
+  
+Trimiterea temelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare. 
+
+> **TABELE STATISTICE** Descărcați de [aici](tables/tabel.pdf).
+
+> **ATENȚIE !!!** Tema specială este destinată în special studenților care nu au predat nicio temă până în acest moment și poate valora până la **2.5 puncte**. Cu toate acestea îi încurajez și pe ceilalți studenți să o facă, aceștia din urmă pot cumula cu temele trimise anterior până la un maxim de **3.5 puncte** (proporțional). Astfel un student care a făcut temele 1-6 corect și mai face încă 7 exerciții (exceptându-le pe cele din Tema 6) din tema specială poate obține 3.5 puncte.
+
+<!-- **Observație** Temele vor fi trimise pe adresa de email a instructorului până cel târziu la data menționată (ora 24) de către șefii de grupă. Aceștia vor aduna în prealabil temele de la colegi și vor crea o arhiva cu numele *grupa_x_tema_y.zip*. În interiorul arhivei ar trebuie sa se găsească un număr de foldere egal cu numărul de studenți care trimit tema, fiecare folder având numele studentului.  -->
+
+### Proiecte de laborator
+
+Mai jos găsiți proiectele cursului de *Statistică*. Proiectele sunt individuale iar copierea proiectelor este __strict interzisă__.
+
+```{r echo = FALSE}
+gproj1_301 = "301"
+proj1_301 = "[Proiect 1](projects/Proiect1_301.pdf)"
+proj1data_301 = "VINERI 30 Decembrie"
+
+gproj1_311_321 = "311, 321"
+proj1_311_321 = "[Proiect 1](projects/Proiect1_311_321.pdf)"
+proj1data_311_321 = "VINERI 30 Decembrie"
+
+
+tabProiecte = data.frame(Tema = c(gproj1_301, gproj1_311_321), 
+                         Data = c(proj1_301, proj1_311_321), 
+                         Solution = c(proj1data_301, proj1data_311_321))
+
+kable(tabProiecte, 
+      col.names = c("Grupa", "Proiect Nr.", "Data de predare"),
+      align = "ccc")
+```
+
+
+Trimiterea proiectelor se poate face pe adresa de **Dropbox**. Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. 
+
+
+### Rezultate
+
+
+```{r, echo=FALSE, include=FALSE, warning=FALSE}
+options(warn=-1)
+# Script for graphical illustration of the results 
+library(tidyverse)
+library(reshape2)
+library(plotly)
+library(stringr)
+
+data = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
+
+data2 = data %>% select(Grupa, Total)
+data2$Grupa = paste("Grupa", data2$Grupa)
+
+data2$Total[data2$Total<5] = 4
+
+p1 = ggplot(data2[!data2$Grupa %in% c("Grupa ERASMUS", "Grupa "),], aes(Total, fill = Grupa))+
+  geom_histogram(color = "#888888")+
+  scale_x_continuous(breaks = 1:10)+
+  scale_color_brewer(palette = "Set2")+
+  facet_grid(Grupa~.)+
+  coord_flip()+
+  theme_minimal()+
+  labs(x = "", y = "", colour = "")+
+  theme(legend.position = "none",
+        strip.text = element_text(face = "bold", size = "12"))
+
+data2b = data %>% select(Grupa, Examen, Total)
+data2b$Grupa = paste("Grupa", data2b$Grupa)
+
+data3 = data2b
+
+data3$Total[data3$Total<5] = 4
+
+data3 = data3[!data3$Grupa%in%c("Grupa ERASMUS", "Grupa "), ]
+
+# Grupa 301
+gr301 = data3[data3$Grupa == "Grupa 301",]
+
+# Grupa 311
+gr311 = data3[data3$Grupa == "Grupa 311",]
+
+# Grupa 321
+gr321 = data3[data3$Grupa == "Grupa 321",]
+
+```
+
+```{r, echo=FALSE, fig.align='center', warning=FALSE, eval = FALSE}
+suppressMessages(ggplotly(p1))
+```
+
+```{r, echo= FALSE}
+stat_tab = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
+
+stat_tab$Total[stat_tab$Total<5 & stat_tab$Total > 1] = 4
+
+stat_tab$Total[stat_tab$Examen == 0] = 'Absent'
+
+# # fix some left 2 columns and right 1 column
+# datatable(
+#   stat_tab, class = 'cell-border stripe',
+#   extensions = c('FixedColumns', 'Buttons'),
+#   options = list(
+#     dom = c('Bfrtip'),
+#     scrollX = TRUE,
+#     fixedColumns = list(leftColumns = 2, rightColumns = 1),
+#     buttons = c('csv', 'excel', 'pdf', 'print')
+#   )
+# )
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:11)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+> **Grupa 301**: dintr-un total de `r length(gr301$Total)` stundeți înscriși, `r sum(gr301$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr301$Total>4)/(length(gr301$Total)-sum(gr301$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 311**: dintr-un total de `r length(gr311$Total)` stundeți înscriși, `r sum(gr311$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr311$Total>4)/(length(gr311$Total)-sum(gr311$Examen == 0))*100, digits = 2), "%")`.
+
+> **Grupa 321**: dintr-un total de `r length(gr321$Total)` stundeți înscriși, `r sum(gr321$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr321$Total>4)/(length(gr321$Total)-sum(gr321$Examen == 0))*100, digits = 2), "%")`.
+
+### Orar
+
+<div>
+<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=400&amp;wkst=2&amp;hl=ro&amp;bgcolor=%23FFFFFF&amp;src=bhbdeogr1ojv4msuvoij6ubigk%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=Europe%2FBucharest" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no" allowfullscreen>&nbsp;</iframe>
+</div>
+
+
+### Notarea
+
+Notarea se va face după cum urmează: teme (25%), mini proiecte (25%) și examen final (50%).
+
+### Bibliografie
+
+  1. Monica Dumitrescu, Anton Batatorescu - *Applied statistics using the R system*, Ed. Univ. Buc., 2006
+  2. Virgil Craiu - *Statistică Matematică*, Ed. Univ. Buc., 1997
+  3. Georgiana Popovici - *Statistical Labs using R-system*, Ed. Univ. Buc.
+  4. George Casella, Roger Berger - *Statistical Inference*, Duxbury
+  5. George Roussas - *A Course in Mathematical Statistics*, Academic Press, 1997
+  6. Geoffrey Grimmett, David Stirzaker - *Probability and Random Processes*
+  7. John Rice - *Mathematical Statistics and Data Analysis*, Duxbury
+  
+
+### Link-uri utile
+
+#### R
+  1. Programul R - [CRAN](https://cran.r-project.org/)
+  2. Interfața grafică [RStudio](https://www.rstudio.com/)
+  3. Documentație R (în engleză) - [R-Intro](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+  4. Documentație R (în română) - [R pentru începători ](ftp://cran.r-project.org/pub/R/doc/contrib/Paradis-rdebuts_RO.pdf)
+  5. Documentație R (în română) - [Inițiere în R pentru persoane cu pregătire matematică ](http://www.edumanager.ro/community/documente/initiere_in_r.pdf)
+  
+#### Latex
+  1. Introducere în Latex (în romană) - [Manual Wikibooks](https://ro.wikibooks.org/wiki/LaTeX_(carte))
+  2. Introducere în Latex (în engleză) - [Wikibooks Latex Manual](https://en.wikibooks.org/wiki/LaTeX) în special secțiunile de [matematică](https://en.wikibooks.org/wiki/LaTeX/Mathematics), [liste](https://en.wikibooks.org/wiki/LaTeX/List_Structures), [grafice](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics) și [figuri](https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions)
+  3. Tutoriale Latex (în engleză) - [video](https://www.youtube.com/playlist?list=PLDD406480D35CE390)
+  4. Editoarele: [Texmaker](http://www.xm1math.net/texmaker/download.html) și [TeXnicCenter](http://www.texniccenter.org/) 
+  5. Mediul latex [MiKTeX](https://miktex.org/)
+
+#### Rmarkdown
+  1. Pachetul [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile

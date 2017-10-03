@@ -1,0 +1,673 @@
+---
+title: "Curs Biostatistica 2017 - Laborator 3 & 4"
+output:
+  html_document:
+    code_folding: show
+    css: css/rmarkdown.css
+    includes:
+      after_body: include/include_footer.html
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
+---
+<style type="text/css">
+.table {
+    margin: auto;
+    width: 40%;
+
+}
+
+.tocify{
+  border: 0px solid;
+}
+
+.list-group-item.active{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+
+.list-group-item.active:hover{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+</style>
+
+# Compararea proporțiilor, tabele de contingență $2\times2$
+***
+
+
+## Aproximarea normală
+***
+
+> Un studiu clinic a investigat efectele metodelor contraceptive orale (OC) asupra bolilor de inimă la femeile cu vârste între 40 și 44 de ani. Cercetătorii au găsit că printre 5000 de femei care utilizau metode contraceptive orale la momentul studiului (cazuri), 13 dintre acestea au dezvoltat un infarct miocardic (MI) (pe o perioadă de 3 ani) pe când printre 10000 de femei care nu au folosit niciodată OC (grupul de control) doar 7 au dezvoltat MI (pe aceeași perioadă). Vrem să vedem dacă există vreo asociere între consumul de anticoncepționale pe cale orală și incidența infarctului miocardic (pe această perioadă). 
+
+Dacă notăm cu $p_1=\mathbb{P}(MI\,|\,OC)$ și $p_2=\mathbb{P}(MI\,|\,non-OC)$ atunci vrem să testăm:
+
+$$
+  \begin{array}{ll}
+    H_0:\,\,p_1=p_2\\
+    H_1:\,\,p_1\neq p_2
+  \end{array}
+$$
+
+```{r}
+n1 = 5000 # nr total cazuri OC
+n11 = 13 # nr cazuri cu MI
+
+n2 = 10000 # nr total control non-OC
+n21 = 7 # nr control cu MI
+
+p1 = n11/n1
+p2 = n21/n2
+
+p = (n11+n21)/(n1+n2) # proportia comuna - pooled p
+
+# Verificam daca putem aplica aproximarea normala 
+n1*p*(1-p)>5
+n2*p*(1-p)>5
+
+# Calculam statistica de test cu corectia de continuitate
+z = (abs(p1-p2)-0.5*(1/n1+1/n2))/sqrt(p*(1-p)*(1/n1+1/n2))
+z
+
+# Calcul de p-valoare: test bilateral
+pval = min(2*(1-pnorm(z)),1)
+pval
+
+# Intervalul de incredere
+
+cat("IC pentru p1-p2 la pragul de semnificatie 95% este \n",
+    "IC = [", p1-p2 - qnorm(0.975) *sqrt(p*(1-p)*(1/n1+1/n2)), ",", 
+    p1-p2 + qnorm(0.9755) *sqrt(p*(1-p)*(1/n1+1/n2)),"]")
+
+# Intervalul de incredere Agresti & Caffo 2000
+
+p1b = (n11+1)/(n1+2)
+p2b = (n21+1)/(n2+2)
+
+cat("IC (Agresti-Caffo) pentru p1-p2 la pragul de semnificatie 95% este \n",
+    "IC = [", p1b-p2b - qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)), ",",
+    p1b-p2b + qnorm(0.975) *sqrt(p1b*(1-p1b)/(n1+2)+p2b*(1-p2b)/(n2+2)),"]")
+
+```
+
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
+a = 0.05
+
+z1 = qnorm(a/2)
+z2 = -z1
+
+par(bty="n")
+x <- seq(-4,4,length=501)
+plot(x,dnorm(x),type="l",main = expression(paste("Normala ", N(0,1))),
+     xaxt="n",yaxt="n",xlab="",ylab="",lwd=2)
+
+abline(h=0)
+x <- c(z1,-1,1,z2)
+segments(x,0,x,-0.01,xpd=TRUE)
+
+#desenezi regiunea pe care vrei sa o colorezi
+cord.x1=c(-4,seq(-4,z1,0.01),z1)
+cord.y1=c(0,dnorm(seq(-4,z1,0.01)),0)
+polygon(cord.x1,cord.y1,col="lightgray")
+
+text(z1,-0.04,expression(-z[1-frac(alpha,2)]),xpd=TRUE)
+
+
+#desenezi regiunea pe care vrei sa o colorezi
+cord.x2=c(z2,seq(z2,4,0.01),4)
+cord.y2=c(0,dnorm(seq(z2,4,0.01)),0)
+polygon(cord.x2,cord.y2,col="lightgray")
+
+text(z2,-0.04,expression(z[1-frac(alpha,2)]),xpd=TRUE)
+
+# liniile verticale care delimiteaza regiunile
+abline(v=z1,untf = FALSE, lty=3)
+abline(v=z2,untf = FALSE, lty=3)
+
+#textul corespunzator lor 
+text(-3, 0.3, "Respinge H0")
+text(3, 0.3, "Respinge H0")
+
+#adauga valoarea observata
+
+segments(z,0,z,-0.01,xpd=TRUE, col="brown3")
+text(z,-0.04,expression(z),xpd=TRUE, cex = 1.3, col = "brown3")
+
+arrows(z+0.3,0.15, x1=z, y1=0.01, lty = 2, col = "brown3")
+text(3.3, 0.17, "valoarea observata", col = "brown3")
+
+```
+
+Concluzionăm că folosirea de anticoncepționale pe cale orală este semnificativ asociat cu incidența crescută de cazuri de MI pe perioada de 3 ani. 
+Puteți crea o funcție care să automatizeze procesul ?
+
+## Pearson $\chi^2$
+***
+
+Considerăm aceeași problemă de mai sus dar o scriem sub formă de tabel de contingență $2\times2$ (tabelul observat):
+
+```{r, echo=FALSE}
+mat = matrix(c(13,4987,5000, 7, 9993, 10000, 20, 14980, 15000),
+             ncol = 3, byrow = T, 
+             dimnames = list(c("OC", "non-OC", "Total"),
+                             c("MI", "non-MI", "Total")))
+
+library(knitr)
+kable(mat, align = "ccc")
+```
+
+Calculul tabelului de pe care ne așteptăm să-l observăm ($E_{ij}=\frac{n_{i\cdot}n_{\cdot j}}{n}$):
+
+```{r}
+# Observat
+n11 = 13
+n1o = 5000
+n12 = n1o-n11
+
+n21 = 7
+n2o = 10000
+n22 = n2o-n21
+
+no1 = n11+n21
+no2 = n12+n22
+
+n = n1o+n2o
+
+#Asteptat
+e11 = n1o*no1/n
+e12 = n1o*no2/n
+e21 = n2o*no1/n
+e22 = n2o*no2/n
+
+Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+
+Mexp = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+Mexp
+```
+
+```{r, echo=FALSE}
+kable(Mexp, align = "cc")
+```
+
+Calculul statisticii de test cu corecția lui Yates:
+
+$$
+  X^2 = \sum_{i=1}^{2}\sum_{j=1}^{2}\frac{\left(|O_{ij}-E_{ij}|-0.5\right)^2}{E_{ij}}\sim_{H_0}\chi_1^2
+$$
+
+```{r}
+X2 = (abs(n11-e11)-0.5)^2/e11 + (abs(n12-e12)-0.5)^2/e12 + 
+  (abs(n21-e21)-0.5)^2/e21 + (abs(n22-e22)-0.5)^2/e22
+X2
+
+pval = 1-pchisq(X2,1) #df = 1
+pval
+```
+
+Sau folosind testul lui Pearson cu corecția lui Yates `chisq.test` avem:
+
+```{r}
+chisq.test(Mobs)
+```
+
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
+a = 0.05
+df = 1
+
+z1 = qchisq(1-a, df)
+
+par(bty="n")
+x <- seq(0,10,length=501)
+plot(x,dchisq(x, df),type="l",
+     main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate")),
+     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
+
+abline(h=-0.05)
+x <- 0:10 
+segments(x,-0.05,x,-0.06,xpd=TRUE)
+
+#desenezi regiunea pe care vrei sa o colorezi
+cord.x=c(z1,seq(z1,10,0.01),10)
+cord.y=c(-0.05,dchisq(seq(z1,10,0.01), df),-0.05)
+polygon(cord.x,cord.y,col="lightgray")
+
+text(z1,-0.2,expression(z[1-alpha]),xpd=TRUE)
+
+# liniile verticale care delimiteaza regiunile
+abline(v=z1,untf = FALSE, lty=3)
+
+#textul corespunzator lor 
+text(z1+2, 2, "Respinge H0")
+
+#adauga valoarea observata
+z = X2
+segments(z,-0.05,z,-0.08,xpd=TRUE, col="brown3")
+text(z,-0.2,expression(z),xpd=TRUE, cex = 1.3, col = "brown3")
+
+arrows(z-0.3,1.15, x1=z, y1=0.01, lty = 2, col = "brown3")
+text(z-0.35, 1.25, "valoarea observata", col = "brown3")
+
+```
+
+Același rezultat se obține și dacă folosim testul `prop.test`, acesta fiind un caz particular al testului hi-pătrat: 
+
+```{r}
+prop.test(Mobs)
+```
+
+## Raportul de verosimilitate maximă
+***
+
+În contextul exemplului de mai sus vrem să vedem testul bazat pe raportul de verosimilitate. Considerând modelul multinomial $(n_{11},n_{12},n_{21},n_{22})\sim \mathcal{M}(n;p_{11},p_{12},p_{21},p_{22})$, obținem raportul de verosimilitate
+
+$$
+  \Lambda(x)=\frac{\sup_{\theta\in\Theta_0}L(\theta|x)}{\sup_{\theta\in\Theta}L(\theta|x)}=\prod_{i=1}^{2}\prod_{j=1}^{2}\left(\frac{n_{i\cdot}\times n_{\cdot j}}{n\times n_{ij}}\right)^{n_{ij}}
+$$
+și din teorema lui Wilks (cazul multidimensional) avem $-2\log\Lambda\to\chi^2(d-d_0)$ unde $d=\dim(\Theta)$ și $d_0=\dim(\Theta_0)$. În cazul nostru
+
+$$
+  \begin{array}{ll}
+    \Theta = \left\{(p_{11},p_{12},p_{21},p_{22})\,|\,p_{ij}\in(0,1),\,\sum_{i=1}^{2}\sum_{j=1}^{2}p_{ij}=1\right\}\\
+    \Theta_0 = \left\{(p_{1}q_1,p_{1}q_2,p_{2}q_1,p_{2}q_2)\,|\,p_{i},q_j\in(0,1),\,\sum_{i=1}^{2}p_{i}=1,\,\sum_{j=1}^{2}q_j=1\right\}
+  \end{array}
+$$
+unde $p_i$ și $q_j$ sunt repartițiile marginale. Obținem că $\dim(\Theta)=4-1$ iar $\dim(\Theta_0)=4-2$, deci $-2\log\Lambda\to\chi^2(1)$.
+
+```{r}
+# Observat
+n11 = 13
+n1o = 5000
+n12 = n1o-n11
+
+n21 = 7
+n2o = 10000
+n22 = n2o-n21
+
+no1 = n11+n21
+no2 = n12+n22
+
+LRT = n11*log((n1o*no1)/(n*n11)) + n12*log((n1o*no2)/(n*n12)) + 
+  n21*log((n2o*no1)/(n*n21)) + n22*log((n2o*no2)/(n*n22))
+LRT = -2*LRT
+LRT
+
+pval = 1-pchisq(LRT,1) #df = 1
+pval
+```
+
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
+a = 0.05
+df = 1
+
+z1 = qchisq(1-a, df)
+
+par(bty="n")
+x <- seq(0,10,length=501)
+plot(x,dchisq(x, df),type="l",
+     main = expression(paste("Repartitia ", chi^2, " cu un grad de libertate (LRT)")),
+     xaxt="n",yaxt="n",xlab="",ylab="",lwd=1.5)
+
+abline(h=-0.05)
+x <- 0:10 
+segments(x,-0.05,x,-0.06,xpd=TRUE)
+
+#desenezi regiunea pe care vrei sa o colorezi
+cord.x=c(z1,seq(z1,10,0.01),10)
+cord.y=c(-0.05,dchisq(seq(z1,10,0.01), df),-0.05)
+polygon(cord.x,cord.y,col="lightgray")
+
+text(z1,-0.2,expression(z[1-alpha]),xpd=TRUE)
+
+# liniile verticale care delimiteaza regiunile
+abline(v=z1,untf = FALSE, lty=3)
+
+#textul corespunzator lor 
+text(z1+2, 2, "Respinge H0")
+
+#adauga valoarea observata
+z = LRT
+segments(z,-0.05,z,-0.08,xpd=TRUE, col="brown3")
+text(z,-0.2,expression(z),xpd=TRUE, cex = 1.3, col = "brown3")
+
+arrows(z-0.3,1.15, x1=z, y1=0.01, lty = 2, col = "brown3")
+text(z-0.35, 1.25, "valoarea observata", col = "brown3")
+
+```
+
+Să creăm o funcție care automatizează procesul:
+
+```{r}
+LRT1 = function(dat){
+  # dat este sub forma de matrice 
+  rs = rowSums(dat) # apply(dat, 1, sum)
+  cs = colSums(dat) # apply(dat, 2, sum)
+  
+  n = sum(dat)
+  
+  expected <- outer(rs,cs,"*")/n
+  
+  lrt <- -2*sum(dat * log(expected/dat)) 
+  
+  dm = dim(dat) # dimensiunea tabloului pentru a calcula gradele de libertate
+  pval = 1-pchisq(lrt,(dm[1]-1)*(dm[2]-1))
+  
+  cat("Statistica LRT este ", lrt, "\n")
+  cat("P-valoarea testului bazat pe raportul de verosimilitate este ", pval)
+  
+  return(list(statistic = lrt, pvalue = pval))
+}
+
+Mobs = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+              dimnames = list(c("OC","non-OC"), c("MI", "non-MI")))
+
+LRT1(Mobs) 
+```
+
+
+## Testul exact al lui Fisher 
+***
+
+> Să presupunem că vrem să investigăm legătura dintre regimul bogat în sare și decesul datorat unei boli cardiovasculare (CVD). Să presupunem că suntem în contextul unui studiu retrospectiv efectuat pe un grup de bărbați cu vârste cuprinse între 50 și 54 de ani dintr-o anumită regiune geografică care au decedat pe parcursul unui luni. S-a încercat introducerea în studiu a unui grup cât mai omogen (s-a încercat includerea în studiu a unui număr egal de persoane care au decedat din cauză de CVD și care au decedat din alte cauze). S-a obținut următorul tabel:
+
+```{r, echo=FALSE}
+matF = matrix(c(2,23,25, 5, 30, 35, 7, 53, 60),ncol = 3, byrow = T, 
+             dimnames = list(c("non-CVD", "CVD", "Total"),
+                             c("Ridicat Sare", "Scazut Sare", "Total")))
+
+kable(matF, align = "ccc")
+```
+
+Tabelul pe care ne așteptam să-l obținem ($H_0$) este:
+
+```{r}
+# Observat
+n11 = 2
+n1o = 25
+n12 = n1o-n11
+
+n21 = 5
+n2o = 35
+n22 = n2o-n21
+
+no1 = n11+n21
+no2 = n12+n22
+
+n = n1o+n2o
+
+#Asteptat
+e11 = n1o*no1/n
+e12 = n1o*no2/n
+e21 = n2o*no1/n
+e22 = n2o*no2/n
+
+MobsF = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+               dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+
+MexpF = matrix(c(e11,e12,e21,e22),ncol = 2, byrow = T, 
+               dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+MexpF
+```
+
+```{r, echo=FALSE}
+kable(MexpF, align = "cc")
+```
+
+Observăm că avem două celule în tabelul așteptat care conțin mai puțin de 5 observații prin urmare nu putem folosi metodele de mai sus (aproximarea normală, testul lui Pearson sau testul bazat pe raportul de verosimilitate). Dacă am încerca am obține:
+
+```{r}
+# Testul lui Pearson (Hi patrat)
+
+chisq.test(MobsF)
+
+# Testul bazat pe raportul de verosimilitate
+
+LRT1(MobsF)
+```
+
+Enumerăm tabelele și probabilitățile lor de apariție:
+
+```{r}
+# Fixez marginalele
+
+n1o = 25
+n2o = 35
+  
+no1 = 7
+no2 = 53
+
+for (i in 0:7){
+  cat("-------------------------------------\n")
+  cat("Tabelul ", i+1, " :\n")
+  
+  # calculez valorile din tabel
+  n11 = i
+  n12 = n1o - n11
+  n21 = no1 - n11
+  n22 = no2 - n12
+  
+  MobsF1 = matrix(c(n11,n12,n21,n22),ncol = 2, byrow = T, 
+                  dimnames = list(c("non-CVD", "CVD"), c("Ridicat Sare", "Scazut Sare")))
+  
+  print(MobsF1)
+  
+  cat("Probabilitatea de a obtine tabelul ", i+1, " este ", 
+      dhyper(i, no1, no2, n1o), "\n")
+  cat("-------------------------------------\n")
+}
+```
+
+Aplicăm testul exact al lui Fisher `fisher.test`:
+
+```{r}
+fisher.test(MobsF)
+```
+
+P-valoarea în `R` este calculată după formula:
+
+$$
+  p_{value} = \sum_{\{i:\mathbb{P}(i)\leq \mathbb{P}(obs)\}}\mathbb{P}(i)
+$$
+care în cazul nostru devine 
+
+```{r}
+n1o = 25
+n2o = 35
+  
+no1 = 7
+no2 = 53
+
+n11 = 2
+  
+ps = dhyper(0:no1, no1, no2, n1o)
+pobs = dhyper(n11, no1, no2, n1o)
+
+pval = sum(ps[ps<=pobs])
+pval
+```
+
+## Date pereche - Testul lui McNemar
+***
+
+> Ne propunem să comparăm două regimuri de chimioterapie pentru pacienții cu cancer la sân care au efectuat operația de mastectomie. Cele două grupuri de tratament investigate ar trebui să fie cât mai comparabile din punct de vedere al celorlalți factori. Presupunem că un studiu de potrivire (matched study) a fost pregătit așa încât din fiecare pereche (potrivită din punct de vedere al vârstei și a condițiilor clinice) s-a selectat aleator un membru căruia i-a fost administrat tratamentul A iar celuilalt membru tratamentul B. Pacienții au fost urmăriți pe o perioadă de 5 ani, iar variabila de interes a fost supraviețuirea în această perioadă. S-au obșinut următoarele date:
+
+```{r, echo=FALSE}
+matMN = matrix(c(526,95,621, 515, 106, 621, 1041, 201, 1242),
+               ncol = 3, byrow = T, 
+             dimnames = list(c("A", "B", "Total"),
+                             c("Supravietuit", "Decedat", "Total")))
+
+kable(matMN, align = "ccc")
+```
+
+Observăm că nu putem folosi testul lui Pearson (cu corecția lui Yates) deoarece datele nu sunt *independente*. Dacă am folosi am obține:
+
+```{r}
+M1csq = matrix(c(526,95,515,106),ncol = 2, byrow = T)
+chisq.test(M1csq)
+```
+
+Construim următorul tabel, în care unitatea de analiză nu mai este *pacientul* ci *perechea* iar perechile sunt clasificate după cum membrii acelei perechi au supraviețuit sau nu o perioadă post-operatorie de 5 ani (liniile tabelului sunt rezultatele pacientului care a urmat tratamentul A iar coloanele sunt rezultatele pacientului care a urmat tratamentul B):
+
+```{r, echo=FALSE}
+matMN2 = matrix(c(510,16,526, 5, 90, 95, 515, 106, 621),
+                ncol = 3, byrow = T, 
+             dimnames = list(c("Supravietuit", "Decedat", "Total"),
+                             c("Supravietuit", "Decedat", "Total")))
+
+kable(matMN2, align = "ccc")
+```
+
+Observăm că 600 (510+90) de perechi au avut același rezultat (perechi concordante) și doar 21 de perechi au avut rezultate diferite (perechi neconcordante).
+
+Aplicăm testul lui McNemar `mcnemar.test` :
+
+```{r}
+M1 = matrix(c(510,16,5,90),ncol = 2, byrow = T, 
+           dimnames = list(c("Supravietuit", "Decedat"), 
+                           c("Supravietuit", "Decedat")))
+mcnemar.test(M1)
+```
+
+# Tabele de contingență $r\times c$
+***
+
+> Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație $\alpha = 0.5$ dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state. 
+
+
+```{r, echo=FALSE}
+matAA = rbind(c(122, 117, 19, 244),
+           c(1781, 1351, 288,3301),
+           c(353, 269, 60, 713))
+
+matAA2 = rbind(c(122, 117, 19, 244, 502),
+           c(1781, 1351, 288,3301, 6721),
+           c(353, 269, 60, 713, 1395),
+           c(2256, 1737, 367, 4258, 8618))
+
+dimnames(matAA2) = list(c("Florida", "Iowa", "Missouri", "Total"),
+                        c("A", "B", "AB", "O", "Total"))
+
+kable(matAA2, align = "cccc")
+```
+
+## Testul $\chi^2$ al lui Pearson 
+***
+
+Tabelul pe care ne așteptăm să-l observat atunci când ipoteza nulă este adevărată:
+
+```{r}
+  matAA_observed = rbind(c(122, 117, 19, 244),
+           c(1781, 1351, 288, 3301),
+           c(353, 269, 60, 713))
+
+  rs = rowSums(matAA_observed) 
+  cs = colSums(matAA_observed) 
+  
+  n = sum(matAA_observed)
+  
+  matAA_expected <- outer(rs,cs,"*")/n
+```
+
+```{r, echo=FALSE}
+matAA_expected2 = matrix(rep(0, 20), ncol = 5)
+
+matAA_expected2[1:3,1:4] = matAA_expected
+matAA_expected2[4,1:4] = colSums(matAA_expected)
+matAA_expected2[1:3,5] = rowSums(matAA_expected) 
+matAA_expected2[4,5] = sum(matAA_expected)
+
+dimnames(matAA_expected2) = list(c("Florida", "Iowa", "Missouri", "Total"),
+                                c("A", "B", "AB", "O", "Total"))
+
+kable(matAA_expected2, align = "cccc")
+```
+
+Aplicând funcția `chisq.test` obținem:
+
+```{r}
+chisq.test(matAA_observed)
+```
+
+## Testul bazat pe raportul de verosimilitate
+***
+
+Aplicând funcția `LRT1` construită anterior obținem p-valoarea testului bazat pe raportul de verosimilitate: 
+
+```{r}
+LRT1(matAA_observed)
+```
+
+## Testul aproximat al lui Fisher
+***
+
+Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip $r\times c$ (pentru o generalizare a testului prezentat la curs puteți consulta [http://mathworld.wolfram.com/FishersExactTest.html](http://mathworld.wolfram.com/FishersExactTest.html)) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo. 
+
+Generalizând raționamentul din cazul $2 \times 2$ obținem că probabilitatea (condiționată) de a observa un tabel dat fiind marginalele (pe rânduri și pe coloane) este dată de:
+
+$$
+  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{j=1}^{c}n_{ij}!}
+$$
+
+```{r}
+fisher <- function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
+  bot0 <- sum(lgamma(tab+1))# lgamma - logaritm natural din gamma - logaritm din factorial
+
+  bot <- 1:n.sim
+  a <- list(rep(row(tab),tab), rep(col(tab),tab))
+  for(i in 1:n.sim) {
+    a[[1]] <- sample(a[[1]])
+    bot[i] <- sum(lgamma(table(a)+1))
+    if(prnt) { if(i == round(i/10)*10) cat(i,"\n") }
+  }
+  if(return.all) return(list(bot0, bot, mean(bot0 <= bot)))
+  cat("P-valoarea aproximata cu Monte Carlo este ", mean(bot0 <= bot))
+}
+
+set.seed(5)
+fisher(matAA_observed)
+```
+
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center'}
+set.seed(5)
+a = fisher(matAA_observed, return.all = TRUE)
+
+# x = seq(0,20, 0.01)
+
+hist(a[[2]], 
+     breaks = 25, 
+     freq = FALSE, 
+     main = "",
+     ylab = "",
+     xlab = expression(sum(log( n[ij] * "!" ))),
+     col = "lightgray")
+abline(v = a[[1]], col = "brown3", lwd = 2)
+text(a[[1]]+2.3, 0.25, "Valoare observata", col = "brown3")
+text(a[[1]]+3.5, 0.2, paste("P-valoarea =", a[[3]]), col = "darkgray")
+# lines(x+min(a[[2]]), dchisq(x, 6))
+```
+
+Același rezultat îl obținem și dacă folosim funcția `fisher.test` (care este mai rapidă):
+
+```{r}
+fisher.test(matAA_observed, simulate.p.value = TRUE, B = 1000)
+```
+
+
+
+

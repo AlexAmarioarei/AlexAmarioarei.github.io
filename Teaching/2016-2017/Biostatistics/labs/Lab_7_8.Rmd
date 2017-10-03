@@ -1,0 +1,672 @@
+---
+title: "Curs Biostatistica 2017 - Laborator 7 & 8"
+subtitle: Regresie
+output:
+  pdf_document:
+    includes:
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+  html_document:
+    code_folding: show
+    css: css/rmarkdown.css
+    includes:
+      after_body: include/include_footer.html
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
+---
+<style type="text/css">
+.table {
+    margin: auto;
+    width: 40%;
+
+}
+
+.tocify{
+  border: 0px solid;
+}
+
+.list-group-item.active{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+
+.list-group-item.active:hover{
+  background-color: rgba(64, 64, 64, 0.72);
+}
+</style>
+
+# Regresie liniară simplă
+***
+***
+
+## Introducere 
+
+```{r, echo=FALSE, warning=FALSE}
+library(ellipse)
+source("functions/visualizeFitLm.R")
+```
+
+
+Regresia liniară simplă (sau *modelul liniar simplu*) este un instrument statistic utilizat pentru a descrie relația dintre două variabile aleatoare, $X$ (variabilă *cauză*, *predictor* sau *covariabilă*) și $Y$ (variabilă *răspuns* sau *efect*) și este definit prin 
+
+$$
+\mathbb{E}[Y|X=x]=\beta_0+\beta_1x 
+$$
+
+sau altfel spus 
+
+$$
+Y = \beta_0 + \beta_1 X + \varepsilon.
+$$
+
+În relațiile de mai sus, $\beta_0$ și $\beta_1$ sunt cunoscute ca ordonata la origine (*intercept*) și respectiv panta (*slope*) dreptei de regresie.
+
+Ipotezele modelului sunt: 
+
+i. **Linearitatea**: $\mathbb{E}[Y|X=x]=\beta_0+\beta_1x$
+ii. **Homoscedasticitatea**: $\mathbb{V}\text{ar}(\varepsilon_i)=\sigma^2$, cu $\sigma^2$ constantă pentru $i=1,\ldots,n$
+iii. **Normalitatea**: $\varepsilon_i\sim\mathcal{N}(0,\sigma^2)$ pentru $i=1,\ldots,n$
+iv. **Independența erorilor**: $\varepsilon_1,\ldots,\varepsilon_n$ sunt independente (sau necorelate, $\mathbb{E}[\varepsilon_i\varepsilon_j]=0$, $i\neq j$, deoarece sunt presupuse normale)
+
+Altfel spus 
+
+$$
+Y|X=x\sim \mathcal{N}(\beta_0+\beta_1x,\sigma^2)
+$$
+
+```{block, type = 'rmdinsight'}
+- Nicio ipoteză nu a fost făcută asupra repartiției lui $X$ (poate fi sau deterministă asu aleatoare)
+
+- Modelul de regresie presupune că **$Y$ este continuă** datorită normalității erorilor. În orice caz, **$X$ poate fi o variabilă discretă**!
+```
+
+```{r, echo=FALSE, out.width = '90%', fig.align = 'center', fig.cap="Regresia liniara simpla"}
+# data(cars)
+# 
+# names(cars) = c("X", "Y")
+# 
+# par(mar = rep(0,4))
+# visualizeFitLm(data = cars, zTop = 0.05)
+
+knitr::include_graphics("images/figures/RegresiaLiniara.png")
+```
+
+Dat fiind un eșantion $(X_1,Y_1),\ldots,(X_n,Y_n)$ pentru variabilele $X$ și $Y$ putem estima coeficienții necunoscuți $\beta_0$ și $\beta_1$ minimizând *suma abaterilor pătratice reziduale* (*Residual Sum of Squares* - RSS)
+
+$$
+\text{RSS}(\beta_0,\beta_1)=\sum_{i=1}^n(Y_i-\beta_0-\beta_1X_i)^2
+$$
+
+ceea ce conduce la 
+
+$$
+\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_x^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
+$$
+
+unde
+
+- $\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$ este *media eșantionului*
+- $s_x^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2$ este *varianța eșantionului*
+- $s_{xy}=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})$ este *covarianța eșantionului*
+
+
+```{r, echo=FALSE,  out.width = '90%', fig.align = 'center', fig.cap="Graficul functiei RSS pentru modelul $y = -0.5 + 1.5x + e$."}
+# Generates 50 points from a N(0, 1): predictor and error
+set.seed(34567) # Fixes the seed for the random generator
+x <- rnorm(n = 50) 
+eps <- rnorm(n = 50) 
+
+# Responses
+yLin <- -0.5 + 1.5 * x + eps
+
+leastSquares <- data.frame(x = x, yLin = yLin)
+
+slm = summary(lm(yLin~x, data = leastSquares))
+
+f_RSS = function(b0, b1, data = leastSquares){
+  n = length(data[[1]])
+  x = data[[1]]
+  y = data[[2]]
+  
+  mx = mean(x)
+  my = mean(y)
+  
+  mxsq = mean(x^2)
+  mysq = mean(y^2)
+  
+  mxy = mean(x*y)
+  
+  return(n*(my+b0^2+b1^2*mxsq-2*b0*my-2*b1*mxy+2*b0*b1*mx))
+  
+}
+
+b0 = seq(-150, 150, length= 30)
+b1 = seq(-150, 150, length= 30)
+
+z = outer(b0, b1, f_RSS)
+z[is.na(z)] <- 1
+
+res = persp(b0, b1, z, theta = -30, phi = 30, expand = 0.5, col = "gray90", 
+      zlab = "RSS")
+
+xc = slm$coefficients[1,1]
+yc = slm$coefficients[2,1]
+points(trans3d(xc, yc, 6, pmat = res), col = "brown3", pch = 16, cex = 1.5)
+text(trans3d(xc-30, yc-90, 6, pmat = res), col = "brown3", cex = 1.3, 
+     labels = expression(paste("(", hat(beta)[0],", ", hat(beta)[1], ")")))
+
+```
+
+Odată ce avem estimatorii $(\hat\beta_0,\hat\beta_1)$ , putem defini:
+
+- *valorile prognozate* (*fitted values*) $\hat Y_1,\ldots,\hat Y_n$ (valorile verticale pe dreapta de regresie), unde
+
+$$
+\hat Y_i=\hat\beta_0+\hat\beta_1X_i,\quad i=1,\ldots,n
+$$
+
+- *reziduurile estimate* (*estimated residuals*) $\hat \varepsilon_1,\ldots,\hat \varepsilon_n$ (distanțele verticale dintre punctele actuale $(X_i,Y_i)$ și cele prognozate $(X_i,\hat Y_i)$), unde
+
+$$
+\hat\varepsilon_i=Y_i-\hat Y_i,\quad i=1,\ldots,n
+$$
+
+Estimatorul pentru $\sigma^2$ este 
+$$
+\hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
+$$
+
+## Exemplul 1
+
+> În acest exercițiu vrem să investigăm relația dintre consumul de clorură de sodiu (sarea de bucătărie) și tensiunea arterială la persoanele trecute de 65 de ani. Pentru aceasta vom folosi setul de date [`saltBP`](data/saltBP.txt) care conține informații despre tensiunea arterială a 25 de pacienți. 
+
+Începem prin a înregistra setul de date
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap="Diagrama de imprastiere"}
+saltBP = read.table("data/saltBP.txt", header = T)
+
+plot(saltBP$salt, saltBP$BP, 
+     xlab = "sare", 
+     ylab = "tensiunea arteriala", 
+     col = "brown3", 
+     pch = 16, 
+     bty="n")
+```
+
+```{r}
+summary(saltBP)
+```
+
+
+### Estimarea parametrilor
+
+Considerăm modelul de regresie $Y = \beta_0 + \beta_1 X + \varepsilon$ (unde $X=$`saltBP$salt` iar $Y=$`saltBP$BP`), $\varepsilon\sim \mathcal{N}(0,\sigma^2)$, a cărui parametrii sunt $\beta_0$, $\beta_1$ și $\sigma^2$.
+
+  -  estimatorii parametrilor $\beta_0$ și $\beta_1$
+
+```{r}
+# pentru b1
+
+b1 = cov(saltBP$salt, saltBP$BP)/var(saltBP$salt)
+cat("b1 = ", b1)
+
+# sau 
+
+sum((saltBP$salt-mean(saltBP$salt))*(saltBP$BP))/sum((saltBP$salt-mean(saltBP$salt))^2)
+
+# pentru b0
+
+b0 = mean(saltBP$BP) - b1*mean(saltBP$salt)
+cat("b0 = ", b0)
+```
+
+sau folosind funcția `lm`:
+
+```{r}
+saltBP_model = lm(BP~salt, data = saltBP)
+names(saltBP_model)
+```
+
+```{r}
+saltBP_model$coefficients
+```
+
+Dreapta de regresie este:
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap="Dreapta de regresie"}
+plot(saltBP$salt, saltBP$BP, 
+     xlab = "nivelul de sare", 
+     ylab = "tensiunea arteriala", 
+     col = "brown3", 
+     pch = 16, 
+     bty="n", 
+     main = paste("y = ", format(b0, digits = 4), " + ", format(b1, digits = 4), " x"))
+
+abline(a = b0, b = b1, col = "grey", lwd = 2)
+points(mean(saltBP$salt), mean(saltBP$BP), pch = 16, col = "dark green", cex = 1.2)
+text(mean(saltBP$salt), mean(saltBP$BP)-1.3, col = "dark green", cex = 1.2, 
+     labels = expression(paste("(", bar(x), ",", bar(y),")")))
+```
+
+  - estimatorul lui $\sigma$ ($\hat{\sigma}$)
+  
+```{r}
+n = length(saltBP$BP)
+e_hat = saltBP$BP - (b0+b1*saltBP$salt)
+
+rss = sum(e_hat^2)
+
+sigma_hat = sqrt(rss/(n-2))
+sigma_hat
+```
+
+sau cu ajutorul funcției `lm`
+
+```{r}
+sqrt(deviance(saltBP_model)/df.residual(saltBP_model))
+```
+
+sau încă 
+
+```{r}
+saltBP_model_summary = summary(saltBP_model)
+# names(saltBP_model_summary)
+saltBP_model_summary$sigma
+```
+
+### Intervale de încredere pentru parametrii
+
+Repartițiile lui $\hat\beta_0$ și $\hat\beta_1$ sunt 
+
+$$
+\hat\beta_0\sim\mathcal{N}\left(\beta_0,\mathrm{SE}(\hat\beta_0)^2\right),\quad\hat\beta_1\sim\mathcal{N}\left(\beta_1,\mathrm{SE}(\hat\beta_1)^2\right)
+$$
+
+unde 
+
+$$
+\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_x^2}.
+$$
+
+Folosind estimatorul $\hat\sigma^2$ pentru $\sigma^2$ obținem că 
+
+$$
+\frac{\hat\beta_0-\beta_0}{\hat{\mathrm{SE}}(\hat\beta_0)}\sim t_{n-2},\quad\frac{\hat\beta_1-\beta_1}{\hat{\mathrm{SE}}(\hat\beta_1)}\sim t_{n-2}
+$$
+
+unde
+
+$$
+\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_x^2}
+$$
+
+prin urmare, intervalele de încredere de nivel $1-\alpha$ pentru $\beta_0$ și $\beta_1$ sunt 
+
+$$
+IC = \left(\hat\beta_j\pm\hat{\mathrm{SE}}(\hat\beta_j)t_{n-2;\alpha/2}\right),\quad j=0,1.
+$$
+
+```{r}
+alpha = 0.05
+
+# trebuie avut grija ca functia var si sd calculeaza impartind la (n-1) si nu la n !!!
+se_b0 = sqrt(sigma_hat^2*(1/n+mean(saltBP$salt)^2/((n-1)*var(saltBP$salt))))
+se_b1 = sqrt(sigma_hat^2/((n-1)*var(saltBP$salt)))
+
+lw_b0 = b0 - qt(1-alpha/2, n-2)*se_b0
+up_b0 = b0 + qt(1-alpha/2, n-2)*se_b0
+
+cat("CI pentru b0 este (", lw_b0, ", ", up_b0, ")\n")
+
+lw_b1 = b1 - qt(1-alpha/2, n-2)*se_b1
+up_b1 = b1 + qt(1-alpha/2, n-2)*se_b1
+  
+cat("CI pentru b1 este (", lw_b1, ", ", up_b1, ")")
+```
+
+Același rezultat se obține apelând funcția `confint` :
+
+```{r}
+confint(saltBP_model)
+```
+
+Putem construi și o regiune de încredere pentru perechea $(\beta_0, \beta_1)$:
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap="Regiune de incredere"}
+plot(ellipse(saltBP_model, c(1,2)), type = "l", col = "grey30", 
+     xlab = expression(beta[0]), 
+     ylab = expression(beta[1]), 
+     bty = "n")
+points(coef(saltBP_model)[1], coef(saltBP_model)[2], pch = 18, col = "brown3")
+abline(v = confint(saltBP_model)[1,], lty = 2)
+abline(h = confint(saltBP_model)[2,], lty = 2)
+```
+
+### ANOVA pentru regresie
+
+Este predictorul $X$ folositor în prezicerea răspunsului $Y$ ? Vrem să testăm ipoteza nulă $H_0:\;\beta_1=0$. 
+
+Introducem următoarele *sume de abateri pătratice*:
+
+- $SS_T=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2$, **suma abaterilor pătratice totală** (variația totală a lui $Y_1,\ldots,Y_n$).
+- $SS_{reg}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2$, **suma abaterilor pătratice de regresie** (variabilitatea explicată de dreapta de regresie)
+- $RSS=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2$, **suma abaterilor pătratice reziduale**
+
+Avem următoarea descompunere ANOVA
+
+$$
+\underbrace{SS_T}_{\text{Variația lui }Y_i} = \underbrace{SS_{reg}}_{\text{Variația lui }\hat Y_i} + \underbrace{RSS}_{\text{Variația lui }\hat \varepsilon_i} 
+$$
+
+și tabelul ANOVA corespunzător
+
+
+|  | Df | SS | MS | $F$ | $p$-value |
+|--|------------|--------|---------|----------------|----------------|
+| Predictor | $1$ | $SS_{reg}$ | $\frac{SS_{reg}}{1}$ | $\frac{SS_{reg}/1}{RSS/(n-2)}$ | $p$ |
+| Residuuri | $n - 2$ | $RSS$ | $\frac{RSS}{n-2}$ | | |
+
+Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
+
+  - *suma abaterilor pătratice totală*:
+
+```{r,  out.width = '90%', fig.align = 'center'}
+plot(saltBP$salt, saltBP$BP, pch = 16, type = "n",
+     main = paste("SST =", round(sum((saltBP$BP - mean(saltBP$BP))^2), 2)), 
+     col.main = "brown4", 
+     xlab = "nivelul de sare", 
+     ylab = "tensiunea arteriala", 
+     bty = "n")
+
+abline(saltBP_model$coefficients, col = "grey30", lwd = 2)
+abline(h = mean(saltBP$BP), col = "brown2", lty = 2)
+
+segments(x0 = saltBP$salt, y0 = mean(saltBP$BP), 
+         x1 = saltBP$salt, y1 = saltBP$BP, 
+         col = "grey50", lwd = 2, lty = 2)
+
+legend("topleft", 
+       legend = expression("Dreapta de regresie", "Media esantionului " * bar(Y),
+                                      (Y[i] - bar(Y))^2), 
+       lwd = c(2, 1, 2),
+       col = c("grey30", "brown2", "grey50"), 
+       lty = c(1, 2, 2), 
+       bty = "n")
+
+points(saltBP$salt, saltBP$BP, pch = 16, col = "brown3")
+```
+
+  - *suma abaterilor pătratice de regresie*
+
+```{r,  out.width = '90%', fig.align = 'center'}
+plot(saltBP$salt, saltBP$BP, pch = 16, type = "n",
+     main = paste("SSreg =", 
+                  round(sum((saltBP_model$fitted.values - mean(saltBP$BP))^2), 2)), 
+     col.main = "forestgreen", 
+     xlab = "nivelul de sare", 
+     ylab = "tensiunea arteriala", 
+     bty = "n")
+
+abline(saltBP_model$coefficients, col = "grey30", lwd = 2)
+abline(h = mean(saltBP$BP), col = "brown2", lty = 2)
+
+segments(x0 = saltBP$salt, y0 = mean(saltBP$BP), 
+         x1 = saltBP$salt, y1 = saltBP_model$fitted.values, 
+         col = "forestgreen", lwd = 2, lty = 2)
+
+points(saltBP$salt, saltBP_model$fitted.values, pch = 16, col = "forestgreen")
+
+legend("topleft", 
+       legend = expression("Dreapta de regresie", "Media esantionului " * bar(Y),
+                                      (hat(Y)[i] - bar(Y))^2), 
+       lwd = c(2, 1, 2),
+       col = c("grey30", "brown2", "forestgreen"), 
+       lty = c(1, 2, 2), 
+       bty = "n")
+
+points(saltBP$salt, saltBP$BP, pch = 16, col = "brown3")
+```
+
+  - *suma abaterilor pătratice reziduale*
+  
+```{r,  out.width = '90%', fig.align = 'center'}
+plot(saltBP$salt, saltBP$BP, pch = 16, type = "n",
+     main = paste("RSS =", 
+                  round(sum((saltBP$BP - saltBP_model$fitted.values)^2), 2)), 
+     col.main = "orange", 
+     xlab = "nivelul de sare", 
+     ylab = "tensiunea arteriala", 
+     bty = "n")
+
+abline(saltBP_model$coefficients, col = "grey30", lwd = 2)
+
+segments(x0 = saltBP$salt, y0 = saltBP$BP, 
+         x1 = saltBP$salt, y1 = saltBP_model$fitted.values, 
+         col = "orange", lwd = 2, lty = 2)
+
+points(saltBP$salt, saltBP_model$fitted.values, pch = 16, col = "orange")
+
+legend("topleft", 
+       legend = expression("Dreapta de regresie", (hat(Y)[i] - Y[i])^2), 
+       lwd = c(2, 2),
+       col = c("grey30", "orange"), 
+       lty = c(1, 2), 
+       bty = "n")
+
+points(saltBP$salt, saltBP$BP, pch = 16, col = "brown3")
+```
+
+Tabelul ANOVA se obține prin 
+
+```{r}
+# tabel ANOVA 
+anova(saltBP_model)
+```
+
+Definiția *coeficientului de determinare* $R^2$ este strâns legată de descompunerea ANOVA:
+
+$$
+R^2 = \frac{SS_{reg}}{SS_T}=\frac{SS_T-RSS}{SS_T} = 1 - \frac{RSS}{SS_T}
+$$
+
+$R^2$ măsoară **proporția din variația** variabilei răspuns $Y$ **explicată** de variabila predictor $X$ prin regresie. Proporția din variația totală a lui $Y$ care nu este explicată este $1-R^2 = \frac{RSS}{SS_T}$. Intuitiv, $R^2$ măsoară cât de bine modelul de regresie este în concordanță cu datele (cât de strâns este norul de puncte în jurul dreptei de regresie). Observăm că dacă datele concordă *perfect* cu modelul (adică $RSS=0$) atunci $R^2=1$.
+
+Putem vedea că $R^2=r_{xy}^2$, unde $r_{xy}$ este *coeficientul de corelație* empiric:
+
+$$
+r_{xy}=\frac{s_{xy}}{s_xs_y}=\frac{\sum_{i=1}^n \left(X_i-\bar X \right)\left(Y_i-\bar Y \right)}{\sqrt{\sum_{i=1}^n \left(X_i-\bar X \right)^2}\sqrt{\sum_{i=1}^n \left(Y_i-\bar Y \right)^2}}
+$$
+
+Mai mult se poate verifica și că $R^2=r^2_{y\hat y}$, adică *coeficientul de determinare este egal cu pătratul coeficientului de corelație empirică dintre $Y_1,\ldots,Y_n$ și $\hat Y_1,\ldots,\hat Y_n$*.
+
+Verificăm relația $R^2=r^2_{xy}=r^2_{y\hat y}$ numeric:
+
+```{r}
+yHat = saltBP_model$fitted.values
+
+saltBP_model_summary$r.squared # R^2
+cor(saltBP$salt, saltBP$BP)^2 # corelatia^2 dintre x si y
+cor(saltBP$BP, yHat)^2 # corelatia^2 dintre y si yHat
+```
+
+
+
+### Inferență asupra parametrilor
+
+Este predictorul $X$ folositor în prezicerea răspunsului $Y$ ? Vrem să testăm ipoteza nulă $H_0:\;\beta_j=0$ (pentru $j=1$ spunem că predictorul `nivel de sare` nu are un efect *liniar* semnificativ asupra `tensiunii arteriale`). Pentru aceasta vom folosi statistica de test 
+
+$$
+t_j = \frac{\hat{\beta}_j}{\hat{SE}(\hat{\beta_j})}\sim_{H_0} t_{n-2}.
+$$
+
+Funcția `summary` ne întoarce $p$-valoarea corespunzătoare a acestor teste:
+
+```{r}
+summary(saltBP_model)
+```
+
+Observăm că ambele ipoteze sunt respinse în favoarea alternativelor bilaterale (la aceeași concluzie am ajuns și utitându-ne la intervalele de încredere - nu conțineau valoarea $0$). Putem observa că $t_1^2$ este exact valoarea $F$ statisticii, deci cele două abordări ne dau aceleași rezultate numerice. 
+
+### Predicții
+
+Pentru un nou set de predictori, $x_0$, răspunsul prognozat este $\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x_0$ și vrem să investigăm incertitudinea din această predicție. Putem face distincția între două tipuri de predicție: predicție asupra răspunsului viitor mediu (inferență asupra mediei condiționate $\mathbb{E}[Y|X=x_0]$) sau predicție asupra observațiilor viitoare (inferență asupra răspunsului condiționat $Y|X=x_0$). 
+
+Un interval de încredere pentru răspunsul viitor mediu este:
+
+$$
+\left(\hat y \pm t_{n-2:\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+$$
+
+Un interval de încredere pentru valoarea prezisă (interval de predicție) este:
+
+$$
+\left(\hat y \pm t_{n-2:\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+$$
+
+Pentru a găsi aceste intervale vom folosi funcția `predict`:
+
+```{r}
+newData = data.frame(salt = 14)
+newData2 = data.frame(salt = c(13, 14, 15))
+
+# Predictie
+predict(saltBP_model, newdata = newData)
+
+# Predictie pentru valoarea raspunsului mediu
+predict(saltBP_model, newdata = newData, interval = "confidence")
+predict(saltBP_model, newdata = newData2, interval = "confidence")
+
+# Predictie asupra observatiilor viitoare
+predict(saltBP_model, newdata = newData, interval = "prediction")
+predict(saltBP_model, newdata = newData2, interval = "prediction")
+
+```
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap='Nivelul de sare prezis impreuna cu intervalul de incredere de nivel 95% pentru raspunsul mediu'}
+g = seq(1,15,0.5)
+
+p = predict(saltBP_model, data.frame(salt = g), se = T, interval = "confidence")
+matplot(g, p$fit, type = "l", lty = c(1,2,2), 
+        lwd = c(2,1,1),
+        col = c("grey30", "grey50", "grey50"),
+        xlab = "nivelul de sare",
+        ylab = "tensiunea arteriala",
+        bty = "n")
+rug(saltBP$salt)
+points(saltBP$salt, saltBP$BP, col = "brown3", pch = 16)
+abline(v = mean(saltBP$salt), lty = 3, col = "grey65")
+
+# Scheffe's bounds
+M = sqrt(2*qf(1-alpha, 2, n-2))
+
+s_xx = (n-1)*var(saltBP$salt)
+lw_scheffe = b0 + b1*g - M*sigma_hat*sqrt(1/n+(g-mean(saltBP$salt))^2/s_xx)
+up_scheffe = b0 + b1*g + M*sigma_hat*sqrt(1/n+(g-mean(saltBP$salt))^2/s_xx)
+
+lines(g, lw_scheffe, lty = 4, col = "brown4")
+lines(g, up_scheffe, lty = 4, col = "brown4")
+
+# Bonferroni bounds
+# x0 = c(7, 8, 13, 14)
+x0 = 1 + 14*runif(6)
+m = length(x0)
+
+t_bonf = qt(1-alpha/(2*m), n-2)
+
+lw_bonf = b0 + b1*x0 - t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
+up_bonf = b0 + b1*x0 + t_bonf*sigma_hat*sqrt(1/n+(x0-mean(saltBP$salt))^2/s_xx)
+
+segments(x0 = x0, y0 = lw_bonf, x1 = x0, y1 = up_bonf, col = "orange", lty = 5)
+segments(x0 = x0-0.25, y0 = lw_bonf, x1 = x0+0.25, y1 = lw_bonf, 
+         col = "orange", lty = 1)
+segments(x0 = x0-0.25, y0 = up_bonf, x1 = x0+0.25, y1 = up_bonf, 
+         col = "orange", lty = 1)
+
+legend("topleft", legend = c("Dreapta de regresie", "95% t interval", 
+                                      "95% Scheffe interval", 
+                             paste0(m, " intervale Bonferroni (95%)")), 
+       lwd = c(2, 1, 1, 1),
+       col = c("grey30", "grey50", "brown4", "orange"), 
+       lty = c(1, 2, 4, 5), 
+       bty = "n")
+
+```
+
+### Diagnostic
+
+În această secțiune vom vedea dacă setul nostru de date verifică ipotezele modelului de regresie liniară. 
+
+  - *Independența*
+  
+Ipoteza de independență a variabilei răspuns (prin urmare și a erorilor) reiese, de cele mai multe ori, din modalitatea în care s-a desfășurat experimentul.
+
+  - *Normalitatea*
+  
+Pentru a verifica dacă ipoteza de normalitate a erorilor este satisfăcută vom trasa dreapta lui Henry (sau Q-Q plot-ul):
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap='Q-Q plot'}
+library(car)
+
+qqPlot(saltBP_model, col = "brown3", col.lines = "grey50", pch = 16,
+       simulate = TRUE,
+       xlab = "Cuantile teoretice",
+       ylab = "Reziduuri studentizate", 
+       main = "Q-Q plot (Dreapta lui Henry)")
+```
+
+Putem folosi și testul `Shapiro-Wilk`:
+
+```{r}
+shapiro.test(residuals(saltBP_model))
+```
+
+```{r, eval=FALSE, echo=FALSE}
+residplot <- function(fit, nbreaks=15) {
+    z <- rstudent(fit)
+    hist(z, breaks=nbreaks, freq=FALSE,
+    xlab="Studentized Residual",
+    main="Distribution of Errors")
+    rug(jitter(z), col="brown")
+    curve(dnorm(x, mean=mean(z), sd=sd(z)),
+    add=TRUE, col="blue", lwd=2)
+    lines(density(z)$x, density(z)$y,
+    col="red", lwd=2, lty=2)
+    legend("topright",
+    legend = c( "Normal Curve", "Kernel Density Curve"),
+    lty=1:2, col=c("blue","red"), cex=.7)
+}
+
+residplot(saltBP_model)
+```
+
+  - *Homoscedasticitatea*
+  
+Pentru a verifica proprietatea de homoscedasticitate a erorilor vom trasa un grafic al reziduurilor versus valorile prezise (fitted), i.e. $\hat{\varepsilon}$ vs $\hat{y}$. Dacă avem homoscedasticitate a erorilor atunci ar trebui să vedem o variație constantă pe verticală ($\hat{\varepsilon}$).
+
+```{r, out.width = '90%', fig.align = 'center', fig.cap='Reziduuri vs Valori prezise (Fitted)'}
+plot(residuals(saltBP_model)~fitted(saltBP_model),  col = "brown3", pch = 16, 
+     xlab = "Valori prezise (fitted)",
+     ylab = "Reziduuri", 
+     main = "Reziduuri vs Fitted",
+     bty = "n")
+
+abline(h = 0, col = "grey30")
+```
+
+Tot în acest grafic putem observa dacă ipoteza de liniaritate este verificată (în caz de liniaritate între variabila răspuns și variabila cauză nu are trebui să vedem o relație sistematică între reziduuri și valorile prezise - ceea ce se și întâmplă în cazul nostru) ori dacă există o altă legătură structurală între variabila dependentă (răspuns) și cea independentă (predictor).
+
+
+
+
+

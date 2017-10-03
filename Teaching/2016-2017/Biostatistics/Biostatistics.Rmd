@@ -1,0 +1,310 @@
+---
+title: "Biostatistică I"
+author: "Alex Amărioarei"
+date: "2017"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 3
+---
+
+<style type="text/css">
+h1 {
+    color: #337ab7;
+    font-weight: bolder;
+    border-bottom: 2px solid #337ab7;
+
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, include=FALSE}
+library(knitr)
+library(DT)
+library(tidyverse)
+```
+
+### Informații generale
+
+Acest curs reprezintă o introducere în biostatistică.  
+
+### Informații de contact 
+
+#### Curs 
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
+
+ *  _Orar_ : Joi 18:00 - 20:00
+
+ *  _Sala_ : Amf. Țițeica (Etaj 3) - Grupa 503
+
+
+#### Seminar/Laborator
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Orar_ : Joi 17:00 - 18:00
+
+ *  _Sala_ : Sala 315 (Etaj 3) - Grupa 503
+ 
+### Laboratoare
+
+Mai jos găsiți o parte din laboratoarele cursului. 
+
+```{r echo = FALSE}
+lab1 = "[Lab_1_2](labs/Lab_1_2.html)"
+pdf_lab1 = "[PDF](labs/Pdfs/Lab_1_2.pdf)"
+labn = ""
+pdf_labn = ""
+data_lab1 = "[normtemp.txt](labs/data/normtemp.txt)"
+data_n = ""
+readings_lab1 = "[Body temperature](labs/readings/BodyTemp.pdf)"
+readings_lab1_b = "[Significance, p values, t tests](labs/readings/nmeth.2698.pdf)"
+
+lab2 = "[Lab_3_4](labs/Lab_3.html)"
+pdf_lab2 = "[PDF](labs/Pdfs/Lab_3_4.pdf)"
+data_lab2 = ""
+
+readings_lab2 = "[Confidence intervals for proportions](labs/readings/agresti_caffo_2000.pdf)"
+readings_lab2_b = "[Exact analysis of contingency tables ](labs/readings/Mehta_1998.pdf)"
+
+lab3 = "[Lab_5_6](labs/Lab_5.html)"
+pdf_lab3 = "[PDF](labs/Pdfs/Lab_5_6.pdf)"
+data_lab3 = ""
+
+readings_lab3 = "[ANOVA - why it is more important than ever](labs/readings/Gelman_anova.pdf)"
+
+lab4 = "[Lab_7_8](labs/Lab_7_8.html)"
+pdf_lab4 = "[PDF](labs/Pdfs/Lab_7_8.pdf)"
+data_lab4 = "[saltBP.txt](labs/data/saltBP.txt)"
+
+readings_lab4 = ""
+
+lab5 = "[Lab_9_10](labs/Lab_9_10.html)"
+pdf_lab5 = "[PDF](labs/Pdfs/Lab_9_10.pdf)"
+data_lab5 = "[galapagos.csv](labs/data/galapagos.csv)"
+
+readings_lab5 = "[Species numbers and endemism](labs/readings/Species.pdf)"
+
+
+tabLab = data.frame(Nr = c(1,"",2, "", 3, 4, 5),
+                    Lab = c(lab1, labn,lab2, labn, lab3, lab4, lab5), 
+                    Pdfs = c(pdf_lab1, pdf_labn, pdf_lab2, pdf_labn, pdf_lab3, pdf_lab4, pdf_lab5),
+                    data = c(data_lab1, data_n,data_lab2, data_n, data_lab3, data_lab4, data_lab5), 
+                    readings = c(readings_lab1, readings_lab1_b,readings_lab2, readings_lab2_b, readings_lab3, readings_lab4, readings_lab5))
+
+
+kable(tabLab, 
+      col.names = c("Nr", "Laborator", "PDFs", "Set Date", "Readings"),
+      align = "clccl", 
+      booktabs = TRUE)
+```
+ 
+### Proiect de laborator
+
+Mai jos găsiți proiectul cursului de *Biostatistică*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
+
+```{r echo = FALSE}
+proj1_503 = "[Proiect](projects/Proiect_503.pdf)"
+dproj1_503 = "[wing.dat](projects/Data/wing.dat)"
+proj1data_503 = "SAMBATA 13 Mai"
+
+
+tabProiecte = data.frame(Proiect = c(proj1_503), 
+                         Data = c(dproj1_503), 
+                         Time = c(proj1data_503))
+
+kable(tabProiecte, 
+      col.names = c("Proiect", "Date", "Data de predare"),
+      align = "ccc")
+```
+
+Trimiterea proiectelor se poate face pe adresa de email de mai sus. Fiecare mesaj va avea titlul: **Proiect Biostatistica 503 - Nume Prenume**. 
+
+### Notarea
+
+Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
+
+### Rezultate sesiunea  6 - 11 iunie 2017
+
+```{r, echo= FALSE}
+stat_tab_R1 = read.csv("results/Tabel_Biostatistica_R2.csv", stringsAsFactors = FALSE)
+
+stat_tab_R1 = stat_tab_R1[,-1]
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab_R1, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+
+### Rezultate sesiunea 29 mai - 3 iunie 2017
+
+```{r, echo= FALSE}
+stat_tab_R1 = read.csv("results/Tabel_Biostatistica_R1.csv", stringsAsFactors = FALSE)
+
+stat_tab_R1 = stat_tab_R1[,-1]
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab_R1, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+### Rezultate sesiunea 14-27 mai 2017
+
+```{r, echo=FALSE, include=FALSE, warning=FALSE}
+options(warn=-1)
+# Script for graphical illustration of the results 
+library(tidyverse)
+library(reshape2)
+library(stringr)
+
+stat_tab = read.csv("results/Tabel_Biostatistica.csv", stringsAsFactors = FALSE)
+
+stat_tab = stat_tab[,-1]
+
+data2 = stat_tab %>% select(Grupa, Examen, Total)
+data2$Total[data2$Total == "Absent"] = 0
+data2$Total = as.numeric(data2$Total)
+
+data2$Total[data2$Total<5 & data2$Total>0] = 4
+
+# Grupa 503
+gr503 = data2[data2$Grupa == "503",]
+# gr503$Total[gr503$Total == "Absent"] = 0
+# gr503$Total = as.numeric(gr503$Total)
+```
+
+> **Grupa 503**: dintr-un total de `r length(gr503$Total)` stundeți înscriși, `r sum(gr503$Total == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr503$Total>4)/(length(gr503$Total)-sum(gr503$Total == 0))*100, digits = 2), "%")`.
+
+
+```{r, echo= FALSE}
+stat_tab = read.csv("results/Tabel_Biostatistica.csv", stringsAsFactors = FALSE)
+
+stat_tab = stat_tab[,-1]
+# stat_tab$Total[stat_tab$Total<5] = 4
+
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#337ab7', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE,
+    scrollY = 300,
+    scroller = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2', '#60cbf2')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+
+### Bibliografie
+
+  1. Monica Dumitrescu, Anton Batatorescu - *Applied statistics using the R system*, Ed. Univ. Buc., 2006
+  2. Bernard Rosner - *Fundamentals of Biostatistics*, Cengage Learning, 2016
+  3. Gerald van Belle et al. - *Biostatistics: A Methodology for the Health Sciences*, Wiley, 2004
+  4. John Rice - *Mathematical Statistics and Data Analysis*, Duxbury
+  
+
+### Link-uri utile
+
+#### R
+  1. Programul R - [CRAN](https://cran.r-project.org/)
+  2. Interfața grafică [RStudio](https://www.rstudio.com/)
+  3. Documentație R (în engleză) - [R-Intro](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+  4. Documentație R (în română) - [R pentru începători ](ftp://cran.r-project.org/pub/R/doc/contrib/Paradis-rdebuts_RO.pdf)
+  5. Documentație R (în română) - [Inițiere în R pentru persoane cu pregătire matematică ](http://www.edumanager.ro/community/documente/initiere_in_r.pdf)
+  
+#### Latex
+  1. Introducere în Latex (în romană) - [Manual Wikibooks](https://ro.wikibooks.org/wiki/LaTeX_(carte))
+  2. Introducere în Latex (în engleză) - [Wikibooks Latex Manual](https://en.wikibooks.org/wiki/LaTeX) în special secțiunile de [matematică](https://en.wikibooks.org/wiki/LaTeX/Mathematics), [liste](https://en.wikibooks.org/wiki/LaTeX/List_Structures), [grafice](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics) și [figuri](https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions)
+  3. Tutoriale Latex (în engleză) - [video](https://www.youtube.com/playlist?list=PLDD406480D35CE390)
+  4. Editoarele: [Texmaker](http://www.xm1math.net/texmaker/download.html) și [TeXnicCenter](http://www.texniccenter.org/) 
+  5. Mediul latex [MiKTeX](https://miktex.org/)
+
+#### Rmarkdown
+  1. Pachetul [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile
