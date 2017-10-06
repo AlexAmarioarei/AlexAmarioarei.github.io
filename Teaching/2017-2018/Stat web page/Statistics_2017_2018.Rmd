@@ -81,21 +81,13 @@ Acest curs reprezintă o introducere în statistica matematică.
  *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
  
 
-## Orar
-***
-
-<div>
-<iframe src="https://calendar.google.com/calendar/embed?src=53cgagrk64j82at74td7btbtuk%40group.calendar.google.com&ctz=Europe/Bucharest" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no" allowfullscreen>&nbsp;</iframe>
-</div>
-
-
 ## Notarea
 ***
 
-Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%).
+Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%). Bonus aveți și $1$ punct din oficiu:
 
 $$
-  T = 0.5\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i
+  T = \min\left(1+0.5\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i, 10\right)
 $$
 
 ## Teme
@@ -214,6 +206,13 @@ datatable(
               target = 'row',
                  backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
 ```
+
+## Orar
+***
+
+<div>
+<iframe src="https://calendar.google.com/calendar/embed?src=53cgagrk64j82at74td7btbtuk%40group.calendar.google.com&ctz=Europe/Bucharest" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no" allowfullscreen>&nbsp;</iframe>
+</div>
 
 ## Bibliografie
 ***
