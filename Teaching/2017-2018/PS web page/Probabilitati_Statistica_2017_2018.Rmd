@@ -80,14 +80,27 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 
  *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
  
-
-## Orar
+## Note de laborator 
 ***
 
-<div>
-<iframe src="https://calendar.google.com/calendar/embed?src=87hp6kpoo88b8ovlk8jrc46qo4%40group.calendar.google.com&ctz=Europe/Bucharest" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no" allowfullscreen>&nbsp;</iframe>
-</div>
+Mai jos găsiți o parte din laboratoarele cursului. 
 
+
+```{r echo = FALSE}
+lab1 = "[HTML](labs/Lab_1.html)"
+pdf_lab1 = "[PDF](labs/Lab_1_pdf.pdf)"
+
+tabLab = data.frame(Nr = c(1),
+                    Lab = c("Laborator 1"),
+                    Htmls = c(lab1),
+                    Pdfs = c(pdf_lab1))
+
+
+kable(tabLab, 
+      col.names = c("Nr", "Laborator", "HTML", "PDFs"),
+      align = "cccc", 
+      booktabs = TRUE)
+```
 
 ## Notarea
 ***
@@ -95,7 +108,7 @@ Acest curs reprezintă o introducere în teoria probabilităților și a statist
 Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%).
 
 $$
-  T = 0.5\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i
+  T = \min\left(1+0.5\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i, 10\right)
 $$
 
 ## Teme
@@ -104,28 +117,28 @@ $$
 Vor fi 6 teme și acestea vor fi postate (aproape) din două în două săptămâni (de obicei Duminică seara). Este încurajată colaborarea între studenți dar fiecare student trebuie să își scrie propriile soluții. Copierea temei este __interzisă__.
 
 ```{r echo = FALSE}
-t1 = "[Tema 1](#)"
-t1sol = "[Solutie Tema 1](#)"
+t1 = "Tema 1"
+t1sol = "Solutie Tema 1"
 t1data = "--"
 
-t2 = "[Tema 2](#)"
-t2sol = "[Solutie Tema 2](#)"
+t2 = "Tema 2"
+t2sol = "Solutie Tema 2"
 t2data = "--"
 
-t3 = "[Tema 3](#)"
-t3sol = "[Solutie Tema 3](#)"
+t3 = "Tema 3"
+t3sol = "Solutie Tema 3"
 t3data = "--"
 
-t4 = "[Tema 4](#)"
-t4sol = "[Solutie Tema 4](#)"
+t4 = "Tema 4"
+t4sol = "Solutie Tema 4"
 t4data = "--"
 
-t5 = "[Tema 5](#)"
-t5sol = "[Solutie Tema 5](#)"
+t5 = "Tema 5"
+t5sol = "Solutie Tema 5"
 t5data = "--"
 
-t6 = "[Tema 6](#)"
-t6sol = "[Solutie Tema 6](#)"
+t6 = "Tema 6"
+t6sol = "Solutie Tema 6"
 t6data = "--"
 
 tab = data.frame(Tema = c(t1, t2, t3, t4, t5, t6), 
@@ -154,7 +167,7 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Probabilități și S
 
 ```{r echo = FALSE}
 gproj1 = "241, 242, 243, 244"
-proj1 = "[Proiect 1](#)"
+proj1 = "Proiect 1"
 proj1data = "--"
 
 
