@@ -644,6 +644,15 @@ h3{
 	margin: 0px;
 }
 
+#my-map a{
+	color: #874F00;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#my-map p a:hover{
+	color: #025587;
+}
 
 /*desktop styles*/
 /*=======================================================================================================================
