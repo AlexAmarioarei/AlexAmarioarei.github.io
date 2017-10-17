@@ -4,6 +4,7 @@ subtitle: Introducere în R
 output:
   pdf_document:
     includes:
+      before_body: tex/body.tex
       in_header: tex/preamble.tex
     keep_tex: yes
     number_sections: yes
@@ -431,7 +432,11 @@ x <= 8.6
 x %in% c(1,9)
 ```
 
-> Să presupunem că am înregistrat în fiecare zi, pe parcursul a 4 săptămâni (de Luni până Duminică), numărul de minute petrecute la telefonul mobil (convorbiri + utilizare) și am obținut următoarele valori: `r rpois(28, 120)`. Ne întrebăm: care sunt zilele din săptămână în care am vorbit cel mai mult? dar cel mai puțin? dar zilele în care am vorbit mai mult de 120 de minute?
+
+```{block,  type = 'rmdexercise'}
+Să presupunem că am înregistrat în fiecare zi, pe parcursul a 4 săptămâni (de Luni până Duminică), numărul de minute petrecute la telefonul mobil (convorbiri + utilizare) și am obținut următoarele valori: 106, 123, 123, 111, 125, 113, 130, 113, 114, 100, 120, 130, 118, 114, 127, 112, 121, 114, 120, 119, 127, 114, 108, 127, 131, 157, 102, 133. Ne întrebăm: care sunt zilele din săptămână în care am vorbit cel mai mult? dar cel mai puțin? dar zilele în care am vorbit mai mult de 120 de minute?
+
+```
 
 
 ## Matrice

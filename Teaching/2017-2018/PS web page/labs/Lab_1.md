@@ -817,7 +817,10 @@ x %in% c(1,9)
 ## [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ```
 
-> Să presupunem că am înregistrat în fiecare zi, pe parcursul a 4 săptămâni (de Luni până Duminică), numărul de minute petrecute la telefonul mobil (convorbiri + utilizare) și am obținut următoarele valori: 124, 103, 125, 128, 126, 116, 111, 113, 116, 119, 119, 130, 128, 126, 130, 128, 120, 98, 125, 131, 112, 114, 117, 118, 124, 119, 104, 130. Ne întrebăm: care sunt zilele din săptămână în care am vorbit cel mai mult? dar cel mai puțin? dar zilele în care am vorbit mai mult de 120 de minute?
+
+<div class="rmdexercise">
+<p>Să presupunem că am înregistrat în fiecare zi, pe parcursul a 4 săptămâni (de Luni până Duminică), numărul de minute petrecute la telefonul mobil (convorbiri + utilizare) și am obținut următoarele valori: 106, 123, 123, 111, 125, 113, 130, 113, 114, 100, 120, 130, 118, 114, 127, 112, 121, 114, 120, 119, 127, 114, 108, 127, 131, 157, 102, 133. Ne întrebăm: care sunt zilele din săptămână în care am vorbit cel mai mult? dar cel mai puțin? dar zilele în care am vorbit mai mult de 120 de minute?</p>
+</div>
 
 
 ## Matrice
@@ -826,7 +829,7 @@ Matricele sunt structuri de date care extind vectorii și sunt folosite la repre
 
 
 <div class="figure" style="text-align: center">
-<img src="Lab_1_files/figure-html/unnamed-chunk-27-1.png" alt="Figura 3. Scalari, Vectori, Matrice"  />
+<img src="Lab_1_files/figure-html/unnamed-chunk-28-1.png" alt="Figura 3. Scalari, Vectori, Matrice"  />
 <p class="caption">Figura 3. Scalari, Vectori, Matrice</p>
 </div>
 

@@ -115,7 +115,10 @@ footer {
 .rmdcaution, .rmdinsight, .rmdexercise, .rmdtip {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
-  background: #f5f5f5 5px center/3em no-repeat;
+  background: #9FB6CD 5px center/3em no-repeat;
+  background-color: rgba(159,182,205, 0.4);
+  border:  1px #6C7B8B solid;;
+  border-radius: 5px;
 } 
 .rmdcaution {
   background-image: url("../images/icons/caution.png");

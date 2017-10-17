@@ -125,7 +125,9 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{framed,color}
-\definecolor{shadecolor}{RGB}{248,248,248}
+\definecolor{shadecolor}{RGB}{248, 248, 248}
+\definecolor{shadecolor1}{RGB}{216,225,235}
+\definecolor{framecolor}{RGB}{108,123,13}
 
 \ifxetex
   \usepackage{letltxmacro}
@@ -141,8 +143,13 @@
   }%
 \fi
 
+\newenvironment{frshaded*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor}{shadecolor1}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
 \newenvironment{rmdblock}[1]
-  {\begin{shaded*}
+  {\begin{frshaded*}
   \begin{itemize}
   \renewcommand{\labelitemi}{
     \raisebox{-.7\height}[0pt][0pt]{
@@ -153,7 +160,7 @@
   }
   {
   \end{itemize}
-  \end{shaded*}
+  \end{frshaded*}
   }
 \newenvironment{rmdcaution}
   {\begin{rmdblock}{caution}}
@@ -242,6 +249,9 @@
 
 \begin{document}
 \maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
 
 Obiectivul acestui laborator este de a prezenta o scurtă introducere în
 programul \href{https://cran.r-project.org/}{R} (cu ajutorul interfeței
@@ -1365,16 +1375,16 @@ doilea scalare)\tabularnewline
 ## [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 \end{verbatim}
 
-\begin{quote}
+\begin{rmdexercise}
 Să presupunem că am înregistrat în fiecare zi, pe parcursul a 4
 săptămâni (de Luni până Duminică), numărul de minute petrecute la
 telefonul mobil (convorbiri + utilizare) și am obținut următoarele
-valori: 124, 103, 125, 128, 126, 116, 111, 113, 116, 119, 119, 130, 128,
-126, 130, 128, 120, 98, 125, 131, 112, 114, 117, 118, 124, 119, 104,
-130. Ne întrebăm: care sunt zilele din săptămână în care am vorbit cel
+valori: 106, 123, 123, 111, 125, 113, 130, 113, 114, 100, 120, 130, 118,
+114, 127, 112, 121, 114, 120, 119, 127, 114, 108, 127, 131, 157, 102,
+133. Ne întrebăm: care sunt zilele din săptămână în care am vorbit cel
 mai mult? dar cel mai puțin? dar zilele în care am vorbit mai mult de
 120 de minute?
-\end{quote}
+\end{rmdexercise}
 
 \subsection{Matrice}\label{matrice}
 
@@ -1386,11 +1396,11 @@ coloane (\emph{columns}).
 
 \begin{figure}
 
-{\centering \includegraphics{Lab_1_pdf_files/figure-latex/unnamed-chunk-27-1} 
+{\centering \includegraphics{Lab_1_pdf_files/figure-latex/unnamed-chunk-28-1} 
 
 }
 
-\caption{Scalari, Vectori, Matrice}\label{fig:unnamed-chunk-27}
+\caption{Scalari, Vectori, Matrice}\label{fig:unnamed-chunk-28}
 \end{figure}
 
 Indexarea liniilor și a coloanelor pentru o matrice începe cu 1. De

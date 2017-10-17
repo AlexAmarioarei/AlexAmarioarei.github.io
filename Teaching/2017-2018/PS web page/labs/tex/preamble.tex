@@ -1,7 +1,9 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{framed,color}
-\definecolor{shadecolor}{RGB}{248,248,248}
+\definecolor{shadecolor}{RGB}{248, 248, 248}
+\definecolor{shadecolor1}{RGB}{216,225,235}
+\definecolor{framecolor}{RGB}{108,123,13}
 
 \ifxetex
   \usepackage{letltxmacro}
@@ -17,8 +19,13 @@
   }%
 \fi
 
+\newenvironment{frshaded*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor}{shadecolor1}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
 \newenvironment{rmdblock}[1]
-  {\begin{shaded*}
+  {\begin{frshaded*}
   \begin{itemize}
   \renewcommand{\labelitemi}{
     \raisebox{-.7\height}[0pt][0pt]{
@@ -29,7 +36,7 @@
   }
   {
   \end{itemize}
-  \end{shaded*}
+  \end{frshaded*}
   }
 \newenvironment{rmdcaution}
   {\begin{rmdblock}{caution}}
