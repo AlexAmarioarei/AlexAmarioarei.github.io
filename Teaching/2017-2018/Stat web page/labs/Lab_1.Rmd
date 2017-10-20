@@ -2,6 +2,12 @@
 title: "Laborator 1"
 subtitle: Introducere în R
 output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
   html_document:
     code_folding: show
     css: labs_css/labs.css
@@ -14,11 +20,6 @@ output:
     includes:
       in_header: lab_header/lab_header.html
       after_body: lab_header/lab_footer.html
-  pdf_document:
-    includes:
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -56,11 +57,23 @@ $(document).ready(function ()  {
 
 Obiectivul acestui laborator este de a prezenta o scurtă introducere în programul [R](https://cran.r-project.org/) (cu ajutorul interfeței grafice [RStudio](https://www.rstudio.com/)). O descriere detaliată a acestui program precum și versiunile disponibile pentru descărcat se găsesc pe site-ul [`www.r-project.org`](http://www.r-project.org).
 
+
 ```{r, echo=FALSE}
 library(knitr)
 
-source("functions/figureNumber.R")
-source("functions/tableNumber.R")
+knitr::opts_chunk$set(comment = NA, prompt = FALSE, collapse = TRUE, error = TRUE, fig.align = 'center')
+
+source("functions/getOutputFormat.R")
+
+if (getOutputFormat() == "pdf_document"){
+  source("functions/figureNumber_tex.R")
+  source("functions/tableNumber_tex.R")
+}else{
+  source("functions/figureNumber.R")
+  source("functions/tableNumber.R")
+}
+
+
 ```
 
 # Introducere 
@@ -733,4 +746,123 @@ subset(x = mtcars,
 ```
 
 
+### Metode de manipulare 
+
+În această secțiune vom prezenta câteva metode mai avansate de manipulare a seturilor de date (a data frame-urilor). 
+
+Vom începe prin introducerea comenzii `order()` care permite sortarea liniilor unui data.frame în funcție de valorile coloanei de interes. De exemplu să considerăm cazul setului de date `mtcars`. Vrem să afisăm primele 10 mașini în funcție de greutatea lor (crescător și descrescător):
+
+```{r}
+cars_increasing = rownames(mtcars[order(mtcars$wt),])
+# afisarea celor mai usoare 10 masini
+cars_increasing[1:10]
+
+cars_decreasing = rownames(mtcars[order(mtcars$wt, decreasing = TRUE),])
+# afisarea celor mai grele 10 masini
+cars_decreasing[1:10]
+```
+
+Funcția `order()` permite ordonarea după mai mult de o coloană, de exemplu dacă vrem să ordonăm mașinile după numărul de cilindrii și după greutate atunci apelăm 
+
+```{r}
+mtcars[order(mtcars$cyl, mtcars$wt), 1:6]
+```
+
+Sunt multe situațiile în care avem la dispoziție două sau mai multe seturi de date și am vrea să construim un nou set de date care să combine informațiile din acestea. Pentru aceasta vom folosi funcția `merge()`. Principalele argumente ale acestei funcții se regăsesc în tabelul de mai jos:
+
+| Argument| Descriere| 
+|:------------|:-------------------------------------------------|
+|`x, y`| Două data frame-uri ce urmează a fi unite|
+|`by`| Un vector de caractere ce reprezintă una sau mai multe coloane după care se va face lipirea. De exemplu `by = "id"` va combina coloanele care au valori care se potrivesc într-o coloană care se numește `"id"`. `by = c("last.name", "first.name")` va combina coloanele care au valori care se potrivesc în ambele coloane `"last.name"` și `"first.name"`|
+|`all`| Un vector logic care indică dacă vrem să includem sau nu liniile care nu se potrivesc conform argumentului `by`. |
+
+Table: `r tn("Argumentele functiei merge")`
+
+Să presupunem că avem la dispoziție un set de date în care apar 5 studenți și notele pe care le-au obținut la examenul de statistică:
+
+```{r}
+stat_course = data.frame(student = c("Ionel", "Maria", "Gigel", "Vasile", "Ana"),
+                         note_stat = c(9, 8, 5, 7, 9)) 
+```
+
+și să presupunem că avem notele acestor studenți la examenul de algebră
+
+```{r}
+alg_course = data.frame(student = c("Maria", "Ana" , "Gigel", "Ionel", "Vasile"),
+                         note_alg = c(10, 8, 9, 7, 9)) 
+
+```
+
+Scopul nostru este să creăm un singur tabel în care să regăsim notele la ambele materii:
+
+```{r}
+combined_courses = merge(x = stat_course, 
+                         y = alg_course,
+                         by = "student")
+combined_courses
+
+```
+
+O a treia funcție care joacă un rol important în manipularea data frame-urilor este funcția `aggregate()` care, după cum îi spune și numele, permite calcularea de funcții pe grupe de date din setul initial. Argumentele principale ale acestei funcții sunt date în tabelul de mai jos:
+
+| Argument| Descriere| 
+|:------------|:-------------------------------------------------|
+|`formula`| O formulă de tipul `y ~ x1 + x2 + ...` unde y este variabila dependentă iar x1, x2, ... sunt variabilele independente. De exemplu, `salary ~ sex + age` va agrega o coloană `salary` la fiecare combinație unică de `sex` și `age`|
+|`FUN`| O funcție pe care vrem să o aplicăm lui y la fiecare nivel al variabilelor independente. E.g. `mean` sau `max`.|
+|`data`| Data frame-ul care conține variabilele din `formula`|
+|`subset`| O submulțime din `data` pe care vrem să le analizăm. De exemplu, `subset(sex == "f" & age > 20)` va restrânge analiza la femei mai învârstă de 20 de ani.|
+
+Table: `r tn("Argumentele functiei aggregate")`
+
+Structura generală a funcției `aggregate()` este 
+
+```{r eval = FALSE}
+aggregate(formula = dv ~ iv, # dv este data, iv este grupul 
+          FUN = fun, # Functia pe care vrem sa o aplicam
+          data = df) # setul de date care contine coloanele dv si iv
+```
+
+Să considerăm setul de date `ChickWeight` și să ne propunem să calculăm pentru fiecare tip de dietă greutatea medie:
+
+```{r}
+# Fara functia aggregate
+mean(ChickWeight$weight[ChickWeight$Diet == 2])
+mean(ChickWeight$weight[ChickWeight$Diet == 3])
+mean(ChickWeight$weight[ChickWeight$Diet == 4])
+
+# Cu ajutorul functiei aggregate
+aggregate(formula = weight ~ Diet,  # DV este weight, IV este Diet
+          FUN = mean,               # calculeaza media pentru fiecare grup
+          data = ChickWeight)       # dataframe este ChickWeight
+```
+
+Funcția `aggregate()` a întors un data.frame cu o coloană pentru variabila independentă `Diet` și o coloană pentru greutatea medie.
+
+Dacă vrem să calculăm greutățile medii în funcție de dietă pentru găinile care au mai puțin de 10 săptămâni de viață atunci folosim opțiunea `subset`:
+
+```{r}
+aggregate(formula = weight ~ Diet,  # DV este weight, IV este Diet
+          FUN = mean,               # calculeaza media pentru fiecare grup
+          subset = Time < 10,       # gainile care au mai putin de 10 saptamani
+          data = ChickWeight)       # dataframe este ChickWeight
+```
+
+Putem să includem de asemenea mai multe variabile independente în formula funcției `aggregate()`. De exemplu putem să calculăm greutatea medie a găinilor atât pentru fiecare tip de dietă cât și pentru numărul de săptămâni de la naștere:
+
+```{r}
+aggregate(formula = weight ~ Diet + Time,  # DV este weight, IV sunt Diet și Time
+          FUN = mean,               # calculeaza media pentru fiecare grup
+          data = ChickWeight)       # dataframe este ChickWeight
+```
+
+```{block, type = "rmdexercise"}
+Considerați setul de date `mtcars`. Calculați:
+
+  a) Greutatea medie în funcție de tipul de transmisie
+  
+  b) Greutatea medie în funcție de numărul de cilindrii
+  
+  c) Consumul mediu în funcție de numărul de cilindrii și tipul de transmisie
+
+```
 
