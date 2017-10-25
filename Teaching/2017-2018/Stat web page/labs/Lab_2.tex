@@ -1619,9 +1619,9 @@ Argumente grafice adiționale (pentru detalii apelați
 \bottomrule
 \end{longtable}
 
-Ca exemplu să considerăm graficele de funcții de mai sus la care vrem să
-specificăm care grafic corespunde funcției \(sin\) și care funcției
-\(cos\):
+Ca exemplu prim să considerăm graficele de funcții de mai sus la care
+vrem să specificăm care grafic corespunde funcției \(sin\) și care
+funcției \(cos\):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1648,6 +1648,57 @@ specificăm care grafic corespunde funcției \(sin\) și care funcției
 \end{Shaded}
 
 \begin{center}\includegraphics{Lab_2_files/figure-latex/unnamed-chunk-45-1} \end{center}
+
+Un al doilea exemplu ar putea consta în afișarea diagramei de
+împrăștiere a mașinilor din setul de date \texttt{mtcars} în funcție de
+variabilele \texttt{mpg} și \texttt{wt} în care punctele sunt colorate
+în raport cu numărul de cilindrii (4, 6, sau 8), respectiv cu
+\emph{roșu}, \emph{orange} și \emph{albastru} și în care afișăm numelor
+mașinilor care au transmisie manuală (\texttt{am\ =\ 1}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg, mtcars}\OperatorTok{$}\NormalTok{wt,}
+     \DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }
+     \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
+     \DataTypeTok{cex =} \FloatTok{1.3}\NormalTok{,}
+     \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{"Mile pe Galon"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Greutatea"}\NormalTok{, }
+     \DataTypeTok{main =} \StringTok{"Graficul variabilelor: MPG vs Weight"}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{], mtcars}\OperatorTok{$}\NormalTok{wt[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{],}
+       \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{,}
+       \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
+       \DataTypeTok{cex =} \FloatTok{1.3}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{8}\NormalTok{], mtcars}\OperatorTok{$}\NormalTok{wt[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{8}\NormalTok{],}
+       \DataTypeTok{col =} \StringTok{"blue"}\NormalTok{,}
+       \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
+       \DataTypeTok{cex =} \FloatTok{1.3}\NormalTok{)}
+
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{wt),}
+       \DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{mean}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg),}
+       \DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+
+\KeywordTok{text}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{],}
+\NormalTok{     mtcars}\OperatorTok{$}\NormalTok{wt[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{], }
+     \DataTypeTok{labels =} \KeywordTok{rownames}\NormalTok{(mtcars)[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{],}
+     \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
+     \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
+
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"cyl = 4"}\NormalTok{, }\StringTok{"cyl = 6"}\NormalTok{, }\StringTok{"cyl = 8"}\NormalTok{),}
+       \DataTypeTok{title =} \StringTok{"Nr. Cilindrii"}\NormalTok{,}
+       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"blue"}\NormalTok{),}
+       \DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{16}\NormalTok{),}
+       \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Lab_2_files/figure-latex/unnamed-chunk-46-1} \end{center}
 
 \subsection{Salvarea figurilor}\label{salvarea-figurilor}
 

@@ -69,9 +69,9 @@ Acest curs reprezintă o introducere în statistica matematică.
 
  *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
 
- *  _Orar_ : Vineri 14:00 - 16:00
+ *  _Orar_ : Vineri 16:00 - 18:00
 
- *  _Sala_ : Sala 219 (Etaj 2) - Grupele 301, 311, 321
+ *  _Sala_ : Amfiteatrul Stoilow (Etaj 1) - Grupele 301, 311, 321
 
 
 ### Seminar/Laborator
@@ -93,10 +93,13 @@ pdf_lab1 = "[PDF](labs/Lab_1.pdf)"
 lab2 = "[HTML](labs/Lab_2.html)"
 pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
 
-tabLab = data.frame(Nr = c(1, 2),
-                    Lab = c("Laborator 1", "Laborator 2"),
-                    Htmls = c(lab1, lab2),
-                    Pdfs = c(pdf_lab1, pdf_lab2))
+lab3 = "[HTML](labs/Lab_3.html)"
+pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
+
+tabLab = data.frame(Nr = c(1, 2, 3),
+                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3"),
+                    Htmls = c(lab1, lab2, lab3),
+                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3))
 
 
 kable(tabLab, 

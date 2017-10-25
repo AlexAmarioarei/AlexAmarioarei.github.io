@@ -581,20 +581,19 @@ Următorul exemplu ilustrează câteva tipuri de simboluri:
 
 <img src="Lab_2_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm următoarea funcție $g:\mathbb{R}\to\mathbb{R}$, 
-
-$$
+<div class="rmdexercise">
+<p>Considerăm următoarea funcție <span class="math inline"><em>g</em> : ℝ → ℝ</span>,</p>
+<p><br /><span class="math display">$$
   g(x) = \left\{\begin{array}{ll}
-              \sin^2(x)\log(x), & x>0\\
-              \sin^2(x)x, & x\leq 0
+              \sin^2(x)\log(x), &amp; x&gt;0\\
+              \sin^2(x)x, &amp; x\leq 0
   \end{array}\right.
-$$
-
-  a) Definiți funcția folosind comenzile `if-else` și `Vectorize` iar apoi folosind comanda `ifelse`.
-  
-  b) Trasați graficul curbei pe intervalul $[-\pi, \pi]$.
-
-</div>\EndKnitrBlock{rmdexercise}
+$$</span><br /></p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Definiți funcția folosind comenzile <code>if-else</code> și <code>Vectorize</code> iar apoi folosind comanda <code>ifelse</code>.</p></li>
+<li><p>Trasați graficul curbei pe intervalul <span class="math inline">[ − <em>π</em>, <em>π</em>]</span>.</p></li>
+</ol>
+</div>
 
 ## Culori
 
@@ -917,7 +916,7 @@ Atunci când vrem să adăugăm o legendă la un grafic folosim funcția `legend
 
 Table: Tabelul 5. Argumentele functiei legend()
 
-Ca exemplu să considerăm graficele de funcții de mai sus la care vrem să specificăm care grafic corespunde funcției $sin$ și care funcției $cos$:
+Ca exemplu prim să considerăm graficele de funcții de mai sus la care vrem să specificăm care grafic corespunde funcției $sin$ și care funcției $cos$:
 
 
 ```r
@@ -943,6 +942,52 @@ legend("bottomright",
 ```
 
 <img src="Lab_2_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" />
+
+Un al doilea exemplu ar putea consta în afișarea diagramei de împrăștiere a mașinilor din setul de date `mtcars` în funcție de variabilele `mpg` și `wt` în care punctele sunt colorate în raport cu numărul de cilindrii (4, 6, sau 8), respectiv cu *roșu*, *orange* și *albastru* și în care afișăm numelor mașinilor care au transmisie manuală (`am = 1`):
+
+
+```r
+plot(mtcars$mpg, mtcars$wt,
+     col = "red", 
+     pch = 16,
+     cex = 1.3,
+     bty = "n",
+     xlab = "Mile pe Galon",
+     ylab = "Greutatea", 
+     main = "Graficul variabilelor: MPG vs Weight")
+
+points(mtcars$mpg[mtcars$cyl == 6], mtcars$wt[mtcars$cyl == 6],
+       col = "orange",
+       pch = 16,
+       cex = 1.3)
+
+points(mtcars$mpg[mtcars$cyl == 8], mtcars$wt[mtcars$cyl == 8],
+       col = "blue",
+       pch = 16, 
+       cex = 1.3)
+
+abline(h = mean(mtcars$wt),
+       lty = 2)
+
+abline(v = mean(mtcars$mpg),
+       lty = 2)
+
+text(mtcars$mpg[mtcars$am == 1],
+     mtcars$wt[mtcars$am == 1], 
+     labels = rownames(mtcars)[mtcars$am == 1],
+     pos = 3, 
+     cex = 0.8)
+
+legend("topright", 
+       legend = c("cyl = 4", "cyl = 6", "cyl = 8"),
+       title = "Nr. Cilindrii",
+       col = c("red", "orange", "blue"),
+       pch = c(16,16,16),
+       bty = "n")
+```
+
+<img src="Lab_2_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" />
+
 
 ## Salvarea figurilor 
 

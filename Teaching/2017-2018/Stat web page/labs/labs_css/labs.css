@@ -112,7 +112,7 @@ footer {
 /*---------------------------------------------------------------------*/
 
 /* for blocks */
-.rmdcaution, .rmdinsight, .rmdexercise, .rmdtip {
+.rmdcaution,.rmdexercise, .rmdtip {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
   background: #9FB6CD 5px center/3em no-repeat;
@@ -120,6 +120,16 @@ footer {
   border:  1px #6C7B8B solid;;
   border-radius: 5px;
 } 
+
+.rmdinsight {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #9FB6CD 5px center/3em no-repeat;
+  background-color: rgba(223,240,216, 0.4);
+  border:  1px #88c189 solid;;
+  border-radius: 5px;
+} 
+
 .rmdcaution {
   background-image: url("../images/icons/caution.png");
 }
