@@ -100,10 +100,13 @@ pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
 lab3 = "[HTML](labs/Lab_3.html)"
 pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
 
-tabLab = data.frame(Nr = c(1,2,3),
-                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3"),
-                    Htmls = c(lab1, lab2, lab3),
-                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3))
+lab4 = "[HTML](labs/Lab_4.html)"
+pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
+
+tabLab = data.frame(Nr = c(1,2,3,4),
+                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4"),
+                    Htmls = c(lab1, lab2, lab3, lab4),
+                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4))
 
 
 kable(tabLab, 
