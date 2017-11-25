@@ -1,0 +1,473 @@
+---
+title: "Tabele Statistice"
+output:
+  html_document:
+    code_folding: show
+    css: labs_css/labs.css
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+    includes:
+      in_header: lab_header/lab_header.html
+      after_body: lab_header/lab_footer.html
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
+---
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 60
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+În acest document ne propunem să prezentăm mai multe tabele statistice utile pentru rezolvarea problemelor de probabilități și statistică.  
+
+```{r, echo=FALSE}
+library(knitr)
+library(kableExtra) # new table styles
+library(latex2exp)
+
+knitr::opts_chunk$set(comment = NA, prompt = FALSE, collapse = TRUE, error = TRUE, fig.align = 'center')
+
+source("functions/getOutputFormat.R")
+
+if (getOutputFormat() == "pdf_document"){
+  source("functions/figureNumber_tex.R")
+  source("functions/tableNumber_tex.R")
+  options(knitr.table.format = "latex") # add format latex 
+  dimplot = "40%"
+}else{
+  source("functions/figureNumber.R")
+  source("functions/tableNumber.R")
+  options(knitr.table.format = "html") # add format html 
+  dimplot = "60%"
+}
+
+
+```
+
+# Tabele pentru repartiția normală standard
+
+## Valorile funcției de repartiție
+
+În tabelul următor descriem valorile **funcției de repartiție**, $\Phi(x)=\mathbb{P}(X\leq x)$ cu $x = x_1 + x_2$, pentru o variabilă aleatoare $X$ repartizată normal de medie $0$ și varianță $1$. Pentru valori negative putem folosi relația $\Phi(x) = 1-\Phi(-x)$.
+
+```{r, echo=FALSE, out.width = dimplot}
+u = seq(-3,3,by=.01)
+plot(u,dnorm(u),type="l", axes=FALSE,
+     xlab="", ylab="", col="white")
+axis(1, labels = F, tcl = 0)
+I = which((u<=1))
+polygon(c(u[I],rev(u[I])),c(dnorm(u)[I],rep(0,length(I))),
+        col="grey80", border=NA)
+lines(u,dnorm(u), lwd=3, col="royalblue")
+text(-1.5, dnorm(-1.75)+.3, TeX("$X\\sim N(0,1)$"), cex = 1.5)
+text(-.15, dnorm(1.75), 
+TeX("$P(X\\leq x)=\\int_{-\\infty}^x \\varphi(t)dt$"), cex = 1)
+```
+
+```{r, echo=FALSE}
+options(digits = 4)
+u = seq(0,3.09,by=0.01)
+p = pnorm(u)
+m = matrix(p,ncol=10, byrow=TRUE)
+colnames(m) = seq(0,.09,by=.01)
+
+m = as.data.frame(m)
+m = cbind(seq(0,3,b=.1), m)
+names(m)[1] = "$x_1 / x_2$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T,
+        col.names = c('$x_{1} / x_{2}$', as.character(seq(0,.09,by=.01)))) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 7) %>%
+    column_spec(1, bold = T, border_right = T)
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$x_{1} / x_{2}$', as.character(seq(0,.09,by=.01)))) %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+
+
+```
+
+## Cuantilele pentru $\mathcal{N}(0,1)$
+
+În tabelul următor descriem **cuantilele** de ordin $\alpha$ pentru repartiția normală standard, i.e. $z_{\alpha}=\Phi^{-1}(\alpha)$ cu $\alpha = \alpha_1 + \alpha_2$. În cazul în care $\alpha<0.5$ vom folosi relația $z_{\alpha} = -z_{1-\alpha}$.
+
+```{r, echo=FALSE, out.width = dimplot}
+a = seq(-3, 3, by=.001)
+plot(a,pnorm(a),type="l", 
+     xlab="", ylab="", 
+     col="white", 
+     bty = "n", axes = FALSE)
+
+axis(1, labels = F, tcl = 0, 
+     col = "grey20")
+axis(2, labels = F, tcl = 0,
+     col = "grey20")
+
+lines(a,pnorm(a), lwd=3, col="royalblue")
+text(2, 0.8, TeX("$\\Phi(x)$"), cex = 1.5)
+segments(-3.5, 0.65, qnorm(0.65), 0.65, 
+         lty = 3, col = "brown3")
+axis(side = 2, 
+     at = 0.65, 
+     labels = TeX("$\\alpha$"), 
+     font = 2)
+
+# text(-3.15, 0.65, TeX("$\\alpha$"), pos = 1)
+segments(qnorm(0.65), 0.65, qnorm(0.65), -0.5,  
+         lty = 3, col = "brown3")
+axis(side = 1, 
+     at = qnorm(0.65), 
+     labels = TeX("$z_{\\alpha} = \\Phi^{-1}(\\alpha)$"), 
+     font = 2)
+
+# text(qnorm(0.65)+0.5, -0.05, TeX("$u_{\\alpha} = \\Phi^{-1}(\\alpha)$"), pos = 3)
+
+```
+
+```{r, echo=FALSE}
+options(digits = 4)
+
+alpha = seq(0.5, 0.999, by = 0.001)
+u = qnorm(alpha)
+
+m = matrix(u, ncol=10, byrow=TRUE)
+
+colnames(m) = seq(0,.009,by=.001)
+
+m = as.data.frame(m)
+m = cbind(seq(0.5,0.99,b=.01), m)
+names(m)[1] = "$\alpha_1 / \alpha_2$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T,
+        col.names = c('$\\alpha_{1} / \\alpha_{2}$', as.character(seq(0,.009,by=.001)))) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 7) %>%
+    column_spec(1, bold = T, border_right = T)
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$\\alpha_{1} / \\alpha_{2}$', as.character(seq(0,.009,by=.001)))) %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+```
+
+# Tabel pentru repartiția t-Student
+
+Tabelul următor prezintă cuantilele de ordin $\alpha$ pentru repatiția t-Student cu $\nu$ grade de libertate. Pentru valori ale lui $\alpha\leq 0.5$ se poate folosi relația următoare $t_{\nu,\alpha} = - t_{\nu,1-\alpha}$. 
+
+```{r, echo=FALSE, out.width = dimplot}
+nu = 5
+u = seq(-3,3,by=.01)
+plot(u,dt(u, nu),type="l", axes=FALSE,
+     xlab="", ylab="", col="white")
+axis(1, labels = F, tcl = 0,
+     col = "grey20")
+I = which((u<=0.7))
+polygon(c(u[I],rev(u[I])),c(dt(u, nu)[I],rep(0,length(I))),
+        col="grey80", border=NA)
+lines(u,dt(u, nu), lwd=3, col="royalblue")
+text(1.5, dt(-1.75, nu)+.25, TeX("$X\\sim t_{\\nu}$"), cex = 1.5)
+
+text(-0.15, dt(-0.75, nu), TeX("Aria = $\\alpha$"), cex = 1.5)
+
+axis(side = 1, at = 0.7, 
+     labels = TeX("$t_{\\nu, \\alpha}$"), 
+     font = 2)
+
+```
+
+```{r, echo=FALSE}
+options(digits = 4)
+
+nu = c(1:30, 40, 60, 120, 1000)
+alpha = c(0.6, 0.75, 0.9, 0.95, 0.975, 0.99, 0.995, 0.9995)
+
+m = t(sapply(nu, function(x){qt(alpha, x)}))
+
+colnames(m) = alpha
+
+m = as.data.frame(m)
+m = cbind(nu, m)
+names(m)[1] = "$\nu / \alpha$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T, 
+        col.names = c('$\\nu / \\alpha$', alpha)) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 7) %>%
+    column_spec(1, bold = T, border_right = T)
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$\\nu / \\alpha$', alpha)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+```
+
+# Tabel pentru repartiția $\chi^2$
+
+Tabelul de mai jos prezintă cuantilele de ordin $\alpha$ ale repartiției $\chi^2_{\nu}$. Dacă $X\sim \chi^2_{\nu}$ atunci $\mathbb{E}[X]=\nu$ și $Var(X) = 2\nu$. Pentru valori $\nu>50$ vom folosi formula $\chi^2_{\nu,\alpha} \approx \frac{(z_{\alpha}+\sqrt{2\nu-1})^2}{2}$ pentru a aproxima cuantilele repartiției $\chi^2_{\nu}$, unde $z_{\alpha}$ este cuantila de ordin $\alpha$ a repartiției normale standard. 
+
+```{r, echo=FALSE, out.width = dimplot}
+nu = 4
+u = seq(0, 20, by=.01)
+plot(u,dchisq(u, nu),type="l", axes=FALSE,
+     xlab="", ylab="", col="white")
+axis(1, labels = F, tcl = 0,
+     col = "grey20")
+
+I = which((u<=8))
+polygon(c(u[I], rev(u[I])), c(dchisq(u, nu)[I], rep(0,length(I))),
+        col="grey80", border=NA)
+lines(u, dchisq(u, nu), lwd=3, col="royalblue")
+
+text(10, dchisq(10, nu)+0.1, TeX("$X\\sim \\chi^2_{\\nu}$"), cex = 1.5)
+
+text(2.5, dchisq(2.5, nu)-0.07, TeX("Aria = $\\alpha$"), cex = 1.5)
+
+axis(side = 1, at = 8, 
+     labels = TeX("$\\chi^2_{\\nu, \\alpha}$"), 
+     font = 2)
+
+```
+
+```{r, echo=FALSE}
+options(digits = 4)
+
+nu = 1:50
+alpha = c(0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.975, 0.99, 0.995)
+
+m = t(sapply(nu, function(x){qchisq(alpha, x)}))
+
+colnames(m) = alpha
+
+m = as.data.frame(m)
+m = cbind(nu, m)
+names(m)[1] = "$\nu / \alpha$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T,
+        col.names = c('$\\nu / \\alpha$', alpha)) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 6) %>%
+    column_spec(1, bold = T, border_right = T)
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$\\nu / \\alpha$', alpha)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), font_size = 10) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+```
+
+# Tabel pentru repartiția Fischer-Snedecor
+
+Tabelele care urmează prezintă cuantilele de ordin $\alpha\in\{0.9, 0.95, 0.975\}$ pentru repartiția Fischer-Snedecor cu $\nu_1$ grade de libertate la numărător și $\nu_2$ grade de libertate la numitor. Pentru valori ale lui $\alpha \leq 0.5$ se poate folosi relația $F_{\nu_1, \nu_2, \alpha} = \frac{1}{F_{\nu_2, \nu_1, 1-\alpha}}$. 
+
+## Cunatile pentru $F_{\nu_1, \nu_2, 0.9}$
+
+```{r, echo=FALSE, out.width = dimplot}
+nu1 = 4
+nu2 = 5
+alpha = 0.9
+
+u = seq(0, 10, by=.01)
+plot(u,df(u, nu1, nu2),type="l", axes=FALSE,
+     xlab="", ylab="", col="white")
+axis(1, labels = F, tcl = 0,
+     col = "grey20")
+
+I = which((u<=qf(alpha, nu1, nu2)))
+polygon(c(u[I], rev(u[I])), c(df(u, nu1, nu2)[I], rep(0,length(I))),
+        col="grey80", border=NA)
+lines(u, df(u, nu1, nu2), lwd=3, col="royalblue")
+
+text(5, df(5, nu1, nu2)+0.5, TeX("$X\\sim F_{\\nu_1, \\nu_2}$"), cex = 1.5)
+
+text(1.2, df(1.2, nu1, nu2)-0.25, TeX("Aria = 0.9"), cex = 1.25)
+
+axis(side = 1, at = qf(alpha, nu1, nu2), 
+     labels = TeX("$F_{\\nu_1, \\nu_2, 0.9}$"), 
+     font = 2)
+
+```
+
+```{r, echo=FALSE}
+options(digits = 4)
+
+nu1 = c(1:10, 12, 15, 20, 24, 30, 40, 60, 120, Inf)
+nu2 = c(1:30, 40, 60, 120, Inf)
+alpha = 0.9
+
+m = t(sapply(nu2, function(x){qf(alpha, nu1, x)}))
+
+colnames(m) = nu1
+
+m = as.data.frame(m)
+m = cbind(nu2, m)
+names(m)[1] = "$\nu_2 / \nu_1$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T, 
+        col.names = c('$\\nu_2 / \\nu_1$', nu1)) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 5) %>%
+    column_spec(1, bold = T, border_right = T)%>%
+    landscape()
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$\\nu_2 / \\nu_1$', nu1)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), font_size = 7) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+```
+
+## Cunatile pentru $F_{\nu_1, \nu_2, 0.95}$
+
+```{r, echo=FALSE, out.width = dimplot}
+nu1 = 4
+nu2 = 5
+alpha = 0.95
+
+u = seq(0, 10, by=.01)
+plot(u,df(u, nu1, nu2),type="l", axes=FALSE,
+     xlab="", ylab="", col="white")
+axis(1, labels = F, tcl = 0,
+     col = "grey20")
+
+I = which((u<=qf(alpha, nu1, nu2)))
+polygon(c(u[I], rev(u[I])), c(df(u, nu1, nu2)[I], rep(0,length(I))),
+        col="grey80", border=NA)
+lines(u, df(u, nu1, nu2), lwd=3, col="royalblue")
+
+text(5, df(5, nu1, nu2)+0.5, TeX("$X\\sim F_{\\nu_1, \\nu_2}$"), cex = 1.5)
+
+text(1.2, df(1.2, nu1, nu2)-0.25, TeX("Aria = 0.95"), cex = 1.25)
+
+axis(side = 1, at = qf(alpha, nu1, nu2), 
+     labels = TeX("$F_{\\nu_1, \\nu_2, 0.95}$"), 
+     font = 2)
+
+```
+
+```{r, echo=FALSE}
+options(digits = 3)
+
+nu1 = c(1:10, 12, 15, 20, 24, 30, 40, 60, 120, Inf)
+nu2 = c(1:30, 40, 60, 120, Inf)
+alpha = 0.95
+
+m = t(sapply(nu2, function(x){qf(alpha, nu1, x)}))
+
+colnames(m) = nu1
+
+m = as.data.frame(m)
+m = cbind(nu2, m)
+names(m)[1] = "$\nu_2 / \nu_1$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T,
+        col.names = c('$\\nu_2 / \\nu_1$', nu1)) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 5) %>%
+    column_spec(1, bold = T, border_right = T)%>%
+    landscape()
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$\\nu_2 / \\nu_1$', nu1)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), font_size = 7) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+```
+
+## Cunatile pentru $F_{\nu_1, \nu_2, 0.975}$
+
+```{r, echo=FALSE, out.width = dimplot}
+nu1 = 4
+nu2 = 5
+alpha = 0.975
+
+u = seq(0, 10, by=.01)
+plot(u,df(u, nu1, nu2),type="l", axes=FALSE,
+     xlab="", ylab="", col="white")
+axis(1, labels = F, tcl = 0,
+     col = "grey20")
+
+I = which((u<=qf(alpha, nu1, nu2)))
+polygon(c(u[I], rev(u[I])), c(df(u, nu1, nu2)[I], rep(0,length(I))),
+        col="grey80", border=NA)
+lines(u, df(u, nu1, nu2), lwd=3, col="royalblue")
+
+text(5, df(5, nu1, nu2)+0.5, TeX("$X\\sim F_{\\nu_1, \\nu_2}$"), cex = 1.5)
+
+text(1.2, df(1.2, nu1, nu2)-0.25, TeX("Aria = 0.975"), cex = 1.25)
+
+axis(side = 1, at = qf(alpha, nu1, nu2), 
+     labels = TeX("$F_{\\nu_1, \\nu_2, 0.975}$"), 
+     font = 2)
+
+```
+
+```{r, echo=FALSE}
+options(digits = 3)
+
+nu1 = c(1:10, 12, 15, 20, 24, 30, 40, 60, 120, Inf)
+nu2 = c(1:30, 40, 60, 120, Inf)
+alpha = 0.975
+
+m = t(sapply(nu2, function(x){qf(alpha, nu1, x)}))
+
+colnames(m) = nu1
+
+m = as.data.frame(m)
+m = cbind(nu2, m)
+names(m)[1] = "$\nu_2 / \nu_1$"
+
+if (getOutputFormat() == "pdf_document"){
+  kable(m, format = "latex", longtable = T, booktabs = T, 
+        col.names = c('$\\nu_2 / \\nu_1$', nu1)) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), font_size = 5) %>%
+    column_spec(1, bold = T, border_right = T)%>%
+    landscape()
+    
+}else{
+  kable(m, booktabs = T,
+        col.names = c('$\\nu_2 / \\nu_1$', nu1)) %>%
+    kable_styling(bootstrap_options = c("striped", "hover"), font_size = 7) %>%
+    column_spec(1, bold = T, border_right = T)
+}
+```

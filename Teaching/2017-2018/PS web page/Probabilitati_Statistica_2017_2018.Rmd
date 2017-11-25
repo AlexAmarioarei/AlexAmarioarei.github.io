@@ -174,7 +174,7 @@ Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare
 În cazul în care o temă nu va fi predată la timp, nu va avea formatul specificat sau nu va fi lizibilă, aceasta va fi punctată cu 0 puncte.  
 ```
 
-> **TABELE STATISTICE** Descărcați de [aici](tables/tabel.pdf).
+> **TABELE STATISTICE** Vizualizați tabelele în format [HTML](tables/Tabele_Statistice.html) sau [PDF](tables/Tabele_Statistice_v2.pdf).
 
 ## Proiect de laborator
 ***
