@@ -1,0 +1,17 @@
+base
+methods
+RevoUtilsMath
+datasets
+utils
+grDevices
+graphics
+stats
+knitr
+DT
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr

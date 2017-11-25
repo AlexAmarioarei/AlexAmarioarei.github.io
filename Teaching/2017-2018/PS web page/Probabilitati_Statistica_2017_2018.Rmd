@@ -203,7 +203,7 @@ Studenții trebuie să trimită proiectele în folderele cu grupele corespunzăt
 ## Rezultate
 ***
 
-```{r, echo= FALSE}
+```{r, echo = FALSE}
 stat_tab_R1 = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
 
 # stat_tab_R1 = stat_tab_R1[,-1]
@@ -213,7 +213,7 @@ stat_tab_R1 = read.csv("results/Tabel_Prob_Stat.csv", stringsAsFactors = FALSE)
 # {paste0("rgb(255,", ., ",", ., ")")}
 
 # fix some left 2 columns and right 1 column
-datatable(
+DT::datatable(
   stat_tab_R1, class = 'cell-border stripe',
   # style = 'bootstrap',
   extensions = c('FixedColumns', 'Buttons', 'Scroller'),
