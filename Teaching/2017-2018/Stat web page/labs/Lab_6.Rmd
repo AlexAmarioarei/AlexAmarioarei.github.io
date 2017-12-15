@@ -1,0 +1,312 @@
+---
+title: "Laborator 6"
+subtitle: Proprietăți ale estimatorilor
+output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+  html_document:
+    code_folding: show
+    css: labs_css/labs.css
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+    includes:
+      in_header: lab_header/lab_header.html
+      after_body: lab_header/lab_footer.html
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    reference_docx: template/template.docx
+    toc: no
+---
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 60
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+Obiectivul acestui laborator este de a ilustra noțiunea de consistență a unui estimator precum și de a compara mai mulți estimatori. 
+
+```{r, echo=FALSE}
+library(knitr)
+
+knitr::opts_chunk$set(comment = NA, prompt = FALSE, collapse = TRUE, error = TRUE, fig.align = 'center')
+
+source("functions/getOutputFormat.R")
+
+if (getOutputFormat() == "pdf_document"){
+  source("functions/figureNumber_tex.R")
+  source("functions/tableNumber_tex.R")
+  options(knitr.table.format = "latex") # add format latex 
+  dimplot = "70%"
+  engine_block = "block"
+}else{
+  source("functions/figureNumber.R")
+  source("functions/tableNumber.R")
+  options(knitr.table.format = "html") # add format html 
+  dimplot = "80%"
+  engine_block = "block2"
+}
+
+```
+
+
+# Exemplu de comparare a trei estimatori
+
+```{r, type = "rmdexercise", engine = engine_block}
+Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație normală de medie $\mu$ și varianță $\sigma^2$. Atunci 
+
+$$
+  \hat{\mu}_1 = \frac{1}{n}\sum_{i=1}^{n}X_i, \quad \hat{\mu}_2 = M_n\,(\text{mediana}\,), \quad \hat{\mu}_3 = \frac{X_{(1)} + X_{(n)}}{2}
+$$
+
+sunt trei estimatori punctuali pentru $\mu$. Creați o funcție care să ilustreze cum sunt repartizați cei trei estimatori. Începeți cu $n = 10$, $\mu = 0$ și $\sigma^2 = 1$ și trasați histogramele pentru a-i compara. Ce se întâmplă dacă schimbați $n$, $\mu$ sau $\sigma^2$ ?
+
+
+```
+
+Vom crea o funcție numită `norm_estimators` care va construi repartițiile celor trei estimatori:
+
+```{r}
+norm_estimators = function(n, mu, sigma, S){
+  # Initializam
+  mu1 = numeric(S)
+  mu2 = numeric(S)
+  mu3 = numeric(S)
+  
+  # repetam experimentul de S ori
+  for (i in 1:S){
+    x = rnorm(n, mean = mu, sd = sigma)
+    
+    # calculam estimatorii
+    mu1[i] = mean(x)
+    mu2[i] = median(x)
+    mu3[i] = (min(x)+max(x))/2
+  }
+  
+  # afisam variantele estimatorilor 
+  print(cbind(var_mu1 = var(mu1), var_mu2 = var(mu2), var_mu3 = var(mu3)))
+  
+ return(cbind(mu1 = mu1, mu2 = mu2, mu3 = mu3))
+  
+}
+```
+
+Pentru a ilustra grafic histogramele celor trei estimatori, considerăm $\mu = 0$ și $\sigma^2 = 1$ și avem:
+
+```{r, echo = FALSE, out.width = dimplot}
+mu = 0
+sigma = 1
+
+n = 1000
+S = 10000
+
+a = norm_estimators(n, mu, sigma, S)
+
+par(mfrow = c(1,3))
+hist(a[,1], freq=FALSE, xlab=expression(hat(mu)[1]), 
+     col="gray80", border="white", 
+     main = expression(paste("Histograma lui ", hat(mu)[1])),
+     ylab = "Densitatea")
+abline(v=mu, col = "brown3", lty = 2)
+
+hist(a[,2], freq=FALSE, xlab=expression(hat(mu)[2]), 
+     col="gray80", border="white",
+     main = expression(paste("Histograma lui ", hat(mu)[2])),
+     ylab = "Densitatea")
+abline(v=mu, col = "brown3", lty = 2)
+
+hist(a[,3], freq=FALSE, xlab=expression(hat(mu)[3]), 
+     col="gray80", border="white",
+     main = expression(paste("Histograma lui ", hat(mu)[3])),
+     ylab = "Densitatea")
+abline(v=mu, col = "brown3", lty = 2)
+```
+
+# Ilustrarea consistenței unui estimator
+
+```{r, type = "rmdexercise", engine = engine_block}
+Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație $Pois(\theta)$. Ilustrați grafic consistența estimatorului $\hat{\theta}_n = S_n^2$ trasând histograma repartiției lui $\hat{\theta}_n$ pentru $n\in\{10,25,50,100\}$. Ce observați?
+
+
+```
+
+Considerăm funcția `pois_est` care pentru $\theta$ fixat simulează repartiția estimatorului $\hat{\theta}_n$: 
+
+```{r}
+pois_est1 = function(n, theta, S){
+  # initializare
+  sigma1 = numeric(S)
+  
+  for (i in 1:S){
+    x = rpois(n, theta)
+    sigma1[i] = var(x)
+  }
+  # afisam varianta estimatorului
+  print(paste0("Pentru n = ", n," varianta estimatorului este ", var(sigma1)))
+  return(sigma1)
+}
+```
+
+Considerând $\theta = 3$ și $n\in\{10,25,50,100\}$ avem: 
+
+```{r, echo = FALSE, out.width = dimplot}
+theta = 3
+
+par(mfrow=c(2,2))
+a1 = pois_est1(10, theta, 50000)
+a2 = pois_est1(25, theta, 50000)
+a3 = pois_est1(50, theta, 50000)
+a4 = pois_est1(100, theta, 50000)
+
+
+hist(a1, freq=FALSE, xlab=expression(hat(theta)[n]), 
+     col="gray80", border="white", main = "n = 10", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a2, freq=FALSE, xlab=expression(hat(theta)[n]), 
+     col="gray80", border="white", main = "n = 25", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a3, freq=FALSE, xlab=expression(hat(theta)[n]), 
+     col="gray80", border="white", main = "n = 50", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a4, freq=FALSE, xlab=expression(hat(theta)[n]), 
+     col="gray80", border="white", main = "n = 100", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+```
+
+
+Ce se întâmplă dacă în loc de $\hat{\theta}_n$ considerăm estimatorul $\tilde{\theta}_n = \bar{X}_n$ sau estimatorul $\dot{\theta}_n = \sqrt{\bar{X}_n S_n^2}$ ?
+
+Pentru $\tilde{\theta}_n$ avem 
+
+```{r, echo = FALSE, out.width = dimplot}
+pois_est2 = function(n, theta, S){
+  # initializare
+  sigma2 = numeric(S)
+  
+  for (i in 1:S){
+    x = rpois(n, theta)
+    sigma2[i] = mean(x)
+  }
+  # afisam varianta estimatorului
+  print(paste0("Pentru n = ", n," varianta estimatorului este ", var(sigma2)))
+  return(sigma2)
+}
+
+theta = 3
+
+par(mfrow=c(2,2))
+a1 = pois_est2(10, theta, 50000)
+a2 = pois_est2(25, theta, 50000)
+a3 = pois_est2(50, theta, 50000)
+a4 = pois_est2(100, theta, 50000)
+
+
+hist(a1, freq=FALSE, xlab=expression(tilde(theta)[n]), 
+     col="gray80", border="white", main = "n = 10", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a2, freq=FALSE, xlab=expression(tilde(theta)[n]), 
+     col="gray80", border="white", main = "n = 25", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a3, freq=FALSE, xlab=expression(tilde(theta)[n]), 
+     col="gray80", border="white", main = "n = 50", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a4, freq=FALSE, xlab=expression(tilde(theta)[n]), 
+     col="gray80", border="white", main = "n = 100", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+```
+
+iar pentru $\dot{\theta}_n$ avem 
+
+```{r, echo = FALSE, out.width = dimplot}
+pois_est3 = function(n, theta, S){
+  # initializare
+  sigma3 = numeric(S)
+  
+  for (i in 1:S){
+    x = rpois(n, theta)
+    sigma3[i] = sqrt(mean(x)*var(x))
+  }
+  # afisam varianta estimatorului
+  print(paste0("Pentru n = ", n," varianta estimatorului este ", var(sigma3)))
+  return(sigma3)
+}
+
+theta = 3
+
+par(mfrow=c(2,2))
+
+a1 = pois_est3(10, theta, 50000)
+a2 = pois_est3(25, theta, 50000)
+a3 = pois_est3(50, theta, 50000)
+a4 = pois_est3(100, theta, 50000)
+
+
+hist(a1, freq=FALSE, xlab=expression(dot(theta)[n]), 
+     col="gray80", border="white", main = "n = 10", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a2, freq=FALSE, xlab=expression(dot(theta)[n]), 
+     col="gray80", border="white", main = "n = 25", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a3, freq=FALSE, xlab=expression(dot(theta)[n]), 
+     col="gray80", border="white", main = "n = 50", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+
+hist(a4, freq=FALSE, xlab=expression(dot(theta)[n]), 
+     col="gray80", border="white", main = "n = 100", xlim = c(0,12),
+     ylab = "Densitatea")
+abline(v=theta, col = "brown3", lty = 2)
+```
+
+

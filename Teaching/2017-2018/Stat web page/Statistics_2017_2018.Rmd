@@ -103,10 +103,16 @@ pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
 lab4 = "[HTML](labs/Lab_4.html)"
 pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
 
-tabLab = data.frame(Nr = c(1, 2, 3, 4),
-                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4"),
-                    Htmls = c(lab1, lab2, lab3, lab4),
-                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4))
+lab5 = "[HTML](labs/Lab_5.html)"
+pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
+
+lab6 = "[HTML](labs/Lab_6.html)"
+pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
+
+tabLab = data.frame(Nr = c(1, 2, 3, 4, 5, 6),
+                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6"),
+                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6),
+                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6))
 
 
 kable(tabLab, 
@@ -144,7 +150,7 @@ t3data = "~~20 Noiembrie~~ 26 Noiembrie"
 
 t4 = "[Tema 4](homework/Tema_4.pdf)"
 t4sol = "Solutie Tema 4"
-t4data = "17 Decembrie"
+t4data = "~~17 Decembrie~~ 20 Decembrie"
 
 t5 = "Tema 5"
 t5sol = "Solutie Tema 5"
