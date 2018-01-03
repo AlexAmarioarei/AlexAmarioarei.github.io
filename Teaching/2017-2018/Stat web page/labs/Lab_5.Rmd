@@ -761,3 +761,96 @@ rug(xp3n)
 
 ```
 
+
+# Metoda grafică: Boxplot 
+
+Una dintre metodele grafice des întâlnite în vizualizarea datelor (cantitative) unidimensionale este *boxplot*-ul (eng. *box and whisker plot* - cutia cu mustăți). Această metodă grafică descriptivă este folosită în principal pentru a investiga forma repartiției (simetrică sau asimetrică) datelor dar și variabilitatea acestora precum și pentru detectarea și ilustrarea schimbărilor de locație și variație între diferitele grupuri de date. 
+
+După cum putem vedea și în figura de mai jos, cutia este definită, de la stânga la dreapta (sau de jos în sus în funcție de cum este reprezentat boxplot-ul: orizontal sau vertical), de prima cuartilă $Q_1$ și de a treia curatilă $Q_3$ ceea ce înseamnă că $50\%$ dintre observații se află în interiorul cutiei. Linia din interiorul cutiei este determinată de mediană sau a doua cuartilă $Q_2$. 
+
+Mustățile care pornesc de o parte și de alta a cutiei sunt determinate astfel (vom folosi conveția folosită de John Tukey^[A se consulta pag. 40-56 din cartea lui John Tukey *Exploratory data analysis*, Addison-Wesley Publishing Company, 1977]): mustața din stânga este determinată de cea mai mică observație mai mare decât $Q_1-1.5 IQR$ iar cea din dreapta de cea mai mare observație din setul de date mai mică decât $Q_3+1.5IQR$, unde $IQR = Q_3-Q_1$ este distanța dintre cuartile (*interquartile range*). 
+
+Valorile observațiilor din setul de date care sunt sau prea mici sau prea mari se numesc valori aberante (*outliers*) și conform lui Tukey sunt definite astfel: *valori strict aberante* care se află la $3IQR$ deasupra celei de-a treia curtilă $Q_3$ sau la $3IQR$ sub prima cuartilă ($x<Q_1-3IQR$ sau $x>Q_3+3IQR$) și *valori potențial aberante* care se află la $1.5IQR$ deasupra celei de-a treia curtilă $Q_3$ sau la $1.5IQR$ sub prima cuartilă ($x<Q_1-1.5IQR$ sau $x>Q_3+1.5IQR$). 
+
+```{r, echo=FALSE, out.width = dimplot, warning=FALSE}
+set.seed(1234)
+
+x = rnorm(500)
+
+par(bty = "n", mar = c(1, 1, 1, 1) )
+
+bp = boxplot(x, horizontal = TRUE, 
+        axes = FALSE,
+        col = grey(0.8, 0.4), 
+        ylim = c(-3.5,3.5))
+
+points(c(min(x), max(x)), c(1,1),
+       pch = 16)
+
+text(bp$stats[1]-0.25, 1.33, TeX("Cea mai mica observatie\n mai mare decat"), cex = 0.8)
+text(bp$stats[1], 1.25, TeX("$Q_1 - 1.5 IQR$"), cex = 0.8)
+
+text(bp$stats[2]-0.3, 1.32, TeX("Prima cuartila"), cex = 0.8)
+text(bp$stats[2]-0.25, 1.25, TeX("$(Q_1)$"), cex = 0.7)
+
+text(bp$stats[3], 1.32, TeX("Mediana"), cex = 0.8)
+text(bp$stats[3], 1.25, TeX("$(Q_2)$"), cex = 0.7)
+
+text(bp$stats[4]+0.3, 1.32, TeX("A treia cuartila"), cex = 0.8)
+text(bp$stats[4]+0.25, 1.25, TeX("$(Q_3)$"), cex = 0.7)
+
+text(bp$stats[5]+0.25, 1.33, TeX("Cea mai mare observatie\n mai mica decat"), cex = 0.8)
+text(bp$stats[5], 1.25, TeX("$Q_3 + 1.5 IQR$"), cex = 0.8)
+
+
+text(min(x)-0.1, 1.1, "Valoarea\n minima", cex = 0.7)
+text(max(x)+0.1, 1.1, "Valoarea\n maxima", cex = 0.7)
+
+
+text(bp$stats[3], 0.7, TeX("$IQR = Q_3 - Q_1$"), cex = 0.8)
+
+s.bp.out = sort(bp$out)
+
+arrows(min(x)+0.2, 0.72, s.bp.out[1], 0.98, length = 0.13, angle = 15, col = "grey30")
+arrows(min(x)+0.2, 0.72, s.bp.out[2], 0.98, length = 0.13, angle = 15, col = "grey30")
+arrows(min(x)+0.2, 0.72, s.bp.out[3], 0.98, length = 0.13, angle = 15, col = "grey30")
+arrows(min(x)+0.2, 0.72, s.bp.out[4], 0.98, length = 0.13, angle = 15, col = "grey30")
+
+text(min(x)+0.2, 0.67, "Valori potential\n aberante", cex = 0.8)
+
+arrows(max(x)-0.1, 0.72, s.bp.out[6], 0.98, length = 0.13, angle = 15, col = "grey30")
+arrows(max(x)-0.1, 0.72, s.bp.out[7], 0.98, length = 0.13, angle = 15, col = "grey30")
+arrows(max(x)-0.1, 0.72, s.bp.out[8], 0.98, length = 0.13, angle = 15, col = "grey30")
+
+text(max(x)-0.2, 0.67, "Valori potential\n aberante", cex = 0.8)
+
+```
+
+
+În R metoda grafică boxplot se poate trasa cu ajutorul funcției `boxplot()`. Aceasta primește ca argumente sau un vector de observații numerice `x` atunci când dorim să ilustrăm repartiția unei variabile sau o formulă de tipul `y~grup`, unde `y` este un vector numeric care va fi împărțit în funcție de variabila discretă `grup`, atunci când vrem să comparăm aceeași variabilă numerică în funcție de una discretă (calitatăvă). Pentru mai multe informații tastați `?boxplot`.
+
+```{r, type = "rmdexercise", engine = engine_block}
+Considerați setul de date `mtcars`. Investigați cu ajutorul unui boxplot cum variază greutatea mașinilor, variabila `wt`, în funcție de numărul de cilindrii `cyl`. Afișați numele mașinilor care prezintă potențiale valori aberante. Aceeași cerință pentru perechile `mpg` - `cyl`, `hp` - `cyl` și `hp` - `am`. 
+```
+
+```{r, echo=FALSE, out.width = dimplot, warning=FALSE}
+par(bty = "n")
+bp = boxplot(mtcars$wt ~ mtcars$cyl,
+             xlab = "Numar de cilindrii", 
+             ylab = "Greutate (in tone)",
+             col = "grey80",
+             main = "Setul de date mtcars: greutate vs numar cilindrii")
+
+cars = mtcars[mtcars$cyl == 8, ]
+cars.names = rownames(cars)[which(cars$wt %in% bp$out)]
+
+text(c(3,3,2.4)+0.3, bp$out, cars.names, cex = 0.6)
+text( c(1:length(unique(mtcars$cyl))) , 
+      bp$stats[nrow(bp$stats) , ] + 0.5 , 
+      paste("n = ", table(mtcars$cyl),sep=""),
+      cex = 0.8)
+```
+
+Numele mașinilor care au o greutate potențial aberantă este `r paste0(cars.names, collapse = ", ")`.
+
+

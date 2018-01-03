@@ -519,5 +519,65 @@ cuantilelor
 
 \begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
+\section{Metoda grafică: Boxplot}\label{metoda-grafica-boxplot}
+
+Una dintre metodele grafice des întâlnite în vizualizarea datelor
+(cantitative) unidimensionale este \emph{boxplot}-ul (eng. \emph{box and
+whisker plot} - cutia cu mustăți). Această metodă grafică descriptivă
+este folosită în principal pentru a investiga forma repartiției
+(simetrică sau asimetrică) datelor dar și variabilitatea acestora precum
+și pentru detectarea și ilustrarea schimbărilor de locație și variație
+între diferitele grupuri de date.
+
+După cum putem vedea și în figura de mai jos, cutia este definită, de la
+stânga la dreapta (sau de jos în sus în funcție de cum este reprezentat
+boxplot-ul: orizontal sau vertical), de prima cuartilă \(Q_1\) și de a
+treia curatilă \(Q_3\) ceea ce înseamnă că \(50\%\) dintre observații se
+află în interiorul cutiei. Linia din interiorul cutiei este determinată
+de mediană sau a doua cuartilă \(Q_2\).
+
+Mustățile care pornesc de o parte și de alta a cutiei sunt determinate
+astfel (vom folosi conveția folosită de John Tukey\footnote{A se
+  consulta pag. 40-56 din cartea lui John Tukey \emph{Exploratory data
+  analysis}, Addison-Wesley Publishing Company, 1977}): mustața din
+stânga este determinată de cea mai mică observație mai mare decât
+\(Q_1-1.5 IQR\) iar cea din dreapta de cea mai mare observație din setul
+de date mai mică decât \(Q_3+1.5IQR\), unde \(IQR = Q_3-Q_1\) este
+distanța dintre cuartile (\emph{interquartile range}).
+
+Valorile observațiilor din setul de date care sunt sau prea mici sau
+prea mari se numesc valori aberante (\emph{outliers}) și conform lui
+Tukey sunt definite astfel: \emph{valori strict aberante} care se află
+la \(3IQR\) deasupra celei de-a treia curtilă \(Q_3\) sau la \(3IQR\)
+sub prima cuartilă (\(x<Q_1-3IQR\) sau \(x>Q_3+3IQR\)) și \emph{valori
+potențial aberante} care se află la \(1.5IQR\) deasupra celei de-a treia
+curtilă \(Q_3\) sau la \(1.5IQR\) sub prima cuartilă (\(x<Q_1-1.5IQR\)
+sau \(x>Q_3+1.5IQR\)).
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-16-1} \end{center}
+
+În R metoda grafică boxplot se poate trasa cu ajutorul funcției
+\texttt{boxplot()}. Aceasta primește ca argumente sau un vector de
+observații numerice \texttt{x} atunci când dorim să ilustrăm repartiția
+unei variabile sau o formulă de tipul \texttt{y\textasciitilde{}grup},
+unde \texttt{y} este un vector numeric care va fi împărțit în funcție de
+variabila discretă \texttt{grup}, atunci când vrem să comparăm aceeași
+variabilă numerică în funcție de una discretă (calitatăvă). Pentru mai
+multe informații tastați \texttt{?boxplot}.
+
+\begin{rmdexercise}
+Considerați setul de date \texttt{mtcars}. Investigați cu ajutorul unui
+boxplot cum variază greutatea mașinilor, variabila \texttt{wt}, în
+funcție de numărul de cilindrii \texttt{cyl}. Afișați numele mașinilor
+care prezintă potențiale valori aberante. Aceeași cerință pentru
+perechile \texttt{mpg} - \texttt{cyl}, \texttt{hp} - \texttt{cyl} și
+\texttt{hp} - \texttt{am}.
+\end{rmdexercise}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-18-1} \end{center}
+
+Numele mașinilor care au o greutate potențial aberantă este Cadillac
+Fleetwood, Lincoln Continental, Chrysler Imperial.
+
 
 \end{document}
