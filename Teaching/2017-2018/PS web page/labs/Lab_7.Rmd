@@ -107,9 +107,9 @@ $$
   \mathbb{P}(A_n) \approx p_n(M) = \frac{\#\left\{j\in\{1,\ldots,M\}\,|\,\left|X_{n}(\omega_j) - X(\omega_j)\right| > \epsilon\right\}}{M}.
 $$
 
-Concret, în figura de mai jos, considerăm $M = 30$ de repetiții ale experimentului (avem $M$ curbe) cu $n = 5000$ de realizări ale unui șir de variabile aleatoare repartizate $\mathcal{U}[0,1]$, $X = 0.5$ și $\epsilon = 0.01$. Pentru $i\in\{500, 1500, 2500, 3500, 4500\}$ am calculat și afișat frecvența de realizarea a evenimentului $A_i$ (câte din cele $M$ curbe sunt în afara benzii $[-\epsilon, \epsilon]$ pentru $i$, fixat). Observăm că $p_{500}(30) = 0.37$ și $p_{3500}(30) = 0.03$, convergența lui $p_n(M)\underset{n\to \infty}{\longrightarrow} 0$ implicând convergența în probabilitate.
+Concret, în figura de mai jos, considerăm $M = 30$ de repetiții ale experimentului (avem $M$ curbe) cu $n = 5000$ de realizări ale unui șir de variabile aleatoare $X_k = \frac{Y_1+\cdots+Y_k}{k}$, cu $Y_i$ independente și repartizate $\mathcal{U}[0,1]$, $X = 0.5$ și $\epsilon = 0.01$. Pentru $i\in\{500, 1500, 2500, 3500, 4500\}$ am calculat și afișat frecvența de realizarea a evenimentului $A_i$ (câte din cele $M$ curbe sunt în afara benzii $[-\epsilon, \epsilon]$ pentru $i$, fixat). Observăm că $p_{500}(30) = 0.37$ și $p_{3500}(30) = 0.03$, convergența lui $p_n(M)\underset{n\to \infty}{\longrightarrow} 0$ implicând convergența în probabilitate.
 
-```{r, echo = FALSE, out.width=dimplot}
+```{r, echo = TRUE, out.width=dimplot}
 showConvergenceProbability = function(N = 2000, m = 10, e = 0.05, n = floor(N/2), 
                                       step = max(floor(N/40), 0.5), min = 0, max = 1,
                                       seed = NULL){

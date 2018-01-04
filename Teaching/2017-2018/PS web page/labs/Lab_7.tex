@@ -337,14 +337,67 @@ folosim aproximarea
 
 Concret, în figura de mai jos, considerăm \(M = 30\) de repetiții ale
 experimentului (avem \(M\) curbe) cu \(n = 5000\) de realizări ale unui
-șir de variabile aleatoare repartizate \(\mathcal{U}[0,1]\), \(X = 0.5\)
-și \(\epsilon = 0.01\). Pentru \(i\in\{500, 1500, 2500, 3500, 4500\}\)
-am calculat și afișat frecvența de realizarea a evenimentului \(A_i\)
-(câte din cele \(M\) curbe sunt în afara benzii
-\([-\epsilon, \epsilon]\) pentru \(i\), fixat). Observăm că
-\(p_{500}(30) = 0.37\) și \(p_{3500}(30) = 0.03\), convergența lui
+șir de variabile aleatoare \(X_k = \frac{Y_1+\cdots+Y_k}{k}\), cu
+\(Y_i\) independente și repartizate \(\mathcal{U}[0,1]\), \(X = 0.5\) și
+\(\epsilon = 0.01\). Pentru \(i\in\{500, 1500, 2500, 3500, 4500\}\) am
+calculat și afișat frecvența de realizarea a evenimentului \(A_i\) (câte
+din cele \(M\) curbe sunt în afara benzii \([-\epsilon, \epsilon]\)
+pentru \(i\), fixat). Observăm că \(p_{500}(30) = 0.37\) și
+\(p_{3500}(30) = 0.03\), convergența lui
 \(p_n(M)\underset{n\to \infty}{\longrightarrow} 0\) implicând
 convergența în probabilitate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{showConvergenceProbability =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{N =} \DecValTok{2000}\NormalTok{, }\DataTypeTok{m =} \DecValTok{10}\NormalTok{, }\DataTypeTok{e =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{n =} \KeywordTok{floor}\NormalTok{(N}\OperatorTok{/}\DecValTok{2}\NormalTok{), }
+                                      \DataTypeTok{step =} \KeywordTok{max}\NormalTok{(}\KeywordTok{floor}\NormalTok{(N}\OperatorTok{/}\DecValTok{40}\NormalTok{), }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{,}
+                                      \DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{)\{}
+  \CommentTok{# only for uniform distribution }
+\NormalTok{  mu =}\StringTok{ }\NormalTok{(min }\OperatorTok{+}\StringTok{ }\NormalTok{max)}\OperatorTok{/}\DecValTok{2}
+\NormalTok{  a =}\StringTok{ }\OperatorTok{-}\StringTok{ }\NormalTok{e }\OperatorTok{-}\StringTok{ }\FloatTok{0.05}
+\NormalTok{  b =}\StringTok{ }\NormalTok{e }\OperatorTok{+}\StringTok{ }\FloatTok{0.05}
+  
+  \KeywordTok{set.seed}\NormalTok{(seed)}
+  
+\NormalTok{  xmat =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{runif}\NormalTok{(N}\OperatorTok{*}\NormalTok{m, }\DataTypeTok{min =}\NormalTok{ min, }\DataTypeTok{max =}\NormalTok{ max), }\DataTypeTok{ncol =}\NormalTok{ m)}
+\NormalTok{  y =}\StringTok{ }\KeywordTok{apply}\NormalTok{(xmat, }\DecValTok{2}\NormalTok{, cumsum)}\OperatorTok{/}\DecValTok{1}\OperatorTok{:}\NormalTok{N}
+  
+  
+  \KeywordTok{par}\NormalTok{(}\DataTypeTok{oma =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{))}
+  
+  \KeywordTok{plot}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{N, y[,}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{mu, }\DataTypeTok{col =} \KeywordTok{grey}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{0.4}\NormalTok{), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+       \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{, }
+       \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(a }\OperatorTok{-}\StringTok{ }\FloatTok{0.05}\NormalTok{, b }\OperatorTok{+}\StringTok{ }\FloatTok{0.05}\NormalTok{), }
+       \DataTypeTok{ylab =} \KeywordTok{TeX}\NormalTok{(}\StringTok{"$X_n-X$"}\NormalTok{),}
+       \DataTypeTok{xlab =} \StringTok{"n"}\NormalTok{,}
+       \DataTypeTok{cex.axis =} \FloatTok{0.7}\NormalTok{,}
+       \DataTypeTok{cex.lab =} \FloatTok{0.9}\NormalTok{)}
+  
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{m)\{}
+    \KeywordTok{lines}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{N, y[,i] }\OperatorTok{-}\StringTok{ }\NormalTok{mu, }\DataTypeTok{col =} \KeywordTok{grey}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{0.4}\NormalTok{))}
+\NormalTok{  \}}
+  
+  
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \OperatorTok{-}\StringTok{ }\NormalTok{e, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =}\NormalTok{ e, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+  
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+  
+  \ControlFlowTok{for}\NormalTok{( j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(n))\{}
+\NormalTok{    pj =}\StringTok{ }\KeywordTok{sum}\NormalTok{(y[n[j],]}\OperatorTok{>}\NormalTok{mu}\OperatorTok{+}\NormalTok{e }\OperatorTok{|}\StringTok{ }\NormalTok{y[n[j],]}\OperatorTok{<}\NormalTok{mu}\OperatorTok{-}\NormalTok{e)}\OperatorTok{/}\NormalTok{m}
+    
+    \KeywordTok{segments}\NormalTok{(n[j]}\OperatorTok{-}\NormalTok{step, a, n[j]}\OperatorTok{-}\NormalTok{step, b, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"royalblue"}\NormalTok{)}
+    \KeywordTok{segments}\NormalTok{(n[j]}\OperatorTok{+}\NormalTok{step, a, n[j]}\OperatorTok{+}\NormalTok{step, b, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"royalblue"}\NormalTok{)}
+    
+    \KeywordTok{text}\NormalTok{(n[j], b}\OperatorTok{+}\FloatTok{0.005}\NormalTok{, }\KeywordTok{round}\NormalTok{(pj, }\DataTypeTok{digits =} \DecValTok{2}\NormalTok{),}
+         \DataTypeTok{cex =} \FloatTok{0.85}\NormalTok{)}
+\NormalTok{  \}}
+  
+\NormalTok{\}}
+
+\KeywordTok{showConvergenceProbability}\NormalTok{(}\DataTypeTok{N =} \DecValTok{5000}\NormalTok{, }\DataTypeTok{m =} \DecValTok{30}\NormalTok{, }\DataTypeTok{e =} \FloatTok{0.01}\NormalTok{, }\DataTypeTok{n =} \KeywordTok{seq}\NormalTok{(}\DecValTok{500}\NormalTok{, }\DecValTok{4500}\NormalTok{, }\DecValTok{1000}\NormalTok{), }\DataTypeTok{seed =} \DecValTok{321}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab_7_files/figure-latex/unnamed-chunk-3-1} \end{center}
 

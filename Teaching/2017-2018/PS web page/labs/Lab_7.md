@@ -50,7 +50,58 @@ $$
   \mathbb{P}(A_n) \approx p_n(M) = \frac{\#\left\{j\in\{1,\ldots,M\}\,|\,\left|X_{n}(\omega_j) - X(\omega_j)\right| > \epsilon\right\}}{M}.
 $$
 
-Concret, în figura de mai jos, considerăm $M = 30$ de repetiții ale experimentului (avem $M$ curbe) cu $n = 5000$ de realizări ale unui șir de variabile aleatoare repartizate $\mathcal{U}[0,1]$, $X = 0.5$ și $\epsilon = 0.01$. Pentru $i\in\{500, 1500, 2500, 3500, 4500\}$ am calculat și afișat frecvența de realizarea a evenimentului $A_i$ (câte din cele $M$ curbe sunt în afara benzii $[-\epsilon, \epsilon]$ pentru $i$, fixat). Observăm că $p_{500}(30) = 0.37$ și $p_{3500}(30) = 0.03$, convergența lui $p_n(M)\underset{n\to \infty}{\longrightarrow} 0$ implicând convergența în probabilitate.
+Concret, în figura de mai jos, considerăm $M = 30$ de repetiții ale experimentului (avem $M$ curbe) cu $n = 5000$ de realizări ale unui șir de variabile aleatoare $X_k = \frac{Y_1+\cdots+Y_k}{k}$, cu $Y_i$ independente și repartizate $\mathcal{U}[0,1]$, $X = 0.5$ și $\epsilon = 0.01$. Pentru $i\in\{500, 1500, 2500, 3500, 4500\}$ am calculat și afișat frecvența de realizarea a evenimentului $A_i$ (câte din cele $M$ curbe sunt în afara benzii $[-\epsilon, \epsilon]$ pentru $i$, fixat). Observăm că $p_{500}(30) = 0.37$ și $p_{3500}(30) = 0.03$, convergența lui $p_n(M)\underset{n\to \infty}{\longrightarrow} 0$ implicând convergența în probabilitate.
+
+
+```r
+showConvergenceProbability = function(N = 2000, m = 10, e = 0.05, n = floor(N/2), 
+                                      step = max(floor(N/40), 0.5), min = 0, max = 1,
+                                      seed = NULL){
+  # only for uniform distribution 
+  mu = (min + max)/2
+  a = - e - 0.05
+  b = e + 0.05
+  
+  set.seed(seed)
+  
+  xmat = matrix(runif(N*m, min = min, max = max), ncol = m)
+  y = apply(xmat, 2, cumsum)/1:N
+  
+  
+  par(oma = c(0.5,0.5,0.5,0.5))
+  
+  plot(1:N, y[,1] - mu, col = grey(0.8, 0.4), type = "l",
+       bty = "n", 
+       ylim = c(a - 0.05, b + 0.05), 
+       ylab = TeX("$X_n-X$"),
+       xlab = "n",
+       cex.axis = 0.7,
+       cex.lab = 0.9)
+  
+  for (i in 2:m){
+    lines(1:N, y[,i] - mu, col = grey(0.8, 0.4))
+  }
+  
+  
+  abline(h = - e, lty = 2, lwd = 2)
+  abline(h = e, lty = 2, lwd = 2)
+  
+  abline(h = 0, col = "brown3", lty = 2, lwd = 2)
+  
+  for( j in 1:length(n)){
+    pj = sum(y[n[j],]>mu+e | y[n[j],]<mu-e)/m
+    
+    segments(n[j]-step, a, n[j]-step, b, lty = 2, col = "royalblue")
+    segments(n[j]+step, a, n[j]+step, b, lty = 2, col = "royalblue")
+    
+    text(n[j], b+0.005, round(pj, digits = 2),
+         cex = 0.85)
+  }
+  
+}
+
+showConvergenceProbability(N = 5000, m = 30, e = 0.01, n = seq(500, 4500, 1000), seed = 321)
+```
 
 <img src="Lab_7_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
 
