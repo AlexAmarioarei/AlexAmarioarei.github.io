@@ -133,13 +133,13 @@ kable(tabLab,
 Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%). Bonus aveți și $1$ punct din oficiu:
 
 $$
-  T = \min\left(1+0.5\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i, 10\right)
+  T = \min\left(1+0.6\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i, 10\right)
 $$
 
 ## Teme
 ***
 
-Vor fi 6 teme și acestea vor fi postate (aproape) din două în două săptămâni (de obicei Duminică seara). Este încurajată colaborarea între studenți dar fiecare student trebuie să își scrie propriile soluții. Copierea temei este __interzisă__.
+Vor fi 5 teme și acestea vor fi postate (aproape) din două în două săptămâni (de obicei Duminică seara). Este încurajată colaborarea între studenți dar fiecare student trebuie să își scrie propriile soluții. Copierea temei este __interzisă__.
 
 ```{r echo = FALSE}
 t1 = "[Tema 1](homework/Tema_1.pdf)"
@@ -162,13 +162,17 @@ t5 = "Tema 5"
 t5sol = "Solutie Tema 5"
 t5data = "--"
 
-t6 = "Tema 6"
-t6sol = "Solutie Tema 6"
-t6data = "--"
+# t6 = "~~Tema 6~~"
+# t6sol = "~~Solutie Tema 6~~"
+# t6data = "--"
 
-tab = data.frame(Tema = c(t1, t2, t3, t4, t5, t6), 
-                 Data = c(t1data, t2data, t3data, t4data, t5data, t6data), 
-                 Solution = c(t1sol, t2sol, t3sol, t4sol, t5sol, t6sol))
+tab = data.frame(Tema = c(t1, t2, t3, t4, t5), 
+                 Data = c(t1data, t2data, t3data, t4data, t5data), 
+                 Solution = c(t1sol, t2sol, t3sol, t4sol, t5sol))
+
+# tab = data.frame(Tema = c(t1, t2, t3, t4, t5, t6), 
+#                  Data = c(t1data, t2data, t3data, t4data, t5data, t6data), 
+#                  Solution = c(t1sol, t2sol, t3sol, t4sol, t5sol, t6sol))
 
 kable(tab, 
       col.names = c("Tema", "Data de predare", "Solutii"),
@@ -192,12 +196,12 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Statistică*. Proiect
 
 ```{r echo = FALSE}
 gproj1_301 = "301"
-proj1_301 = "Proiect 1"
-proj1data_301 = "--"
+proj1_301 = "[Proiect HTML](projects/Proiect_301.html) / [Proiect PDF](projects/Proiect_301.pdf)"
+proj1data_301 = "11 Februarie"
 
 gproj1_311_321 = "311, 321"
 proj1_311_321 = "Proiect 1"
-proj1data_311_321 = "--"
+proj1data_311_321 = "11 Februarie"
 
 
 tabProiecte = data.frame(Tema = c(gproj1_301, gproj1_311_321), 

@@ -195,8 +195,8 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Probabilități și S
 
 ```{r echo = FALSE}
 gproj1 = "241, 242, 243, 244"
-proj1 = "Proiect 1"
-proj1data = "--"
+proj1 = "[Proiect HTML](projects/Proiect.html) / [Proiect PDF](projects/Proiect.pdf)"
+proj1data = "2 Februarie"
 
 
 tabProiecte = data.frame(Tema = c(gproj1), Data = c(proj1), Solution = c(proj1data))

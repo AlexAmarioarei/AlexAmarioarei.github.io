@@ -1,0 +1,361 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Proiect},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Proiect}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+\subtitle{Grupa 301}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{framed,color}
+\definecolor{shadecolor}{RGB}{248, 248, 248}
+\definecolor{shadecolor1}{RGB}{216,225,235}
+\definecolor{framecolor}{RGB}{108,123,13}
+
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi
+
+\newenvironment{frshaded*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor}{shadecolor1}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+\newenvironment{rmdblock}[1]
+  {\begin{frshaded*}
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=2em,keepaspectratio}\includegraphics{images/icons/#1}}
+    }
+  }
+  \item
+  }
+  {
+  \end{itemize}
+  \end{frshaded*}
+  }
+
+\newenvironment{rmdcaution}
+  {\begin{rmdblock}{caution}}
+  {\end{rmdblock}}
+% \newenvironment{rmdinsight}
+%   {\begin{rmdblock}{insight}}
+%   {\end{rmdblock}}
+\newenvironment{rmdexercise}
+  {\begin{rmdblock}{exercise}}
+  {\end{rmdblock}}
+\newenvironment{rmdtip}
+  {\begin{rmdblock}{tip}}
+  {\end{rmdblock}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% For insight block %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{shadecolor_insight}{RGB}{223,240,216}
+\definecolor{framecolor_insight}{RGB}{136,193,137}
+
+\newenvironment{frshaded_insight*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor_insight}{shadecolor_insight}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+\newenvironment{rmdblock_insight}[1]
+  {\begin{frshaded_insight*}
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=2em,keepaspectratio}\includegraphics{images/icons/#1}}
+    }
+  }
+  \item
+  }
+  {
+  \end{itemize}
+  \end{frshaded_insight*}
+  }
+
+\newenvironment{rmdinsight}
+  {\begin{rmdblock_insight}{insight}}
+  {\end{rmdblock_insight}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{slashbox}
+\usepackage{color}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\VV{{\mathbb V}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MA{{\mathcal A}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\ME{{\mathcal E}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+
+% independent sign
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Statistic\u a\\ \textit{Instructor}: A. Am\u arioarei, S. Cojocea}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 301, 311, 321}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\textbf{Notă:} Raportul poate fi scris în \emph{Microsoft Word} sau
+\LaTeX (pentru ușurință recomand folosirea pachetului \emph{rmarkdown}
+din \emph{R} - mai multe informații găsiți pe site la secțiunea
+\emph{Link-uri utile}). Toate simulările, figurile și codurile folosite
+trebuie incluse în raport. Se va folosi doar limbajul \emph{R}.
+
+\section{Problemă}\label{problema}
+
+Un segment de lungime \(1\) este rupt în trei bucăți. Presupunând că
+punctele de ruptură sunt date de două variabile aleatoare \(X\) și \(Y\)
+repartizate pe \([0,1]\), Scopul acestui exercțiu este să determinăm, în
+funcție de procedura de alegere a punctelor de ruptură, care este
+probabilitatea de formare a unui triunghi cu lungimile celor trei
+segmente obținute.
+
+\textbf{Procedura \(1\):} Presupunem că punctele de ruptură sunt date de
+două variabile aleatoare \(X\) și \(Y\), independente și repartizate
+uniform pe intervalul \([0,1]\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Fie \(a\), \(b\) și \(c\) lungimile celor trei segmente obținute
+  (luate de la stanga la dreapta). Arătați că lungimile celor trei
+  segmente pot forma un triunghi dacă și numai dacă fiecare dintre cele
+  trei lungimi este mai mică sau egală cu \(\frac{1}{2}\). Traduceți
+  această condiție in funcție de v.a. \(X\) și \(Y\).
+\item
+  Într-o primă etapă dorim să aproximăm lungimile medii ale celor trei
+  segmente obținute. Pentru aceasta, simulăm \(N=5000\) de realizări
+  independente ale cuplului \((X,Y)\). Care sunt valoriile lungimilor
+  medii ? Ce teoremă limită justifică acest rezultat ?
+\item
+  Dorim de asemenea să răspundem într-o manieră mai fină la intrebarea
+  problemei:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Cuplul de puncte \((X,Y)\) de ruptură poate fi văzut ca un punct în
+    pătratul unitate \([0,1]^2\). Plecând de la \(5000\) de realizări
+    independente ale cuplului \((X,Y)\), reprezentați grafic punctele
+    \((X_i,Y_i)\) din interiorul pătratului \([0,1]^2\) care determină
+    cele trei segmente cu ajutorul cărora putem forma un triunghi, cu
+    albastru, și pe celelalte cu roșu.
+  \item
+    Plecând de la \(N=5000\) de realizări independente ale cuplului
+    \((X,Y)\), estimați probabilitatea căutată.
+  \item
+    Găsiți această probabilitate teoretic și comparați cu rezultatul
+    găsit la punctul anterior.
+  \end{enumerate}
+\end{enumerate}
+
+4.\footnote{Această întrebare este mai dificilă și nerezolvarea ei nu
+  scade punctajul proiectului. Cu toate acestea, cine reușește să facă
+  acest subpunct va primi 0.5 puncte suplimentare.} Presupunând că
+punctele de ruptură sunt date de procedura \(1\), ce puteți spune despre
+probabilitatea de formare a unui triunghi obtuzunghic ? Justificați atât
+teoretic cât și prin simulare.
+
+Ne întrebăm acum ce se întâmplă cu probabilitatea de formare a unui
+triunghi cu ajutorul celor trei segmente determinate de punctele de
+ruptură dacă adoptăm următoarele două proceduri.
+
+\textbf{Procedura 2:} Alegem pentru început un punct de ruptură \(X\)
+repartizat uniform \(\mathcal{U}([0,1])\) și dintre cele două segmente
+formate îl alegem pe cel mai lung pe care alegem un al doilea punct,
+\(Y\), repartizat uniform pe acest segment.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+  Reconsiderați punctele b. și c. de la punctul 3.
+\item
+  Pentru a ilustra grafic regiunea determinată de perechile care
+  verifică problema (formează un triunghi) putem considera variabila
+  aleatoare \(Z\) repartizată uniform pe intervalul \([0,1]\) și care să
+  fie independentă de \(X\) și să exprimăm lungimile celor trei segmente
+  în funcție de aceasta. Plecând de la \(5000\) de realizări
+  independente ale cuplului \((X,Z)\), reprezentați grafic, cu albastru,
+  punctele \((X_i, Z_i)\) din interiorul pătratului \([0,1]\) care
+  determină cele trei segmente cu ajutorul cărora putem forma un
+  triunghi și pe celelalte cu roșu.
+\end{enumerate}
+
+\textbf{Procedura 3:} Alegem pentru început un punct de ruptură \(X\)
+repartizat uniform \(\mathcal{U}([0,1])\) care va împărții segmentul
+\([0,1]\) în două subsegmente. Aruncăm, de manieră independentă, o
+monedă echilibrată și alegem în funcție de rezultatul aruncării, cap sau
+pajură, segementul din stânga (cap) sau cel din dreapta (pajură). Pe
+segmentul selecționat alegem un al doilea punct de ruptură, \(Y\),
+repartizat uniform pe acest segment.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Reconsiderați punctele 5. și 6. de la \emph{Procedura 2}.
+\end{enumerate}
+
+
+\end{document}
