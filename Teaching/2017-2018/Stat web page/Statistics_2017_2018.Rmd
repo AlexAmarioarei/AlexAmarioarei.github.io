@@ -133,7 +133,7 @@ kable(tabLab,
 Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%). Bonus aveți și $1$ punct din oficiu:
 
 $$
-  T = \min\left(1+0.6\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i, 10\right)
+  T = \min\left(1+0.5\times E + 0.2\times P + 0.06\times\sum_{i=1}^{5}T_i, 10\right)
 $$
 
 ## Teme
