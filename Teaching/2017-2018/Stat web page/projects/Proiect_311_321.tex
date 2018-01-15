@@ -1,0 +1,398 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Proiect},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Proiect}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+\subtitle{Grupele 311, 321}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{framed,color}
+\definecolor{shadecolor}{RGB}{248, 248, 248}
+\definecolor{shadecolor1}{RGB}{216,225,235}
+\definecolor{framecolor}{RGB}{108,123,13}
+
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi
+
+\newenvironment{frshaded*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor}{shadecolor1}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+\newenvironment{rmdblock}[1]
+  {\begin{frshaded*}
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=2em,keepaspectratio}\includegraphics{images/icons/#1}}
+    }
+  }
+  \item
+  }
+  {
+  \end{itemize}
+  \end{frshaded*}
+  }
+
+\newenvironment{rmdcaution}
+  {\begin{rmdblock}{caution}}
+  {\end{rmdblock}}
+% \newenvironment{rmdinsight}
+%   {\begin{rmdblock}{insight}}
+%   {\end{rmdblock}}
+\newenvironment{rmdexercise}
+  {\begin{rmdblock}{exercise}}
+  {\end{rmdblock}}
+\newenvironment{rmdtip}
+  {\begin{rmdblock}{tip}}
+  {\end{rmdblock}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% For insight block %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{shadecolor_insight}{RGB}{223,240,216}
+\definecolor{framecolor_insight}{RGB}{136,193,137}
+
+\newenvironment{frshaded_insight*}{%
+  \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor_insight}{shadecolor_insight}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+\newenvironment{rmdblock_insight}[1]
+  {\begin{frshaded_insight*}
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=2em,keepaspectratio}\includegraphics{images/icons/#1}}
+    }
+  }
+  \item
+  }
+  {
+  \end{itemize}
+  \end{frshaded_insight*}
+  }
+
+\newenvironment{rmdinsight}
+  {\begin{rmdblock_insight}{insight}}
+  {\end{rmdblock_insight}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{slashbox}
+\usepackage{color}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\VV{{\mathbb V}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MA{{\mathcal A}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\ME{{\mathcal E}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+
+% independent sign
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Statistic\u a\\ \textit{Instructor}: A. Am\u arioarei, S. Cojocea}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 301, 311, 321}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+
+\textbf{Notă:} Rezolvarea problemelor de mai jos va fi realizată în
+\textbf{R} (scripturile trebuie să fie comentate) şi va fi însoţită de
+un document text (.pdf sau .docx) care să conţină comentarii şi
+concluzii, acolo unde sunt cerute.
+
+\textbf{Punctaj:} 1. 0.5p , 2. 0.75p, 3. 0.25p 4. 0.25p 5. 0.25p
+\textbf{BONUS:} 0.5 p
+
+\section{Problemă}\label{problema}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generaţi \(10 000\) de variabile aleatoare folosind \textbf{metoda
+  transformării inverse} pentru repartiţiile definite mai jos:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \item
+    Repartiţia logistică are densitatea de probabilitate
+    \(f(x) = \frac{e^{-\frac{x-\mu}{\beta}}}{\beta\left(1+e^{-\frac{x-\mu}{\beta}}\right)^2}\)
+    și funcția de repartiție
+    \(F(x) = \frac{1}{1+e^{-\frac{x-\mu}{\beta}}}\).
+  \item
+    Repartiţia Cauchy are densitatea de probabilitate
+    \(f(x) = \frac{1}{\pi \sigma}\frac{1}{1+\left(\frac{x-\mu}{\sigma}\right)^2}\)
+    și funcția de repartiție
+    \(F(x) = \frac{1}{2}+\frac{1}{\pi}\arctan\left(\frac{x-\mu}{\sigma}\right)\).
+  \end{enumerate}
+\end{enumerate}
+
+Comparaţi rezultatele obţinute cu valorile date de funcţiile
+\texttt{rlogis} şi respectiv \texttt{rcauchy} (funcţiile de repartiţie
+predefinite în R pentru repartiţiile logistică şi respectiv Cauchy).
+Ilustraţi grafic aceste rezultate.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Folosiţi \textbf{metoda respingerii} pentru a genera observaţii din
+  densitatea de probabilitate definită prin
+  \(f(x)\propto e^{-\frac{x^2}{2}}\left[\sin(6x)^2+3\cos(x)^2\sin(4x)^2+1\right]\)\footnote{Notația
+    \(\propto\) înseamnă că \(f(x)\) este proporțională cu expresia din
+    dreapta} parcurgând paşii următori:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \item
+    Reprezentaţi grafic \(f(x)\) şi arătaţi că aceasta este mărginită de
+    \(Mg(x)\) unde \(g(x)\) este densitatea de probabilitate a
+    repartiţiei normale standard. Determinaţi o valoare potrivită pentru
+    constanta \(M\), chiar dacă nu este optimă\footnote{\textbf{Indiciu:}
+      Folosiţi funcţia \texttt{optimise} din R}.
+  \item
+    Generaţi \(2500\) de observaţii din densitatea de mai sus folosind
+    metoda respingerii.
+  \item
+    Deduceţi, pornind de la rata de acceptare a acestui algoritm, o
+    aproximare a \emph{constantei de normalizare} a lui \(f(x)\), apoi
+    comparaţi histograma valorilor generate cu reprezentarea grafică a
+    lui \(f(x)\) normalizată.
+  \end{enumerate}
+\item
+  \textbf{Metoda Monte Carlo pentru aproximarea unor integrale}
+\end{enumerate}
+
+Punctul de plecare al metodei Monte Carlo pentru aproximarea unei
+integrale este nevoia de a evalua expresia
+\(\mathbb{E}_{f}[h(X)] = \int_{\chi}h(x)f(x)\,dx\), unde \(\chi\)
+reprezintă mulţimea de valori a variabile aleatoare \(X\) (care este, de
+obicei, suportul densităţii \(f\)).
+
+Principiul metodei Monte Carlo este de a aproxima expresia de mai sus cu
+media de selecţie \(\bar{h}_n = \frac{1}{n}\sum_{j = 1}^{n}h(X_j)\)
+pornind de la un eşantion \(X_1,X_2,\ldots,X_n\) din densitatea \(f\),
+întrucât aceasta converge a.s. către \(\mathbb{E}_{f}[h(X)]\), conform
+legii numerelor mari. Mai mult, atunci când \(h(X)^2\) are medie finită
+viteza de convergenţă a lui \(\bar{h}_n\) poate fi determinată întrucât
+convergenţa este de ordin \(\mathcal{O}(\sqrt{n})\) iar varianţa
+aproximării este
+\(Var(\bar{h}_n) = \frac{1}{n}\int_{\chi}\left(h(x) - \mathbb{E}_{f}[h(X)]\right)^2f(x)\,dx\),
+cantitate care poate fi de asemenea aproximată prin
+\(v_n = \frac{1}{n^2}\sum_{j=1}^{n}\left(h(X_j) - \bar{h}_n\right)^2\).
+
+Mai precis, datorită teoremei limită centrală, pentru un \(n\) suficient
+de mare expresia
+
+\[
+\frac{\bar{h}_n - \mathbb{E}_{f}[h(X)]}{\sqrt{v_n}}
+\]
+
+poate fi aproximată cu o normală standard, ceea ce conduce la
+posibilitatea construirii unui test de convergenţă şi a unor margini
+pentru aproximarea lui \(\mathbb{E}_{f}[h(X)]\).
+
+\textbf{Cerință:}
+
+Pentru funcţia \(h(x) = \left(\cos(50x) + \sin(20x)\right)^2\)
+construiţi o aproximare a integralei acesteia pe intervalul {[}0,1{]}
+după cum urmează: valoarea integralei poate fi văzută ca fiind media
+funcţiei \(h(X)\) unde \(X\) este repartizată uniform pe \([0,1]\).
+Urmărind algoritmul dat de metoda Monte Carlo construiţi programul R
+care determină aproximarea acestei integrale. Comparaţi rezultatul
+obţinut cu cel analitic și cu cel numeric obținut folosind funcția
+\texttt{integrate}. Ataşaţi reprezentările grafice pe care le
+consideraţi utile pentru a putea observa eficienţa metodei.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Pornind de la un set de date din cele oferite de R (\emph{fiecare
+  student îşi alege singur setul de date}) realizaţi o analiză de tipul
+  ``statistică descriptivă'' a acestora (medie, cuartile, histogramă,
+  boxplot, boxplot comparativ, identificare de outlieri, etc.).
+  Documentaţi corespunzător acest proces şi explicaţi ce concluzii
+  puteţi trage în urma acestei analize asupra datelor. Includeţi în
+  fişier şi o descriere a datelor şi sursa lor.
+\item
+  Reprezentaţi grafic densitatea de probabilitate şi funcţia de
+  repartiţie (în câte două grafice alăturate) pentru un set de parametri
+  la alegere (cel puţin 4 cu reprezentările realizate în acelaşi grafic)
+  pentru repartiţiile \textbf{Student}, \textbf{Fisher} şi \(\chi^2\).
+  Identificaţi proprietăţile lor şi daţi un exemplu, construind un
+  program în R, de utilizarea lor în testarea unor ipoteze statistice.
+\end{enumerate}
+
+\textbf{BONUS:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Construiţi un script R util în unul din experimentele de Machine
+  Learning disponibile aici: \url{https://studio.azureml.net/} (vezi
+  exemplu la ultimul laborator !!!)
+\end{enumerate}
+
+
+\end{document}

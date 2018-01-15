@@ -200,7 +200,7 @@ proj1_301 = "[Proiect HTML](projects/Proiect_301.html) / [Proiect PDF](projects/
 proj1data_301 = "11 Februarie"
 
 gproj1_311_321 = "311, 321"
-proj1_311_321 = "Proiect 1"
+proj1_311_321 = "[Proiect HTML](projects/Proiect_311_321.html) / [Proiect PDF](projects/Proiect_311_321.pdf)"
 proj1data_311_321 = "11 Februarie"
 
 
