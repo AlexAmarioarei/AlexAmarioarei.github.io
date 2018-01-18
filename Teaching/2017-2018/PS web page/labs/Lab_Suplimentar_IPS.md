@@ -39,7 +39,7 @@ Scopul acestui exemplu este de a construi un sistem de localizare a poziției un
 
 Datele provin din două fișiere .txt, numite [*offline*](lab_IPS_data/offline.final.trace.txt) și [*online*](lab_IPS_data/online.final.trace.txt), care se găsesc pe site-ul [CRAWDAD](https://crawdad.org/mannheim/compass/20080411/) (A Community Resource for Archiving Wireless Data At Dartmouth). Setul de date *offline* conține măsurători ale intensității semnalului folosind un laptop IBM Thinkpad R51 pe un grid de 166 de puncte distanțate la un metru fiecare și distribuite pe o suprafață de aproximativ 312 $m^2$ aparținând holului unui birou construit în campusul Universității din Mannheim (suprafața totală $15\times 32$ - vezi planul de mai jos în care cerculețele gri reprezintă locațiile măsurătorilor offline și pătratele negre sunt locațiile punctelor de acces - 6). 
 
-<img src="lab_IPS_data/building.jpg" width="90%" style="display: block; margin: auto;" />
+<img src="lab_IPS_data/building.jpg" width="100%" style="display: block; margin: auto;" />
 
 În plus față de coordonatele $(x,y)$ ale device-ului mobil ne sunt furnizate și orientările acestuia. Intensitatea semnalelor a fost înregistrată pentru 8 orientări diferite (0, 45, 90, 135, 180, 225, 270, 315), înregistrându-se un total de 110 măsurători pentru fiecare punct de acces și fiecare combinație de locație-orientare. 
 
@@ -292,7 +292,7 @@ length(unique(offline$orientation))
 
 iar funția de repartiție empirică a acestora este 
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
 
 ceea ce arată că observațiile sunt aglomerate în jurul celor 8 valori de orientare. Următoarea funcție permite transformarea unghiurilor din setul de date în unghiurile corespunzătoare orientăriilor celor mai apropiate (e.g. $47.5$ se duce în $45$ și $358.2$ se duce în $0$)
 
@@ -315,7 +315,7 @@ Schimbând orientările obținem rezultatul așteptat
 offline$angle = roundOrientation(offline$orientation)
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Să explorăm adresele MAC emitente
 
@@ -589,7 +589,7 @@ offlineSummary = do.call("rbind", signalSummary)
 
 Ne uităm dacă abaterile standard variază în funcție de intensitatea medie a semnalului recepționat și constatăm că semnalele slabe au o abatere standard mai mică și aceasta crește odată cu creșterea intensității semnalului.
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Cum influențează distanța semnalul ?
 
@@ -623,43 +623,43 @@ surfaceSS = function(data, mac, angle = 45, ...){
 Graficul pentru adresa MAC  00:0f:a3:39:e1:c0 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```
 Graficul pentru adresa MAC  00:0f:a3:39:dd:cd 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-2.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-2.png" width="80%" style="display: block; margin: auto;" />
 
 ```
 Graficul pentru adresa MAC  00:14:bf:b1:97:8a 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-3.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-3.png" width="80%" style="display: block; margin: auto;" />
 
 ```
 Graficul pentru adresa MAC  00:14:bf:3b:c7:c6 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-4.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-4.png" width="80%" style="display: block; margin: auto;" />
 
 ```
 Graficul pentru adresa MAC  00:14:bf:b1:97:90 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-5.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-5.png" width="80%" style="display: block; margin: auto;" />
 
 ```
 Graficul pentru adresa MAC  00:14:bf:b1:97:8d 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-6.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-6.png" width="80%" style="display: block; margin: auto;" />
 
 ```
 Graficul pentru adresa MAC  00:14:bf:b1:97:81 
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-7.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-37-7.png" width="80%" style="display: block; margin: auto;" />
 
 Graficele de mai sus ne spun și unde se află locațiile punctelor de acces pe plan. Putem să creăm o matrice cu pozițiile și numele celor 6 puncte de acces:
 
@@ -679,7 +679,7 @@ AP
 00:14:bf:b1:97:81 33.5  2.8
 ```
 
-<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-39-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
 
 Pentru a vedea ce relație există între intensitatea semnalului și distanța de la punctul de acces putem să calculăm distanțele de la locația device-ului până la punctele de acces (distanța Euclidiană)
 
@@ -699,6 +699,284 @@ offlineSummary$dist = sqrt(diffs[ ,1]^2 + diffs[, 2]^2)
 <img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-# Metodă de prezicere a locației
+# Metodă de prezicere a locației bazată pe cei mai apropiați vecini
+
+Pentru a putea estima locația unei noi observații pe baza intensității semnalului dintre un device mobil aflat în acea locație și câteva puncte de acces fixate, vom folosi metoda celor mai apropiați $k$ vecini ($k$-nearest neighbors sau $k-NN$). Idea din spatele acestei metode este următoarea: avem un set de date de antrenament (training data) în care intensitatea semnalului către cele 6 puncte de acces fixe este măsurată din diferite poziții cunoscute din interiorul clădirii în care se desfășoară experimentul; atunci când avem o observație nouă, ceea ce înseamnă că avem un nou set de măsurători a intensității semnalului efectuate din locația necunoscută către punctele de acces, găsim $k$ observații din setul de date de antrenament care sunt cele mai *similare* de noua observație. Prin *similare* înțelegem că intensitatea semnalelor înregistrate între punctele de acces și noua observație a cărei locație este necunoscută este apropiată de intensitatea semnalelor înregistrate între punctele de acces și cele $k$ observații. Estimăm poziția observației noi prin agregarea poziției celor $k$ observații din datele de antrenament. 
+
+Vom măsura distanța dintre două seturi de intensități de semnale cu ajutorul metricii Euclidiene^[Binențeles se pot alege și alte metrici pentru a calcula similaritatea dintre două observații, e.g. metrica [Mahalanobis](https://en.wikipedia.org/wiki/Mahalanobis_distance) sau [Minkowski](https://en.wikipedia.org/wiki/Minkowski_distance), distanța Euclidiană este un caz particular de Minkowski ($p=2$).], anume având date două observații $o1$ și $o2$, acestea sunt caracterizate fiecare de un 6-tuplu de intensități de semnale $(S_1^i,S_3^i, S_3^i,S_4^i, S_5^i, S_6^i)$, $i\in\{1,2\}$ către cele 6 puncte de acces și 
+
+$$
+  d_E(o1,o2) = \sqrt{(S_1^2-S_1^2)^2 + (S_2^2-S_2^2)^2 + (S_3^2-S_3^2)^2 + (S_4^2-S_4^2)^2 + (S_5^2-S_5^2)^2 + (S_6^2-S_6^2)^2}
+$$
+
+## Pregătirea setului de date online
+
+Setul de date de test este setul de date *online* (acestea sunt noile observații a căror locație vrem să o estimăm). Vom folosi funcția `readData()` pentru a preprocesa (curăța și aduce la forma dorită pentru analiză) acest set de date. 
+
+
+```r
+# valorile adreselor mac pt cele 6 puncte de acces
+macs = unique(offlineSummary$mac)
+online = readData(filename = "lab_IPS_data/online.final.trace.txt",
+                  subMacs = macs)
+```
+
+Pentru a ne face o impresie preliminară asupra acestui set de date, vrem să ilustrăm câte observații avem pentru fiecare pereche *locație - unghi orientare* 
+
+
+```r
+# cream o noua variabila prin unirea perechii x-y
+online$posXY = paste(online$posX, online$posY, sep = "-")
+
+# cate noi locatii avem?
+length(unique(online$posXY))
+[1] 60
+
+tabonlineXYA = table(online$posXY, online$angle)
+head(tabonlineXYA, 10)
+            
+               0  45  90 135 180 225 270 315
+  0-0.05       0   0   0 593   0   0   0   0
+  0.15-9.42    0   0 606   0   0   0   0   0
+  0.31-11.09   0   0   0   0   0 573   0   0
+  0.47-8.2   590   0   0   0   0   0   0   0
+  0.78-10.94 586   0   0   0   0   0   0   0
+  0.93-11.69   0   0   0   0 583   0   0   0
+  1.08-12.19   0   0   0   0   0 630   0   0
+  1.24-3.93    0   0   0   0   0   0 574   0
+  1.39-6.61    0   0   0 595   0   0   0   0
+  1.52-9.32  583   0   0   0   0   0   0   0
+```
+
+Tabelul de mai sus ne arată că pentru fiecare locație au fost înregistrate intensitățile semnalelor pentru o singură orientare și nu pentru 8 orientări ca și în cazul setului de date *offline*.
+
+Vrem să organizăm datele *online* pentru analiză într-un data.frame care să conțină informații sumarizate pe câte o coloană pentru fiecare dintre cele 6 puncte de acces în care să se înregistreze valoarea intensității semnalului corespunzător (este diferit față de organizarea datelor *offline* întrucât în această situație știm în prealabil câte punte de acces emit semnal - 6). Păstrăm în setul de date doar acele informații care permit estimarea pozițiilor: poziția, orientarea și intensitatea semnalului pentru fiecare din cele 6 puncte de acces.
+
+
+```r
+# ce variabile pastram
+keepVars = c("posXY", "posX", "posY", "orientation", "angle")
+
+# sumarizam observatiile - dupa medie
+byLoc = with(online, by(online, list(posXY), function(x) {
+  ans = x[1,keepVars]
+  avgSS = tapply(x$signal, x$mac, mean)
+  y = matrix(avgSS, nrow = 1, ncol = 6, dimnames = list(ans$posXY, names(avgSS)))
+  cbind(ans, y)
+}))
+
+# datele sumarizate
+onlineSummary = do.call("rbind", byLoc)
+
+
+dim(onlineSummary)
+[1] 60 11
+names(onlineSummary)
+ [1] "posXY"             "posX"              "posY"             
+ [4] "orientation"       "angle"             "00:0f:a3:39:e1:c0"
+ [7] "00:14:bf:3b:c7:c6" "00:14:bf:b1:97:81" "00:14:bf:b1:97:8a"
+[10] "00:14:bf:b1:97:8d" "00:14:bf:b1:97:90"
+```
+
+Deoarece în modelul bazat pe cei mai apropiați vecini dorim să comparăm observațiile noi cu cele din setul de date *offline* în vederea găsirii acelor observații care sunt cele mai apropiate în sensul intensității semnalelor măsurate față de cele 6 puncte de acces, ar trebui ca acestea din urmă să prezinte caracteristici similare cu cele cu care le comparăm, de exemplu am vrea să comparăm observații care au orientare similară cu cele noi. Pentru aceasta vom considera toate observațiile care au orientarea într-un interval specificat. De exemplu dacă dorim doar o orientare atunci alegem din setul de date *offline* doar pe acelea care au aceeași orientare (după rotunjire) cu cea a noii observații (tot după rotunjire la unghi de 45 de grade). Dacă în schimb dorim două orientări atunci le alegem orientările (multiplii de 45 de grade) care mărginesc orientarea observației noi. 
+
+
+```r
+# pentru numarul de orientari m
+m = 3
+
+# unghiul noii observatii
+angleNewObs = 230
+
+# determinam cel mai apropiat unghi de 45
+refs = seq(0, by = 45, length = 8)
+nearestAngle = roundOrientation(angleNewObs)
+
+# dupa cum m este par sau impar
+if (m %% 2 == 1){
+  angles = seq(-45*(m-1)/2, 45*(m-1)/2, length = m)
+}else{
+  m = m+1
+  angles = seq(-45*(m-1)/2, 45*(m-1)/2, length = m)
+  if (sign(angleNewObs - nearestAngle)>-1){
+    angles = angles[-1]
+  }else{
+    angles = angles[-m]
+  }
+}
+# transformam unghiurile si le ajustam 
+# e.g. -45 -> 315 si 405 -> 45
+angles = angles + nearestAngle
+angles[angles<0] = angles[angles<0] + 360
+angles[angles>360] = angles[angles>360] - 360
+
+# alegem observatiile cu unghiurile corespunzatoarea
+offlineSubset = offlineSummary[offlineSummary$angle %in% angles, ]
+```
+
+Transformăm setul de date ales (cel de antrenament) în același format cu cel pentru datele de test `onlineSummary` cu ajutorul unei funcții:
+
+
+```r
+reshapeSS = function(data, varSignal = "signal", 
+                     keepVars = c("posXY", "posX", "posY")){
+  byLocation = with(data, by(data, list(posXY), function(x){
+    ans = x[1,keepVars]
+    avgSS = tapply(x[,varSignal], x$mac, mean)
+    y = matrix(avgSS, nrow = 1, ncol = 6, 
+               dimnames = list(ans$posXY, names(avgSS)))
+    cbind(ans, y)
+  }))
+  newDataSS = do.call("rbind", byLocation)
+  return(newDataSS)
+}
+
+# sumarizam setul de date de antrenament 
+trainSS = reshapeSS(offlineSubset, varSignal = "avgSignal")
+```
+
+Creăm o funcție care să automatizeze acest proces: selecție de unghiuri de orientare și transformare de date pentru antrenament. Funcția `selectTrain()` calculează media intensității semnalelor ce corespund la diferite orientări pentru a produce un singur 6-tuplu de intensități de semnele pentru fiecare din cele 166 de locații.
+
+
+```r
+# numim functia selectTrain()
+selectTrain = function(angleNewObs, signals = NULL, m = 1){
+  refs = seq(0, by = 45, length = 8)
+  nearestAngle = roundOrientation(angleNewObs)
+  
+  if (m %% 2 == 1){
+    angles = seq(-45*(m-1)/2, 45*(m-1)/2, length = m)
+  }else{
+    m = m+1
+    angles = seq(-45*(m-1)/2, 45*(m-1)/2, length = m)
+    if (sign(angleNewObs - nearestAngle)>-1){
+      angles = angles[-1]
+    }else{
+      angles = angles[-m]
+    }
+  }
+  # transformam unghiurile si le ajustam 
+  # e.g. -45 -> 315 si 405 -> 45
+  angles = angles + nearestAngle
+  angles[angles<0] = angles[angles<0] + 360
+  angles[angles>360] = angles[angles>360] - 360
+  angles = sort(angles) 
+  
+  offlineSubset = signals[signals$angle %in% angles, ]
+  reshapeSS(offlineSubset, varSignal = "avgSignal")
+}
+
+# testam pentru unghiul 130 si m = 3
+train130 = selectTrain(130, offlineSummary, 3)
+head(train130)
+     posXY posX posY 00:0f:a3:39:e1:c0 00:14:bf:3b:c7:c6 00:14:bf:b1:97:81
+0-0    0-0    0    0         -52.37243         -66.13039         -63.19262
+0-1    0-1    0    1         -52.98182         -65.37177         -63.72941
+0-10  0-10    0   10         -56.34184         -65.67238         -69.16041
+0-11  0-11    0   11         -54.73420         -67.17593         -70.34538
+0-12  0-12    0   12         -56.03030         -70.46493         -72.28758
+0-13  0-13    0   13         -54.55152         -71.19211         -72.58496
+     00:14:bf:b1:97:8a 00:14:bf:b1:97:8d 00:14:bf:b1:97:90
+0-0          -35.58063         -64.25411         -55.33780
+0-1          -39.37649         -65.44867         -59.15328
+0-10         -44.71545         -66.85781         -50.45502
+0-11         -48.34689         -66.78383         -54.93054
+0-12         -45.17264         -66.72696         -50.49886
+0-13         -43.32784         -68.72616         -54.48160
+```
+
+## Să găsim cei mai apropiați vecini
+
+În această secțiune construim funcția `findNN()` care permite găsirea celor mai apropiați $k$ vecini de noua observație din setul de date de test. Funcția primește ca date de intrare un vector numeric de lungime 6 ce corespunde intensității semnalelor pentru noua observație și datele de antrenament rezultate din aplicarea funcției `selectTrain()`. Ca date de ieșire funcția întoarce locațiile observațiilor din setul de date de antrenament în funcție de apropierea de observația nouă, de test.
+
+
+```r
+# functia findNN
+findNN = function(newSignal, trainSubset){
+  # aplicam functia x-newSignal liniilor 
+  diffs = apply(trainSubset[, 4:9], 1, function(x) x-newSignal)
+  
+  # aplicam functia coloanelor 
+  dists = apply(diffs, 2, function(x) sqrt(sum(x^2)))
+  
+  # ordonam observatiile
+  closest = order(dists)
+  
+  # intoarcem pozitiile obs ordonate
+  return(trainSubset[closest, 1:3])
+}
+```
+
+Estimam pozitiile noilor puncte cu ajutorul funcției `predXY()` care calculează media aritmetică a locațiilor celor mai apropiate $k$ puncte (aici puteți să dați o metodă alternativă de calcul a locațiilor):
+
+
+```r
+# functia predXY
+predXY = function(newSignals, newAngles, trainData, 
+                  numAngles = 1, k = 3){
+  
+  closeXY = list(length = nrow(newSignals))
+  
+  for (i in 1:nrow(newSignals)){
+    trainSS = selectTrain(newAngles[i], trainData, m = numAngles)
+    closeXY[[i]] = findNN(newSignal = as.numeric(newSignals[i,]), trainSS)
+  }
+  # estimam locatia 
+  estXY = lapply(closeXY, function(x) sapply(x[, 2:3], 
+                                             function(x) mean(x[1:k])))
+  estXY = do.call("rbind", estXY)
+  return(estXY)
+}
+```
+
+Vom testa rezultatele pentru două modele, unul în care considerăm trei vecini și trei orientări și un altul în care considerăm un vecin și trei orientări. Funcția `calcError()` determină eroarea în sensul sumei celor mai mici pătrate. 
+
+
+```r
+# testam 
+
+estXYk3 = predXY(newSignals = onlineSummary[, 6:11], 
+                 newAngles = onlineSummary[, 4], 
+                 offlineSummary, numAngles = 3, k = 3)
+estXYk1 = predXY(newSignals = onlineSummary[, 6:11], 
+                 newAngles = onlineSummary[, 4], 
+                 offlineSummary, numAngles = 3, k = 1)
+
+# eroarea
+calcError = function(estXY, actualXY){
+  sum(rowSums((estXY-actualXY)^2))
+}
+
+actualXY = onlineSummary[, c("posX", "posY")]
+sapply(list(estXYk1, estXYk3), calcError, actualXY)
+[1] 659.4003 306.7025
+```
+
+Putem constata că atunci când alegem metoda celor mai mici pătrate cu 3 vecini rezultatele sunt mai bune. Putem observa și grafic acest lucru din figurile de mai jos în care segmentele roșii arată cum locațiile de test (punctele albastre) se conectează cu locațiile prezise (asterix). 
+
+
+
+
+```
+Graficul care ilustreaza metoda celor mai apropiati vecini pentru k = 1
+```
+
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-52-1.png" width="90%" style="display: block; margin: auto;" />
+
+```
+Graficul care ilustreaza metoda celor mai apropiati vecini pentru k = 3
+```
+
+<img src="Lab_Suplimentar_IPS_files/figure-html/unnamed-chunk-52-2.png" width="90%" style="display: block; margin: auto;" />
+
+
+
+
+
+
+
+
+
+
 
 
