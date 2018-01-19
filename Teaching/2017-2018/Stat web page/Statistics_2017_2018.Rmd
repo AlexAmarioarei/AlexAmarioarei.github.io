@@ -115,10 +115,13 @@ pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
 lab6 = "[HTML](labs/Lab_6.html)"
 pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
 
-tabLab = data.frame(Nr = c(1, 2, 3, 4, 5, 6),
-                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6"),
-                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6),
-                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6))
+lab_sup = "[HTML](labs/Lab_Suplimentar_IPS.html)"
+pdf_lab_sup = "[PDF](labs/Lab_Suplimentar_IPS.pdf)"
+
+tabLab = data.frame(Nr = c(1, 2, 3, 4, 5, 6, 7),
+                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6", "Laborator Suplimentar"),
+                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6, lab_sup),
+                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6, pdf_lab_sup))
 
 
 kable(tabLab, 
