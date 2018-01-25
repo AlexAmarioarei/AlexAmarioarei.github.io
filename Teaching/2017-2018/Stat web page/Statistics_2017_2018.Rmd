@@ -115,10 +115,16 @@ pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
 lab6 = "[HTML](labs/Lab_6.html)"
 pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
 
-tabLab = data.frame(Nr = c(1, 2, 3, 4, 5, 6),
-                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6"),
-                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6),
-                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6))
+lab7 = "[HTML](labs/Lab_7.html)"
+pdf_lab7 = "[PDF](labs/Lab_7.pdf)"
+
+lab_sup = "[HTML](labs/Lab_Suplimentar_IPS.html)"
+pdf_lab_sup = "[PDF](labs/Lab_Suplimentar_IPS.pdf)"
+
+tabLab = data.frame(Nr = c(1, 2, 3, 4, 5, 6, 7, 8),
+                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6", "Laborator 7", "Laborator Suplimentar"),
+                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6, lab7, lab_sup),
+                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6, pdf_lab7, pdf_lab_sup))
 
 
 kable(tabLab, 
@@ -133,7 +139,7 @@ kable(tabLab,
 Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%). Bonus aveți și $1$ punct din oficiu:
 
 $$
-  T = \min\left(1+0.6\times E + 0.2\times P + 0.05\times\sum_{i=1}^{6}T_i, 10\right)
+  T = \min\left(1+0.5\times E + 0.2\times P + 0.06\times\sum_{i=1}^{5}T_i, 10\right)
 $$
 
 ## Teme
@@ -158,9 +164,9 @@ t4 = "[Tema 4](homework/Tema_4.pdf)"
 t4sol = "[Solutie Tema 4](homework/Tema_4_Sol.pdf)"
 t4data = "~~17 Decembrie~~ 20 Decembrie"
 
-t5 = "Tema 5"
+t5 = "[Tema 5](homework/Tema_5.pdf)"
 t5sol = "Solutie Tema 5"
-t5data = "--"
+t5data = "21 Ianuarie"
 
 # t6 = "~~Tema 6~~"
 # t6sol = "~~Solutie Tema 6~~"
@@ -200,7 +206,7 @@ proj1_301 = "[Proiect HTML](projects/Proiect_301.html) / [Proiect PDF](projects/
 proj1data_301 = "11 Februarie"
 
 gproj1_311_321 = "311, 321"
-proj1_311_321 = "Proiect 1"
+proj1_311_321 = "[Proiect HTML](projects/Proiect_311_321.html) / [Proiect PDF](projects/Proiect_311_321.pdf)"
 proj1data_311_321 = "11 Februarie"
 
 
