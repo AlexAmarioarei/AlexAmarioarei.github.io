@@ -115,7 +115,7 @@
   \title{Laborator 6}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-\subtitle{Proprietăți ale estimatorilor}
+\subtitle{Elemente de estimare punctuală}
   \author{}
   \preauthor{}\postauthor{}
   \date{}
@@ -278,6 +278,17 @@
 \rfoot{Pagina \thepage}
 \lfoot{Grupele: 301, 311, 321}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
 
 \begin{document}
 \maketitle
@@ -288,7 +299,10 @@
 Obiectivul acestui laborator este de a ilustra noțiunea de consistență a
 unui estimator precum și de a compara mai mulți estimatori.
 
-\section{Exemplu de comparare a trei
+\section{Proprietăți ale
+estimatorilor}\label{proprietati-ale-estimatorilor}
+
+\subsection{Exemplu de comparare a trei
 estimatori}\label{exemplu-de-comparare-a-trei-estimatori}
 
 \begin{rmdexercise}
@@ -340,13 +354,13 @@ Pentru a ilustra grafic histogramele celor trei estimatori, considerăm
 \(\mu = 0\) și \(\sigma^2 = 1\) și avem:
 
 \begin{verbatim}
-          var_mu1     var_mu2    var_mu3
-[1,] 0.0009932978 0.001566703 0.06160938
+         var_mu1     var_mu2    var_mu3
+[1,] 0.001004297 0.001616957 0.06173788
 \end{verbatim}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
-\section{Ilustrarea consistenței unui
+\subsection{Ilustrarea consistenței unui
 estimator}\label{ilustrarea-consistentei-unui-estimator}
 
 \begin{rmdexercise}
@@ -379,10 +393,10 @@ simulează repartiția estimatorului \(\hat{\theta}_n\):
 Considerând \(\theta = 3\) și \(n\in\{10,25,50,100\}\) avem:
 
 \begin{verbatim}
-[1] "Pentru n = 10 varianta estimatorului este 2.35589143397559"
-[1] "Pentru n = 25 varianta estimatorului este 0.869958122138972"
-[1] "Pentru n = 50 varianta estimatorului este 0.428576062015341"
-[1] "Pentru n = 100 varianta estimatorului este 0.211720157485395"
+[1] "Pentru n = 10 varianta estimatorului este 2.36640535383542"
+[1] "Pentru n = 25 varianta estimatorului este 0.867491312476916"
+[1] "Pentru n = 50 varianta estimatorului este 0.423889651410313"
+[1] "Pentru n = 100 varianta estimatorului este 0.209445339803901"
 \end{verbatim}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-7-1} \end{center}
@@ -394,10 +408,10 @@ Ce se întâmplă dacă în loc de \(\hat{\theta}_n\) considerăm estimatorul
 Pentru \(\tilde{\theta}_n\) avem
 
 \begin{verbatim}
-[1] "Pentru n = 10 varianta estimatorului este 0.301055748790976"
-[1] "Pentru n = 25 varianta estimatorului este 0.118347691085662"
-[1] "Pentru n = 50 varianta estimatorului este 0.0600801199663993"
-[1] "Pentru n = 100 varianta estimatorului este 0.0296748320834817"
+[1] "Pentru n = 10 varianta estimatorului este 0.298847741178824"
+[1] "Pentru n = 25 varianta estimatorului este 0.120073798790536"
+[1] "Pentru n = 50 varianta estimatorului este 0.059625419400548"
+[1] "Pentru n = 100 varianta estimatorului este 0.030382726300286"
 \end{verbatim}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-8-1} \end{center}
@@ -405,13 +419,289 @@ Pentru \(\tilde{\theta}_n\) avem
 iar pentru \(\dot{\theta}_n\) avem
 
 \begin{verbatim}
-[1] "Pentru n = 10 varianta estimatorului este 0.771286077961343"
-[1] "Pentru n = 25 varianta estimatorului este 0.305968043909498"
-[1] "Pentru n = 50 varianta estimatorului este 0.151093564634052"
-[1] "Pentru n = 100 varianta estimatorului este 0.075734675439954"
+[1] "Pentru n = 10 varianta estimatorului este 0.768686527564423"
+[1] "Pentru n = 25 varianta estimatorului este 0.298405855235567"
+[1] "Pentru n = 50 varianta estimatorului este 0.148305598496592"
+[1] "Pentru n = 100 varianta estimatorului este 0.0749605083080048"
 \end{verbatim}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-9-1} \end{center}
+
+\section{Estimare prin metoda verosimilității
+maxime}\label{estimare-prin-metoda-verosimilitatii-maxime}
+
+\subsection{\texorpdfstring{Exemplu: EVM nu este întotdeauna media
+eșantionului chiar dacă
+\(\mathbb{E}_{\theta}[\hat{\theta}_n] = \theta\)}{Exemplu: EVM nu este întotdeauna media eșantionului chiar dacă \textbackslash{}mathbb\{E\}\_\{\textbackslash{}theta\}{[}\textbackslash{}hat\{\textbackslash{}theta\}\_n{]} = \textbackslash{}theta}}\label{exemplu-evm-nu-este-intotdeauna-media-esantionului-chiar-daca-mathbbe_thetahattheta_n-theta}
+
+\begin{rmdexercise}
+Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
+Laplace \(L(\theta, c)\) a cărei densitate este dată de formula
+
+\[
+  f_{\theta, c}(x) = \frac{1}{2c}e^{-\frac{|x-\theta|}{c}}, \quad -\infty<x<\infty
+\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Ilustrați grafic densitatea și funcția de repartiție a repartiției
+  Laplace pentru diferite valori ale parametrilor \(\theta\) (de
+  locație) și \(c\) (de scală), e.g. \(\theta\in\{0, 3\}\) și
+  \(c\in\{1,2,3,4\}\).
+\item
+  Determinați estimatorul de verosimilitate maximă \(\hat{\theta}_n\)
+  pentru \(\theta\).
+\end{enumerate}
+\end{rmdexercise}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Se poate arăta cu ușurință că funcția de repartiție a repartiției
+  Laplace \(L(\theta, c)\) este
+\end{enumerate}
+
+\[
+  F_{\theta, c}(x) = \frac{1}{2} + \frac{1}{2}\operatorname{sgn}(x-\theta)\left(1-e^{-\frac{|x-\theta|}{c}}\right) = \left\{\begin{array}{ll}
+    \frac{1}{2}e^{-\frac{|x-\theta|}{c}}, & x<\theta\\
+    1-\frac{1}{2}e^{-\frac{|x-\theta|}{c}}, & x\geq\theta
+  \end{array}\right.
+\]
+
+Ilustrarea grafică a densității și a funcției de repartiție pentru
+repartiția Laplace:
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-11-1} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Pentru a determina estimatorul de verosimilitate maximă să observăm că
+  funcția de verosimilitate este
+\end{enumerate}
+
+\[
+L(\theta|\mathbf{X}) = \prod_{i=1}^{n}\left(\frac{1}{2c}e^{-\frac{|X_i-\theta|}{c}}\right) = \frac{1}{(2c)^n}e^{-\sum_{i=1}^{n}\frac{|X_i-\theta|}{c}}
+\]
+
+și acesta ia valoarea maximă pentru toate valorile lui \(\theta\) care
+minimizează funcția de la exponent
+
+\[
+  M(\theta) = \sum_{i=1}^{n}|X_i-\theta| = \sum_{i=1}^{n}|X_{(i)}-\theta|,
+\]
+
+unde \(x_{(i)}\) este statistica de ordine de rang \(i\). Se poate vedea
+că funcția \(M(\theta)\) este continuă și afină pe porțiuni din figura
+de mai jos (pentru un eșantion de talie \(10\) dintr-o populație
+\(L(3,1)\) - creați o funcție care vă permite să generați observații
+repartizate Laplace).
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-12-1} \end{center}
+
+Observăm că dacă \(\theta\) se află între statistica de ordine de rang
+\(m\) și cea de rang \(m+1\), i.e. \(X_{(m)}\leq \theta\leq X_{(m+1)}\),
+atunci am avea că \(X_{(i)} \leq X_{(m)} \leq \theta\) dacă \(i\leq m\)
+și \(\theta\leq X_{(m+1)}\leq X_{(i)}\) dacă \(m+1\leq i\leq n\), prin
+urmare
+
+\[
+M(\theta) = \sum_{i=1}^{n}|X_{(i)}-\theta| = \sum_{i=1}^{m}(\theta - X_{(i)}) + \sum_{i=m+1}^{n}(X_{(i)}-\theta)
+\]
+
+deci dacă \(X_{(m)}< \theta< X_{(m+1)}\) atunci
+
+\[
+\frac{d}{d\theta}M(\theta) = m - (n-m) = 2m-n.
+\]
+
+Astfel, \(M'(\theta)<0\) (și \(M(\theta)\) este descrescătoare) dacă
+\(m<\frac{n}{2}\) și \(M'(\theta)>0\) (și \(M(\theta)\) este
+crescătoare) dacă \(m>\frac{n}{2}\). Dacă \(n = 2k+1\) este impar,
+atunci \(\frac{n}{2} = k +\frac{1}{2}\) iar \(M(\theta)\) este strict
+descrescătoare dacă \(\theta<X_{(k+1)}\) și strict crescătoare dacă
+\(\theta>X_{(k+1)}\) de unde deducem că minimul se atinge pentru
+\(\theta = X_{(k+1)}\).
+
+Dacă \(n = 2k\) este par atunci, raționând asemănător, deducem că
+\(M(\theta)\) este minimizată pentru orice punct din intervalul
+\((X_{(k)}, X_{(k+1)})\), deci orice punct din acest interval va
+maximiza și funcția de verosimilitate. Prin convenție alegem estimatorul
+de verosimilitate maximă să fie mijlocul acestui interval, i.e.
+\(\theta = \frac{X_{(k)} + X_{(k+1)}}{2}\).
+
+Prin urmare am găsit că estimatorul de verosimilitate maximă este
+mediana eșantionului
+
+\[
+\hat{\theta}_n = \left\{\begin{array}{ll}
+  X_{\left(\frac{n+1}{2}\right)}, & \text{$n$ impar}\\
+  \frac{X_{\left(\frac{n}{2}\right)} + X_{\left(\frac{n}{2}+1\right)}}{2}, & \text{$n$ par}\\
+\end{array}\right.
+\]
+
+Mai jos avem ilustrat logaritmul funcției de verosimilitate pentru un
+eșantion de volum par (stânga) și unul de volum impar (dreapta):
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-13-1} \end{center}
+
+\subsection{Exemplu de EVM determinat prin soluții
+numerice}\label{exemplu-de-evm-determinat-prin-solutii-numerice}
+
+\begin{rmdexercise}
+Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
+logistică a cărei densitate este dată de formula
+
+\[
+  f_{\theta}(x) = \frac{e^{-(x-\theta)}}{\left(1+e^{-(x-\theta)}\right)^2}, \quad x\in\mathbb{R},\, \theta\in\mathbb{R} 
+\]
+
+Determinați estimatorul de verosimilitate maximă \(\hat{\theta}_n\)
+pentru \(\theta\).
+\end{rmdexercise}
+
+Densitatea de repartiție și funcția de repartiție a repartiției
+logistice sunt ilustrate mai jos (în R se folosesc funcțiile:
+\texttt{rlogis}, \texttt{dlogis}, \texttt{plogis} și respectiv
+\texttt{qlogis}):
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-15-1} \end{center}
+
+Observăm că funcția de verosimilitate este dată de
+
+\[
+L(\theta|\mathbf{x}) = \prod_{i=1}^{n}f_{\theta}(x_i) = \prod_{i=1}^{n}\frac{e^{-(x_i-\theta)}}{\left(1+e^{-(x_i-\theta)}\right)^2}
+\]
+
+iar logaritmul funcției de verosimilitate este
+
+\[
+l(\theta|\mathbf{x}) = \sum_{i=1}^{n}\log{f_{\theta}(x_i)} = n\theta - n\bar{x}_n - 2\sum_{i=1}^{n}\log{\left(1+e^{-(x_i-\theta)}\right)}.
+\]
+
+Pentru a găsi valoarea lui \(\theta\) care maximizează logaritmul
+funcției de verosimilitate și prin urmare a funcției de verosimilitate
+trebuie să rezolvăm ecuația \(l'(\theta|\mathbf{x}) = 0\), unde derivata
+lui \(l(\theta|\mathbf{x})\) este
+
+\[
+l'(\theta|\mathbf{x}) = n - 2\sum_{i = 1}^{n}\frac{e^{-(x_i-\theta)}}{1+e^{-(x_i-\theta)}}
+\]
+
+ceea ce conduce la ecuația
+
+\[
+  \sum_{i = 1}^{n}\frac{e^{-(x_i-\theta)}}{1+e^{-(x_i-\theta)}} = \frac{n}{2} \tag{$\star$}
+\]
+
+Chiar dacă această ecuație nu se simplifică, se poate arăta că această
+ecuația admite soluție unică. Observăm că derivata parțiala a membrului
+drept în (\(\star\)) devine
+
+\[
+\frac{\partial }{\partial \theta}\sum_{i = 1}^{n}\frac{e^{-(x_i-\theta)}}{1+e^{-(x_i-\theta)}} = \sum_{i = 1}^{n}\frac{e^{-(x_i-\theta)}}{\left(1+e^{-(x_i-\theta)}\right)^2}>0
+\]
+
+ceea ce arată că membrul stâng este o funcție strict crescătoare în
+\(\theta\). Cum membrul stâng în (\(\star\)) tinde spre \(0\) atunci
+când \(\theta\to-\infty\) și spre \(n\) pentru \(\theta\to\infty\)
+deducem că ecuația (\(\star\)) admite soluție unică (vezi graficul de
+mai jos).
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-16-1} \end{center}
+
+Cum nu putem găsi o soluție a ecuației \(l'(\theta|\mathbb{x}) = 0\) sub
+formă compactă, este necesar să apelăm la metode numerice. O astfel de
+metodă numerică este binecunoscuta
+\href{https://en.wikipedia.org/wiki/Newton\%27s_method}{metodă a lui
+Newton-Raphson}. Metoda presupune să începem cu o valoare (soluție)
+inițială \(\hat{\theta}^{(0)}\) și să alegem, plecând de la aceasta, o
+nouă valoare \(\hat{\theta}^{(1)}\) definită prin
+
+\[
+  \hat{\theta}^{(1)} = \hat{\theta}^{(0)} - \frac{l'\left(\hat{\theta}^{(0)}\right)}{l''\left(\hat{\theta}^{(0)}\right)},
+\]
+
+adică \(\hat{\theta}^{(1)}\) este intersecția cu axa absciselor a
+tangentei în punctul
+\(\left(\hat{\theta}^{(0)}, l'\left(\hat{\theta}^{(0)}\right)\right)\)
+la graficul funcției \(l'(\theta)\). Ideea este de a itera procesul până
+când soluția converge, cu alte cuvinte pornind de la o valoare
+\emph{rezonabilă} de start \(\hat{\theta}^{(0)}\) la pasul \(k+1\) avem
+
+\[
+  \hat{\theta}^{(k+1)} = \hat{\theta}^{(k)} - \frac{l'\left(\hat{\theta}^{(k)}\right)}{l''\left(\hat{\theta}^{(k)}\right)}
+\]
+
+și oprim procesul atunco când \(k\) este suficient de mare și/sau
+\(\left|\hat{\theta}^{(k+1)} - \hat{\theta}^{(k)}\right|\) este
+suficient de mic. Următorul grafic ilustrează grafic algoritmul lui
+Newton:
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-17-1} \end{center}
+
+\textbf{Obs:} Singurul lucru care se schimbă atunci când trecem de la
+scalar la vector, este funcția \(l(\theta)\) care acum este o funcție de
+\(p>1\) variabile,
+\(\theta = (\theta_1, \theta_2, \ldots, \theta_p)^{\intercal}\in\mathbb{R}^p\).
+În acest context \(l'(\theta)\) este un vector de derivate parțiale iar
+\(l''(\theta)\) este o matrice de derivate parțiale de ordin doi. Prin
+urmare itarațiile din metoda lui Newton sunt
+
+\[
+  \hat{\theta}^{(k+1)} = \hat{\theta}^{(k)} - \left[l''\left(\hat{\theta}^{(k)}\right)\right]^{-1}l'\left(\hat{\theta}^{(k)}\right)
+\] unde \([\cdot]^{-1}\) este
+\href{https://en.wikipedia.org/wiki/Moore\%E2\%80\%93Penrose_inverse}{pseudoinversa}
+unei matrici.
+
+Funcția de mai jos implementează metoada lui Newton pentru cazul
+multidimensional:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Metoda lui Newton}
+
+\NormalTok{newton <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(f, df, x0, }\DataTypeTok{eps=}\FloatTok{1e-08}\NormalTok{, }\DataTypeTok{maxiter=}\DecValTok{1000}\NormalTok{, ...) \{}
+  \CommentTok{# in caz ca nu e incarcat pachetul sa putem accesa pseudoinversa}
+  \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{exists}\NormalTok{(}\StringTok{"ginv"}\NormalTok{)) }\KeywordTok{library}\NormalTok{(MASS) }
+  
+\NormalTok{  x <-}\StringTok{ }\NormalTok{x0}
+\NormalTok{  k <-}\StringTok{ }\DecValTok{0}
+  
+  \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{    k <-}\StringTok{ }\NormalTok{k }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+    
+\NormalTok{    x.new <-}\StringTok{ }\NormalTok{x }\OperatorTok{-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{ginv}\NormalTok{(}\KeywordTok{df}\NormalTok{(x, ...)) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{f}\NormalTok{(x, ...))}
+    
+    \ControlFlowTok{if}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(x.new }\OperatorTok{-}\StringTok{ }\NormalTok{x)) }\OperatorTok{<}\StringTok{ }\NormalTok{eps }\OperatorTok{|}\StringTok{ }\NormalTok{k }\OperatorTok{>=}\StringTok{ }\NormalTok{maxiter) \{}
+      \ControlFlowTok{if}\NormalTok{(k }\OperatorTok{>=}\StringTok{ }\NormalTok{maxiter) }\KeywordTok{warning}\NormalTok{(}\StringTok{"S-a atins numarul maxim de iteratii!"}\NormalTok{)}
+      \ControlFlowTok{break}
+\NormalTok{    \}}
+\NormalTok{    x <-}\StringTok{ }\NormalTok{x.new}
+\NormalTok{  \}}
+\NormalTok{  out <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{solution =}\NormalTok{ x.new, }\DataTypeTok{value =} \KeywordTok{f}\NormalTok{(x.new, ...), }\DataTypeTok{iter =}\NormalTok{ k)}
+  
+  \KeywordTok{return}\NormalTok{(out)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Să presupunem că am observat următorul eșantion de talie \(20\) din
+repartiția logistică:
+
+\begin{verbatim}
+ [1]  6.996304  9.970107 12.304991 11.259549  6.326912  5.378941  4.299639
+ [8]  8.484635  5.601117  7.094335  6.324731  6.868456  9.753360  8.042095
+[15]  8.227830 10.977982  7.743096  7.722159  8.562884  6.968356
+\end{verbatim}
+
+și aplicănd metoda lui Newton găsim estimatorul de verosimilitate maximă
+\(\hat{\theta}_n=\) 7.7933 după numai 3 iterații (datele au fost
+simulate folosin \(\theta = 7.5\)).
 
 
 \end{document}

@@ -118,10 +118,16 @@ pdf_lab6= "[PDF](labs/Lab_6.pdf)"
 lab7 = "[HTML](labs/Lab_7.html)"
 pdf_lab7= "[PDF](labs/Lab_7.pdf)"
 
-tabLab = data.frame(Nr = c(1,2,3,4,5,6,7),
-                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6", "Laborator 7"),
-                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6, lab7),
-                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6, pdf_lab7))
+lab_sup1 = "[HTML](labs/Lab_Suplimentar.html)"
+pdf_lab_sup1= "[PDF](labs/Lab_Suplimentar.pdf)"
+
+lab_sup2 = "[HTML](labs/Lab_Suplimentar_IPS.html)"
+pdf_lab_sup2= "[PDF](labs/Lab_Suplimentar_IPS.pdf)"
+
+tabLab = data.frame(Nr = c(1,2,3,4,5,6,7,8,9),
+                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6", "Laborator 7", "Laborator Suplimentar 1", "Laborator Suplimentar 2"),
+                    Htmls = c(lab1, lab2, lab3, lab4, lab5, lab6, lab7, lab_sup1, lab_sup2),
+                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3, pdf_lab4, pdf_lab5, pdf_lab6, pdf_lab7, pdf_lab_sup1, pdf_lab_sup2))
 
 
 kable(tabLab, 
@@ -166,7 +172,7 @@ t4data = "~~16 Decembrie~~ 20 Decembrie"
 
 t5 = "[Tema 5](homework/Tema5.pdf)"
 t5sol = "[Solutie Tema 5](homework/Tema5_Sol.pdf)"
-t5data = "13 Ianuarie"
+t5data = "~~13 Ianuarie~~ 16 Ianuarie"
 
 tab = data.frame(Tema = c(t1, t2, t3, t4, t5), 
                  Data = c(t1data, t2data, t3data, t4data, t5data), 
@@ -187,6 +193,7 @@ Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare
 
 > **TABELE STATISTICE** Vizualizați tabelele în format [HTML](tables/Tabele_Statistice.html) sau [PDF](tables/Tabele_Statistice_v2.pdf).
 
+
 ## Proiect de laborator
 ***
 
@@ -195,7 +202,7 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Probabilități și S
 ```{r echo = FALSE}
 gproj1 = "241, 242, 243, 244"
 proj1 = "[Proiect HTML](projects/Proiect.html) / [Proiect PDF](projects/Proiect.pdf)"
-proj1data = "~~2 Februarie~~ 6 Februarie"
+proj1data = "~~2 Februarie~~ <span style = 'color: #cc0000;'>6 Februarie</span>"
 
 
 tabProiecte = data.frame(Tema = c(gproj1), Data = c(proj1), Solution = c(proj1data))
