@@ -275,7 +275,7 @@ $(document).ready(function ()  {
     var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
-<p><strong>Notă:</strong> Raportul poate fi scris în <em>Microsoft Word</em> sau (pentru ușurință recomand folosirea pachetului <em>rmarkdown</em> din <em>R</em> - mai multe informații găsiți pe site la secțiunea <em>Link-uri utile</em>). Toate simulările, figurile și codurile folosite trebuie incluse în raport. Se va folosi doar limbajul <em>R</em>.</p>
+<p><strong>Notă:</strong> Raportul poate fi scris în <em>Microsoft Word</em> sau <em>Latex</em> (pentru ușurință recomand folosirea pachetului <em>rmarkdown</em> din <em>R</em> - mai multe informații găsiți pe site la secțiunea <em>Link-uri utile</em>). Toate simulările, figurile și codurile folosite trebuie incluse în raport. Se va folosi doar limbajul <em>R</em>.</p>
 <div id="problema-1" class="section level1">
 <h1><span class="header-section-number">1</span> Problema 1</h1>
 <p>Considerăm următoarele distribuții: <span class="math inline">\(\operatorname{Bin}(n,p)\)</span>, <span class="math inline">\(\operatorname{Pois}(\lambda)\)</span>, <span class="math inline">\(\operatorname{Exp}(\lambda)\)</span>, <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span></p>
@@ -326,7 +326,7 @@ f_{(X_1,X_2)}(x_1,x_2) = \frac{1}{\pi}\mathbf{1}_{D(1)}(x_1,x_2).
 </ol>
 <p>O a doua metodă de simulare a unui punct <span class="math inline">\((X,Y)\)</span> repartizat uniform pe <span class="math inline">\(D(1)\)</span> constă în folosirea schimbării de variabilă în coordonate polare: <span class="math inline">\(X=R\cos(\Theta)\)</span> și <span class="math inline">\(Y=R\sin(\Theta)\)</span>.</p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Plecând de la densitatea cuplului <span class="math inline">\((X,Y)\)</span>, găsiți densitatea v.a. <span class="math inline">\(R\)</span> și <span class="math inline">\(\Theta\)</span>.</p></li>
+<li><p>Plecând de la densitatea cuplului <span class="math inline">\((X,Y)\)</span>, găsiți densitatea v.a. <span class="math inline">\(R\)</span> și <span class="math inline">\(\Theta\)</span>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p></li>
 <li><p>Simulați <span class="math inline">\(N=1000\)</span> de puncte prin această metodă și ilustrați grafic aceste puncte (incluzand conturul cercului).</p></li>
 </ol>
 </div>
@@ -334,6 +334,7 @@ f_{(X_1,X_2)}(x_1,x_2) = \frac{1}{\pi}\mathbf{1}_{D(1)}(x_1,x_2).
 <hr />
 <ol>
 <li id="fn1"><p>A se vedea articolul lui Camp, B. H. - <em>Approximation to the Point Binomial</em>, Annals of Mathematical Statistics, 22, pp. 130-131, 1951.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><em>Indicație:</em> Aici puteți folosi următorul rezultat bazat pe formula de schimbare de variabilă în cazul multidimensional: Fie <span class="math inline">\(\textbf{X}=(X_1, \ldots, X_n)\)</span> un vector aleator cu densitatea <span class="math inline">\(f_{\textbf{X}}\)</span> și <span class="math inline">\(g:\mathbb{R}^n\to\mathbb{R}^n\)</span> o funcție diferențiabilă de clasă <span class="math inline">\(\mathcal{C}^1\)</span>, injectivă și cu Jacobianul nenul. Atunci vectorul aleator <span class="math inline">\(\textbf{Y}=g(\textbf{X})\)</span> are densitatea <span class="math inline">\(f_{\textbf{Y}}(y) = f_{\textbf{X}}\left(g^{-1}(y)\right)\left|\det J_{g^{-1}}(y)\right|\)</span> dacă <span class="math inline">\(y\in Im(g)\)</span> și <span class="math inline">\(0\)</span> altfel<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
 

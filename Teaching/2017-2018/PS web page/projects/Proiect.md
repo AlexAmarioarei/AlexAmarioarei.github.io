@@ -29,7 +29,7 @@ $(document).ready(function ()  {
 
 
 
-**Notă:** Raportul poate fi scris în *Microsoft Word* sau \LaTeX (pentru ușurință recomand folosirea pachetului *rmarkdown* din *R* - mai multe informații găsiți pe site la secțiunea *Link-uri utile*). Toate simulările, figurile și codurile folosite trebuie incluse în raport. Se va folosi doar limbajul *R*.
+**Notă:** Raportul poate fi scris în *Microsoft Word* sau *Latex* (pentru ușurință recomand folosirea pachetului *rmarkdown* din *R* - mai multe informații găsiți pe site la secțiunea *Link-uri utile*). Toate simulările, figurile și codurile folosite trebuie incluse în raport. Se va folosi doar limbajul *R*.
 
 # Problema 1
 
@@ -97,7 +97,7 @@ Pentru aceasta vom folosi două metode. O primă metodă este metoda de simulare
   
 O a doua metodă de simulare a unui punct $(X,Y)$ repartizat uniform pe $D(1)$ constă în folosirea schimbării de variabilă în coordonate polare: $X=R\cos(\Theta)$ și $Y=R\sin(\Theta)$. 
 
-  4. Plecând de la densitatea cuplului $(X,Y)$, găsiți densitatea v.a. $R$ și $\Theta$. 
+  4. Plecând de la densitatea cuplului $(X,Y)$, găsiți densitatea v.a. $R$ și $\Theta$.^[*Indicație:* Aici puteți folosi următorul rezultat bazat pe formula de schimbare de variabilă în cazul multidimensional: Fie $\textbf{X}=(X_1, \ldots, X_n)$ un vector aleator cu densitatea $f_{\textbf{X}}$ și $g:\mathbb{R}^n\to\mathbb{R}^n$ o funcție diferențiabilă de clasă $\mathcal{C}^1$, injectivă și cu Jacobianul nenul. Atunci vectorul aleator $\textbf{Y}=g(\textbf{X})$ are densitatea $f_{\textbf{Y}}(y) = f_{\textbf{X}}\left(g^{-1}(y)\right)\left|\det J_{g^{-1}}(y)\right|$ dacă $y\in Im(g)$ și $0$ altfel] 
   
   5. Simulați $N=1000$ de puncte prin această metodă și ilustrați grafic aceste puncte (incluzand conturul cercului).
 
