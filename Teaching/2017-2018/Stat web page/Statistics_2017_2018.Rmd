@@ -165,7 +165,7 @@ t4sol = "[Solutie Tema 4](homework/Tema_4_Sol.pdf)"
 t4data = "~~17 Decembrie~~ 20 Decembrie"
 
 t5 = "[Tema 5](homework/Tema_5.pdf)"
-t5sol = "Solutie Tema 5"
+t5sol = "[Solutie Tema 5](homework/Tema_5_Sol.pdf)"
 t5data = "21 Ianuarie"
 
 # t6 = "~~Tema 6~~"
