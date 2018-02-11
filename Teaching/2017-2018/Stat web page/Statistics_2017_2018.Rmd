@@ -228,8 +228,9 @@ Studenții trebuie să trimită proiectele în folderele cu grupele corespunzăt
 ***
 
 ```{r, echo= FALSE}
-stat_tab_R1 = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
-
+# stat_tab_R1 = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
+stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_2018.csv", stringsAsFactors = FALSE)
+stat_tab_R1$Total = round(stat_tab_R1$Total, 2)
 # stat_tab_R1 = stat_tab_R1[,-1]
 # create 19 breaks and 20 rgb color values ranging from white to red
 # brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
