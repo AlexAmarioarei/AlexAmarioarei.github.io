@@ -222,7 +222,7 @@ Studenții trebuie să trimită proiectele în folderele cu grupele corespunzăt
 ***
 
 ```{r, echo = FALSE}
-stat_tab_R1 = read.csv("results/Tabel_Prob_Stat_2.csv", stringsAsFactors = FALSE)
+stat_tab_R1 = read.csv("results/Tabel_Prob_Stat_3.csv", stringsAsFactors = FALSE)
 
 stat_tab_R1 = stat_tab_R1[,1:10]
 stat_tab_R1$Total[stat_tab_R1$Examen == 0] = "Absent"
