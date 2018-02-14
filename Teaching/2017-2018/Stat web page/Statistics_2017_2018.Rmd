@@ -203,20 +203,23 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Statistică*. Proiect
 ```{r echo = FALSE}
 gproj1_301 = "301"
 proj1_301 = "[Proiect HTML](projects/Proiect_301.html) / [Proiect PDF](projects/Proiect_301.pdf)"
+bproj1_301 = "[Barem](projects/Barem_301.pdf)"
 proj1data_301 = "11 Februarie"
 
 gproj1_311_321 = "311, 321"
 proj1_311_321 = "[Proiect HTML](projects/Proiect_311_321.html) / [Proiect PDF](projects/Proiect_311_321.pdf)"
+bproj1_311_321 = ""
 proj1data_311_321 = "11 Februarie"
 
 
 tabProiecte = data.frame(Tema = c(gproj1_301, gproj1_311_321), 
                          Data = c(proj1_301, proj1_311_321), 
+                         Barem = c(bproj1_301, bproj1_311_321),
                          Solution = c(proj1data_301, proj1data_311_321))
 
 kable(tabProiecte, 
-      col.names = c("Grupa", "Proiect Nr.", "Data de predare"),
-      align = "ccc")
+      col.names = c("Grupa", "Proiect Nr.", "Barem", "Data de predare"),
+      align = "cccc")
 ```
 
 
@@ -224,13 +227,39 @@ Trimiterea proiectelor se va face pe adresa de **Dropbox** (conform instrucțiun
 
 Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. Fiecare proiect va fi trimis în format **PDF** sau **MSWord** și va fi generat cu ajutorul pachetului [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile. Fișierul final va conține și codul `R` (documentat) și va avea numele: *Proiect_Nume_Prenume_grupa_x.pdf*, unde *x* este numărul grupei. 
 
+## Examen
+
+Mai jos găsiți subiectele și baremul de corectare de la examenul din sesiunea 21.01.2018 - 11.02.2018:
+
+```{r echo = FALSE}
+grupe = "301, 311, 321"
+exam = "[Examen](exams/Examen_301_311_2018.pdf)"
+barem = "[Barem](exams/Barem_examen.pdf)"
+exam_data = "11 Februarie"
+
+tabExam = data.frame(Grupe = grupe, 
+                     Exam = exam, 
+                     Barem = barem,
+                     Data = exam_data)
+
+kable(tabExam, 
+      col.names = c("Grupa", "Examen", "Barem", "Data"),
+      align = "cccc")
+```
+
+
 ## Rezultate
 ***
 
 ```{r, echo= FALSE}
 # stat_tab_R1 = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
-stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_2018.csv", stringsAsFactors = FALSE)
+# stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_2018.csv", stringsAsFactors = FALSE)
+stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_14_2018.csv", stringsAsFactors = FALSE)
 stat_tab_R1$Total = round(stat_tab_R1$Total, 2)
+
+stat_tab_R1 = stat_tab_R1[,1:10]
+stat_tab_R1$Total[stat_tab_R1$Examen == 0] = "Absent"
+
 # stat_tab_R1 = stat_tab_R1[,-1]
 # create 19 breaks and 20 rgb color values ranging from white to red
 # brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
@@ -262,6 +291,44 @@ datatable(
   formatStyle('Total', 
               target = 'row',
                  backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
+
+```{r, echo=FALSE, fig.align="center", warning=FALSE}
+# Grupa 301
+gr301 = stat_tab_R1[stat_tab_R1$Grupa == 301,]
+
+# Grupa 311
+gr311 = stat_tab_R1[stat_tab_R1$Grupa == 311,]
+
+# Grupa 321
+gr321 = stat_tab_R1[stat_tab_R1$Grupa == 321,]
+
+# library(plotly)
+
+pstat_tab_p = stat_tab_R1[stat_tab_R1$Total != "Absent", ]
+pstat_tab_p = pstat_tab_p %>% mutate(ID = ifelse(Total == "4", TRUE, FALSE),
+                                     Grupa2 = paste0("Grupa ", Grupa))
+
+pl1 = ggplot(pstat_tab_p, aes(x = as.numeric(Total), fill = ID)) +
+    geom_bar() +
+    ylim(c(0,10))+
+    scale_fill_manual(values = c("dodgerblue", "grey80")) +
+    geom_text(stat='count', aes(label=..count.., colour = ID), 
+              vjust=-1, size = 3)+ 
+    scale_colour_manual(values = c("black", "brown3"))+
+    scale_x_continuous(breaks = 4:10,
+                     labels = 4:10)+
+    guides(fill = FALSE, colour = FALSE) +
+    facet_wrap(~Grupa2)+
+    theme_minimal()+
+    labs(x = "Nota finala", y = "Numar studenti")+
+    theme(strip.text = element_text(size = 12, face = "bold"),
+          axis.text.y = element_blank(),
+          axis.ticks.y = element_blank())
+
+pl1
+# ggplotly(pl1)
 ```
 
 ## Bibliografie

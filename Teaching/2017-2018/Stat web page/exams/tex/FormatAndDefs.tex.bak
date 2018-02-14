@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{slashbox}
+\usepackage{color}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CITEVA DEFINITII
+\def\om{\omega}
+\def\Om{\Omega}
+\def\et{\eta}
+\def\td{\tilde{\delta}}
+\def\m{{\mu}}
+\def\n{{\nu}}
+\def\k{{\kappa}}
+\def\l{{\lambda}}
+\def\L{{\Lambda}}
+\def\g{{\gamma}}
+\def\a{{\alpha}}
+\def\e{{\varepsilon}}
+\def\b{{\beta}}
+\def\G{{\Gamma}}
+\def\d{{\delta}}
+\def\D{{\Delta}}
+\def\t{{\theta}}
+\def\s{{\sigma}}
+\def\S{{\Sigma}}
+\def\z{{\zeta}}
+\def\qed{\hfill\Box}
+\def\ds{\displaystyle}
+\def\mc{\mathcal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\1{{\mathbf 1}}
+\def\CC{{\mathbb C}}
+\def\VV{{\mathbb V}}
+\def\RR{{\mathbb R}}
+\def\QQ{{\mathbb Q}}
+\def\ZZ{{\mathbb Z}}
+\def\PP{{\mathbb P}}
+\def\EE{{\mathbb E}}
+\def\NN{{\mathbb N}}
+\def\FF{{\mathbb F}}
+%\def\SS{{\mathbb S}}
+\def\MA{{\mathcal A}}
+\def\MO{{\mathcal O}}
+\def\MF{{\mathcal F}}
+\def\ME{{\mathcal E}}
+\def\MR{{\mathcal R}}
+\def\MB{{\mathcal B}}
+\def\MM{{\mathcal M}}
+\def\MN{{\mathcal N}}
+\def\MU{{\mathcal U}}
+\def\MP{{\mathcal P}}
+\def\MS{{\mathcal S}}
+\def\MBS{{\mathbf S}}
+\def\MX{{\bm{ \mathscr X}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
+\lhead{\textit{Curs}: Probabilit\u a\c ti \c si Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, S. Cojocea}
+\rfoot{Pagina \thepage}
+\lfoot{Grupele: 241, 242, 243, 244}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

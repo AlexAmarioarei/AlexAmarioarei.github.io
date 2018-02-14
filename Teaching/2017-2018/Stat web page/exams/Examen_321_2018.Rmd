@@ -1,0 +1,108 @@
+---
+title: "\\textbf{Examen}"
+date: "11 Februarie 2018"
+output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/FormatAndDefs321.tex
+    keep_tex: yes
+    toc: no
+  html_document:
+    figcaption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Problemele:
+
+# Ex 1 - Arnaud Guyader - td 4 ex 2
+# Ex 2 - Arnaud Guyader - td2 ex 5 si td 3 ex 7 (combinate)
+# Ex 3 - Arnaud Guyader - td 4 ex 5
+
+```
+
+```{block, type = 'rmdcaution'}
+
+Timp de lucru 2h. Toate documentele, computerele personale, telefoanele mobile și/sau calculatoarele electronice de mână sunt autorizate. Orice modalitate de comunicare între voi este **strict interzisă**. Aveți 3 subiecte, fiecare valorând 10 puncte. Mult succes !
+
+```
+
+
+## Exercițiul 1
+
+Fie $X$ o variabilă aleatoare repartizată 
+
+$$
+  \mathbb{P}_{\theta}(X = k) = A(k+1)\theta^k,\quad k\in\mathbb{N}
+$$
+unde $\theta\in(0,1)$ un parametru necunoscut și $A\in\mathbb{R}$ este o constantă. 
+
+  1. Determinați constanta $A$ și calculați $\EE[X]$ și $Var(X)$.
+  
+Dorim să estimăm pe $\theta$ plecând de la un eșantion $X_1, X_2, \ldots, X_n$ de talie $n$ din populația dată de repartiția lui $X$.  
+
+  2. Determinați estimatorul $\tilde{\theta}$ a lui $\theta$ obținut prin metoda momentelor și calculați $\mathbb{P}_{\theta}(\tilde{\theta} = 0)$.
+  
+  3. Determinați estimatorul de verosimilitate maximă $\hat{\theta}$ a lui $\theta$ și verificați dacă acesta este bine definit.
+  
+  4. Studiați consistența estimatorului $\tilde{\theta}$ și determinați legea lui limită.
+
+## Exercițiul 2
+
+Fie $X_1, X_2, \ldots, X_n$ un eșantion de talie $n$ din populația $f_{\theta}$ unde 
+
+$$
+  f_{\theta}(x) = \frac{1}{\theta}e^{-\frac{x-\theta}{\theta}} \mathbf{1}_{[\theta, +\infty)}(x)
+$$
+
+cu $\theta>0$, parametru necunoscut. 
+
+  1. a) Determinați repartiția lui $\frac{X_1}{\theta}-1$.
+  
+    b) Determinați estimatorul $\tilde{\theta}$ a lui $\theta$ obținut prin metoda momentelor și calculați eroarea pătratică medie a acestuia.
+  
+    c) Găsiți legea limită a lui $\tilde{\theta}$.
+    
+  2. a) Determinați estimatorul $\hat{\theta}$ a lui $\theta$ obținut prin metoda verosimilității maxime.
+  
+    b) Calculați eroarea pătratică medie a lui $\hat{\theta}$ și verificați dacă estimatorul este consistent.
+    
+    c) Construiți un interval de încredere pentru $\theta$ de nivel de încredere $1-\alpha$. 
+    
+    d) Pe care dintre cei doi estimatori îl preferați ?
+
+## Exercițiul 3
+
+Fie $X_1, X_2, \ldots, X_n$ un eșantion de talie $n$ din populația $f_{\theta}$ unde 
+
+$$
+  f_{\theta}(x) = \frac{3}{(x-\theta)^4}\mathbf{1}_{[1+\theta,+\infty)}(x)
+$$
+
+  1. a) Calculați $\EE_{\theta}[X_1]$, $Var_{\theta}(X_1)$ și funcția de repartiție $F_{\theta}(x)$ a lui $X_1$.
+  
+    b) În cazul în care $\theta = 2$ dorim să generăm $3$ valori aleatoare din repartiția lui $X\sim f_{\theta}(x)$. Pentru aceasta dispunem de trei valori rezultate din repartiția uniformă pe [0, 1] : $u_1 = 0.25$, $u_2 = 0.4$ și $u_3 = 0.5$. Descrieți procedura.
+  
+  2. a) Determinați estimatorul $\hat{\theta}_{n}^M$ a lui $\theta$ obținut prin metoda momentelor și calculați eroarea pătratică medie a acestui estimator. Care este legea lui limită ?
+  
+    b) Găsiți un interval de încredere asimptotic de nivel de încredere de $95\%$ pentru $\theta$.
+  
+  3. a) Exprimați în funcție de $\theta$ mediana repartiției lui $X_1$ și plecând de la aceasta găsiți un alt estimator $\hat{\theta}_{n}^Q$ al lui $\theta$.
+  
+    b) Determinați legea lui limită a lui $\hat{\theta}_{n}^Q$ și arătați că, asimptotic, acesta este mai bun decât $\hat{\theta}_{n}^M$.
+    
+    c) Găsiți un interval de încredere asimptotic de nivel de încredere de $95\%$ pentru $\theta$.
+    
+  4. a) Determinați estimatorul de verosimilitate maximă $\hat{\theta}_{n}^{VM}$ a lui $\theta$ și verificați dacă este deplasat.
+  
+    b) Calculați funcția de repartiție a lui $\hat{\theta}_{n}^{VM}-\theta$.
+    
+    c) Pe care dintre cei trei estimatori îl preferați ? 
+
+
+
