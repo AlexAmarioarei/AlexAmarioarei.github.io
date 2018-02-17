@@ -254,8 +254,8 @@ kable(tabExam,
 ```{r, echo= FALSE}
 # stat_tab_R1 = read.csv("results/Tabel_Statistica.csv", stringsAsFactors = FALSE)
 # stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_2018.csv", stringsAsFactors = FALSE)
-stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_14_2018.csv", stringsAsFactors = FALSE)
-stat_tab_R1$Total = round(stat_tab_R1$Total, 2)
+stat_tab_R1 = read.csv("results/Tabel_Statistica_feb_17_2018.csv", stringsAsFactors = FALSE)
+# stat_tab_R1$Total = round(stat_tab_R1$Total, 2)
 
 stat_tab_R1 = stat_tab_R1[,1:10]
 stat_tab_R1$Total[stat_tab_R1$Examen == 0] = "Absent"
@@ -312,7 +312,8 @@ pstat_tab_p = pstat_tab_p %>% mutate(ID = ifelse(Total == "4", TRUE, FALSE),
 
 pl1 = ggplot(pstat_tab_p, aes(x = as.numeric(Total), fill = ID)) +
     geom_bar() +
-    ylim(c(0,10))+
+    # coord_flip() +
+    # ylim(c(0,10))+
     scale_fill_manual(values = c("dodgerblue", "grey80")) +
     geom_text(stat='count', aes(label=..count.., colour = ID), 
               vjust=-1, size = 3)+ 
