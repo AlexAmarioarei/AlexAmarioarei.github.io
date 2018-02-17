@@ -100,15 +100,16 @@ readings_lab1 = "-"
 
 lab2 = "[HTML](labs/Lab_2.html)"
 pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
-data_lab2 = "-"
-readings_lab2 = "-"
+data_lab2 = "[normtemp.txt](labs/dataIn/normtemp.txt)"
+readings_lab2 = "[Body temperature](labs/readings/BodyTemp.pdf)"
+readings_lab2_b = "[Significance, p values, t tests](labs/readings/nmeth.2698.pdf)"
 
-tabLab = data.frame(Nr = 1:2,
-                    Lab = c("Laborator 1", "Laborator 2"),
-                    Htmls = c(lab1, lab2),
-                    Pdfs = c(pdf_lab1, pdf_lab2),
-                    data = c(data_lab1, data_lab2), 
-                    readings = c(readings_lab1, readings_lab2))
+tabLab = data.frame(Nr = c(1, 2, ""),
+                    Lab = c("Laborator 1", "Laborator 2", ""),
+                    Htmls = c(lab1, lab2, ""),
+                    Pdfs = c(pdf_lab1, pdf_lab2, ""),
+                    data = c(data_lab1, data_lab2, ""), 
+                    readings = c(readings_lab1, readings_lab2, readings_lab2_b))
 
 
 kable(tabLab, 

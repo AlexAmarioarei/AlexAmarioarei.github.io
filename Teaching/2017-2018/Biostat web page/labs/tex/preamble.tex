@@ -2,8 +2,12 @@
 \usepackage{longtable}
 \usepackage{framed,color}
 \definecolor{shadecolor}{RGB}{248, 248, 248}
-\definecolor{shadecolor1}{RGB}{216,225,235}
-\definecolor{framecolor}{RGB}{108,123,13}
+%\definecolor{shadecolor1}{RGB}{216,225,235}
+%\definecolor{framecolor}{RGB}{108,123,13}
+
+%\definecolor{shadecolor}{RGB}{226, 255, 241}
+\definecolor{shadecolor1}{RGB}{217,225,199}
+\definecolor{framecolor}{RGB}{60,179,113}
 
 \ifxetex
   \usepackage{letltxmacro}
@@ -38,7 +42,7 @@
   \end{itemize}
   \end{frshaded*}
   }
-  
+
 \newenvironment{rmdcaution}
   {\begin{rmdblock}{caution}}
   {\end{rmdblock}}
@@ -51,12 +55,15 @@
 \newenvironment{rmdtip}
   {\begin{rmdblock}{tip}}
   {\end{rmdblock}}
-  
-  
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% For insight block %%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{shadecolor_insight}{RGB}{223,240,216}
 \definecolor{framecolor_insight}{RGB}{136,193,137}
+
+%\definecolor{shadecolor_insight}{RGB}{217,225,199}
+%\definecolor{framecolor_insight}{RGB}{60,179,113}
 
 \newenvironment{frshaded_insight*}{%
   \def\FrameCommand{\fboxrule=\FrameRule\fboxsep=\FrameSep \fcolorbox{framecolor_insight}{shadecolor_insight}}%
@@ -77,11 +84,11 @@
   \end{itemize}
   \end{frshaded_insight*}
   }
-  
+
 \newenvironment{rmdinsight}
   {\begin{rmdblock_insight}{insight}}
   {\end{rmdblock_insight}}
-  
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{subfigure}
 \usepackage{booktabs}
@@ -142,6 +149,7 @@
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 
+\renewcommand\tablename{Tab.}
 \renewcommand{\figurename}{Fig.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -151,8 +159,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
-\lhead{\textit{Curs}: Statistic\u a\\ \textit{Instructori}: A. Am\u arioarei, S. Cojocea}
+\lhead{\textit{Curs}: Biostatistic\u a\\ \textit{Instructor}: A. Am\u arioarei}
 \rfoot{Pagina \thepage}
-\lfoot{Grupele: 301, 311, 321}
+\lfoot{Grupa: 503}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
