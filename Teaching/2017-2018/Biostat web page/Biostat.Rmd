@@ -75,9 +75,9 @@ Acest curs reprezintă o introducere în biostatistică și este adresat studen�
 
  *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
 
- *  _Orar_ : 
+ *  _Orar_ : Vineri 17.00 - 19.00
 
- *  _Sala_ : 
+ *  _Sala_ : 219
 
 
 ### Seminar/Laborator
@@ -85,6 +85,10 @@ Acest curs reprezintă o introducere în biostatistică și este adresat studen�
  *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
 
  *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
+ 
+ *  _Orar_ : Vineri 19.00 - 20.00
+
+ *  _Sala_ : 204
  
 ## Note de laborator 
 ***
