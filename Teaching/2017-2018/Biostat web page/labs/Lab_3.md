@@ -27,6 +27,7 @@ output:
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
+bibliography: references/Biostat_2018_ref.bib
 ---
 
 <script>
@@ -449,8 +450,10 @@ Observăm că probabilitatea de acoperire în acest caz este mai aproape de țin
 
 ## Exemplul 1
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](dataIn/normtemp.txt) (sursa originală a datelor este *Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlich. Journal of the American Medical Association, 268, 1578-1580*).
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Care este temperatura normală a corpului uman ? ([vezi articol](readings/BodyTemp.pdf)) Ne dorim să testăm din punct de vedere statistic dacă temperatura medie a corpului uman este de $37^\circ C$ plecând de la următorul set de date [descarcă](dataIn/normtemp.txt).
 </div>\EndKnitrBlock{rmdexercise}
+
+Acest exemplu se bazează pe articolul [@Mackowiak1992], acesta reprezentând și sursa originală a datelor. 
 
 Pentru a citi datele putem folosi două metode: sau să le citim direct din pagina de internet (prin comanda `read.table`)
 
@@ -524,13 +527,14 @@ Testăm ipoteza de normalitate (folosind testul `Shapiro-Wilk`):
 
 
 ```r
-shapiro.test(degreesC)# distributia pare sa fie aproape de normala si testul nu detecteaza 
+# distributia pare sa fie aproape de normala si testul nu detecteaza 
+# o abatere semnificativa fata de normala
+shapiro.test(degreesC)
 
 	Shapiro-Wilk normality test
 
 data:  degreesC
 W = 0.98658, p-value = 0.2332
-                      # o abatere semnificativa fata de normala
 ```
 
 Distribuția pare să fie aproape de normală, testul Shapiro-Wilk nu detectează o deviație semnificantă de la normalitate.
@@ -578,7 +582,7 @@ t.obt
 
 qt(c(0.25, 0.975), df = 129) # valorile critice pentru alpha = 0.05
 [1] -0.6763963  1.9785245
-2*pt(t.obt, df = 129) # p valoarea pentru testul two-tailed
+2*pt(t.obt, df = 129) # p valoarea pentru testul bilateral
 [1] 2.367923e-07
 ```
 
@@ -590,14 +594,14 @@ t.single = function(obs.mean, mu, SD, n) {
   t.obt = (obs.mean - mu) / (SD / sqrt(n))
   p.value = pt(abs(t.obt), df=n-1, lower.tail=F)
   print(c(t.obt = t.obt, p.value = p.value))
-  warning("P-value pentru one-sided. Dubleaza pentru two-sided.")
+  warning("P-value pentru unilateral. Dubleaza pentru bilateral.")
 }
 
 t.single(36.805, mu = 37, SD = 0.4073, n = 130)
         t.obt       p.value 
 -5.458733e+00  1.183961e-07 
 Warning in t.single(36.805, mu = 37, SD = 0.4073, n = 130): P-value pentru
-one-sided. Dubleaza pentru two-sided.
+unilateral. Dubleaza pentru bilateral.
 ```
 
 
@@ -877,5 +881,8 @@ sample estimates:
 mean of the differences 
                2.763889 
 ```
+
+# Referințe
+
 
 

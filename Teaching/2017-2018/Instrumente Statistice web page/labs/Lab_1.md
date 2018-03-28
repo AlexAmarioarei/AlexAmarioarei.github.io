@@ -27,6 +27,7 @@ output:
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
+bibliography: references/InstStatFin_2018_ref.bib
 ---
 
 <script>
@@ -541,6 +542,8 @@ Există mai multe moduri de creare a unei matrici în R. Funcțiile cele mai uzu
 Table: Tabelul 3. Functii care permit crearea matricelor
 
 Pentru a vedea ce obținem atunci când folosim funcțiile `cbind()` și `rbind()` să considerăm exemplele următoare:
+
+\newpage
 
 
 ```r
@@ -2481,7 +2484,7 @@ Pentru fiecare repartiție, există patru comenzi în R prefixate cu literele `d
   
   * `rname`: generează observații independente din repartiția dată 
   
-O parte din cele mai cunoscute repartiții continue^[Pentru mai multe informații, se poate consulta monografia Johnson, N., Kotz, S. și Balakrishnan, N. *Continuous Univariate Distributions*, (Volumul 1, Ediția a 2-a), John Wiley & Sons, New York (1994),  756 pp., ISBN 0-471-58495-9] sunt prezentate mai jos:
+O parte din cele mai cunoscute repartiții continue (pentru mai multe informații, se poate consulta monografia [@Johnson1994]) sunt prezentate mai jos:
 
 
 
@@ -2586,7 +2589,7 @@ $$
   F_X(x) \left(\overset{not}{=} \Phi(x)\right) = \int_{-\infty}^{x}\varphi(t)\,dt = \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}\,dt.
 $$
 
-Pentru funcția de repartiție nu avem o formulă explicită de calcul, ea poate fi aproximată cu ajutorul descompunerii în serie. În cazul variabilelor *normale standard* ($X\sim\mathcal{N}(0,1)$) avem proprietățile
+Pentru funcția de repartiție nu avem o formulă explicită de calcul, ea poate fi aproximată cu ajutorul descompunerii în serie. În cazul variabilelor *normale standard* ($X\sim\mathcal{N}(0,1)$) avem proprietățile (pentru mai multe astfel de inegalități se poate consulta cartea [@LinBai2010, capitolul 2])
 
   a) $\Phi(x) = 1-\Phi(-x)$ pentru toate valorile $x\in\mathbb{R}$
   b) $1-\Phi(a)\leq\frac{1}{2}e^{-\frac{a^2}{2}}$ pentru $a>0$^[Pentru mai multe astfel de inegalități se poate consulta cartea (capitolul 2): Lin, Z. și Bai, Z. *Probability Inequalities*, Springer, 2010.]
@@ -3023,6 +3026,8 @@ $$
 
 </div>\EndKnitrBlock{rmdexercise}
 
+Pentru mai multe proprietăți ale funcției $\Gamma(\alpha)$ puteți consulta lucrarea [@Artin1964].
+
 Funcția de repartiție a unei variabile aleatoare $X\sim \Gamma(\alpha, \beta)$ este dată de 
 
 $$
@@ -3210,4 +3215,8 @@ qbeta(c(0.01, 0.025, 0.05, 0.25, 0.5, 0.75, 0.95, 0.975, 0.99), shape1 = 1, shap
 </div>\EndKnitrBlock{rmdexercise}
 
 <img src="Lab_1_files/figure-html/unnamed-chunk-200-1.png" width="80%" style="display: block; margin: auto;" />
+
+# Referințe
+
+
 

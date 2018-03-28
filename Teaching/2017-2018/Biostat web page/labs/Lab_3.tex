@@ -274,6 +274,7 @@
 
 \renewcommand\tablename{Tab.}
 \renewcommand{\figurename}{Fig.}
+\renewcommand\refname{Referințe}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Header and Footer
@@ -282,7 +283,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
-\lhead{\textit{Curs}: Biostatistic\u a\\ \textit{Instructor}: A. Am\u arioarei}
+\lhead{\textit{Curs}: Biostatistic\u a 2018\\ \textit{Instructor}: A. Am\u arioarei}
 \rfoot{Pagina \thepage}
 \lfoot{Grupa: 503}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -751,12 +752,11 @@ Care este temperatura normală a corpului uman ?
 (\href{readings/BodyTemp.pdf}{vezi articol}) Ne dorim să testăm din
 punct de vedere statistic dacă temperatura medie a corpului uman este de
 \(37^\circ C\) plecând de la următorul set de date
-\href{dataIn/normtemp.txt}{descarcă} (sursa originală a datelor este
-\emph{Mackowiak, P. A., Wasserman, S. S., and Levine, M. M. (1992). A
-Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body
-Temperature, and Other Legacies of Carl Reinhold August Wunderlich.
-Journal of the American Medical Association, 268, 1578-1580}).
+\href{dataIn/normtemp.txt}{descarcă}.
 \end{rmdexercise}
+
+Acest exemplu se bazează pe articolul (Mackowiak, Wasserman, and Levine
+1992), acesta reprezentând și sursa originală a datelor.
 
 Pentru a citi datele putem folosi două metode: sau să le citim direct
 din pagina de internet (prin comanda \texttt{read.table})
@@ -841,13 +841,14 @@ Testăm ipoteza de normalitate (folosind testul \texttt{Shapiro-Wilk}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{shapiro.test}\NormalTok{(degreesC)}\CommentTok{# distributia pare sa fie aproape de normala si testul nu detecteaza }
+\CommentTok{# distributia pare sa fie aproape de normala si testul nu detecteaza }
+\CommentTok{# o abatere semnificativa fata de normala}
+\KeywordTok{shapiro.test}\NormalTok{(degreesC)}
 
 \NormalTok{    Shapiro}\OperatorTok{-}\NormalTok{Wilk normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{degreesC}
 \NormalTok{W =}\StringTok{ }\FloatTok{0.98658}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.2332}
-                      \CommentTok{# o abatere semnificativa fata de normala}
 \end{Highlighting}
 \end{Shaded}
 
@@ -903,7 +904,7 @@ uman este de \texttt{37} grade Celsius.
 
 \KeywordTok{qt}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.975}\NormalTok{), }\DataTypeTok{df =} \DecValTok{129}\NormalTok{) }\CommentTok{# valorile critice pentru alpha = 0.05}
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\FloatTok{0.6763963}  \FloatTok{1.9785245}
-\DecValTok{2}\OperatorTok{*}\KeywordTok{pt}\NormalTok{(t.obt, }\DataTypeTok{df =} \DecValTok{129}\NormalTok{) }\CommentTok{# p valoarea pentru testul two-tailed}
+\DecValTok{2}\OperatorTok{*}\KeywordTok{pt}\NormalTok{(t.obt, }\DataTypeTok{df =} \DecValTok{129}\NormalTok{) }\CommentTok{# p valoarea pentru testul bilateral}
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{2.367923e-07}
 \end{Highlighting}
 \end{Shaded}
@@ -916,14 +917,14 @@ Ca să automatizăm aceste calcule putem crea o funcție:
 \NormalTok{  t.obt =}\StringTok{ }\NormalTok{(obs.mean }\OperatorTok{-}\StringTok{ }\NormalTok{mu) }\OperatorTok{/}\StringTok{ }\NormalTok{(SD }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(n))}
 \NormalTok{  p.value =}\StringTok{ }\KeywordTok{pt}\NormalTok{(}\KeywordTok{abs}\NormalTok{(t.obt), }\DataTypeTok{df=}\NormalTok{n}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{lower.tail=}\NormalTok{F)}
   \KeywordTok{print}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DataTypeTok{t.obt =}\NormalTok{ t.obt, }\DataTypeTok{p.value =}\NormalTok{ p.value))}
-  \KeywordTok{warning}\NormalTok{(}\StringTok{"P-value pentru one-sided. Dubleaza pentru two-sided."}\NormalTok{)}
+  \KeywordTok{warning}\NormalTok{(}\StringTok{"P-value pentru unilateral. Dubleaza pentru bilateral."}\NormalTok{)}
 \NormalTok{\}}
 
 \KeywordTok{t.single}\NormalTok{(}\FloatTok{36.805}\NormalTok{, }\DataTypeTok{mu =} \DecValTok{37}\NormalTok{, }\DataTypeTok{SD =} \FloatTok{0.4073}\NormalTok{, }\DataTypeTok{n =} \DecValTok{130}\NormalTok{)}
 \NormalTok{        t.obt       p.value }
 \OperatorTok{-}\FloatTok{5.458733e+00}  \FloatTok{1.183961e-07} 
 \NormalTok{Warning }\ControlFlowTok{in} \KeywordTok{t.single}\NormalTok{(}\FloatTok{36.805}\NormalTok{, }\DataTypeTok{mu =} \DecValTok{37}\NormalTok{, }\DataTypeTok{SD =} \FloatTok{0.4073}\NormalTok{, }\DataTypeTok{n =} \DecValTok{130}\NormalTok{)}\OperatorTok{:}\StringTok{ }\NormalTok{P}\OperatorTok{-}\NormalTok{value pentru}
-\NormalTok{one}\OperatorTok{-}\NormalTok{sided. Dubleaza pentru two}\OperatorTok{-}\NormalTok{sided.}
+\NormalTok{unilateral. Dubleaza pentru bilateral.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1227,6 +1228,16 @@ sau
                \FloatTok{2.763889} 
 \end{Highlighting}
 \end{Shaded}
+
+\section*{Referințe}\label{referinte}
+\addcontentsline{toc}{section}{Referințe}
+
+\hypertarget{refs}{}
+\hypertarget{ref-Mackowiak1992}{}
+Mackowiak, P. A., S. S. Wasserman, and M. M. Levine. 1992. ``A Critical
+Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body
+Temperature, and Other Legacies of Carl Reinhold August Wunderlich.''
+\emph{Journal of the American Medical Association} 268: 1578--80.
 
 
 \end{document}

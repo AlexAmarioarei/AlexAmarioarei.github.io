@@ -275,6 +275,7 @@
 
 \renewcommand\tablename{Tab.}
 \renewcommand{\figurename}{Fig.}
+\renewcommand\refname{Referințe}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Header and Footer
@@ -283,7 +284,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
-\lhead{\textit{Curs}: Biostatistic\u a\\ \textit{Instructor}: A. Am\u arioarei}
+\lhead{\textit{Curs}: Biostatistic\u a 2018\\ \textit{Instructor}: A. Am\u arioarei}
 \rfoot{Pagina \thepage}
 \lfoot{Grupa: 503}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -298,6 +299,7 @@
 \usepackage{pdflscape}
 \usepackage{tabu}
 \usepackage{threeparttable}
+\usepackage[normalem]{ulem}
 
 \begin{document}
 \maketitle
@@ -1088,11 +1090,7 @@ Pentru a vedea ce obținem atunci când folosim funcțiile \texttt{cbind()}
 \NormalTok{x <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
 \NormalTok{y <-}\StringTok{ }\DecValTok{6}\OperatorTok{:}\DecValTok{10}
 \NormalTok{z <-}\StringTok{ }\DecValTok{11}\OperatorTok{:}\DecValTok{15}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# Cream o matrice cu x, y si z ca si coloane}
 \KeywordTok{cbind}\NormalTok{(x, y, z)}
 \NormalTok{     x  y  z}
@@ -2812,7 +2810,7 @@ mici.\strut
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-85-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-84-1} \end{center}
 
 În afară de vectorii \texttt{x} și \texttt{y} toate celelalte argumente
 sunt opționale, dacă nu sunt specificate atunci R-ul folosește valorile
@@ -2834,16 +2832,16 @@ prezintă tipurile simboluri pe care atunci când atribuim argumentului
 
 \begin{figure}
 
-{\centering \includegraphics{Lab_1_files/figure-latex/unnamed-chunk-87-1} 
+{\centering \includegraphics{Lab_1_files/figure-latex/unnamed-chunk-86-1} 
 
 }
 
-\caption{Tipurile de simboluri asociate parametrului pch.}\label{fig:unnamed-chunk-87}
+\caption{Tipurile de simboluri asociate parametrului pch.}\label{fig:unnamed-chunk-86}
 \end{figure}
 
 Următorul exemplu ilustrează câteva tipuri de simboluri:
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-88-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-87-1} \end{center}
 
 \begin{rmdexercise}
 Considerăm următoarea funcție \(g:\mathbb{R}\to\mathbb{R}\),
@@ -2954,7 +2952,7 @@ Putem crea o histogramă folosind setul de date \texttt{ChickWeight}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-90-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-89-1} \end{center}
 
 Putem modifica histograma de mai sus, schimbând numărul de bin-uri și
 culoarea acestora:
@@ -2972,7 +2970,7 @@ culoarea acestora:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-91-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-90-1} \end{center}
 
 Dacă vrem să ilustrăm două histograme pe aceeași figură, pentru a
 evidenția repartiția după două clase, putem folosi argumentul
@@ -2995,7 +2993,7 @@ evidenția repartiția după două clase, putem folosi argumentul
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-92-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-91-1} \end{center}
 
 \subsection{\texorpdfstring{Funcția
 \texttt{barplot}}{Funcția barplot}}\label{functia-barplot}
@@ -3036,7 +3034,7 @@ greutatea medie a mașinilor în funcție de numărul de cilindrii:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-93-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-92-1} \end{center}
 
 \begin{rmdexercise}
 Folosind setul de date \texttt{ChickWeight} afișați, cu ajutorul
@@ -3083,7 +3081,7 @@ cilindrii.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-95-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-94-1} \end{center}
 
 \subsection{\texorpdfstring{Funcția
 \texttt{boxplot}}{Funcția boxplot}}\label{functia-boxplot}
@@ -3174,7 +3172,7 @@ numărul de cilindrii (\texttt{cyl}) în cazul mașinilor din setul de date
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-96-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-95-1} \end{center}
 
 Putem să vedem această relație și în raport cu tipul de transmisie.
 
@@ -3206,7 +3204,7 @@ Putem să vedem această relație și în raport cu tipul de transmisie.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-97-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-96-1} \end{center}
 
 \subsection{Funcții pentru adăugarea unor elemente la un
 grafic}\label{functii-pentru-adaugarea-unor-elemente-la-un-grafic}
@@ -3264,7 +3262,7 @@ setul de date \texttt{mtcars} în raport cu tipul de transmisie.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-98-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-97-1} \end{center}
 
 Dacă vrem să adăugăm linii drepte la un grafic putem folosi comanda
 \texttt{abline()} sau \texttt{segments()}. De exemplu în figura de mai
@@ -3286,7 +3284,7 @@ media variabilelor de pe axa x și y.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-99-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-98-1} \end{center}
 
 Pentru a adăuga numele mașinilor cu transmisie automată în fiecare punct
 putem folosi comanda \texttt{text()}. Argumentele principale ale acestei
@@ -3314,7 +3312,7 @@ etichetelor și \texttt{labels} care reprezintă etichetele.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-100-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-99-1} \end{center}
 
 Funcția \texttt{curve()} permite trasarea/adăugarea unei linii care
 descrie o funcție. Printre argumentele funcției regăsim \texttt{expr}
@@ -3341,7 +3339,7 @@ adăugarea unei curbe la un grafic existent.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-101-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-100-1} \end{center}
 
 Atunci când vrem să adăugăm o legendă la un grafic folosim funcția
 \texttt{legend()}. Argumentele acestei funcții se regăsesc în tabelul de
@@ -3415,7 +3413,7 @@ specificăm care grafic corespunde funcției \(sin\) și care funcției
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-102-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-101-1} \end{center}
 
 \subsection{Salvarea figurilor}\label{salvarea-figurilor}
 
@@ -3883,11 +3881,9 @@ corespunzătoare repartiției uniforme.
   \texttt{rname}: generează observații independente din repartiția dată
 \end{itemize}
 
-O parte din cele mai cunoscute repartiții continue\footnote{Pentru mai
-  multe informații, se poate consulta monografia Johnson, N., Kotz, S.
-  și Balakrishnan, N. \emph{Continuous Univariate Distributions},
-  (Volumul 1, Ediția a 2-a), John Wiley \& Sons, New York (1994), 756
-  pp., ISBN 0-471-58495-9} sunt prezentate mai jos:
+O parte din cele mai cunoscute repartiții continue (pentru mai multe
+informații, se poate consulta monografia (Johnson, Kotz, and
+Balakrishnan 1994)) sunt prezentate mai jos:
 
 \subsection{Repartiția Uniformă}\label{repartitia-uniforma}
 
@@ -3901,7 +3897,7 @@ O variabilă aleatoare \(X\) repartizată \emph{uniform} pe intervalul
   \end{array}\right.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-116-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-115-1} \end{center}
 
 Funcția de repartiție a repartiției uniforme este
 
@@ -3913,7 +3909,7 @@ Funcția de repartiție a repartiției uniforme este
   \end{array}\right.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-117-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-116-1} \end{center}
 
 Media și varianța variabilei aleatoare \(X\) repartizate uniform pe
 \([a,b]\) sunt egale cu
@@ -4003,7 +3999,7 @@ Determinați:
 \end{enumerate}
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-123-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-122-1} \end{center}
 
 \begin{rmdexercise}
 Dacă \(X\) o variabilă aleatoare repartizată uniform pe \([a,b]\) și
@@ -4021,7 +4017,7 @@ cu \(X\sim\mathcal{N}(\mu, \sigma^2)\), dacă densitatea ei are forma
   f_X(x) \left(\overset{not}{=} \varphi(x)\right) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \quad x\in\mathbb{R}.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-125-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-124-1} \end{center}
 
 Funcția de repartiție a unei variabile
 \(X\sim\mathcal{N}(\mu, \sigma^2)\) este dată de
@@ -4033,7 +4029,8 @@ Funcția de repartiție a unei variabile
 Pentru funcția de repartiție nu avem o formulă explicită de calcul, ea
 poate fi aproximată cu ajutorul descompunerii în serie. În cazul
 variabilelor \emph{normale standard} (\(X\sim\mathcal{N}(0,1)\)) avem
-proprietățile
+proprietățile (pentru mai multe astfel de inegalități se poate consulta
+cartea (Lin and Bai 2010, capitolul 2))
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
@@ -4041,13 +4038,10 @@ proprietățile
 \item
   \(\Phi(x) = 1-\Phi(-x)\) pentru toate valorile \(x\in\mathbb{R}\)
 \item
-  \(1-\Phi(a)\leq\frac{1}{2}e^{-\frac{a^2}{2}}\) pentru
-  \(a>0\)\footnote{Pentru mai multe astfel de inegalități se poate
-    consulta cartea (capitolul 2): Lin, Z. și Bai, Z. \emph{Probability
-    Inequalities}, Springer, 2010.}
+  \(1-\Phi(a)\leq\frac{1}{2}e^{-\frac{a^2}{2}}\) pentru \(a>0\)
 \end{enumerate}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-126-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-125-1} \end{center}
 
 Media și varianța variabilei aleatoare \(X\) repartizate normal de
 parametrii \(\mathcal{N}(\mu, \sigma^2)\) sunt egale cu
@@ -4175,7 +4169,7 @@ densitățile repartițiilor normale cu parametrii
 Aceeași cerință pentru funcțiile de repartiție.
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-134-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-133-1} \end{center}
 
 \begin{rmdexercise}
 Generați \(250\) de observații din repartiția \(\mathcal{N}(0, 2)\),
@@ -4183,7 +4177,7 @@ trasați histograma acestora și suprapuneți densitatea repartiției date
 (vezi figura de mai jos).
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-136-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-135-1} \end{center}
 
 \begin{rmdexercise}
 Fie \(X\) o variabilă aleatoare repartizată normal de parametrii \(\mu\)
@@ -4195,7 +4189,7 @@ că are loc următoarea inegalitate:
 \]
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-138-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-137-1} \end{center}
 
 \subsection{Repartiția Log-Normală}\label{repartitia-log-normala}
 
@@ -4211,7 +4205,7 @@ parametrii \(\mu\) și \(\sigma^2\). Cu alte cuvinte dacă
     f_X(x) = \frac{1}{x\sigma\sqrt{2\pi}}e^{-\frac{(\ln(x)-\mu)^2}{2\sigma^2}}, \quad x\in (0, +\infty).
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-139-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-138-1} \end{center}
 
 Funcția de repartiție a unei variabile aleatoare
 \(X\sim LN(\mu, \sigma^2)\) este dată de
@@ -4223,7 +4217,7 @@ Funcția de repartiție a unei variabile aleatoare
 și, ca și în cazul repartiției normale, nu are o formulă explicită de
 calcul.
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-140-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-139-1} \end{center}
 
 Media și varianța variabilei aleatoare \(X\) repartizate log-normal de
 parametrii \(LN(\mu, \sigma^2)\) sunt egale cu
@@ -4319,7 +4313,7 @@ același grafic densitățile repartițiilor log-normale cu parametrii
 cerință pentru funcțiile de repartiție.
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-147-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-146-1} \end{center}
 
 \begin{rmdexercise}
 Generați \(500\) de observații din repartiția \(LN(0, 2)\), trasați
@@ -4327,7 +4321,7 @@ histograma acestora și suprapuneți densitatea repartiției date (vezi
 figura de mai jos).
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-149-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-148-1} \end{center}
 
 Printre fenomenele care pot fi modelate cu ajutorul repartiției
 log-normale se numără: cantitatea de lapte produsă de vaci, cantitatea
@@ -4349,7 +4343,7 @@ Spunem că o variabilă aleatoare \(X\) este repartizată
   f_X(x) = \lambda e^{-\lambda x}\mathbb{1}_{\mathbb{R}_+}(x),\quad \forall x\in\mathbb{R}.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-150-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-149-1} \end{center}
 
 Funcția de repartiție a unei variabile aleatoare
 \(X\sim \mathcal{E}(\lambda)\) este dată de
@@ -4358,7 +4352,7 @@ Funcția de repartiție a unei variabile aleatoare
   F_{X}(x) = 1 - e^{-\lambda x}\mathbb{1}_{\mathbb{R}_+}(x), \quad x\in \mathbb{R}.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-151-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-150-1} \end{center}
 
 Media și varianța variabilei aleatoare \(X\) repartizate exponențial de
 parametru \(\lambda\) sunt egale cu
@@ -4469,7 +4463,7 @@ Adăugați legendele corespunzătoare. Aceeași cerință pentru funcțiile de
 repartiție.
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-159-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-158-1} \end{center}
 
 \begin{rmdexercise}
 Folosind rezultatul de universalitate de la repartiția uniformă,
@@ -4485,7 +4479,7 @@ trasați histograma acestora și suprapuneți densitatea repartiției date
 (vezi figura de mai jos).
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-163-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-162-1} \end{center}
 
 \subsection{Repartiția Cauchy}\label{repartitia-cauchy}
 
@@ -4504,7 +4498,7 @@ variabilei aleatoare \(X\) și nu media iar prima și a treia cuartilă
 sunt \(Q_1 = -1\) și respectiv \(Q_3=1\) (avem
 \(\mathbb{P}(X\leq -1) = \mathbb{P}(X\geq 1) = \frac{1}{4}\)).
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-164-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-163-1} \end{center}
 
 Funcția de repartiție a unei variabile aleatoare \(X\sim C(0,1)\) este
 dată de
@@ -4513,7 +4507,7 @@ dată de
   F_{X}(x) = \frac{1}{2} + \frac{1}{\pi}\arctan(x), \quad x\in \mathbb{R}.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-165-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-164-1} \end{center}
 
 Media și varianța variabilei aleatoare \(X\sim C(0,1)\) \textbf{nu
 există}.
@@ -4607,7 +4601,7 @@ histograma acestora și suprapuneți densitatea repartiției date pentru
 intervalul \([-5,5]\) (vezi figura de mai jos).
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-172-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-171-1} \end{center}
 
 \begin{rmdexercise}
 Fie \(X\) și \(Y\) două variabile aleatoare independente repartizate
@@ -4624,7 +4618,7 @@ grafic densitățile repartițiilor Cauchy cu parametrii
 pentru funcțiile de repartiție.
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-175-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-174-1} \end{center}
 
 \begin{rmdexercise}
 Folosind rezultatul de universalitate de la repartiția uniformă,
@@ -4639,7 +4633,7 @@ generarea de \(n\) observații independente dintr-o variabilă repartizată
 Warning in rug(x): some values will be clipped
 \end{verbatim}
 
-\begin{center}\includegraphics{Lab_1_files/figure-latex/unnamed-chunk-177-1} \end{center}
+\begin{center}\includegraphics{Lab_1_files/figure-latex/unnamed-chunk-176-1} \end{center}
 
 \subsection{Repartiția Gama}\label{repartitia-gama}
 
@@ -4658,13 +4652,10 @@ al doilea tip) definită prin
   \Gamma(\alpha) = \int_{0}^{\infty}x^{\alpha-1} e^{- x}\,dx,\quad \forall \alpha>0.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-178-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-177-1} \end{center}
 
 \begin{rmdexercise}
-Arătați că funcția \(\Gamma(\alpha)\) verifică\footnote{Pentru mai multe
-  proprietăți puteți consulta lucrarea lui E. Artin
-  \href{http://plouffe.fr/simon/math/Artin\%20E.\%20The\%20Gamma\%20Function\%20(1931)(23s).pdf}{The
-  Gamma Function}}:
+Arătați că funcția \(\Gamma(\alpha)\) verifică următoarele proprietăți:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -4682,6 +4673,9 @@ Arătați că funcția \(\Gamma(\alpha)\) verifică\footnote{Pentru mai multe
 \end{enumerate}
 \end{rmdexercise}
 
+Pentru mai multe proprietăți ale funcției \(\Gamma(\alpha)\) puteți
+consulta lucrarea (Artin 1964).
+
 Funcția de repartiție a unei variabile aleatoare
 \(X\sim \Gamma(\alpha, \beta)\) este dată de
 
@@ -4691,7 +4685,7 @@ Funcția de repartiție a unei variabile aleatoare
 
 și nu are o formulă explicită de calcul.
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-180-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-179-1} \end{center}
 
 Observăm că repartiția \(\Gamma(1, \lambda)\) coincide cu repartiția
 \(\mathcal{E}(\lambda)\).
@@ -4786,7 +4780,7 @@ trasați pe același grafic densitățile repartițiilor Gama cu parametrii
 pentru funcțiile de repartiție.
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-187-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-186-1} \end{center}
 
 \begin{rmdexercise}
 Generați \(250\) de observații din repartiția \(\Gamma(9,2)\), trasați
@@ -4794,7 +4788,7 @@ histograma acestora și suprapuneți densitatea repartiției date (vezi
 figura de mai jos).
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-189-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-188-1} \end{center}
 
 \subsection{Repartiția Beta}\label{repartitia-beta}
 
@@ -4811,7 +4805,7 @@ Euler de primul tip) definită prin
   B(\alpha, \beta) = \int_{0}^{\infty}x^{\alpha-1} (1-x)^{\beta-1}\,dx,\quad \forall \alpha, \beta >0.
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-190-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-189-1} \end{center}
 
 \begin{rmdexercise}
 Arătați că funcția Beta \(B(\alpha, \beta)\) verifică următoarele
@@ -4842,7 +4836,7 @@ Funcția de repartiție a unei variabile aleatoare
 
 și nu are o formulă explicită de calcul.
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-192-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-191-1} \end{center}
 
 Observăm că repartiția \(B(1, 1)\) coincide cu repartiția
 \(\mathcal{U}([0,1])\).
@@ -4939,7 +4933,7 @@ Adăugați legendele corespunzătoare. Aceeași cerință pentru funcțiile de
 repartiție.
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-199-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-198-1} \end{center}
 
 \begin{rmdexercise}
 Generați \(250\) de observații din repartiția \(B(3,3)\), trasați
@@ -4947,7 +4941,23 @@ histograma acestora și suprapuneți densitatea repartiției date (vezi
 figura de mai jos).
 \end{rmdexercise}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-201-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_1_files/figure-latex/unnamed-chunk-200-1} \end{center}
+
+\section*{Referințe}\label{referinte}
+\addcontentsline{toc}{section}{Referințe}
+
+\hypertarget{refs}{}
+\hypertarget{ref-Artin1964}{}
+Artin, Emil. 1964. ``The Gamma Function.'' Athena Series - Selected
+topics in mathematics.
+\url{http://plouffe.fr/simon/math/Artin\%20E.\%20The\%20Gamma\%20Function\%20(1931)(23s).pdf}.
+
+\hypertarget{ref-Johnson1994}{}
+Johnson, N., S. Kotz, and N. Balakrishnan. 1994. \emph{Continuous
+Univariate Distributions}. 2nd ed. Vol. 1. John Wiley \& Sons, New York.
+
+\hypertarget{ref-LinBai2010}{}
+Lin, Z., and Z. Bai. 2010. \emph{Probability Inequalities}. Springer.
 
 
 \end{document}

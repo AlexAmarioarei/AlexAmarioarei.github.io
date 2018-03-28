@@ -27,6 +27,7 @@ output:
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
+bibliography: references/Biostat_2018_ref.bib
 ---
 
 <script>
@@ -1965,7 +1966,7 @@ Pentru fiecare repartiție, există patru comenzi în R prefixate cu literele `d
   
   * `rname`: generează observații independente din repartiția dată 
   
-O parte din cele mai cunoscute repartiții continue^[Pentru mai multe informații, se poate consulta monografia Johnson, N., Kotz, S. și Balakrishnan, N. *Continuous Univariate Distributions*, (Volumul 1, Ediția a 2-a), John Wiley & Sons, New York (1994),  756 pp., ISBN 0-471-58495-9] sunt prezentate mai jos:
+O parte din cele mai cunoscute repartiții continue (pentru mai multe informații, se poate consulta monografia [@Johnson1994]) sunt prezentate mai jos:
 
 ```{r, echo = FALSE}
 col_border = "forestgreen"
@@ -2190,10 +2191,10 @@ $$
   F_X(x) \left(\overset{not}{=} \Phi(x)\right) = \int_{-\infty}^{x}\varphi(t)\,dt = \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}\,dt.
 $$
 
-Pentru funcția de repartiție nu avem o formulă explicită de calcul, ea poate fi aproximată cu ajutorul descompunerii în serie. În cazul variabilelor *normale standard* ($X\sim\mathcal{N}(0,1)$) avem proprietățile
+Pentru funcția de repartiție nu avem o formulă explicită de calcul, ea poate fi aproximată cu ajutorul descompunerii în serie. În cazul variabilelor *normale standard* ($X\sim\mathcal{N}(0,1)$) avem proprietățile (pentru mai multe astfel de inegalități se poate consulta cartea [@LinBai2010, capitolul 2])
 
   a) $\Phi(x) = 1-\Phi(-x)$ pentru toate valorile $x\in\mathbb{R}$
-  b) $1-\Phi(a)\leq\frac{1}{2}e^{-\frac{a^2}{2}}$ pentru $a>0$^[Pentru mai multe astfel de inegalități se poate consulta cartea (capitolul 2): Lin, Z. și Bai, Z. *Probability Inequalities*, Springer, 2010.]
+  b) $1-\Phi(a)\leq\frac{1}{2}e^{-\frac{a^2}{2}}$ pentru $a>0$
 
 
 ```{r, echo=FALSE, out.width=dimplot}
@@ -3301,7 +3302,7 @@ axis(side = 1, at = c(0, 0.5, 1.5),
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
-Arătați că funcția $\Gamma(\alpha)$ verifică^[Pentru mai multe proprietăți puteți consulta lucrarea lui E. Artin [The Gamma Function](http://plouffe.fr/simon/math/Artin%20E.%20The%20Gamma%20Function%20(1931)(23s).pdf)]:
+Arătați că funcția $\Gamma(\alpha)$ verifică următoarele proprietăți:
   
   1) $\Gamma(1)=1$
   2) $\Gamma(\alpha+1) = \alpha\Gamma(\alpha), \quad \forall \alpha>0$
@@ -3311,6 +3312,8 @@ Arătați că funcția $\Gamma(\alpha)$ verifică^[Pentru mai multe proprietăț
 
 
 ```
+
+Pentru mai multe proprietăți ale funcției $\Gamma(\alpha)$ puteți consulta lucrarea [@Artin1964].
 
 Funcția de repartiție a unei variabile aleatoare $X\sim \Gamma(\alpha, \beta)$ este dată de 
 
@@ -3798,4 +3801,6 @@ lines(seq(0, 1, length.out = 250),
 rug(x)
 
 ```
+
+# Referințe
 

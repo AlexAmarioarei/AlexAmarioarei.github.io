@@ -27,6 +27,7 @@ output:
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
+bibliography: references/Biostat_2018_ref.bib
 ---
 
 <script>
@@ -240,7 +241,7 @@ $$
 
 unde $\lceil x \rceil$ reprezintă cea mai mică valoare întreagă mai mare sau egală cu $x$.
 
-Pentru calculul cuantilelor empirice vom folosi funcția `quantile()`^[Articolul lui Hyndman, R. J. și Fan, Y. (1996) [*Sample quantiles in statistical packages*](readings/Sample Quantiles.pdf), American Statistician 50, 361–365 prezintă și compară o serie de algoritmi folosiți în soft-urile de profil pentru calcularea cuantilelor empirice.]. De exemplu pentru a calcula cuantila de ordin 0.25 și respectiv 0.75 a greutății găinilor din setul de date `chickwts` vom scrie
+Pentru calculul cuantilelor empirice vom folosi funcția `quantile()`. Articolul [@Hyndman1996] prezintă și compară o serie de algoritmi folosiți în soft-urile de profil pentru calcularea cuantilelor empirice. De exemplu pentru a calcula cuantila de ordin 0.25 și respectiv 0.75 a greutății găinilor din setul de date `chickwts` vom scrie
 
 
 ```r
@@ -443,9 +444,9 @@ Se poate observa că pentru $m$ suficient de mare ($h$ mic) și $x\in B_j$ avem
 $$
   \mathbb{E}\left[\hat{f}_n(x)\right] = \mathbb{E}\left[\sum_{i=1}^{m} \frac{\hat{p}_i}{h} \mathbf{1}_{B_i}(x)\right]= \frac{\mathbb{E}\left[\hat{p}_j\right]}{h} = \frac{p_j}{h} = \frac{\int_{B_j}f(x)\,dx}{h}\approx \frac{f(x)h}{h} = f(x).
 $$
-Alegerea numărului de bin-uri și a mărimii acestora nu este o problemă trivială^[De exemplu, D. Scott propune o variantă de alegere în articolul [*On optimal and data-based histograms*](readings/histo-bin-size-scott.pdf), Biometrika, 66:605-610, 1979. Un rezultat similar, dar mai robust, a fost obținut de D. Freedman și P. Diaconis în [*On the histogram as a density estimator: $L_2$ theory*](readings/FreedmanDiaconis1_1981.pdf), Z. Wahrscheinlichkeitstheorie verw. Gebiete, 57, 453-476, 1981.]. Câteva dintre metodele de alegere a mărimii bin-ului sunt prezentate în următoarea pagină de [Wikipedia](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width). 
+Alegerea numărului de bin-uri și a mărimii acestora nu este o problemă trivială. De exemplu, D. Scott propune o variantă de alegere a lui $k$ în articolul [@Scott1979]. Un rezultat similar, dar mai robust, a fost obținut de D. Freedman și P. Diaconis în [@FreedmanDiaconis1981]. Câteva dintre metodele de alegere a mărimii bin-ului sunt prezentate în următoarea pagină de [Wikipedia](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width). 
 
-În R, funcția `hist()` este folosită pentru trasarea unei histograme. Această funcție utilizează ca metodă predefinită de alegere a mărimii bin-urilor, metoda lui Sturges^[A se vedea articolul Sturges, H. A. *The choice of a class interval*, Journal of the American Statistical Association: 65, 1926.]. 
+În R, funcția `hist()` este folosită pentru trasarea unei histograme. Această funcție utilizează ca metodă predefinită de alegere a mărimii bin-urilor, metoda lui Sturges (a se vedea articolul [@Sturges1926]). 
 
 \BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerați setul de date `chickwts`. Investigați cu ajutorul unei histograme cum este repartizată greutatea găinilor, variabila `weight`. Dar în funcție de tipul de alimentație `feed` ?.</div>\EndKnitrBlock{rmdexercise}
 
@@ -602,7 +603,7 @@ Una dintre metodele grafice des întâlnite în vizualizarea datelor (cantitativ
 
 După cum putem vedea și în figura de mai jos, cutia este definită, de la stânga la dreapta (sau de jos în sus în funcție de cum este reprezentat boxplot-ul: orizontal sau vertical), de prima cuartilă $Q_1$ și de a treia curatilă $Q_3$ ceea ce înseamnă că $50\%$ dintre observații se află în interiorul cutiei. Linia din interiorul cutiei este determinată de mediană sau a doua cuartilă $Q_2$. 
 
-Mustățile care pornesc de o parte și de alta a cutiei sunt determinate astfel (vom folosi conveția folosită de John Tukey^[A se consulta pag. 40-56 din cartea lui John Tukey *Exploratory data analysis*, Addison-Wesley Publishing Company, 1977]): mustața din stânga este determinată de cea mai mică observație mai mare decât $Q_1-1.5 IQR$ iar cea din dreapta de cea mai mare observație din setul de date mai mică decât $Q_3+1.5IQR$, unde $IQR = Q_3-Q_1$ este distanța dintre cuartile (*interquartile range*). 
+Mustățile care pornesc de o parte și de alta a cutiei sunt determinate astfel (vom folosi conveția folosită de John Tukey în [@Tukey1977, pag. 40-56]): mustața din stânga este determinată de cea mai mică observație mai mare decât $Q_1-1.5 IQR$ iar cea din dreapta de cea mai mare observație din setul de date mai mică decât $Q_3+1.5IQR$, unde $IQR = Q_3-Q_1$ este distanța dintre cuartile (*interquartile range*). 
 
 Valorile observațiilor din setul de date care sunt sau prea mici sau prea mari se numesc valori aberante (*outliers*) și conform lui Tukey sunt definite astfel: *valori strict aberante* care se află la $3IQR$ deasupra celei de-a treia curtilă $Q_3$ sau la $3IQR$ sub prima cuartilă ($x<Q_1-3IQR$ sau $x>Q_3+3IQR$) și *valori potențial aberante* care se află la $1.5IQR$ deasupra celei de-a treia curtilă $Q_3$ sau la $1.5IQR$ sub prima cuartilă ($x<Q_1-1.5IQR$ sau $x>Q_3+1.5IQR$). 
 
@@ -640,74 +641,5 @@ Numele mașinilor care au o greutate potențial aberantă este Cadillac Fleetwoo
 
 <img src="Lab_2_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" />
 
-
-# Metode pentru verificarea proprietății de normalitate 
-
-Sunt multe metode și modele statistice (e.g. testul student, ANOVA, etc.) pentru care ipoteza de normalitate a datelor joacă un rol important și prin urmare verificarea unei astfel de ipoteze este esențială.  
-
-## Coeficientul de asimetrie, aplatizare și testul Jarque-Bera 
-
-Coeficientul de asimetrie (*skewness*) este o măsură a simetriei (sau mai bine a lipsei simetriei) unei repartiții. Fiind dată o variabilă aleatoare $X$ cu $\mathbb{E}[|X|^3]<\infty$, $\mathbb{E}[X]=\mu$ și $Var(X)=\sigma^2>0$ coeficientul de asimetrie este definit prin relația 
-
-$$
-  \gamma_1(X) = \mathbb{E}\left[\frac{(X-\mu)^3}{\sigma^3}\right].
-$$
-
-Cum repartiția normală este simetrică față de media sa $\mu$ atunci coeficientul de asimetrie este 0. În general o repartiție unimodală are coerficientul de asimetrie negativ dacă are o coadă mai lungă spre stânga (masa este concentrată mai spre dreapta) și pozitiv dacă are coada mai lungă spre dreapta (masa este concentrată mai spre stânga). 
-
-<img src="Lab_2_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" />
-
-Coeficientul de asimetrie pentru un eșantion $X_1, X_2, \ldots, X_n$ este 
-
-$$
-  b_1 = \frac{\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^3}{\left(\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^2\right)^{\frac{3}{2}}}.
-$$
-
-Coeficientul de aplatizare (*kurtosis*) măsoară dacă datele au coadă mai lungă sau mai scurtă în raport cu repartiția normală. Fiind dată o variabilă aleatoare $X$ cu $\mathbb{E}[X^4]<\infty$, $\mathbb{E}[X]=\mu$ și $Var(X)=\sigma^2>0$ coeficientul de aplatizare este definit prin relația 
-
-$$
-  \gamma_2(X) = \mathbb{E}\left[\frac{(X-\mu)^4}{\sigma^4}\right] - 3.
-$$
-
-Pentru o variabilă aleatoare repartizată normal, $Z\sim \mathcal{N}(\mu, \sigma^2)$, avem că $\gamma_2(Z) = 0$.
-
-Coeficientul de platizare pentru un eșantion $X_1, X_2, \ldots, X_n$ este 
-
-$$
-  b_2 = \frac{\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^4}{\left(\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^2\right)^{2}} - 3.
-$$
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Construiți în R o funcție care să permită calculul coeficientului de asimetrie și a coeficientului de aplatizare pentru un eșantion.  </div>\EndKnitrBlock{rmdexercise}
-
-Plecând de la coeficientul de asimetrie și coeficientul de aplatizare a unui eșantion C. Jarque și A. Bera^[Jarque, C. M., and Bera, A. K. (1987) *A test for normality of observations and regression residuals*. International Statistical Review 55, 163–172.] au propus următoarea statistică de test pentru testarea ipotezei de normalitate a datelor
-
-$$
-  JB = \frac{n}{6}\left(b_1^2 + \frac{b_2^2}{4}\right).
-$$
-
-Autorii au arătat că dacă datele sunt normale și $n$ este suficient de mare atunci $JB\overset{d}{\to}\chi^2(2)$. 
-
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Construiți în R o funcție `JBtest()` care să implementeze testul Jarque-Bera.</div>\EndKnitrBlock{rmdexercise}
-
-
-
-
-```r
-# pentru esantion normal 
-x = rnorm(1000)
-JBtest(x)
-Jarque Bera Test
-
-X-squared =  3.064054 , df =  2 , p-value =  0.2160972 
-
-# pentru esantion exponential  
-x = rexp(100, 0.2)
-JBtest(x)
-Jarque Bera Test
-
-X-squared =  26.84848 , df =  2 , p-value =  1.478856e-06 
-```
-
-
-## Metoda grafică: Q-Q plot 
-
+# Referințe
 

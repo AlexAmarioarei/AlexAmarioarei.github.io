@@ -27,6 +27,7 @@ output:
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
+bibliography: references/InstStatFin_2018_ref.bib
 ---
 
 <script>

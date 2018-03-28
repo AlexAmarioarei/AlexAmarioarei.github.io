@@ -111,14 +111,39 @@ readings_lab2_b = ""
 lab3 = "[HTML](labs/Lab_3.html)"
 pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
 data_lab3 = "[Google Data](labs/dataIn/google_data.csv) | [Apple Data](labs/dataIn/apple_data.csv) | [Microsoft Data](labs/dataIn/msft_data.csv)"
-readings_lab3 = "-"
+data_lab3_b = "[studFMI.txt](labs/dataIn/studFMI.txt)"
+readings_lab3 = "[Sample quantiles in statistical packages](labs/readings/Sample Quantiles.pdf)"
+readings_lab3_b = "[On optimal and data based histograms](labs/readings/histo-bin-size-scott.pdf)"
 
-tabLab = data.frame(Nr = c(1, 2, 3),
-                    Lab = c("Laborator 1", "Laborator 2", "Laborator 3"),
-                    Htmls = c(lab1, lab2, lab3),
-                    Pdfs = c(pdf_lab1, pdf_lab2, pdf_lab3),
-                    data = c(data_lab1, data_lab2, data_lab3), 
-                    readings = c(readings_lab1, readings_lab2, readings_lab3))
+lab4 = "[HTML](labs/Lab_4.html)"
+pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
+data_lab4 = ""
+readings_lab4 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
+
+tabLab = data.frame(Nr = c(1, 
+                           2, 
+                           3, "",
+                           4),
+                    Lab = c("Laborator 1", 
+                            "Laborator 2", 
+                            "Laborator 3", "",
+                            "Laborator 4"),
+                    Htmls = c(lab1, 
+                              lab2, 
+                              lab3, "",
+                              lab4),
+                    Pdfs = c(pdf_lab1, 
+                             pdf_lab2, 
+                             pdf_lab3, "",
+                             pdf_lab4),
+                    data = c(data_lab1, 
+                             data_lab2, 
+                             data_lab3, data_lab3_b,
+                             data_lab4), 
+                    readings = c(readings_lab1, 
+                                 readings_lab2, 
+                                 readings_lab3, readings_lab3_b,
+                                 readings_lab4))
 
 
 kable(tabLab, 

@@ -275,6 +275,7 @@
 
 \renewcommand\tablename{Tab.}
 \renewcommand{\figurename}{Fig.}
+\renewcommand\refname{Referințe}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Header and Footer
@@ -283,7 +284,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
-\lhead{\textit{Curs}: Biostatistic\u a\\ \textit{Instructor}: A. Am\u arioarei}
+\lhead{\textit{Curs}: Biostatistic\u a 2018\\ \textit{Instructor}: A. Am\u arioarei}
 \rfoot{Pagina \thepage}
 \lfoot{Grupa: 503}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -583,13 +584,11 @@ unde \(\lceil x \rceil\) reprezintă cea mai mică valoare întreagă mai
 mare sau egală cu \(x\).
 
 Pentru calculul cuantilelor empirice vom folosi funcția
-\texttt{quantile()}\footnote{Articolul lui Hyndman, R. J. și Fan, Y.
-  (1996) \href{readings/Sample\%20Quantiles.pdf}{\emph{Sample quantiles
-  in statistical packages}}, American Statistician 50, 361--365 prezintă
-  și compară o serie de algoritmi folosiți în soft-urile de profil
-  pentru calcularea cuantilelor empirice.}. De exemplu pentru a calcula
-cuantila de ordin 0.25 și respectiv 0.75 a greutății găinilor din setul
-de date \texttt{chickwts} vom scrie
+\texttt{quantile()}. Articolul (Hyndman and Fan 1996) prezintă și
+compară o serie de algoritmi folosiți în soft-urile de profil pentru
+calcularea cuantilelor empirice. De exemplu pentru a calcula cuantila de
+ordin 0.25 și respectiv 0.75 a greutății găinilor din setul de date
+\texttt{chickwts} vom scrie
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -840,22 +839,17 @@ care scris sub formă compactă devine
 \[
   \mathbb{E}\left[\hat{f}_n(x)\right] = \mathbb{E}\left[\sum_{i=1}^{m} \frac{\hat{p}_i}{h} \mathbf{1}_{B_i}(x)\right]= \frac{\mathbb{E}\left[\hat{p}_j\right]}{h} = \frac{p_j}{h} = \frac{\int_{B_j}f(x)\,dx}{h}\approx \frac{f(x)h}{h} = f(x).
 \] Alegerea numărului de bin-uri și a mărimii acestora nu este o
-problemă trivială\footnote{De exemplu, D. Scott propune o variantă de
-  alegere în articolul \href{readings/histo-bin-size-scott.pdf}{\emph{On
-  optimal and data-based histograms}}, Biometrika, 66:605-610, 1979. Un
-  rezultat similar, dar mai robust, a fost obținut de D. Freedman și P.
-  Diaconis în \href{readings/FreedmanDiaconis1_1981.pdf}{\emph{On the
-  histogram as a density estimator: \(L_2\) theory}}, Z.
-  Wahrscheinlichkeitstheorie verw. Gebiete, 57, 453-476, 1981.}. Câteva
-dintre metodele de alegere a mărimii bin-ului sunt prezentate în
-următoarea pagină de
+problemă trivială. De exemplu, D. Scott propune o variantă de alegere a
+lui \(k\) în articolul (Scott 1979). Un rezultat similar, dar mai
+robust, a fost obținut de D. Freedman și P. Diaconis în (Freedman and
+Diaconis 1981). Câteva dintre metodele de alegere a mărimii bin-ului
+sunt prezentate în următoarea pagină de
 \href{https://en.wikipedia.org/wiki/Histogram\#Number_of_bins_and_width}{Wikipedia}.
 
 În R, funcția \texttt{hist()} este folosită pentru trasarea unei
 histograme. Această funcție utilizează ca metodă predefinită de alegere
-a mărimii bin-urilor, metoda lui Sturges\footnote{A se vedea articolul
-  Sturges, H. A. \emph{The choice of a class interval}, Journal of the
-  American Statistical Association: 65, 1926.}.
+a mărimii bin-urilor, metoda lui Sturges (a se vedea articolul (Sturges
+1926)).
 
 \begin{rmdexercise}
 Considerați setul de date \texttt{chickwts}. Investigați cu ajutorul
@@ -1044,13 +1038,12 @@ află în interiorul cutiei. Linia din interiorul cutiei este determinată
 de mediană sau a doua cuartilă \(Q_2\).
 
 Mustățile care pornesc de o parte și de alta a cutiei sunt determinate
-astfel (vom folosi conveția folosită de John Tukey\footnote{A se
-  consulta pag. 40-56 din cartea lui John Tukey \emph{Exploratory data
-  analysis}, Addison-Wesley Publishing Company, 1977}): mustața din
-stânga este determinată de cea mai mică observație mai mare decât
-\(Q_1-1.5 IQR\) iar cea din dreapta de cea mai mare observație din setul
-de date mai mică decât \(Q_3+1.5IQR\), unde \(IQR = Q_3-Q_1\) este
-distanța dintre cuartile (\emph{interquartile range}).
+astfel (vom folosi conveția folosită de John Tukey în (J. 1977, pag.
+40-56)): mustața din stânga este determinată de cea mai mică observație
+mai mare decât \(Q_1-1.5 IQR\) iar cea din dreapta de cea mai mare
+observație din setul de date mai mică decât \(Q_3+1.5IQR\), unde
+\(IQR = Q_3-Q_1\) este distanța dintre cuartile (\emph{interquartile
+range}).
 
 Valorile observațiilor din setul de date care sunt sau prea mici sau
 prea mari se numesc valori aberante (\emph{outliers}) și conform lui
@@ -1114,105 +1107,30 @@ unui boxplot cum variază greutatea găinilor, variabila \texttt{weight},
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab_2_files/figure-latex/unnamed-chunk-31-1} \end{center}
 
-\section{Metode pentru verificarea proprietății de
-normalitate}\label{metode-pentru-verificarea-proprietatii-de-normalitate}
+\section*{Referințe}\label{referinte}
+\addcontentsline{toc}{section}{Referințe}
 
-Sunt multe metode și modele statistice (e.g.~testul student, ANOVA,
-etc.) pentru care ipoteza de normalitate a datelor joacă un rol
-important și prin urmare verificarea unei astfel de ipoteze este
-esențială.
+\hypertarget{refs}{}
+\hypertarget{ref-FreedmanDiaconis1981}{}
+Freedman, D., and P. Diaconis. 1981. ``On the Histogram as a Density
+Estimator: \(L_2\) Theory.'' \emph{Z. Wahrscheinlichkeitstheorie Verw.
+Gebiete} 57: 453--76.
 
-\subsection{Coeficientul de asimetrie, aplatizare și testul
-Jarque-Bera}\label{coeficientul-de-asimetrie-aplatizare-si-testul-jarque-bera}
+\hypertarget{ref-Hyndman1996}{}
+Hyndman, R. J., and Y Fan. 1996. ``Sample Quantiles in Statistical
+Packages.'' \emph{American Statistician} 50: 361--65.
 
-Coeficientul de asimetrie (\emph{skewness}) este o măsură a simetriei
-(sau mai bine a lipsei simetriei) unei repartiții. Fiind dată o
-variabilă aleatoare \(X\) cu \(\mathbb{E}[|X|^3]<\infty\),
-\(\mathbb{E}[X]=\mu\) și \(Var(X)=\sigma^2>0\) coeficientul de asimetrie
-este definit prin relația
+\hypertarget{ref-Tukey1977}{}
+J., Tukey. 1977. \emph{Exploratory Data Analysis}. Addison-Wesley
+Publishing Company.
 
-\[
-  \gamma_1(X) = \mathbb{E}\left[\frac{(X-\mu)^3}{\sigma^3}\right].
-\]
+\hypertarget{ref-Scott1979}{}
+Scott, D. 1979. ``On Optimal and Data-Based Histograms.''
+\emph{Biometrika} 66: 605--10.
 
-Cum repartiția normală este simetrică față de media sa \(\mu\) atunci
-coeficientul de asimetrie este 0. În general o repartiție unimodală are
-coerficientul de asimetrie negativ dacă are o coadă mai lungă spre
-stânga (masa este concentrată mai spre dreapta) și pozitiv dacă are
-coada mai lungă spre dreapta (masa este concentrată mai spre stânga).
-
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_2_files/figure-latex/unnamed-chunk-32-1} \end{center}
-
-Coeficientul de asimetrie pentru un eșantion \(X_1, X_2, \ldots, X_n\)
-este
-
-\[
-  b_1 = \frac{\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^3}{\left(\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^2\right)^{\frac{3}{2}}}.
-\]
-
-Coeficientul de aplatizare (\emph{kurtosis}) măsoară dacă datele au
-coadă mai lungă sau mai scurtă în raport cu repartiția normală. Fiind
-dată o variabilă aleatoare \(X\) cu \(\mathbb{E}[X^4]<\infty\),
-\(\mathbb{E}[X]=\mu\) și \(Var(X)=\sigma^2>0\) coeficientul de
-aplatizare este definit prin relația
-
-\[
-  \gamma_2(X) = \mathbb{E}\left[\frac{(X-\mu)^4}{\sigma^4}\right] - 3.
-\]
-
-Pentru o variabilă aleatoare repartizată normal,
-\(Z\sim \mathcal{N}(\mu, \sigma^2)\), avem că \(\gamma_2(Z) = 0\).
-
-Coeficientul de platizare pentru un eșantion \(X_1, X_2, \ldots, X_n\)
-este
-
-\[
-  b_2 = \frac{\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^4}{\left(\frac{1}{n}\sum_{i = 1}^{n} (X_i - \bar{X}_n)^2\right)^{2}} - 3.
-\]
-
-\begin{rmdexercise}
-Construiți în R o funcție care să permită calculul coeficientului de
-asimetrie și a coeficientului de aplatizare pentru un eșantion.
-\end{rmdexercise}
-
-Plecând de la coeficientul de asimetrie și coeficientul de aplatizare a
-unui eșantion C. Jarque și A. Bera\footnote{Jarque, C. M., and Bera, A.
-  K. (1987) \emph{A test for normality of observations and regression
-  residuals}. International Statistical Review 55, 163--172.} au propus
-următoarea statistică de test pentru testarea ipotezei de normalitate a
-datelor
-
-\[
-  JB = \frac{n}{6}\left(b_1^2 + \frac{b_2^2}{4}\right).
-\]
-
-Autorii au arătat că dacă datele sunt normale și \(n\) este suficient de
-mare atunci \(JB\overset{d}{\to}\chi^2(2)\).
-
-\begin{rmdexercise}
-Construiți în R o funcție \texttt{JBtest()} care să implementeze testul
-Jarque-Bera.
-\end{rmdexercise}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# pentru esantion normal }
-\NormalTok{x =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
-\KeywordTok{JBtest}\NormalTok{(x)}
-\NormalTok{Jarque Bera Test}
-
-\NormalTok{X}\OperatorTok{-}\NormalTok{squared =}\StringTok{  }\FloatTok{3.064054}\NormalTok{ , df =}\StringTok{  }\DecValTok{2}\NormalTok{ , p}\OperatorTok{-}\NormalTok{value =}\StringTok{  }\FloatTok{0.2160972} 
-
-\CommentTok{# pentru esantion exponential  }
-\NormalTok{x =}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{100}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
-\KeywordTok{JBtest}\NormalTok{(x)}
-\NormalTok{Jarque Bera Test}
-
-\NormalTok{X}\OperatorTok{-}\NormalTok{squared =}\StringTok{  }\FloatTok{26.84848}\NormalTok{ , df =}\StringTok{  }\DecValTok{2}\NormalTok{ , p}\OperatorTok{-}\NormalTok{value =}\StringTok{  }\FloatTok{1.478856e-06} 
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Metoda grafică: Q-Q plot}\label{metoda-grafica-q-q-plot}
+\hypertarget{ref-Sturges1926}{}
+Sturges, H. 1926. ``The Choice of a Class Interval.'' \emph{Journal of
+the American Statistical Association} 65.
 
 
 \end{document}
