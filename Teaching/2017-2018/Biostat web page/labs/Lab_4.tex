@@ -767,7 +767,7 @@ Jarque-Bera. Aplicați testul pentru o serie de exemple.
 \NormalTok{    Jarque Bera Test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x}
-\NormalTok{=}\StringTok{ }\FloatTok{0.76886}\NormalTok{, df =}\StringTok{ }\DecValTok{2}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.6808}
+\NormalTok{=}\StringTok{ }\FloatTok{1.5627}\NormalTok{, df =}\StringTok{ }\DecValTok{2}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.4578}
 
 \CommentTok{# pentru esantion exponential  }
 \NormalTok{x =}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{100}\NormalTok{, }\FloatTok{0.2}\NormalTok{)}
@@ -776,7 +776,7 @@ Jarque-Bera. Aplicați testul pentru o serie de exemple.
 \NormalTok{    Jarque Bera Test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x}
-\NormalTok{=}\StringTok{ }\FloatTok{90.481}\NormalTok{, df =}\StringTok{ }\DecValTok{2}\NormalTok{, p}\OperatorTok{-}\NormalTok{value }\OperatorTok{<}\StringTok{ }\FloatTok{2.2e-16}
+\NormalTok{=}\StringTok{ }\FloatTok{99.092}\NormalTok{, df =}\StringTok{ }\DecValTok{2}\NormalTok{, p}\OperatorTok{-}\NormalTok{value }\OperatorTok{<}\StringTok{ }\FloatTok{2.2e-16}
 \end{Highlighting}
 \end{Shaded}
 
@@ -847,7 +847,7 @@ Statistica \(SF\) reprezintă pătratul corelației dintre
 \NormalTok{    Shapiro}\OperatorTok{-}\NormalTok{Wilk normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x}
-\NormalTok{W =}\StringTok{ }\FloatTok{0.98931}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.609}
+\NormalTok{W =}\StringTok{ }\FloatTok{0.99416}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.9472}
 
 \CommentTok{# esantion repartizat t-student}
 \NormalTok{xt =}\StringTok{ }\KeywordTok{rt}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{df =} \DecValTok{2}\NormalTok{)}
@@ -856,7 +856,7 @@ Statistica \(SF\) reprezintă pătratul corelației dintre
 \NormalTok{    Shapiro}\OperatorTok{-}\NormalTok{Wilk normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{xt}
-\NormalTok{W =}\StringTok{ }\FloatTok{0.82419}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{1.472e-09}
+\NormalTok{W =}\StringTok{ }\FloatTok{0.89663}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{9.845e-07}
 \end{Highlighting}
 \end{Shaded}
 
@@ -908,7 +908,7 @@ Putem verifica acest test pentru seturile de date:
 \NormalTok{    Shapiro}\OperatorTok{-}\NormalTok{Francia normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x}
-\NormalTok{W =}\StringTok{ }\FloatTok{0.96816}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.01775}
+\NormalTok{W =}\StringTok{ }\FloatTok{0.98801}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.4314}
 
 \CommentTok{# esantion repartizat t-student}
 \NormalTok{xt =}\StringTok{ }\KeywordTok{rt}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{df =} \DecValTok{2}\NormalTok{)}
@@ -917,7 +917,7 @@ Putem verifica acest test pentru seturile de date:
 \NormalTok{    Shapiro}\OperatorTok{-}\NormalTok{Francia normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{xt}
-\NormalTok{W =}\StringTok{ }\FloatTok{0.84551}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{8.742e-08}
+\NormalTok{W =}\StringTok{ }\FloatTok{0.57064}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{2.169e-13}
 \end{Highlighting}
 \end{Shaded}
 
@@ -929,14 +929,86 @@ dintre statisticile de ordine \(X_{(i+1)} - X_{(i)}\) (se numesc
 \emph{spacings} în literatura de specialitate) și este dată de
 
 \[
-  CS = \frac{1}{(n-1)S_n}\sum_{i = 1}^{n}\frac{X_{(i+1)} - X_{(i)}}{z_{p_{i+1}} - z_{p_i}}
+  CS = \frac{1}{(n-1)S_n}\sum_{i = 1}^{n-1}\frac{X_{(i+1)} - X_{(i)}}{z_{p_{i+1}} - z_{p_i}}
 \]
 
 unde \(z_{p_i}\) este cuantila de ordin
 \(p_i = \frac{i - 3/8}{n + 1/4}\) asociată funcției de repartiție
 \(\Phi\) a normalei standard, iar \(S_n^2\) este dispersia eșantionului
 \(X_1, X_2, \ldots, X_n\). Conform (Chen 1995) ipoteza de normalitate
-este respinsă pentru valori mici ale lui \(CS\).
+este respinsă pentru valori mici ale lui \(CS\) (spunem că este un
+\emph{lower tailed test}, adică regiunea critică este de tipul
+\(C = \{T(x)\leq k\}\)).
+
+\begin{rmdexercise}
+Simulați în R, pentru \(n\in\{100, 1000\}\), repartiția testului
+Chen-Shapiro sub ipoteza nulă folosind \(m = 100000\) de repetări.
+\end{rmdexercise}
+
+Construim funcția care determină statistica de test Chen-Shapiro:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CS_stat =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  sx =}\StringTok{ }\KeywordTok{sort}\NormalTok{(x)}
+\NormalTok{  lenx =}\StringTok{ }\KeywordTok{length}\NormalTok{(sx)}
+  
+\NormalTok{  sn =}\StringTok{ }\KeywordTok{sd}\NormalTok{(x)}
+  
+\NormalTok{  p =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{lenx }\OperatorTok{-}\StringTok{ }\DecValTok{3}\OperatorTok{/}\DecValTok{8}\NormalTok{)}\OperatorTok{/}\NormalTok{(lenx}\OperatorTok{+}\DecValTok{1}\OperatorTok{/}\DecValTok{4}\NormalTok{)}
+\NormalTok{  z =}\StringTok{ }\KeywordTok{qnorm}\NormalTok{(p)}
+  
+\NormalTok{  dx =}\StringTok{ }\KeywordTok{diff}\NormalTok{(sx)}
+\NormalTok{  dz =}\StringTok{ }\KeywordTok{diff}\NormalTok{(z)}
+  
+\NormalTok{  cs =}\StringTok{ }\KeywordTok{sum}\NormalTok{(dx}\OperatorTok{/}\NormalTok{dz)}\OperatorTok{/}\NormalTok{((lenx}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{sn)}
+  
+  \KeywordTok{return}\NormalTok{(cs)}
+\NormalTok{\}}
+
+\NormalTok{sim_cs_stat_h0 =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{n =} \DecValTok{100}\NormalTok{,...)\{}
+\NormalTok{  x =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n,...)}
+    
+  \KeywordTok{CS_stat}\NormalTok{(x)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Simulăm pentru \(n\in\{100, 1000\}\) (ipoteza nulă de normalitate) și
+ilustrăm histograma repartiției \(CS\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m =}\StringTok{ }\DecValTok{100000}
+
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+
+\NormalTok{cs1 =}\StringTok{ }\KeywordTok{replicate}\NormalTok{(m, }\KeywordTok{sim_cs_stat_h0}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+\NormalTok{cs2 =}\StringTok{ }\KeywordTok{replicate}\NormalTok{(m, }\KeywordTok{sim_cs_stat_h0}\NormalTok{(}\DecValTok{1000}\NormalTok{))}
+
+\KeywordTok{hist}\NormalTok{(cs1,}
+     \DataTypeTok{freq =} \OtherTok{FALSE}\NormalTok{,}
+     \DataTypeTok{col =} \StringTok{"grey80"}\NormalTok{,}
+     \DataTypeTok{main =} \StringTok{"Repartitia statisticii Chen-Shapiro}\CharTok{\textbackslash{}n}\StringTok{ n = 100"}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Densitatea"}\NormalTok{,}
+     \DataTypeTok{cex.main =} \FloatTok{0.8}\NormalTok{,}
+     \DataTypeTok{cex.axis =} \FloatTok{0.7}\NormalTok{,}
+     \DataTypeTok{cex.lab =} \FloatTok{0.7}\NormalTok{)}
+
+\KeywordTok{hist}\NormalTok{(cs2,}
+     \DataTypeTok{freq =} \OtherTok{FALSE}\NormalTok{,}
+     \DataTypeTok{col =} \StringTok{"grey80"}\NormalTok{,}
+     \DataTypeTok{main =} \StringTok{"Repartitia statisticii Chen-Shapiro}\CharTok{\textbackslash{}n}\StringTok{ n = 1000"}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Densitatea"}\NormalTok{,}
+     \DataTypeTok{cex.main =} \FloatTok{0.8}\NormalTok{,}
+     \DataTypeTok{cex.axis =} \FloatTok{0.7}\NormalTok{,}
+     \DataTypeTok{cex.lab =} \FloatTok{0.7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_4_files/figure-latex/unnamed-chunk-27-1} \end{center}
 
 \subsection{Testul lui Kolmogorov-Smirnov și varianta lui
 Lilliefors}\label{testul-lui-kolmogorov-smirnov-si-varianta-lui-lilliefors}
@@ -1026,14 +1098,14 @@ Kolmogorov-Smirnov (Lilliefors)
 \NormalTok{    One}\OperatorTok{-}\NormalTok{sample Kolmogorov}\OperatorTok{-}\NormalTok{Smirnov test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x}
-\NormalTok{D =}\StringTok{ }\FloatTok{0.081452}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.5207}
+\NormalTok{D =}\StringTok{ }\FloatTok{0.068914}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.7292}
 \NormalTok{alternative hypothesis}\OperatorTok{:}\StringTok{ }\NormalTok{two}\OperatorTok{-}\NormalTok{sided}
 \KeywordTok{lillie.test}\NormalTok{(x)}
 
     \KeywordTok{Lilliefors}\NormalTok{ (Kolmogorov}\OperatorTok{-}\NormalTok{Smirnov) normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x}
-\NormalTok{D =}\StringTok{ }\FloatTok{0.061804}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.4564}
+\NormalTok{D =}\StringTok{ }\FloatTok{0.05138}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.7439}
 
 \CommentTok{# esantion repartizat t-student}
 \NormalTok{xt =}\StringTok{ }\KeywordTok{rt}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{df =} \DecValTok{2}\NormalTok{)}
@@ -1042,14 +1114,14 @@ Kolmogorov-Smirnov (Lilliefors)
 \NormalTok{    One}\OperatorTok{-}\NormalTok{sample Kolmogorov}\OperatorTok{-}\NormalTok{Smirnov test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{xt}
-\NormalTok{D =}\StringTok{ }\FloatTok{0.14631}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.02764}
+\NormalTok{D =}\StringTok{ }\FloatTok{0.11649}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.1325}
 \NormalTok{alternative hypothesis}\OperatorTok{:}\StringTok{ }\NormalTok{two}\OperatorTok{-}\NormalTok{sided}
 \KeywordTok{lillie.test}\NormalTok{(xt)}
 
     \KeywordTok{Lilliefors}\NormalTok{ (Kolmogorov}\OperatorTok{-}\NormalTok{Smirnov) normality test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{xt}
-\NormalTok{D =}\StringTok{ }\FloatTok{0.13669}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{8.932e-05}
+\NormalTok{D =}\StringTok{ }\FloatTok{0.09705}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.02131}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1086,7 +1158,7 @@ Funcția \texttt{ks.test()} permite și compararea a două eșantioane:
 \NormalTok{    Two}\OperatorTok{-}\NormalTok{sample Kolmogorov}\OperatorTok{-}\NormalTok{Smirnov test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{x and y}
-\NormalTok{D =}\StringTok{ }\FloatTok{0.061667}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.9003}
+\NormalTok{D =}\StringTok{ }\FloatTok{0.10833}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{0.2668}
 \NormalTok{alternative hypothesis}\OperatorTok{:}\StringTok{ }\NormalTok{two}\OperatorTok{-}\NormalTok{sided}
 
 \CommentTok{# datele nu provin din aceeasi populatie}
@@ -1098,7 +1170,7 @@ Funcția \texttt{ks.test()} permite și compararea a două eșantioane:
 \NormalTok{    Two}\OperatorTok{-}\NormalTok{sample Kolmogorov}\OperatorTok{-}\NormalTok{Smirnov test}
 
 \NormalTok{data}\OperatorTok{:}\StringTok{  }\NormalTok{xt and yt}
-\NormalTok{D =}\StringTok{ }\FloatTok{0.13667}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{2.487e-14}
+\NormalTok{D =}\StringTok{ }\FloatTok{0.13483}\NormalTok{, p}\OperatorTok{-}\NormalTok{value =}\StringTok{ }\FloatTok{5.829e-14}
 \NormalTok{alternative hypothesis}\OperatorTok{:}\StringTok{ }\NormalTok{two}\OperatorTok{-}\NormalTok{sided}
 \end{Highlighting}
 \end{Shaded}
@@ -1159,7 +1231,7 @@ Jarque-Bera & Shapiro-Wilk & Shapiro-Francia & Lilliefors\\
 \bottomrule
 \endlastfoot
 \showrowcolors
-0.813 & 0.788 & 0.83 & 0.626\\*
+0.812 & 0.785 & 0.831 & 0.62\\*
 \end{longtable}
 
 \rowcolors{2}{white}{white}
@@ -1200,7 +1272,7 @@ Jarque-Bera & Shapiro-Wilk & Shapiro-Francia & Lilliefors\\
 \bottomrule
 \endlastfoot
 \showrowcolors
-0.012 & 0.897 & 0.708 & 0.352\\*
+0.012 & 0.904 & 0.707 & 0.363\\*
 \end{longtable}
 
 \rowcolors{2}{white}{white}
@@ -1241,7 +1313,7 @@ Jarque-Bera & Shapiro-Wilk & Shapiro-Francia & Lilliefors\\
 \bottomrule
 \endlastfoot
 \showrowcolors
-0.766 & 0.954 & 0.931 & 0.696\\*
+0.767 & 0.946 & 0.925 & 0.695\\*
 \end{longtable}
 
 \rowcolors{2}{white}{white}

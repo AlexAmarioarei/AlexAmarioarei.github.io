@@ -114,26 +114,36 @@ data_lab3 = "[normtemp.txt](labs/dataIn/normtemp.txt)"
 readings_lab3 = "[Body temperature](labs/readings/BodyTemp.pdf)"
 readings_lab3_b = "[Significance, p values, t tests](labs/readings/nmeth.2698.pdf)"
 
+lab4 = "[HTML](labs/Lab_4.html)"
+pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
+data_lab4 = ""
+readings_lab4 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
 
 
 tabLab = data.frame(Nr = c(1, 
                            2, "",
-                           3, ""),
+                           3, "",
+                           4),
                     Lab = c("Laborator 1", 
                             "Laborator 2", "", 
-                            "Laborator 3", ""),
+                            "Laborator 3", "",
+                            "Laborator 4"),
                     Htmls = c(lab1, 
                               lab2, "", 
-                              lab3, ""),
+                              lab3, "",
+                              lab4),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2, "", 
-                             pdf_lab3, ""),
+                             pdf_lab3, "",
+                             pdf_lab4),
                     data = c(data_lab1, 
                              data_lab2, "", 
-                             data_lab3, ""), 
+                             data_lab3, "",
+                             data_lab4), 
                     readings = c(readings_lab1, 
                                  readings_lab2, readings_lab2_b,
-                                 readings_lab3, readings_lab3_b))
+                                 readings_lab3, readings_lab3_b,
+                                 readings_lab4))
 
 
 kable(tabLab, 

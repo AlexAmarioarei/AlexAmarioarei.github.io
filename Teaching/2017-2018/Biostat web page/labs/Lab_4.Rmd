@@ -658,10 +658,72 @@ sf.test(xt)
 O alternativă a testului Shapiro-Wilk este testul dezvoltat de Chen și Shapiro în [@ChenShapiro1995]. Statistica de test este bazată pe diferențele dintre statisticile de ordine $X_{(i+1)} - X_{(i)}$ (se numesc *spacings* în literatura de specialitate) și este dată de 
 
 $$
-  CS = \frac{1}{(n-1)S_n}\sum_{i = 1}^{n}\frac{X_{(i+1)} - X_{(i)}}{z_{p_{i+1}} - z_{p_i}}
+  CS = \frac{1}{(n-1)S_n}\sum_{i = 1}^{n-1}\frac{X_{(i+1)} - X_{(i)}}{z_{p_{i+1}} - z_{p_i}}
 $$
 
-unde $z_{p_i}$ este cuantila de ordin $p_i = \frac{i - 3/8}{n + 1/4}$ asociată funcției de repartiție $\Phi$ a normalei standard, iar $S_n^2$ este dispersia eșantionului $X_1, X_2, \ldots, X_n$. Conform [@ChenShapiro1995] ipoteza de normalitate este respinsă pentru valori mici ale lui $CS$. 
+unde $z_{p_i}$ este cuantila de ordin $p_i = \frac{i - 3/8}{n + 1/4}$ asociată funcției de repartiție $\Phi$ a normalei standard, iar $S_n^2$ este dispersia eșantionului $X_1, X_2, \ldots, X_n$. Conform [@ChenShapiro1995] ipoteza de normalitate este respinsă pentru valori mici ale lui $CS$ (spunem că este un *lower tailed test*, adică regiunea critică este de tipul $C = \{T(x)\leq k\}$).
+
+```{r, type = "rmdexercise", engine = engine_block}
+Simulați în R, pentru $n\in\{100, 1000\}$, repartiția testului Chen-Shapiro sub ipoteza nulă folosind $m = 100000$ de repetări. 
+```
+
+Construim funcția care determină statistica de test Chen-Shapiro:
+
+```{r}
+CS_stat = function(x){
+  sx = sort(x)
+  lenx = length(sx)
+  
+  sn = sd(x)
+  
+  p = (1:lenx - 3/8)/(lenx+1/4)
+  z = qnorm(p)
+  
+  dx = diff(sx)
+  dz = diff(z)
+  
+  cs = sum(dx/dz)/((lenx-1)*sn)
+  
+  return(cs)
+}
+
+sim_cs_stat_h0 = function(n = 100,...){
+  x = rnorm(n,...)
+    
+  CS_stat(x)
+}
+```
+
+Simulăm pentru $n\in\{100, 1000\}$ (ipoteza nulă de normalitate) și ilustrăm histograma repartiției $CS$:
+
+```{r, out.width=dimplot2}
+m = 100000
+
+par(mfrow = c(1,2))
+
+cs1 = replicate(m, sim_cs_stat_h0(100))
+cs2 = replicate(m, sim_cs_stat_h0(1000))
+
+hist(cs1,
+     freq = FALSE,
+     col = "grey80",
+     main = "Repartitia statisticii Chen-Shapiro\n n = 100",
+     xlab = "",
+     ylab = "Densitatea",
+     cex.main = 0.8,
+     cex.axis = 0.7,
+     cex.lab = 0.7)
+
+hist(cs2,
+     freq = FALSE,
+     col = "grey80",
+     main = "Repartitia statisticii Chen-Shapiro\n n = 1000",
+     xlab = "",
+     ylab = "Densitatea",
+     cex.main = 0.8,
+     cex.axis = 0.7,
+     cex.lab = 0.7)
+```
 
 ## Testul lui Kolmogorov-Smirnov și varianta lui Lilliefors
 
