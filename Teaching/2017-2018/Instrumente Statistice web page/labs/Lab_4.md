@@ -396,7 +396,7 @@ JBtest(x)
 	Jarque Bera Test
 
 data:  x
-= 1.3557, df = 2, p-value = 0.5077
+= 4.041, df = 2, p-value = 0.1326
 
 # pentru esantion exponential  
 x = rexp(100, 0.2)
@@ -405,7 +405,7 @@ JBtest(x)
 	Jarque Bera Test
 
 data:  x
-= 66.394, df = 2, p-value = 3.775e-15
+= 91.095, df = 2, p-value < 2.2e-16
 ```
 
 ## Testul lui Shapiro-Wilk și varianta lui Shapiro-Francia
@@ -441,7 +441,7 @@ shapiro.test(x)
 	Shapiro-Wilk normality test
 
 data:  x
-W = 0.98678, p-value = 0.4229
+W = 0.99079, p-value = 0.7281
 
 # esantion repartizat t-student
 xt = rt(100, df = 2)
@@ -450,7 +450,7 @@ shapiro.test(xt)
 	Shapiro-Wilk normality test
 
 data:  xt
-W = 0.61812, p-value = 9.632e-15
+W = 0.43502, p-value < 2.2e-16
 ```
 
 Pentru testul Shapiro-Francia, pachetul [nortest](https://cran.r-project.org/web/packages/nortest/) prezintă o implementare a acestuia (numită `sf.test()` - pentru instalarea pachetului apelați `install.packages("nortest")`). Codul acestei funcții este redat mai jos (calculul p-valorii este conform articolului [@RoystonSF1993])
@@ -495,7 +495,7 @@ sf.test(x)
 	Shapiro-Francia normality test
 
 data:  x
-W = 0.98311, p-value = 0.1977
+W = 0.98913, p-value = 0.5085
 
 # esantion repartizat t-student
 xt = rt(100, df = 2)
@@ -504,7 +504,7 @@ sf.test(xt)
 	Shapiro-Francia normality test
 
 data:  xt
-W = 0.94103, p-value = 0.0004489
+W = 0.96616, p-value = 0.01311
 ```
 
 
@@ -516,7 +516,71 @@ $$
   CS = \frac{1}{(n-1)S_n}\sum_{i = 1}^{n}\frac{X_{(i+1)} - X_{(i)}}{z_{p_{i+1}} - z_{p_i}}
 $$
 
-unde $z_{p_i}$ este cuantila de ordin $p_i = \frac{i - 3/8}{n + 1/4}$ asociată funcției de repartiție $\Phi$ a normalei standard, iar $S_n^2$ este dispersia eșantionului $X_1, X_2, \ldots, X_n$. Conform [@ChenShapiro1995] ipoteza de normalitate este respinsă pentru valori mici ale lui $CS$. 
+unde $z_{p_i}$ este cuantila de ordin $p_i = \frac{i - 3/8}{n + 1/4}$ asociată funcției de repartiție $\Phi$ a normalei standard, iar $S_n^2$ este dispersia eșantionului $X_1, X_2, \ldots, X_n$. Conform [@ChenShapiro1995] ipoteza de normalitate este respinsă pentru valori mici ale lui $CS$ (spunem că este un *lower tailed test*, adică regiunea critică este de tipul $C = \{T(x)\leq k\}$).
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Simulați în R, pentru $n\in\{100, 1000\}$, repartiția testului Chen-Shapiro sub ipoteza nulă folosind $m = 100000$ de repetări. </div>\EndKnitrBlock{rmdexercise}
+
+Construim funcția care determină statistica de test Chen-Shapiro:
+
+
+```r
+CS_stat = function(x){
+  sx = sort(x)
+  lenx = length(sx)
+  
+  sn = sd(x)
+  
+  p = (1:lenx - 3/8)/(lenx+1/4)
+  z = qnorm(p)
+  
+  dx = diff(sx)
+  dz = diff(z)
+  
+  cs = sum(dx/dz)/((lenx-1)*sn)
+  
+  return(cs)
+}
+
+sim_cs_stat_h0 = function(n = 100,...){
+  x = rnorm(n,...)
+    
+  CS_stat(x)
+}
+```
+
+Simulăm pentru $n\in\{100, 1000\}$ (ipoteza nulă de normalitate) și ilustrăm histograma repartiției $CS$:
+
+
+```r
+m = 100000
+
+par(mfrow = c(1,2))
+
+cs1 = replicate(m, sim_cs_stat_h0(100))
+cs2 = replicate(m, sim_cs_stat_h0(1000))
+
+hist(cs1,
+     freq = FALSE,
+     col = "grey80",
+     main = "Repartitia statisticii Chen-Shapiro\n n = 100",
+     xlab = "",
+     ylab = "Densitatea",
+     cex.main = 0.8,
+     cex.axis = 0.7,
+     cex.lab = 0.7)
+
+hist(cs2,
+     freq = FALSE,
+     col = "grey80",
+     main = "Repartitia statisticii Chen-Shapiro\n n = 1000",
+     xlab = "",
+     ylab = "Densitatea",
+     cex.main = 0.8,
+     cex.axis = 0.7,
+     cex.lab = 0.7)
+```
+
+<img src="Lab_4_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Testul lui Kolmogorov-Smirnov și varianta lui Lilliefors
 
@@ -583,14 +647,14 @@ ks.test(x, "pnorm", mean = 5, sd = 2)
 	One-sample Kolmogorov-Smirnov test
 
 data:  x
-D = 0.098604, p-value = 0.2853
+D = 0.14549, p-value = 0.02901
 alternative hypothesis: two-sided
 lillie.test(x)
 
 	Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  x
-D = 0.075016, p-value = 0.1804
+D = 0.06264, p-value = 0.4345
 
 # esantion repartizat t-student
 xt = rt(100, df = 2)
@@ -599,14 +663,14 @@ ks.test(xt, "pnorm")
 	One-sample Kolmogorov-Smirnov test
 
 data:  xt
-D = 0.060664, p-value = 0.8554
+D = 0.11704, p-value = 0.1292
 alternative hypothesis: two-sided
 lillie.test(xt)
 
 	Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  xt
-D = 0.14153, p-value = 3.922e-05
+D = 0.32312, p-value < 2.2e-16
 ```
 
 Trebuie observat că testul lui Kolmogorov-Smirnov poate fi folosit și pentru a testa dacă două eșantioane provin din aceeași populație. Fie $X_1, X_2, \ldots, X_n$ un eșantion de talie $n$ dintr-o populație $F$ și $Y1, Y_2, \ldots, Y_m$ un eșantion de talie $m$ dintr-o populație $G$ și vrem să testăm 
@@ -636,7 +700,7 @@ ks.test(x, y)
 	Two-sample Kolmogorov-Smirnov test
 
 data:  x and y
-D = 0.13, p-value = 0.1103
+D = 0.10167, p-value = 0.3384
 alternative hypothesis: two-sided
 
 # datele nu provin din aceeasi populatie
@@ -648,7 +712,7 @@ ks.test(xt, yt)
 	Two-sample Kolmogorov-Smirnov test
 
 data:  xt and yt
-D = 0.14417, p-value = 6.661e-16
+D = 0.14933, p-value < 2.2e-16
 alternative hypothesis: two-sided
 ```
 
@@ -695,10 +759,10 @@ round(apply(out_rt3, 1, function(x) mean(x<=0.05, na.rm=TRUE)), 3)
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> 0.819 </td>
-   <td style="text-align:right;"> 0.792 </td>
-   <td style="text-align:right;"> 0.835 </td>
-   <td style="text-align:right;"> 0.627 </td>
+   <td style="text-align:right;"> 0.81 </td>
+   <td style="text-align:right;"> 0.786 </td>
+   <td style="text-align:right;"> 0.833 </td>
+   <td style="text-align:right;"> 0.624 </td>
   </tr>
 </tbody>
 </table>
@@ -730,9 +794,9 @@ round(apply(out_u, 1, function(x) mean(x<=0.05, na.rm=TRUE)), 3)
 <tbody>
   <tr>
    <td style="text-align:right;"> 0.013 </td>
-   <td style="text-align:right;"> 0.902 </td>
-   <td style="text-align:right;"> 0.704 </td>
-   <td style="text-align:right;"> 0.353 </td>
+   <td style="text-align:right;"> 0.908 </td>
+   <td style="text-align:right;"> 0.706 </td>
+   <td style="text-align:right;"> 0.361 </td>
   </tr>
 </tbody>
 </table>
@@ -763,10 +827,10 @@ round(apply(out_g22, 1, function(x) mean(x<=0.05, na.rm=TRUE)), 3)
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> 0.758 </td>
-   <td style="text-align:right;"> 0.949 </td>
-   <td style="text-align:right;"> 0.926 </td>
-   <td style="text-align:right;"> 0.702 </td>
+   <td style="text-align:right;"> 0.764 </td>
+   <td style="text-align:right;"> 0.954 </td>
+   <td style="text-align:right;"> 0.93 </td>
+   <td style="text-align:right;"> 0.693 </td>
   </tr>
 </tbody>
 </table>
