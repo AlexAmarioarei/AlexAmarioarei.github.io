@@ -117,33 +117,44 @@ readings_lab3_b = "[Significance, p values, t tests](labs/readings/nmeth.2698.pd
 lab4 = "[HTML](labs/Lab_4.html)"
 pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
 data_lab4 = ""
-readings_lab4 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
+readings_lab4 = "[Confidence intervals for proportions](labs/readings/agresti_caffo_2000.pdf)"
+
+lab5 = "[HTML](labs/Lab_5.html)"
+pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
+data_lab5 = ""
+readings_lab5 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
 
 
 tabLab = data.frame(Nr = c(1, 
                            2, "",
                            3, "",
-                           4),
+                           4,
+                           5),
                     Lab = c("Laborator 1", 
                             "Laborator 2", "", 
                             "Laborator 3", "",
-                            "Laborator 4"),
+                            "Laborator 4",
+                            "Laborator 5"),
                     Htmls = c(lab1, 
                               lab2, "", 
                               lab3, "",
-                              lab4),
+                              lab4,
+                              lab5),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2, "", 
                              pdf_lab3, "",
-                             pdf_lab4),
+                             pdf_lab4,
+                             pdf_lab5),
                     data = c(data_lab1, 
                              data_lab2, "", 
                              data_lab3, "",
-                             data_lab4), 
+                             data_lab4,
+                             data_lab5), 
                     readings = c(readings_lab1, 
                                  readings_lab2, readings_lab2_b,
                                  readings_lab3, readings_lab3_b,
-                                 readings_lab4))
+                                 readings_lab4,
+                                 readings_lab5))
 
 
 kable(tabLab, 
