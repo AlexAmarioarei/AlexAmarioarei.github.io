@@ -66,6 +66,12 @@ library(tidyverse)
 
 Acest curs prezintă o serie de metode statistice ce pot fi aplicate în finanțe și este adresat studenților de Master anul I de la Facultatea de Matematică și Informatică a Universității din București.  
 
+
+```{r, fig.align='center', out.width="30%", echo=FALSE}
+knitr::include_graphics("images/null_hypothesis.png")
+```
+
+
 ## Informații de contact 
 ***
 
@@ -148,6 +154,32 @@ tabLab = data.frame(Nr = c(1,
 
 kable(tabLab, 
       col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
+      align = "cccccl", 
+      booktabs = TRUE)
+```
+
+## Note de seminar 
+***
+
+Mai jos găsiți o parte din notele de seminar. 
+
+
+```{r echo = FALSE}
+sem1 = "[HTML](labs/Sem_1.html)"
+pdf_sem1 = "[PDF](labs/Sem_1.pdf)"
+data_sem1 = "-"
+readings_sem1 = "-"
+
+tabSem = data.frame(Nr = c(1),
+                    Lab = c("Seminar 1"),
+                    Htmls = c(sem1),
+                    Pdfs = c(pdf_sem1),
+                    data = c(data_sem1), 
+                    readings = c(readings_sem1))
+
+
+kable(tabSem, 
+      col.names = c("Nr", "Seminar", "HTML", "PDFs", "Set Date", "Readings"),
       align = "cccccl", 
       booktabs = TRUE)
 ```
