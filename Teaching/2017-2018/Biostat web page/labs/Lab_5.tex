@@ -1239,7 +1239,7 @@ Aplicăm testul lui McNemar \texttt{mcnemar.test} :
 Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în
 trei eșantioane de cetățeni afro-americani care trăiesc în trei state
 diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de
-semnificație \(\alpha = 0.5\) dacă repartiția grupelor de sânge pentru
+semnificație \(\alpha = 0.05\) dacă repartiția grupelor de sânge pentru
 cetățenii afro-americani diferă de-a lungul celor trei state.
 \end{rmdexercise}
 
@@ -1356,43 +1356,117 @@ Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip
 consulta \url{http://mathworld.wolfram.com/FishersExactTest.html}) numai
 că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În
 acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de
-tip Monte-Carlo.
+tip Monte-Carlo. Mai multe informații despre testul lui Fisher (exact)
+aproximat dar și despre alte teste exacte se găsesc în monografia (Mehta
+and Patel 1995).
 
 Generalizând raționamentul din cazul \(2 \times 2\) obținem că
 probabilitatea (condiționată) de a observa un tabel dat fiind
 marginalele (pe rânduri și pe coloane) este dată de:
 
 \[
-  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{j=1}^{c}n_{ij}!}
+  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}
+\] Pentru început să observăm că
+
+\[
+  \log(\mathbb{P}(\,tabel\,))\propto - \sum_{i=1}^{r}\sum_{j=1}^{c}\log(n_{ij}!) = - \sum_{i=1}^{r}\sum_{j=1}^{c}\log(\Gamma(n_{ij} + 1))
 \]
+
+iar pentru a calcula în R această probabilitate putem să folosim funcția
+\texttt{lgamma()}. Ne punem acum întrebarea cum generăm aleator un tabel
+cu \(r\) linii și \(c\) coloane care să aibă intrări numere naturale, a
+căror sumă pe linii este \(n_{i\cdot}\) iar pe coloane este
+\(n_{\cdot j}\).
+
+O idee ar fi să ne uităm la indicii liniilor și a coloanelor (folosim
+funcțiile \texttt{row()} și respectiv \texttt{col()}) și apoi să le
+permutăm aleator (folosim \texttt{sample()}). Să presupunem că avem
+tabelul \(2\times 2\)
+
+\[
+  \begin{array}{c|c|c|c}
+     & 1 & 2 &\\
+    \hline
+    1 & n_{11} & n_{12} & n_{1\cdot}\\
+    \hline
+    2 & n_{21} & n_{22} & n_{2\cdot}\\
+    \hline
+     & n_{\cdot 1} & n_{\cdot 2} & n 
+  \end{array}
+\]
+
+care mai poate fi scris, ținând seama doar de inidicii liniilor și
+coloanelor pe care se află elementele, sub forma următoare
+
+\[
+  \underbrace{(1,1), (1,1), \ldots, (1,1)}_{n_{11}},\underbrace{(2,1), (2,1), \ldots, (2,1)}_{n_{21}},\underbrace{(1,2), (1,2), \ldots, (1,2)}_{n_{12}},\underbrace{(2,2), (2,2), \ldots, (2,2)}_{n_{22}}
+\]
+
+iar în R avem:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fisher <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(tab, }\DataTypeTok{n.sim=}\DecValTok{1000}\NormalTok{, }\DataTypeTok{return.all=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{prnt=}\OtherTok{FALSE}\NormalTok{)\{}
-\NormalTok{  bot0 <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{lgamma}\NormalTok{(tab}\OperatorTok{+}\DecValTok{1}\NormalTok{))}\CommentTok{# lgamma - logaritm natural din gamma }
-                            \CommentTok{#- logaritm din factorial}
+\NormalTok{tab =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{), }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{tab}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]   }\DecValTok{10}    \DecValTok{3}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{5}    \DecValTok{7}
 
-\NormalTok{  bot <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n.sim}
-\NormalTok{  a <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{row}\NormalTok{(tab),tab), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{col}\NormalTok{(tab),tab))}
-  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n.sim) \{}
-\NormalTok{    a[[}\DecValTok{1}\NormalTok{]] <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(a[[}\DecValTok{1}\NormalTok{]])}
-\NormalTok{    bot[i] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{lgamma}\NormalTok{(}\KeywordTok{table}\NormalTok{(a)}\OperatorTok{+}\DecValTok{1}\NormalTok{))}
-    \ControlFlowTok{if}\NormalTok{(prnt) \{ }\ControlFlowTok{if}\NormalTok{(i }\OperatorTok{==}\StringTok{ }\KeywordTok{round}\NormalTok{(i}\OperatorTok{/}\DecValTok{10}\NormalTok{)}\OperatorTok{*}\DecValTok{10}\NormalTok{) }\KeywordTok{cat}\NormalTok{(i,}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) \}}
-\NormalTok{  \}}
-  \ControlFlowTok{if}\NormalTok{(return.all) }\KeywordTok{return}\NormalTok{(}\KeywordTok{list}\NormalTok{(bot0, bot, }\KeywordTok{mean}\NormalTok{(bot0 }\OperatorTok{<=}\StringTok{ }\NormalTok{bot)))}
-  \KeywordTok{cat}\NormalTok{(}\StringTok{"P-valoarea aproximata cu Monte Carlo este "}\NormalTok{, }\KeywordTok{mean}\NormalTok{(bot0 }\OperatorTok{<=}\StringTok{ }\NormalTok{bot))}
-\NormalTok{\}}
+\CommentTok{# liniile si coloanele pe care se afla elementele}
+\KeywordTok{row}\NormalTok{(tab)}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{1}    \DecValTok{1}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{2}    \DecValTok{2}
+\KeywordTok{col}\NormalTok{(tab)}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{1}    \DecValTok{2}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{1}    \DecValTok{2}
 
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
-\KeywordTok{fisher}\NormalTok{(matAA_observed)}
-\NormalTok{P}\OperatorTok{-}\NormalTok{valoarea aproximata cu Monte Carlo este  }\FloatTok{0.482}
+\CommentTok{# cream o lista cu doua componente}
+\CommentTok{# prima corespunde indicilor liniilor}
+\CommentTok{# a doua corespunde indicilor coloanelor}
+\CommentTok{# cu nr de indici conform cu datele initiale}
+\NormalTok{a =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{row}\NormalTok{(tab),tab), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{col}\NormalTok{(tab),tab))}
+\NormalTok{a}
+\NormalTok{[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{ [}\DecValTok{1}\NormalTok{] }\DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2}
+
+\NormalTok{[[}\DecValTok{2}\NormalTok{]]}
+\NormalTok{ [}\DecValTok{1}\NormalTok{] }\DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2} \DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-42-1} \end{center}
+Vom afișa funcția care calculează p-valoarea testului lui Fisher prin
+metoda Monte-Carlo:
 
-Același rezultat îl obținem și dacă folosim funcția \texttt{fisher.test}
-(care este mai rapidă):
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fisher =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(tab, }\DataTypeTok{n.sim=}\DecValTok{1000}\NormalTok{, }\DataTypeTok{return.all=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{prnt=}\OtherTok{FALSE}\NormalTok{)\{}
+\NormalTok{  bot0 =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{lgamma}\NormalTok{(tab}\OperatorTok{+}\DecValTok{1}\NormalTok{))}\CommentTok{# lgamma: logaritm natural din gamma }
+                            \CommentTok{#- logaritm din factorial}
+
+\NormalTok{  bot =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n.sim}
+\NormalTok{  a =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{row}\NormalTok{(tab),tab), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{col}\NormalTok{(tab),tab))}
+  
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n.sim) \{}
+\NormalTok{    a[[}\DecValTok{1}\NormalTok{]] =}\StringTok{ }\KeywordTok{sample}\NormalTok{(a[[}\DecValTok{1}\NormalTok{]])}
+\NormalTok{    bot[i] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{lgamma}\NormalTok{(}\KeywordTok{table}\NormalTok{(a)}\OperatorTok{+}\DecValTok{1}\NormalTok{))}
+    \ControlFlowTok{if}\NormalTok{(prnt) \{ }\ControlFlowTok{if}\NormalTok{(i }\OperatorTok{==}\StringTok{ }\KeywordTok{round}\NormalTok{(i}\OperatorTok{/}\DecValTok{10}\NormalTok{)}\OperatorTok{*}\DecValTok{10}\NormalTok{) }\KeywordTok{cat}\NormalTok{(i,}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) \}}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{(return.all) }\KeywordTok{return}\NormalTok{(}\KeywordTok{list}\NormalTok{(bot0, bot, }\KeywordTok{mean}\NormalTok{(bot0 }\OperatorTok{<=}\StringTok{ }\NormalTok{bot)))}
+  \KeywordTok{cat}\NormalTok{(}\StringTok{"P-valoarea aproximata cu Monte Carlo este"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(bot0 }\OperatorTok{<=}\StringTok{ }\NormalTok{bot))}
+\NormalTok{\}}
+
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\KeywordTok{fisher}\NormalTok{(matAA_observed)}
+\NormalTok{P}\OperatorTok{-}\NormalTok{valoarea aproximata cu Monte Carlo este }\FloatTok{0.48}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-43-1} \end{center}
+
+Același rezultat îl obținem și dacă folosim funcția
+\texttt{fisher.test()} din R (care este mai rapidă):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1402,7 +1476,7 @@ Același rezultat îl obținem și dacă folosim funcția \texttt{fisher.test}
 \StringTok{    on 1000 replicates)}
 
 \StringTok{data:  matAA_observed}
-\StringTok{p-value = 0.4975}
+\StringTok{p-value = 0.4835}
 \StringTok{alternative hypothesis: two.sided}
 \end{Highlighting}
 \end{Shaded}
@@ -1417,6 +1491,10 @@ Intervals for Proportions and Differences of Proportions Result from
 Adding Two Successes and Two Failures.'' \emph{The American
 Statistician} 54: 280--88.
 doi:\href{https://doi.org/10.1080/00031305.2000.10474560}{10.1080/00031305.2000.10474560}.
+
+\hypertarget{ref-Mehta1995}{}
+Mehta, Cyrus R., and Nitin R. Patel. 1995. \emph{Exact Tests}.
+\url{http://gen.lib.rus.ec/book/index.php?md5=DDE1DF04691963EDA9F54E8942F48AA3}.
 
 
 \end{document}

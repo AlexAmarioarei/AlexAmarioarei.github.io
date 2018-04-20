@@ -1109,7 +1109,7 @@ McNemar's chi-squared = 4.7619, df = 1, p-value = 0.0291</code></pre>
 <h1><span class="header-section-number">4</span> Tabele de contingență <span class="math inline">\(r\times c\)</span></h1>
 
 <div class="rmdexercise">
-<p>Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație <span class="math inline">\(\alpha = 0.5\)</span> dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state.</p>
+<p>Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație <span class="math inline">\(\alpha = 0.05\)</span> dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state.</p>
 </div>
 
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
@@ -1357,38 +1357,88 @@ $pvalue
 </div>
 <div id="testul-aproximat-al-lui-fisher" class="section level2">
 <h2><span class="header-section-number">4.3</span> Testul aproximat al lui Fisher</h2>
-<p>Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip <span class="math inline">\(r\times c\)</span> (pentru o generalizare a testului prezentat la curs puteți consulta <a href="http://mathworld.wolfram.com/FishersExactTest.html" class="uri">http://mathworld.wolfram.com/FishersExactTest.html</a>) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo.</p>
+<p>Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip <span class="math inline">\(r\times c\)</span> (pentru o generalizare a testului prezentat la curs puteți consulta <a href="http://mathworld.wolfram.com/FishersExactTest.html" class="uri">http://mathworld.wolfram.com/FishersExactTest.html</a>) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo. Mai multe informații despre testul lui Fisher (exact) aproximat dar și despre alte teste exacte se găsesc în monografia <span class="citation">(Mehta and Patel 1995)</span>.</p>
 <p>Generalizând raționamentul din cazul <span class="math inline">\(2 \times 2\)</span> obținem că probabilitatea (condiționată) de a observa un tabel dat fiind marginalele (pe rânduri și pe coloane) este dată de:</p>
 <p><span class="math display">\[
-  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{j=1}^{c}n_{ij}!}
+  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}
+\]</span> Pentru început să observăm că</p>
+<p><span class="math display">\[
+  \log(\mathbb{P}(\,tabel\,))\propto - \sum_{i=1}^{r}\sum_{j=1}^{c}\log(n_{ij}!) = - \sum_{i=1}^{r}\sum_{j=1}^{c}\log(\Gamma(n_{ij} + 1))
 \]</span></p>
-<pre class="r"><code>fisher &lt;- function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
-  bot0 &lt;- sum(lgamma(tab+1))# lgamma - logaritm natural din gamma 
+<p>iar pentru a calcula în R această probabilitate putem să folosim funcția <code>lgamma()</code>. Ne punem acum întrebarea cum generăm aleator un tabel cu <span class="math inline">\(r\)</span> linii și <span class="math inline">\(c\)</span> coloane care să aibă intrări numere naturale, a căror sumă pe linii este <span class="math inline">\(n_{i\cdot}\)</span> iar pe coloane este <span class="math inline">\(n_{\cdot j}\)</span>.</p>
+<p>O idee ar fi să ne uităm la indicii liniilor și a coloanelor (folosim funcțiile <code>row()</code> și respectiv <code>col()</code>) și apoi să le permutăm aleator (folosim <code>sample()</code>). Să presupunem că avem tabelul <span class="math inline">\(2\times 2\)</span></p>
+<p><span class="math display">\[
+  \begin{array}{c|c|c|c}
+     &amp; 1 &amp; 2 &amp;\\
+    \hline
+    1 &amp; n_{11} &amp; n_{12} &amp; n_{1\cdot}\\
+    \hline
+    2 &amp; n_{21} &amp; n_{22} &amp; n_{2\cdot}\\
+    \hline
+     &amp; n_{\cdot 1} &amp; n_{\cdot 2} &amp; n 
+  \end{array}
+\]</span></p>
+<p>care mai poate fi scris, ținând seama doar de inidicii liniilor și coloanelor pe care se află elementele, sub forma următoare</p>
+<p><span class="math display">\[
+  \underbrace{(1,1), (1,1), \ldots, (1,1)}_{n_{11}},\underbrace{(2,1), (2,1), \ldots, (2,1)}_{n_{21}},\underbrace{(1,2), (1,2), \ldots, (1,2)}_{n_{12}},\underbrace{(2,2), (2,2), \ldots, (2,2)}_{n_{22}}
+\]</span></p>
+<p>iar în R avem:</p>
+<pre class="r"><code>tab = matrix(c(10, 3, 5, 7), nrow = 2, byrow = TRUE)
+tab
+     [,1] [,2]
+[1,]   10    3
+[2,]    5    7
+
+# liniile si coloanele pe care se afla elementele
+row(tab)
+     [,1] [,2]
+[1,]    1    1
+[2,]    2    2
+col(tab)
+     [,1] [,2]
+[1,]    1    2
+[2,]    1    2
+
+# cream o lista cu doua componente
+# prima corespunde indicilor liniilor
+# a doua corespunde indicilor coloanelor
+# cu nr de indici conform cu datele initiale
+a = list(rep(row(tab),tab), rep(col(tab),tab))
+a
+[[1]]
+ [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 1 1 1 2 2 2 2 2 2 2
+
+[[2]]
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2</code></pre>
+<p>Vom afișa funcția care calculează p-valoarea testului lui Fisher prin metoda Monte-Carlo:</p>
+<pre class="r"><code>fisher = function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
+  bot0 = sum(lgamma(tab+1))# lgamma: logaritm natural din gamma 
                             #- logaritm din factorial
 
-  bot &lt;- 1:n.sim
-  a &lt;- list(rep(row(tab),tab), rep(col(tab),tab))
+  bot = 1:n.sim
+  a = list(rep(row(tab),tab), rep(col(tab),tab))
+  
   for(i in 1:n.sim) {
-    a[[1]] &lt;- sample(a[[1]])
-    bot[i] &lt;- sum(lgamma(table(a)+1))
+    a[[1]] = sample(a[[1]])
+    bot[i] = sum(lgamma(table(a)+1))
     if(prnt) { if(i == round(i/10)*10) cat(i,&quot;\n&quot;) }
   }
   if(return.all) return(list(bot0, bot, mean(bot0 &lt;= bot)))
-  cat(&quot;P-valoarea aproximata cu Monte Carlo este &quot;, mean(bot0 &lt;= bot))
+  cat(&quot;P-valoarea aproximata cu Monte Carlo este&quot;, mean(bot0 &lt;= bot))
 }
 
-set.seed(5)
+set.seed(1234)
 fisher(matAA_observed)
-P-valoarea aproximata cu Monte Carlo este  0.482</code></pre>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAABQVBMVEUAAAAAADoAAGYAOmYAOpAAZrY6AAA6ADo6AGY6Ojo6OmY6OpA6ZrY6kNtmAABmADpmAGZmOjpmOmZmZmZmZpBmkLZmkNtmtrZmtv+QOgCQOjqQZgCQZmaQkGaQkLaQ2/+pqampqbmpqcepudWpx+O2ZgC2Zjq2Zma2kJC2tma22/+2/7a2//+5qam5qbm51fHHqanHqbnHx8fH4//NMzPNM1rNM3/NWqDNf8HT09PVMzPVM1rVWlrVoOHVuanVx6nV1cfV8f/bkDrbtmbbtpDb25Db///eMzPeM1ref3/eoKDewf/jx6nj8dXj/+Pj///nWjPnoH/nwaDn4f/ufzPu4aDu/8Hu///x1bnx///3oFr3/+H3////tmb/wX//25D/27b/4aD/48f/8dX//7b//8H//9v//+H//+P///H////lAUbSAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAUpElEQVR4nO2d/2PbxnmH5czyvmRWu+9R19ZuEm1dWy/uyqSFW6cNt9rb7G3Z4q2qV0qxLDMO//8/oLg7AAQoHom7e498AT7PDzL0Cv6IAB4dcEfgeLQAUMzRvl8AwCYQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICio5pAEnUz2/QogGAQF1SAoqAZBQTUICqpBUFANgoJqEBRUg6CgGgQF1SAoqGasgh6tYTI5GuvmjpexHrGj4iaTSTHWzR0vYz1iCDoSBn/E1p3LDQg6DgZ/xNaZWIKgI2HwRwxBx83gjxiCjpvBHzEEHTeDP2IIOm5Cjtj1yd3y66zsIr/zo1yvJxgEHTfBgk5vPzFL72V7RYEg6LgJFbRS02qqAgQdN6GCXt6xgs7UnOQRdNzQgoJqwgQ17yEeL+rukgoQdNwEHrHS0Vv3yo68Gj8RdOQM/ogh6LgZ/BFD0HETdsSm5TWo6yTRi4edEHTEpuX15/WJ6SWNXdCvPv/kN9XCz5rim6fPgl7aq0dh61+ErX4YhAg6P71rv95+MnpBFxeTZ51/DZkFDY0/DMKGmdwbnGe3n4xe0DdPXcv54qe/a9UQdOeEt6AlZ8ejF3Txwp7j3zx9bJYnE9OQWoMuyuXHi1bxX/97Uq76si4bqnVePfr3R6766pFbuV7N/CdXuPj4iyrJrFP+NVSxUBF2DVppeX2ycj/T8lEgwZfWj1yCuubP+LN4UTamL8sFI6g55dvWdVk0baxZevWoMrRe59WjqmqzTLVezfwnd3VbttDt+CYWKkJ78e4kPz/1tKDjEbTxp2zuvnC+lgZ99bmRsNS2VXxcN7QXrmPVrOOMffnJb6ofLFezC+UPTKUdv/xdUCFs1HgEtf40qlxMbKv4zBWqcl2sGtq63KzTNMJvnjpDm9Xsf7INsmssl0n1N1CBoD6MLy+tWOWF4yf/+6glqP3RsuguOif1xWOzzqufWx/Lr199bn/YrOZcLE/npoXuJNXfQEWkUb5O0ogELeX5f3uat8K9etRtQdvFummsuNmCuriPv2hWc4JefPJ/T5914pffQAUtqJeLj//HNoH2CtJ1fJbXoO3iygjR6jVoNVBVrtOs5hbePP23MqWT1HwDFQjq5avPf2Hdcq3b5HGnF98pVh3vF1UD2enFm29sy2m+1KtVpr6Y/KwT/3j5DVQgqJ+XlSjldeHHX9Ra1eOgnaIb4Kz66ivjoM+qgrW3Wq36Txf12KhNKn396e+ab8ARZtT81I12eofpRyUoKCBsoL6+Udl7xzKCgixRb3X6n0lCUJAl5maRhf+pTgQFWWhBQTWB16BVE8o1KOyIsCPmHjw+OvI+FY+gIAvjoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFQzHEEDPvMQQcfDgATtbyKCjgcEBdUgKKgGQUE1CAqqQVBQDYKCahAUVIOgoBoEBdUgKKgGQUE1CAqqQVBQzXBmt0PQg2Q4s9sh6EEynLmZEPQgGc7sdgh6kNCCgmqGM7sdgh4kw5ndDkEPEsZBQTUICqoJO2LT8vRuL0P38FGIQxD0+X3Lh54fv334k5T0q/v3v/dZ+7d98Nvy63n5C03s15+WCx+l5KskrJN06155GXq8QFAPTpm3D+0/N0kT9Kq086pl6NV982vOTbU09OtPy4Vz79/GYAkfZpqfll0kBF2LE7SjUZskQb/+1DSPzxsD3z40gn796Yeu+vqByT5//7/if4NKYgbqz24/GZugvnl1Al9jJaiTpfrH2PrcnYatoFf1mbgu/vhX90utzlfKN1g18PyDX7YFdfj+NIZL1ED92fHoBPWkBL7GbgtayfPBb40/5lRsBDWn47cPP3RSuWJ9pn794KNl2fD6gb2kdd+9/kfzz1UtaPnt8/YpvnoBB92CNif265OV+5mim5wAhiOo9c9gmru3Dz96++PPXANYCupO1KXBreJHC/fF2NeUb+Csr5tIk+N+W7vrdDW+XlJoL96d5OentKDrqHrxtSW2xXT2XN23LedPnHuVgXWx9q5dvkFX0PNSTiuoaTNt02v/4+j6SIyDbg4PfI3PV7rv5fnalMrry/f/40FLUCNlq+guTO/bi8+6fIPOKd5+Y6LbV6YjbD8RdEt44GtcCur6PFfv/2epn5Xo9YNuC9outjo3Tdl9074GbXeSzmuhW+3q+Rj9jDWKTtJaVlvQtw//qRTKtnquc7S8Bm0XWwNQTfkGq8NM7Rb0yg4DJL0LoBVa0I3hga9xVdDyovTDup0s27d2L75TrDruz7/3WVO+yepAffcatL4OHRsIujE88DXeENS1hefmNF3a1xkH7RTdSdu0nnV5Tfq5O9u70avmtz13edVJ/6DHQXcf14kegKAgzqE91Rn4UQz5Ngf6cWhPda5f25uSb3OgH4f2TBKCDoxDe6oTQQcGLSiCqubQnupE0IFxaE91IujAOLRxUAQdGPoEDR2qRNBRo1DQQIcQdNQgKIKqBkERVDUIiqCqQVAEVQ2CIqhqEBRBVYOgCKoaBEVQ1SAogqoGQRFUNQiKoKpBUARVDYIiqGoQFEFVg6AIqhoERVDVICiCqgZBEVQ1CIqgqgmbWcQ8DT/LPHkYgkKLYEHtnCKtSXDi43yvCEFhSaiglZoZp75BUGgRKujlHStoxsnDEBRa0IJuTJH5hESIJ0xQc3COF3V3KTHO94o0Ceopp28l9CRwX5eO3rrnn9wOQUEYxkFjwtO3EnqCoDHh6VsJPUHQmPD0rYSeIGhMePpWQk/Ce/EbPykJQUGWoH3t/Zj4uDhPhIxDa2oIOkBCP2nuWDJufYSMQ2tqCDpAAvf17GjtXSKS77EgKLSgkxQTnr6V0BMEjQlP30roCYLGhKdvJfQkcl9PGWaCnUALGhOevpXQEwSNCU/fSugJgsaEp28l9CR0oH7jG50ICtIE7etpfaNyzo/jRlBoEbKv56eNlofyTJKnnL6V0JOwu5ma9zkP5alOTzl9K6EntKAx4elbCT0JvAatmlCuQWFHhO3r+pZlT/uJoCAN46Ax4elbCT1B0Jjw9K2EniBoTHj6VkJPEDQmPH0roScIGhOevpXQEwSNCU/fSugJgsaEp28l9ARBY8LTtxJ6gqAx4elbCT1B0Jjw9K2EniBoTHj6VkJPEDQmPH0roScIGhPOZyvsDAQVCi9oWLOAoELhBYJmAUGFwgsEzQKCCoUXCJoFBBUKLxA0CwgqFF4gaBYQVCi8QNAsIKhQeIGgWUBQofACQbOAoELhBYJmgdnthMILBM0Cs9sJhRcImgXmZhIKLxA0C8xuJxReIGgWaEGFwgsEzQKz2wmFFwiaBWa3EwovEDQLjIMKhRcImgUEFQovEDQLCCoUXiBoFhBUKLxA0CyEjYMuH2BkHHRNOX3jYZWgnTo/9b4JHxPnicjmEIIOkNCbRY4l49ZHZHMIQQdI4E6dHb23riw5dwGCQgs6SULhBYJmYY+C+iaQyeYQgg6QfQoadPQR9DCJ3KlTgWEmBIXt0IIKhRcImgUEFQovEDQLCCoUXiBoFvb4VCeCwnb2+FQngsJ29vhMEoLCdvb4VCeCwnZoQYXCCwTNwh6f6kRQ2M4en+pEUNgO46BC4QWCZgFBhcILBM0CggqFFwiaBQQVCi8QNAsIKhReIGgWEFQovEDQLCCoUHiBoFlAUKHwAkGzgKBC4QWCZgFBhcILBM0CggqFFwiaBQQVCi8QNAsIKhReIGgWEFQovEDQLCCoUHiBoFlAUKHwAkGzgKBC4QWCZgFBhcILBM0CggqFm7IP2X18WCCoULi/TMuaAoIKhfvLCJoCggqF+8sImgKCCoX7ywiaQtjUN2a6hhmz2yHo7ggW1E5605qlKT4OQWE7oYJWajI3U/8ygqYQKujlHSsos9v1LyNoCrSgQuH+MoKmECaoeVvkeFF3lxLjEBS2E7jzSkdv3fPPvoiga+th+xjaMA4qFO4vI2gKCCoU7i8jaAp8DI1QuL+MoCnwMTRC4f4ygqbAhygIhfvLCJoCH0MjFO4ve29kDthXhwstqFC4v+xdPWBfHS4yH0MT1SogKGyHj6ERCveXETQFxkGFwv1lBE0BQYXC/WUETSFyL03pxfcuI2gKtKBC4f4ygqaAoELh/jKCpoCgQuH+MoKmwM0iQuH+cqCgTKDTgZtFhML95VBBfSkhR2o88FanULi/jKApcLOIULi/jKAp0IIKhfvL3tU9+FICdu2IkLlZJCru4AUNTAk5UuOBm0WEwv1lBE2BcVChcH8ZQVNAUKFwfxlBU0BQoXB/GUFTQFChcH8ZQVNAUKFwfxlBU0BQoXB/GUFTQFChcH8ZQVNAUKFwfxlBU0BQoXB/GUFTQFChcH8ZQVNAUKFwfxlBU0BQoXB/GUFTQFChcH8ZQVNAUKFwfxlBU0BQoXB/GUFTQFChcH8ZQVNAUKFwf1kq5TCfRkZQoXB/OXOK7AFUB4IKhfvLmVNG3rAiqFC4v7yfFNnjuj8QVCjcX0bQFBBUKNxfRtAUmDxMKNxfRtAUmDxMKNxfRtAUmPpGKNxf1iTo8OZ2ZPIwoXB/WZWgvvCA47ZbaEGFwv1lBE2BycOEwv1lBE2BycOEwv1lBE2BcVChcH8ZQVNAUKFwf3k/KSKz4yro8zNQLxTuL2tKCRU0aO0sMFAvFO4va0rJKmiWQVaGmYTC/WVNKXkFDQvvaUnAurED9WHXQwiaMcUbHnaIPC75wgMc62eUh9gWVMsBQtABDhHIDNRvvtzwXpvsmMlk36/gQIl008kTtPbWgXrVTCb7fgUQjN4RWnkQdIAgKKgmUtCpd6heMQg6QGhBQTUICqpBUFCN8M0iqkHQASJ8s4hqEHSACL/VqRoEHSDCN4uoBkEHyB5b0J2/Jcx78ZlJVmKdJSErb3+qM9uvJvxAw/d4s8jwdhbhuw/f4zjo8HYW4bsPR1DCVYcjKOGqwxGUcNXhCEq46nAEJVx1OIISrjr8kG63gwGCoKAaBAXVICioBkFBNQgKqkFQUA2CgmoQFFSDoKAaBAXVICioBkFBNTsR1D1rd7wwz4Ue3bq3aC8sFpd/ZJ+xv7zjVskSXlaO3vNGRIXbaYDsw62z5a8TD1/+lhyvvOQs5gHIXuGxB7TLTgS9/MPq+JlpRWdmO87KL5d3rDLXJ3YSiFm5o65PIjaoT/i0rMxiDPWHz0/Lhak5AqY8izG0R/jyt+R45QvzxxUjaK/dEntAu+xE0HoekuuTu+ZP7NgtuNkfZm4qMjcpRMy8uL3CzX46i9hZ/nD3F1C+YPfKM4U3CznC7U+jBO29W9InOt6JoNP20TPb4xoc2/Qc3bVb2/xN5giPF3RDuKVciHeoR/jKgnj49PbfxgjaZ7dEH9AuOxH07I9bFz3T5oxYnXStQ7N3fngSd7HVIzz+FL85vPx52cjZIxEzWVWP8JUF6fDytUddg/YIjz+gXXYh6PWJ2QlndYfi7qK6Qpy2HJqac7Fr6eTDo/sxW8LtFEArjYdseHdBOtychmME7RMefUBX2N0wU93GzE/LrXPX1G1Bb8W2Qz3CbXNxeSf2z9kfXveR4s7CPcI7C+Lh5jo9qgXtEZ54QBt2J2jVr66O5VnZffnhN+xBdYLaLWnWkQ2Pv0zcGO5atvhTfI/wRVz7GfDK4wXdHJ54QBt2KGh91dy86GqMsroG/dEioau0JTytkfOET+vhvjT7N4a3FuTDp9WsibGNwsbwxAPasAtB3QbM6kGTprGpJhm137vJcSPaoT7hKz+SCa8vuKKHmfqELxdyhBtiWtA+4dEHdIXd9OLtKM9dtzfMAbUDuHWLVnW0qx9lCY++BvWHL+OiB+p7hMdfOPd55Xa9qF58j/DoA9plN6f4s/pEUi+Y98qaQbOmox13NusTfiYeXp0fq8W4q4ft4a3fkuOVL2KvQfuERx/QDtwsAqpBUFANgoJqEBRUg6CgGgQF1SAoqAZBQTUICqpBUFANgoJqEBRUg6CgGgQF1SAoqAZBQTUICqpBUFANgoJqEDQRM8lgw8YnMOffv/mE45d/FftU+qGAoKnM7tSPtM3PNj0j9uVfrnPx+i9Sn8sdOQiazKx56PL6rxf1A+E3uP7zVRPdVFuX79KGbgJB0/nno3d+YBfm3114Bb05s0M1F1zMrJAHBIIKYGdyq1kv6JpJiuoJImNn5DkMEFSC6dEfNIZaQZtJC86Ojm59x8yKXU1o/DcnTVeqEtRNTgweEFSEv1vOpG0ENe7Z2WDMnDvmGtVOUWh+ZlytmsyqUa1+BOtBUBHmp80ZvBTUTUnUTA9+duuem/LVtZb12b4RNHmCrTGDoCJMl6fpUlCnXvnVzQxlTT2ufra8SK2mJrSfiwE+EFSC2Z8ulxtBy4XpJkGvv4Gg20FQATpjmWtb0OYU7wS9fPfX7z5pBOUUvwEETac7Bn/zGnTa6iS1W9Bv2v9GJ2kjCJrM/FvNKXr2nqcX3wwztVrQ6v8wzLQRBE1l/veNn/9iuj03xkHf+Qc7v3N1WboUlIH6PiBoKmetu5nWX03aK9HOO5rtFpS3OjeCoIl0brdbvZq07aY7h1//WauhbAl6+Sd0kTaBoFmZLe8SbXelloLOv42fG0HQnTH//g/qxUbQL79LD34zCLofuA20Jwi6FxI+f/PAQFBQDYKCahAUVIOgoBoEBdUgKKgGQUE1CAqqQVBQDYKCahAUVIOgoBoEBdUgKKgGQUE1CAqqQVBQDYKCahAUVIOgoBoEBdUgKKgGQUE1CAqq+T3jucvfmtWR3wAAAABJRU5ErkJggg==" width="90%" style="display: block; margin: auto;" /></p>
-<p>Același rezultat îl obținem și dacă folosim funcția <code>fisher.test</code> (care este mai rapidă):</p>
+P-valoarea aproximata cu Monte Carlo este 0.48</code></pre>
+<p><img src="data:image/png;base64,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" width="90%" style="display: block; margin: auto;" /></p>
+<p>Același rezultat îl obținem și dacă folosim funcția <code>fisher.test()</code> din R (care este mai rapidă):</p>
 <pre class="r"><code>fisher.test(matAA_observed, simulate.p.value = TRUE, B = 1000)
 
     Fisher's Exact Test for Count Data with simulated p-value (based
     on 1000 replicates)
 
 data:  matAA_observed
-p-value = 0.4975
+p-value = 0.4835
 alternative hypothesis: two.sided</code></pre>
 </div>
 </div>
@@ -1397,6 +1447,9 @@ alternative hypothesis: two.sided</code></pre>
 <div id="refs" class="references">
 <div id="ref-Agresti2000">
 <p>Agresti, Brian, Alan; Caffo. 2000. “Simple and Effective Confidence Intervals for Proportions and Differences of Proportions Result from Adding Two Successes and Two Failures.” <em>The American Statistician</em> 54: 280–88. doi:<a href="https://doi.org/10.1080/00031305.2000.10474560">10.1080/00031305.2000.10474560</a>.</p>
+</div>
+<div id="ref-Mehta1995">
+<p>Mehta, Cyrus R., and Nitin R. Patel. 1995. <em>Exact Tests</em>. <a href="http://gen.lib.rus.ec/book/index.php?md5=DDE1DF04691963EDA9F54E8942F48AA3" class="uri">http://gen.lib.rus.ec/book/index.php?md5=DDE1DF04691963EDA9F54E8942F48AA3</a>.</p>
 </div>
 </div>
 </div>

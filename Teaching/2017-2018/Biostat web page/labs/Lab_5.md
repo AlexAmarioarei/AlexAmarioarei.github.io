@@ -880,7 +880,7 @@ McNemar's chi-squared = 4.7619, df = 1, p-value = 0.0291
 # Tabele de contingență $r\times c$
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație $\alpha = 0.5$ dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state. 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Următorul tabel prezintă repartiția grupelor de sânge (A, B, AB și O) în trei eșantioane de cetățeni afro-americani care trăiesc în trei state diferite (Florida, Iowa și Missouri). Vrem să testăm la un nivel de semnificație $\alpha = 0.05$ dacă repartiția grupelor de sânge pentru cetățenii afro-americani diferă de-a lungul celor trei state. 
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1027,39 +1027,102 @@ $pvalue
 
 ## Testul aproximat al lui Fisher 
 
-Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip $r\times c$ (pentru o generalizare a testului prezentat la curs puteți consulta [http://mathworld.wolfram.com/FishersExactTest.html](http://mathworld.wolfram.com/FishersExactTest.html)) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo. 
+Testul exact al lui Fisher poate fi aplicat și în cazul tabelelor de tip $r\times c$ (pentru o generalizare a testului prezentat la curs puteți consulta [http://mathworld.wolfram.com/FishersExactTest.html](http://mathworld.wolfram.com/FishersExactTest.html)) numai că numărul de tabele pe care trebuie să le generăm devine prohibitiv. În acest caz putem aproxima p-valoarea testului cu ajutorul metodelor de tip Monte-Carlo. Mai multe informații despre testul lui Fisher (exact) aproximat dar și despre alte teste exacte se găsesc în monografia [@Mehta1995].
 
 Generalizând raționamentul din cazul $2 \times 2$ obținem că probabilitatea (condiționată) de a observa un tabel dat fiind marginalele (pe rânduri și pe coloane) este dată de:
 
 $$
-  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{j=1}^{c}n_{ij}!}
+  \mathbb{P}(\,tabel\,) = \frac{\prod_{i=1}^{r}n_{i\cdot}!\prod_{j=1}^{c}n_{\cdot j}!}{n!\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}\propto\frac{1}{\prod_{i=1}^{r}\prod_{j=1}^{c}n_{ij}!}
 $$
+Pentru început să observăm că 
+
+$$
+  \log(\mathbb{P}(\,tabel\,))\propto - \sum_{i=1}^{r}\sum_{j=1}^{c}\log(n_{ij}!) = - \sum_{i=1}^{r}\sum_{j=1}^{c}\log(\Gamma(n_{ij} + 1))
+$$
+
+iar pentru a calcula în R această probabilitate putem să folosim funcția `lgamma()`. Ne punem acum întrebarea cum generăm aleator un tabel cu $r$ linii și $c$ coloane care să aibă intrări numere naturale, a căror sumă pe linii este $n_{i\cdot}$ iar pe coloane este $n_{\cdot j}$. 
+
+O idee ar fi să ne uităm la indicii liniilor și a coloanelor (folosim funcțiile `row()` și respectiv `col()`) și apoi să le permutăm aleator (folosim `sample()`). Să presupunem că avem tabelul $2\times 2$
+
+$$
+  \begin{array}{c|c|c|c}
+     & 1 & 2 &\\
+    \hline
+    1 & n_{11} & n_{12} & n_{1\cdot}\\
+    \hline
+    2 & n_{21} & n_{22} & n_{2\cdot}\\
+    \hline
+     & n_{\cdot 1} & n_{\cdot 2} & n 
+  \end{array}
+$$
+
+care mai poate fi scris, ținând seama doar de inidicii liniilor și coloanelor pe care se află elementele, sub forma următoare
+
+$$
+  \underbrace{(1,1), (1,1), \ldots, (1,1)}_{n_{11}},\underbrace{(2,1), (2,1), \ldots, (2,1)}_{n_{21}},\underbrace{(1,2), (1,2), \ldots, (1,2)}_{n_{12}},\underbrace{(2,2), (2,2), \ldots, (2,2)}_{n_{22}}
+$$
+
+iar în R avem:
 
 
 ```r
-fisher <- function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
-  bot0 <- sum(lgamma(tab+1))# lgamma - logaritm natural din gamma 
+tab = matrix(c(10, 3, 5, 7), nrow = 2, byrow = TRUE)
+tab
+     [,1] [,2]
+[1,]   10    3
+[2,]    5    7
+
+# liniile si coloanele pe care se afla elementele
+row(tab)
+     [,1] [,2]
+[1,]    1    1
+[2,]    2    2
+col(tab)
+     [,1] [,2]
+[1,]    1    2
+[2,]    1    2
+
+# cream o lista cu doua componente
+# prima corespunde indicilor liniilor
+# a doua corespunde indicilor coloanelor
+# cu nr de indici conform cu datele initiale
+a = list(rep(row(tab),tab), rep(col(tab),tab))
+a
+[[1]]
+ [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 1 1 1 2 2 2 2 2 2 2
+
+[[2]]
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
+```
+
+Vom afișa funcția care calculează p-valoarea testului lui Fisher prin metoda Monte-Carlo:
+
+
+```r
+fisher = function(tab, n.sim=1000, return.all=FALSE, prnt=FALSE){
+  bot0 = sum(lgamma(tab+1))# lgamma: logaritm natural din gamma 
                             #- logaritm din factorial
 
-  bot <- 1:n.sim
-  a <- list(rep(row(tab),tab), rep(col(tab),tab))
+  bot = 1:n.sim
+  a = list(rep(row(tab),tab), rep(col(tab),tab))
+  
   for(i in 1:n.sim) {
-    a[[1]] <- sample(a[[1]])
-    bot[i] <- sum(lgamma(table(a)+1))
+    a[[1]] = sample(a[[1]])
+    bot[i] = sum(lgamma(table(a)+1))
     if(prnt) { if(i == round(i/10)*10) cat(i,"\n") }
   }
   if(return.all) return(list(bot0, bot, mean(bot0 <= bot)))
-  cat("P-valoarea aproximata cu Monte Carlo este ", mean(bot0 <= bot))
+  cat("P-valoarea aproximata cu Monte Carlo este", mean(bot0 <= bot))
 }
 
-set.seed(5)
+set.seed(1234)
 fisher(matAA_observed)
-P-valoarea aproximata cu Monte Carlo este  0.482
+P-valoarea aproximata cu Monte Carlo este 0.48
 ```
 
-<img src="Lab_5_files/figure-html/unnamed-chunk-42-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab_5_files/figure-html/unnamed-chunk-43-1.png" width="90%" style="display: block; margin: auto;" />
 
-Același rezultat îl obținem și dacă folosim funcția `fisher.test` (care este mai rapidă):
+Același rezultat îl obținem și dacă folosim funcția `fisher.test()` din R (care este mai rapidă):
 
 
 ```r
@@ -1069,7 +1132,7 @@ fisher.test(matAA_observed, simulate.p.value = TRUE, B = 1000)
 	on 1000 replicates)
 
 data:  matAA_observed
-p-value = 0.4975
+p-value = 0.4835
 alternative hypothesis: two.sided
 ```
 
