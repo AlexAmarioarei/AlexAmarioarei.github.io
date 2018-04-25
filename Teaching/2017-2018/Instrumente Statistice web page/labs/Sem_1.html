@@ -430,7 +430,7 @@ x = rgeom(n, theta) + 1
 # EVM gasit este 
 EVM = 1/mean(x)
 EVM
-[1] 0.3435246</code></pre>
+[1] 0.3350084</code></pre>
 <p>Vom crea o funcție care să calculeze estimatorul de verosimilitate maximă plecând de la logaritmul funcției de verosimilitate (îi determinăm maximul cu ajutorul funcției <code>optimize()</code>):</p>
 <pre class="r"><code>EVM_geom = function(theta, n, init = 0.5, seed = NULL){
   
@@ -453,11 +453,11 @@ EVM
 
 # exemple
 EVM_geom(0.345, 1000)
-[1] 0.3363523
+[1] 0.330461
 EVM_geom(0.478, 1000)
-[1] 0.4805382
+[1] 0.4807692
 EVM_geom(0.222, 1000)
-[1] 0.2317444</code></pre>
+[1] 0.2290347</code></pre>
 <p>În figura de mai jos este ilustrată proprietatea de consistență a estimatorului de verosimilitate maximă, pentru <span class="math inline">\(\theta = 0.345\)</span>:</p>
 <pre class="r"><code>theta = 0.345
 t = seq(100, 100000, 100)
@@ -1223,11 +1223,343 @@ sigma
 \]</span></p>
 <p>deducem că testul este nedeplasat.</p>
 </div>
-<div id="teste-bazate-pe-raportul-de-verosimilitati" class="section level2">
-<h2><span class="header-section-number">2.2</span> Teste bazate pe raportul de verosimilități</h2>
+<div id="test-bazat-pe-raportul-de-verosimilitati" class="section level2">
+<h2><span class="header-section-number">2.2</span> Test bazat pe raportul de verosimilități</h2>
+<p>Presupunem că <span class="math inline">\(Y\)</span> este o variabilă aleatoare care ia valori în mulțimea <span class="math inline">\(\{y_1,y_2,\ldots,y_c\}\)</span> iar repartiția ei este dată de</p>
+<p><span class="math display">\[
+\mathbb{P}\circ Y^{-1} = \sum_{j = 1}^{c}p_j\delta_{y_j},
+\]</span></p>
+<p>unde <span class="math inline">\(\mathbb{P}(Y = y_j) = p_{j},\, j\in\{1,2,\ldots,c\}\)</span>.</p>
+<p>Fie <span class="math inline">\(Y_1, Y_2,\ldots, Y_n\)</span> un eșantion de talie <span class="math inline">\(n\)</span> din populația <span class="math inline">\(\mathbb{P}\circ Y^{-1}\)</span> și</p>
+<p><span class="math display">\[
+  N_i = \sum_{k = 1}^{n}\mathbf{1}_{y_i}(Y_k)
+\]</span></p>
+<p>numărul de observații care categoria <span class="math inline">\(y_i\)</span>. Observăm că variabilele aleatoare <span class="math inline">\(N_1, N_2, \ldots, N_c\)</span> verifică</p>
+<p><span class="math display">\[
+  N_1 + N_2 +\cdots+ N_c = n.
+\]</span></p>
+<p>Putem modela o observație <span class="math inline">\(Y_k\)</span> dintr-o variabilă discretă cu <span class="math inline">\(c\)</span> categorii cu ajutorul unui vector elemente de <span class="math inline">\(\{0,1\}\)</span>, <span class="math inline">\((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)})\)</span>, pentru care componenta <span class="math inline">\(j\)</span> ia valoarea <span class="math inline">\(1\)</span> dacă <span class="math inline">\(Y_k = y_j\)</span> și <span class="math inline">\(0\)</span> altfel. Funcția de masă a <span class="math inline">\(c\)</span>-uplului este</p>
+<p><span class="math display">\[
+\mathbb{P}((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1,x_2,\ldots,x_c)) = p_1^{x_1}p_2^{x_2}\cdots p_c^{x_c}
+\]</span> unde <span class="math inline">\(x_j\in\{0,1\}\)</span> cu <span class="math inline">\(\sum_{j = 1}^{c}x_j = 1\)</span>. Pentru un eșantion de talie <span class="math inline">\(n\)</span>, <span class="math inline">\(\{(X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}),\, k = 1,2,\ldots, n\}\)</span> avem</p>
+<p><span class="math display">\[
+\mathbb{P}\left((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1^{(k)},x_2^{(k)},\ldots,x_c^{(k)}), \,k = 1,2,\ldots,n\right) = \prod_{k=1}^{n}p_1^{x_1^{(k)}}p_2^{x_2^{(k)}}\cdots p_c^{x_c^{(k)}} = p_1^{n_1}p_2^{n_2}\cdots p_c^{n_c}
+\]</span></p>
+<p>unde <span class="math inline">\(n_j\)</span> reprezintă numărul de observații din categoria <span class="math inline">\(y_j\)</span> iar <span class="math inline">\(\sum_{j = 1}^{c}n_j = n\)</span>.</p>
+<p>În următorul exercițiu ne propunem să aplicăm testul bazat pe raportul de verosimilități pentru efectuarea unui test asupra parametrilor unei repartiții multinomiale.</p>
 
 <div class="rmdexercise">
-Va urma !
+<p>Spunem că vectorul <span class="math inline">\((N_1, N_2,\ldots, N_c)\)</span> este repartizat multinomial <span class="math inline">\(\mathcal{M}(n;p_1,p_2,\ldots,p_c)\)</span> dacă</p>
+<p><span class="math display">\[
+  \mathbb{P}(N_1 = n_1, N_2 = n_2, \ldots, N_c = n_c) = \frac{n!}{n_1!n_2!\cdots n_c!}p_1^{n_1}p_2^{n_2}\cdots p_c^{n_c}
+\]</span></p>
+<p>unde <span class="math inline">\(n_1 + n_2 +\cdots+n_c = n\)</span>.</p>
+<p>Determinați repartiția marginală a lui <span class="math inline">\(N_i\)</span>.</p>
+</div>
+
+<p>Observăm că</p>
+
+<span class="math display">\[\begin{align*}
+  \mathbb{P}(N_i = n_i) &amp;= \sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\mathbb{P}(N_1 = n_1, \ldots, N_{i-1} = n_{i-1}, N_i = n_i, N_{i+1} = n_{i+1}, \ldots, N_c = n_c),  \; n_1 + \cdots + n_c = n - n_i\\
+    &amp;= \sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\frac{n!}{n_1!\cdots n_c!}p_1^{n_1}\cdots p_{c}^{n_c},  \; n_1 + \cdots + n_c = n - n_i\\
+    &amp;= \frac{n!p_i^{n_i}}{n_i!(n-n_i)!}\sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\frac{(n-n_i)!}{n_1!\cdots n_{i-1}!n_{i+1}!\cdots n_c!}p_1^{n_1}\cdots p_{i-1}^{n_{i-1}}p_{i+1}^{n_{i+1}}\cdots p_{c}^{n_c},  \; n_1 + \cdots + n_c = n - n_i\\
+    &amp;= \binom{n}{n_i}p_i^{n_i}(1-p_i)^{n-n_i}\underbrace{\sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\binom{n-n_i}{n_1,\ldots,n_c}\left(\frac{p_1}{1-p_i}\right)^{n_1}\cdots \left(\frac{p_{i-1}}{1-p_i}\right)^{n_{i-1}}\left(\frac{p_{i+1}}{1-p_i}\right)^{n_{i+1}}\cdots \left(\frac{p_c}{1-p_i}\right)^{n_c}}_{=1}\\
+    &amp;= \binom{n}{n_i}p_i^{n_i}(1-p_i)^{n-n_i}
+\end{align*}\]</span>
+
+<p>prin urmare <span class="math inline">\(N\sim\mathcal{B}(n, p_i)\)</span>.</p>
+
+<div class="rmdexercise">
+<p>Considerăm ipotezele</p>
+<span class="math display">\[\begin{align*}
+  H_0: &amp; \{(p_1,p_2,\ldots, p_c) = (\pi_1,\pi_2,\ldots, \pi_c)\}\\
+  H_1: &amp; \{\exists i \text{ astfel incat } p_i\neq \pi_i\}
+\end{align*}\]</span>
+<p>unde <span class="math inline">\((\pi_1,\pi_2,\ldots, \pi_c)\)</span> sunt probabilități specificate în avans. Construiți testul bazat pe raportul de verosimilități corespunzător.</p>
+</div>
+
+<p>Testul bazat pe raportul de verosimilitate este</p>
+<p><span class="math display">\[
+  \Lambda(\mathbf{x})=\frac{\sup_{\theta\in\Theta_0}L(\theta|\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta|\mathbf{x})},
+\]</span></p>
+<p>unde <span class="math inline">\(\Theta\)</span> este spațiul parametrilor modelului, <span class="math inline">\(\Theta_0\)</span> este spațiul parametrilor corespunzător ipotezei nule iar <span class="math inline">\(L(\theta|\mathbf{x})\)</span> este funcția de verosimilitate.</p>
+<p>Observăm că spațiul parametrilor corespunzător modelului este</p>
+<p><span class="math display">\[
+\Theta = \left\{p_1, p_2, \ldots, p_c\,|\,p_{j}\in(0,1),\,\sum_{j = 1}^{c}p_{j} = 1\right\},
+\]</span></p>
+<p>cu <span class="math inline">\(\dim{\Theta} = c-1\)</span>, cel corespunzător ipotezei nule este</p>
+<p><span class="math display">\[
+\Theta_0 = \left\{(p_1,p_2,\ldots, p_c) = (\pi_1,\pi_2,\ldots, \pi_c)\right\}
+\]</span></p>
+<p>cu <span class="math inline">\(\dim{\Theta_0} = 0\)</span> iar funcția de verosimilitate este</p>
+<p><span class="math display">\[
+  L(p_{j},\,j = 1,\ldots,c\,;\,\mathbf{x}) = \mathbb{P}(N_{j} = n_{j}, \,j = 1,\ldots,c) = \frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} p_{j}^{n_{j}}.
+\]</span></p>
+<p>Observăm că</p>
+<p><span class="math display">\[
+  \sup_{\theta\in\Theta_0}L(\theta|\mathbf{x}) = \mathbb{P}_{H_0}(N_1 = n_1, N_2 = n_2, \ldots, N_c = n_c) = \frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} \pi_{j}^{n_{j}}.
+\]</span></p>
+<p>Pentru a determina estimatorul de verosimilitate maximă pe <span class="math inline">\(\Theta\)</span> trebuie să rezolvăm problema de optimizare:</p>
+<p><span class="math display">\[
+  \left\{\begin{array}{ll}
+    \max_{\theta\in\Theta} \log L(\theta|\mathbf{x}) = \max \log{\left(\frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} p_{j}^{n_{j}}\right)}\\
+    \sum_{j = 1}^{c}p_{j} = 1
+  \end{array}\right.
+\]</span> Cum logaritmul funcției de verosimilitate este</p>
+<p><span class="math display">\[
+\log{\left(\frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} p_{j}^{n_{j}}\right)} = \log\left(\frac{n!}{\prod_{j = 1}^{c} n_{j}!}\right) + \sum_{j = 1}^{c}n_{j}\log{p_j}
+\]</span></p>
+<p>iar <span class="math inline">\(p_c = 1 - p_1 -\cdots p_{c-1}\)</span>, rezolvând ecuația de verosimilitate <span class="math inline">\(\frac{\partial\log{L}}{\partial p_j} = 0\)</span> deducem</p>
+<p><span class="math display">\[
+\left\{\begin{array}{llll}
+  \frac{n_1}{p_1} - \frac{n_c}{1 - p_1 - p_2 -\cdots -p_{c-1}} = 0\\
+  \frac{n_2}{p_2} - \frac{n_c}{1 - p_1 - p_2 -\cdots -p_{c-1}} = 0\\
+  \cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\\
+  \frac{n_{c-1}}{p_{c-1}} - \frac{n_c}{1 - p_1 - p_2 -\cdots -p_{c-1}} = 0\\
+\end{array}\right.
+\]</span></p>
+<p>de unde</p>
+<p><span class="math display">\[
+  \frac{n_1}{p_1} = \frac{n_2}{p_2} = \cdots = \frac{n_c}{p_c} = \frac{\sum_{j = 1}^{c}n_j}{\sum_{j = 1}^{c}p_j} = n,
+\]</span> deci <span class="math inline">\(\hat{p}_{j} = \frac{n_j}{n}\)</span>.</p>
+<p>Raportul de verosimilitate devine</p>
+<p><span class="math display">\[
+\Lambda(\mathbf{x})=\frac{\sup_{\theta\in\Theta_0}L(\theta|\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta|\mathbf{x})} = \frac{\prod_{j = 1}^{c} \pi_{j}^{n_{j}}}{\prod_{j = 1}^{c} \left(\frac{n_{j}}{n}\right)^{n_{j}}} = \prod_{j = 1}^{c}\left(\frac{n\pi_{j}}{n_j}\right)^{n_{j}}
+\]</span></p>
+<p>și aplicând <a href="https://en.wikipedia.org/wiki/Likelihood-ratio_test">Teorema lui Wilks</a> găsim</p>
+<p><span class="math display">\[
+  -2\log \Lambda(\mathbf{x}) = 2\sum_{j = 1}^{c} n_{j}\log\left(\frac{n_{j}}{n\times \pi_{j}}\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}}\chi^2(\underbrace{\dim{\Theta} - \dim{\Theta_0}}_{(c-1)-0}) = \chi^2(c-1).
+\]</span></p>
+<p>Prin urmare, regiunea critică a testului asimptotic de nivel <span class="math inline">\(\alpha\)</span> bazat pe raportul de verosimilitate este</p>
+<p><span class="math display">\[
+  C = \left\{\mathbf{x} \,|\, -2\log \Lambda(\mathbf{x}) &gt; \chi^2_{1-\alpha}(c-1)\right\}.
+\]</span></p>
+<p>O metodă alternativă este bazată pe statistica <span class="math inline">\(\chi^2\)</span> a lui Pearson, <span class="citation">(Pearson 1900)</span>, care este dată de</p>
+<p><span class="math display">\[
+  X^2 = \sum_{j = 1}^{c}\frac{(O_{j} - E_{j})^2}{E_{j}}
+\]</span></p>
+<p>unde <span class="math inline">\(O_{j} = n_{j}\)</span> sunt efectivele observate iar <span class="math inline">\(E_{j}\)</span> sunt efectivele pe care ne așteptăm să le observăm dacă ipoteza nulă ar fi adevărată (sub <span class="math inline">\(H_0\)</span>, repartiția condiționată a lui <span class="math inline">\(N_{j}\)</span> la <span class="math inline">\(\sum_{j = 1}^{c}N_{j} = n\)</span> este <span class="math inline">\(\mathcal{B}(n,p_{j})\)</span>),</p>
+<p><span class="math display">\[
+  E_{j} = \mathbb{E}_{H_0}[N_{j}] = n \pi_j
+\]</span></p>
+<p>ceea ce implică</p>
+<p><span class="math display">\[
+  X^2 = \sum_{j = 1}^{c}\frac{\left(n_{j} - n \pi_j\right)^2}{n \pi_j}.
+\]</span></p>
+<p>Karl Pearson a arătat că această statistică este asimptotic repartizată</p>
+<p><span class="math display">\[
+  X^2 = \sum_{j = 1}^{c}\frac{\left(n_{j} - n \pi_j\right)^2}{n \pi_j} \underset{n\to\infty}{\overset{d}{\longrightarrow}} \chi^2(c-1)
+\]</span></p>
+<p>prin urmare testul <span class="math inline">\(\chi^2\)</span> a lui Pearson de nivel <span class="math inline">\(\alpha\)</span>, pentru ipotezele <span class="math inline">\(H_0\,vs\,H_1\)</span> conduce la aceeași regiune critică ca și testul bazat pe raportul de verosimilitate (cu toate acestea se poate arăta că statistica lui Pearson <span class="math inline">\(X^2\)</span> converge mai repede decât statistica <span class="math inline">\(-2\log \Lambda(\mathbf{x})\)</span>, <span class="citation">(Agresti 2012)</span>).</p>
+
+<div class="rmdexercise">
+<p>Un exercițiu constă în extragerea la întâmplare, de către o persoană, a unei cărți de joc dintr-un pachet amestecat în prealabil, notarea culorii acesteia (inimă roșie, inimă neagră, romb și treflă) și cărții în pachet tot aleator. Să presupunem că în urma efectuării exercițiului pe <span class="math inline">\(200\)</span> de persoane s-au obținut următoarele rezultate: 35 cărți de treflă, 51 cărți de romb, 64 cărți de inimă roșie și respectiv 50 cărți de inimă neagră. Ne propunem să testăm ipotezele</p>
+<span class="math display">\[\begin{align*}
+  H_0&amp;:\,\{\text{Cele patru culori sunt egal probabile}\}\\
+  H_1&amp;:\,\{\text{Cel putin una din cele patru culori este diferita de 0.25}\}
+\end{align*}\]</span>
+</div>
+
+<p>Observăm că dacă notăm cu <span class="math inline">\(Y\)</span> variabila discretă care ia valori în mulțimea <span class="math inline">\(\{y_1,y_2,y_3,y_4\} = \{\clubsuit, \diamondsuit, \heartsuit, \spadesuit\}\)</span> și cu <span class="math inline">\(p_j = \mathbb{P}(Y = y_j)\)</span> atunci ipotezele se scriu</p>
+<span class="math display">\[\begin{align*}
+  H_0&amp;:\,\{\text{Cele patru culori sunt egal probabile}\} = \{(p_1,p_2,p_3,p_4) = (\pi_1, \pi_2, \pi_3, \pi_4) \,|\, \pi_j = 0.25\}\\
+  H_1&amp;:\,\{\text{Cel putin una din cele patru culori este diferita de 0.25}\} = \{\exists j, \text{ astfel ca } p_j\neq 0.25\}
+\end{align*}\]</span>
+<p>Avem că tabelul efectivelor observate este</p>
+<p><span class="math display">\[
+\begin{array}{c|c|c|c}
+  \clubsuit &amp; \diamondsuit &amp; \heartsuit &amp; \spadesuit \\
+  \hline
+  O_1 &amp; O_2 &amp; O_3 &amp; O_4
+\end{array} 
+=
+\begin{array}{c|c|c|c}
+  \clubsuit &amp; \diamondsuit &amp; \heartsuit &amp; \spadesuit \\
+  \hline
+  35 &amp; 51 &amp; 64 &amp; 50
+\end{array}
+\]</span></p>
+<p>care in R este</p>
+<pre class="r"><code>tab_observed = c(35, 51, 64, 50)</code></pre>
+<p>iar tabelul efectivelor pe care ne așteptăm să le observăm dacă ipoteza nulă este adevărată este</p>
+<p><span class="math display">\[
+\begin{array}{c|c|c|c}
+  \clubsuit &amp; \diamondsuit &amp; \heartsuit &amp; \spadesuit \\
+  \hline
+  E_1 = n\pi_1 &amp; E_2 = n\pi_2 &amp; E_3 = n\pi_3 &amp; E_4 = n\pi_4
+\end{array} 
+=
+\begin{array}{c|c|c|c}
+  \clubsuit &amp; \diamondsuit &amp; \heartsuit &amp; \spadesuit \\
+  \hline
+  50 &amp; 50 &amp; 50 &amp; 50
+\end{array}
+\]</span></p>
+<p>care în R se scrie</p>
+<pre class="r"><code>n = 200
+prob = rep(0.25, 4)
+
+tab_expected = n*prob</code></pre>
+<p>Putem calcula acum statistica lui Pearson</p>
+<p><span class="math display">\[
+  X^2 = \sum_{j = 1}^{c}\frac{(O_{j} - E_{j})^2}{E_{j}} = \sum_{j = 1}^{c}\frac{\left(n_{j} - n \pi_j\right)^2}{n \pi_j}
+\]</span></p>
+<p>care devine</p>
+<pre class="r"><code>alpha = 0.05
+X2 = sum((tab_observed - tab_expected)^2/tab_expected)
+
+# p - valoarea
+1 - pchisq(X2, df = 3)
+[1] 0.03774185</code></pre>
+<p>Acelați rezultat îl obținem și dacă aplicăm funcția <code>chisq.test()</code></p>
+<pre class="r"><code>chisq.test(tab_observed, p = prob)
+
+    Chi-squared test for given probabilities
+
+data:  tab_observed
+X-squared = 8.44, df = 3, p-value = 0.03774</code></pre>
+<p>Pentru testul bazat pe raportul de verosimilitate maximă avem</p>
+<p><span class="math display">\[
+  -2\log \Lambda(\mathbf{x}) = -2\sum_{j = 1}^{c} n_{j}\log\left(\frac{n_{j}}{n\times \pi_{j}}\right)
+\]</span></p>
+<p>care devine</p>
+<pre class="r"><code>LRT = 2*sum(tab_observed*log(tab_observed/tab_expected))
+
+# p - valoarea
+1 - pchisq(LRT, df = 3)
+[1] 0.03431406</code></pre>
+<p>Ambele proceduri conduc la respingerea ipotezei nule pentru un prag de semnificație <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+</div>
+<div id="testul-raportului-de-verosimilitati-testul-lui-wald-si-testul-de-scor" class="section level2">
+<h2><span class="header-section-number">2.3</span> Testul raportului de verosimilități, testul lui Wald și testul de scor</h2>
+
+<div class="rmdexercise">
+<p>Considerăm două variabile aleatoare <span class="math inline">\(X\)</span> și <span class="math inline">\(Y\)</span> astfel încât repartiția condiționată a lui <span class="math inline">\(Y|X = x\)</span> este dată de</p>
+<p><span class="math display">\[
+  f_{Y|X}(y|x;\beta) = \frac{1}{\beta + x}e^{-\frac{y}{\beta + x}}
+\]</span></p>
+<p>Vom nota pentru simplitate cu <span class="math inline">\(\beta_i = \frac{1}{\beta + x_i}\)</span>. Repartiția condiționată de mai sus este o repartiție exponențială, care la rândul ei poate fi privită ca un caz particular de repartiție Gamma, cu <span class="math inline">\(\rho = 1\)</span>,</p>
+<p><span class="math display">\[
+  f_{Y|X}(y|x;\beta,\rho) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y^{\rho - 1}e^{-y\beta_i}
+\]</span></p>
+<p>Vrem să testăm ipotezele</p>
+<p><span class="math display">\[
+  H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
+\]</span></p>
+</div>
+
+<p>Începem prin a reaminti că funcția <span class="math inline">\(\Gamma(p)\)</span> este definită prin (vezi și <a href="https://en.wikipedia.org/wiki/Gamma_function" class="uri">https://en.wikipedia.org/wiki/Gamma_function</a>)</p>
+<p><span class="math display">\[
+\Gamma(p) = \int_{0}^{\infty}t^{p-1}e^{-t}\,dt,\quad p&gt;0,
+\]</span></p>
+<p>verifică relația de recurență</p>
+<p><span class="math display">\[
+\Gamma(p) = (p-1)\Gamma(p-1)
+\]</span></p>
+<p>și <span class="math inline">\(\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}\)</span>. Mai mult, dacă <span class="math inline">\(n\in\mathbb{N}\)</span> atunci <span class="math inline">\(\Gamma(n+1) = n!\)</span>.</p>
+<p>De asemenea, derivatele funcției <span class="math inline">\(\Gamma\)</span> sunt</p>
+<p><span class="math display">\[
+\frac{d^k \Gamma(p)}{dp^k} = \int_{0}^{\infty}(\log(t))^kt^{p-1}e^{-t}\, dt
+\]</span></p>
+<p>iar primele două derivale ale funcției <span class="math inline">\(\log(\Gamma(p))\)</span>, cunoscute și ca funcțiile <a href="https://en.wikipedia.org/wiki/Digamma_function">digamma</a> și respectiv <a href="https://en.wikipedia.org/wiki/Trigamma_function">trigamma</a>, se notează cu <span class="math inline">\(\Psi\)</span> și respectiv <span class="math inline">\(\Psi'\)</span> și sunt definite prin</p>
+<span class="math display">\[\begin{align*}
+  \Psi &amp;= \frac{\partial \log(\Gamma(p))}{\partial p} = \frac{\Gamma'}{\Gamma}\\
+  \Psi' &amp;=\frac{\partial^2 \log(\Gamma(p))}{\partial p^2} = \frac{\Gamma\Gamma'' - \Gamma'^2}{\Gamma^2}
+\end{align*}\]</span>
+<p>Aceste funcții sunt implementate în R cu ajutorul funcțiilor <code>digamma()</code> și respectiv <code>trigamma()</code>.</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAAArlBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrY6AAA6ADo6AGY6OgA6OpA6ZmY6ZpA6ZrY6kNtmAABmADpmAGZmOgBmOjpmOpBmZjpmkLZmtrZmtttmtv+QOgCQOjqQOmaQZjqQZmaQ27aQ29uQ2/+2ZgC2Zjq227a22/+2/7a2/9u2///NMzPT09PbkDrbkGbbtmbbtpDbtrbb27bb////tmb/25D/27b//7b//9v////f5Q6mAAAACXBIWXMAAA7DAAAOwwHHb6hkAAARv0lEQVR4nO3dC3fb1pWGYYgzrpjUba3YvY3l9CJnmkrVzLQih+T//2MlTNEmuXHnuXz74H1Ws5xKtoGN8wokFBGsdoCwKvcOAF0IFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNIIFNII9Grb+8Vj/U/u/Ygp33wEerWSA/2/Pxx+JVDHSo1zb728zb0LaQJdL6tffdgv4/pDVf3nw/7//uJP1c0fP1Q3H8/+/fh5R/aT/frD6xm0uCm391W1+PnuP365+Hu2+ZIEurl787KqFo+bu9uX+t/Xy8Xf1sub/9rsxz399+PnU+xTGF8mWx4CLXDK+gy6ubt52OWbL0mgq+rd6wPhP//8y6oe5/bL0tYfO/334+dT7FMYx8nqfwqc8rjbu3zzJQn0ufp4+Br8cPOHf921j3b8fIp9CuM4Wf1PgVOeBZpnvqRn0NV+xMODQ/Nox8+n2Kcwms6gBU3ZeAZNO1+y56D/W9W7frs/57R/7R0/n2Kfwjg+Lzs+Rytsyv3TyW+B5pkvzVX86nCtu/tpf3n3p5uH1mcvr59Psk9hnF7FFzjlT9Xiv4+B5pkv2fdBC/5u4YnSp0w/X5JA18vF4//fZf+eb2SlT5lnvjRn0P9ZVtXbok8ttdKnzDIf/6kT0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0ggU0gi0ZKuq5uNOjy0ItGDb+4/1L+u3Hu7m3IJApT09PV3xpzfvH09+8WlyoFcdOQzwdHDF33A8g37fEKiX9Zt+BvUyoUtP19dZWy/bn4M6WT8ClRMozv7NRN5AGAQqJXCcXVfxTtaPQHUEP3N2XsU7WT8CFRHjcd1cxVcHrxsMuq1YCFRArGedLVfxBIoRYl4SNV/FEygGSnTBfoFAMUiWOncEiiEyxVkjUPRIVOfm7nDVvuAiCcMlfGTf/ND0PXoCRbu0j+yrNw3foydQtMj4xPMEgaKRRp4EikYide4IFJZOnTsCxSWpPAkU58TyJFCcksuTQPGNYJ4EiiPJPAkUB6J5EihqqnXuCBTSeRIotPsk0LnTzpNA5069TwKdNfk8CXTOHORJoDPmok8CnS0XeRLoXPk4fe4I1JGQbzLgJU8C9SPkmwz46ZNA3Wi5PeE/9AQdm0C96Lw94SiOzp8E6kjX7QlHcHN5dECgzo09Jr7yJFD3Rh4Tb30SqHfjjom7PgnUu1HHxF+fBOrdmGPisE8C9W7EMfHYJ4F6N/yYuOyTQL0bfEx89kmg3o0INOZuREOgzg09Jk5PoATq3cBj4rVPAvVu2DFx2yeBejfomPjtk0C9G3JMHPdJoN4NCzT6bkRDoM4NOCaeT6AE6l3/MXHdJ4F6NyTQBLsRTUGBrpc3f7m7fLPcV04GnKA3UN8n0IIC3f74WL9f7uZ3TS/LdTLgBH2BOu+zoEA37x/rl+RevizX1YAT9AeaZDeicbV+Q86glzc2cDXgBD2Bej+B+lq/7sVYVU3PQV0NOEH3MXHfp6/1m3IV72rACfoCTbQb0bhaPwK1CFQIgVqdx8T/I7yv9SNQq+uYFNCnr/UjUKs70GS7EUDz/U9drR+BWsUE2nL/U1frR6BWxzHxNbS5/+mBq/UjUKv9mDh7Btp5/1MnoxCo1RVowt0IoOv+p05mIVCrnEAvOfxZCgK1Wo+Js0f4th+XdLV+BGp1BJpyN67X8uOSrtaPQK22Y+JuYvPjkgeu1o9ArWICLeHHJQnUKibQEn5ckkCtcgJt5mr9CNRqOSbFDOxq/QjUIlAhBGo1H5Ny5nW1fgRqEagQArUIVAiBWgQqhECtxmNS0Liu1o9ALQIVQqBW0zEpaVpX60egFoEKIVCLQIUQqEWgQuYd6HpZ3ba96vFcCdMeuVq/WQdav+pxtXgcEGgBw37jav1mHeiXMjfvfyZQXbMOdPupfkHu5reNrxs/U8Cw37hav1kHun8OWt/ZYLVousX5qRJm/cbV+s070GYEKoRAV7eXHyFQIQRKoNIIlEClEahFoEII1DLHpLBRXa0fgVoEKoRALQIVQqAWgQohUOvymJQ2qav1I1CLQIUQqEWgQgjUIlAhBGoRqJDpgXqZcDwCFUKgFoEKIVDr4pgUNyeBOkegQgjUIlAhBGoRqBACtQhUCIFa58ekvDEJ1DkCFUKgFoEKIVCLQIUQqEWgQgjUIlAhBGoRqBACtQhUCIFaBCqEQC0CFUKg1tkxKXBKAnWOQIUQqEWgQgjUIlAhBGoRqBACtQhUCIFap8ekxCEJ1LlyAl19eVedm4fzjxKoc8UEWr/V49767cvZhwsKdP3dw/6LcHH+RmwE6sXrm5A2vxepk8k6A91+eqi/+pq/Ar1MOF4xgR7PoI1v9ehkss5A919669+cfgWevVWgxIQxdqKYQOu3Gy/7OehPD/X7rdaRNvwZiQkJdIzTE4yTyboD3d7X87w5f4QnUDe6riGcTOb9Kp5AO3ReQziZjECtYgI11xAHBJoQgXbpuoZwMtkVgSqMGGUXygm06xrCyWQEapUTaDMCTYdAJyDQdGIHKjBieASaToBdqC8jzhGoEN+BXrkHm7vDf1lZNH0bJsQGNBFoMtfuwXr5jjOotnkHuts93/yVQJXNPdDd9v7kh33Oflor0Ab0EGgycfaAQIW4DjTIDqxuLz9CoEIIlEClEWhXoNknjIJAU4m0AwQqhEAtAhVCoBaBCiFQi0CFEKhFoEII1CJQIQRqzSNQJ8MRqEWgQjwHGmv7BCqEQC0CFXLY2c3du9F/Jv+Ew7c/bb78Ew41aT4fwx0X47mqBs/oL9Bp8+WfcLgJ8/kY7uQhfj/jx1F/JveEI7c/er78E44ydj4fwx0XY1V/BV7exKfnz2SecNTmp8yXfcIRJsznY7jjc1DzM2e9fyb7hCM2P22+7BMONmk+H8M5voqPtnl/gY5DoGkQ6EQEmgaBTkSgaRDoRASaBoFORKBpEOhEBJpG/EB9LOFoBJpEvK0TqBACtQhUCIFaBCqEQC0CFeI20IgbJ1AhBGoRqBACtQhUCIFaBCqEQC0CFUKgFoEKIVCLQIUQqEWgQgjUkpgvotkEmnPEmJsmUCEEahGoEAK1CFQIgVoEKsRpoFG3TKBCCNQiUCEEahGoEAK1CFQIgVrlBLqqajcP5x8l0PgIdIjt/Zcbhq7fvpx9mEDjI9AhXu8XennbUAKNj0CHOJ5Bv28M1Md8PgONu2FXC9hpvex4DupjPgK1XC3gKNXB6/9zMd+8A11/97C/0F1c3Nnd1QL22n66OIH6mm/Wge7Xrr7CbbnK9bGAXTZ3hzPmguegaYXa7v7ydv2b1qtcHwvYab18N+szaK4Rg232p4d6+epIT7lawB7PN38l0OSCbXZ7Xz8Cvvn6CO/wIqLP9v7yIp5Ao4u8WVcLOIGr+Qh0Zd4Dy9UCTuBqPgIlUGn9gbZfBRKoT67m6wy05/touUaMvVVXCziBq/m6z6CX30c7v8olUJ9czdf3EN/1fTQC9cnVfL3PQTu+j0agPrmaz+FVfPSNulrACVzNR6CWqwWcwNV8BGq5WsAJXM1HoJarBZzA1XwEarlawAlczUeglqsFnMDVfP4Cjb9NVws4gav5CNRytYATuJqPQC1XCziBq/kI1HK1gBO4ms9doAk26erWMBMQaEwEejUCjYlAr0agMRHo1Qg0JgK9GoHGRKBXm1Gg6WdMsUECFUKgFoEKIVCLQIU4CzTJ9ghUCIFaBCqEQC0CFUKgFoEKIVCLQIX4CjTN5ghUCIFaBCrkykATD0mgIRBoLIk2RqBCCNQiUCEEahGoEAK1CFQIgVpzCdTFhJ4CTbUtAhVCoBaBCiFQi0CFOAo02aYIVAiBWlXazSVHoHEQaCAEGgeBBkKgcRBoIAQaRbotEagQArUIVIibQBMeTAIVcm2gyYYk0GAINAYCDYZAY4iynfXy5i931eLx/KMEKsRLoFE2s/3xcfPDw27zu5ezD88mUA8zzjrQzfvH/f/qX84+TKBCZh3o6xl0/bbUM+iqqt08nH+UQMOLtJVVdf4ctDqIucmUtvcf61+avwBrDma8OtA0QyY9ksUE+vrcpfkpTM3BjAS6ur38SDGBHs+g3xNobAQ6yXrJc9AkQ8bcRsmBXjp9jl1zMCOBWuUEuj+D3vIcNP6QiY9jMYHWz0FXi0cCjY1Ap/lS5ub9zwQaGYFOs/1UXx5tfstVfFxPBDrRell/n2m1INCoUh/GcgJtRqBhJT+KBCrk+kCjT0mggRFoWAQaGIGGRaCBEWhQ6Q8igQqRDzT195h2BColQKBxx8xwDOcTqIMhCdQiUCEEahGoEPVAcxxBAhUiHmiGSyQClSIfaLS/uh2BCiFQi0CFdAfa95KBg3hTZnmEn1Og+lN2Btr7koFX0abMc/gIVEhnoOYlA5evCnwVa8pMR49AhXSfQZtfMmBEmjLPAzyBSul7Dtr0kgErzpi5Dh6BCplyFW8RqCcEGka2Y0egQnQDzfUMlEClKAca/u8chkCFyAaa7wRKoErCBBphzoxHbk6Byo+pGmjO40agQgjUIlAhgQINPWfGZ6AEKkUz0Kx9zitQ9TlVAw35t41FoEIkA817AiVQJYqBZu6TQJWECjTknLkPGYEKEQw09wmUQJUECzTYoNn7nFmg4oMqBhrm75mOQIXIBZr/BDq3QLUnDRdomDkF+iRQJWKBKvRJoEoCBhpgUIk+CVSJWqAh9mO4VdX+dtXSy3aVdDfeCCBsoNcN+pT6BFrfOWVv/fbl7MMzDFR31pCBXrumyQ/T6z19mm/tI7xoV7JrLjxr0ECvGzT91/HxDNr4ZqvCi3alpkBlh9UJNMdBWi95DvqFbqGhA506Z/Lnnx1mGKjutGEDnV6o0gGaZ6Ci4wYOdOKyqpw/T28vqbFHMTSuucgKGOEDnTBoroOzuTsE2Xj3PtEFC6B5zUULDR3olDnzHZrNDw+tn9NcrxBa1lyz0OCBjp4z68P76s1L26cklyuItjVXeaJ1JnygIwtVPChfqO7X9VrX/Ekw0QiBjvlKFDgiq9vmj2ffsWg61lwv0RiBDs5O4nAQ6JmnJ4lV+SpKoMMKFTkQBHrh6as0u9MtTqAD6lM5AK3Ed+8K/Wv+dCrBHnWIFeiuaziFwXvJ7+BkA9f8yYq7X42iBdr6bEbi63IAB7s40bg1b+g0ZbcRA+2YLeZGQ/Gxl926XjEwwYBWx+vZZtRAm4eKvcUwvOxnl85XDITjO1DkY14xcPjRg3/oaZ+BQAvW8ooBVwi0ZM2vGHCFQCGNQCGNQCGNQCGNQCGNQCGNQCGNQCGNQCGNQCFtWqCVkMAHhPkS69vVaQOG+C1B/pI4DwHMJzMfgUbbLvMR6LDfMh7zycxHoNG2y3wEOuy3jMd8MvMRaLTtMl++QIFECBTSCBTSCBTSCBTSCBTSCBTSCBTSCBTSpgS6qqqPfb/n8i2uL23vq6rl3ttffR6wnd3zu97fMhbzCc03IdDNDw+9t6Pa3DW+e9s3z7fHW1u1Wt32Hqb67kPBF5D5lOabEOj67cv2U/f9qLY//ty7a0NODr0Dbj/9PvgCMp/SfBMCrd8W43Pfubv/a2fAb3nufYh4fhf+IZD5dkLz5Qu0630yv+rZzv5kILuAzLcLMV+ch/gBA66/G3LXyp7df65fdRV6BZlvJzRfpIuk3gEH3PV30Fd6hKtc5tsJzZfr20yfB5wbPg85e4h+G4b5As3HN+ohjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhjUAhLV+gn9+8bO/Dv+BGBvMFkfEM+vnd5767+7jGfCFkDHR7/+Yl39bjY74QMga6Xt4Mee2/W8wXQr5At/cfVyWfYpgviGyBbu/rG0+U+ySN+cLg20yQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQRqCQ9m/XiIA7kTWGCgAAAABJRU5ErkJggg==" width="90%" style="display: block; margin: auto;" /></p>
+
+<div class="rmdexercise">
+<p>Fie <span class="math inline">\(\{X_i, Y_i\}\)</span> un eșantion de talie <span class="math inline">\(n\)</span> din populația <span class="math inline">\(f_{Y|X}\)</span> și scrieți logaritmul funcției de verosimilitate pentru modelul necondiționat și respectiv sub <span class="math inline">\(H_0\)</span> (modelul condiționat).</p>
+</div>
+
+<p>Considerăm parametrul <span class="math inline">\(\mathbf{\theta} = (\beta, \rho)^\intercal\)</span> și avem</p>
+<p><span class="math display">\[
+ f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y_i^{\rho - 1}e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+\]</span></p>
+<p>Cum logaritmul funcției de verosimilitate este</p>
+<p><span class="math display">\[
+  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+\]</span></p>
+<p>deducem că, sub modelul necondiționat,</p>
+<p><span class="math display">\[
+  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+\]</span></p>
+<p>Sub <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\rho = 1\)</span> avem</p>
+<p><span class="math display">\[
+f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+\]</span></p>
+<p>și cum</p>
+<p><span class="math display">\[
+  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+\]</span></p>
+<p>găsim că logaritmul funcției de verosimilitate, sub <span class="math inline">\(H_0\)</span>, este</p>
+<p><span class="math display">\[
+  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
+\]</span></p>
+
+<div class="rmdexercise">
+<p>Scrieți vectorii gradient și matricele Hessiene pentru logaritmul funcției de verosimilitate asociat modelului necondiționat și respectiv modelului condiționat (sub <span class="math inline">\(H_0\)</span>).</p>
+</div>
+
+<p>Am văzut la punctul anterior că logaritmul funcției de verosimilitate pentru modelul necondiționat este</p>
+<p><span class="math display">\[
+  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+\]</span></p>
+<p>Din definiția lui <span class="math inline">\(\beta_i = \frac{1}{\beta+x_i}\)</span> avem că</p>
+<span class="math display">\[\begin{align*}
+  \frac{\partial\beta_i}{\partial \beta} &amp;= \frac{\partial\left(\frac{1}{\beta+x_i}\right)}{\partial \beta} = -\frac{1}{(\beta + x_i)^2} = -\beta_i^2\\
+  \frac{\partial\log{\beta_i}}{\partial \beta} &amp;= \frac{\partial(-\log{\beta+x_i})}{\partial \beta} = -\frac{1}{\beta + x_i} = -\beta_i
+\end{align*}\]</span>
+<p>iar <span class="math inline">\(\frac{\partial\log{\Gamma(\rho)}}{\partial \rho} = \Psi(\rho)\)</span>.</p>
+<p>Prin urmare găsim că</p>
+<span class="math display">\[\begin{align*}
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta} &amp;= -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho} &amp;= \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
+\end{align*}\]</span>
+<p>astfel, vectorul gradient sub modelul necondiționat este</p>
+<p><span class="math display">\[
+\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \begin{pmatrix}
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta}\\
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho}
+\end{pmatrix} 
+= 
+\begin{pmatrix}
+  -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
+  \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
+\end{pmatrix}.
+\]</span></p>
+<p>Pentru matricea Hessiană avem</p>
+<p><span class="math display">\[
+H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}\partial \mathbf{\theta}^\intercal} = \begin{pmatrix}
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} &amp; \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho}\\
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} &amp; \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2}
+\end{pmatrix}
+\]</span></p>
+<p>și cum</p>
+<span class="math display">\[\begin{align*}
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} &amp;= \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3\\
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho} &amp;= \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} = - \sum_{i=1}^{n}\beta_i\\
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2} &amp;= -n\Phi'(\rho)
+\end{align*}\]</span>
+<p>găsim</p>
+<p><span class="math display">\[
+H(y|x;\mathbf{\theta}) = \begin{pmatrix}
+  \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3 &amp; \sum_{i=1}^{n}\beta_i\\
+  \sum_{i=1}^{n}\beta_i &amp; -n\Phi'(\rho)
+\end{pmatrix}.
+\]</span></p>
+<p>Sub ipoteza nulă <span class="math inline">\(H_0\)</span>, avem <span class="math inline">\(\rho = 1\)</span> (<span class="math inline">\(\mathbf{\theta} = \beta\)</span>) deci vectorul gradient (care acum e scalar) este</p>
+<p><span class="math display">\[
+\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \frac{\partial l(y|x;\beta)}{\partial \beta} = -\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2
+\]</span></p>
+<p>iar matricea Hessiană (care este tot scalară) este</p>
+<p><span class="math display">\[
+H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
+\]</span></p>
+
+<div class="rmdexercise">
+<p>Scrieți matricea informațională medie a lui Fisher pentru modelul necondiționat și respectiv modelul condiționat (sub <span class="math inline">\(H_0\)</span>).</p>
 </div>
 
 </div>
@@ -1235,8 +1567,14 @@ Va urma !
 <div id="referinte" class="section level1 unnumbered">
 <h1>Referințe</h1>
 <div id="refs" class="references">
+<div id="ref-Agresti2012">
+<p>Agresti, Alan. 2012. <em>Categorical Data Analysis</em>. 3rd ed. Wiley. <a href="http://gen.lib.rus.ec/book/index.php?md5=640290AD3F29427A30C48D483E420C96" class="uri">http://gen.lib.rus.ec/book/index.php?md5=640290AD3F29427A30C48D483E420C96</a>.</p>
+</div>
 <div id="ref-Evans2000">
 <p>Merran Evans, Brian Peacock, Nicholas Hastings. 2000. <em>Statistical Distributions</em>. Wiley Series in Probability and Statistics. Wiley-Interscience. <a href="http://gen.lib.rus.ec/book/index.php?md5=EED460A11523229329F6DA85E3FF7936" class="uri">http://gen.lib.rus.ec/book/index.php?md5=EED460A11523229329F6DA85E3FF7936</a>.</p>
+</div>
+<div id="ref-Pearson1900">
+<p>Pearson, K. 1900. “On the Criterion That a Given System of Deviations from the Probable in the Case of a Correlated System of Variables Is Such That It Can Be Reasonably Supposed to Have Arisen from Random Sampling.” <em>Philosophical Magazine</em> 50: 157–75.</p>
 </div>
 </div>
 </div>

@@ -21,13 +21,14 @@ output:
       in_header: tex/preamble.tex
     keep_tex: yes
     number_sections: yes
+    citation_package: natbib
   word_document:
     fig_caption: yes
     highlight: pygments
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
-bibliography: references/InstStatFin_2018_ref.bib
+bibliography: references/InstStatFin2018ref.bib
 ---
 
 <script>
@@ -249,7 +250,7 @@ x = rgeom(n, theta) + 1
 # EVM gasit este 
 EVM = 1/mean(x)
 EVM
-[1] 0.3435246
+[1] 0.3350084
 ```
 
 Vom crea o funcție care să calculeze estimatorul de verosimilitate maximă plecând de la logaritmul funcției de verosimilitate (îi determinăm maximul cu ajutorul funcției `optimize()`):
@@ -277,11 +278,11 @@ EVM_geom = function(theta, n, init = 0.5, seed = NULL){
 
 # exemple
 EVM_geom(0.345, 1000)
-[1] 0.3363523
+[1] 0.330461
 EVM_geom(0.478, 1000)
-[1] 0.4805382
+[1] 0.4807692
 EVM_geom(0.222, 1000)
-[1] 0.2317444
+[1] 0.2290347
 ```
 
 În figura de mai jos este ilustrată proprietatea de consistență a estimatorului de verosimilitate maximă, pentru $\theta = 0.345$:
@@ -1257,9 +1258,484 @@ $$
 
 deducem că testul este nedeplasat.
 
-## Teste bazate pe raportul de verosimilități 
+## Test bazat pe raportul de verosimilități 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Va urma !</div>\EndKnitrBlock{rmdexercise}
+Presupunem că $Y$ este o variabilă aleatoare care ia valori în mulțimea $\{y_1,y_2,\ldots,y_c\}$ iar repartiția ei este dată de 
+
+$$
+\mathbb{P}\circ Y^{-1} = \sum_{j = 1}^{c}p_j\delta_{y_j},
+$$
+
+unde $\mathbb{P}(Y = y_j) = p_{j},\, j\in\{1,2,\ldots,c\}$. 
+
+Fie $Y_1, Y_2,\ldots, Y_n$ un eșantion de talie $n$ din populația $\mathbb{P}\circ Y^{-1}$ și 
+
+$$
+  N_i = \sum_{k = 1}^{n}\mathbf{1}_{y_i}(Y_k)
+$$
+
+numărul de observații care categoria $y_i$. Observăm că variabilele aleatoare $N_1, N_2, \ldots, N_c$ verifică 
+
+$$
+  N_1 + N_2 +\cdots+ N_c = n.
+$$
+
+Putem modela o observație $Y_k$ dintr-o variabilă discretă cu $c$ categorii cu ajutorul unui vector elemente de $\{0,1\}$, $(X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)})$, pentru care componenta $j$ ia valoarea $1$ dacă $Y_k = y_j$ și $0$ altfel. Funcția de masă a $c$-uplului este 
+
+$$
+\mathbb{P}((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1,x_2,\ldots,x_c)) = p_1^{x_1}p_2^{x_2}\cdots p_c^{x_c}
+$$
+unde $x_j\in\{0,1\}$ cu $\sum_{j = 1}^{c}x_j = 1$. Pentru un eșantion de talie $n$, $\{(X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}),\, k = 1,2,\ldots, n\}$ avem 
+
+$$
+\mathbb{P}\left((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1^{(k)},x_2^{(k)},\ldots,x_c^{(k)}), \,k = 1,2,\ldots,n\right) = \prod_{k=1}^{n}p_1^{x_1^{(k)}}p_2^{x_2^{(k)}}\cdots p_c^{x_c^{(k)}} = p_1^{n_1}p_2^{n_2}\cdots p_c^{n_c}
+$$
+
+unde $n_j$ reprezintă numărul de observații din categoria $y_j$ iar $\sum_{j = 1}^{c}n_j = n$.
+
+În următorul exercițiu ne propunem să aplicăm testul bazat pe raportul de verosimilități pentru efectuarea unui test asupra parametrilor unei repartiții multinomiale. 
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Spunem că vectorul $(N_1, N_2,\ldots, N_c)$ este repartizat multinomial $\mathcal{M}(n;p_1,p_2,\ldots,p_c)$ dacă 
+
+$$
+  \mathbb{P}(N_1 = n_1, N_2 = n_2, \ldots, N_c = n_c) = \frac{n!}{n_1!n_2!\cdots n_c!}p_1^{n_1}p_2^{n_2}\cdots p_c^{n_c}
+$$
+  
+unde $n_1 + n_2 +\cdots+n_c = n$. 
+
+Determinați repartiția marginală a lui $N_i$.
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Observăm că 
+
+\scriptsize
+\begin{align*}
+  \mathbb{P}(N_i = n_i) &= \sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\mathbb{P}(N_1 = n_1, \ldots, N_{i-1} = n_{i-1}, N_i = n_i, N_{i+1} = n_{i+1}, \ldots, N_c = n_c),  \; n_1 + \cdots + n_c = n - n_i\\
+    &= \sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\frac{n!}{n_1!\cdots n_c!}p_1^{n_1}\cdots p_{c}^{n_c},  \; n_1 + \cdots + n_c = n - n_i\\
+    &= \frac{n!p_i^{n_i}}{n_i!(n-n_i)!}\sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\frac{(n-n_i)!}{n_1!\cdots n_{i-1}!n_{i+1}!\cdots n_c!}p_1^{n_1}\cdots p_{i-1}^{n_{i-1}}p_{i+1}^{n_{i+1}}\cdots p_{c}^{n_c},  \; n_1 + \cdots + n_c = n - n_i\\
+    &= \binom{n}{n_i}p_i^{n_i}(1-p_i)^{n-n_i}\underbrace{\sum_{n_1}\cdots\sum_{n_{i-1}}\sum_{n_{i+1}}\cdots\sum_{n_{c}}\binom{n-n_i}{n_1,\ldots,n_c}\left(\frac{p_1}{1-p_i}\right)^{n_1}\cdots \left(\frac{p_{i-1}}{1-p_i}\right)^{n_{i-1}}\left(\frac{p_{i+1}}{1-p_i}\right)^{n_{i+1}}\cdots \left(\frac{p_c}{1-p_i}\right)^{n_c}}_{=1}\\
+    &= \binom{n}{n_i}p_i^{n_i}(1-p_i)^{n-n_i}
+\end{align*}
+\normalsize
+
+prin urmare $N\sim\mathcal{B}(n, p_i)$.
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm ipotezele 
+
+\begin{align*}
+  H_0: & \{(p_1,p_2,\ldots, p_c) = (\pi_1,\pi_2,\ldots, \pi_c)\}\\
+  H_1: & \{\exists i \text{ astfel incat } p_i\neq \pi_i\}
+\end{align*}
+  
+unde $(\pi_1,\pi_2,\ldots, \pi_c)$ sunt probabilități specificate în avans. Construiți testul bazat pe raportul de verosimilități corespunzător. 
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Testul bazat pe raportul de verosimilitate este
+
+$$
+  \Lambda(\mathbf{x})=\frac{\sup_{\theta\in\Theta_0}L(\theta|\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta|\mathbf{x})},
+$$
+
+unde $\Theta$ este spațiul parametrilor modelului, $\Theta_0$ este spațiul parametrilor corespunzător ipotezei nule iar $L(\theta|\mathbf{x})$ este funcția de verosimilitate.
+
+Observăm că spațiul parametrilor corespunzător modelului este 
+
+$$
+\Theta = \left\{p_1, p_2, \ldots, p_c\,|\,p_{j}\in(0,1),\,\sum_{j = 1}^{c}p_{j} = 1\right\},
+$$
+
+cu $\dim{\Theta} = c-1$, cel corespunzător ipotezei nule este 
+
+$$
+\Theta_0 = \left\{(p_1,p_2,\ldots, p_c) = (\pi_1,\pi_2,\ldots, \pi_c)\right\}
+$$
+
+cu $\dim{\Theta_0} = 0$ iar funcția de verosimilitate este 
+
+$$
+  L(p_{j},\,j = 1,\ldots,c\,;\,\mathbf{x}) = \mathbb{P}(N_{j} = n_{j}, \,j = 1,\ldots,c) = \frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} p_{j}^{n_{j}}.
+$$
+
+Observăm că 
+
+$$
+  \sup_{\theta\in\Theta_0}L(\theta|\mathbf{x}) = \mathbb{P}_{H_0}(N_1 = n_1, N_2 = n_2, \ldots, N_c = n_c) = \frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} \pi_{j}^{n_{j}}.
+$$ 
+
+
+Pentru a determina estimatorul de verosimilitate maximă pe $\Theta$ trebuie să rezolvăm problema de optimizare:
+
+$$
+  \left\{\begin{array}{ll}
+    \max_{\theta\in\Theta} \log L(\theta|\mathbf{x}) = \max \log{\left(\frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} p_{j}^{n_{j}}\right)}\\
+    \sum_{j = 1}^{c}p_{j} = 1
+  \end{array}\right.
+$$
+Cum logaritmul funcției de verosimilitate este 
+
+$$
+\log{\left(\frac{n!}{\prod_{j = 1}^{c} n_{j}!}\prod_{j = 1}^{c} p_{j}^{n_{j}}\right)} = \log\left(\frac{n!}{\prod_{j = 1}^{c} n_{j}!}\right) + \sum_{j = 1}^{c}n_{j}\log{p_j}
+$$
+
+iar $p_c = 1 - p_1 -\cdots p_{c-1}$, rezolvând ecuația de verosimilitate $\frac{\partial\log{L}}{\partial p_j} = 0$ deducem 
+
+$$
+\left\{\begin{array}{llll}
+  \frac{n_1}{p_1} - \frac{n_c}{1 - p_1 - p_2 -\cdots -p_{c-1}} = 0\\
+  \frac{n_2}{p_2} - \frac{n_c}{1 - p_1 - p_2 -\cdots -p_{c-1}} = 0\\
+  \cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\\
+  \frac{n_{c-1}}{p_{c-1}} - \frac{n_c}{1 - p_1 - p_2 -\cdots -p_{c-1}} = 0\\
+\end{array}\right.
+$$
+
+de unde 
+
+$$
+  \frac{n_1}{p_1} = \frac{n_2}{p_2} = \cdots = \frac{n_c}{p_c} = \frac{\sum_{j = 1}^{c}n_j}{\sum_{j = 1}^{c}p_j} = n,
+$$
+deci $\hat{p}_{j} = \frac{n_j}{n}$.
+
+
+Raportul de verosimilitate devine 
+
+$$
+\Lambda(\mathbf{x})=\frac{\sup_{\theta\in\Theta_0}L(\theta|\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta|\mathbf{x})} = \frac{\prod_{j = 1}^{c} \pi_{j}^{n_{j}}}{\prod_{j = 1}^{c} \left(\frac{n_{j}}{n}\right)^{n_{j}}} = \prod_{j = 1}^{c}\left(\frac{n\pi_{j}}{n_j}\right)^{n_{j}}
+$$
+
+și aplicând [Teorema lui Wilks](https://en.wikipedia.org/wiki/Likelihood-ratio_test) găsim
+
+$$
+  -2\log \Lambda(\mathbf{x}) = 2\sum_{j = 1}^{c} n_{j}\log\left(\frac{n_{j}}{n\times \pi_{j}}\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}}\chi^2(\underbrace{\dim{\Theta} - \dim{\Theta_0}}_{(c-1)-0}) = \chi^2(c-1).
+$$
+
+
+Prin urmare, regiunea critică a testului asimptotic de nivel $\alpha$ bazat pe raportul de verosimilitate este 
+
+$$
+  C = \left\{\mathbf{x} \,|\, -2\log \Lambda(\mathbf{x}) > \chi^2_{1-\alpha}(c-1)\right\}.
+$$
+
+O metodă alternativă este bazată pe statistica $\chi^2$ a lui Pearson, [@Pearson1900], care este dată de 
+
+$$
+  X^2 = \sum_{j = 1}^{c}\frac{(O_{j} - E_{j})^2}{E_{j}}
+$$
+
+unde $O_{j} = n_{j}$ sunt efectivele observate iar $E_{j}$ sunt efectivele pe care ne așteptăm să le observăm dacă ipoteza nulă ar fi adevărată (sub $H_0$, repartiția condiționată a lui $N_{j}$ la $\sum_{j = 1}^{c}N_{j} = n$ este $\mathcal{B}(n,p_{j})$),
+
+$$
+  E_{j} = \mathbb{E}_{H_0}[N_{j}] = n \pi_j
+$$
+
+ceea ce implică 
+
+$$
+  X^2 = \sum_{j = 1}^{c}\frac{\left(n_{j} - n \pi_j\right)^2}{n \pi_j}.
+$$
+
+Karl Pearson a arătat că această statistică este asimptotic repartizată 
+
+$$
+  X^2 = \sum_{j = 1}^{c}\frac{\left(n_{j} - n \pi_j\right)^2}{n \pi_j} \underset{n\to\infty}{\overset{d}{\longrightarrow}} \chi^2(c-1)
+$$
+
+prin urmare testul $\chi^2$ a lui Pearson de nivel $\alpha$, pentru ipotezele $H_0\,vs\,H_1$ conduce la aceeași regiune critică ca și testul bazat pe raportul de verosimilitate (cu toate acestea se poate arăta că statistica lui Pearson $X^2$ converge mai repede decât statistica $-2\log \Lambda(\mathbf{x})$, [@Agresti2012]).
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Un exercițiu constă în extragerea la întâmplare, de către o persoană, a unei cărți de joc dintr-un pachet amestecat în prealabil, notarea culorii acesteia (inimă roșie, inimă neagră, romb și treflă) și cărții în pachet tot aleator. Să presupunem că în urma efectuării exercițiului pe $200$ de persoane s-au obținut următoarele rezultate: 35 cărți de treflă, 51 cărți de romb, 64 cărți de inimă roșie și respectiv 50 cărți de inimă neagră. Ne propunem să testăm ipotezele 
+
+\begin{align*}
+  H_0&:\,\{\text{Cele patru culori sunt egal probabile}\}\\
+  H_1&:\,\{\text{Cel putin una din cele patru culori este diferita de 0.25}\}
+\end{align*}
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Observăm că dacă notăm cu $Y$ variabila discretă care ia valori în mulțimea $\{y_1,y_2,y_3,y_4\} = \{\clubsuit, \diamondsuit, \heartsuit, \spadesuit\}$ și cu $p_j = \mathbb{P}(Y = y_j)$ atunci ipotezele se scriu
+
+\begin{align*}
+  H_0&:\,\{\text{Cele patru culori sunt egal probabile}\} = \{(p_1,p_2,p_3,p_4) = (\pi_1, \pi_2, \pi_3, \pi_4) \,|\, \pi_j = 0.25\}\\
+  H_1&:\,\{\text{Cel putin una din cele patru culori este diferita de 0.25}\} = \{\exists j, \text{ astfel ca } p_j\neq 0.25\}
+\end{align*}
+
+Avem că tabelul efectivelor observate este 
+
+$$
+\begin{array}{c|c|c|c}
+  \clubsuit & \diamondsuit & \heartsuit & \spadesuit \\
+  \hline
+  O_1 & O_2 & O_3 & O_4
+\end{array} 
+=
+\begin{array}{c|c|c|c}
+  \clubsuit & \diamondsuit & \heartsuit & \spadesuit \\
+  \hline
+  35 & 51 & 64 & 50
+\end{array}
+$$
+
+care in R este 
+
+
+```r
+tab_observed = c(35, 51, 64, 50)
+```
+
+iar tabelul efectivelor pe care ne așteptăm să le observăm dacă ipoteza nulă este adevărată este 
+
+$$
+\begin{array}{c|c|c|c}
+  \clubsuit & \diamondsuit & \heartsuit & \spadesuit \\
+  \hline
+  E_1 = n\pi_1 & E_2 = n\pi_2 & E_3 = n\pi_3 & E_4 = n\pi_4
+\end{array} 
+=
+\begin{array}{c|c|c|c}
+  \clubsuit & \diamondsuit & \heartsuit & \spadesuit \\
+  \hline
+  50 & 50 & 50 & 50
+\end{array}
+$$
+
+care în R se scrie 
+
+
+```r
+n = 200
+prob = rep(0.25, 4)
+
+tab_expected = n*prob
+```
+
+Putem calcula acum statistica lui Pearson 
+
+$$
+  X^2 = \sum_{j = 1}^{c}\frac{(O_{j} - E_{j})^2}{E_{j}} = \sum_{j = 1}^{c}\frac{\left(n_{j} - n \pi_j\right)^2}{n \pi_j}
+$$
+
+
+care devine 
+
+
+```r
+alpha = 0.05
+X2 = sum((tab_observed - tab_expected)^2/tab_expected)
+
+# p - valoarea
+1 - pchisq(X2, df = 3)
+[1] 0.03774185
+```
+
+Acelați rezultat îl obținem și dacă aplicăm funcția `chisq.test()`
+
+
+```r
+chisq.test(tab_observed, p = prob)
+
+	Chi-squared test for given probabilities
+
+data:  tab_observed
+X-squared = 8.44, df = 3, p-value = 0.03774
+```
+
+Pentru testul bazat pe raportul de verosimilitate maximă avem 
+
+$$
+  -2\log \Lambda(\mathbf{x}) = -2\sum_{j = 1}^{c} n_{j}\log\left(\frac{n_{j}}{n\times \pi_{j}}\right)
+$$
+
+care devine 
+
+
+
+```r
+LRT = 2*sum(tab_observed*log(tab_observed/tab_expected))
+
+# p - valoarea
+1 - pchisq(LRT, df = 3)
+[1] 0.03431406
+```
+
+Ambele proceduri conduc la respingerea ipotezei nule pentru un prag de semnificație $\alpha = 0.05$.
+
+
+
+## Testul raportului de verosimilități, testul lui Wald și testul de scor 
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm două variabile aleatoare $X$ și $Y$ astfel încât repartiția condiționată a lui $Y|X = x$ este dată de 
+
+$$
+  f_{Y|X}(y|x;\beta) = \frac{1}{\beta + x}e^{-\frac{y}{\beta + x}}
+$$
+  
+Vom nota pentru simplitate cu $\beta_i = \frac{1}{\beta + x_i}$. Repartiția condiționată de mai sus este o repartiție exponențială, care la rândul ei poate fi privită ca un caz particular de repartiție Gamma, cu $\rho = 1$,
+
+$$
+  f_{Y|X}(y|x;\beta,\rho) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y^{\rho - 1}e^{-y\beta_i}
+$$
+  
+Vrem să testăm ipotezele
+
+$$
+  H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
+$$
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Începem prin a reaminti că funcția $\Gamma(p)$ este definită prin (vezi și [https://en.wikipedia.org/wiki/Gamma_function](https://en.wikipedia.org/wiki/Gamma_function)) 
+
+$$
+\Gamma(p) = \int_{0}^{\infty}t^{p-1}e^{-t}\,dt,\quad p>0,
+$$
+
+verifică relația de recurență 
+
+$$
+\Gamma(p) = (p-1)\Gamma(p-1)
+$$
+
+și $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$. Mai mult, dacă $n\in\mathbb{N}$ atunci $\Gamma(n+1) = n!$. 
+
+De asemenea, derivatele funcției $\Gamma$ sunt 
+
+$$
+\frac{d^k \Gamma(p)}{dp^k} = \int_{0}^{\infty}(\log(t))^kt^{p-1}e^{-t}\, dt
+$$
+
+iar primele două derivale ale funcției $\log(\Gamma(p))$, cunoscute și ca funcțiile [digamma](https://en.wikipedia.org/wiki/Digamma_function) și respectiv [trigamma](https://en.wikipedia.org/wiki/Trigamma_function), se notează cu $\Psi$ și respectiv $\Psi'$ și sunt definite prin
+
+\begin{align*}
+  \Psi &= \frac{\partial \log(\Gamma(p))}{\partial p} = \frac{\Gamma'}{\Gamma}\\
+  \Psi' &=\frac{\partial^2 \log(\Gamma(p))}{\partial p^2} = \frac{\Gamma\Gamma'' - \Gamma'^2}{\Gamma^2}
+\end{align*}
+
+Aceste funcții sunt implementate în R cu ajutorul funcțiilor `digamma()` și respectiv `trigamma()`.
+
+<img src="Sem_1_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" />
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $\{X_i, Y_i\}$ un eșantion de talie $n$ din populația $f_{Y|X}$ și scrieți logaritmul funcției de verosimilitate pentru modelul necondiționat și respectiv sub $H_0$ (modelul condiționat).
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Considerăm parametrul $\mathbf{\theta} = (\beta, \rho)^\intercal$ și avem 
+
+$$
+ f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y_i^{\rho - 1}e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+$$
+
+Cum logaritmul funcției de verosimilitate este 
+
+$$
+  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+$$
+
+deducem că, sub modelul necondiționat,  
+
+$$
+  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+$$
+
+Sub $H_0$, $\rho = 1$ avem  
+
+$$
+f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+$$
+
+și cum 
+
+$$
+  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+$$
+
+găsim că logaritmul funcției de verosimilitate, sub $H_0$, este 
+
+$$
+  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
+$$
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Scrieți vectorii gradient și matricele Hessiene pentru logaritmul funcției de verosimilitate asociat modelului necondiționat și respectiv modelului condiționat (sub $H_0$).
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Am văzut la punctul anterior că logaritmul funcției de verosimilitate pentru modelul necondiționat este 
+
+$$
+  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+$$
+
+Din definiția lui $\beta_i = \frac{1}{\beta+x_i}$ avem că 
+
+\begin{align*}
+  \frac{\partial\beta_i}{\partial \beta} &= \frac{\partial\left(\frac{1}{\beta+x_i}\right)}{\partial \beta} = -\frac{1}{(\beta + x_i)^2} = -\beta_i^2\\
+  \frac{\partial\log{\beta_i}}{\partial \beta} &= \frac{\partial(-\log{\beta+x_i})}{\partial \beta} = -\frac{1}{\beta + x_i} = -\beta_i
+\end{align*}
+
+iar $\frac{\partial\log{\Gamma(\rho)}}{\partial \rho} = \Psi(\rho)$. 
+
+Prin urmare găsim că 
+
+\begin{align*}
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta} &= -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho} &= \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
+\end{align*}
+
+astfel, vectorul gradient sub modelul necondiționat este 
+
+$$
+\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \begin{pmatrix}
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta}\\
+  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho}
+\end{pmatrix} 
+= 
+\begin{pmatrix}
+  -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
+  \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
+\end{pmatrix}.
+$$
+
+Pentru matricea Hessiană avem
+
+$$
+H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}\partial \mathbf{\theta}^\intercal} = \begin{pmatrix}
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} & \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho}\\
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} & \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2}
+\end{pmatrix}
+$$
+
+și cum 
+
+\begin{align*}
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} &= \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3\\
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho} &= \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} = - \sum_{i=1}^{n}\beta_i\\
+  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2} &= -n\Phi'(\rho)
+\end{align*}
+
+găsim 
+
+$$
+H(y|x;\mathbf{\theta}) = \begin{pmatrix}
+  \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3 & \sum_{i=1}^{n}\beta_i\\
+  \sum_{i=1}^{n}\beta_i & -n\Phi'(\rho)
+\end{pmatrix}.
+$$
+
+Sub ipoteza nulă $H_0$, avem $\rho = 1$ ($\mathbf{\theta} = \beta$) deci vectorul gradient (care acum e scalar) este
+
+$$
+\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \frac{\partial l(y|x;\beta)}{\partial \beta} = -\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2
+$$
+
+iar matricea Hessiană (care este tot scalară) este 
+
+$$
+H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
+$$
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Scrieți matricea informațională medie a lui Fisher pentru modelul necondiționat și respectiv modelul condiționat (sub $H_0$).
+
+</div>\EndKnitrBlock{rmdexercise}
+
 
 
 

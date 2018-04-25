@@ -1,0 +1,29 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Agresti(2012)]{Agresti2012}
+Alan Agresti.
+\newblock \emph{Categorical Data Analysis}.
+\newblock Wiley, 3 edition, 2012.
+\newblock URL
+  \url{http://gen.lib.rus.ec/book/index.php?md5=640290AD3F29427A30C48D483E420C96}.
+
+\bibitem[Merran~Evans(2000)]{Evans2000}
+Brian~Peacock Merran~Evans, Nicholas~Hastings.
+\newblock \emph{Statistical Distributions}.
+\newblock Wiley Series in Probability and Statistics. Wiley-Interscience, 2000.
+\newblock URL
+  \url{http://gen.lib.rus.ec/book/index.php?md5=EED460A11523229329F6DA85E3FF7936}.
+
+\bibitem[Pearson(1900)]{Pearson1900}
+K.~Pearson.
+\newblock On the criterion that a given system of deviations from the probable
+  in the case of a correlated system of variables is such that it can be
+  reasonably supposed to have arisen from random sampling.
+\newblock \emph{Philosophical Magazine}, 50:\penalty0 157--175, 1900.
+
+\end{thebibliography}
