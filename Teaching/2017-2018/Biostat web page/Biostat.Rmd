@@ -59,12 +59,17 @@ knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(DT)
 library(tidyverse)
+library(kableExtra)
 ```
 
 ## Informații generale
 ***
 
 Acest curs reprezintă o introducere în biostatistică și este adresat studenților de Master anul II de la Facultatea de Matematică și Informatică a Universității din București.  
+
+```{r, fig.align='center', out.width="80%", echo=FALSE}
+knitr::include_graphics("images/cell_phones.png")
+```
 
 ## Informații de contact 
 ***
@@ -121,46 +126,62 @@ readings_lab4 = "[Confidence intervals for proportions](labs/readings/agresti_ca
 
 lab5 = "[HTML](labs/Lab_5.html)"
 pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
-data_lab5 = ""
+data_lab5 = "[hcmv.data](labs/dataIn/hcmv.data)"
 readings_lab5 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
+readings_lab5_b = "[Teaching Statistics Theory Through Applications](labs/readings/Speed1999.pdf)"
+
+
+lab6 = "[HTML](labs/Lab_6.html)"
+pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
+data_lab6 = "[saltBP.txt](labs/dataIn/saltBP.txt), [galapagos.csv](labs/dataIn/galapagos.csv)"
+# data_lab6_b = "[galapagos.csv](labs/dataIn/galapagos.csv)"
+readings_lab6 = "[Species number and endemism](labs/readings/Species.pdf)"
 
 
 tabLab = data.frame(Nr = c(1, 
                            2, "",
                            3, "",
                            4,
-                           5),
+                           5, "",
+                           6),
                     Lab = c("Laborator 1", 
                             "Laborator 2", "", 
                             "Laborator 3", "",
                             "Laborator 4",
-                            "Laborator 5"),
+                            "Laborator 5", "",
+                            "Laborator 6"),
                     Htmls = c(lab1, 
                               lab2, "", 
                               lab3, "",
                               lab4,
-                              lab5),
+                              lab5, "",
+                              lab6),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2, "", 
                              pdf_lab3, "",
                              pdf_lab4,
-                             pdf_lab5),
+                             pdf_lab5, "",
+                             pdf_lab6),
                     data = c(data_lab1, 
                              data_lab2, "", 
                              data_lab3, "",
                              data_lab4,
-                             data_lab5), 
+                             data_lab5, "",
+                             data_lab6), 
                     readings = c(readings_lab1, 
                                  readings_lab2, readings_lab2_b,
                                  readings_lab3, readings_lab3_b,
                                  readings_lab4,
-                                 readings_lab5))
+                                 readings_lab5, readings_lab5_b,
+                                 readings_lab6))
 
 
-kable(tabLab, 
+kableExtra::kable(tabLab, "html",
       col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
       align = "cccccl", 
-      booktabs = TRUE)
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
 ```
 
 ## Proiect de laborator
