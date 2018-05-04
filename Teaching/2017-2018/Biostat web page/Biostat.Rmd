@@ -189,9 +189,9 @@ kableExtra::kable(tabLab, "html",
 Mai jos găsiți proiectul cursului de *Biostatistică*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
 
 ```{r echo = FALSE}
-proj1_503 = "-"
+proj1_503 = "[Exemple subiecte](projects/Example of Project subjects.docx)"
 dproj1_503 = "-"
-proj1data_503 = "-"
+proj1data_503 = "<span style = 'color: #cc0000;'>18 Mai</span>"
 
 
 tabProiecte = data.frame(Proiect = c(proj1_503), 
