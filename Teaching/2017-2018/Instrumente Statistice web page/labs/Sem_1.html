@@ -430,7 +430,7 @@ x = rgeom(n, theta) + 1
 # EVM gasit este 
 EVM = 1/mean(x)
 EVM
-[1] 0.3350084</code></pre>
+[1] 0.3448276</code></pre>
 <p>Vom crea o funcție care să calculeze estimatorul de verosimilitate maximă plecând de la logaritmul funcției de verosimilitate (îi determinăm maximul cu ajutorul funcției <code>optimize()</code>):</p>
 <pre class="r"><code>EVM_geom = function(theta, n, init = 0.5, seed = NULL){
   
@@ -453,11 +453,11 @@ EVM
 
 # exemple
 EVM_geom(0.345, 1000)
-[1] 0.330461
+[1] 0.3528512
 EVM_geom(0.478, 1000)
-[1] 0.4807692
+[1] 0.4796163
 EVM_geom(0.222, 1000)
-[1] 0.2290347</code></pre>
+[1] 0.2150219</code></pre>
 <p>În figura de mai jos este ilustrată proprietatea de consistență a estimatorului de verosimilitate maximă, pentru <span class="math inline">\(\theta = 0.345\)</span>:</p>
 <pre class="r"><code>theta = 0.345
 t = seq(100, 100000, 100)
@@ -723,7 +723,7 @@ logis.newton = newton(dl, ddl, median(x))</code></pre>
 \]</span></p>
 
 <div class="rmdexercise">
-<p>Fie <span class="math inline">\(\mathbf{\theta} = (c, \rho, \sigma^2)^\intercal\)</span> vectorul parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitae pentru o observație, <span class="math inline">\(y_1\)</span>.</p>
+<p>Fie <span class="math inline">\(\boldsymbol{\theta} = (c, \rho, \sigma^2)^\intercal\)</span> vectorul parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitae pentru o observație, <span class="math inline">\(y_1\)</span>.</p>
 </div>
 
 <p>Cum variabila aleatoare <span class="math inline">\(Y_1\)</span> are media și varianța date de</p>
@@ -732,11 +732,11 @@ logis.newton = newton(dl, ddl, median(x))</code></pre>
 \]</span></p>
 <p>iar <span class="math inline">\(\epsilon_t\)</span> sunt i.i.d. repartizate <span class="math inline">\(\mathcal{N}(0,\sigma^2)\)</span>, deducem că <span class="math inline">\(Y_1\)</span> este repartizată tot normal, cu <span class="math inline">\(Y_1\sim\mathcal{N}\left(\frac{c}{1-\rho}, \frac{\sigma^2}{1-\rho^2}\right)\)</span>. Astfel funcția de verosimilitate pentru <span class="math inline">\(y_1\)</span> este</p>
 <p><span class="math display">\[
-  L(\mathbf{\theta};y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}
+  L(\boldsymbol{\theta};y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}
 \]</span></p>
 <p>iar logaritmul funcției de verosimilitate pentru <span class="math inline">\(y_1\)</span> este</p>
 <p><span class="math display">\[
-  l(\mathbf{\theta};y_1) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}.
+  l(\boldsymbol{\theta};y_1) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}.
 \]</span></p>
 
 <div class="rmdexercise">
@@ -753,11 +753,11 @@ logis.newton = newton(dl, ddl, median(x))</code></pre>
 \]</span></p>
 <p>de unde funcția de verosimilitate (condiționată) pentru <span class="math inline">\(y_2\)</span> este</p>
 <p><span class="math display">\[
-  L(\mathbf{\theta};y_2|y_1) = f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}
+  L(\boldsymbol{\theta};y_2|y_1) = f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}
 \]</span></p>
 <p>iar logaritmul funcției de verosimilitate (condiționată) pentru <span class="math inline">\(y_2\)</span> este</p>
 <p><span class="math display">\[
-  l(\mathbf{\theta};y_2|y_1) = \log f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta}) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\sigma^2\right)-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
+  l(\boldsymbol{\theta};y_2|y_1) = \log f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta}) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\sigma^2\right)-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
 \]</span></p>
 
 <div class="rmdexercise">
@@ -770,47 +770,47 @@ logis.newton = newton(dl, ddl, median(x))</code></pre>
 \]</span></p>
 <p>prin urmare funcția de verosimilitate (completă) pentru eșantionul <span class="math inline">\(\{y_1, y_2\}\)</span> este</p>
 <p><span class="math display">\[
-  L(\mathbf{\theta};y_1,y_2) = f_{(Y_1,Y_2)}(y_1,y_2;\mathbf{\theta}) = f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta})f_{Y_1}(y_1;\mathbf{\theta})
+  L(\boldsymbol{\theta};y_1,y_2) = f_{(Y_1,Y_2)}(y_1,y_2;\boldsymbol{\theta}) = f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta})f_{Y_1}(y_1;\boldsymbol{\theta})
 \]</span></p>
 <p>sau echivalent</p>
 <p><span class="math display">\[
-  L(\mathbf{\theta};y_1,y_2) = L(\mathbf{\theta};y_2|y_1)L(\mathbf{\theta};y_1) = \frac{\sqrt{1-\rho^2}}{2 \pi\sigma^2}e^{-\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}.
+  L(\boldsymbol{\theta};y_1,y_2) = L(\boldsymbol{\theta};y_2|y_1)L(\boldsymbol{\theta};y_1) = \frac{\sqrt{1-\rho^2}}{2 \pi\sigma^2}e^{-\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}.
 \]</span></p>
 <p>În mod similar, logaritmul funcției de verosimilitate este</p>
 <p><span class="math display">\[
-  l(\mathbf{\theta};y_1,y_2) = l(\mathbf{\theta};y_2|y_1)+ l(\mathbf{\theta};y_1) = \frac{1}{2}\log(1-\rho^2) - \log(2 \pi\sigma^2) -\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
+  l(\boldsymbol{\theta};y_1,y_2) = l(\boldsymbol{\theta};y_2|y_1)+ l(\boldsymbol{\theta};y_1) = \frac{1}{2}\log(1-\rho^2) - \log(2 \pi\sigma^2) -\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
 \]</span> Observăm că densitatea lui <span class="math inline">\(Y_3\)</span> condiționată la primele două variabile este</p>
 <p><span class="math display">\[
-  f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\mathbf{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_3 - c -\rho y_2)^2}{\sigma^2}}
+  f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\boldsymbol{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_3 - c -\rho y_2)^2}{\sigma^2}}
 \]</span></p>
 <p>de unde</p>
 <span class="math display">\[\begin{align*}
-  f_{Y_3, Y_2, Y_1}(y_3, y_2, y_1;\mathbf{\theta}) &amp;= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\mathbf{\theta})f_{Y_2,Y_1}(y_2, y_1;\mathbf{\theta})\\
-  &amp;= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\mathbf{\theta})f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta})f_{Y_1}(y_1;\mathbf{\theta}).
+  f_{Y_3, Y_2, Y_1}(y_3, y_2, y_1;\boldsymbol{\theta}) &amp;= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\boldsymbol{\theta})f_{Y_2,Y_1}(y_2, y_1;\boldsymbol{\theta})\\
+  &amp;= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\boldsymbol{\theta})f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta})f_{Y_1}(y_1;\boldsymbol{\theta}).
 \end{align*}\]</span>
 <p>În general, valoarea lui <span class="math inline">\(Y_1, Y_2, \ldots, Y_{t-1}\)</span> influențează valoarea lui <span class="math inline">\(Y_{t}\)</span> doar prin valoarea lui <span class="math inline">\(Y_{t-1}\)</span> ceea ce arată că densitatea lui <span class="math inline">\(Y_{t}\)</span> condiționată la celelalte <span class="math inline">\(t-1\)</span> variabile este</p>
 <p><span class="math display">\[
-  f_{Y_t|Y_{t-1}, Y_{t-2},\ldots, Y_1}(y_t|y_{t-1}, y_{t-2},\ldots, y_1;\mathbf{\theta}) = f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\mathbf{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_t - c -\rho y_{t-1})^2}{\sigma^2}}.
+  f_{Y_t|Y_{t-1}, Y_{t-2},\ldots, Y_1}(y_t|y_{t-1}, y_{t-2},\ldots, y_1;\boldsymbol{\theta}) = f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\boldsymbol{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_t - c -\rho y_{t-1})^2}{\sigma^2}}.
 \]</span></p>
 <p>Astfel, pentru un eșantion <span class="math inline">\(y_1,y_2,\ldots,y_T\)</span> de talie <span class="math inline">\(T\)</span> avem</p>
 <span class="math display">\[\begin{align*}
- L(\mathbf{\theta};y_1,y_2,\ldots,y_T) &amp;= L(\mathbf{\theta};y_1)\times\prod_{t = 2}^{T}L(\mathbf{\theta};y_t|y_{t-1})\\
- l(\mathbf{\theta};y_1,y_2,\ldots,y_T) &amp;= l(\mathbf{\theta};y_1)+\sum_{t = 2}^{T}l(\mathbf{\theta};y_t|y_{t-1})
+ L(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &amp;= L(\boldsymbol{\theta};y_1)\times\prod_{t = 2}^{T}L(\boldsymbol{\theta};y_t|y_{t-1})\\
+ l(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &amp;= l(\boldsymbol{\theta};y_1)+\sum_{t = 2}^{T}l(\boldsymbol{\theta};y_t|y_{t-1})
 \end{align*}\]</span>
 <p>ceea ce conduce la</p>
 <span class="math display">\[\begin{align*}
- L(\mathbf{\theta};y_1,y_2,\ldots,y_T) &amp;= \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}\times\prod_{t = 2}^{T}\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_t - c-\rho y_{t-1}\right)^2}{\sigma^2}}
+ L(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &amp;= \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}\times\prod_{t = 2}^{T}\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_t - c-\rho y_{t-1}\right)^2}{\sigma^2}}
 \end{align*}\]</span>
 <p>și respectiv la</p>
 <span class="math display">\[\begin{align*}
- l(\mathbf{\theta};y_1,y_2,\ldots,y_T) &amp;= -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}\\
+ l(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &amp;= -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}\\
        &amp;\quad +\sum_{t = 2}^{T}\left(-\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\sigma^2\right)-\frac{1}{2}\frac{\left(y_t - c-\rho y_{t-1}\right)^2}{\sigma^2}\right)\\
        &amp;= -\frac{T}{2}\log(2\pi) -\frac{T}{2}\log(\sigma^2) + \frac{1}{2}\log(1-\rho^2) +\\
        &amp;\quad+\frac{1}{2\sigma^2}\left[(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2 + \sum_{t = 2}^{T}\left(y_t - c-\rho y_{t-1}\right)^2\right]
 \end{align*}\]</span>
 
 <div class="rmdexercise">
-<p>Funcția de verosimilitate este o funcție neliniară în parametrii <span class="math inline">\(\mathbf{\theta}\)</span>, prin urmare estimatorul de verosimilitate maximă <span class="math inline">\(\hat{\mathbf{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal\)</span> va fi determinat prin metode numerice. Scrieți o funcție în R care să permită generarea unui eșantion dintr-un proces <span class="math inline">\(AR(1)\)</span>. Pentru <span class="math inline">\(c = 1\)</span>, <span class="math inline">\(\rho = 0.5\)</span> și <span class="math inline">\(\sigma^2 = 1\)</span> generați un eșantion de talie <span class="math inline">\(T = 1000\)</span> și calculați estimatorul de verosimilitate maximă.</p>
+<p>Funcția de verosimilitate este o funcție neliniară în parametrii <span class="math inline">\(\boldsymbol{\theta}\)</span>, prin urmare estimatorul de verosimilitate maximă <span class="math inline">\(\hat{\boldsymbol{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal\)</span> va fi determinat prin metode numerice. Scrieți o funcție în R care să permită generarea unui eșantion dintr-un proces <span class="math inline">\(AR(1)\)</span>. Pentru <span class="math inline">\(c = 1\)</span>, <span class="math inline">\(\rho = 0.5\)</span> și <span class="math inline">\(\sigma^2 = 1\)</span> generați un eșantion de talie <span class="math inline">\(T = 1000\)</span> și calculați estimatorul de verosimilitate maximă.</p>
 </div>
 
 <p>Avem următoarea funcție care generează procesul autoregresiv <span class="math inline">\(AR(1)\)</span>:</p>
@@ -920,20 +920,20 @@ sigma
 <p>care sunt apropiate de valorile reale.</p>
 
 <div class="rmdexercise">
-<p>Acum considerăm că prima observație <span class="math inline">\(y_1\)</span> este dată (deterministă) și avem <span class="math inline">\(f_{Y_1}(y_1;\mathbf{\theta})\)</span>. Scrieți logaritmul funcției de verosimilitate a modelului <span class="math inline">\(AR(1)\)</span> pentru eșantionul <span class="math inline">\(y_1,y_2,\ldots,y_T\)</span>.</p>
+<p>Acum considerăm că prima observație <span class="math inline">\(y_1\)</span> este dată (deterministă) și avem <span class="math inline">\(f_{Y_1}(y_1;\boldsymbol{\theta})\)</span>. Scrieți logaritmul funcției de verosimilitate a modelului <span class="math inline">\(AR(1)\)</span> pentru eșantionul <span class="math inline">\(y_1,y_2,\ldots,y_T\)</span>.</p>
 </div>
 
 <p>Funcția de verosimilitate condiționată este definită prin</p>
 <p><span class="math display">\[
-  L(\mathbf{\theta};y_2,\ldots, y_T|y_1) = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}, Y_1 = y_1}(y_t|y_{t-1}, y_1;\mathbf{\theta})\times \underbrace{f_{Y_1}(y_1;\mathbf{\theta})}_{ = 1} = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\mathbf{\theta})
+  L(\boldsymbol{\theta};y_2,\ldots, y_T|y_1) = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}, Y_1 = y_1}(y_t|y_{t-1}, y_1;\boldsymbol{\theta})\times \underbrace{f_{Y_1}(y_1;\boldsymbol{\theta})}_{ = 1} = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\boldsymbol{\theta})
 \]</span></p>
 <p>iar logaritmul funcției de verosimilitate condiționtă devine</p>
 <p><span class="math display">\[
-  l(\mathbf{\theta};y_2,\ldots, y_T|y_1) = \sum_{t = 2}^{T}l_t(\mathbf{\theta};y_t|y_{t-1})
+  l(\boldsymbol{\theta};y_2,\ldots, y_T|y_1) = \sum_{t = 2}^{T}l_t(\boldsymbol{\theta};y_t|y_{t-1})
 \]</span></p>
-<p>cu <span class="math inline">\(l_t(\mathbf{\theta};y_t|y_{t-1}) = \log(f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\mathbf{\theta}))\)</span>. Găsim că</p>
+<p>cu <span class="math inline">\(l_t(\boldsymbol{\theta};y_t|y_{t-1}) = \log(f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\boldsymbol{\theta}))\)</span>. Găsim că</p>
 <p><span class="math display">\[
-  l(\mathbf{\theta};y_2,\ldots, y_T|y_1) = -\frac{T-1}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{t = 2}^{T}(y_t - c - \rho y_{t-1})^2.
+  l(\boldsymbol{\theta};y_2,\ldots, y_T|y_1) = -\frac{T-1}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{t = 2}^{T}(y_t - c - \rho y_{t-1})^2.
 \]</span></p>
 </div>
 </div>
@@ -955,7 +955,13 @@ sigma
 </div>
 
 <p>Pentru mai multe detalii privind repartiția Rayleigh se poate consulta pagina <a href="https://en.wikipedia.org/wiki/Rayleigh_distribution" class="uri">https://en.wikipedia.org/wiki/Rayleigh_distribution</a> sau monografia <span class="citation">(Merran Evans 2000)</span>. Densitatea de repartiție și funcția de repartiție a repartiției Rayleigh sunt ilustrate mai jos (pentru a folosi în R funcțiile: <code>rrayleigh</code>, <code>drayleigh</code>, <code>prayleigh</code> și respectiv <code>qrayleigh</code> trebuie instalat pachetul <code>VGAM</code>):</p>
-<p><img src="data:image/png;base64,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" width="90%" style="display: block; margin: auto;" /></p>
+<pre><code>Error in library(VGAM): there is no package called 'VGAM'
+Error in drayleigh(x, scale = pars[1]): could not find function &quot;drayleigh&quot;
+Error in drayleigh(x, scale = scale): could not find function &quot;drayleigh&quot;
+Error in strwidth(legend, units = &quot;user&quot;, cex = cex, font = text.font): plot.new has not been called yet
+Error in prayleigh(x, scale = pars[1]): could not find function &quot;prayleigh&quot;
+Error in prayleigh(x, scale = scale): could not find function &quot;prayleigh&quot;
+Error in strwidth(legend, units = &quot;user&quot;, cex = cex, font = text.font): plot.new has not been called yet</code></pre>
 <p>În cele ce urmează, ne propunem să răspundem la o serie de întrebări:</p>
 
 <div class="rmdexercise">
@@ -1241,7 +1247,8 @@ sigma
 <p>Putem modela o observație <span class="math inline">\(Y_k\)</span> dintr-o variabilă discretă cu <span class="math inline">\(c\)</span> categorii cu ajutorul unui vector elemente de <span class="math inline">\(\{0,1\}\)</span>, <span class="math inline">\((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)})\)</span>, pentru care componenta <span class="math inline">\(j\)</span> ia valoarea <span class="math inline">\(1\)</span> dacă <span class="math inline">\(Y_k = y_j\)</span> și <span class="math inline">\(0\)</span> altfel. Funcția de masă a <span class="math inline">\(c\)</span>-uplului este</p>
 <p><span class="math display">\[
 \mathbb{P}((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1,x_2,\ldots,x_c)) = p_1^{x_1}p_2^{x_2}\cdots p_c^{x_c}
-\]</span> unde <span class="math inline">\(x_j\in\{0,1\}\)</span> cu <span class="math inline">\(\sum_{j = 1}^{c}x_j = 1\)</span>. Pentru un eșantion de talie <span class="math inline">\(n\)</span>, <span class="math inline">\(\{(X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}),\, k = 1,2,\ldots, n\}\)</span> avem</p>
+\]</span></p>
+<p>unde <span class="math inline">\(x_j\in\{0,1\}\)</span> cu <span class="math inline">\(\sum_{j = 1}^{c}x_j = 1\)</span>. Pentru un eșantion de talie <span class="math inline">\(n\)</span>, <span class="math inline">\(\{(X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}),\, k = 1,2,\ldots, n\}\)</span> avem</p>
 <p><span class="math display">\[
 \mathbb{P}\left((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1^{(k)},x_2^{(k)},\ldots,x_c^{(k)}), \,k = 1,2,\ldots,n\right) = \prod_{k=1}^{n}p_1^{x_1^{(k)}}p_2^{x_2^{(k)}}\cdots p_c^{x_c^{(k)}} = p_1^{n_1}p_2^{n_2}\cdots p_c^{n_c}
 \]</span></p>
@@ -1430,8 +1437,33 @@ X-squared = 8.44, df = 3, p-value = 0.03774</code></pre>
 [1] 0.03431406</code></pre>
 <p>Ambele proceduri conduc la respingerea ipotezei nule pentru un prag de semnificație <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 </div>
-<div id="testul-raportului-de-verosimilitati-testul-lui-wald-si-testul-de-scor" class="section level2">
-<h2><span class="header-section-number">2.3</span> Testul raportului de verosimilități, testul lui Wald și testul de scor</h2>
+<div id="testul-raportului-de-verosimilitati-si-testul-lui-wald" class="section level2">
+<h2><span class="header-section-number">2.3</span> Testul raportului de verosimilități și testul lui Wald</h2>
+<p>Reamintim că statisticile de test corespunzătoare testului bazat pe raportul de verosimilități și respectiv pentru testul lui Wald atunci când testăm ipotezele:</p>
+<p><span class="math display">\[
+H_0:\, \underbrace{c(\boldsymbol{\theta})}_{p\times 1} = \boldsymbol{0}_{p\times 1} \quad vs\quad H_1:\, c(\boldsymbol{\theta})\neq \boldsymbol{0}_{p\times 1}
+\]</span></p>
+<p>unde <span class="math inline">\(c:\mathbb{R}^k\to\mathbb{R}^p\)</span> este o funcție vectorială</p>
+<p><span class="math display">\[
+c(\boldsymbol{\theta}) = \begin{pmatrix}c_1(\boldsymbol{\theta}) &amp; c_2(\boldsymbol{\theta}) &amp;\cdots &amp; c_p(\boldsymbol{\theta})\end{pmatrix}^\intercal
+\]</span></p>
+<p>cu proprietatea că <span class="math inline">\(c_i(\boldsymbol{\theta})\)</span> sunt diferențiabile și nu avem restricții redundante, cu alte cuvinte rangul matricei <span class="math inline">\(\frac{\partial c(\boldsymbol{\theta})}{\partial \boldsymbol{\theta}^\intercal}\)</span> este egal cu <span class="math inline">\(p\)</span>, <span class="math inline">\(\forall\theta\in\Theta\)</span>, sunt date de</p>
+<ul>
+<li>statistica de test pentru testul raportului de verosimilități (Wilks)</li>
+</ul>
+<p><span class="math display">\[
+LRT = -2\log{\Lambda(\mathbf{x})} = -2\log{\frac{\sup_{\theta\in\Theta_0}L(\theta|\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta|\mathbf{x})}} = -2\left(l(\hat{\boldsymbol{\theta}}_{H_0};\mathbf{x}) - l(\hat{\boldsymbol{\theta}};\mathbf{x}) \right)
+\]</span></p>
+<ul>
+<li>statistica de test pentru testul lui Wald</li>
+</ul>
+<p><span class="math display">\[
+W = c(\hat{\boldsymbol{\theta}})^\intercal\left(\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}}) \hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}})^\intercal\right)^{-1}c(\hat{\boldsymbol{\theta}})
+\]</span></p>
+<p>unde <span class="math inline">\(\hat{\mathbb{V}}\)</span> este estimatorul matricei de varianță-covarianță asimptotică.</p>
+<p>Statisticile de test corespunzătoare celor două teste sunt ilustrate (pentru modelul binomial) în figura de mai jos:</p>
+<p><img src="data:image/png;base64,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" width="90%" style="display: block; margin: auto;" /></p>
+<p>Exercițiul din această secțiune este preluat din <span class="citation">(Greene 2011)</span>.</p>
 
 <div class="rmdexercise">
 <p>Considerăm două variabile aleatoare <span class="math inline">\(X\)</span> și <span class="math inline">\(Y\)</span> astfel încât repartiția condiționată a lui <span class="math inline">\(Y|X = x\)</span> este dată de</p>
@@ -1473,29 +1505,29 @@ X-squared = 8.44, df = 3, p-value = 0.03774</code></pre>
 <p>Fie <span class="math inline">\(\{X_i, Y_i\}\)</span> un eșantion de talie <span class="math inline">\(n\)</span> din populația <span class="math inline">\(f_{Y|X}\)</span> și scrieți logaritmul funcției de verosimilitate pentru modelul necondiționat și respectiv sub <span class="math inline">\(H_0\)</span> (modelul condiționat).</p>
 </div>
 
-<p>Considerăm parametrul <span class="math inline">\(\mathbf{\theta} = (\beta, \rho)^\intercal\)</span> și avem</p>
+<p>Considerăm parametrul <span class="math inline">\(\boldsymbol{\theta} = (\beta, \rho)^\intercal\)</span> și avem</p>
 <p><span class="math display">\[
- f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y_i^{\rho - 1}e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+ f_{Y_i|X_i}(y|x;\boldsymbol{\theta}) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y_i^{\rho - 1}e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
 \]</span></p>
 <p>Cum logaritmul funcției de verosimilitate este</p>
 <p><span class="math display">\[
-  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+  l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\boldsymbol{\theta})}
 \]</span></p>
 <p>deducem că, sub modelul necondiționat,</p>
 <p><span class="math display">\[
-  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+  l(y|x;\boldsymbol{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
 \]</span></p>
 <p>Sub <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\rho = 1\)</span> avem</p>
 <p><span class="math display">\[
-f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+f_{Y_i|X_i}(y|x;\boldsymbol{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
 \]</span></p>
 <p>și cum</p>
 <p><span class="math display">\[
-  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+  l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\boldsymbol{\theta})}
 \]</span></p>
 <p>găsim că logaritmul funcției de verosimilitate, sub <span class="math inline">\(H_0\)</span>, este</p>
 <p><span class="math display">\[
-  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
+  l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
 \]</span></p>
 
 <div class="rmdexercise">
@@ -1504,7 +1536,7 @@ f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad 
 
 <p>Am văzut la punctul anterior că logaritmul funcției de verosimilitate pentru modelul necondiționat este</p>
 <p><span class="math display">\[
-  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+  l(y|x;\boldsymbol{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
 \]</span></p>
 <p>Din definiția lui <span class="math inline">\(\beta_i = \frac{1}{\beta+x_i}\)</span> avem că</p>
 <span class="math display">\[\begin{align*}
@@ -1514,54 +1546,426 @@ f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad 
 <p>iar <span class="math inline">\(\frac{\partial\log{\Gamma(\rho)}}{\partial \rho} = \Psi(\rho)\)</span>.</p>
 <p>Prin urmare găsim că</p>
 <span class="math display">\[\begin{align*}
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta} &amp;= -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho} &amp;= \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \beta} &amp;= -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \rho} &amp;= \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
 \end{align*}\]</span>
 <p>astfel, vectorul gradient sub modelul necondiționat este</p>
 <p><span class="math display">\[
-\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \begin{pmatrix}
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta}\\
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho}
-\end{pmatrix} 
-= 
-\begin{pmatrix}
+\frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \boldsymbol{\theta}} = \begin{pmatrix}
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \beta}\\
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \rho}
+\end{pmatrix} = \begin{pmatrix}
   -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
   \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
-\end{pmatrix}.
+\end{pmatrix}
 \]</span></p>
 <p>Pentru matricea Hessiană avem</p>
 <p><span class="math display">\[
-H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}\partial \mathbf{\theta}^\intercal} = \begin{pmatrix}
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} &amp; \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho}\\
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} &amp; \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2}
+H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal} = \begin{pmatrix}
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta^2} &amp; \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta\partial \rho}\\
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho\partial \beta} &amp; \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho^2}
 \end{pmatrix}
 \]</span></p>
 <p>și cum</p>
 <span class="math display">\[\begin{align*}
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} &amp;= \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3\\
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho} &amp;= \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} = - \sum_{i=1}^{n}\beta_i\\
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2} &amp;= -n\Phi'(\rho)
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta^2} &amp;= \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3\\
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta\partial \rho} &amp;= \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho\partial \beta} = - \sum_{i=1}^{n}\beta_i\\
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho^2} &amp;= -n\Psi'(\rho)
 \end{align*}\]</span>
 <p>găsim</p>
 <p><span class="math display">\[
-H(y|x;\mathbf{\theta}) = \begin{pmatrix}
-  \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3 &amp; \sum_{i=1}^{n}\beta_i\\
-  \sum_{i=1}^{n}\beta_i &amp; -n\Phi'(\rho)
-\end{pmatrix}.
+H(y|x;\boldsymbol{\theta}) = 
+\begin{pmatrix}
+  \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3 &amp; -\sum_{i=1}^{n}\beta_i \\
+  -\sum_{i=1}^{n}\beta_i &amp; -n\Psi'(\rho)
+\end{pmatrix}
 \]</span></p>
-<p>Sub ipoteza nulă <span class="math inline">\(H_0\)</span>, avem <span class="math inline">\(\rho = 1\)</span> (<span class="math inline">\(\mathbf{\theta} = \beta\)</span>) deci vectorul gradient (care acum e scalar) este</p>
+<p>Sub ipoteza nulă <span class="math inline">\(H_0\)</span>, avem <span class="math inline">\(\rho = 1\)</span> (<span class="math inline">\(\boldsymbol{\theta} = \beta\)</span>) deci vectorul gradient (care acum e scalar) este</p>
 <p><span class="math display">\[
-\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \frac{\partial l(y|x;\beta)}{\partial \beta} = -\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2
+\frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \boldsymbol{\theta}} = \frac{\partial l(y|x;\beta)}{\partial \beta} = -\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2
 \]</span></p>
 <p>iar matricea Hessiană (care este tot scalară) este</p>
 <p><span class="math display">\[
-H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
+H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
 \]</span></p>
 
 <div class="rmdexercise">
 <p>Scrieți matricea informațională medie a lui Fisher pentru modelul necondiționat și respectiv modelul condiționat (sub <span class="math inline">\(H_0\)</span>).</p>
 </div>
 
+<p>Sub modelul necondiționat avem că matricea Hessiană (stocastică) pentru o observație <span class="math inline">\(Y_i|x_i\)</span> este</p>
+<p><span class="math display">\[
+H_i(Y_i|x_i;\boldsymbol{\theta}) = 
+  \begin{pmatrix}
+    \rho\beta_i^2 - 2Y_i\beta_i^3 &amp; -\beta_i\\ 
+    -\beta_i &amp; -\Psi'(\rho)
+  \end{pmatrix}
+\]</span></p>
+<p>iar matricea informațională medie a lui Fisher pentru o observație se scrie</p>
+<p><span class="math display">\[
+  I(\boldsymbol{\theta}) = \mathbb{E}_{X}[I_i(\boldsymbol{\theta})] = \mathbb{E}_{X}[\mathbb{E}_{\boldsymbol{\theta}}[-H_i(Y_i|X_i;\boldsymbol{\theta})]] = \mathbb{E}_{X}\left[\begin{pmatrix}
+    -\rho\beta_i^2 + 2\mathbb{E}_{\boldsymbol{\theta}}[Y_i]\beta_i^3 &amp; \beta_i\\ 
+    \beta_i &amp; \Psi'(\rho)
+  \end{pmatrix}\right]
+\]</span></p>
+<p>deoarece <span class="math inline">\(\beta_i = \frac{1}{\beta+X_i}\)</span> depinde de variabila aleatoare <span class="math inline">\(X_i\)</span>.</p>
+<p>Cum pentru funcția de scor calculată pentru o observație are loc <span class="math inline">\(\mathbb{E}_{\boldsymbol{\theta}}[s(Y_i|x_i;\boldsymbol{\theta})] = \mathbf{0}_{2\times 1}\)</span> deducem că</p>
+<p><span class="math display">\[
+\mathbb{E}_{\boldsymbol{\theta}}[s(Y_i|x_i;\boldsymbol{\theta})] = \mathbb{E}_{\boldsymbol{\theta}}\left[\begin{pmatrix}
+  -\rho\beta_i + Y_i\beta_i^2\\ 
+    \log{\beta_i} - \Psi(\rho) + \log{Y_i}
+\end{pmatrix}\right] = \mathbf{0}_{2\times 1}
+\]</span> de unde <span class="math inline">\(\mathbb{E}_{\boldsymbol{\theta}}[Y_i] = \frac{\rho}{\beta_i}\)</span> (media <span class="math inline">\(\mathbb{E}_{\boldsymbol{\theta}}\)</span> reprezintă media în raport cu repartiția condiționată <span class="math inline">\(Y|X = x\)</span>). Înlocuind în expresia matricei informaționale medii găsim că</p>
+<p><span class="math display">\[
+  I(\boldsymbol{\theta}) = \mathbb{E}_{X}\left[\begin{pmatrix}
+    \rho\beta_i^2  &amp; \beta_i\\ 
+    \beta_i &amp; \Psi'(\rho)
+  \end{pmatrix}\right].
+\]</span></p>
+<p>Pentru modelul condiționat (sub <span class="math inline">\(H_0:\rho = 1\)</span>, <span class="math inline">\(\boldsymbol{\theta} = \beta\)</span>) avem</p>
+<span class="math display">\[\begin{align*}
+  H_i(Y_i|x_i;\boldsymbol{\theta}) &amp;= H_i(Y_i|x_i;\beta) = \beta_i^2 - 2Y_i\beta_i^3\\
+  \mathbb{E}_{\boldsymbol{\theta}}[s(Y_i|x_i;\boldsymbol{\theta})] &amp;= \mathbb{E}_{\beta}[s(Y_i|x_i;\beta)] = \mathbb{E}_{\beta}[-\beta_i + Y_i\beta_i^2] = 0
+\end{align*}\]</span>
+<p>ceea ce conduce la <span class="math inline">\(\mathbb{E}_{\beta}[Y_i] = \frac{1}{\beta_i}\)</span>. Informația medie a lui Fisher pentru o observație sub modelul condiționat revine la</p>
+<p><span class="math display">\[
+I(\boldsymbol{\theta}) = I(\beta) = \mathbb{E}_{X}[\mathbb{E}_{\beta}[-H_i(Y_i|X_i;\beta)]] = \mathbb{E}_{X}[-\beta_i^2 + 2\mathbb{E}_{\beta}[Y_i]\beta_i^3] = \mathbb{E}_{X}[\beta_i^2].
+\]</span></p>
+
+<div class="rmdexercise">
+<p>Fie <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span> estimatorul de verosimilitate maximă pentru <span class="math inline">\(\boldsymbol{\theta} = (\beta, \rho)^\intercal\)</span> pe <span class="math inline">\(\Theta\)</span> și <span class="math inline">\(\hat{\boldsymbol{\theta}}_{H_0}\)</span> estimatorul de verosimilitate maximă pentru <span class="math inline">\(\beta\)</span> pe <span class="math inline">\(\Theta_0 = \{\boldsymbol{\theta} = (\beta, \rho)^\intercal\,|\,\rho = 1\}\)</span>. Determinați repartițiile asimptotice ale lui <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span> și <span class="math inline">\(\hat{\boldsymbol{\theta}}_{H_0}\)</span>.</p>
+</div>
+
+<p>Am văzut că, atunci când sunt îndeplinite o serie de condiții de regularitate <span class="citation">(Greene 2011, Capitolul 14)</span>, repartiția asimptotică a lui <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span> pentru modelul necondiționat verifică</p>
+<p><span class="math display">\[
+\sqrt{n}\left(\hat{\boldsymbol{\theta}} - \boldsymbol{\theta}\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}} \mathcal{N}\left(0, I^{-1}(\boldsymbol{\theta})\right)
+\]</span></p>
+<p>unde <span class="math inline">\(\boldsymbol{\theta}\)</span> reprezintă valoarea reală a parametrului (pe <span class="math inline">\(\Theta\)</span>) iar</p>
+<p><span class="math display">\[
+  I(\boldsymbol{\theta}) = \mathbb{E}_{X}\left[\begin{pmatrix}
+    \rho\beta_i^2  &amp; \beta_i\\ 
+    \beta_i &amp; \Psi'(\rho)
+  \end{pmatrix}\right].
+\]</span></p>
+<p>Echivalent, putem scrie</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\theta}}\approx \mathcal{N}\left(\boldsymbol{\theta}, \frac{1}{n}I^{-1}(\boldsymbol{\theta})\right)
+\]</span></p>
+<p>Sub <span class="math inline">\(H_0\)</span> și sub aceleași condiții de regularitate avem</p>
+<p><span class="math display">\[
+\sqrt{n}\left(\hat{\boldsymbol{\theta}}_{H_0} - \boldsymbol{\theta}_0\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}} \mathcal{N}\left(0, I^{-1}(\boldsymbol{\theta}_0)\right)
+\]</span></p>
+<p>unde <span class="math inline">\(\boldsymbol{\theta}_0 = \beta_0\)</span> reprezintă valoarea reală a parametrului sub modelul condiționat iar matricea informațională pentru o observație este</p>
+<p><span class="math display">\[
+I(\boldsymbol{\theta}_0) = \mathbb{E}_{X}(\beta_i^2).
+\]</span></p>
+<p>De asemenea putem scrie</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\theta}}_{H_0}\approx \mathcal{N}\left(\boldsymbol{\theta}_0, \frac{1}{n}I^{-1}(\boldsymbol{\theta}_0)\right)
+\]</span></p>
+
+<div class="rmdexercise">
+<p>Calculați cei trei estimatori pentru matricea informațională medie a lui Fisher pentru modelul necondiționat și pentru modelul condiționat.</p>
+</div>
+
+<p>Avem următorii estimatori pentru matricea informațională medie a lui Fisher:</p>
+<span class="math display">\[\begin{align*}
+  \hat{I}_{A}(\hat{\boldsymbol{\theta}}) &amp;= \frac{1}{n}\sum_{i=1}^{n}\hat{I}_{i}(\hat{\boldsymbol{\theta}})\\
+  \hat{I}_{B}(\hat{\boldsymbol{\theta}}) &amp;= \frac{1}{n}\sum_{i=1}^{n}\left(\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}^\intercal\right)\\
+  \hat{I}_{C}(\hat{\boldsymbol{\theta}}) &amp;= \frac{1}{n}\sum_{i=1}^{n}\left(-\left.\frac{\partial^2 l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal}\right\rvert_{\hat{\boldsymbol{\theta}}}\right)
+\end{align*}\]</span>
+<p>Primul estimator <span class="math inline">\(\hat{I}_{A}(\hat{\boldsymbol{\theta}})\)</span> corespunde la media empirică a celor <span class="math inline">\(n\)</span> matrice informaționale (pentru <span class="math inline">\(Y_1,\ldots, Y_n\)</span>) evaluate în <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span>. Al doilea estimator <span class="math inline">\(\hat{I}_{B}(\hat{\boldsymbol{\theta}})\)</span> este cunoscut sub numele de estimator <em>OPG</em> (outer product of gradients) sau, în literatura econometrică, sub numele de estimator <em>BHHH</em> (de la numele autorilor care l-au propus <span class="citation">(Berndt et al. 1974)</span>). Cel de-al treilea estimator, <span class="math inline">\(\hat{I}_{C}(\hat{\boldsymbol{\theta}})\)</span>, este estimatorul bazat pe matricea Hessiană. Cei trei estimarori sunt asimptotic echivalenți numai că pentru eșantioane mici sau de mărime moderată pot întoarce valori diferite semnificativ (a se vedea <span class="citation">(Greene 2011)</span> care sugerează alegerea estimatorului <span class="math inline">\(\hat{I}_{C}(\hat{\boldsymbol{\theta}})\)</span>).</p>
+<p>Pentru <span class="math inline">\(\hat{I}_{A}(\hat{\boldsymbol{\theta}})\)</span> avem, sub modelul necondiționat, că</p>
+<p><span class="math display">\[
+\hat{I}_{A}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i = 1}^{n}\begin{pmatrix}\hat{\rho}\hat{\beta}_i^2 &amp; \hat{\beta}_i\\ \hat{\beta}_i &amp; \Psi'(\hat{\rho})\end{pmatrix} = \frac{1}{n}\begin{pmatrix}\hat{\rho}\sum_{i = 1}^{n}\hat{\beta}_i^2 &amp; \sum_{i = 1}^{n}\hat{\beta}_i\\ \sum_{i = 1}^{n}\hat{\beta}_i &amp; n\Psi'(\hat{\rho})\end{pmatrix}
+\]</span></p>
+<p>iar pentru modelul condiționat</p>
+<p><span class="math display">\[
+\hat{I}_{A}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i = 1}^{n}\hat{I}_{i}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i = 1}^{n} \hat{\beta}_{i}^2
+\]</span></p>
+<p>unde <span class="math inline">\(\hat{\beta}_i = \frac{1}{\hat{\beta} + x_i}\)</span> iar <span class="math inline">\(\hat{\beta}\)</span> și <span class="math inline">\(\hat{\rho}\)</span> sunt estimatorii obținuți sub modelul necondiționat și respectiv sub modelul condiționat.</p>
+<p>Estimatorul OPG, <span class="math inline">\(\hat{I}_{B}(\hat{\boldsymbol{\theta}})\)</span>, pentru matricea informațională, sub modelul necondiționat, este</p>
+<span class="math display">\[\begin{align*}
+\hat{I}_{B}(\hat{\boldsymbol{\theta}}) &amp;= \frac{1}{n}\sum_{i=1}^{n}\left(\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}^\intercal\right) \\
+  &amp;= \frac{1}{n}\sum_{i = 1}^{n}\left[\begin{pmatrix}-\hat{\rho}\hat{\beta}_i + y_i\hat{\beta}_i^2 \\ \log{\hat{\beta}_i} - \Psi(\hat{\rho}) + \log{y_i}\end{pmatrix} \times \begin{pmatrix}-\hat{\rho}\hat{\beta}_i + y_i\hat{\beta}_i^2 &amp; \log{\hat{\beta}_i} - \Psi(\hat{\rho}) + \log{y_i}\end{pmatrix}\right]
+\end{align*}\]</span>
+<p>iar sub modelul condiționat avem</p>
+<p><span class="math display">\[
+\hat{I}_{B}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i=1}^{n}\left(\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}_{H_0}}\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}_{H_0}}^\intercal\right) = \frac{1}{n}\sum_{i = 1}^{n} \left(-\hat{\beta}_i + y_i\hat{\beta}_i^2\right)^2
+\]</span></p>
+<p>În mod similar, matricea <span class="math inline">\(\hat{I}_{C}(\hat{\boldsymbol{\theta}})\)</span> devine</p>
+<p><span class="math display">\[
+\hat{I}_{C}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i=1}^{n}\left(-\left.\frac{\partial^2 l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal}\right\rvert_{\hat{\boldsymbol{\theta}}}\right) = \frac{1}{n}\sum_{i = 1}^{n}\begin{pmatrix} - \hat{\rho}\hat{\beta}_i^2 + 2y_i\hat{\beta}_i^3 &amp; \hat{\beta}_i\\ \hat{\beta}_i &amp; \Psi'(\hat{\rho})\end{pmatrix}
+\]</span></p>
+<p>sub modelul necondiționat și respectiv</p>
+<p><span class="math display">\[
+\hat{I}_{C}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i=1}^{n}\left(-\left.\frac{\partial^2 l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal}\right\rvert_{\hat{\boldsymbol{\theta}}}\right) = \frac{1}{n}\sum_{i = 1}^{n} \left(-\hat{\beta}_i^2 + 2y_i\hat{\beta}_i^3\right).
+\]</span></p>
+<p>sub <span class="math inline">\(H_0\)</span>.</p>
+
+<div class="rmdexercise">
+<p>Considerați setul de date <a href="dataIn/ex_Greene.csv">ex_Greene.csv</a>. Scrieți un cod R prin care să estimați parametrii modelului necondiționat și respectiv condiționat cu ajutorul estimatorilor de verosimilitate maximă și calculați matricea de varianță-covarianță asimptotică pentru fiecare din cele trei alternative.</p>
+</div>
+
+<p>Avem setul de date</p>
+<pre class="r"><code># citim setul de date
+data = read.csv(&quot;dataIn/ex_Greene.csv&quot;)
+head(data)
+      Y  X
+1 20.50 12
+2 31.50 16
+3 47.70 18
+4 26.20 16
+5 44.00 12
+6  8.28 12</code></pre>
+<p>Calculăm estimatorul de verosimilitate maximă <span class="math inline">\(\hat{\boldsymbol{\theta}}\)</span> pentru modelul necondiționat (sub <span class="math inline">\(\Theta\)</span>) prin maximizarea logaritmului funcției de verosimilitate:</p>
+<pre class="r"><code># x si y
+y = data$Y
+x = data$X
+
+# talia esantionului
+n = length(x) 
+
+# functia log likelihood
+loglik_1 = function(param){
+  beta = param[1]
+  rho = param[2]
+  
+  betai = 1/(beta + x)
+  
+  li = betai^rho/gamma(rho) * y^{rho-1}*exp(-y*betai)
+  l = sum(log(li))
+  
+  # intoarcem -l pentru maxim 
+  return(-l)
+}
+
+# determinam MLE 
+param = c(-4, 3) # valori initiale
+
+MLE = optim(param, loglik_1)
+
+# MLE 
+theta_hat = MLE$par
+
+# valoarea log likelihood in theta 
+loglik_theta = -MLE$value</code></pre>
+<p>A obținut că estimatorul de verosimilitate maximă <span class="math inline">\(\hat{\boldsymbol{\theta}} = (\hat{\beta}, \hat{\rho})^\intercal\)</span> este:</p>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+MLE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+beta
+</td>
+<td style="text-align:right;">
+-4.716897
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho
+</td>
+<td style="text-align:right;">
+3.150490
+</td>
+</tr>
+</tbody>
+</table>
+<p>iar logaritmul funcției de verosimilitate este <span class="math inline">\(l(y|x;\hat{\boldsymbol{\theta}}) =\)</span> -82.916.</p>
+<p>Estimatorii matricei asimptotice de varianță-covarianță <span class="math inline">\(\hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})\)</span>, în funcție de matricea informațională a lui Fisher, sunt</p>
+<pre class="r"><code>library(MASS)
+
+beta_hat = theta_hat[1]
+rho_hat = theta_hat[2]
+
+betai_hat = 1/(beta_hat + x)
+
+# Matricea de varianta covarianta asimptotica 
+# Estimatorul A
+
+I_A = (1/n)*matrix(c(rho_hat*sum(betai_hat^2), sum(betai_hat),
+                    sum(betai_hat), n*psigamma(rho_hat, 1)), 
+                  nrow = 2, 
+                  byrow = TRUE)
+V_A = (1/n)*ginv(I_A)
+V_A
+          [,1]       [,2]
+[1,]  4.903387 -1.4732713
+[2,] -1.473271  0.5767018</code></pre>
+<pre class="r"><code># Matricea de varianta covarianta asimptotica 
+# Estimatorul B (OPG)
+
+a = -rho_hat*betai_hat + y*betai_hat^2
+b =  log(betai_hat) - psigamma(rho_hat, 0) + log(y)
+
+a2 = sum(a^2)
+ab = sum(a*b)
+b2 = sum(b^2)
+
+grad2 = matrix(c(a2, ab, ab, b2), nrow = 2, byrow = T)
+
+I_B = (1/n)*grad2
+V_B = (1/n)*ginv(I_B)
+V_B
+          [,1]      [,2]
+[1,] 13.383041 -4.323718
+[2,] -4.323718  1.537368</code></pre>
+<pre class="r"><code># Matricea de varianta covarianta asimptotica 
+# Estimatorul C (Hessiana)
+
+I_C = (1/n)*matrix(c(-rho_hat*sum(betai_hat^2) + 2*sum(y*betai_hat^3),
+                     sum(betai_hat),
+                    sum(betai_hat), 
+                    n*psigamma(rho_hat, 1)), 
+                  nrow = 2, 
+                  byrow = TRUE)
+V_C = (1/n)*ginv(I_C)
+V_C
+          [,1]       [,2]
+[1,]  5.507040 -1.6546446
+[2,] -1.654645  0.6311972</code></pre>
+<p>Chiar dacă asimptotic, cei trei estimatori sunt echivalenți observăm că între estimatorii <span class="math inline">\(A\)</span>, <span class="math inline">\(C\)</span> și estimatorul <span class="math inline">\(B\)</span> există o diferență semnificativă care se datorează în principal eșantionului mic.</p>
+<p>În mod similar putem calcula estimatorul de verosimilitate maximă și respectiv varianța asimptotică pentru modelul condiționat (sub <span class="math inline">\(H_0\)</span>). Avem că <span class="math inline">\(\hat{\boldsymbol{\theta}}_{H_0}\)</span> este dat de</p>
+<pre class="r"><code># functia log likelihood
+loglik_H0 = function(param){
+  beta = param[1]
+
+  betai = 1/(beta + x)
+  
+  li = betai*exp(-y*betai)
+  l = sum(log(li))
+  
+  # intoarcem -l pentru maxim 
+  return(-l)
+}
+
+# determinam MLE 
+param_H0 = -4 # valori initiale
+
+MLE_H0 = optim(param_H0, loglik_H0)
+
+# MLE (sub H0)
+theta_hat_H0 = MLE_H0$par
+
+# valoarea log likelihood in theta 
+loglik_theta_H0 = -MLE_H0$value</code></pre>
+<p>prin urmare <span class="math inline">\(l(y|x;\hat{\boldsymbol{\theta}}_{H_0}) =\)</span> -88.4363</p>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+MLE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+beta
+</td>
+<td style="text-align:right;">
+15.6
+</td>
+</tr>
+</tbody>
+</table>
+<p>Varianța asimptotică <span class="math inline">\(\hat{\mathbb{V}}(\hat{\boldsymbol{\theta}}_{H_0})\)</span> este</p>
+<pre class="r"><code>beta_hat_H0 = theta_hat_H0[1]
+
+betai_hat_H0 = 1/(beta_hat_H0 + x)
+
+# Varianta asimptotica (H0)
+# Estimatorul A
+
+I_A = (1/n)*sum(betai_hat_H0^2)
+V_A = (1/n)*ginv(I_A)
+V_A
+         [,1]
+[1,] 44.24637</code></pre>
+<pre class="r"><code># Varianta asimptotica (H0)
+# Estimatorul B (OPG)
+
+I_B = (1/n)*sum((-betai_hat_H0 + y*betai_hat_H0^2)^2)
+V_B = (1/n)*ginv(I_B)
+V_B
+         [,1]
+[1,] 100.4772</code></pre>
+<pre class="r"><code># Varianta asimptotica (H0)
+# Estimatorul C (Hessiana)
+
+I_C = (1/n)*sum(-betai_hat_H0^2 + 2*y*betai_hat_H0^3)
+V_C = (1/n)*ginv(I_C)
+V_C
+         [,1]
+[1,] 46.14659</code></pre>
+
+<div class="rmdexercise">
+<p>Testați ipotezele</p>
+<p><span class="math display">\[
+  H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
+\]</span></p>
+<p>cu ajutorul testului bazat pe raportul de verosimilități (LRT) pentru un prag de semnificație de <span class="math inline">\(5\%\)</span>.</p>
+</div>
+
+<p>Statistica testului bazat pe raportul de verosimilități este</p>
+<p><span class="math display">\[
+ LRT = - 2\log{\Lambda(\mathbf{x})} = - 2 \log{\frac{\sup_{\theta\in\Theta_0}L(y|x;\boldsymbol{\theta})}{\sup_{\theta\in\Theta}L(y|x;\boldsymbol{\theta})}} = -2\left(l(y|x;\hat{\boldsymbol{\theta}}_{H_0}) - l(y|x;\hat{\boldsymbol{\theta}})\right)
+\]</span></p>
+<p>iar pentru eșantionul nostru acesta are valoarea</p>
+<p><span class="math display">\[
+LRT = -2(-88.4363 + 82.9160) = 11.0406 
+\]</span></p>
+<p><a href="https://en.wikipedia.org/wiki/Likelihood-ratio_test">Teorema lui Wilks</a> implică</p>
+<p><span class="math display">\[
+  LRT = -2\log \Lambda(\mathbf{x}) = -2\left(l(y|x;\hat{\boldsymbol{\theta}}_{H_0}) - l(y|x;\hat{\boldsymbol{\theta}})\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}}\chi^2(\underbrace{\dim{\Theta} - \dim{\Theta_0}}_{2-1}) = \chi^2(1).
+\]</span> Regiunea critică a testului asimptotic de nivel <span class="math inline">\(\alpha\)</span> bazat pe raportul de verosimilitate este</p>
+<p><span class="math display">\[
+  C = \left\{\mathbf{y} \,|\, -2\log \Lambda(\mathbf{y}) &gt; \chi^2_{1-\alpha}(1) = 3.8415\right\}
+\]</span> ceea ce arată că la un nivel de semnificație <span class="math inline">\(\alpha = 5\%\)</span> respingem ipoteza nulă <span class="math inline">\(H_0:\,\rho = 1\)</span>.</p>
+
+<div class="rmdexercise">
+<p>Testați ipotezele</p>
+<p><span class="math display">\[
+  H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
+\]</span></p>
+<p>cu ajutorul testului lui Wald pentru un prag de semnificație de <span class="math inline">\(5\%\)</span>.</p>
+</div>
+
+<p>Observăm că ipoteza nulă <span class="math inline">\(H_0:\,\rho = 1\)</span> se poate scrie sub forma</p>
+<p><span class="math display">\[
+  H_0:\, c(\boldsymbol{\theta}) = 0
+\]</span></p>
+<p>unde <span class="math inline">\(c(\boldsymbol{\theta}) = \rho - 1\)</span>. Statistica de test a lui Wald este definită prin</p>
+<p><span class="math display">\[
+W = c(\hat{\boldsymbol{\theta}})^\intercal\left(\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}}) \hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}})^\intercal\right)^{-1}c(\hat{\boldsymbol{\theta}})
+\]</span></p>
+<p>unde <span class="math inline">\(\hat{\mathbb{V}}\)</span> este estimatorul matricei de varianță-covarianță asimptotică (matricea de varianță-covarianță asimptotică a estimatorului de verosimilitate maximă este <span class="math inline">\(\mathbf{V}(\hat{\boldsymbol{\theta}}) = I_n^{-1}(\boldsymbol{\theta}_0)\)</span> unde <span class="math inline">\(I_n(\boldsymbol{\theta}_0)\)</span> este matricea informațională a lui Fisher).</p>
+<p>În cazul problemei noastre avem <span class="math inline">\(\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}}) = \begin{pmatrix}0 &amp; 1\end{pmatrix}\)</span> de unde</p>
+<p><span class="math display">\[
+W = (\hat{\rho} - 1)^2\left[\begin{pmatrix}0 &amp; 1\end{pmatrix} \underbrace{\begin{pmatrix}\hat{\mathbb{V}}(\hat{\beta}) &amp; Cov(\hat{\beta}, \hat{\rho})  \\ Cov(\hat{\beta}, \hat{\rho}) &amp;  \hat{\mathbb{V}}(\hat{\rho})\end{pmatrix}}_{\hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})}\begin{pmatrix}0 \\ 1\end{pmatrix}\right]^{-1} = (\hat{\rho} - 1)^2\hat{\mathbb{V}}(\hat{\rho}).
+\]</span></p>
+<p>Dat fiind estimatorul pe care îl alegem pentru matricea informațională <span class="math inline">\(I\)</span> a lui Fisher găsim</p>
+<span class="math display">\[\begin{align*}
+W_{A} &amp; = \frac{(3.1509 - 1)^2}{0.5768} = 8.0214\\
+W_{B} &amp; = \frac{(3.1509 - 1)^2}{1.5372} = 3.0096\\
+W_{C} &amp; = \frac{(3.1509 - 1)^2}{0.6309} = 7.335\\
+\end{align*}\]</span>
+<p>Cum regiunea critică a testului lui Wald este</p>
+<p><span class="math display">\[
+  C = \left\{\mathbf{y} \,|\, W(\mathbf{y}) &gt; \chi^2_{1-\alpha}(1) = 3.8415\right\}
+\]</span></p>
+<p>concluzionăm că pentru un test de nivel <span class="math inline">\(\alpha = 5\%\)</span>, statistica de test a lui Wald care folosește estimatorii <span class="math inline">\(A\)</span> și <span class="math inline">\(C\)</span> conduce la respingerea ipotezei nule <span class="math inline">\(H_0:\,\rho = 1\)</span> pe când statistica <span class="math inline">\(W_B\)</span>, care folește estimatorul <span class="math inline">\(B\)</span> (estimatorul OPG al matricei informaționale a lui Fisher) nu respinge ipoteza nulă la acest prag de semnificativitate.</p>
 </div>
 </div>
 <div id="referinte" class="section level1 unnumbered">
@@ -1569,6 +1973,12 @@ H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum
 <div id="refs" class="references">
 <div id="ref-Agresti2012">
 <p>Agresti, Alan. 2012. <em>Categorical Data Analysis</em>. 3rd ed. Wiley. <a href="http://gen.lib.rus.ec/book/index.php?md5=640290AD3F29427A30C48D483E420C96" class="uri">http://gen.lib.rus.ec/book/index.php?md5=640290AD3F29427A30C48D483E420C96</a>.</p>
+</div>
+<div id="ref-Berndt1974">
+<p>Berndt, E.K., B.H. Hall, R.E. Hall, and J.A. Hausman. 1974. “Estimation and Inference in Nonlinear Structural Models.” <em>Annals of Economic and Social Measurement</em> 3 (4): 653–65.</p>
+</div>
+<div id="ref-Greene2011">
+<p>Greene, William H. 2011. <em>Econometric Analysis</em>. 7th ed. Prentice Hall. <a href="http://gen.lib.rus.ec/book/index.php?md5=A0CEC5F0E1D09DF6E99A0E52B9B60DBB" class="uri">http://gen.lib.rus.ec/book/index.php?md5=A0CEC5F0E1D09DF6E99A0E52B9B60DBB</a>.</p>
 </div>
 <div id="ref-Evans2000">
 <p>Merran Evans, Brian Peacock, Nicholas Hastings. 2000. <em>Statistical Distributions</em>. Wiley Series in Probability and Statistics. Wiley-Interscience. <a href="http://gen.lib.rus.ec/book/index.php?md5=EED460A11523229329F6DA85E3FF7936" class="uri">http://gen.lib.rus.ec/book/index.php?md5=EED460A11523229329F6DA85E3FF7936</a>.</p>

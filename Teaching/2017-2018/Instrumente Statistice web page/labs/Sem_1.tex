@@ -219,6 +219,50 @@
 \usepackage{booktabs}
 \usepackage{slashbox}
 \usepackage{color}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{linkcol}{rgb}{0,0,0.4}
+\definecolor{citecol}{rgb}{0.5,0,0}
+
+% Change this to change the informations included in the pdf file
+% \usepackage[pagebackref]{hyperref}
+% \usepackage[verbose]{backref}
+\usepackage[hyperpageref]{backref}
+% \backrefsetup{verbose=false}
+% \PassOptionsToPackage{pagebackref}{hyperref}
+% See hyperref documentation for information on those parameters
+
+\hypersetup
+{
+bookmarksopen=true,
+pdftitle="Curs Instrumente Statistice pentru Finante",
+pdfauthor="Alexandru Amarioarei",
+pdfsubject="Laboratoare Instrumente Statistice pentru Finante", %subject of the document
+pdfmenubar=true, %menubar shown
+pdfhighlight=/O, %effect of clicking on a link
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=None, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+linkcolor=linkcol, %couleur des liens hypertextes internes
+citecolor=citecol, %couleur des liens pour les citations
+urlcolor=linkcol %couleur des liens pour les url
+}
+
+
+% set the back references
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backreftwosep}{ și~} % inserted between entries 
+                              % in a list of two entries, 
+                              % default is " and~".
+\renewcommand*{\backreflastsep}{ și~} % inserted between the last 
+                               % two entries of a list with more
+                               % than two entries, default is ", and~".
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 (Necitat.)%
+    \or        (Citat la pagina~#2.)%
+    \else      (Citat la paginile~#2.)%
+    \fi}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CITEVA DEFINITII
 \def\om{\omega}
@@ -592,7 +636,7 @@ contextul din exercițiu.
 \CommentTok{# EVM gasit este }
 \NormalTok{EVM =}\StringTok{ }\DecValTok{1}\OperatorTok{/}\KeywordTok{mean}\NormalTok{(x)}
 \NormalTok{EVM}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.3489184}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.3419973}
 \end{Highlighting}
 \end{Shaded}
 
@@ -623,11 +667,11 @@ determinăm maximul cu ajutorul funcției \texttt{optimize()}):
 
 \CommentTok{# exemple}
 \KeywordTok{EVM_geom}\NormalTok{(}\FloatTok{0.345}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.33886}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.3429276}
 \KeywordTok{EVM_geom}\NormalTok{(}\FloatTok{0.478}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.4854295}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.4761904}
 \KeywordTok{EVM_geom}\NormalTok{(}\FloatTok{0.222}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.2206884}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.2174065}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1009,7 +1053,7 @@ rezultă că
 \]
 
 \begin{rmdexercise}
-Fie \(\mathbf{\theta} = (c, \rho, \sigma^2)^\intercal\) vectorul
+Fie \(\boldsymbol{\theta} = (c, \rho, \sigma^2)^\intercal\) vectorul
 parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul
 funcției de verosimilitae pentru o observație, \(y_1\).
 \end{rmdexercise}
@@ -1026,13 +1070,13 @@ deducem că \(Y_1\) este repartizată tot normal, cu
 Astfel funcția de verosimilitate pentru \(y_1\) este
 
 \[
-  L(\mathbf{\theta};y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}
+  L(\boldsymbol{\theta};y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}
 \]
 
 iar logaritmul funcției de verosimilitate pentru \(y_1\) este
 
 \[
-  l(\mathbf{\theta};y_1) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}.
+  l(\boldsymbol{\theta};y_1) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}.
 \]
 
 \begin{rmdexercise}
@@ -1057,14 +1101,14 @@ condiționată a lui \(Y_2\) dat fiind \(Y_1 = y_1\) este
 de unde funcția de verosimilitate (condiționată) pentru \(y_2\) este
 
 \[
-  L(\mathbf{\theta};y_2|y_1) = f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}
+  L(\boldsymbol{\theta};y_2|y_1) = f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}
 \]
 
 iar logaritmul funcției de verosimilitate (condiționată) pentru \(y_2\)
 este
 
 \[
-  l(\mathbf{\theta};y_2|y_1) = \log f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta}) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\sigma^2\right)-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
+  l(\boldsymbol{\theta};y_2|y_1) = \log f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta}) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\sigma^2\right)-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
 \]
 
 \begin{rmdexercise}
@@ -1085,31 +1129,31 @@ prin urmare funcția de verosimilitate (completă) pentru eșantionul
 \(\{y_1, y_2\}\) este
 
 \[
-  L(\mathbf{\theta};y_1,y_2) = f_{(Y_1,Y_2)}(y_1,y_2;\mathbf{\theta}) = f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta})f_{Y_1}(y_1;\mathbf{\theta})
+  L(\boldsymbol{\theta};y_1,y_2) = f_{(Y_1,Y_2)}(y_1,y_2;\boldsymbol{\theta}) = f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta})f_{Y_1}(y_1;\boldsymbol{\theta})
 \]
 
 sau echivalent
 
 \[
-  L(\mathbf{\theta};y_1,y_2) = L(\mathbf{\theta};y_2|y_1)L(\mathbf{\theta};y_1) = \frac{\sqrt{1-\rho^2}}{2 \pi\sigma^2}e^{-\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}.
+  L(\boldsymbol{\theta};y_1,y_2) = L(\boldsymbol{\theta};y_2|y_1)L(\boldsymbol{\theta};y_1) = \frac{\sqrt{1-\rho^2}}{2 \pi\sigma^2}e^{-\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}}.
 \]
 
 În mod similar, logaritmul funcției de verosimilitate este
 
 \[
-  l(\mathbf{\theta};y_1,y_2) = l(\mathbf{\theta};y_2|y_1)+ l(\mathbf{\theta};y_1) = \frac{1}{2}\log(1-\rho^2) - \log(2 \pi\sigma^2) -\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
+  l(\boldsymbol{\theta};y_1,y_2) = l(\boldsymbol{\theta};y_2|y_1)+ l(\boldsymbol{\theta};y_1) = \frac{1}{2}\log(1-\rho^2) - \log(2 \pi\sigma^2) -\frac{1}{2}\frac{(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2}{\sigma^2}-\frac{1}{2}\frac{\left(y_2 - c-\rho y_1\right)^2}{\sigma^2}.
 \] Observăm că densitatea lui \(Y_3\) condiționată la primele două
 variabile este
 
 \[
-  f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\mathbf{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_3 - c -\rho y_2)^2}{\sigma^2}}
+  f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\boldsymbol{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_3 - c -\rho y_2)^2}{\sigma^2}}
 \]
 
 de unde
 
 \begin{align*}
-  f_{Y_3, Y_2, Y_1}(y_3, y_2, y_1;\mathbf{\theta}) &= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\mathbf{\theta})f_{Y_2,Y_1}(y_2, y_1;\mathbf{\theta})\\
-  &= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\mathbf{\theta})f_{Y_2|Y_1}(y_2|y_1;\mathbf{\theta})f_{Y_1}(y_1;\mathbf{\theta}).
+  f_{Y_3, Y_2, Y_1}(y_3, y_2, y_1;\boldsymbol{\theta}) &= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\boldsymbol{\theta})f_{Y_2,Y_1}(y_2, y_1;\boldsymbol{\theta})\\
+  &= f_{Y_3|Y_2,Y_1}(y_3|y_2, y_1;\boldsymbol{\theta})f_{Y_2|Y_1}(y_2|y_1;\boldsymbol{\theta})f_{Y_1}(y_1;\boldsymbol{\theta}).
 \end{align*}
 
 În general, valoarea lui \(Y_1, Y_2, \ldots, Y_{t-1}\) influențează
@@ -1118,26 +1162,26 @@ că densitatea lui \(Y_{t}\) condiționată la celelalte \(t-1\) variabile
 este
 
 \[
-  f_{Y_t|Y_{t-1}, Y_{t-2},\ldots, Y_1}(y_t|y_{t-1}, y_{t-2},\ldots, y_1;\mathbf{\theta}) = f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\mathbf{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_t - c -\rho y_{t-1})^2}{\sigma^2}}.
+  f_{Y_t|Y_{t-1}, Y_{t-2},\ldots, Y_1}(y_t|y_{t-1}, y_{t-2},\ldots, y_1;\boldsymbol{\theta}) = f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\boldsymbol{\theta}) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{(y_t - c -\rho y_{t-1})^2}{\sigma^2}}.
 \]
 
 Astfel, pentru un eșantion \(y_1,y_2,\ldots,y_T\) de talie \(T\) avem
 
 \begin{align*}
- L(\mathbf{\theta};y_1,y_2,\ldots,y_T) &= L(\mathbf{\theta};y_1)\times\prod_{t = 2}^{T}L(\mathbf{\theta};y_t|y_{t-1})\\
- l(\mathbf{\theta};y_1,y_2,\ldots,y_T) &= l(\mathbf{\theta};y_1)+\sum_{t = 2}^{T}l(\mathbf{\theta};y_t|y_{t-1})
+ L(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &= L(\boldsymbol{\theta};y_1)\times\prod_{t = 2}^{T}L(\boldsymbol{\theta};y_t|y_{t-1})\\
+ l(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &= l(\boldsymbol{\theta};y_1)+\sum_{t = 2}^{T}l(\boldsymbol{\theta};y_t|y_{t-1})
 \end{align*}
 
 ceea ce conduce la
 
 \begin{align*}
- L(\mathbf{\theta};y_1,y_2,\ldots,y_T) &= \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}\times\prod_{t = 2}^{T}\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_t - c-\rho y_{t-1}\right)^2}{\sigma^2}}
+ L(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &= \frac{1}{\sqrt{2\pi}\sqrt{\frac{\sigma^2}{1-\rho^2}}}e^{-\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}}\times\prod_{t = 2}^{T}\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\frac{\left(y_t - c-\rho y_{t-1}\right)^2}{\sigma^2}}
 \end{align*}
 
 și respectiv la
 
 \begin{align*}
- l(\mathbf{\theta};y_1,y_2,\ldots,y_T) &= -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}\\
+ l(\boldsymbol{\theta};y_1,y_2,\ldots,y_T) &= -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}\\
        &\quad +\sum_{t = 2}^{T}\left(-\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\sigma^2\right)-\frac{1}{2}\frac{\left(y_t - c-\rho y_{t-1}\right)^2}{\sigma^2}\right)\\
        &= -\frac{T}{2}\log(2\pi) -\frac{T}{2}\log(\sigma^2) + \frac{1}{2}\log(1-\rho^2) +\\
        &\quad+\frac{1}{2\sigma^2}\left[(1-\rho^2)\left(y_1 - \frac{c}{1-\rho}\right)^2 + \sum_{t = 2}^{T}\left(y_t - c-\rho y_{t-1}\right)^2\right]
@@ -1145,8 +1189,9 @@ ceea ce conduce la
 
 \begin{rmdexercise}
 Funcția de verosimilitate este o funcție neliniară în parametrii
-\(\mathbf{\theta}\), prin urmare estimatorul de verosimilitate maximă
-\(\hat{\mathbf{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal\)
+\(\boldsymbol{\theta}\), prin urmare estimatorul de verosimilitate
+maximă
+\(\hat{\boldsymbol{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal\)
 va fi determinat prin metode numerice. Scrieți o funcție în R care să
 permită generarea unui eșantion dintr-un proces \(AR(1)\). Pentru
 \(c = 1\), \(\rho = 0.5\) și \(\sigma^2 = 1\) generați un eșantion de
@@ -1255,29 +1300,29 @@ care sunt apropiate de valorile reale.
 
 \begin{rmdexercise}
 Acum considerăm că prima observație \(y_1\) este dată (deterministă) și
-avem \(f_{Y_1}(y_1;\mathbf{\theta})\). Scrieți logaritmul funcției de
-verosimilitate a modelului \(AR(1)\) pentru eșantionul
+avem \(f_{Y_1}(y_1;\boldsymbol{\theta})\). Scrieți logaritmul funcției
+de verosimilitate a modelului \(AR(1)\) pentru eșantionul
 \(y_1,y_2,\ldots,y_T\).
 \end{rmdexercise}
 
 Funcția de verosimilitate condiționată este definită prin
 
 \[
-  L(\mathbf{\theta};y_2,\ldots, y_T|y_1) = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}, Y_1 = y_1}(y_t|y_{t-1}, y_1;\mathbf{\theta})\times \underbrace{f_{Y_1}(y_1;\mathbf{\theta})}_{ = 1} = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\mathbf{\theta})
+  L(\boldsymbol{\theta};y_2,\ldots, y_T|y_1) = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}, Y_1 = y_1}(y_t|y_{t-1}, y_1;\boldsymbol{\theta})\times \underbrace{f_{Y_1}(y_1;\boldsymbol{\theta})}_{ = 1} = \prod_{t = 2}^{T}f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\boldsymbol{\theta})
 \]
 
 iar logaritmul funcției de verosimilitate condiționtă devine
 
 \[
-  l(\mathbf{\theta};y_2,\ldots, y_T|y_1) = \sum_{t = 2}^{T}l_t(\mathbf{\theta};y_t|y_{t-1})
+  l(\boldsymbol{\theta};y_2,\ldots, y_T|y_1) = \sum_{t = 2}^{T}l_t(\boldsymbol{\theta};y_t|y_{t-1})
 \]
 
 cu
-\(l_t(\mathbf{\theta};y_t|y_{t-1}) = \log(f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\mathbf{\theta}))\).
+\(l_t(\boldsymbol{\theta};y_t|y_{t-1}) = \log(f_{Y_t|Y_{t-1}}(y_t|y_{t-1};\boldsymbol{\theta}))\).
 Găsim că
 
 \[
-  l(\mathbf{\theta};y_2,\ldots, y_T|y_1) = -\frac{T-1}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{t = 2}^{T}(y_t - c - \rho y_{t-1})^2.
+  l(\boldsymbol{\theta};y_2,\ldots, y_T|y_1) = -\frac{T-1}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{t = 2}^{T}(y_t - c - \rho y_{t-1})^2.
 \]
 
 \section{Testarea ipotezelor
@@ -1312,7 +1357,15 @@ folosi în R funcțiile: \texttt{rrayleigh}, \texttt{drayleigh},
 \texttt{prayleigh} și respectiv \texttt{qrayleigh} trebuie instalat
 pachetul \texttt{VGAM}):
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\begin{verbatim}
+Error in library(VGAM): there is no package called 'VGAM'
+Error in drayleigh(x, scale = pars[1]): could not find function "drayleigh"
+Error in drayleigh(x, scale = scale): could not find function "drayleigh"
+Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
+Error in prayleigh(x, scale = pars[1]): could not find function "prayleigh"
+Error in prayleigh(x, scale = scale): could not find function "prayleigh"
+Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
+\end{verbatim}
 
 În cele ce urmează, ne propunem să răspundem la o serie de întrebări:
 
@@ -1767,7 +1820,9 @@ masă a \(c\)-uplului este
 
 \[
 \mathbb{P}((X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}) = (x_1,x_2,\ldots,x_c)) = p_1^{x_1}p_2^{x_2}\cdots p_c^{x_c}
-\] unde \(x_j\in\{0,1\}\) cu \(\sum_{j = 1}^{c}x_j = 1\). Pentru un
+\]
+
+unde \(x_j\in\{0,1\}\) cu \(\sum_{j = 1}^{c}x_j = 1\). Pentru un
 eșantion de talie \(n\),
 \(\{(X_1^{(k)}, X_2^{(k)}, \ldots, X_c^{(k)}),\, k = 1,2,\ldots, n\}\)
 avem
@@ -2077,9 +2132,57 @@ care devine
 Ambele proceduri conduc la respingerea ipotezei nule pentru un prag de
 semnificație \(\alpha = 0.05\).
 
-\subsection{Testul raportului de verosimilități, testul lui Wald și
-testul de
-scor}\label{testul-raportului-de-verosimilitati-testul-lui-wald-si-testul-de-scor}
+\subsection{Testul raportului de verosimilități și testul lui
+Wald}\label{testul-raportului-de-verosimilitati-si-testul-lui-wald}
+
+Reamintim că statisticile de test corespunzătoare testului bazat pe
+raportul de verosimilități și respectiv pentru testul lui Wald atunci
+când testăm ipotezele:
+
+\[
+H_0:\, \underbrace{c(\boldsymbol{\theta})}_{p\times 1} = \boldsymbol{0}_{p\times 1} \quad vs\quad H_1:\, c(\boldsymbol{\theta})\neq \boldsymbol{0}_{p\times 1}
+\]
+
+unde \(c:\mathbb{R}^k\to\mathbb{R}^p\) este o funcție vectorială
+
+\[
+c(\boldsymbol{\theta}) = \begin{pmatrix}c_1(\boldsymbol{\theta}) & c_2(\boldsymbol{\theta}) &\cdots & c_p(\boldsymbol{\theta})\end{pmatrix}^\intercal
+\]
+
+cu proprietatea că \(c_i(\boldsymbol{\theta})\) sunt diferențiabile și
+nu avem restricții redundante, cu alte cuvinte rangul matricei
+\(\frac{\partial c(\boldsymbol{\theta})}{\partial \boldsymbol{\theta}^\intercal}\)
+este egal cu \(p\), \(\forall\theta\in\Theta\), sunt date de
+
+\begin{itemize}
+\tightlist
+\item
+  statistica de test pentru testul raportului de verosimilități (Wilks)
+\end{itemize}
+
+\[
+LRT = -2\log{\Lambda(\mathbf{x})} = -2\log{\frac{\sup_{\theta\in\Theta_0}L(\theta|\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta|\mathbf{x})}} = -2\left(l(\hat{\boldsymbol{\theta}}_{H_0};\mathbf{x}) - l(\hat{\boldsymbol{\theta}};\mathbf{x}) \right)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  statistica de test pentru testul lui Wald
+\end{itemize}
+
+\[
+W = c(\hat{\boldsymbol{\theta}})^\intercal\left(\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}}) \hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}})^\intercal\right)^{-1}c(\hat{\boldsymbol{\theta}})
+\]
+
+unde \(\hat{\mathbb{V}}\) este estimatorul matricei de
+varianță-covarianță asimptotică.
+
+Statisticile de test corespunzătoare celor două teste sunt ilustrate
+(pentru modelul binomial) în figura de mai jos:
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-45-1} \end{center}
+
+Exercițiul din această secțiune este preluat din \citep{Greene2011}.
 
 \begin{rmdexercise}
 Considerăm două variabile aleatoare \(X\) și \(Y\) astfel încât
@@ -2142,7 +2245,7 @@ notează cu \(\Psi\) și respectiv \(\Psi'\) și sunt definite prin
 Aceste funcții sunt implementate în R cu ajutorul funcțiilor
 \texttt{digamma()} și respectiv \texttt{trigamma()}.
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-46-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-47-1} \end{center}
 
 \begin{rmdexercise}
 Fie \(\{X_i, Y_i\}\) un eșantion de talie \(n\) din populația
@@ -2150,41 +2253,41 @@ Fie \(\{X_i, Y_i\}\) un eșantion de talie \(n\) din populația
 modelul necondiționat și respectiv sub \(H_0\) (modelul condiționat).
 \end{rmdexercise}
 
-Considerăm parametrul \(\mathbf{\theta} = (\beta, \rho)^\intercal\) și
-avem
+Considerăm parametrul \(\boldsymbol{\theta} = (\beta, \rho)^\intercal\)
+și avem
 
 \[
- f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y_i^{\rho - 1}e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+ f_{Y_i|X_i}(y|x;\boldsymbol{\theta}) = \frac{\beta_i^{\rho}}{\Gamma(\rho)}y_i^{\rho - 1}e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
 \]
 
 Cum logaritmul funcției de verosimilitate este
 
 \[
-  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+  l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\boldsymbol{\theta})}
 \]
 
 deducem că, sub modelul necondiționat,
 
 \[
-  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+  l(y|x;\boldsymbol{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
 \]
 
 Sub \(H_0\), \(\rho = 1\) avem
 
 \[
-f_{Y_i|X_i}(y|x;\mathbf{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
+f_{Y_i|X_i}(y|x;\boldsymbol{\theta}) = \beta_i e^{-y_i\beta_i},\quad \text{cu}\quad  \beta_i = \frac{1}{\beta+x_i}
 \]
 
 și cum
 
 \[
-  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\mathbf{\theta})}
+  l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n} \log{ f_{Y_i|X_i}(y|x;\boldsymbol{\theta})}
 \]
 
 găsim că logaritmul funcției de verosimilitate, sub \(H_0\), este
 
 \[
-  l(y|x;\mathbf{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
+  l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
 \]
 
 \begin{rmdexercise}
@@ -2197,7 +2300,7 @@ Am văzut la punctul anterior că logaritmul funcției de verosimilitate
 pentru modelul necondiționat este
 
 \[
-  l(y|x;\mathbf{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
+  l(y|x;\boldsymbol{\theta}) = \rho\sum_{i = 1}^{n}\beta_i - n\log{\Gamma(\rho)} + (\rho - 1)\sum_{i = 1}^{n}y_i - \sum_{i = 1}^{n}y_i\beta_i.
 \]
 
 Din definiția lui \(\beta_i = \frac{1}{\beta+x_i}\) avem că
@@ -2212,62 +2315,61 @@ iar \(\frac{\partial\log{\Gamma(\rho)}}{\partial \rho} = \Psi(\rho)\).
 Prin urmare găsim că
 
 \begin{align*}
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta} &= -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho} &= \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \beta} &= -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \rho} &= \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
 \end{align*}
 
 astfel, vectorul gradient sub modelul necondiționat este
 
 \[
-\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \begin{pmatrix}
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \beta}\\
-  \frac{\partial l(y|x;\mathbf{\theta})}{\partial \rho}
-\end{pmatrix} 
-= 
-\begin{pmatrix}
+\frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \boldsymbol{\theta}} = \begin{pmatrix}
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \beta}\\
+  \frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \rho}
+\end{pmatrix} = \begin{pmatrix}
   -\rho\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2\\
   \sum_{i=1}^{n}\log{\beta_i} - n\Psi(\rho) + \sum_{i=1}^{n}\log{y_i}
-\end{pmatrix}.
+\end{pmatrix}
 \]
 
 Pentru matricea Hessiană avem
 
 \[
-H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}\partial \mathbf{\theta}^\intercal} = \begin{pmatrix}
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} & \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho}\\
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} & \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2}
+H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal} = \begin{pmatrix}
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta^2} & \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta\partial \rho}\\
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho\partial \beta} & \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho^2}
 \end{pmatrix}
 \]
 
 și cum
 
 \begin{align*}
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta^2} &= \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3\\
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \beta\partial \rho} &= \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho\partial \beta} = - \sum_{i=1}^{n}\beta_i\\
-  \frac{\partial^2 l(y|x;\mathbf{\theta})}{\partial \rho^2} &= -n\Phi'(\rho)
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta^2} &= \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3\\
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \beta\partial \rho} &= \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho\partial \beta} = - \sum_{i=1}^{n}\beta_i\\
+  \frac{\partial^2 l(y|x;\boldsymbol{\theta})}{\partial \rho^2} &= -n\Psi'(\rho)
 \end{align*}
 
 găsim
 
 \[
-H(y|x;\mathbf{\theta}) = \begin{pmatrix}
-  \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3 & \sum_{i=1}^{n}\beta_i\\
-  \sum_{i=1}^{n}\beta_i & -n\Phi'(\rho)
-\end{pmatrix}.
+H(y|x;\boldsymbol{\theta}) = 
+\begin{pmatrix}
+  \rho\sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3 & -\sum_{i=1}^{n}\beta_i \\
+  -\sum_{i=1}^{n}\beta_i & -n\Psi'(\rho)
+\end{pmatrix}
 \]
 
 Sub ipoteza nulă \(H_0\), avem \(\rho = 1\)
-(\(\mathbf{\theta} = \beta\)) deci vectorul gradient (care acum e
+(\(\boldsymbol{\theta} = \beta\)) deci vectorul gradient (care acum e
 scalar) este
 
 \[
-\frac{\partial l(y|x;\mathbf{\theta})}{\partial \mathbf{\theta}} = \frac{\partial l(y|x;\beta)}{\partial \beta} = -\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2
+\frac{\partial l(y|x;\boldsymbol{\theta})}{\partial \boldsymbol{\theta}} = \frac{\partial l(y|x;\beta)}{\partial \beta} = -\sum_{i=1}^{n}\beta_i + \sum_{i=1}^{n}y_i\beta_i^2
 \]
 
 iar matricea Hessiană (care este tot scalară) este
 
 \[
-H(y|x;\mathbf{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
+H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
 \]
 
 \begin{rmdexercise}
@@ -2275,8 +2377,567 @@ Scrieți matricea informațională medie a lui Fisher pentru modelul
 necondiționat și respectiv modelul condiționat (sub \(H_0\)).
 \end{rmdexercise}
 
+Sub modelul necondiționat avem că matricea Hessiană (stocastică) pentru
+o observație \(Y_i|x_i\) este
+
+\[
+H_i(Y_i|x_i;\boldsymbol{\theta}) = 
+  \begin{pmatrix}
+    \rho\beta_i^2 - 2Y_i\beta_i^3 & -\beta_i\\ 
+    -\beta_i & -\Psi'(\rho)
+  \end{pmatrix}
+\]
+
+iar matricea informațională medie a lui Fisher pentru o observație se
+scrie
+
+\[
+  I(\boldsymbol{\theta}) = \mathbb{E}_{X}[I_i(\boldsymbol{\theta})] = \mathbb{E}_{X}[\mathbb{E}_{\boldsymbol{\theta}}[-H_i(Y_i|X_i;\boldsymbol{\theta})]] = \mathbb{E}_{X}\left[\begin{pmatrix}
+    -\rho\beta_i^2 + 2\mathbb{E}_{\boldsymbol{\theta}}[Y_i]\beta_i^3 & \beta_i\\ 
+    \beta_i & \Psi'(\rho)
+  \end{pmatrix}\right]
+\]
+
+deoarece \(\beta_i = \frac{1}{\beta+X_i}\) depinde de variabila
+aleatoare \(X_i\).
+
+Cum pentru funcția de scor calculată pentru o observație are loc
+\(\mathbb{E}_{\boldsymbol{\theta}}[s(Y_i|x_i;\boldsymbol{\theta})] = \mathbf{0}_{2\times 1}\)
+deducem că
+
+\[
+\mathbb{E}_{\boldsymbol{\theta}}[s(Y_i|x_i;\boldsymbol{\theta})] = \mathbb{E}_{\boldsymbol{\theta}}\left[\begin{pmatrix}
+  -\rho\beta_i + Y_i\beta_i^2\\ 
+    \log{\beta_i} - \Psi(\rho) + \log{Y_i}
+\end{pmatrix}\right] = \mathbf{0}_{2\times 1}
+\] de unde
+\(\mathbb{E}_{\boldsymbol{\theta}}[Y_i] = \frac{\rho}{\beta_i}\) (media
+\(\mathbb{E}_{\boldsymbol{\theta}}\) reprezintă media în raport cu
+repartiția condiționată \(Y|X = x\)). Înlocuind în expresia matricei
+informaționale medii găsim că
+
+\[
+  I(\boldsymbol{\theta}) = \mathbb{E}_{X}\left[\begin{pmatrix}
+    \rho\beta_i^2  & \beta_i\\ 
+    \beta_i & \Psi'(\rho)
+  \end{pmatrix}\right].
+\]
+
+Pentru modelul condiționat (sub \(H_0:\rho = 1\),
+\(\boldsymbol{\theta} = \beta\)) avem
+
+\begin{align*}
+  H_i(Y_i|x_i;\boldsymbol{\theta}) &= H_i(Y_i|x_i;\beta) = \beta_i^2 - 2Y_i\beta_i^3\\
+  \mathbb{E}_{\boldsymbol{\theta}}[s(Y_i|x_i;\boldsymbol{\theta})] &= \mathbb{E}_{\beta}[s(Y_i|x_i;\beta)] = \mathbb{E}_{\beta}[-\beta_i + Y_i\beta_i^2] = 0
+\end{align*}
+
+ceea ce conduce la \(\mathbb{E}_{\beta}[Y_i] = \frac{1}{\beta_i}\).
+Informația medie a lui Fisher pentru o observație sub modelul
+condiționat revine la
+
+\[
+I(\boldsymbol{\theta}) = I(\beta) = \mathbb{E}_{X}[\mathbb{E}_{\beta}[-H_i(Y_i|X_i;\beta)]] = \mathbb{E}_{X}[-\beta_i^2 + 2\mathbb{E}_{\beta}[Y_i]\beta_i^3] = \mathbb{E}_{X}[\beta_i^2].
+\]
+
+\begin{rmdexercise}
+Fie \(\hat{\boldsymbol{\theta}}\) estimatorul de verosimilitate maximă
+pentru \(\boldsymbol{\theta} = (\beta, \rho)^\intercal\) pe \(\Theta\)
+și \(\hat{\boldsymbol{\theta}}_{H_0}\) estimatorul de verosimilitate
+maximă pentru \(\beta\) pe
+\(\Theta_0 = \{\boldsymbol{\theta} = (\beta, \rho)^\intercal\,|\,\rho = 1\}\).
+Determinați repartițiile asimptotice ale lui
+\(\hat{\boldsymbol{\theta}}\) și \(\hat{\boldsymbol{\theta}}_{H_0}\).
+\end{rmdexercise}
+
+Am văzut că, atunci când sunt îndeplinite o serie de condiții de
+regularitate \citep[Capitolul 14]{Greene2011}, repartiția asimptotică a
+lui \(\hat{\boldsymbol{\theta}}\) pentru modelul necondiționat verifică
+
+\[
+\sqrt{n}\left(\hat{\boldsymbol{\theta}} - \boldsymbol{\theta}\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}} \mathcal{N}\left(0, I^{-1}(\boldsymbol{\theta})\right)
+\]
+
+unde \(\boldsymbol{\theta}\) reprezintă valoarea reală a parametrului
+(pe \(\Theta\)) iar
+
+\[
+  I(\boldsymbol{\theta}) = \mathbb{E}_{X}\left[\begin{pmatrix}
+    \rho\beta_i^2  & \beta_i\\ 
+    \beta_i & \Psi'(\rho)
+  \end{pmatrix}\right].
+\]
+
+Echivalent, putem scrie
+
+\[
+\hat{\boldsymbol{\theta}}\approx \mathcal{N}\left(\boldsymbol{\theta}, \frac{1}{n}I^{-1}(\boldsymbol{\theta})\right)
+\]
+
+Sub \(H_0\) și sub aceleași condiții de regularitate avem
+
+\[
+\sqrt{n}\left(\hat{\boldsymbol{\theta}}_{H_0} - \boldsymbol{\theta}_0\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}} \mathcal{N}\left(0, I^{-1}(\boldsymbol{\theta}_0)\right)
+\]
+
+unde \(\boldsymbol{\theta}_0 = \beta_0\) reprezintă valoarea reală a
+parametrului sub modelul condiționat iar matricea informațională pentru
+o observație este
+
+\[
+I(\boldsymbol{\theta}_0) = \mathbb{E}_{X}(\beta_i^2).
+\]
+
+De asemenea putem scrie
+
+\[
+\hat{\boldsymbol{\theta}}_{H_0}\approx \mathcal{N}\left(\boldsymbol{\theta}_0, \frac{1}{n}I^{-1}(\boldsymbol{\theta}_0)\right)
+\]
+
+\begin{rmdexercise}
+Calculați cei trei estimatori pentru matricea informațională medie a lui
+Fisher pentru modelul necondiționat și pentru modelul condiționat.
+\end{rmdexercise}
+
+Avem următorii estimatori pentru matricea informațională medie a lui
+Fisher:
+
+\begin{align*}
+  \hat{I}_{A}(\hat{\boldsymbol{\theta}}) &= \frac{1}{n}\sum_{i=1}^{n}\hat{I}_{i}(\hat{\boldsymbol{\theta}})\\
+  \hat{I}_{B}(\hat{\boldsymbol{\theta}}) &= \frac{1}{n}\sum_{i=1}^{n}\left(\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}^\intercal\right)\\
+  \hat{I}_{C}(\hat{\boldsymbol{\theta}}) &= \frac{1}{n}\sum_{i=1}^{n}\left(-\left.\frac{\partial^2 l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal}\right\rvert_{\hat{\boldsymbol{\theta}}}\right)
+\end{align*}
+
+Primul estimator \(\hat{I}_{A}(\hat{\boldsymbol{\theta}})\) corespunde
+la media empirică a celor \(n\) matrice informaționale (pentru
+\(Y_1,\ldots, Y_n\)) evaluate în \(\hat{\boldsymbol{\theta}}\). Al
+doilea estimator \(\hat{I}_{B}(\hat{\boldsymbol{\theta}})\) este
+cunoscut sub numele de estimator \emph{OPG} (outer product of gradients)
+sau, în literatura econometrică, sub numele de estimator \emph{BHHH} (de
+la numele autorilor care l-au propus \citep{Berndt1974}). Cel de-al
+treilea estimator, \(\hat{I}_{C}(\hat{\boldsymbol{\theta}})\), este
+estimatorul bazat pe matricea Hessiană. Cei trei estimarori sunt
+asimptotic echivalenți numai că pentru eșantioane mici sau de mărime
+moderată pot întoarce valori diferite semnificativ (a se vedea
+\citep{Greene2011} care sugerează alegerea estimatorului
+\(\hat{I}_{C}(\hat{\boldsymbol{\theta}})\)).
+
+Pentru \(\hat{I}_{A}(\hat{\boldsymbol{\theta}})\) avem, sub modelul
+necondiționat, că
+
+\[
+\hat{I}_{A}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i = 1}^{n}\begin{pmatrix}\hat{\rho}\hat{\beta}_i^2 & \hat{\beta}_i\\ \hat{\beta}_i & \Psi'(\hat{\rho})\end{pmatrix} = \frac{1}{n}\begin{pmatrix}\hat{\rho}\sum_{i = 1}^{n}\hat{\beta}_i^2 & \sum_{i = 1}^{n}\hat{\beta}_i\\ \sum_{i = 1}^{n}\hat{\beta}_i & n\Psi'(\hat{\rho})\end{pmatrix}
+\]
+
+iar pentru modelul condiționat
+
+\[
+\hat{I}_{A}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i = 1}^{n}\hat{I}_{i}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i = 1}^{n} \hat{\beta}_{i}^2
+\]
+
+unde \(\hat{\beta}_i = \frac{1}{\hat{\beta} + x_i}\) iar \(\hat{\beta}\)
+și \(\hat{\rho}\) sunt estimatorii obținuți sub modelul necondiționat și
+respectiv sub modelul condiționat.
+
+Estimatorul OPG, \(\hat{I}_{B}(\hat{\boldsymbol{\theta}})\), pentru
+matricea informațională, sub modelul necondiționat, este
+
+\begin{align*}
+\hat{I}_{B}(\hat{\boldsymbol{\theta}}) &= \frac{1}{n}\sum_{i=1}^{n}\left(\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}}^\intercal\right) \\
+  &= \frac{1}{n}\sum_{i = 1}^{n}\left[\begin{pmatrix}-\hat{\rho}\hat{\beta}_i + y_i\hat{\beta}_i^2 \\ \log{\hat{\beta}_i} - \Psi(\hat{\rho}) + \log{y_i}\end{pmatrix} \times \begin{pmatrix}-\hat{\rho}\hat{\beta}_i + y_i\hat{\beta}_i^2 & \log{\hat{\beta}_i} - \Psi(\hat{\rho}) + \log{y_i}\end{pmatrix}\right]
+\end{align*}
+
+iar sub modelul condiționat avem
+
+\[
+\hat{I}_{B}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i=1}^{n}\left(\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}_{H_0}}\left.\frac{\partial l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}}\right\rvert_{\hat{\boldsymbol{\theta}}_{H_0}}^\intercal\right) = \frac{1}{n}\sum_{i = 1}^{n} \left(-\hat{\beta}_i + y_i\hat{\beta}_i^2\right)^2
+\]
+
+În mod similar, matricea \(\hat{I}_{C}(\hat{\boldsymbol{\theta}})\)
+devine
+
+\[
+\hat{I}_{C}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i=1}^{n}\left(-\left.\frac{\partial^2 l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal}\right\rvert_{\hat{\boldsymbol{\theta}}}\right) = \frac{1}{n}\sum_{i = 1}^{n}\begin{pmatrix} - \hat{\rho}\hat{\beta}_i^2 + 2y_i\hat{\beta}_i^3 & \hat{\beta}_i\\ \hat{\beta}_i & \Psi'(\hat{\rho})\end{pmatrix}
+\]
+
+sub modelul necondiționat și respectiv
+
+\[
+\hat{I}_{C}(\hat{\boldsymbol{\theta}}) = \frac{1}{n}\sum_{i=1}^{n}\left(-\left.\frac{\partial^2 l(\boldsymbol{\theta};y_i|x_i)}{\partial \boldsymbol{\theta}\partial \boldsymbol{\theta}^\intercal}\right\rvert_{\hat{\boldsymbol{\theta}}}\right) = \frac{1}{n}\sum_{i = 1}^{n} \left(-\hat{\beta}_i^2 + 2y_i\hat{\beta}_i^3\right).
+\]
+
+sub \(H_0\).
+
+\begin{rmdexercise}
+Considerați setul de date \href{dataIn/ex_Greene.csv}{ex\_Greene.csv}.
+Scrieți un cod R prin care să estimați parametrii modelului
+necondiționat și respectiv condiționat cu ajutorul estimatorilor de
+verosimilitate maximă și calculați matricea de varianță-covarianță
+asimptotică pentru fiecare din cele trei alternative.
+\end{rmdexercise}
+
+Avem setul de date
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# citim setul de date}
+\NormalTok{data =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"dataIn/ex_Greene.csv"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(data)}
+\NormalTok{      Y  X}
+\DecValTok{1} \FloatTok{20.50} \DecValTok{12}
+\DecValTok{2} \FloatTok{31.50} \DecValTok{16}
+\DecValTok{3} \FloatTok{47.70} \DecValTok{18}
+\DecValTok{4} \FloatTok{26.20} \DecValTok{16}
+\DecValTok{5} \FloatTok{44.00} \DecValTok{12}
+\DecValTok{6}  \FloatTok{8.28} \DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+Calculăm estimatorul de verosimilitate maximă
+\(\hat{\boldsymbol{\theta}}\) pentru modelul necondiționat (sub
+\(\Theta\)) prin maximizarea logaritmului funcției de verosimilitate:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# x si y}
+\NormalTok{y =}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{Y}
+\NormalTok{x =}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{X}
+
+\CommentTok{# talia esantionului}
+\NormalTok{n =}\StringTok{ }\KeywordTok{length}\NormalTok{(x) }
+
+\CommentTok{# functia log likelihood}
+\NormalTok{loglik_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(param)\{}
+\NormalTok{  beta =}\StringTok{ }\NormalTok{param[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  rho =}\StringTok{ }\NormalTok{param[}\DecValTok{2}\NormalTok{]}
+  
+\NormalTok{  betai =}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(beta }\OperatorTok{+}\StringTok{ }\NormalTok{x)}
+  
+\NormalTok{  li =}\StringTok{ }\NormalTok{betai}\OperatorTok{^}\NormalTok{rho}\OperatorTok{/}\KeywordTok{gamma}\NormalTok{(rho) }\OperatorTok{*}\StringTok{ }\NormalTok{y}\OperatorTok{^}\NormalTok{\{rho}\OperatorTok{-}\DecValTok{1}\NormalTok{\}}\OperatorTok{*}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{y}\OperatorTok{*}\NormalTok{betai)}
+\NormalTok{  l =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{log}\NormalTok{(li))}
+  
+  \CommentTok{# intoarcem -l pentru maxim }
+  \KeywordTok{return}\NormalTok{(}\OperatorTok{-}\NormalTok{l)}
+\NormalTok{\}}
+
+\CommentTok{# determinam MLE }
+\NormalTok{param =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{) }\CommentTok{# valori initiale}
+
+\NormalTok{MLE =}\StringTok{ }\KeywordTok{optim}\NormalTok{(param, loglik_}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{# MLE }
+\NormalTok{theta_hat =}\StringTok{ }\NormalTok{MLE}\OperatorTok{$}\NormalTok{par}
+
+\CommentTok{# valoarea log likelihood in theta }
+\NormalTok{loglik_theta =}\StringTok{ }\OperatorTok{-}\NormalTok{MLE}\OperatorTok{$}\NormalTok{value}
+\end{Highlighting}
+\end{Shaded}
+
+A obținut că estimatorul de verosimilitate maximă
+\(\hat{\boldsymbol{\theta}} = (\hat{\beta}, \hat{\rho})^\intercal\)
+este:
+
+\rowcolors{2}{gray!6}{white}
+
+\begin{longtable}{lr}
+\hiderowcolors
+\toprule
+  & MLE\\
+\midrule
+\endfirsthead
+\multicolumn{2}{@{}l}{\textit{(continued)}}\\
+\toprule
+  & MLE\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\showrowcolors
+beta & -4.716897\\
+rho & 3.150490\\*
+\end{longtable}
+
+\rowcolors{2}{white}{white}
+
+iar logaritmul funcției de verosimilitate este
+\(l(y|x;\hat{\boldsymbol{\theta}}) =\) -82.916.
+
+Estimatorii matricei asimptotice de varianță-covarianță
+\(\hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})\), în funcție de matricea
+informațională a lui Fisher, sunt
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+
+\NormalTok{beta_hat =}\StringTok{ }\NormalTok{theta_hat[}\DecValTok{1}\NormalTok{]}
+\NormalTok{rho_hat =}\StringTok{ }\NormalTok{theta_hat[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{betai_hat =}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(beta_hat }\OperatorTok{+}\StringTok{ }\NormalTok{x)}
+
+\CommentTok{# Matricea de varianta covarianta asimptotica }
+\CommentTok{# Estimatorul A}
+
+\NormalTok{I_A =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(rho_hat}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(betai_hat}\OperatorTok{^}\DecValTok{2}\NormalTok{), }\KeywordTok{sum}\NormalTok{(betai_hat),}
+                    \KeywordTok{sum}\NormalTok{(betai_hat), n}\OperatorTok{*}\KeywordTok{psigamma}\NormalTok{(rho_hat, }\DecValTok{1}\NormalTok{)), }
+                  \DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }
+                  \DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{V_A =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{ginv}\NormalTok{(I_A)}
+\NormalTok{V_A}
+\NormalTok{          [,}\DecValTok{1}\NormalTok{]       [,}\DecValTok{2}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]  }\FloatTok{4.903387} \OperatorTok{-}\FloatTok{1.4732713}
+\NormalTok{[}\DecValTok{2}\NormalTok{,] }\OperatorTok{-}\FloatTok{1.473271}  \FloatTok{0.5767018}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Matricea de varianta covarianta asimptotica }
+\CommentTok{# Estimatorul B (OPG)}
+
+\NormalTok{a =}\StringTok{ }\OperatorTok{-}\NormalTok{rho_hat}\OperatorTok{*}\NormalTok{betai_hat }\OperatorTok{+}\StringTok{ }\NormalTok{y}\OperatorTok{*}\NormalTok{betai_hat}\OperatorTok{^}\DecValTok{2}
+\NormalTok{b =}\StringTok{  }\KeywordTok{log}\NormalTok{(betai_hat) }\OperatorTok{-}\StringTok{ }\KeywordTok{psigamma}\NormalTok{(rho_hat, }\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{log}\NormalTok{(y)}
+
+\NormalTok{a2 =}\StringTok{ }\KeywordTok{sum}\NormalTok{(a}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{ab =}\StringTok{ }\KeywordTok{sum}\NormalTok{(a}\OperatorTok{*}\NormalTok{b)}
+\NormalTok{b2 =}\StringTok{ }\KeywordTok{sum}\NormalTok{(b}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{grad2 =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(a2, ab, ab, b2), }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\NormalTok{I_B =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\NormalTok{grad2}
+\NormalTok{V_B =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{ginv}\NormalTok{(I_B)}
+\NormalTok{V_B}
+\NormalTok{          [,}\DecValTok{1}\NormalTok{]      [,}\DecValTok{2}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{13.383041} \OperatorTok{-}\FloatTok{4.323718}
+\NormalTok{[}\DecValTok{2}\NormalTok{,] }\OperatorTok{-}\FloatTok{4.323718}  \FloatTok{1.537368}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Matricea de varianta covarianta asimptotica }
+\CommentTok{# Estimatorul C (Hessiana)}
+
+\NormalTok{I_C =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\NormalTok{rho_hat}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(betai_hat}\OperatorTok{^}\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\DecValTok{2}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(y}\OperatorTok{*}\NormalTok{betai_hat}\OperatorTok{^}\DecValTok{3}\NormalTok{),}
+                     \KeywordTok{sum}\NormalTok{(betai_hat),}
+                    \KeywordTok{sum}\NormalTok{(betai_hat), }
+\NormalTok{                    n}\OperatorTok{*}\KeywordTok{psigamma}\NormalTok{(rho_hat, }\DecValTok{1}\NormalTok{)), }
+                  \DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }
+                  \DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{V_C =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{ginv}\NormalTok{(I_C)}
+\NormalTok{V_C}
+\NormalTok{          [,}\DecValTok{1}\NormalTok{]       [,}\DecValTok{2}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]  }\FloatTok{5.507040} \OperatorTok{-}\FloatTok{1.6546446}
+\NormalTok{[}\DecValTok{2}\NormalTok{,] }\OperatorTok{-}\FloatTok{1.654645}  \FloatTok{0.6311972}
+\end{Highlighting}
+\end{Shaded}
+
+Chiar dacă asimptotic, cei trei estimatori sunt echivalenți observăm că
+între estimatorii \(A\), \(C\) și estimatorul \(B\) există o diferență
+semnificativă care se datorează în principal eșantionului mic.
+
+În mod similar putem calcula estimatorul de verosimilitate maximă și
+respectiv varianța asimptotică pentru modelul condiționat (sub \(H_0\)).
+Avem că \(\hat{\boldsymbol{\theta}}_{H_0}\) este dat de
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# functia log likelihood}
+\NormalTok{loglik_H0 =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(param)\{}
+\NormalTok{  beta =}\StringTok{ }\NormalTok{param[}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{  betai =}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(beta }\OperatorTok{+}\StringTok{ }\NormalTok{x)}
+  
+\NormalTok{  li =}\StringTok{ }\NormalTok{betai}\OperatorTok{*}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{y}\OperatorTok{*}\NormalTok{betai)}
+\NormalTok{  l =}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{log}\NormalTok{(li))}
+  
+  \CommentTok{# intoarcem -l pentru maxim }
+  \KeywordTok{return}\NormalTok{(}\OperatorTok{-}\NormalTok{l)}
+\NormalTok{\}}
+
+\CommentTok{# determinam MLE }
+\NormalTok{param_H0 =}\StringTok{ }\OperatorTok{-}\DecValTok{4} \CommentTok{# valori initiale}
+
+\NormalTok{MLE_H0 =}\StringTok{ }\KeywordTok{optim}\NormalTok{(param_H0, loglik_H0)}
+
+\CommentTok{# MLE (sub H0)}
+\NormalTok{theta_hat_H0 =}\StringTok{ }\NormalTok{MLE_H0}\OperatorTok{$}\NormalTok{par}
+
+\CommentTok{# valoarea log likelihood in theta }
+\NormalTok{loglik_theta_H0 =}\StringTok{ }\OperatorTok{-}\NormalTok{MLE_H0}\OperatorTok{$}\NormalTok{value}
+\end{Highlighting}
+\end{Shaded}
+
+prin urmare \(l(y|x;\hat{\boldsymbol{\theta}}_{H_0}) =\) -88.4363
+
+\rowcolors{2}{gray!6}{white}
+
+\begin{longtable}{lr}
+\hiderowcolors
+\toprule
+  & MLE\\
+\midrule
+\endfirsthead
+\multicolumn{2}{@{}l}{\textit{(continued)}}\\
+\toprule
+  & MLE\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\showrowcolors
+beta & 15.6\\*
+\end{longtable}
+
+\rowcolors{2}{white}{white}
+
+Varianța asimptotică
+\(\hat{\mathbb{V}}(\hat{\boldsymbol{\theta}}_{H_0})\) este
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beta_hat_H0 =}\StringTok{ }\NormalTok{theta_hat_H0[}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{betai_hat_H0 =}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(beta_hat_H0 }\OperatorTok{+}\StringTok{ }\NormalTok{x)}
+
+\CommentTok{# Varianta asimptotica (H0)}
+\CommentTok{# Estimatorul A}
+
+\NormalTok{I_A =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(betai_hat_H0}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{V_A =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{ginv}\NormalTok{(I_A)}
+\NormalTok{V_A}
+\NormalTok{         [,}\DecValTok{1}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{44.24637}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Varianta asimptotica (H0)}
+\CommentTok{# Estimatorul B (OPG)}
+
+\NormalTok{I_B =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{sum}\NormalTok{((}\OperatorTok{-}\NormalTok{betai_hat_H0 }\OperatorTok{+}\StringTok{ }\NormalTok{y}\OperatorTok{*}\NormalTok{betai_hat_H0}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{V_B =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{ginv}\NormalTok{(I_B)}
+\NormalTok{V_B}
+\NormalTok{         [,}\DecValTok{1}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{100.4772}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Varianta asimptotica (H0)}
+\CommentTok{# Estimatorul C (Hessiana)}
+
+\NormalTok{I_C =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(}\OperatorTok{-}\NormalTok{betai_hat_H0}\OperatorTok{^}\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{y}\OperatorTok{*}\NormalTok{betai_hat_H0}\OperatorTok{^}\DecValTok{3}\NormalTok{)}
+\NormalTok{V_C =}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{*}\KeywordTok{ginv}\NormalTok{(I_C)}
+\NormalTok{V_C}
+\NormalTok{         [,}\DecValTok{1}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{46.14659}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdexercise}
+Testați ipotezele
+
+\[
+  H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
+\]
+
+cu ajutorul testului bazat pe raportul de verosimilități (LRT) pentru un
+prag de semnificație de \(5\%\).
+\end{rmdexercise}
+
+Statistica testului bazat pe raportul de verosimilități este
+
+\[
+ LRT = - 2\log{\Lambda(\mathbf{x})} = - 2 \log{\frac{\sup_{\theta\in\Theta_0}L(y|x;\boldsymbol{\theta})}{\sup_{\theta\in\Theta}L(y|x;\boldsymbol{\theta})}} = -2\left(l(y|x;\hat{\boldsymbol{\theta}}_{H_0}) - l(y|x;\hat{\boldsymbol{\theta}})\right)
+\]
+
+iar pentru eșantionul nostru acesta are valoarea
+
+\[
+LRT = -2(-88.4363 + 82.9160) = 11.0406 
+\]
+
+\href{https://en.wikipedia.org/wiki/Likelihood-ratio_test}{Teorema lui
+Wilks} implică
+
+\[
+  LRT = -2\log \Lambda(\mathbf{x}) = -2\left(l(y|x;\hat{\boldsymbol{\theta}}_{H_0}) - l(y|x;\hat{\boldsymbol{\theta}})\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}}\chi^2(\underbrace{\dim{\Theta} - \dim{\Theta_0}}_{2-1}) = \chi^2(1).
+\] Regiunea critică a testului asimptotic de nivel \(\alpha\) bazat pe
+raportul de verosimilitate este
+
+\[
+  C = \left\{\mathbf{y} \,|\, -2\log \Lambda(\mathbf{y}) > \chi^2_{1-\alpha}(1) = 3.8415\right\}
+\] ceea ce arată că la un nivel de semnificație \(\alpha = 5\%\)
+respingem ipoteza nulă \(H_0:\,\rho = 1\).
+
+\begin{rmdexercise}
+Testați ipotezele
+
+\[
+  H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
+\]
+
+cu ajutorul testului lui Wald pentru un prag de semnificație de \(5\%\).
+\end{rmdexercise}
+
+Observăm că ipoteza nulă \(H_0:\,\rho = 1\) se poate scrie sub forma
+
+\[
+  H_0:\, c(\boldsymbol{\theta}) = 0
+\]
+
+unde \(c(\boldsymbol{\theta}) = \rho - 1\). Statistica de test a lui
+Wald este definită prin
+
+\[
+W = c(\hat{\boldsymbol{\theta}})^\intercal\left(\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}}) \hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}})^\intercal\right)^{-1}c(\hat{\boldsymbol{\theta}})
+\]
+
+unde \(\hat{\mathbb{V}}\) este estimatorul matricei de
+varianță-covarianță asimptotică (matricea de varianță-covarianță
+asimptotică a estimatorului de verosimilitate maximă este
+\(\mathbf{V}(\hat{\boldsymbol{\theta}}) = I_n^{-1}(\boldsymbol{\theta}_0)\)
+unde \(I_n(\boldsymbol{\theta}_0)\) este matricea informațională a lui
+Fisher).
+
+În cazul problemei noastre avem
+\(\frac{\partial c}{\partial \boldsymbol{\theta}^\intercal}(\hat{\boldsymbol{\theta}}) = \begin{pmatrix}0 & 1\end{pmatrix}\)
+de unde
+
+\[
+W = (\hat{\rho} - 1)^2\left[\begin{pmatrix}0 & 1\end{pmatrix} \underbrace{\begin{pmatrix}\hat{\mathbb{V}}(\hat{\beta}) & Cov(\hat{\beta}, \hat{\rho})  \\ Cov(\hat{\beta}, \hat{\rho}) &  \hat{\mathbb{V}}(\hat{\rho})\end{pmatrix}}_{\hat{\mathbb{V}}(\hat{\boldsymbol{\theta}})}\begin{pmatrix}0 \\ 1\end{pmatrix}\right]^{-1} = (\hat{\rho} - 1)^2\hat{\mathbb{V}}(\hat{\rho}).
+\]
+
+Dat fiind estimatorul pe care îl alegem pentru matricea informațională
+\(I\) a lui Fisher găsim
+
+\begin{align*}
+W_{A} & = \frac{(3.1509 - 1)^2}{0.5768} = 8.0214\\
+W_{B} & = \frac{(3.1509 - 1)^2}{1.5372} = 3.0096\\
+W_{C} & = \frac{(3.1509 - 1)^2}{0.6309} = 7.335\\
+\end{align*}
+
+Cum regiunea critică a testului lui Wald este
+
+\[
+  C = \left\{\mathbf{y} \,|\, W(\mathbf{y}) > \chi^2_{1-\alpha}(1) = 3.8415\right\}
+\]
+
+concluzionăm că pentru un test de nivel \(\alpha = 5\%\), statistica de
+test a lui Wald care folosește estimatorii \(A\) și \(C\) conduce la
+respingerea ipotezei nule \(H_0:\,\rho = 1\) pe când statistica \(W_B\),
+care folește estimatorul \(B\) (estimatorul OPG al matricei
+informaționale a lui Fisher) nu respinge ipoteza nulă la acest prag de
+semnificativitate.
+
 \renewcommand\refname{Referințe}
-\bibliography{references/InstStatFin2018ref.bib}
+\bibliography{references/InstStatFin2018ref}
 
 
 \end{document}

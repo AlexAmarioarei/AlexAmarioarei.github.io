@@ -432,7 +432,7 @@ Y|X=x\sim \mathcal{N}(\beta_0+\beta_1x,\sigma^2)
 \end{itemize}
 \end{rmdinsight}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_6_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{images/lab6/RegresiaLiniara} \end{center}
 
 Dat fiind un eșantion \((X_1,Y_1),\ldots,(X_n,Y_n)\) pentru variabilele
 \(X\) și \(Y\) putem estima coeficienții necunoscuți \(\beta_0\) și
@@ -446,7 +446,7 @@ Dat fiind un eșantion \((X_1,Y_1),\ldots,(X_n,Y_n)\) pentru variabilele
 ceea ce conduce la
 
 \[
-\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_x^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
+\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_{xx}^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
 \]
 
 unde
@@ -456,8 +456,8 @@ unde
 \item
   \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) este \emph{media eșantionului}
 \item
-  \(s_x^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2\) este \emph{varianța
-  eșantionului}
+  \(s_{xx}^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2\) este
+  \emph{varianța eșantionului}
 \item
   \(s_{xy}=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})\) este
   \emph{covarianța eșantionului}
@@ -498,7 +498,118 @@ Estimatorul pentru \(\sigma^2\) este
 
 \[
 \hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
-\]
+\] \#\# Funcția \texttt{lm()} din R
+
+Pentru a rula modelul de regresie liniară simplă în R se folosește
+funcția \texttt{lm()} (\emph{linear model}). Funcția \texttt{lm()} are
+două argumente esențiale: \texttt{formula} și \texttt{data}.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+Argument\strut
+\end{minipage} & \begin{minipage}[b]{0.67\columnwidth}\raggedright\strut
+Descriere\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\texttt{formula}\strut
+\end{minipage} & \begin{minipage}[t]{0.67\columnwidth}\raggedright\strut
+O formulă de forma \(y \sim x_1 + x_2 + \ldots\), unde \(y\) este
+variabila răspuns (dependentă) iar \(x_1,x_2,\ldots\) sunt variabilele
+explicative (independente). Dacă vrem să includem toate coloanele (cu
+excepția lui \(y\)) ca variabile explicative putem folosi
+\(y \sim .\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\texttt{data}\strut
+\end{minipage} & \begin{minipage}[t]{0.67\columnwidth}\raggedright\strut
+Este setul de date în format \texttt{data.frame} care conține coloanele
+specificate de formulă.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Următorul tabel conține corespondențe între codul \texttt{R} și
+conceptele statistice asociate modelului de regresie:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.49\columnwidth}\raggedright\strut
+\texttt{R}\strut
+\end{minipage} & \begin{minipage}[b]{0.45\columnwidth}\raggedright\strut
+Concepte statistice\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{x}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Variabilele predictor \(X_1,\ldots,X_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{y}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Răspunsul \(Y_1,\ldots,Y_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{data\ \textless{}-\ data.frame(x\ =\ x,\ y\ =\ y)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Eșantionul \((X_1,Y_1),\ldots,(X_n,Y_n)\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\ \textless{}-\ lm(y\ \textasciitilde{}\ x,\ data\ =\ data)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Modelul de regresie liniară simplă\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$coefficients}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Coeficienții \(\hat\beta_0,\hat\beta_1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$residuals}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Valorile reziduale \(\hat\varepsilon_1,\ldots,\hat\varepsilon_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$fitted.values}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Valorile fitate \(\hat Y_1,\ldots,\hat Y_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$df.residual}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Gradele de libertate \(n-2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\ \textless{}-\ summary(model)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Sumarul modelului de regresie liniară\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$sigma}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Estimatorul \(\hat\sigma\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$r.squared}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Coeficientul de determinare \(R^2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$fstatistic}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Testul lui Fisher \(F\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{anova(model)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Tabelul ANOVA\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \subsection{Aplicație}\label{aplicatie}
 
@@ -661,7 +772,7 @@ Repartițiile lui \(\hat\beta_0\) și \(\hat\beta_1\) sunt
 unde
 
 \[
-\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_x^2}.
+\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_{xx}^2}.
 \]
 
 Folosind estimatorul \(\hat\sigma^2\) pentru \(\sigma^2\) obținem că
@@ -673,7 +784,7 @@ Folosind estimatorul \(\hat\sigma^2\) pentru \(\sigma^2\) obținem că
 unde
 
 \[
-\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_x^2}
+\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_{xx}^2}
 \]
 
 prin urmare, intervalele de încredere de nivel \(1-\alpha\) pentru
@@ -783,7 +894,12 @@ Residuuri & \(n - 2\) & \(RSS\) & \(\frac{RSS}{n-2}\) & &\tabularnewline
 \bottomrule
 \end{longtable}
 
-Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
+unde sub ipoteza nulă, \(H_0:\,\beta_1 = 0\), avem
+
+\[
+  F=\frac{SS_{reg}/1}{RSS/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2}
+\] Descompunerea ANOVA pentru problema noastră poate fi ilustrată
+astfel:
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
@@ -1020,14 +1136,14 @@ condiționat \(Y|X=x_0\)).
 Un interval de încredere pentru răspunsul viitor mediu este:
 
 \[
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_{xx}^2}\right)}\right)
 \]
 
 Un interval de încredere pentru valoarea prezisă (interval de predicție)
 este:
 
 \[
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_{xx}^2}\right)}\right)
 \]
 
 Pentru a găsi aceste intervale vom folosi funcția \texttt{predict()}:

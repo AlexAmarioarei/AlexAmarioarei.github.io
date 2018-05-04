@@ -94,6 +94,50 @@
 \usepackage{booktabs}
 \usepackage{slashbox}
 \usepackage{color}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{linkcol}{rgb}{0,0,0.4}
+\definecolor{citecol}{rgb}{0.5,0,0}
+
+% Change this to change the informations included in the pdf file
+% \usepackage[pagebackref]{hyperref}
+% \usepackage[verbose]{backref}
+\usepackage[hyperpageref]{backref}
+% \backrefsetup{verbose=false}
+% \PassOptionsToPackage{pagebackref}{hyperref}
+% See hyperref documentation for information on those parameters
+
+\hypersetup
+{
+bookmarksopen=true,
+pdftitle="Curs Instrumente Statistice pentru Finante",
+pdfauthor="Alexandru Amarioarei",
+pdfsubject="Laboratoare Instrumente Statistice pentru Finante", %subject of the document
+pdfmenubar=true, %menubar shown
+pdfhighlight=/O, %effect of clicking on a link
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=None, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+linkcolor=linkcol, %couleur des liens hypertextes internes
+citecolor=citecol, %couleur des liens pour les citations
+urlcolor=linkcol %couleur des liens pour les url
+}
+
+
+% set the back references
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backreftwosep}{ și~} % inserted between entries 
+                              % in a list of two entries, 
+                              % default is " and~".
+\renewcommand*{\backreflastsep}{ și~} % inserted between the last 
+                               % two entries of a list with more
+                               % than two entries, default is ", and~".
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 (Necitat.)%
+    \or        (Citat la pagina~#2.)%
+    \else      (Citat la paginile~#2.)%
+    \fi}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CITEVA DEFINITII
 \def\om{\omega}

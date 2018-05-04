@@ -59,6 +59,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(DT)
 library(tidyverse)
+library(kableExtra)
 ```
 
 ## Informații generale
@@ -152,10 +153,16 @@ tabLab = data.frame(Nr = c(1,
                                  readings_lab4))
 
 
-kable(tabLab, 
+# kable(tabLab, 
+#       col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
+#       align = "cccccl", 
+#       booktabs = TRUE)
+
+kableExtra::kable(tabLab, "html",
       col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
       align = "cccccl", 
-      booktabs = TRUE)
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
 ## Note de seminar 
@@ -178,10 +185,12 @@ tabSem = data.frame(Nr = c(1),
                     readings = c(readings_sem1))
 
 
-kable(tabSem, 
+kableExtra::kable(tabSem, "html",
       col.names = c("Nr", "Seminar", "HTML", "PDFs", "Set Date", "Readings"),
       align = "cccccl", 
-      booktabs = TRUE)
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
 ```
 
 ## Proiect de laborator

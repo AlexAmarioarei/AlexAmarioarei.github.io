@@ -317,12 +317,12 @@ Y|X=x\sim \mathcal{N}(\beta_0+\beta_1x,\sigma^2)
 \]</span></p>
 <p>ceea ce conduce la</p>
 <p><span class="math display">\[
-\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_x^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
+\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_{xx}^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
 \]</span></p>
 <p>unde</p>
 <ul>
 <li><span class="math inline">\(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\)</span> este <em>media eșantionului</em></li>
-<li><span class="math inline">\(s_x^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2\)</span> este <em>varianța eșantionului</em></li>
+<li><span class="math inline">\(s_{xx}^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2\)</span> este <em>varianța eșantionului</em></li>
 <li><span class="math inline">\(s_{xy}=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})\)</span> este <em>covarianța eșantionului</em></li>
 </ul>
 <p>Graficul functiei RSS pentru modelul <span class="math inline">\(y = -0.5 + 1.5x + e\)</span>:</p>
@@ -343,7 +343,97 @@ Y|X=x\sim \mathcal{N}(\beta_0+\beta_1x,\sigma^2)
 <p>Estimatorul pentru <span class="math inline">\(\sigma^2\)</span> este</p>
 <p><span class="math display">\[
 \hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
-\]</span></p>
+\]</span> ## Funcția <code>lm()</code> din R</p>
+<p>Pentru a rula modelul de regresie liniară simplă în R se folosește funcția <code>lm()</code> (<em>linear model</em>). Funcția <code>lm()</code> are două argumente esențiale: <code>formula</code> și <code>data</code>.</p>
+<table style="width:90%;">
+<colgroup>
+<col width="19%"></col>
+<col width="70%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Argument</th>
+<th align="left">Descriere</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>formula</code></td>
+<td align="left">O formulă de forma <span class="math inline">\(y \sim x_1 + x_2 + \ldots\)</span>, unde <span class="math inline">\(y\)</span> este variabila răspuns (dependentă) iar <span class="math inline">\(x_1,x_2,\ldots\)</span> sunt variabilele explicative (independente). Dacă vrem să includem toate coloanele (cu excepția lui <span class="math inline">\(y\)</span>) ca variabile explicative putem folosi <span class="math inline">\(y \sim .\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>data</code></td>
+<td align="left">Este setul de date în format <code>data.frame</code> care conține coloanele specificate de formulă.</td>
+</tr>
+</tbody>
+</table>
+<p>Următorul tabel conține corespondențe între codul <code>R</code> și conceptele statistice asociate modelului de regresie:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="51%"></col>
+<col width="48%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"><code>R</code></th>
+<th align="left">Concepte statistice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>x</code></td>
+<td align="left">Variabilele predictor <span class="math inline">\(X_1,\ldots,X_n\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>y</code></td>
+<td align="left">Răspunsul <span class="math inline">\(Y_1,\ldots,Y_n\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>data &lt;- data.frame(x = x, y = y)</code></td>
+<td align="left">Eșantionul <span class="math inline">\((X_1,Y_1),\ldots,(X_n,Y_n)\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>model &lt;- lm(y ~ x, data = data)</code></td>
+<td align="left">Modelul de regresie liniară simplă</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>model$coefficients</code></td>
+<td align="left">Coeficienții <span class="math inline">\(\hat\beta_0,\hat\beta_1\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>model$residuals</code></td>
+<td align="left">Valorile reziduale <span class="math inline">\(\hat\varepsilon_1,\ldots,\hat\varepsilon_n\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>model$fitted.values</code></td>
+<td align="left">Valorile fitate <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>model$df.residual</code></td>
+<td align="left">Gradele de libertate <span class="math inline">\(n-2\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>summaryModel &lt;- summary(model)</code></td>
+<td align="left">Sumarul modelului de regresie liniară</td>
+</tr>
+<tr class="even">
+<td align="left"><code>summaryModel$sigma</code></td>
+<td align="left">Estimatorul <span class="math inline">\(\hat\sigma\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>summaryModel$r.squared</code></td>
+<td align="left">Coeficientul de determinare <span class="math inline">\(R^2\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>summaryModel$fstatistic</code></td>
+<td align="left">Testul lui Fisher <span class="math inline">\(F\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>anova(model)</code></td>
+<td align="left">Tabelul ANOVA</td>
+</tr>
+</tbody>
+</table>
 <div id="aplicatie" class="section level2">
 <h2><span class="header-section-number">1.1</span> Aplicație</h2>
 
@@ -439,7 +529,7 @@ saltBP_model_summary$sigma
 \]</span></p>
 <p>unde</p>
 <p><span class="math display">\[
-\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_x^2}.
+\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_{xx}^2}.
 \]</span></p>
 <p>Folosind estimatorul <span class="math inline">\(\hat\sigma^2\)</span> pentru <span class="math inline">\(\sigma^2\)</span> obținem că</p>
 <p><span class="math display">\[
@@ -447,7 +537,7 @@ saltBP_model_summary$sigma
 \]</span></p>
 <p>unde</p>
 <p><span class="math display">\[
-\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_x^2}
+\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_{xx}^2}
 \]</span></p>
 <p>prin urmare, intervalele de încredere de nivel <span class="math inline">\(1-\alpha\)</span> pentru <span class="math inline">\(\beta_0\)</span> și <span class="math inline">\(\beta_1\)</span> sunt</p>
 <p><span class="math display">\[
@@ -537,7 +627,10 @@ abline(h = confint(saltBP_model)[2,], lty = 2)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:</p>
+<p>unde sub ipoteza nulă, <span class="math inline">\(H_0:\,\beta_1 = 0\)</span>, avem</p>
+<p><span class="math display">\[
+  F=\frac{SS_{reg}/1}{RSS/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2}
+\]</span> Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:</p>
 <ol style="list-style-type: lower-alpha">
 <li><em>suma abaterilor pătratice totală</em>:</li>
 </ol>
@@ -687,11 +780,11 @@ F-statistic: 54.59 on 1 and 23 DF,  p-value: 1.631e-07</code></pre>
 <p>Pentru un nou set de predictori, <span class="math inline">\(x_0\)</span>, răspunsul prognozat este <span class="math inline">\(\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x_0\)</span> și vrem să investigăm incertitudinea din această predicție. Putem face distincția între două tipuri de predicție: predicție asupra răspunsului viitor mediu (inferență asupra mediei condiționate <span class="math inline">\(\mathbb{E}[Y|X=x_0]\)</span>) sau predicție asupra observațiilor viitoare (inferență asupra răspunsului condiționat <span class="math inline">\(Y|X=x_0\)</span>).</p>
 <p>Un interval de încredere pentru răspunsul viitor mediu este:</p>
 <p><span class="math display">\[
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_{xx}^2}\right)}\right)
 \]</span></p>
 <p>Un interval de încredere pentru valoarea prezisă (interval de predicție) este:</p>
 <p><span class="math display">\[
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_{xx}^2}\right)}\right)
 \]</span></p>
 <p>Pentru a găsi aceste intervale vom folosi funcția <code>predict()</code>:</p>
 <pre class="r"><code>newData = data.frame(salt = 14)

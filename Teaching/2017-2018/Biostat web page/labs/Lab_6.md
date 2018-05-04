@@ -112,13 +112,13 @@ $$
 ceea ce conduce la 
 
 $$
-\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_x^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
+\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_{xx}^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
 $$
 
 unde
 
 - $\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$ este *media eșantionului*
-- $s_x^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2$ este *varianța eșantionului*
+- $s_{xx}^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2$ este *varianța eșantionului*
 - $s_{xy}=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})$ este *covarianța eșantionului*
 
 Graficul functiei RSS pentru modelul $y = -0.5 + 1.5x + e$:
@@ -144,6 +144,33 @@ Estimatorul pentru $\sigma^2$ este
 $$
 \hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
 $$
+## Funcția `lm()` din R
+
+Pentru a rula modelul de regresie liniară simplă în R se folosește funcția `lm()` (*linear model*). Funcția `lm()` are două argumente esențiale: `formula` și `data`.
+
+| Argument| Descriere| 
+|:------------|:-------------------------------------------------|
+|`formula`| O formulă de forma $y \sim x_1 + x_2 + \ldots$, unde $y$ este variabila răspuns (dependentă) iar $x_1,x_2,\ldots$ sunt variabilele explicative (independente). Dacă vrem să includem toate coloanele (cu excepția lui $y$) ca variabile explicative putem folosi $y \sim .$|
+|`data`|Este setul de date în format `data.frame` care conține coloanele specificate de formulă.|
+
+Următorul tabel conține corespondențe între codul `R` și conceptele statistice asociate modelului de regresie:
+
+
+|              `R`                       |        Concepte statistice          |
+|:---------------------------------------|:------------------------------------|
+| `x` | Variabilele predictor $X_1,\ldots,X_n$    |
+| `y` | Răspunsul $Y_1,\ldots,Y_n$    |
+| `data <- data.frame(x = x, y = y)` | Eșantionul $(X_1,Y_1),\ldots,(X_n,Y_n)$    |
+| `model <- lm(y ~ x, data = data)` | Modelul de regresie liniară simplă |
+| `model$coefficients` | Coeficienții $\hat\beta_0,\hat\beta_1$ |
+| `model$residuals` | Valorile reziduale $\hat\varepsilon_1,\ldots,\hat\varepsilon_n$ |
+| `model$fitted.values` | Valorile fitate $\hat Y_1,\ldots,\hat Y_n$ |
+| `model$df.residual` | Gradele de libertate $n-2$ |
+| `summaryModel <- summary(model)` | Sumarul modelului de regresie liniară |
+| `summaryModel$sigma` | Estimatorul $\hat\sigma$ |
+| `summaryModel$r.squared` | Coeficientul de determinare $R^2$ |
+| `summaryModel$fstatistic` | Testul lui Fisher $F$ |
+| `anova(model)` | Tabelul ANOVA |
 
 ## Aplicație
 
@@ -289,7 +316,7 @@ $$
 unde 
 
 $$
-\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_x^2}.
+\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_{xx}^2}.
 $$
 
 Folosind estimatorul $\hat\sigma^2$ pentru $\sigma^2$ obținem că 
@@ -301,7 +328,7 @@ $$
 unde
 
 $$
-\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_x^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_x^2}
+\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_{xx}^2}
 $$
 
 prin urmare, intervalele de încredere de nivel $1-\alpha$ pentru $\beta_0$ și $\beta_1$ sunt 
@@ -389,6 +416,11 @@ $$
 | Predictor | $1$ | $SS_{reg}$ | $\frac{SS_{reg}}{1}$ | $\frac{SS_{reg}/1}{RSS/(n-2)}$ | $p$ |
 | Residuuri | $n - 2$ | $RSS$ | $\frac{RSS}{n-2}$ | | |
 
+unde sub ipoteza nulă, $H_0:\,\beta_1 = 0$, avem 
+
+$$
+  F=\frac{SS_{reg}/1}{RSS/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2}
+$$
 Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 
   a) *suma abaterilor pătratice totală*:
@@ -577,13 +609,13 @@ Pentru un nou set de predictori, $x_0$, răspunsul prognozat este $\hat{y} = \ha
 Un interval de încredere pentru răspunsul viitor mediu este:
 
 $$
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_{xx}^2}\right)}\right)
 $$
 
 Un interval de încredere pentru valoarea prezisă (interval de predicție) este:
 
 $$
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_{xx}^2}\right)}\right)
 $$
 
 Pentru a găsi aceste intervale vom folosi funcția `predict()`:
