@@ -106,13 +106,13 @@ Mai jos găsiți o parte din laboratoarele cursului.
 ```{r echo = FALSE}
 lab1 = "[HTML](labs/Lab_1.html)"
 pdf_lab1 = "[PDF](labs/Lab_1.pdf)"
-data_lab1 = "-"
-readings_lab1 = "-"
+data_lab1 = ""
+readings_lab1 = ""
 
 lab2 = "[HTML](labs/Lab_2.html)"
 pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
-data_lab2 = "-"
-readings_lab2 = "-"
+data_lab2 = ""
+readings_lab2 = ""
 readings_lab2_b = ""
 
 lab3 = "[HTML](labs/Lab_3.html)"
@@ -127,30 +127,41 @@ pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
 data_lab4 = ""
 readings_lab4 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
 
+lab5 = "[HTML](labs/Lab_5.html)"
+pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
+data_lab5 = ""
+readings_lab5 = ""
+
 tabLab = data.frame(Nr = c(1, 
                            2, 
                            3, "",
-                           4),
+                           4,
+                           5),
                     Lab = c("Laborator 1", 
                             "Laborator 2", 
                             "Laborator 3", "",
-                            "Laborator 4"),
+                            "Laborator 4",
+                            "Laborator 5"),
                     Htmls = c(lab1, 
                               lab2, 
                               lab3, "",
-                              lab4),
+                              lab4,
+                              lab5),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2, 
                              pdf_lab3, "",
-                             pdf_lab4),
+                             pdf_lab4,
+                             pdf_lab5),
                     data = c(data_lab1, 
                              data_lab2, 
                              data_lab3, data_lab3_b,
-                             data_lab4), 
+                             data_lab4,
+                             data_lab5), 
                     readings = c(readings_lab1, 
                                  readings_lab2, 
                                  readings_lab3, readings_lab3_b,
-                                 readings_lab4))
+                                 readings_lab4,
+                                 readings_lab5))
 
 
 # kable(tabLab, 
@@ -174,15 +185,26 @@ Mai jos găsiți o parte din notele de seminar.
 ```{r echo = FALSE}
 sem1 = "[HTML](labs/Sem_1.html)"
 pdf_sem1 = "[PDF](labs/Sem_1.pdf)"
-data_sem1 = "-"
-readings_sem1 = "-"
+data_sem1 = ""
+readings_sem1 = "Greene 2012, Capitolul 14"
 
-tabSem = data.frame(Nr = c(1),
-                    Lab = c("Seminar 1"),
-                    Htmls = c(sem1),
-                    Pdfs = c(pdf_sem1),
-                    data = c(data_sem1), 
-                    readings = c(readings_sem1))
+sem2 = "[HTML](labs/Sem_2.html)"
+pdf_sem2 = "[PDF](labs/Sem_2.pdf)"
+data_sem2 = ""
+readings_sem2 = ""
+
+tabSem = data.frame(Nr = c(1,
+                           2),
+                    Lab = c("Seminar 1",
+                            "Seminar 2"),
+                    Htmls = c(sem1,
+                              sem2),
+                    Pdfs = c(pdf_sem1,
+                             pdf_sem2),
+                    data = c(data_sem1,
+                             data_sem2), 
+                    readings = c(readings_sem1,
+                                 readings_sem2))
 
 
 kableExtra::kable(tabSem, "html",
@@ -270,6 +292,7 @@ datatable(
   2. Miller - *Mathematics and Statistics for Financial Risk Management*, Wiley, 2014
   3. Ruppert - *Statistics and Finance an Introduction*, Springer, 2004
   4. Durbin, Koopman - *Time Series Analysis by State Space Methods*, Oxford, 2011
+  5. Greene, William - *Econometric Analysis*, Prentice Hall, 2012
   
 
 ## Link-uri utile

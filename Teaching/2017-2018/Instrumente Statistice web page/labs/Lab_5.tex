@@ -384,7 +384,6 @@ Ipotezele modelului sunt:
 
 \begin{enumerate}
 \def\labelenumi{\roman{enumi}.}
-\tightlist
 \item
   \textbf{Linearitatea}: \(\mathbb{E}[Y|X=x]=\beta_0+\beta_1x\)
 \item
@@ -407,6 +406,8 @@ Altfel spus
 Y|X=x\sim \mathcal{N}(\beta_0+\beta_1x,\sigma^2)
 \]
 
+\begin{center}\includegraphics[width=0.6\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-3-1} \end{center}
+
 \begin{rmdinsight}
 \begin{itemize}
 \item
@@ -419,40 +420,40 @@ Y|X=x\sim \mathcal{N}(\beta_0+\beta_1x,\sigma^2)
 \end{itemize}
 \end{rmdinsight}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-4-1} \end{center}
-
 Dat fiind un eșantion \((X_1,Y_1),\ldots,(X_n,Y_n)\) pentru variabilele
 \(X\) și \(Y\) putem estima coeficienții necunoscuți \(\beta_0\) și
 \(\beta_1\) minimizând \emph{suma abaterilor pătratice reziduale}
 (\emph{Residual Sum of Squares} - RSS)
 
 \[
-\text{RSS}(\beta_0,\beta_1)=\sum_{i=1}^n(Y_i-\beta_0-\beta_1X_i)^2
+\text{RSS}(\beta_0,\beta_1)=\sum_{i=1}^n(Y_i-\beta_0-\beta_1x_i)^2
 \]
 
 ceea ce conduce la
 
 \[
-\hat\beta_0=\bar{Y}-\hat\beta_1\bar{X},\quad \hat\beta_1=\frac{s_{xy}}{s_{xx}^2}=\frac{\sum_{i=1}^{n}{(X_i-\bar{X})}Y_i}{\sum_{i=1}^{n}{(X_i-\bar{X})^2}}
+\hat\beta_0=\bar{Y}-\hat\beta_1\bar{x},\quad \hat\beta_1=\frac{S_{xy}}{S_{xx}}=\frac{\sum_{i=1}^{n}{(x_i-\bar{x})}Y_i}{\sum_{i=1}^{n}{(x_i-\bar{x})^2}}
 \]
 
 unde folosim notațiile
 
 \begin{itemize}
-\tightlist
 \item
   \(\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\) este \emph{media eșantionului}
 \item
-  \(s_{xx}^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2\) este
-  \emph{varianța eșantionului}
+  \(S_{xx}=\sum_{i=1}^n(X_i-\bar{X})^2\) este \emph{suma abaterilor
+  pătratice pentru \(X\)}
 \item
-  \(s_{xy}=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})\) este
-  \emph{covarianța eșantionului}
+  \(S_{yy}=\sum_{i=1}^n(Y_i-\bar{Y})^2\) este \emph{suma abaterilor
+  pătratice pentru \(Y\)}
+\item
+  \(S_{xy}=\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})\) este \emph{suma
+  produselor încrucișate}
 \end{itemize}
 
 Graficul functiei RSS pentru modelul \(y = -0.5 + 1.5x + e\):
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Odată ce avem estimatorii \((\hat\beta_0,\hat\beta_1)\) , putem defini:
 
@@ -465,7 +466,7 @@ Odată ce avem estimatorii \((\hat\beta_0,\hat\beta_1)\) , putem defini:
 \end{itemize}
 
 \[
-\hat Y_i=\hat\beta_0+\hat\beta_1X_i,\quad i=1,\ldots,n
+\hat Y_i=\hat\beta_0+\hat\beta_1x_i,\quad i=1,\ldots,n
 \]
 
 \begin{itemize}
@@ -486,6 +487,120 @@ Estimatorul pentru \(\sigma^2\) este
 \[
 \hat{\sigma}^2 = \frac{RSS(\hat{\beta}_0,\hat{\beta}_1)}{n-2} = \frac{\sum_{i=1}^{n}\hat{\varepsilon}_i^2}{n-2}.
 \]
+
+\subsection{\texorpdfstring{Funcția \emph{lm()} din
+R}{Funcția lm() din R}}\label{functia-lm-din-r}
+
+Pentru a rula modelul de regresie liniară simplă în R se folosește
+funcția \texttt{lm()} (\emph{linear model}). Funcția \texttt{lm()} are
+două argumente esențiale: \texttt{formula} și \texttt{data}.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+Argument\strut
+\end{minipage} & \begin{minipage}[b]{0.67\columnwidth}\raggedright\strut
+Descriere\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\texttt{formula}\strut
+\end{minipage} & \begin{minipage}[t]{0.67\columnwidth}\raggedright\strut
+O formulă de forma \(y \sim x_1 + x_2 + \ldots\), unde \(y\) este
+variabila răspuns (dependentă) iar \(x_1,x_2,\ldots\) sunt variabilele
+explicative (independente). Dacă vrem să includem toate coloanele (cu
+excepția lui \(y\)) ca variabile explicative putem folosi
+\(y \sim .\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\texttt{data}\strut
+\end{minipage} & \begin{minipage}[t]{0.67\columnwidth}\raggedright\strut
+Este setul de date în format \texttt{data.frame} care conține coloanele
+specificate de formulă.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Următorul tabel conține corespondențe între codul \texttt{R} și
+conceptele statistice asociate modelului de regresie:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.49\columnwidth}\raggedright\strut
+\texttt{R}\strut
+\end{minipage} & \begin{minipage}[b]{0.45\columnwidth}\raggedright\strut
+Concepte statistice\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{x}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Variabilele predictor \(X_1,\ldots,X_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{y}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Răspunsul \(Y_1,\ldots,Y_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{data\ \textless{}-\ data.frame(x\ =\ x,\ y\ =\ y)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Eșantionul \((X_1,Y_1),\ldots,(X_n,Y_n)\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\ \textless{}-\ lm(y\ \textasciitilde{}\ x,\ data\ =\ data)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Modelul de regresie liniară simplă\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$coefficients}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Coeficienții \(\hat\beta_0,\hat\beta_1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$residuals}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Valorile reziduale \(\hat\varepsilon_1,\ldots,\hat\varepsilon_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$fitted.values}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Valorile fitate \(\hat Y_1,\ldots,\hat Y_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$df.residual}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Gradele de libertate \(n-2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\ \textless{}-\ summary(model)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Sumarul modelului de regresie liniară\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$sigma}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Estimatorul \(\hat\sigma\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$r.squared}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Coeficientul de determinare \(R^2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$fstatistic}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Testul lui Fisher \(F\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{anova(model)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Tabelul ANOVA\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \section{Aplicație}\label{aplicatie}
 
@@ -538,6 +653,7 @@ Considerăm modelul de regresie \(Y = \beta_0 + \beta_1 X + \varepsilon\)
 \(\beta_0\), \(\beta_1\) și \(\sigma^2\).
 
 Observăm că estimatorii parametrilor \(\beta_0\) și \(\beta_1\) sunt
+dați de
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -549,7 +665,8 @@ Observăm că estimatorii parametrilor \(\beta_0\) și \(\beta_1\) sunt
 
 \CommentTok{# sau }
 
-\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{TV}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{*}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales))}\OperatorTok{/}\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{TV}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{TV}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{*}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales))}\OperatorTok{/}
+\StringTok{  }\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{TV}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.04753664}
 
 \CommentTok{# pentru b0}
@@ -580,7 +697,12 @@ sau folosind funcția \texttt{lm()}:
 \end{Highlighting}
 \end{Shaded}
 
-Dreapta de regresie este:
+Graficul sumei abaterilor pătratice reziduale \(RSS\) este
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-12-1} \end{center}
+
+Dreapta de regresie (observăm că aceasta trece prin punctul de
+coordonate \((\bar{x}, \bar{y})\)) este:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -588,18 +710,23 @@ Dreapta de regresie este:
      \DataTypeTok{xlab =} \StringTok{"Publicitate TV"}\NormalTok{, }
      \DataTypeTok{ylab =} \StringTok{"Volumul vanzarilor"}\NormalTok{, }
      \DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{, }
-     \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
+     \DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }
      \DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }
-     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"y = "}\NormalTok{, }\KeywordTok{format}\NormalTok{(b0, }\DataTypeTok{digits =} \DecValTok{4}\NormalTok{), }\StringTok{" + "}\NormalTok{, }\KeywordTok{format}\NormalTok{(b1, }\DataTypeTok{digits =} \DecValTok{4}\NormalTok{), }\StringTok{" x"}\NormalTok{))}
+     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"y = "}\NormalTok{, }\KeywordTok{format}\NormalTok{(b0, }\DataTypeTok{digits =} \DecValTok{4}\NormalTok{), }\StringTok{" + "}\NormalTok{, }
+                  \KeywordTok{format}\NormalTok{(b1, }\DataTypeTok{digits =} \DecValTok{4}\NormalTok{), }\StringTok{" x"}\NormalTok{))}
 
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{a =}\NormalTok{ b0, }\DataTypeTok{b =}\NormalTok{ b1, }\DataTypeTok{col =} \StringTok{"royalblue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
-\KeywordTok{points}\NormalTok{(}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV), }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"dark green"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{)}
-\KeywordTok{text}\NormalTok{(}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV), }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales)}\OperatorTok{-}\FloatTok{1.3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"dark green"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{, }
+\KeywordTok{points}\NormalTok{(}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV), }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }
+       \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
+       \DataTypeTok{col =} \StringTok{"dark green"}\NormalTok{, }
+       \DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV), }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales)}\OperatorTok{-}\FloatTok{1.3}\NormalTok{, }
+     \DataTypeTok{col =} \StringTok{"dark green"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{, }
      \DataTypeTok{labels =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{paste}\NormalTok{(}\StringTok{"("}\NormalTok{, }\KeywordTok{bar}\NormalTok{(x), }\StringTok{","}\NormalTok{, }\KeywordTok{bar}\NormalTok{(y),}\StringTok{")"}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 De asemenea pentru calculul estimatorului lui \(\sigma\)
 (\(\hat{\sigma}\)) avem
@@ -610,6 +737,7 @@ De asemenea pentru calculul estimatorului lui \(\sigma\)
 \NormalTok{e_hat =}\StringTok{ }\NormalTok{advertise}\OperatorTok{$}\NormalTok{sales }\OperatorTok{-}\StringTok{ }\NormalTok{(b0}\OperatorTok{+}\NormalTok{b1}\OperatorTok{*}\NormalTok{advertise}\OperatorTok{$}\NormalTok{TV)}
 
 \NormalTok{rss =}\StringTok{ }\KeywordTok{sum}\NormalTok{(e_hat}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\CommentTok{# sau folosind comanda deviance(advertise_TV_model)}
 
 \NormalTok{sigma_hat =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(rss}\OperatorTok{/}\NormalTok{(n}\OperatorTok{-}\DecValTok{2}\NormalTok{))}
 \NormalTok{sigma_hat}
@@ -626,7 +754,7 @@ sau cu ajutorul funcției \texttt{lm()}
 \end{Highlighting}
 \end{Shaded}
 
-sau încă
+sau încă aplicând funcția \texttt{summary()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -649,7 +777,7 @@ Repartițiile lui \(\hat\beta_0\) și \(\hat\beta_1\) sunt
 unde
 
 \[
-\mathrm{SE}(\hat\beta_0)^2=\frac{\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \mathrm{SE}(\hat\beta_1)^2=\frac{\sigma^2}{ns_{xx}^2}.
+\mathrm{SE}(\hat\beta_0)^2=\sigma^2\left[\frac{1}{n}+\frac{\bar x^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2}\right]=\sigma^2\left[\frac{1}{n}+\frac{\bar x^2}{S_{xx}}\right],\quad  \mathrm{SE}(\hat\beta_1)^2= \frac{\sigma^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2} = \frac{\sigma^2}{S_{xx}}.
 \]
 
 Folosind estimatorul \(\hat\sigma^2\) pentru \(\sigma^2\) obținem că
@@ -661,7 +789,7 @@ Folosind estimatorul \(\hat\sigma^2\) pentru \(\sigma^2\) obținem că
 unde
 
 \[
-\hat{\mathrm{SE}}(\hat\beta_0)^2=\frac{\hat\sigma^2}{n}\left[1+\frac{\bar X^2}{s_{xx}^2}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat\sigma^2}{ns_{xx}^2}
+\hat{\mathrm{SE}}(\hat\beta_0)^2=\hat \sigma^2\left[\frac{1}{n}+\frac{\bar x^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2}\right]=\hat \sigma^2\left[\frac{1}{n}+\frac{\bar x^2}{S_{xx}}\right],\quad \hat{\mathrm{SE}}(\hat\beta_1)^2=\frac{\hat \sigma^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2} = \frac{\hat \sigma^2}{S_{xx}}
 \]
 
 prin urmare, intervalele de încredere de nivel \(1-\alpha\) pentru
@@ -671,7 +799,7 @@ prin urmare, intervalele de încredere de nivel \(1-\alpha\) pentru
 IC = \left(\hat\beta_j\pm\hat{\mathrm{SE}}(\hat\beta_j)t_{n-2;1-\alpha/2}\right),\quad j=0,1.
 \]
 
-În R avem
+În R putem calcula aceste intervale de încredere folosind comenzile
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -708,27 +836,60 @@ Același rezultat se obține apelând funcția \texttt{confint()} :
 \end{Highlighting}
 \end{Shaded}
 
-Putem construi și o regiune de încredere pentru perechea
-\((\beta_0, \beta_1)\):
+Observăm că în absența unui buget de publicitate TV, volumul vânzărilor
+se încadrează în medie între \(6130\) și \(7940\) de unități. Mai mult,
+pentru fiecare creștere a bugetului pentru publicitatea TV cu \(1000\)
+de RON obținem o creștere, în medie, a vânzărilor între \(42\) și \(53\)
+de unități.
+
+Putem construi și o regiune de încredere de nivel de încredere
+\(1-\alpha\) pentru vectorul \(\boldsymbol{\beta} = (\beta_0, \beta_1)\)
+plecând de la repartiția bidimensională a vectorului
+\(\boldsymbol{\hat \beta} = (\hat \beta_0, \hat \beta_1)^\intercal\). În
+cazul modelului condițional normal avem că
+\(\boldsymbol{\hat \beta}\sim\mathcal{N}(\boldsymbol{\beta}, \sigma^2 V)\)
+unde
+
+\[
+  V = \frac{1}{\sigma^2}\begin{pmatrix}Var(\hat \beta_0) & Cov(\hat \beta_0, \hat \beta_1)\\ Cov(\hat \beta_0, \hat \beta_1) & Var(\hat \beta_1)\end{pmatrix} = \frac{1}{\sum_{i = 1}^{n}(x_i - \bar x)}\begin{pmatrix}\frac{\sum_{i = 1}^{n}x_i^2}{n} & -\bar x\\ -\bar x & 1\end{pmatrix}
+\]
+
+și cum
+
+\[
+\frac{1}{2\hat \sigma^2}\left(\boldsymbol{\hat \beta} - \boldsymbol{\beta}\right)^\intercal V^{-1} \left(\boldsymbol{\hat \beta} - \boldsymbol{\beta}\right) \sim F_{2, n-2}
+\]
+
+găsim că regiunea de încredere este
+
+\[
+  RC(\beta_0, \beta_1) = \left\{\frac{1}{2\hat\sigma^2}\left[n(\hat\beta_0 - \beta_0)^2 + 2n\bar x(\hat\beta_0 - \beta_0)(\hat\beta_1 - \beta_1) + (\hat\beta_1 - \beta_1)^2\sum_{i=1}^{n}x_i^2\right]\leq f^{1-\alpha}_{2,n-2}\right\}
+\]
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ellipse)}
+\KeywordTok{library}\NormalTok{(car)}
 
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
+
+\CommentTok{# trasam regiunea de incredere}
 \KeywordTok{confidenceEllipse}\NormalTok{(advertise_TV_model,}
-                  \DataTypeTok{xlab =} \KeywordTok{expression}\NormalTok{(beta[}\DecValTok{0}\NormalTok{]), }
-                  \DataTypeTok{ylab =} \KeywordTok{expression}\NormalTok{(beta[}\DecValTok{1}\NormalTok{]),}
+                  \DataTypeTok{xlab =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{hat}\NormalTok{(beta[}\DecValTok{0}\NormalTok{])), }
+                  \DataTypeTok{ylab =} \KeywordTok{expression}\NormalTok{(}\KeywordTok{hat}\NormalTok{(beta[}\DecValTok{1}\NormalTok{])),}
                   \DataTypeTok{col =} \StringTok{"grey30"}\NormalTok{) }
+
 \KeywordTok{points}\NormalTok{(}\KeywordTok{coef}\NormalTok{(advertise_TV_model)[}\DecValTok{1}\NormalTok{], }\KeywordTok{coef}\NormalTok{(advertise_TV_model)[}\DecValTok{2}\NormalTok{], }
        \DataTypeTok{pch =} \DecValTok{18}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{,}
        \DataTypeTok{cex =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{# trasam intervalele de incredere}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{confint}\NormalTok{(advertise_TV_model)[}\DecValTok{1}\NormalTok{,], }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{confint}\NormalTok{(advertise_TV_model)[}\DecValTok{2}\NormalTok{,], }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-19-1} \end{center}
 
 \subsection{ANOVA pentru regresie}\label{anova-pentru-regresie}
 
@@ -738,11 +899,9 @@ să testăm ipoteza nulă \(H_0:\;\beta_1=0\).
 Introducem următoarele \emph{sume de abateri pătratice}:
 
 \begin{itemize}
-\tightlist
 \item
-  \(SS_T=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\), \textbf{suma
-  abaterilor pătratice totală} (variația totală a lui
-  \(Y_1,\ldots,Y_n\)).
+  \(SS_T=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\), \textbf{suma totală a
+  abaterilor pătratice} (variația totală a lui \(Y_1,\ldots,Y_n\)).
 \item
   \(SS_{reg}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\), \textbf{suma
   abaterilor pătratice de regresie} (variabilitatea explicată de dreapta
@@ -782,15 +941,16 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
-     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"SST ="}\NormalTok{, }\KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{sales }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales))}\OperatorTok{^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
+\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
+     \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"SST ="}\NormalTok{, }\KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{sales }\OperatorTok{-}\StringTok{ }
+\StringTok{                                        }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales))}\OperatorTok{^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
      \DataTypeTok{col.main =} \StringTok{"brown4"}\NormalTok{, }
      \DataTypeTok{xlab =} \StringTok{"Publicitate TV"}\NormalTok{, }
      \DataTypeTok{ylab =} \StringTok{"Volumul vanzarilor"}\NormalTok{, }
      \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 
 \KeywordTok{abline}\NormalTok{(advertise_TV_model}\OperatorTok{$}\NormalTok{coefficients, }\DataTypeTok{col =} \StringTok{"royalblue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }\DataTypeTok{col =} \StringTok{"brown2"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }\DataTypeTok{col =} \StringTok{"brown2"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
 
 \KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ advertise}\OperatorTok{$}\NormalTok{TV, }\DataTypeTok{y0 =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }
          \DataTypeTok{x1 =}\NormalTok{ advertise}\OperatorTok{$}\NormalTok{TV, }\DataTypeTok{y1 =}\NormalTok{ advertise}\OperatorTok{$}\NormalTok{sales, }
@@ -799,16 +959,16 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 \KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
        \DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"Media esantionului "} \OperatorTok{*}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y),}
 \NormalTok{                                      (Y[i] }\OperatorTok{-}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y))}\OperatorTok{^}\DecValTok{2}\NormalTok{), }
-       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{),}
        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"royalblue"}\NormalTok{, }\StringTok{"brown2"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{), }
        \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{), }
        \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 
-\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-19-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
@@ -820,36 +980,37 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
+\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
      \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"SSreg ="}\NormalTok{, }
-                  \KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales))}\OperatorTok{^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
+                  \KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values }\OperatorTok{-}\StringTok{ }
+\StringTok{                               }\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales))}\OperatorTok{^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
      \DataTypeTok{col.main =} \StringTok{"forestgreen"}\NormalTok{, }
      \DataTypeTok{xlab =} \StringTok{"Publicitate TV"}\NormalTok{, }
      \DataTypeTok{ylab =} \StringTok{"Volumul vanzarilor"}\NormalTok{, }
      \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 
 \KeywordTok{abline}\NormalTok{(advertise_TV_model}\OperatorTok{$}\NormalTok{coefficients, }\DataTypeTok{col =} \StringTok{"royalblue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }\DataTypeTok{col =} \StringTok{"brown2"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }\DataTypeTok{col =} \StringTok{"brown2"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
 
 \KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ advertise}\OperatorTok{$}\NormalTok{TV, }\DataTypeTok{y0 =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{sales), }
          \DataTypeTok{x1 =}\NormalTok{ advertise}\OperatorTok{$}\NormalTok{TV, }\DataTypeTok{y1 =}\NormalTok{ advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values, }
          \DataTypeTok{col =} \StringTok{"forestgreen"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
-\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"forestgreen"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{col =} \StringTok{"forestgreen"}\NormalTok{)}
 
 \KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
        \DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"Media esantionului "} \OperatorTok{*}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y),}
 \NormalTok{                                      (}\KeywordTok{hat}\NormalTok{(Y)[i] }\OperatorTok{-}\StringTok{ }\KeywordTok{bar}\NormalTok{(Y))}\OperatorTok{^}\DecValTok{2}\NormalTok{), }
-       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{),}
        \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"royalblue"}\NormalTok{, }\StringTok{"brown2"}\NormalTok{, }\StringTok{"forestgreen"}\NormalTok{), }
        \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{), }
        \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 
-\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
@@ -861,7 +1022,7 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
+\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{,}
      \DataTypeTok{main =} \KeywordTok{paste}\NormalTok{(}\StringTok{"RSS ="}\NormalTok{, }
                   \KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{((advertise}\OperatorTok{$}\NormalTok{sales }\OperatorTok{-}\StringTok{ }\NormalTok{advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values)}\OperatorTok{^}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{)), }
      \DataTypeTok{col.main =} \StringTok{"orange"}\NormalTok{, }
@@ -875,7 +1036,7 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
          \DataTypeTok{x1 =}\NormalTok{ advertise}\OperatorTok{$}\NormalTok{TV, }\DataTypeTok{y1 =}\NormalTok{ advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values, }
          \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 
-\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise_TV_model}\OperatorTok{$}\NormalTok{fitted.values, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{)}
 
 \KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
        \DataTypeTok{legend =} \KeywordTok{expression}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, (}\KeywordTok{hat}\NormalTok{(Y)[i] }\OperatorTok{-}\StringTok{ }\NormalTok{Y[i])}\OperatorTok{^}\DecValTok{2}\NormalTok{), }
@@ -884,11 +1045,11 @@ Descompunerea ANOVA pentru problema noastră poate fi ilustrată astfel:
        \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }
        \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 
-\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-21-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 Tabelul ANOVA se obține prin
 
@@ -922,12 +1083,23 @@ modelul de regresie este în concordanță cu datele (cât de strâns este
 norul de puncte în jurul dreptei de regresie). Observăm că dacă datele
 concordă \emph{perfect} cu modelul (adică \(RSS=0\)) atunci \(R^2=1\).
 
+În cazul problemei noastre avem \$R\^{}2 =\$0.612 prin urmare
+aproximativ 61.19\% din variabilitatea volumului vânzărilor este
+explicată de bugetul alocat publicității TV.
+
 Putem vedea că \(R^2=r_{xy}^2\), unde \(r_{xy}\) este \emph{coeficientul
 de corelație} empiric:
 
 \[
-r_{xy}=\frac{s_{xy}}{s_xs_y}=\frac{\sum_{i=1}^n \left(X_i-\bar X \right)\left(Y_i-\bar Y \right)}{\sqrt{\sum_{i=1}^n \left(X_i-\bar X \right)^2}\sqrt{\sum_{i=1}^n \left(Y_i-\bar Y \right)^2}}
+r_{xy}=\frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}=\frac{\sum_{i=1}^n \left(X_i-\bar X \right)\left(Y_i-\bar Y \right)}{\sqrt{\sum_{i=1}^n \left(X_i-\bar X \right)^2}\sqrt{\sum_{i=1}^n \left(Y_i-\bar Y \right)^2}}
 \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.6118751}
+\end{Highlighting}
+\end{Shaded}
 
 Mai mult se poate verifica și că \(R^2=r^2_{y\hat y}\), adică
 \emph{coeficientul de determinare este egal cu pătratul coeficientului
@@ -1008,14 +1180,14 @@ condiționat \(Y|X=x_0\)).
 Un interval de încredere pentru răspunsul viitor mediu este:
 
 \[
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2\left(\frac{1}{n}+\frac{(x_0-\bar x)^2}{S_{xx}}\right)}\right)
 \]
 
 Un interval de încredere pentru valoarea prezisă (interval de predicție)
 este:
 
 \[
-\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2+\frac{\hat\sigma^2}{n}\left(1+\frac{(x_0-\bar x)^2}{s_x^2}\right)}\right)
+\left(\hat y \pm t_{n-2;1-\alpha/2}\sqrt{\hat\sigma^2\left(1+\frac{1}{n}+\frac{(x_0-\bar x)^2}{S_{xx}}\right)}\right)
 \]
 
 Pentru a găsi aceste intervale vom folosi funcția \texttt{predict()}:
@@ -1052,22 +1224,104 @@ Pentru a găsi aceste intervale vom folosi funcția \texttt{predict()}:
 \end{Highlighting}
 \end{Shaded}
 
-Volumul de vânzări prezis impreună cu intervalul de încredere de nivel
-95\% pentru răspunsul mediu este ilustrat în figura următoare
+Volumul de vânzări prezis pentru o anumită valoare \(x_0\) impreună cu
+intervalul de încredere de nivel 95\% pentru răspunsul mediu și cu
+intervalul de predicție, sunt ilustrate în figura următoare
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{alpha =}\StringTok{ }\FloatTok{0.05}
+\NormalTok{x0 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{155}\NormalTok{, }\DecValTok{294}\NormalTok{)}
+
+\NormalTok{p.conf =}\StringTok{ }\KeywordTok{predict}\NormalTok{(advertise_TV_model, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TV =}\NormalTok{ x0), }\DataTypeTok{se =}\NormalTok{ T, }\DataTypeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+\NormalTok{p.pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(advertise_TV_model, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TV =}\NormalTok{ x0), }\DataTypeTok{se =}\NormalTok{ T, }\DataTypeTok{interval =} \StringTok{"prediction"}\NormalTok{)}
+
+\CommentTok{# diagrama de imprastiesre}
+\KeywordTok{plot}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales,}
+     \DataTypeTok{col =} \StringTok{"grey70"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{"Publicitate TV"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Volumul vanzarilor"}\NormalTok{,}
+     \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
+
+\CommentTok{# dreapta de regresie}
+\KeywordTok{abline}\NormalTok{(advertise_TV_model}\OperatorTok{$}\NormalTok{coefficients, }\DataTypeTok{col =} \StringTok{"royalblue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{#intervalele de incredere}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0, }\DataTypeTok{y0 =}\NormalTok{ p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{x1 =}\NormalTok{ x0, }\DataTypeTok{y1 =}\NormalTok{ p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{3}\NormalTok{], }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{2}\NormalTok{], }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{3}\NormalTok{], }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{3}\NormalTok{], }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{#intervalele de predictie}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0, }\DataTypeTok{y0 =}\NormalTok{ p.pred}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{x1 =}\NormalTok{ x0, }\DataTypeTok{y1 =}\NormalTok{ p.pred}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{3}\NormalTok{], }
+         \DataTypeTok{col =} \StringTok{"magenta"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ p.pred}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ p.pred}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{2}\NormalTok{], }
+         \DataTypeTok{col =} \StringTok{"magenta"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ p.pred}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{3}\NormalTok{], }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{2.5}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ p.pred}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{3}\NormalTok{], }
+         \DataTypeTok{col =} \StringTok{"magenta"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{# valoarea prezisa}
+\KeywordTok{points}\NormalTok{(x0, p.conf}\OperatorTok{$}\NormalTok{fit[,}\DecValTok{1}\NormalTok{], }
+       \DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{, }
+       \DataTypeTok{pch =} \DecValTok{20}\NormalTok{)}
+
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }
+       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }
+                  \StringTok{"interval de incredere"}\NormalTok{,}
+                  \StringTok{"interval de predictie"}\NormalTok{), }
+       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"royalblue"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"magenta"}\NormalTok{), }
+       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{), }
+       \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-28-1} \end{center}
+
+Sunt circumstanțe în care am dori să avem intervalele de încredere
+pentru răspunsul mediu în mai mult de un punct, prin urmare ne aflăm în
+cadrul unei probleme de inferență simultană. O soluție la această
+problemă, în cazul în care avem \(m\) puncte, este dată de inegalitatea
+lui Bonferroni care conduce la marginea
+
+\[
+  \hat \beta_0 + \hat\beta_1 x_{0i} - t_{n-2, \frac{\alpha}{2m}}RSS\sqrt{\frac{1}{n}+\frac{(x_{0i} - \bar{x})^2}{S_{xx}}} < \beta_0 + \beta_1 x_{0i} < \hat \beta_0 + \hat\beta_1 x_{0i} + t_{n-2, \frac{\alpha}{2m}}RSS\sqrt{\frac{1}{n}+\frac{(x_{0i} - \bar{x})^2}{S_{xx}}}.
+\]
+
+Scheffe (a se vedea \citep[pag. 559 - 562]{Casella2001}) a arătat,
+pentru problema de regresie, că există un interval care este adevărat
+pentru orice \(x\)
+
+\[
+  \hat \beta_0 + \hat\beta_1 x - M_{\alpha}RSS\sqrt{\frac{1}{n}+\frac{(x - \bar{x})^2}{S_{xx}}} < \beta_0 + \beta_1 x < \hat \beta_0 + \hat\beta_1 x + M_{\alpha}RSS\sqrt{\frac{1}{n}+\frac{(x - \bar{x})^2}{S_{xx}}}, \forall x
+\]
+
+unde \(M_{\alpha} = \sqrt{2f_{2, n-2}^{\alpha}}\).
+
+În figura de mai jos am ilustrat volumul de vânzări prezis împreună cu
+intervalul de încredere de nivel 95\% pentru răspunsul mediu folosind 6
+intervale de tip Bonferroni precum și banda lui Scheffe:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha =}\StringTok{ }\FloatTok{0.05}
 \NormalTok{g =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{300}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
 
 \NormalTok{p =}\StringTok{ }\KeywordTok{predict}\NormalTok{(advertise_TV_model, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{TV =}\NormalTok{ g), }\DataTypeTok{se =}\NormalTok{ T, }\DataTypeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+
 \KeywordTok{matplot}\NormalTok{(g, p}\OperatorTok{$}\NormalTok{fit, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{), }
         \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}
         \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"royalblue"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{),}
         \DataTypeTok{xlab =} \StringTok{"Publicitate TV"}\NormalTok{,}
         \DataTypeTok{ylab =} \StringTok{"Volumul vanzarilor"}\NormalTok{,}
         \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
-\KeywordTok{rug}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV)}
-\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{)}
+
+\CommentTok{# rug(advertise$TV)}
+
+\KeywordTok{points}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV, advertise}\OperatorTok{$}\NormalTok{sales, }
+       \DataTypeTok{col =} \StringTok{"grey70"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{)}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV), }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"grey65"}\NormalTok{)}
 
 \CommentTok{# Scheffe's bounds}
@@ -1077,8 +1331,14 @@ Volumul de vânzări prezis impreună cu intervalul de încredere de nivel
 \NormalTok{lw_scheffe =}\StringTok{ }\NormalTok{b0 }\OperatorTok{+}\StringTok{ }\NormalTok{b1}\OperatorTok{*}\NormalTok{g }\OperatorTok{-}\StringTok{ }\NormalTok{M}\OperatorTok{*}\NormalTok{sigma_hat}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n}\OperatorTok{+}\NormalTok{(g}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{s_xx)}
 \NormalTok{up_scheffe =}\StringTok{ }\NormalTok{b0 }\OperatorTok{+}\StringTok{ }\NormalTok{b1}\OperatorTok{*}\NormalTok{g }\OperatorTok{+}\StringTok{ }\NormalTok{M}\OperatorTok{*}\NormalTok{sigma_hat}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n}\OperatorTok{+}\NormalTok{(g}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{s_xx)}
 
-\KeywordTok{lines}\NormalTok{(g, lw_scheffe, }\DataTypeTok{lty =} \DecValTok{4}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown4"}\NormalTok{)}
-\KeywordTok{lines}\NormalTok{(g, up_scheffe, }\DataTypeTok{lty =} \DecValTok{4}\NormalTok{, }\DataTypeTok{col =} \StringTok{"brown4"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(g, lw_scheffe, }
+      \DataTypeTok{lty =} \DecValTok{4}\NormalTok{, }
+      \DataTypeTok{lwd =} \DecValTok{2}\NormalTok{,}
+      \DataTypeTok{col =} \StringTok{"brown4"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(g, up_scheffe, }
+      \DataTypeTok{lty =} \DecValTok{4}\NormalTok{, }
+      \DataTypeTok{lwd =} \DecValTok{2}\NormalTok{,}
+      \DataTypeTok{col =} \StringTok{"brown4"}\NormalTok{)}
 
 \CommentTok{# Bonferroni bounds}
 
@@ -1090,23 +1350,24 @@ Volumul de vânzări prezis impreună cu intervalul de încredere de nivel
 \NormalTok{lw_bonf =}\StringTok{ }\NormalTok{b0 }\OperatorTok{+}\StringTok{ }\NormalTok{b1}\OperatorTok{*}\NormalTok{x0 }\OperatorTok{-}\StringTok{ }\NormalTok{t_bonf}\OperatorTok{*}\NormalTok{sigma_hat}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n}\OperatorTok{+}\NormalTok{(x0}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{s_xx)}
 \NormalTok{up_bonf =}\StringTok{ }\NormalTok{b0 }\OperatorTok{+}\StringTok{ }\NormalTok{b1}\OperatorTok{*}\NormalTok{x0 }\OperatorTok{+}\StringTok{ }\NormalTok{t_bonf}\OperatorTok{*}\NormalTok{sigma_hat}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{n}\OperatorTok{+}\NormalTok{(x0}\OperatorTok{-}\KeywordTok{mean}\NormalTok{(advertise}\OperatorTok{$}\NormalTok{TV))}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{s_xx)}
 
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0, }\DataTypeTok{y0 =}\NormalTok{ lw_bonf, }\DataTypeTok{x1 =}\NormalTok{ x0, }\DataTypeTok{y1 =}\NormalTok{ up_bonf, }\DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{5}\NormalTok{)}
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{0.25}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ lw_bonf, }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{0.25}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ lw_bonf, }
-         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
-\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{0.25}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ up_bonf, }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{0.25}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ up_bonf, }
-         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0, }\DataTypeTok{y0 =}\NormalTok{ lw_bonf, }\DataTypeTok{x1 =}\NormalTok{ x0, }\DataTypeTok{y1 =}\NormalTok{ up_bonf, }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{1.25}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ lw_bonf, }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{1.25}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ lw_bonf, }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\DataTypeTok{x0 =}\NormalTok{ x0}\OperatorTok{-}\FloatTok{1.25}\NormalTok{, }\DataTypeTok{y0 =}\NormalTok{ up_bonf, }\DataTypeTok{x1 =}\NormalTok{ x0}\OperatorTok{+}\FloatTok{1.25}\NormalTok{, }\DataTypeTok{y1 =}\NormalTok{ up_bonf, }
+         \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
 
 \KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"Dreapta de regresie"}\NormalTok{, }\StringTok{"95% t interval"}\NormalTok{, }
                                       \StringTok{"95% Scheffe interval"}\NormalTok{, }
                              \KeywordTok{paste0}\NormalTok{(m, }\StringTok{" intervale Bonferroni (95%)"}\NormalTok{)), }
-       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
-       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey30"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{, }\StringTok{"brown4"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }
-       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{), }
+       \DataTypeTok{lwd =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"royalblue"}\NormalTok{, }\StringTok{"grey50"}\NormalTok{, }\StringTok{"brown4"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }
+       \DataTypeTok{lty =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{), }
        \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-29-1} \end{center}
 
 \subsection{Diagnostic}\label{diagnostic}
 
@@ -1148,7 +1409,7 @@ satisfăcută vom trasa dreapta lui Henry (sau Q-Q plot-ul):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-27-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-30-1} \end{center}
 
 \begin{verbatim}
 [1]  36 179
@@ -1181,9 +1442,19 @@ trasa un grafic al reziduurilor versus valorile prezise (fitted), i.e.
 erorilor atunci ar trebui să vedem o variație constantă pe verticală
 (\(\hat{\varepsilon}\)).
 
+Tot în acest grafic putem observa dacă ipoteza de liniaritate este
+verificată (în caz de liniaritate între variabila răspuns și variabila
+explicativă nu are trebui să vedem o relație sistematică între reziduuri
+și valorile prezise - ceea ce nu se întâmplă în cazul nostru) ori dacă
+există o altă legătură structurală între variabila dependentă (răspuns)
+și cea independentă (predictor).
+
+În cazul aplicației noastre avem următoarea figură:
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(advertise_TV_model)}\OperatorTok{~}\KeywordTok{fitted}\NormalTok{(advertise_TV_model),  }\DataTypeTok{col =} \StringTok{"brown3"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(advertise_TV_model)}\OperatorTok{~}\KeywordTok{fitted}\NormalTok{(advertise_TV_model),  }
+     \DataTypeTok{col =} \StringTok{"grey70"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
      \DataTypeTok{xlab =} \StringTok{"Valori prezise (fitted)"}\NormalTok{,}
      \DataTypeTok{ylab =} \StringTok{"Reziduuri"}\NormalTok{, }
      \DataTypeTok{main =} \StringTok{"Reziduuri vs Valori prezise"}\NormalTok{,}
@@ -1193,15 +1464,51 @@ erorilor atunci ar trebui să vedem o variație constantă pe verticală
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-33-1} \end{center}
 
-Tot în acest grafic putem observa dacă ipoteza de liniaritate este
-verificată (în caz de liniaritate între variabila răspuns și variabila
-explicativă nu are trebui să vedem o relație sistematică între reziduuri
-și valorile prezise - ceea ce se și întâmplă în cazul nostru) ori dacă
-există o altă legătură structurală între variabila dependentă (răspuns)
-și cea independentă (predictor).
+Se poate observa că magnitudinea valorilor reziduale crește odată cu
+magnitudinea valorilor prezise (graficul are o formă de pâlnie) prin
+urmare ipoteza de homoscedasticitate nu este satisfăcută. O soluție în
+acest caz este de a transforma variabila răspuns \(Y\) cu ajutorul unei
+funcții concave, i.e. \(\log{Y}\) sau \(\sqrt{Y}\).
 
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{advertise_TV_model_log =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(sales) }\OperatorTok{~}\StringTok{ }\NormalTok{TV, }\DataTypeTok{data =}\NormalTok{ advertise)}
+\NormalTok{advertise_TV_model_sqrt =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(sales) }\OperatorTok{~}\StringTok{ }\NormalTok{TV, }\DataTypeTok{data =}\NormalTok{ advertise)}
+
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(advertise_TV_model_log)}\OperatorTok{~}\KeywordTok{fitted}\NormalTok{(advertise_TV_model_log),  }
+     \DataTypeTok{col =} \StringTok{"grey70"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }
+     \DataTypeTok{xlab =} \StringTok{"Valori prezise (fitted)"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Reziduuri"}\NormalTok{, }
+     \DataTypeTok{main =} \StringTok{"Reziduuri vs Valori prezise }\CharTok{\textbackslash{}n}\StringTok{(logaritm)"}\NormalTok{,}
+     \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
+
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =} \StringTok{"grey30"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(advertise_TV_model_sqrt)}\OperatorTok{~}\KeywordTok{fitted}\NormalTok{(advertise_TV_model_sqrt),  }
+     \DataTypeTok{col =} \StringTok{"grey70"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }
+     \DataTypeTok{xlab =} \StringTok{"Valori prezise (fitted)"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Reziduuri"}\NormalTok{, }
+     \DataTypeTok{main =} \StringTok{"Reziduuri vs Valori prezise }\CharTok{\textbackslash{}n}\StringTok{(radical)"}\NormalTok{,}
+     \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
+
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \DecValTok{0}\NormalTok{, }\DataTypeTok{col =} \StringTok{"grey30"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab_5_files/figure-latex/unnamed-chunk-34-1} \end{center}
+
+Observăm că în cazul transformării logaritmice
+(\(\log{Y}\approx \beta_0 + \beta_1 x + \varepsilon\)) reziduurile par
+să îndeplinească ipoteza de homoscedasticitate (au varianță constantă).
+Cu toate acestea, graficul prezintă dovezi ale unei relații neliniare
+între volumul vânzărilor și bugetul alocat publicității TV.
+
+\renewcommand\refname{Referințe}
 \bibliography{references/InstStatFin2018ref.bib}
 
 
