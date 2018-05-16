@@ -129,7 +129,7 @@ readings_lab4 = "[An empirical power comparison of univariate goodness-of-fit te
 
 lab5 = "[HTML](labs/Lab_5.html)"
 pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
-data_lab5 = ""
+data_lab5 = "[advertising.csv](labs/dataIn/advertising.csv)"
 readings_lab5 = ""
 
 tabLab = data.frame(Nr = c(1, 
@@ -185,7 +185,7 @@ Mai jos găsiți o parte din notele de seminar.
 ```{r echo = FALSE}
 sem1 = "[HTML](labs/Sem_1.html)"
 pdf_sem1 = "[PDF](labs/Sem_1.pdf)"
-data_sem1 = ""
+data_sem1 = "[ex_Greene.csv](labs/dataIn/ex_Greene.csv)"
 readings_sem1 = "Greene 2012, Capitolul 14"
 
 sem2 = "[HTML](labs/Sem_2.html)"
