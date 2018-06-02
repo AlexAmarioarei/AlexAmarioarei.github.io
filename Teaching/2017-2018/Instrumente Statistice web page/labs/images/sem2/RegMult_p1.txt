@@ -1,0 +1,47 @@
+\documentclass[10pt]{article}
+\usepackage{pgf,tikz,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\pagestyle{empty}
+\begin{document}
+\definecolor{qqttcc}{rgb}{0,0.2,0.8}
+\definecolor{rvwvcq}{rgb}{0.08235294117647059,0.396078431372549,0.7529411764705882}
+\definecolor{wrwrwr}{rgb}{0.3803921568627451,0.3803921568627451,0.3803921568627451}
+\definecolor{ffffff}{rgb}{1,1,1}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\begin{axis}[
+x=1cm,y=1cm,
+axis lines=middle,
+xmin=-8.208792346227185,
+xmax=12.951731737936896,
+ymin=-5.385617777226783,
+ymax=8.725978478900906,
+xtick={-8,-7,...,12},
+ytick={-5,-4,...,8},]
+\clip(-8.208792346227185,-5.385617777226783) rectangle (12.951731737936896,8.725978478900906);
+\fill[line width=0.4pt,color=wrwrwr] (-3.111029725951292,2.954926455947031) -- (-7.88,-2.76) -- (9.000353629433969,-2.83623402004636) -- (12.503805451422773,5.14911112376599) -- cycle;
+\draw [line width=0.8pt,color=wrwrwr] (-3.111029725951292,2.954926455947031)-- (-7.88,-2.76);
+\draw [line width=0.8pt,color=wrwrwr] (-7.88,-2.76)-- (9.000353629433969,-2.83623402004636);
+\draw [line width=0.8pt] (9.000353629433969,-2.83623402004636)-- (12.503805451422773,5.14911112376599);
+\draw [->,line width=0.8pt] (-0.48,2.1) -- (4.367784716065373,6.827338937966816);
+\draw [->,line width=0.8pt] (-0.48,2.1) -- (5.947688614639597,3.0646730742571426);
+\draw [->,line width=0.8pt] (-0.48,2.1) -- (2.9126100726417468,-1.217698019246686);
+\draw [line width=1.6pt,dash pattern=on 1pt off 1pt,color=rvwvcq] (4.3677847160653736,6.827338937966817)-- (4.346996506873608,1.2560988745734867);
+\draw [color=qqttcc](4.350116103724744,1.6907912509190397) node[anchor=north west] {$\hat{Y} = X\hat{\beta}$};
+\draw (2.082917094707164,-0.45274235760668535) node[anchor=north west] {$X\gamma$};
+\draw (1.4920712923571282,5.565640466330927) node[anchor=north west] {$Y$};
+\draw (5.916544509955072,3.3396632574772895) node[anchor=north west] {$X\alpha$};
+\draw (-5.446931735242132,-0.9886257597381166) node[anchor=north west] {$\mathcal{M}(X)$};
+\draw [->,line width=1.6pt,color=rvwvcq] (-0.48,2.1) -- (4.346996506873607,1.2560988745734867);
+\draw [->,line width=0.8pt] (-0.4728345154581079,2.08926865250395) -- (4.664831764124446,-0.3971230634362848);
+\draw (3.84171390170262,0.05565984441544173) node[anchor=north west] {$X\delta$};
+\draw [line width=1.2pt] (-2.877439525022208,7.750395875020608)-- (-2.808736524748948,1.0587236484050437);
+\draw (-4.869826532946748,7.970245475895042) node[anchor=north west] {$\mathcal{M}(X)^\perp$};
+\begin{scriptsize}
+\draw [color=ffffff] (-3.111029725951292,2.954926455947031) circle (0.5pt);
+\draw[color=ffffff] (-2.946142525295468,3.2915711572860076) node {$A$};
+\end{scriptsize}
+\end{axis}
+\end{tikzpicture}
+\end{document}

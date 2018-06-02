@@ -247,4 +247,19 @@
   pages   = {653--665},
 }
 
+@Book{Casella2001,
+  title     = {Statistical Inference},
+  publisher = {Duxbury Press},
+  year      = {2001},
+  author    = {George Casella and Roger L. Berger},
+  edition   = {2nd},
+}
+
+@Book{Turtoi2000,
+  title     = {O introducere in geometrie},
+  publisher = {Fundatia Theta},
+  year      = {2000},
+  author    = {Ornea, L. and Turtoi, A.},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -352,7 +352,7 @@ prin metoda celor mai mici pătrate. Astfel coeficienții \(\hat\beta_0\)
 lui \(Y\) pe subspațiul generat de vectorii \(\{\mathbf{1}, X\}\) (a se
 vedea figura de mai jos).
 
-\begin{center}\includegraphics[width=0.8\linewidth]{images/lab5/reg_int_geom5} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{images/sem2/reg_int_geom5} \end{center}
 
 Observăm că, în general, vectorii \(\{\mathbf{1}, X\}\) nu formează o
 bază ortogonală în \(\mathcal{M}(X)\) (cu excepția cazului în care
@@ -388,7 +388,8 @@ eșantionului sunt perfect aliniate) iar dacă \(R^2 = 0\), deducem că
 \(\hat y_i = \bar y\) (modelul liniar nu este adaptat în acest caz, nu
 putem explica mai bine decât media).
 
-\subsection{Exercițiul 1}\label{exercitiul-1}
+\subsection{Metoada celor mai mici
+pătrate}\label{metoada-celor-mai-mici-patrate}
 
 \begin{rmdexercise}
 Arătați că estimatorii obținuți prin metoda celor mai mici pătrate,
@@ -460,7 +461,7 @@ tot cu ajutorul metodei celor mai mici pătrate atunci când variem
 \(\sigma^2\) (în figura din stânga) și respectiv pe \(x_i\) în jurul lui
 \(\bar x\) (în figura din dreapta).
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Sem_2_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Sem_2_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Pentru a determina \(Var(\hat \beta_0)\), vom folosi relația
 \(\hat \beta_0 = \bar y - \hat \beta_1 \bar x\) ceea ce conduce la
@@ -612,9 +613,9 @@ Din necorelarea erorilor deducem că
   Var(\hat\varepsilon_{n+1}) = Var(y_{n+1} - \hat y_{n+1}) = Var(y_{n+1}) + Var(\hat y_{n+1}) = \sigma^2\left[1 + \frac{1}{n} + \frac{(x_{n+1} - \bar x)^2}{\sum_{i=1}^{n}(x_i - \bar x)^2}\right].
 \]
 
-\subsection{\texorpdfstring{Exercițiul 2: Coeficientul de determinare
-\(R^2\) și coeficientul de
-corelație}{Exercițiul 2: Coeficientul de determinare R\^{}2 și coeficientul de corelație}}\label{exercitiul-2-coeficientul-de-determinare-r2-si-coeficientul-de-corelatie}
+\hypertarget{reg_sim_ex_2}{\subsection{\texorpdfstring{Coeficientul de
+determinare \(R^2\) și coeficientul de
+corelație}{Coeficientul de determinare R\^{}2 și coeficientul de corelație}}\label{reg_sim_ex_2}}
 
 \begin{rmdexercise}
 Arătați că
@@ -670,6 +671,650 @@ De asemenea
 
 deducem că
 \(r_{y\hat y}^2 = \frac{\sum_{i = 1}^{n}(\hat y_i - \bar{y})^2}{\sum_{i = 1}^{n}(y_i - \bar y)^2} = R^2\).
+
+\subsection{Aplicații numerice}\label{aplicatii-numerice}
+
+\begin{rmdexercise}
+Tabelul de mai prezintă o serie de date privind greutatea taților și
+respectiv a fiului lor cel mare
+
+\[
+\begin{array}{lcccccccccccc}
+  Tata: & 65 & 63 & 67 & 64 & 68 & 62 & 70 & 66 & 68 & 67 & 69 & 71\\
+  Fiu: & 68 & 66 & 68 & 65 & 69 & 66 & 68 & 65 & 71 & 67 & 68 & 70
+\end{array}
+\]
+
+Obținem următoarele rezultate numerice
+
+\[
+  \sum_{i = 1}^{12}t_i = 800 \quad \sum_{i = 1}^{12}t_i^2 = 53418 \quad \sum_{i = 1}^{12}t_i f_i = 54107 \quad \sum_{i = 1}^{12}f_i = 811 \quad \sum_{i = 1}^{12}f_i^2 = 54849.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Determinați dreapta obținută prin metoda celor mai mici pătrate a
+  greutății fiilor în funcie de greutatea taților.
+\item
+  Determinați dreapta obținută prin metoda celor mai mici pătrate a
+  greutății taților în funcie de greutatea fiilor.
+\item
+  Arătați că produsul pantelor celor două drepte este egal cu pătratul
+  coeficientului de corelație empirică dintre \(t_i\) și \(f_i\) (sau
+  coeficientul de determinare).
+\end{enumerate}
+\end{rmdexercise}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Dreapta de regresie a greutății fiilor în funcție de greutatea taților
+  este \(f = \hat\alpha_0 + \hat\alpha_1 t\) unde coeficienții sunt dați
+  de
+\end{enumerate}
+
+\[
+  \hat\alpha_0 = \bar f - \hat\alpha_1 \bar t, \quad \hat\alpha_1 = \frac{\sum_{i = 1}^{12}(t_i - \bar t)(f_i - \bar f)}{\sum_{i = 1}^{12}(t_i - \bar t)^2}
+\]
+
+Pentru datele din problema noastră coeficienții sunt
+\(\hat\alpha_0 = 35.8\) și \(\hat\alpha_1 = 0.48\) iar dreapta de
+regresie este \(f = 35.8 + 0.48 t\) (a se vedea figura din stânga).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Dreapta de regresie a greutății taților în funcție de greutatea fiilor
+  este \(t = \hat\beta_0 + \hat\beta_1 f\) unde coeficienții sunt dați
+  de
+\end{enumerate}
+
+\[
+  \hat\beta_0 = \bar t - \hat\beta_1 \bar f, \quad \hat\beta_1 = \frac{\sum_{i = 1}^{12}(f_i - \bar f)(t_i - \bar t)}{\sum_{i = 1}^{12}(f_i - \bar f)^2}
+\]
+
+În cazul problemei, coeficienții sunt \(\hat\beta_0 = -3.38\) și
+\(\hat\beta_1 = 1.03\) iar dreapta de regresie este
+\(t = -3.38 + 1.03 f\) (a se vedea figura din mijloc).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Produsul pantelor celor două drepte este
+\end{enumerate}
+
+\[
+\hat \alpha_1 \hat\beta_1 = \frac{\left[\sum_{i = 1}^{12}(f_i - \bar f)(t_i - \bar t)\right]^2}{\sum_{i = 1}^{12}(f_i - \bar f)^2\sum_{i = 1}^{12}(t_i - \bar t)^2}
+\]
+
+și conform \protect\hyperlink{reg_sim_ex_2}{exercițiului 2} și a
+definiției coeficientului de determinare avem
+
+\[
+\hat \alpha_1 \hat\beta_1 = r_{f,t}^2= R^2.
+\]
+
+\begin{center}\includegraphics[width=0.9\linewidth]{Sem_2_files/figure-latex/unnamed-chunk-11-1} \end{center}
+
+\begin{rmdexercise}
+Dorim să exprimăm înălțimea \(y\) (măsurată în picioare) a unui arbore
+în funcție de diametrul său \(x\) (exprimat în centimetri) la înălțimea
+de 1m30 de la sol. Pentru aceasta dispunem de 20 de măsurători
+\((x_i,y_i)=\)(diametru, înălțime) și în urma calculelor am obținut
+rezultatele următoare: \(\bar x = 4.53\), \(\bar y = 8.65\) și
+
+\[
+\frac{1}{20}\sum_{i = 1}^{20}(x_i - \bar x)^2 = 10.97 \quad \frac{1}{20}\sum_{i = 1}^{20}(y_i - \bar y)^2 = 2.24 \quad \frac{1}{20}\sum_{i = 1}^{20}(x_i - \bar x)(y_i - \bar y) = 3.77.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Notăm cu \(y = \hat \beta_0 + \hat \beta_1 x\) dreapta de regresie.
+  Calculați coeficienții \(\hat \beta_0\) și \(\hat \beta_1\).
+\item
+  Dați și calculați o măsură care descrie calitatea concordanței datelor
+  cu modelul propus.
+\item
+  Să presupunem că abaterile standard pentru estimatorii
+  \(\hat \beta_0\) și \(\hat \beta_1\) sunt \(\hat \sigma_0 = 1.62\) și
+  respectiv \(\hat \sigma_1 = 0.05\). Presupunem că erorile
+  \(\varepsilon_i\) sunt variabile aleatoare independente repartizare
+  normal de medie \(0\) și varianțe egale. Vrem să testăm ipotezele
+  \(H_0:\, \beta_j = 0\) versus \(H_1:\, \beta_j \neq 0\) pentru
+  \(j = 0,1\). De ce acest test este interesant în contextul problemei
+  noastre?
+\end{enumerate}
+\end{rmdexercise}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimatorii coeficienților dreptei de regresie
+  \(y = \hat \beta_0 + \hat \beta_1 x\) sunt dați de
+\end{enumerate}
+
+\[
+  \hat \beta_1 = \frac{\sum_{i = 1}^{n}(x_i - \bar x)(y_i - \bar y)}{\sum_{i = 1}^{n}(x_i - \bar x)^2} \approx 0.344
+\]
+
+și respectiv
+
+\[
+  \hat \beta_0 = \bar y - \hat \beta_1 \bar x \approx 7.09
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Pentru a măsura calitatea concordanței datelor la modelul de regresie
+  vom folosi coeficientul de determinare \(R^2\). Am văzut că acesta
+  corespunde pătratului coeficientului de corelație empirică:
+\end{enumerate}
+
+\[
+  R^2 = r_{x,y}^2 = \left(\frac{\sum_{i = 1}^{n}(x_i - \bar x)(y_i - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_i - \bar x)^2}\sqrt{\sum_{i = 1}^{n}(y_i - \bar y)^2}}\right)^2 \approx 0.58.
+\]
+
+Observăm că modelul de regresie liniară simplă explică un pic mai mult
+de jumătate din variabilitatea datelor.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Sub ipoteza modelului condiționat normal (erorile \(\varepsilon_i\)
+  sunt variabile aleatoare independente repartizare normal de medie
+  \(0\) și varianțe egale) avem că
+  \(\hat\beta_j\sim\mathcal{N}(\beta_j, \sigma_{\hat\beta_j}^2)\) și
+  înlocuind varianțele \(\sigma_{\hat\beta_j}^2\) cu estimatorii
+  \(\hat\sigma_j^2\), deducem că
+  \(\frac{\hat\beta_j - \beta_j}{\hat\sigma_j}\sim t_{n-2}\).
+\end{enumerate}
+
+Prin urmare, sub \(H_0\) avem că
+
+\[
+\frac{\hat\beta_0}{\hat\sigma_0}\sim t_{18},
+\]
+
+iar pentru un prag de semnificație \(1-\alpha = 95\%\), ținând seama că
+\(\left|\frac{\hat\beta_0}{\hat\sigma_0}\right|\approx 4.38\) și că
+\(t_{18}(1-\alpha/2)\approx 2.1\), concluzionăm că respingem ipoteza
+nulă.
+
+În mod similar, pentru \(\hat\beta_1\) găsim că
+
+\[
+\left|\frac{\hat\beta_1}{\hat\sigma_1}\right|\approx 6.88 > 2.1
+\]
+
+de unde respingem ipoteza nulă \(H_0:\, \beta_1 = 0\) în acest caz de
+asemenea.
+
+\begin{center}\includegraphics[width=0.9\linewidth]{Sem_2_files/figure-latex/unnamed-chunk-13-1} \end{center}
+
+\section{Regresie liniară multiplă}\label{regresie-liniara-multipla}
+
+Principiul problemei de regresie este de a modela o variabilă \(y\),
+numită variabilă răspuns sau variabilă dependentă (cea pe care vrem să o
+explicăm), cu ajutorul unei funcții care depinde de un anumit număr de
+variabile \(\boldsymbol x = (x_1,\ldots, x_p)^\intercal\), numite
+variabile explicative sau predictori sau independente (vom folosi în
+general primele două denumiri)
+
+\[
+  y\approx g(\boldsymbol x) = g(x_1,\ldots, x_p).
+\] Astfel având dat un eșantion de talie \(n\) de \((p+1)\)-upluri
+\((\boldsymbol x, y)\), \(n>p\), ne propunem să determinăm \(g\).
+Aproximarea, \(\approx\), din relația anterioară se poate descrie
+matematic sub forma
+
+\[
+  g = \underset{f\in\mathcal{G}}{\arg\min}\sum_{i = 1}^{n}L\left(y_i - f(\boldsymbol x_i)\right)
+\]
+
+unde \(L(\cdot)\) se numește funcție de cost sau de pierdere iar
+\(\mathcal{G}\) este o clasă de funcții dată.
+
+În general funcția de cost poate lua multe forme, e.g.
+\href{https://en.wikipedia.org/wiki/Loss_function}{Loss function}, dar
+de cele mai multe ori vom întâlni două: funcția de cost absolut
+\(L(x) = |x|\) sau funcția de cost pătratic \(L(x) = x^2\).
+
+În ceea ce privește clasa de funcții \(\mathcal{G}\) vom considera
+funcțiile liniare
+
+\[
+\mathcal{G} = \left\{f:\mathbb{R}^p\to \mathbb{R}\,|\, f(\boldsymbol x) = \begin{pmatrix}1 & \boldsymbol x\end{pmatrix} \boldsymbol \beta = \beta_0 + \beta_1 x_1 +\cdots + \beta_p x_p\right\}.
+\]
+
+Atunci când vorbim de regresie liniară ne referim la liniaritatea în
+parametrii \(\beta_j\) și nu în variabilele explicative, e.g.
+\(f_1(x_1,x_2) = \beta_0 + \beta_1 x_1 + \beta_2 x_2\),
+\(f_2(x_1, x_2) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 \underbrace{x_1 x_2}_{x_3}\)
+sau
+\(f_3(x_1, x_2) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 \underbrace{x_1 x_2}_{x_3}+ \beta_4 \underbrace{x_1^2}_{x_4}+ \beta_5 \underbrace{x_2^3}_{x_5}\)
+sunt toate funcții liniare în \(\boldsymbol\beta\).
+
+\subsection{Modelare}\label{modelare}
+
+Modelul de regresie liniară multiplă reprezintă o extensie a modelului
+de regresie liniară simplă atunci când numărul variabilelor explicative
+este finit. Presupunem că datele verifică modelul
+
+\[
+  y_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} + \varepsilon_i, \quad i = 1,2,\ldots,n
+\] unde
+
+\begin{itemize}
+\item
+  \(x_{ij}\) sunt valori cunoscute și nu sunt aleatoare
+\item
+  parametrii \(\beta_j\) sunt necunoscuți și nu sunt aleatori
+\item
+  \(\varepsilon_i\) sunt variabile aleatoare necunoscute
+\end{itemize}
+
+Scris sub formă compactă modelul devine
+
+\[
+  \boldsymbol Y = \boldsymbol X\boldsymbol \beta + \boldsymbol \varepsilon
+\]
+
+unde
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbf{X}\) se numește \emph{matricea de design}
+\end{itemize}
+
+\[
+\mathbf{X}=\begin{pmatrix}
+1 & x_{11} & \cdots & x_{1p}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & x_{n1} & \cdots & x_{np}
+\end{pmatrix}_{n\times(p+1)}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbf{Y}\) este \emph{vectorul răspuns} și este un vector aleator,
+  \(\boldsymbol\beta\) este \emph{vectorul parametrilor} sau
+  coeficienților și este necunoscut iar \(\boldsymbol\varepsilon\) este
+  \emph{vectorul erorilor} și este un vector aleator
+\end{itemize}
+
+\[
+\mathbf{Y}=\begin{pmatrix}
+Y_1 \\
+\vdots \\
+Y_n
+\end{pmatrix}_{n\times 1},\quad\boldsymbol\beta=\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_p
+\end{pmatrix}_{(p+1)\times 1}\text{ și }\quad
+\boldsymbol\varepsilon=\begin{pmatrix}
+\varepsilon_1 \\
+\vdots \\
+\varepsilon_n
+\end{pmatrix}_{n\times 1}.
+\]
+
+Ipotezele modelului de regresie liniară multiplă sunt:
+
+\[
+  \begin{array}{ll}
+    \mathcal{H}_1: \, rang(\boldsymbol X) = p+1\\
+    \mathcal{H}_2: \, \mathbb{E}[\boldsymbol \varepsilon] = 0,\, Var(\boldsymbol \varepsilon) = \sigma^2 I_n
+  \end{array}
+\]
+
+Prima ipoteză ne spune că matricea de design \(\boldsymbol X\) are
+coloanele liniar independente iar a doua ipoteză se referă la
+centralitatea erorilor (medie nulă), homoscedasticitatea (aceeași
+varianță) și necorelarea acestora.
+
+\subsection{Metoda celor mai mici
+pătrate}\label{metoda-celor-mai-mici-patrate}
+
+În această secțiune vom prezenta estimatorul lui \(\boldsymbol \beta\)
+obținut prin metoda celor mai mici pătrate, metodă care folosește ca
+funcție de cost \(L\) funcția \(L(x) = x^2\). Estimatorul
+\(\hat{\boldsymbol \beta}\) obținut prin metoda celor mai mici pătrate
+este definit prin
+
+\[
+  \hat{\boldsymbol \beta} = \underset{\boldsymbol\beta\in\mathbb{R}^{p+1}}{\arg\min}\sum_{i = 1}^{n}\left[y_i - \left(\beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}\right)\right]^2 = \underset{\boldsymbol\beta\in\mathbb{R}^{p+1}}{\arg\min}\sum_{i = 1}^{n}\left(y_i - \sum_{j= 0}^{p}\beta_j x_{ij}\right)^2 = \underset{\boldsymbol\beta\in\mathbb{R}^{p+1}}{\arg\min}\left\lVert \boldsymbol Y - \boldsymbol X \boldsymbol\beta\right\rVert^2
+\]
+
+unde am folosit convenția \(x_{i0} = 1\), \(i = 1,2,\ldots,n\).
+
+\begin{rmdexercise}
+Arătați că dacă ipoteza \(\mathcal{H}_1\) este adevărată atunci
+estimatorul \(\hat{\boldsymbol \beta}\) obținut prin metoda celor mai
+mici pătrate este
+
+\[
+  \hat{\boldsymbol \beta} = (\boldsymbol{X}^\intercal \boldsymbol X)^{-1}\boldsymbol{X}^\intercal \boldsymbol Y
+\]
+\end{rmdexercise}
+
+Ne propunem să prezentăm mai multe metode de calcul pentru estimatorul
+\(\hat{\boldsymbol \beta}\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Metoda geometrică
+\end{enumerate}
+
+Din punct de vedere geometric, ne plasăm în spațiul variabilelor
+\(\mathbb{R}^n\) (am presupus că \(n>p\))). Vectorul variabilelor
+răspuns \(\boldsymbol Y\in \mathbb{R}^n\) iar matricea de design
+\(\boldsymbol{X}\) poate fi văzută ca fiind formată din \(p+1\) vectori
+coloană,
+\(\boldsymbol{X} = \left[\underbrace{\boldsymbol X_0}_{\mathbf{1} = (1,\cdots,1)}|\boldsymbol X_1|\cdots|\boldsymbol X_p\right]\).
+
+Începem prin a reaminti câteva noțiuni de algebră liniară, pentru mai
+multe detalii se poate consulta monografia \citep{Turtoi2000}. Fiind
+dată matricea (de design)
+\(\boldsymbol{X}\in\mathcal{M}_{n,p+1}(\mathbb{R})\) putem defini
+nucleul matricei
+
+\[
+\ker(\boldsymbol{X}) = \left\{\boldsymbol u\in\mathbb{R}^{p+1}\,|\, \boldsymbol{X}\boldsymbol u = 0\right\}
+\]
+
+ca fiind subspațiul lui \(\mathbb{R}^{p+1}\) care conține vectorii
+ortogonali pe liniile din matricea \(\boldsymbol{X}\). De asemenea,
+imaginea matricei \(\boldsymbol{X}\) este subspațiul vectorilor din
+\(\mathbb{R}^n\) care se pot scrie ca o combinație liniară de coloanele
+matricei \(\boldsymbol{X}\) și este definit prin
+
+\[
+\mathrm{Im}(\boldsymbol{X}) = \left\{\boldsymbol v\in\mathbb{R}^{n}\,|\,\exists \boldsymbol u\in\mathbb{R}^{p+1} \text{ a.î. } \boldsymbol{X}\boldsymbol u = \boldsymbol v\right\}.
+\]
+
+Se poate arăta (a se vedea \citep[Capitolul 1]{Turtoi2000}) că
+\(\dim \ker(\boldsymbol{X}) = p + 1 - \mathrm{rang}(\boldsymbol{X})\) și
+că \(\dim \mathrm{Im}(\boldsymbol{X}) = \mathrm{rang}(\boldsymbol{X})\)
+ceea ce conduce la
+\(\dim \ker(\boldsymbol{X}) + \dim \mathrm{Im}(\boldsymbol{X}) = p+1\)
+(caz particular al \emph{teoremei lui Grassman}).
+
+Reamintim că doi vectori \(\boldsymbol u\) și \(\boldsymbol v\) sunt
+ortogonali dacă \(\langle \boldsymbol u, \boldsymbol v\rangle = 0\), iar
+în acest caz scriem \(\boldsymbol u \perp \boldsymbol v\), și că două
+subspații \(V\) și \(W\) sunt ortogonale dacă
+\(\forall \boldsymbol v \in V\) și respectiv
+\(\forall \boldsymbol w \in W\) avem
+\(\boldsymbol v\perp \boldsymbol w\) și notăm \(V\perp W\). De asemenea,
+spațiul ortogonal al lui \(V\) este spațiul \(V^{\perp}\) care conține
+toți vectorii ortogonali pe \(V\) și are ca proprietăți:
+\(V\cap V^{\perp} = \{0\}\) și \(\left(V^{\perp}\right)^\perp = V\). Se
+poate arăta cu ușurință că dacă \(V\) este un subspațiu a lui
+\(W\subset\mathbb{R}^n\) atunci pentru orice vector
+\(\boldsymbol w\in W\) avem că
+\(\boldsymbol w = \boldsymbol v + \boldsymbol v^\perp\) unde
+\(\boldsymbol v\in V\) și \(\boldsymbol v^\perp\in V^\perp\) iar
+descompunerea se face în mod unic (acest rezultat se mai scrie și sub
+forma \(W = V\oplus V^\perp\)).
+
+Spunem că o matrice pătratică \(P\in\mathcal{M}_{n}(\mathbb{R})\) este o
+matrice de proiecție dacă este idempotentă \(P^2 = P\) (numele vine de
+la faptul că pentru \(\boldsymbol x\in\mathbb{R}^n\) aplicația liniară
+\(P\boldsymbol x\) este proiecția lui \(\boldsymbol x\) pe
+\(\mathrm{Im}(P)\) de-a lungul lui \(\ker(P)\) - a se vedea
+\citep[Capitolul 1, Secțiunea 5.2]{Turtoi2000}). Dacă în plus matricea
+\(P\) este simetrică, i.e. \(P = P^\intercal\), atunci
+\(P\boldsymbol x\) este proiecția ortogonală a lui \(\boldsymbol x\) pe
+\(\mathrm{Im}(P)\) de-a lungul lui \(\ker(P)\), cu alte cuvinte în
+descompunerea \(\boldsymbol x = P\boldsymbol x + (I - P)\boldsymbol x\)
+vectorii \(P\boldsymbol x\) și respectiv \((I - P)\boldsymbol x\) sunt
+ortogonali. Prin urmare matricea \(P\) este o matrice de proiecție
+ortogonală dacă are loc relația
+\(\boldsymbol v\perp \boldsymbol v - P\boldsymbol v\) adică
+\(\langle\boldsymbol v, \boldsymbol v - P\boldsymbol v\rangle = 0\)
+pentru toți \(\boldsymbol v\).
+
+Dacă \(\boldsymbol{X}\in\mathcal{M}_{m,k}(\mathbb{R})\) este o matrice
+de \(\mathrm{rang}(\boldsymbol{X}) = k\) (\(m\geq k\)) atunci pentru a
+determina matricea de proiecție ortogonală pe subspațiul imagine
+\(\mathrm{Im}(\boldsymbol{X})\) să observăm că
+\(\langle\boldsymbol{X}\boldsymbol v, \boldsymbol{X}\boldsymbol v - P_X\boldsymbol{X}\boldsymbol v\rangle = 0\)
+pentru toți \(\boldsymbol{v}\), cu alte cuvinte
+\(\boldsymbol{X}^\intercal(I - P_X)\boldsymbol{X} = 0\) și cum
+\(\boldsymbol{X}^\intercal\boldsymbol{X}\) este inversabilă găsim că
+
+\[
+  P_{X} = \boldsymbol{X}\left(\boldsymbol{X}^\intercal\boldsymbol{X}\right)^{-1}\boldsymbol{X}^\intercal
+\]
+
+iar matricea de proiecție ortogonală pe \(\ker(\boldsymbol{X})\) este
+\(I - P_{X}\). Să observăm că dacă \(\boldsymbol{X} = \boldsymbol{v}\)
+atunci
+
+\[
+  P_v = \boldsymbol{v}\left(\boldsymbol{v}^\intercal\boldsymbol{v}\right)^{-1}\boldsymbol{v}^\intercal = \frac{\boldsymbol{v}\boldsymbol{v}^\intercal}{\lVert\boldsymbol{v}\rVert^2}
+\] iar proiecția vectorului \(\boldsymbol{u}\) pe \(\boldsymbol{v}\)
+este
+\(P_v\boldsymbol{u} = \frac{\boldsymbol{v}\boldsymbol{v}^\intercal}{\lVert\boldsymbol{v}\rVert^2}\boldsymbol{u} = \frac{\langle\boldsymbol{u}, \boldsymbol{v}\rangle}{\lVert\boldsymbol{v}\rVert^2}\boldsymbol{v}\).
+
+Pentru problema noastră, notăm cu
+\(\mathcal{M}(X) = \mathrm{Im}(\boldsymbol{X})\) subspațiul imagine și
+conform ipotezei \(\mathcal{H}_1\) avem că
+\(\mathrm{rang}(\boldsymbol{X}) = p+1\), deci
+\(\dim \mathcal{M}(X) = p+1\). Din definiția spațiului imagine avem că
+toți vectorii din \(\mathcal{M}(X)\) sunt de forma
+\(\boldsymbol X \boldsymbol\alpha\), cu
+\(\boldsymbol \alpha = (\alpha_0, \alpha_1,\ldots, \alpha_p)\in\mathbb{R}^{p+1}\)
+
+\[
+  \boldsymbol X \boldsymbol\alpha = \sum_{i = 0}^{p}\alpha_i \boldsymbol X_i.
+\]
+
+Conform modelului de regresie,
+\(\boldsymbol Y = \boldsymbol X\boldsymbol \beta + \boldsymbol \varepsilon\),
+vectorul răspuns \(\boldsymbol Y\) este suma dintre un element din
+\(\mathcal{M}(X)\) și un element din \(\mathbb{R}^n\) care nu are niciun
+motiv să aparțină tot lui \(\mathcal{M}(X)\). Astfel problema
+minimizării funcției
+\(S(\boldsymbol \beta) = \left\lVert \boldsymbol Y - \boldsymbol X \boldsymbol\beta\right\rVert^2\)
+revine la a găsi acel vector din \(\mathcal{M}(X)\) care este cel mai
+aproape de \(\boldsymbol Y\) în sensul distanței euclidiene, cu alte
+cuvinte de a determina vectorul proiecției ortogonale a lui
+\(\boldsymbol Y\) pe \(\mathcal{M}(X)\) (a se vedea figura de mai jos).
+Proiecția ortogonală a lui \(\boldsymbol Y\) pe \(\mathcal{M}(X)\) se
+notează cu \(\hat{\boldsymbol Y} = P_X \boldsymbol X\), unde \(P_X\)
+este matricea de proiecție ortogonală pe \(\mathcal{M}(X)\). Să remarcăm
+că \(\hat{\boldsymbol Y}\in\mathcal{M}(X)\) putem scrie
+\(\hat{\boldsymbol Y} = \boldsymbol X\hat{\boldsymbol \beta}\) unde
+\(\hat{\boldsymbol \beta}\) reprezintă estimatorul obținut prin metoda
+celor mai mici pătrate (sunt coordonatele lui \(\hat{\boldsymbol Y}\) în
+baza \(\{\boldsymbol X_0, \boldsymbol X_1,\ldots, \boldsymbol X_p\}\) a
+spațiului \(\mathcal{M}(X)\)). Spațiul ortogonal
+\(\mathcal{M}(X)^\perp\) se mai numește și spațiul reziduurilor și are
+dimensiunea \(\dim \mathcal{M}(X)^\perp = n - (p+1)\) (\emph{teorema lui
+Grassman}).
+
+\begin{center}\includegraphics[width=0.8\linewidth]{images/sem2/RegMult_p1} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Metoda analitică
+\end{enumerate}
+
+O a doua metodă este metoda analitică. Problema noastră cere să căutăm
+vectorul \(\boldsymbol \beta\in\mathbb{R}^{p+1}\) care minimizează
+funcția
+
+\begin{align*}
+S(\boldsymbol \beta) &= \left\lVert \boldsymbol Y - \boldsymbol X \boldsymbol\beta\right\rVert^2 = \left(\boldsymbol Y - \boldsymbol X \boldsymbol\beta\right)^\intercal\left(\boldsymbol Y - \boldsymbol X \boldsymbol\beta\right) = \boldsymbol Y^\intercal \boldsymbol Y - \boldsymbol Y^\intercal \boldsymbol X \boldsymbol\beta - \boldsymbol \beta^\intercal \boldsymbol X^\intercal \boldsymbol Y + \boldsymbol \beta^\intercal \boldsymbol X^\intercal \boldsymbol X \boldsymbol\beta \\
+  & = \boldsymbol \beta^\intercal \boldsymbol X^\intercal \boldsymbol X \boldsymbol\beta - 2 \boldsymbol Y^\intercal \boldsymbol X \boldsymbol\beta + \lVert  \boldsymbol Y \rVert^2
+\end{align*}
+
+unde am folosit faptul că
+\(\boldsymbol Y^\intercal \boldsymbol X \boldsymbol\beta = \left(\boldsymbol Y^\intercal \boldsymbol X \boldsymbol\beta\right)^\intercal = \boldsymbol \beta^\intercal \boldsymbol X^\intercal \boldsymbol Y\)
+(sunt elemente de dimensiune \(1\times 1\)). Pentru aceasta trebuie să
+rezolvăm ecuația \(\nabla S(\boldsymbol \beta) = 0\) și să verificăm că
+soluția este într-adevăr punct de minim.
+
+Reamintim că dacă \(f:\mathbb{R}^k\to\mathbb{R}\) atunci
+
+\[
+\nabla f = \frac{\partial f}{\partial \boldsymbol x^\intercal} = \begin{pmatrix}\frac{\partial f}{\partial x_1} & \frac{\partial f}{\partial x_2} & \cdots & \frac{\partial f}{\partial x_k}\end{pmatrix}.
+\]
+
+În particular, pentru
+\(f(\boldsymbol x) = \boldsymbol a^\intercal \boldsymbol x\) (formă
+liniară) avem
+
+\[
+  \nabla f = \frac{\partial \boldsymbol a^\intercal \boldsymbol x}{\partial \boldsymbol x^\intercal} = \begin{pmatrix}\frac{\partial \sum_{i=1}^{k}a_i x_i}{\partial x_1} & \frac{\partial \sum_{i=1}^{k}a_i x_i}{\partial x_2} & \cdots & \frac{\partial \sum_{i=1}^{k}a_i x_i}{\partial x_k}\end{pmatrix} = \boldsymbol a^\intercal
+\]
+
+iar
+\(\frac{\partial \boldsymbol a^\intercal \boldsymbol x}{\partial \boldsymbol x} = \boldsymbol a\).
+
+În cazul în care \(f\) este o aplicație liniară,
+\(f(\boldsymbol x) = A \boldsymbol x\) unde
+\(A\in\mathcal{M}_{m,k}(\mathbb{R})\), atunci
+
+\[
+  A \boldsymbol x = \begin{pmatrix}\sum_{j=1}^{k}a_{1j} x_j\\
+  \sum_{j=1}^{k}a_{2j} x_j\\
+  \vdots\\
+  \sum_{j=1}^{k}a_{mj} x_j\end{pmatrix}, \qquad \frac{\partial A \boldsymbol x}{\partial x_j} = \begin{pmatrix}a_{1j}\\
+  a_{2j}\\
+  \vdots\\
+  a_{mj}\end{pmatrix}
+\]
+
+și
+
+\[
+  \frac{\partial A \boldsymbol x}{\partial \boldsymbol x^\intercal} = \begin{pmatrix}\begin{pmatrix}a_{11}\\
+  a_{21}\\
+  \vdots\\
+  a_{m1}\end{pmatrix}, \ldots, \begin{pmatrix}a_{1j}\\
+  a_{2j}\\
+  \vdots\\
+  a_{mj}\end{pmatrix}, \ldots, \begin{pmatrix}a_{1k}\\
+  a_{2k}\\
+  \vdots\\
+  a_{mk}\end{pmatrix}\end{pmatrix} = \begin{pmatrix}a_{11} & \cdots & a_{1j} & \cdots & a_{1k}\\
+  \vdots & \ddots & \vdots & \ddots & \vdots\\
+  a_{i1} & \cdots & a_{ij} & \cdots & a_{ik}\\
+  \vdots & \ddots & \vdots & \ddots & \vdots\\
+  a_{m1} & \cdots & a_{mj} & \cdots & a_{mk}
+  \end{pmatrix} = A.
+\]
+
+În mod similar se poate verifica și relația
+\(\frac{\partial \boldsymbol x^\intercal A^\intercal}{\partial \boldsymbol x} = A^\intercal\).
+
+Dacă \(f\) este o formă pătratică
+\(f(\boldsymbol x) = \boldsymbol x^\intercal A \boldsymbol x\) cu
+\(A\in\mathcal{M}_{k}(\mathbb{R})\) (matrice pătratică de ordin \(k\)),
+atunci
+
+\[
+  \boldsymbol x^\intercal  A \boldsymbol x = \sum_{i = 1}^{k}\sum_{j = 1}^{k}a_{ij}x_ix_j = \sum_{i = 1}^{k}a_{ii}x_i^2 + \sum_{i = 1}^{k}\sum_{\substack{j = 1\\ j\neq i}}^{k}a_{ij}x_ix_j 
+\]
+
+de unde
+
+\[
+  \frac{\partial \boldsymbol x^\intercal  A \boldsymbol x}{\partial x_r} = 2 a_{rr}x_r + \sum_{j\neq r}a_{rj}x_j + \sum_{i\neq r}a_{ir}x_i = \sum_{j = 1}^{k}a_{rj}x_j + \sum_{i = 1}^{k}a_{ir}x_i
+\]
+
+prin urmare
+
+\[
+  \frac{\partial \boldsymbol x^\intercal  A \boldsymbol x}{\partial \boldsymbol x} = \begin{pmatrix}\frac{\partial \boldsymbol x^\intercal  A \boldsymbol x}{\partial x_1}\\
+  \vdots\\
+  \frac{\partial \boldsymbol x^\intercal  A \boldsymbol x}{\partial x_k}\end{pmatrix} = \begin{pmatrix}\sum_{j = 1}^{k}a_{1j}x_j + \sum_{i = 1}^{k}a_{i1}x_i\\
+  \vdots\\
+  \sum_{j = 1}^{k}a_{kj}x_j + \sum_{i = 1}^{k}a_{ik}x_i\end{pmatrix} = A\boldsymbol x + A^\intercal \boldsymbol x.
+\]
+
+De asemenea putem observa că
+\(\frac{\partial \boldsymbol x^\intercal A \boldsymbol x}{\partial \boldsymbol x^\intercal} = \left(A\boldsymbol x + A^\intercal \boldsymbol x\right)^\intercal = \boldsymbol x^\intercal A^\intercal + \boldsymbol x^\intercal A\).
+
+În plus, dacă \(A\in\mathcal{M}_{k}(\mathbb{R})\) este o matrice
+simetrică (\(A^\intercal = A\)) atunci
+
+\[
+  \frac{\partial \boldsymbol x^\intercal  A \boldsymbol x}{\partial \boldsymbol x} = 2A\boldsymbol x, \quad \frac{\partial \boldsymbol x^\intercal  A \boldsymbol x}{\partial \boldsymbol x^\intercal} = 2\boldsymbol x^\intercal A^\intercal.
+\]
+
+Revenind la problema noastră observăm că \(S(\boldsymbol \beta)\) este
+pătratică în \(\boldsymbol \beta\) iar matricea
+\(\boldsymbol X^\intercal \boldsymbol X\) este simetrică, prin urmare
+
+\[
+\nabla S(\boldsymbol \beta) = \frac{\partial S(\boldsymbol \beta)}{\partial \boldsymbol \beta^\intercal} = \frac{\partial }{\partial \boldsymbol \beta^\intercal}\left(\boldsymbol \beta^\intercal \boldsymbol X^\intercal \boldsymbol X \boldsymbol\beta - 2 \boldsymbol Y^\intercal \boldsymbol X \boldsymbol\beta + \lVert  \boldsymbol Y \rVert^2\right) = 2 \boldsymbol \beta^\intercal (\boldsymbol X^\intercal \boldsymbol X)  - 2 \boldsymbol Y^\intercal \boldsymbol X = 0 
+\]
+
+este echivalentă cu \emph{sistem de ecuații normale} (prin trecerea la
+transpusă)
+
+\[
+(\boldsymbol X^\intercal \boldsymbol X)\boldsymbol \beta = \boldsymbol X^\intercal\boldsymbol Y
+\]
+
+care atunci când ipoteza \(\mathcal{H}_1\) este adevărată, ceea ce
+conduce la inversabilitatea matricei
+\(\boldsymbol X^\intercal \boldsymbol X\) (are valori proprii nenule),
+revine la
+
+\[
+\hat{\boldsymbol \beta} = (\boldsymbol X^\intercal \boldsymbol X)^{-1} \boldsymbol X^\intercal \boldsymbol Y.
+\]
+
+Pentru a arăta că \(\hat{\boldsymbol \beta}\) este într-adevăr un punct
+de minim pentru \(S(\boldsymbol \beta)\) trebuie să arătăm că matricea
+hessiană este pozitiv definită. Matricea hessiană, ținând cont de
+simetria matricii \(\boldsymbol X^\intercal \boldsymbol X\), este
+
+\[
+  \frac{\partial^2 S(\boldsymbol \beta)}{\partial \boldsymbol \beta\partial \boldsymbol \beta^\intercal} = \frac{\partial}{\partial \boldsymbol \beta}\left(\frac{\partial S(\boldsymbol \beta)}{\partial \boldsymbol \beta^\intercal}\right) = \frac{\partial}{\partial \boldsymbol \beta}\left(2 \boldsymbol \beta^\intercal (\boldsymbol X^\intercal \boldsymbol X)  - 2 \boldsymbol Y^\intercal \boldsymbol X\right) =  2 \boldsymbol X^\intercal \boldsymbol X
+\]
+
+iar pentru \(\boldsymbol u\in\mathbb{R}^{p+1}\backslash\{0\}\) avem
+
+\[
+  \boldsymbol u^\intercal \frac{\partial^2 S(\boldsymbol \beta)}{\partial \boldsymbol \beta\partial \boldsymbol \beta^\intercal} \boldsymbol u = \boldsymbol u^\intercal \left(2 \boldsymbol X^\intercal \boldsymbol X\right) \boldsymbol u  = \langle \boldsymbol X\boldsymbol u, \boldsymbol X\boldsymbol u\rangle = 2\lVert \boldsymbol X\boldsymbol u\rVert^2 > 0
+\] deci \(\boldsymbol X^\intercal \boldsymbol X\) este pozitiv definită
+prin urmare și
+\(\frac{\partial^2 S(\boldsymbol \beta)}{\partial \boldsymbol \beta\partial \boldsymbol \beta^\intercal}\)
+este pozitiv definită.
+
+\subsection{Interpretări geometrice}\label{interpretari-geometrice-1}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{images/sem2/RegMult_p2} \end{center}
+
+\subsection{Modelul condiționat
+normal}\label{modelul-conditionat-normal}
 
 \bibliography{references/InstStatFin2018ref.bib}
 
