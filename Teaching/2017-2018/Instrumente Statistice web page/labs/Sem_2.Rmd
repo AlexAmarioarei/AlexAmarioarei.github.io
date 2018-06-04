@@ -2317,7 +2317,7 @@ $$
 Pentru a putea utiliza această statistică de test este necesar să determinăm repartiția sa sub ipoteza nulă. Notând cu $P_X$ și respectiv $P_{X_0}$ matricele de proiecție ortogonală pe $\mathcal{M}(X)$ și $\mathcal{M}(X_0)$, știm că 
 
 $$
-  \hat{\boldsymbol Y} - \hat{\boldsymbol Y}_0 = P_X\boldsymbol Y - P_{X_0}\boldsymbol Y
+  \hat{\boldsymbol Y} - \hat{\boldsymbol Y}_0 = P_X\boldsymbol Y - P_{X_{0}}\boldsymbol Y
 $$
 
 și cum $\mathcal{M}(X_0)\subset \mathcal{M}(X)$, deci $P_{X_0}\boldsymbol Y = P_{X_0}P_{X}\boldsymbol Y$ și 
