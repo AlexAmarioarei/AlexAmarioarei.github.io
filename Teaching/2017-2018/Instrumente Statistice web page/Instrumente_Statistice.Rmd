@@ -97,12 +97,6 @@ knitr::include_graphics("images/null_hypothesis.png")
 
  *  _Sala_ : 204
  
-### Prezentare UniCredit Consumer Financing 
-
-Mai jos găsiți prezentarea domnului Viorel Dediu, Head of Credit Risk Management Function:
-
-> Prezentare UniCredit Consumer Financing [PDF](presentation/Prezentare.pdf)
- 
 ## Note de laborator 
 ***
 
@@ -138,47 +132,36 @@ pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
 data_lab5 = "[advertising.csv](labs/dataIn/advertising.csv)"
 readings_lab5 = ""
 
-lab6 = "[HTML](labs/Lab_6.html)"
-pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
-data_lab6 = ""
-readings_lab6 = "[Species number and endemism: The Galapagos arhipelago revisited](labs/readings/Species.pdf)"
-
 tabLab = data.frame(Nr = c(1, 
                            2, 
                            3, "",
                            4,
-                           5,
-                           6),
+                           5),
                     Lab = c("Laborator 1", 
                             "Laborator 2", 
                             "Laborator 3", "",
                             "Laborator 4",
-                            "Laborator 5",
-                            "Laborator 6"),
+                            "Laborator 5"),
                     Htmls = c(lab1, 
                               lab2, 
                               lab3, "",
                               lab4,
-                              lab5,
-                              lab6),
+                              lab5),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2, 
                              pdf_lab3, "",
                              pdf_lab4,
-                             pdf_lab5,
-                             pdf_lab6),
+                             pdf_lab5),
                     data = c(data_lab1, 
                              data_lab2, 
                              data_lab3, data_lab3_b,
                              data_lab4,
-                             data_lab5,
-                             data_lab6), 
+                             data_lab5), 
                     readings = c(readings_lab1, 
                                  readings_lab2, 
                                  readings_lab3, readings_lab3_b,
                                  readings_lab4,
-                                 readings_lab5,
-                                 readings_lab6))
+                                 readings_lab5))
 
 
 # kable(tabLab, 
@@ -232,9 +215,6 @@ kableExtra::kable(tabSem, "html",
 
 ```
 
-> **TABELE STATISTICE** Vizualizați versiunea [HTML](tables/Tabele_Statistice.html) sau [PDF](tables/Tabele_Statistice_v2_stat.pdf).
-
-
 ## Proiect de laborator
 
 Mai jos găsiți proiectul cursului de *Instrumente Statistice pentru Finanțe*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
@@ -249,15 +229,9 @@ tabProiecte = data.frame(Proiect = c(proj1_403),
                          Data = c(dproj1_403), 
                          Time = c(proj1data_403))
 
-# kable(tabProiecte, 
-#       col.names = c("Proiect", "Date", "Data de predare"),
-#       align = "ccc")
-
-kableExtra::kable(tabProiecte, "html",
+kable(tabProiecte, 
       col.names = c("Proiect", "Date", "Data de predare"),
-      align = "ccc", 
-      booktabs = TRUE) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+      align = "ccc")
 ```
 
 Trimiterea proiectelor se va face pe adresa de **Dropbox** (conform instrucțiunilor de la curs) până la *data de predare* din tabel, dar cel târziu până la ora 23:59. 
@@ -274,7 +248,7 @@ Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
 ```{r, echo= FALSE}
 stat_tab = read.csv("results/Tabel_Instrumente_Stat.csv", stringsAsFactors = FALSE)
 
-stat_tab = stat_tab[1:20,-1]
+stat_tab = stat_tab[1:12,-1]
 # stat_tab$Total[stat_tab$Total<5] = 4
 
 # create 19 breaks and 20 rgb color values ranging from white to red

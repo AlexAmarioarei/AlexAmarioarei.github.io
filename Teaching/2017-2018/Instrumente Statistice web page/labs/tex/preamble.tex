@@ -9,7 +9,6 @@
 \definecolor{shadecolor1}{RGB}{217,225,199}
 \definecolor{framecolor}{RGB}{60,179,113}
 
-%%%%%%%%%%%%%%%%%%%%%%
 \ifxetex
   \usepackage{letltxmacro}
   \setlength{\XeTeXLinkMargin}{1pt}
@@ -43,30 +42,6 @@
   \end{itemize}
   \end{frshaded*}
   }
-  
-%%%%%%%%%%%%%%%
-% definitions.
-% -------------------
-\usepackage{marginnote}
-% \renewcommand*{\marginnotevadjust}{40pt}
-% \renewcommand{\marginnotevadjust}{0pt}
-% \renewcommand{\marginfont}{\noindent\rule{0pt}{0.7\baselineskip}\tiny}
-
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{lemma}[proposition]{Lemma}
-\newtheorem{corollary}[proposition]{Corollary}
-\newtheorem{theorem}[proposition]{Theorem}
-
-\newcounter{exo}[section]
-\newcommand{\enonce}[2]{\refstepcounter{proposition}\hypertarget{exo:#1}{}\label{exo:#1}{\scriptsize\;\textbf{Ex.}~\ref{exo:#1}}}
-
-\reversemarginpar
-\setlength{\marginparwidth}{1.2cm}
-% 
-% \newcommand{\enonce}[2]{\refstepcounter{proposition}\hypertarget{exo:#1}{}\label{exo:#1}{\noindent\color{black}\normalsize\bf Exercice \ref{exo:#1}}\ \  #2\vspace{1mm}\hrule\vspace{1mm} \color{black}\normalsize}
-
-
-%%%%%%%%%%%%%%%
 
 \newenvironment{rmdcaution}
   {\begin{rmdblock}{caution}}
@@ -74,15 +49,9 @@
 % \newenvironment{rmdinsight}
 %   {\begin{rmdblock}{insight}}
 %   {\end{rmdblock}}
-
 \newenvironment{rmdexercise}
   {\begin{rmdblock}{exercise}}
   {\end{rmdblock}}
-
-% \newenvironment{rmdexercise_tex}
-%   {\begin{rmdblock}{exercise}}
-%   {\end{rmdblock}}
-  
 \newenvironment{rmdtip}
   {\begin{rmdblock}{tip}}
   {\end{rmdblock}}
