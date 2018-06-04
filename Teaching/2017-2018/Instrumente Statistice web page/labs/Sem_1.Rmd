@@ -2,6 +2,18 @@
 title: "Exerciții de seminar 1"
 subtitle: Metoda verosimilității maxime și testare de ipoteze statistice
 output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: natbib
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    toc: no
   html_document:
     code_folding: show
     css: labs_css/labs.css
@@ -15,18 +27,6 @@ output:
     includes:
       in_header: lab_header/lab_header.html
       after_body: lab_header/lab_footer.html
-  word_document:
-    fig_caption: yes
-    highlight: pygments
-    keep_md: yes
-    toc: no
-  pdf_document:
-    includes:
-      before_body: tex/body.tex
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
-    citation_package: natbib
 bibliography: references/InstStatFin2018ref.bib
 ---
 
@@ -93,6 +93,8 @@ if (getOutputFormat() == "pdf_document"){
 ## Metoda verosimilității maxime și repartiția Geometrică
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{11001}{}}\vspace{-7mm}
+
 Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație Geometrică a cărei funcție de masă este dată de
 
 $$
@@ -337,6 +339,8 @@ abline(h = theta, col = "brown3",
 ## Exemplu de EVM determinat prin soluții numerice
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{12001}{}}\vspace{-7mm}
+
 Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație logistică a cărei densitate este dată de formula 
 
 $$
@@ -604,6 +608,8 @@ logis.newton = newton(dl, ddl, median(x))
 ## Metoda verosimilității maxime și procese autoregresive $AR(r)$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{13001}{}}\vspace{-7mm}
+
 Se numește proces autoregresiv de ordin 1 $AR(1)$, un proces Gaussian staționar definit prin 
 
 $$
@@ -622,6 +628,8 @@ $$
 $$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{13002}{}}\vspace{-7mm}
+
 Fie $\boldsymbol{\theta} = (c, \rho, \sigma^2)^\intercal$ vectorul parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitae pentru o observație, $y_1$.
 
 
@@ -646,6 +654,8 @@ $$
 $$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{13003}{}}\vspace{-7mm}
+
 Care este repartiția condiționată a lui $Y_2$ la $Y_1 = y_1$? Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitate (condiționată) pentru a doua observație $y_2$. 
 
 
@@ -677,6 +687,8 @@ $$
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{13004}{}}\vspace{-7mm}
+
 Considerați eșantionul $\{y_1, y_2\}$ de talie $2$. Scrieți funcția de verosimilitate (completă) și logaritmul funcției de verosimilitate a modelului $AR(1)$ pentru acest eșantion. Extindeți rezultatul pentru un eșantion $y_1,y_2,\ldots,y_T$ de talie $T$. 
 
 
@@ -749,6 +761,8 @@ ceea ce conduce la
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{13005}{}}\vspace{-7mm}
+
 Funcția de verosimilitate este o funcție neliniară în parametrii $\boldsymbol{\theta}$, prin urmare estimatorul de verosimilitate maximă $\hat{\boldsymbol{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal$ va fi determinat prin metode numerice. Scrieți o funcție în R care să permită generarea unui eșantion dintr-un proces $AR(1)$. Pentru $c = 1$, $\rho = 0.5$ și $\sigma^2 = 1$ generați un eșantion de talie $T = 1000$ și calculați estimatorul de verosimilitate maximă.
 
 
@@ -895,6 +909,8 @@ if (getOutputFormat() == "pdf_document"){
 care sunt apropiate de valorile reale. 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{13006}{}}\vspace{-7mm}
+
 Acum considerăm că prima observație $y_1$ este dată (deterministă) și avem $f_{Y_1}(y_1;\boldsymbol{\theta})$. Scrieți logaritmul funcției de verosimilitate a modelului $AR(1)$ pentru eșantionul $y_1,y_2,\ldots,y_T$.
 
 
@@ -927,6 +943,8 @@ $$
 Să presupunem că ne aflăm în contextul următoarei probleme:
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21001}{}}\vspace{-7mm}
+
 Fie $U$ și $V$ două variablie aleatoare independente și repartizate $\mathcal{N}(0, \theta)$. Variabila aleatoare $X$ definită prin
 
 $$
@@ -1014,6 +1032,8 @@ legend("bottomright",
 În cele ce urmează, ne propunem să răspundem la o serie de întrebări:
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21002}{}}\vspace{-7mm}
+
 Fie $X_1, X_2, \ldots, X_n$ un eșantion de talie $n$ dintr-o populație Rayleigh de parametru $\theta$. Determinați estimatorul de verosimilitate maximă pentru $\theta$.
 
 
@@ -1052,6 +1072,8 @@ $$
 unde am folosit faptul că $\sum_{i = 1}^{n}x_i^2 = 2n\hat{\theta}_n$. Prin urmare $\hat{\theta}_n$ este estimatorul de verosimilitate maximă.
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21003}{}}\vspace{-7mm}
+
 Determinați repartiția asimptotică a EVM $\hat{\theta}_n$ a lui $\theta$.
 
 
@@ -1088,6 +1110,8 @@ $$
 $$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21004}{}}\vspace{-7mm}
+
 Considerăm testul pentru ipotezele 
 
 $$
@@ -1166,6 +1190,8 @@ $$
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21005}{}}\vspace{-7mm}
+
 Considerăm testul pentru ipotezele 
 
 $$
@@ -1210,6 +1236,8 @@ $$
 ceea ce arată că pentru pragul de semnificație de $\alpha = 10\%$ respingem ipoteza nulă $H_0:\, \theta = 2$.
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21006}{}}\vspace{-7mm}
+
 Determinați puterea testului unilateral UMP de mărime $\alpha$ pentru ipotezele
 
 $$
@@ -1339,6 +1367,8 @@ legend("bottomright",
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21007}{}}\vspace{-7mm}
+
 Considerăm testul bilateral pentru ipotezele 
 
 $$
@@ -1379,6 +1409,8 @@ $$
 $$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21008}{}}\vspace{-7mm}
+
 Determinați puterea testului bilateral de mărime $\alpha$ pentru ipotezele
 
 $$
@@ -1515,6 +1547,8 @@ legend("bottomright",
 ```
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{21009}{}}\vspace{-7mm}
+
 Arătați că testul bilateral este nedeplasat și consistent.
 
 
@@ -1588,6 +1622,8 @@ unde $n_j$ reprezintă numărul de observații din categoria $y_j$ iar $\sum_{j 
 În următorul exercițiu ne propunem să aplicăm testul bazat pe raportul de verosimilități pentru efectuarea unui test asupra parametrilor unei repartiții multinomiale. 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{22001}{}}\vspace{-7mm}
+
 Spunem că vectorul $(N_1, N_2,\ldots, N_c)$ este repartizat multinomial $\mathcal{M}(n;p_1,p_2,\ldots,p_c)$ dacă 
 
 $$
@@ -1616,6 +1652,8 @@ Observăm că
 prin urmare $N\sim\mathcal{B}(n, p_i)$.
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{22002}{}}\vspace{-7mm}
+
 Considerăm ipotezele 
 
 \begin{align*}
@@ -1740,6 +1778,8 @@ $$
 prin urmare testul $\chi^2$ a lui Pearson de nivel $\alpha$, pentru ipotezele $H_0\,vs\,H_1$ conduce la aceeași regiune critică ca și testul bazat pe raportul de verosimilitate (cu toate acestea se poate arăta că statistica lui Pearson $X^2$ converge mai repede decât statistica $-2\log \Lambda(\mathbf{x})$, [@Agresti2012]).
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{22003}{}}\vspace{-7mm}
+
 Un exercițiu constă în extragerea la întâmplare, de către o persoană, a unei cărți de joc dintr-un pachet amestecat în prealabil, notarea culorii acesteia (inimă roșie, inimă neagră, romb și treflă) și cărții în pachet tot aleator. Să presupunem că în urma efectuării exercițiului pe $200$ de persoane s-au obținut următoarele rezultate: 35 cărți de treflă, 51 cărți de romb, 64 cărți de inimă roșie și respectiv 50 cărți de inimă neagră. Ne propunem să testăm ipotezele 
 
 \begin{align*}
@@ -2009,6 +2049,8 @@ axis(side = 4, # right
 Exercițiul din această secțiune este preluat din [@Greene2011].
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23001}{}}\vspace{-7mm}
+
 Considerăm două variabile aleatoare $X$ și $Y$ astfel încât repartiția condiționată a lui $Y|X = x$ este dată de 
 
 $$
@@ -2089,6 +2131,8 @@ par(mfrow = c(1, 1))
 ```
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23002}{}}\vspace{-7mm}
+
 Fie $\{X_i, Y_i\}$ un eșantion de talie $n$ din populația $f_{Y|X}$ și scrieți logaritmul funcției de verosimilitate pentru modelul necondiționat și respectiv sub $H_0$ (modelul condiționat).
 
 
@@ -2131,6 +2175,8 @@ $$
 $$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23003}{}}\vspace{-7mm}
+
 Scrieți vectorii gradient și matricele Hessiene pentru logaritmul funcției de verosimilitate asociat modelului necondiționat și respectiv modelului condiționat (sub $H_0$).
 
 
@@ -2210,6 +2256,8 @@ H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = 
 $$
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23004}{}}\vspace{-7mm}
+
 Scrieți matricea informațională medie a lui Fisher pentru modelul necondiționat și respectiv modelul condiționat (sub $H_0$).
 
 
@@ -2268,6 +2316,8 @@ $$
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23005}{}}\vspace{-7mm}
+
 Fie $\hat{\boldsymbol{\theta}}$ estimatorul de verosimilitate maximă pentru $\boldsymbol{\theta} = (\beta, \rho)^\intercal$ pe $\Theta$ și $\hat{\boldsymbol{\theta}}_{H_0}$ estimatorul de verosimilitate maximă pentru $\beta$ pe $\Theta_0 = \{\boldsymbol{\theta} = (\beta, \rho)^\intercal\,|\,\rho = 1\}$. Determinați repartițiile asimptotice ale lui $\hat{\boldsymbol{\theta}}$ și $\hat{\boldsymbol{\theta}}_{H_0}$.
 
 
@@ -2316,6 +2366,8 @@ $$
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23006}{}}\vspace{-7mm}
+
 Calculați cei trei estimatori pentru matricea informațională medie a lui Fisher pentru modelul necondiționat și pentru modelul condiționat.
 
 
@@ -2373,6 +2425,8 @@ $$
 sub $H_0$.
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23007}{}}\vspace{-7mm}
+
 Considerați setul de date [ex_Greene.csv](dataIn/ex_Greene.csv). Scrieți un cod R prin care să estimați parametrii modelului necondiționat și respectiv condiționat cu ajutorul estimatorilor de verosimilitate maximă și calculați matricea de varianță-covarianță asimptotică pentru fiecare din cele trei alternative. 
 
 
@@ -2582,6 +2636,8 @@ V_C
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23008}{}}\vspace{-7mm}
+
 Testați ipotezele 
 
 $$
@@ -2619,6 +2675,8 @@ ceea ce arată că la un nivel de semnificație $\alpha = 5\%$ respingem ipoteza
 
 
 ```{r, type = "rmdexercise", engine = engine_block}
+\marginnote{\enonce{23009}{}}\vspace{-7mm}
+
 Testați ipotezele 
 
 $$

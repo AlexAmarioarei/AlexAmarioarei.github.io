@@ -134,6 +134,7 @@
 \definecolor{shadecolor1}{RGB}{217,225,199}
 \definecolor{framecolor}{RGB}{60,179,113}
 
+%%%%%%%%%%%%%%%%%%%%%%
 \ifxetex
   \usepackage{letltxmacro}
   \setlength{\XeTeXLinkMargin}{1pt}
@@ -167,6 +168,30 @@
   \end{itemize}
   \end{frshaded*}
   }
+  
+%%%%%%%%%%%%%%%
+% definitions.
+% -------------------
+\usepackage{marginnote}
+% \renewcommand*{\marginnotevadjust}{40pt}
+% \renewcommand{\marginnotevadjust}{0pt}
+% \renewcommand{\marginfont}{\noindent\rule{0pt}{0.7\baselineskip}\tiny}
+
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{theorem}[proposition]{Theorem}
+
+\newcounter{exo}[section]
+\newcommand{\enonce}[2]{\refstepcounter{proposition}\hypertarget{exo:#1}{}\label{exo:#1}{\scriptsize\;\textbf{Ex.}~\ref{exo:#1}}}
+
+\reversemarginpar
+\setlength{\marginparwidth}{1.2cm}
+% 
+% \newcommand{\enonce}[2]{\refstepcounter{proposition}\hypertarget{exo:#1}{}\label{exo:#1}{\noindent\color{black}\normalsize\bf Exercice \ref{exo:#1}}\ \  #2\vspace{1mm}\hrule\vspace{1mm} \color{black}\normalsize}
+
+
+%%%%%%%%%%%%%%%
 
 \newenvironment{rmdcaution}
   {\begin{rmdblock}{caution}}
@@ -174,9 +199,15 @@
 % \newenvironment{rmdinsight}
 %   {\begin{rmdblock}{insight}}
 %   {\end{rmdblock}}
+
 \newenvironment{rmdexercise}
   {\begin{rmdblock}{exercise}}
   {\end{rmdblock}}
+
+% \newenvironment{rmdexercise_tex}
+%   {\begin{rmdblock}{exercise}}
+%   {\end{rmdblock}}
+  
 \newenvironment{rmdtip}
   {\begin{rmdblock}{tip}}
   {\end{rmdblock}}
@@ -365,6 +396,8 @@ maxime}\label{estimare-prin-metoda-verosimilitatii-maxime}
 Geometrică}\label{metoda-verosimilitatii-maxime-si-repartitia-geometrica}
 
 \begin{rmdexercise}
+\marginnote{\enonce{11001}{}}\vspace{-7mm}
+
 Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
 Geometrică a cărei funcție de masă este dată de
 
@@ -636,7 +669,7 @@ contextul din exercițiu.
 \CommentTok{# EVM gasit este }
 \NormalTok{EVM =}\StringTok{ }\DecValTok{1}\OperatorTok{/}\KeywordTok{mean}\NormalTok{(x)}
 \NormalTok{EVM}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.3419973}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.348675}
 \end{Highlighting}
 \end{Shaded}
 
@@ -667,11 +700,11 @@ determinăm maximul cu ajutorul funcției \texttt{optimize()}):
 
 \CommentTok{# exemple}
 \KeywordTok{EVM_geom}\NormalTok{(}\FloatTok{0.345}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.3429276}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.346733}
 \KeywordTok{EVM_geom}\NormalTok{(}\FloatTok{0.478}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.4761904}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.4931127}
 \KeywordTok{EVM_geom}\NormalTok{(}\FloatTok{0.222}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.2174065}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.2251128}
 \end{Highlighting}
 \end{Shaded}
 
@@ -708,6 +741,8 @@ estimatorului de verosimilitate maximă, pentru \(\theta = 0.345\):
 numerice}\label{exemplu-de-evm-determinat-prin-solutii-numerice}
 
 \begin{rmdexercise}
+\marginnote{\enonce{12001}{}}\vspace{-7mm}
+
 Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
 logistică a cărei densitate este dată de formula
 
@@ -1029,6 +1064,8 @@ autoregresive
 \(AR(r)\)}{Metoda verosimilității maxime și procese autoregresive AR(r)}}\label{metoda-verosimilitatii-maxime-si-procese-autoregresive-arr}
 
 \begin{rmdexercise}
+\marginnote{\enonce{13001}{}}\vspace{-7mm}
+
 Se numește proces autoregresiv de ordin 1 \(AR(1)\), un proces Gaussian
 staționar definit prin
 
@@ -1053,6 +1090,8 @@ rezultă că
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{13002}{}}\vspace{-7mm}
+
 Fie \(\boldsymbol{\theta} = (c, \rho, \sigma^2)^\intercal\) vectorul
 parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul
 funcției de verosimilitae pentru o observație, \(y_1\).
@@ -1080,6 +1119,8 @@ iar logaritmul funcției de verosimilitate pentru \(y_1\) este
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{13003}{}}\vspace{-7mm}
+
 Care este repartiția condiționată a lui \(Y_2\) la \(Y_1 = y_1\)?
 Scrieți funcția de verosimilitate și logaritmul funcției de
 verosimilitate (condiționată) pentru a doua observație \(y_2\).
@@ -1112,6 +1153,8 @@ este
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{13004}{}}\vspace{-7mm}
+
 Considerați eșantionul \(\{y_1, y_2\}\) de talie \(2\). Scrieți funcția
 de verosimilitate (completă) și logaritmul funcției de verosimilitate a
 modelului \(AR(1)\) pentru acest eșantion. Extindeți rezultatul pentru
@@ -1188,6 +1231,8 @@ ceea ce conduce la
 \end{align*}
 
 \begin{rmdexercise}
+\marginnote{\enonce{13005}{}}\vspace{-7mm}
+
 Funcția de verosimilitate este o funcție neliniară în parametrii
 \(\boldsymbol{\theta}\), prin urmare estimatorul de verosimilitate
 maximă
@@ -1299,6 +1344,8 @@ sigma & 1.0 & 1.0104216\\*
 care sunt apropiate de valorile reale.
 
 \begin{rmdexercise}
+\marginnote{\enonce{13006}{}}\vspace{-7mm}
+
 Acum considerăm că prima observație \(y_1\) este dată (deterministă) și
 avem \(f_{Y_1}(y_1;\boldsymbol{\theta})\). Scrieți logaritmul funcției
 de verosimilitate a modelului \(AR(1)\) pentru eșantionul
@@ -1334,6 +1381,8 @@ Neyman-Pearson}\label{teste-parametrice-si-lema-neyman-pearson}
 Să presupunem că ne aflăm în contextul următoarei probleme:
 
 \begin{rmdexercise}
+\marginnote{\enonce{21001}{}}\vspace{-7mm}
+
 Fie \(U\) și \(V\) două variablie aleatoare independente și repartizate
 \(\mathcal{N}(0, \theta)\). Variabila aleatoare \(X\) definită prin
 
@@ -1357,19 +1406,13 @@ folosi în R funcțiile: \texttt{rrayleigh}, \texttt{drayleigh},
 \texttt{prayleigh} și respectiv \texttt{qrayleigh} trebuie instalat
 pachetul \texttt{VGAM}):
 
-\begin{verbatim}
-Error in library(VGAM): there is no package called 'VGAM'
-Error in drayleigh(x, scale = pars[1]): could not find function "drayleigh"
-Error in drayleigh(x, scale = scale): could not find function "drayleigh"
-Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
-Error in prayleigh(x, scale = pars[1]): could not find function "prayleigh"
-Error in prayleigh(x, scale = scale): could not find function "prayleigh"
-Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
-\end{verbatim}
+\begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-24-1} \end{center}
 
 În cele ce urmează, ne propunem să răspundem la o serie de întrebări:
 
 \begin{rmdexercise}
+\marginnote{\enonce{21002}{}}\vspace{-7mm}
+
 Fie \(X_1, X_2, \ldots, X_n\) un eșantion de talie \(n\) dintr-o
 populație Rayleigh de parametru \(\theta\). Determinați estimatorul de
 verosimilitate maximă pentru \(\theta\).
@@ -1411,6 +1454,8 @@ Prin urmare \(\hat{\theta}_n\) este estimatorul de verosimilitate
 maximă.
 
 \begin{rmdexercise}
+\marginnote{\enonce{21003}{}}\vspace{-7mm}
+
 Determinați repartiția asimptotică a EVM \(\hat{\theta}_n\) a lui
 \(\theta\).
 \end{rmdexercise}
@@ -1456,6 +1501,8 @@ sau echivalent
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{21004}{}}\vspace{-7mm}
+
 Considerăm testul pentru ipotezele
 
 \[
@@ -1533,6 +1580,8 @@ Regiunea critică a testului UMP cu ipotezele \(H_0\,\,vs\,\,H_1\) devine
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{21005}{}}\vspace{-7mm}
+
 Considerăm testul pentru ipotezele
 
 \[
@@ -1582,6 +1631,8 @@ ceea ce arată că pentru pragul de semnificație de \(\alpha = 10\%\)
 respingem ipoteza nulă \(H_0:\, \theta = 2\).
 
 \begin{rmdexercise}
+\marginnote{\enonce{21006}{}}\vspace{-7mm}
+
 Determinați puterea testului unilateral UMP de mărime \(\alpha\) pentru
 ipotezele
 
@@ -1643,6 +1694,8 @@ Ilustrăm în R funcția putere a testului pentru ipotezele
 \begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-31-1} \end{center}
 
 \begin{rmdexercise}
+\marginnote{\enonce{21007}{}}\vspace{-7mm}
+
 Considerăm testul bilateral pentru ipotezele
 
 \[
@@ -1685,6 +1738,8 @@ regiune critică se poate scrie sub forma
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{21008}{}}\vspace{-7mm}
+
 Determinați puterea testului bilateral de mărime \(\alpha\) pentru
 ipotezele
 
@@ -1753,6 +1808,8 @@ Ilustrăm în R funcția putere a testului bilateral pentru ipotezele
 \begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 \begin{rmdexercise}
+\marginnote{\enonce{21009}{}}\vspace{-7mm}
+
 Arătați că testul bilateral este nedeplasat și consistent.
 \end{rmdexercise}
 
@@ -1839,6 +1896,8 @@ de verosimilități pentru efectuarea unui test asupra parametrilor unei
 repartiții multinomiale.
 
 \begin{rmdexercise}
+\marginnote{\enonce{22001}{}}\vspace{-7mm}
+
 Spunem că vectorul \((N_1, N_2,\ldots, N_c)\) este repartizat
 multinomial \(\mathcal{M}(n;p_1,p_2,\ldots,p_c)\) dacă
 
@@ -1868,6 +1927,8 @@ Observăm că
 prin urmare \(N\sim\mathcal{B}(n, p_i)\).
 
 \begin{rmdexercise}
+\marginnote{\enonce{22002}{}}\vspace{-7mm}
+
 Considerăm ipotezele
 
 \begin{align*}
@@ -2002,6 +2063,8 @@ arăta că statistica lui Pearson \(X^2\) converge mai repede decât
 statistica \(-2\log \Lambda(\mathbf{x})\), \citep{Agresti2012}).
 
 \begin{rmdexercise}
+\marginnote{\enonce{22003}{}}\vspace{-7mm}
+
 Un exercițiu constă în extragerea la întâmplare, de către o persoană, a
 unei cărți de joc dintr-un pachet amestecat în prealabil, notarea
 culorii acesteia (inimă roșie, inimă neagră, romb și treflă) și cărții
@@ -2185,6 +2248,8 @@ Statisticile de test corespunzătoare celor două teste sunt ilustrate
 Exercițiul din această secțiune este preluat din \citep{Greene2011}.
 
 \begin{rmdexercise}
+\marginnote{\enonce{23001}{}}\vspace{-7mm}
+
 Considerăm două variabile aleatoare \(X\) și \(Y\) astfel încât
 repartiția condiționată a lui \(Y|X = x\) este dată de
 
@@ -2248,6 +2313,8 @@ Aceste funcții sunt implementate în R cu ajutorul funcțiilor
 \begin{center}\includegraphics[width=0.8\linewidth]{Sem_1_files/figure-latex/unnamed-chunk-47-1} \end{center}
 
 \begin{rmdexercise}
+\marginnote{\enonce{23002}{}}\vspace{-7mm}
+
 Fie \(\{X_i, Y_i\}\) un eșantion de talie \(n\) din populația
 \(f_{Y|X}\) și scrieți logaritmul funcției de verosimilitate pentru
 modelul necondiționat și respectiv sub \(H_0\) (modelul condiționat).
@@ -2291,6 +2358,8 @@ găsim că logaritmul funcției de verosimilitate, sub \(H_0\), este
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{23003}{}}\vspace{-7mm}
+
 Scrieți vectorii gradient și matricele Hessiene pentru logaritmul
 funcției de verosimilitate asociat modelului necondiționat și respectiv
 modelului condiționat (sub \(H_0\)).
@@ -2373,6 +2442,8 @@ H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = 
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{23004}{}}\vspace{-7mm}
+
 Scrieți matricea informațională medie a lui Fisher pentru modelul
 necondiționat și respectiv modelul condiționat (sub \(H_0\)).
 \end{rmdexercise}
@@ -2440,6 +2511,8 @@ I(\boldsymbol{\theta}) = I(\beta) = \mathbb{E}_{X}[\mathbb{E}_{\beta}[-H_i(Y_i|X
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{23005}{}}\vspace{-7mm}
+
 Fie \(\hat{\boldsymbol{\theta}}\) estimatorul de verosimilitate maximă
 pentru \(\boldsymbol{\theta} = (\beta, \rho)^\intercal\) pe \(\Theta\)
 și \(\hat{\boldsymbol{\theta}}_{H_0}\) estimatorul de verosimilitate
@@ -2494,6 +2567,8 @@ De asemenea putem scrie
 \]
 
 \begin{rmdexercise}
+\marginnote{\enonce{23006}{}}\vspace{-7mm}
+
 Calculați cei trei estimatori pentru matricea informațională medie a lui
 Fisher pentru modelul necondiționat și pentru modelul condiționat.
 \end{rmdexercise}
@@ -2568,6 +2643,8 @@ sub modelul necondiționat și respectiv
 sub \(H_0\).
 
 \begin{rmdexercise}
+\marginnote{\enonce{23007}{}}\vspace{-7mm}
+
 Considerați setul de date \href{dataIn/ex_Greene.csv}{ex\_Greene.csv}.
 Scrieți un cod R prin care să estimați parametrii modelului
 necondiționat și respectiv condiționat cu ajutorul estimatorilor de
@@ -2841,6 +2918,8 @@ Varianța asimptotică
 \end{Shaded}
 
 \begin{rmdexercise}
+\marginnote{\enonce{23008}{}}\vspace{-7mm}
+
 Testați ipotezele
 
 \[
@@ -2877,6 +2956,8 @@ raportul de verosimilitate este
 respingem ipoteza nulă \(H_0:\,\rho = 1\).
 
 \begin{rmdexercise}
+\marginnote{\enonce{23009}{}}\vspace{-7mm}
+
 Testați ipotezele
 
 \[
@@ -2937,7 +3018,7 @@ informaționale a lui Fisher) nu respinge ipoteza nulă la acest prag de
 semnificativitate.
 
 \renewcommand\refname{Referințe}
-\bibliography{references/InstStatFin2018ref}
+\bibliography{references/InstStatFin2018ref.bib}
 
 
 \end{document}
