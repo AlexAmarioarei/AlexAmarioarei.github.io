@@ -65,7 +65,9 @@ Obiectivul acestui seminar este de a prezenta câteva exerciții de calcul cu me
 
 ## Metoda verosimilității maxime și repartiția Geometrică
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație Geometrică a cărei funcție de masă este dată de
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{11001}{}}\vspace{-7mm}
+
+Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație Geometrică a cărei funcție de masă este dată de
 
 $$
   f_{\theta}(x) = \mathbb{P}_{\theta}(X = x) = \theta (1-\theta)^{x-1}, \quad \forall x\in\{1,2,3,\ldots\}  
@@ -249,7 +251,7 @@ x = rgeom(n, theta) + 1
 # EVM gasit este 
 EVM = 1/mean(x)
 EVM
-[1] 0.3448276
+[1] 0.3445899
 ```
 
 Vom crea o funcție care să calculeze estimatorul de verosimilitate maximă plecând de la logaritmul funcției de verosimilitate (îi determinăm maximul cu ajutorul funcției `optimize()`):
@@ -277,11 +279,11 @@ EVM_geom = function(theta, n, init = 0.5, seed = NULL){
 
 # exemple
 EVM_geom(0.345, 1000)
-[1] 0.3528512
+[1] 0.3642935
 EVM_geom(0.478, 1000)
-[1] 0.4796163
+[1] 0.4837891
 EVM_geom(0.222, 1000)
-[1] 0.2150219
+[1] 0.224254
 ```
 
 În figura de mai jos este ilustrată proprietatea de consistență a estimatorului de verosimilitate maximă, pentru $\theta = 0.345$:
@@ -315,7 +317,9 @@ abline(h = theta, col = "brown3",
 
 ## Exemplu de EVM determinat prin soluții numerice
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație logistică a cărei densitate este dată de formula 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{12001}{}}\vspace{-7mm}
+
+Fie $X_1,X_2,\ldots,X_n$ un eșantion de talie $n$ dintr-o populație logistică a cărei densitate este dată de formula 
 
 $$
   f_{\theta}(x) = \frac{e^{-(x-\theta)}}{\left(1+e^{-(x-\theta)}\right)^2}, \quad x\in\mathbb{R},\, \theta\in\mathbb{R} 
@@ -591,7 +595,9 @@ logis.newton = newton(dl, ddl, median(x))
 
 ## Metoda verosimilității maxime și procese autoregresive $AR(r)$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Se numește proces autoregresiv de ordin 1 $AR(1)$, un proces Gaussian staționar definit prin 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{13001}{}}\vspace{-7mm}
+
+Se numește proces autoregresiv de ordin 1 $AR(1)$, un proces Gaussian staționar definit prin 
 
 $$
   Y_t = c + \rho Y_{t-1} + \epsilon_{t}
@@ -607,7 +613,9 @@ $$
   \mathbb{E}[Y_t] = \frac{c}{1-\rho} ,\quad Var[Y_t] = \frac{\sigma^2}{1-\rho^2}.
 $$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $\boldsymbol{\theta} = (c, \rho, \sigma^2)^\intercal$ vectorul parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitae pentru o observație, $y_1$.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{13002}{}}\vspace{-7mm}
+
+Fie $\boldsymbol{\theta} = (c, \rho, \sigma^2)^\intercal$ vectorul parametrilor modelului. Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitae pentru o observație, $y_1$.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -629,7 +637,9 @@ $$
   l(\boldsymbol{\theta};y_1) = -\frac{1}{2}\log(2\pi) - \frac{1}{2}\log\left(\frac{\sigma^2}{1-\rho^2}\right) -\frac{1}{2}\frac{\left(y_1 - \frac{c}{1-\rho}\right)^2}{\frac{\sigma^2}{1-\rho^2}}.
 $$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Care este repartiția condiționată a lui $Y_2$ la $Y_1 = y_1$? Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitate (condiționată) pentru a doua observație $y_2$. 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{13003}{}}\vspace{-7mm}
+
+Care este repartiția condiționată a lui $Y_2$ la $Y_1 = y_1$? Scrieți funcția de verosimilitate și logaritmul funcției de verosimilitate (condiționată) pentru a doua observație $y_2$. 
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -658,7 +668,9 @@ $$
 $$
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerați eșantionul $\{y_1, y_2\}$ de talie $2$. Scrieți funcția de verosimilitate (completă) și logaritmul funcției de verosimilitate a modelului $AR(1)$ pentru acest eșantion. Extindeți rezultatul pentru un eșantion $y_1,y_2,\ldots,y_T$ de talie $T$. 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{13004}{}}\vspace{-7mm}
+
+Considerați eșantionul $\{y_1, y_2\}$ de talie $2$. Scrieți funcția de verosimilitate (completă) și logaritmul funcției de verosimilitate a modelului $AR(1)$ pentru acest eșantion. Extindeți rezultatul pentru un eșantion $y_1,y_2,\ldots,y_T$ de talie $T$. 
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -728,7 +740,9 @@ ceea ce conduce la
 \end{align*}
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Funcția de verosimilitate este o funcție neliniară în parametrii $\boldsymbol{\theta}$, prin urmare estimatorul de verosimilitate maximă $\hat{\boldsymbol{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal$ va fi determinat prin metode numerice. Scrieți o funcție în R care să permită generarea unui eșantion dintr-un proces $AR(1)$. Pentru $c = 1$, $\rho = 0.5$ și $\sigma^2 = 1$ generați un eșantion de talie $T = 1000$ și calculați estimatorul de verosimilitate maximă.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{13005}{}}\vspace{-7mm}
+
+Funcția de verosimilitate este o funcție neliniară în parametrii $\boldsymbol{\theta}$, prin urmare estimatorul de verosimilitate maximă $\hat{\boldsymbol{\theta}} = (\hat{c}, \hat{\rho}, \hat{\sigma}^2)^\intercal$ va fi determinat prin metode numerice. Scrieți o funcție în R care să permită generarea unui eșantion dintr-un proces $AR(1)$. Pentru $c = 1$, $\rho = 0.5$ și $\sigma^2 = 1$ generați un eșantion de talie $T = 1000$ și calculați estimatorul de verosimilitate maximă.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -829,7 +843,9 @@ Obținem următoarele rezultate
 
 care sunt apropiate de valorile reale. 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Acum considerăm că prima observație $y_1$ este dată (deterministă) și avem $f_{Y_1}(y_1;\boldsymbol{\theta})$. Scrieți logaritmul funcției de verosimilitate a modelului $AR(1)$ pentru eșantionul $y_1,y_2,\ldots,y_T$.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{13006}{}}\vspace{-7mm}
+
+Acum considerăm că prima observație $y_1$ este dată (deterministă) și avem $f_{Y_1}(y_1;\boldsymbol{\theta})$. Scrieți logaritmul funcției de verosimilitate a modelului $AR(1)$ pentru eșantionul $y_1,y_2,\ldots,y_T$.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -859,7 +875,9 @@ $$
 
 Să presupunem că ne aflăm în contextul următoarei probleme:
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $U$ și $V$ două variablie aleatoare independente și repartizate $\mathcal{N}(0, \theta)$. Variabila aleatoare $X$ definită prin
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21001}{}}\vspace{-7mm}
+
+Fie $U$ și $V$ două variablie aleatoare independente și repartizate $\mathcal{N}(0, \theta)$. Variabila aleatoare $X$ definită prin
 
 $$
     X = \sqrt{U^2 + V^2}
@@ -875,20 +893,13 @@ $$
 
 Pentru mai multe detalii privind repartiția Rayleigh se poate consulta pagina [https://en.wikipedia.org/wiki/Rayleigh_distribution](https://en.wikipedia.org/wiki/Rayleigh_distribution) sau monografia [@Evans2000]. Densitatea de repartiție și funcția de repartiție a repartiției Rayleigh sunt ilustrate mai jos (pentru a folosi în R funcțiile: `rrayleigh`, `drayleigh`, `prayleigh` și respectiv `qrayleigh` trebuie instalat pachetul `VGAM`):
 
-
-```
-Error in library(VGAM): there is no package called 'VGAM'
-Error in drayleigh(x, scale = pars[1]): could not find function "drayleigh"
-Error in drayleigh(x, scale = scale): could not find function "drayleigh"
-Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
-Error in prayleigh(x, scale = pars[1]): could not find function "prayleigh"
-Error in prayleigh(x, scale = scale): could not find function "prayleigh"
-Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
-```
+<img src="Sem_1_files/figure-html/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" />
 
 În cele ce urmează, ne propunem să răspundem la o serie de întrebări:
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $X_1, X_2, \ldots, X_n$ un eșantion de talie $n$ dintr-o populație Rayleigh de parametru $\theta$. Determinați estimatorul de verosimilitate maximă pentru $\theta$.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21002}{}}\vspace{-7mm}
+
+Fie $X_1, X_2, \ldots, X_n$ un eșantion de talie $n$ dintr-o populație Rayleigh de parametru $\theta$. Determinați estimatorul de verosimilitate maximă pentru $\theta$.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -924,7 +935,9 @@ $$
 
 unde am folosit faptul că $\sum_{i = 1}^{n}x_i^2 = 2n\hat{\theta}_n$. Prin urmare $\hat{\theta}_n$ este estimatorul de verosimilitate maximă.
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Determinați repartiția asimptotică a EVM $\hat{\theta}_n$ a lui $\theta$.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21003}{}}\vspace{-7mm}
+
+Determinați repartiția asimptotică a EVM $\hat{\theta}_n$ a lui $\theta$.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -958,7 +971,9 @@ $$
   \sqrt{n}\left(\hat{\theta}_n - \theta\right) \underset{n\to\infty}{\overset{d}{\longrightarrow}} \mathcal{N}(0,\theta^2). 
 $$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm testul pentru ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21004}{}}\vspace{-7mm}
+
+Considerăm testul pentru ipotezele 
 
 $$
   H_0:\, \theta = \theta_0 \quad \text{vs}\quad H_1:\, \theta = \theta_1
@@ -1034,7 +1049,9 @@ $$
 $$
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm testul pentru ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21005}{}}\vspace{-7mm}
+
+Considerăm testul pentru ipotezele 
 
 $$
   H_0:\, \theta = 2 \quad \text{vs}\quad H_1:\, \theta > 2
@@ -1076,7 +1093,9 @@ $$
 
 ceea ce arată că pentru pragul de semnificație de $\alpha = 10\%$ respingem ipoteza nulă $H_0:\, \theta = 2$.
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Determinați puterea testului unilateral UMP de mărime $\alpha$ pentru ipotezele
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21006}{}}\vspace{-7mm}
+
+Determinați puterea testului unilateral UMP de mărime $\alpha$ pentru ipotezele
 
 $$
    H_0:\, \theta = \theta_0 \quad \text{vs}\quad H_1:\, \theta > \theta_0
@@ -1133,7 +1152,9 @@ pow_graf = function(theta, theta0, alpha, n){
 <img src="Sem_1_files/figure-html/unnamed-chunk-31-1.png" width="90%" style="display: block; margin: auto;" />
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm testul bilateral pentru ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21007}{}}\vspace{-7mm}
+
+Considerăm testul bilateral pentru ipotezele 
 
 $$
   H_0:\, \theta = \theta_0 \quad \text{vs}\quad H_1:\, \theta \neq \theta_0
@@ -1171,7 +1192,9 @@ $$
   C = \left\{\mathbf{x}\,|\,\left|\hat{\theta}_n(\mathbf{x}) - \theta_0\right| > \frac{\theta_0}{\sqrt{n}}z_{1-\frac{\alpha}{2}}\right\}.
 $$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Determinați puterea testului bilateral de mărime $\alpha$ pentru ipotezele
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21008}{}}\vspace{-7mm}
+
+Determinați puterea testului bilateral de mărime $\alpha$ pentru ipotezele
 
 $$
    H_0:\, \theta = \theta_0 \quad \text{vs}\quad H_1:\, \theta \neq \theta_0
@@ -1233,7 +1256,9 @@ pow_graf_bilateral = function(theta, theta0, alpha, n){
 
 <img src="Sem_1_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Arătați că testul bilateral este nedeplasat și consistent.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{21009}{}}\vspace{-7mm}
+
+Arătați că testul bilateral este nedeplasat și consistent.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1304,7 +1329,9 @@ unde $n_j$ reprezintă numărul de observații din categoria $y_j$ iar $\sum_{j 
 
 În următorul exercițiu ne propunem să aplicăm testul bazat pe raportul de verosimilități pentru efectuarea unui test asupra parametrilor unei repartiții multinomiale. 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Spunem că vectorul $(N_1, N_2,\ldots, N_c)$ este repartizat multinomial $\mathcal{M}(n;p_1,p_2,\ldots,p_c)$ dacă 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{22001}{}}\vspace{-7mm}
+
+Spunem că vectorul $(N_1, N_2,\ldots, N_c)$ este repartizat multinomial $\mathcal{M}(n;p_1,p_2,\ldots,p_c)$ dacă 
 
 $$
   \mathbb{P}(N_1 = n_1, N_2 = n_2, \ldots, N_c = n_c) = \frac{n!}{n_1!n_2!\cdots n_c!}p_1^{n_1}p_2^{n_2}\cdots p_c^{n_c}
@@ -1330,7 +1357,9 @@ Observăm că
 
 prin urmare $N\sim\mathcal{B}(n, p_i)$.
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{22002}{}}\vspace{-7mm}
+
+Considerăm ipotezele 
 
 \begin{align*}
   H_0: & \{(p_1,p_2,\ldots, p_c) = (\pi_1,\pi_2,\ldots, \pi_c)\}\\
@@ -1452,7 +1481,9 @@ $$
 
 prin urmare testul $\chi^2$ a lui Pearson de nivel $\alpha$, pentru ipotezele $H_0\,vs\,H_1$ conduce la aceeași regiune critică ca și testul bazat pe raportul de verosimilitate (cu toate acestea se poate arăta că statistica lui Pearson $X^2$ converge mai repede decât statistica $-2\log \Lambda(\mathbf{x})$, [@Agresti2012]).
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Un exercițiu constă în extragerea la întâmplare, de către o persoană, a unei cărți de joc dintr-un pachet amestecat în prealabil, notarea culorii acesteia (inimă roșie, inimă neagră, romb și treflă) și cărții în pachet tot aleator. Să presupunem că în urma efectuării exercițiului pe $200$ de persoane s-au obținut următoarele rezultate: 35 cărți de treflă, 51 cărți de romb, 64 cărți de inimă roșie și respectiv 50 cărți de inimă neagră. Ne propunem să testăm ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{22003}{}}\vspace{-7mm}
+
+Un exercițiu constă în extragerea la întâmplare, de către o persoană, a unei cărți de joc dintr-un pachet amestecat în prealabil, notarea culorii acesteia (inimă roșie, inimă neagră, romb și treflă) și cărții în pachet tot aleator. Să presupunem că în urma efectuării exercițiului pe $200$ de persoane s-au obținut următoarele rezultate: 35 cărți de treflă, 51 cărți de romb, 64 cărți de inimă roșie și respectiv 50 cărți de inimă neagră. Ne propunem să testăm ipotezele 
 
 \begin{align*}
   H_0&:\,\{\text{Cele patru culori sunt egal probabile}\}\\
@@ -1605,7 +1636,9 @@ Statisticile de test corespunzătoare celor două teste sunt ilustrate (pentru m
 
 Exercițiul din această secțiune este preluat din [@Greene2011].
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm două variabile aleatoare $X$ și $Y$ astfel încât repartiția condiționată a lui $Y|X = x$ este dată de 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23001}{}}\vspace{-7mm}
+
+Considerăm două variabile aleatoare $X$ și $Y$ astfel încât repartiția condiționată a lui $Y|X = x$ este dată de 
 
 $$
   f_{Y|X}(y|x;\beta) = \frac{1}{\beta + x}e^{-\frac{y}{\beta + x}}
@@ -1656,7 +1689,9 @@ Aceste funcții sunt implementate în R cu ajutorul funcțiilor `digamma()` și 
 
 <img src="Sem_1_files/figure-html/unnamed-chunk-47-1.png" width="90%" style="display: block; margin: auto;" />
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $\{X_i, Y_i\}$ un eșantion de talie $n$ din populația $f_{Y|X}$ și scrieți logaritmul funcției de verosimilitate pentru modelul necondiționat și respectiv sub $H_0$ (modelul condiționat).
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23002}{}}\vspace{-7mm}
+
+Fie $\{X_i, Y_i\}$ un eșantion de talie $n$ din populația $f_{Y|X}$ și scrieți logaritmul funcției de verosimilitate pentru modelul necondiționat și respectiv sub $H_0$ (modelul condiționat).
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1696,7 +1731,9 @@ $$
   l(y|x;\boldsymbol{\theta}) = \sum_{i = 1}^{n}\beta_i - \sum_{i = 1}^{n}y_i\beta_i.
 $$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Scrieți vectorii gradient și matricele Hessiene pentru logaritmul funcției de verosimilitate asociat modelului necondiționat și respectiv modelului condiționat (sub $H_0$).
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23003}{}}\vspace{-7mm}
+
+Scrieți vectorii gradient și matricele Hessiene pentru logaritmul funcției de verosimilitate asociat modelului necondiționat și respectiv modelului condiționat (sub $H_0$).
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1773,7 +1810,9 @@ $$
 H(y|x;\boldsymbol{\theta}) = \frac{\partial^2 l(y|x;\beta)}{\partial \beta^2} = \sum_{i=1}^{n}\beta_i^2 - 2\sum_{i=1}^{n}y_i\beta_i^3.
 $$
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Scrieți matricea informațională medie a lui Fisher pentru modelul necondiționat și respectiv modelul condiționat (sub $H_0$).
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23004}{}}\vspace{-7mm}
+
+Scrieți matricea informațională medie a lui Fisher pentru modelul necondiționat și respectiv modelul condiționat (sub $H_0$).
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1829,7 +1868,9 @@ I(\boldsymbol{\theta}) = I(\beta) = \mathbb{E}_{X}[\mathbb{E}_{\beta}[-H_i(Y_i|X
 $$
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $\hat{\boldsymbol{\theta}}$ estimatorul de verosimilitate maximă pentru $\boldsymbol{\theta} = (\beta, \rho)^\intercal$ pe $\Theta$ și $\hat{\boldsymbol{\theta}}_{H_0}$ estimatorul de verosimilitate maximă pentru $\beta$ pe $\Theta_0 = \{\boldsymbol{\theta} = (\beta, \rho)^\intercal\,|\,\rho = 1\}$. Determinați repartițiile asimptotice ale lui $\hat{\boldsymbol{\theta}}$ și $\hat{\boldsymbol{\theta}}_{H_0}$.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23005}{}}\vspace{-7mm}
+
+Fie $\hat{\boldsymbol{\theta}}$ estimatorul de verosimilitate maximă pentru $\boldsymbol{\theta} = (\beta, \rho)^\intercal$ pe $\Theta$ și $\hat{\boldsymbol{\theta}}_{H_0}$ estimatorul de verosimilitate maximă pentru $\beta$ pe $\Theta_0 = \{\boldsymbol{\theta} = (\beta, \rho)^\intercal\,|\,\rho = 1\}$. Determinați repartițiile asimptotice ale lui $\hat{\boldsymbol{\theta}}$ și $\hat{\boldsymbol{\theta}}_{H_0}$.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1875,7 +1916,9 @@ $$
 
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Calculați cei trei estimatori pentru matricea informațională medie a lui Fisher pentru modelul necondiționat și pentru modelul condiționat.
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23006}{}}\vspace{-7mm}
+
+Calculați cei trei estimatori pentru matricea informațională medie a lui Fisher pentru modelul necondiționat și pentru modelul condiționat.
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -1930,7 +1973,9 @@ $$
 
 sub $H_0$.
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerați setul de date [ex_Greene.csv](dataIn/ex_Greene.csv). Scrieți un cod R prin care să estimați parametrii modelului necondiționat și respectiv condiționat cu ajutorul estimatorilor de verosimilitate maximă și calculați matricea de varianță-covarianță asimptotică pentru fiecare din cele trei alternative. 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23007}{}}\vspace{-7mm}
+
+Considerați setul de date [ex_Greene.csv](dataIn/ex_Greene.csv). Scrieți un cod R prin care să estimați parametrii modelului necondiționat și respectiv condiționat cu ajutorul estimatorilor de verosimilitate maximă și calculați matricea de varianță-covarianță asimptotică pentru fiecare din cele trei alternative. 
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -2166,7 +2211,9 @@ V_C
 ```
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Testați ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23008}{}}\vspace{-7mm}
+
+Testați ipotezele 
 
 $$
   H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1
@@ -2201,7 +2248,9 @@ $$
 ceea ce arată că la un nivel de semnificație $\alpha = 5\%$ respingem ipoteza nulă $H_0:\,\rho = 1$.
 
 
-\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Testați ipotezele 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">\marginnote{\enonce{23009}{}}\vspace{-7mm}
+
+Testați ipotezele 
 
 $$
   H_0:\; \rho = 1 \quad \text{vs}\quad H_1:\; \rho\neq 1

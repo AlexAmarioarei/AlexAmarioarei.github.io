@@ -2,18 +2,6 @@
 title: "Exerciții de seminar 1"
 subtitle: Metoda verosimilității maxime și testare de ipoteze statistice
 output:
-  pdf_document:
-    includes:
-      before_body: tex/body.tex
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
-    citation_package: natbib
-  word_document:
-    fig_caption: yes
-    highlight: pygments
-    keep_md: yes
-    toc: no
   html_document:
     code_folding: show
     css: labs_css/labs.css
@@ -27,6 +15,18 @@ output:
     includes:
       in_header: lab_header/lab_header.html
       after_body: lab_header/lab_footer.html
+  word_document:
+    fig_caption: yes
+    highlight: pygments
+    keep_md: yes
+    toc: no
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: natbib
 bibliography: references/InstStatFin2018ref.bib
 ---
 
