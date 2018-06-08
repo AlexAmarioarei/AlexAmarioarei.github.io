@@ -218,6 +218,49 @@ Trimiterea proiectelor se va face pe adresa de **Dropbox** (conform instrucțiun
 
 Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. Fiecare proiect va fi trimis în format **PDF** sau **MSWord** și va fi generat cu ajutorul pachetului [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile. Fișierul final va conține și codul `R` (documentat) și va avea numele: *Proiect_Nume_Prenume_grupa_x.pdf*, unde *x* este numărul grupei. 
 
+## Rezultate sesiunea 2 - 7 iunie 2018
+***
+
+
+```{r, echo = FALSE}
+stat_tab_R1 = read.csv("results/Tabel_Prob_Stat_Restanta_Iunie.csv", stringsAsFactors = FALSE)
+
+stat_tab_R1 = stat_tab_R1[,1:10]
+stat_tab_R1$Total[stat_tab_R1$Examen == 0] = "Absent"
+  
+# stat_tab_R1 = stat_tab_R1[,-1]
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
+# fix some left 2 columns and right 1 column
+DT::datatable(
+  stat_tab_R1, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2f7acd', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#9ddcff', '#9ddcff', '#9ddcff', '#9ddcff', '#9ddcff', '#9ddcff')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99')))
+```
+
 ## Rezultate
 ***
 
