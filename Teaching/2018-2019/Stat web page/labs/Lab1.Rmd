@@ -27,7 +27,7 @@ output:
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
-bibliography: references/ProbStat2019ref.bib
+bibliography: references/Stat2019ref.bib
 ---
 
 <script>
