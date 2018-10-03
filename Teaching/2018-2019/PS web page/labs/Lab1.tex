@@ -418,7 +418,7 @@ urlcolor=linkcol %couleur des liens pour les url
 \fancyhf{}
 \rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
 % \lhead{\textit{Curs}: Tehnici alternative în predarea matematicii (2018)\\ \textit{Instructori}: A. Am\u arioarei, M. Patriche}
-\lhead{\textit{Curs}: Probabilități și Statistică (2019)\\ \textit{Instructor}: A. Am\u arioarei}
+\lhead{\textit{Curs}: Probabilități și Statistică (2018-2019)\\ \textit{Instructor}: A. Am\u arioarei}
 \rfoot{Pagina \thepage}
 \lfoot{Grupele: 241, 242, 243, 244}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -588,6 +588,28 @@ păstrată în memorie (\texttt{a} apare în fereastra de lucru -
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{1.029086}
 \end{Highlighting}
 \end{Shaded}
+
+Operațiile binare în \texttt{R} sunt date în tabelul de mai jos:
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Operatii binare in R}\tabularnewline
+\toprule
+Operatorul & Descriere\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Operatorul & Descriere\tabularnewline
+\midrule
+\endhead
+\texttt{+} & Adunare\tabularnewline
+\texttt{-} & Scădere\tabularnewline
+\texttt{*} & Înmulțire\tabularnewline
+\texttt{/} & Împărțire\tabularnewline
+\texttt{\^{}} or \texttt{**} & Exponențiere\tabularnewline
+\texttt{\%/\%} & Câtul împărțirii\tabularnewline
+\texttt{\%\%} & Restul împărțirii\tabularnewline
+\bottomrule
+\end{longtable}
 
 Pentru a șterge toate variabilele din memorie trebuie să folosim comanda
 următoare (funcția \texttt{ls()} listează numele obiectelor din memorie
@@ -962,6 +984,59 @@ folosi funcția \texttt{seq()}:
 \end{Highlighting}
 \end{Shaded}
 
+\begin{longtable}[]{@{}lll@{}}
+\caption{Functii utile pentru crearea unui vector}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.34\columnwidth}\raggedright\strut
+Function\strut
+\end{minipage} & \begin{minipage}[b]{0.39\columnwidth}\raggedright\strut
+Example\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+Result\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.34\columnwidth}\raggedright\strut
+Function\strut
+\end{minipage} & \begin{minipage}[b]{0.39\columnwidth}\raggedright\strut
+Example\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+Result\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
+\texttt{c(a,\ b,\ ...)}\strut
+\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\texttt{c(1,\ 5,\ 9)}\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+1, 5, 9\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
+\texttt{a:b}\strut
+\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\texttt{1:5}\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+1, 2, 3, 4, 5\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
+\texttt{seq(from,\ to,\ by,\ length.out)}\strut
+\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\texttt{seq(from\ =\ 0,\ to\ =\ 6,\ by\ =\ 2)}\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+0, 2, 4, 6\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
+\texttt{rep(x,\ times,\ each,\ length.out)}\strut
+\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\texttt{rep(c(7,\ 8),\ times\ =\ 2,\ each\ =\ 2)}\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+7, 7, 8, 8, 7, 7, 8, 8\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
 \subsubsection{Operații cu vectori}\label{operatii-cu-vectori}
 
 Operațiile elementare pe care le puteam face cu scalari (adunarea
@@ -1226,11 +1301,11 @@ coloane (\emph{columns}).
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{Lab1_files/figure-latex/unnamed-chunk-29-1} 
+{\centering \includegraphics[width=0.8\linewidth]{Lab1_files/figure-latex/unnamed-chunk-30-1} 
 
 }
 
-\caption{Scalari, Vectori, Matrice}\label{fig:unnamed-chunk-29}
+\caption{Scalari, Vectori, Matrice}\label{fig:unnamed-chunk-30}
 \end{figure}
 
 Indexarea liniilor și a coloanelor pentru o matrice începe cu 1. De
@@ -1362,6 +1437,19 @@ Operațiile uzuale cu vectori se aplică și matricelor. Pe lângă acestea
 avem la dispoziție și operații de algebră liniară clasice, cum ar fi
 determinarea dimensiunii acestora, transpunerea matricelor sau
 înmulțirea lor:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{diag}\NormalTok{(M) }\CommentTok{# Diagonala matricei M}
+\KeywordTok{dim}\NormalTok{(M) }\CommentTok{# Dimensiunile matricei M}
+\KeywordTok{nrow}\NormalTok{(M) }\CommentTok{# Numarul de linii ale matricei M}
+\KeywordTok{ncol}\NormalTok{(M) }\CommentTok{# Numarul de coloane ale matricei M}
+\KeywordTok{t}\NormalTok{(M) }\CommentTok{# Transpusa}
+\KeywordTok{colSums}\NormalTok{(M), }\KeywordTok{rowSums}\NormalTok{(M) }\CommentTok{# Suma pe coloane si suma pe linii}
+\end{Highlighting}
+\end{Shaded}
+
+De exemplu:
 
 \begin{Shaded}
 \begin{Highlighting}[]
