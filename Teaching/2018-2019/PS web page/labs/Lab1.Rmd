@@ -2,6 +2,12 @@
 title: "Laborator 1"
 subtitle: Introducere în R
 output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
   html_document:
     code_folding: show
     css: lab_css/labs.css
@@ -15,12 +21,6 @@ output:
     includes:
       in_header: lab_header/lab_header.html
       after_body: lab_header/lab_footer.html
-  pdf_document:
-    includes:
-      before_body: tex/body.tex
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -203,6 +203,21 @@ asq = sqrt(a)
 asq
 ```
 
+Operațiile binare în `R` sunt date în tabelul de mai jos:
+
+
+| Operatorul | Descriere |
+|:-------------------|:---------------------------------------------|
+| `+` | Adunare |
+| `-` | Scădere |
+| `*` | Înmulțire |
+| `/` | Împărțire |
+| `^` or `**` | Exponențiere |
+| `%/%` | Câtul împărțirii |
+| `%%` | Restul împărțirii | 
+
+Table: `r tn("Operatii binare in R")`
+
 Pentru a șterge toate variabilele din memorie trebuie să folosim comanda următoare (funcția `ls()` listează numele obiectelor din memorie iar comanda `rm()` șterge obiectele; de asemenea se poate folosi și comanda `ls.str()` pentru a lista obiectele împreună cu o scurtă descriere a lor)
 
 ```{r, eval=FALSE}
@@ -359,6 +374,16 @@ seq(1, 10, 1)
 seq(1, 10, length.out = 15)
 ```
 
+
+| Function| Example|Result |
+|:-------------------------|:-----------------------------|:----------|
+|     `c(a, b, ...)`|    `c(1, 5, 9)` |`r c(1, 5, 9)`     |
+|     `a:b`|    `1:5`|`r 1:5`    |
+|     `seq(from, to, by, length.out)`|    `seq(from = 0, to = 6, by = 2)`|`r seq(from = 0, to = 6, by = 2)`     |
+|     `rep(x, times, each, length.out)`|    `rep(c(7, 8), times = 2, each = 2)`|`r rep(c(7, 8), times = 2, each = 2)`     |
+
+Table: `r tn("Functii utile pentru crearea unui vector")`
+
 ### Operații cu vectori 
 
 Operațiile elementare pe care le puteam face cu scalari (adunarea `+`, scăderea `-`, înmulțirea `*`, împărțirea `/` și ridicarea la putere `^`) putem să le facem și cu vectori (între vectori sau între vectori și scalari).  
@@ -491,6 +516,16 @@ Să presupunem că am înregistrat în fiecare zi, pe parcursul a 4 săptămâni
 
 ```
 
+```{r, echo = FALSE, eval=FALSE}
+x = c(106, 123, 123, 111, 125, 113, 130, 113, 114, 100, 120, 130, 118, 114, 127, 112, 121, 114, 120, 119, 127, 114, 108, 127, 131, 157, 102, 133)
+zile = rep(c("L", "Ma", "Mi", "J", "V", "S", "D"), 4)
+sapt = rep(1:4, each = 7)
+
+cat("Cel mai mult s-a vorbit in zilele", zile[which(x == max(x))], "din saptamana", sapt[which(x == max(x))], "\n")
+cat("Cel mai putin s-a vorbit in zilele", zile[which(x == min(x))], "din saptamana", sapt[which(x == min(x))], "\n")
+cat("Zilele in care s-a vorbit mai mult de 120 minute sunt", zile[x>=120], "din saptamanile", sapt[x>=120], "\n")
+```
+
 
 ## Matrice
 
@@ -573,6 +608,17 @@ matrix(data = 1:10,
 ```
 
 Operațiile uzuale cu vectori se aplică și matricelor. Pe lângă acestea avem la dispoziție și operații de algebră liniară clasice, cum ar fi determinarea dimensiunii acestora, transpunerea matricelor sau înmulțirea lor: 
+
+```{r, eval = FALSE}
+diag(M) # Diagonala matricei M
+dim(M) # Dimensiunile matricei M
+nrow(M) # Numarul de linii ale matricei M
+ncol(M) # Numarul de coloane ale matricei M
+t(M) # Transpusa
+colSums(M), rowSums(M) # Suma pe coloane si suma pe linii
+```
+
+De exemplu:
 
 ```{r}
 m = matrix(data = 1:10,

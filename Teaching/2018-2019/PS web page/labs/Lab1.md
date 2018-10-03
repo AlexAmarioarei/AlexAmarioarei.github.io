@@ -148,6 +148,21 @@ asq
 [1] 1.029086
 ```
 
+Operațiile binare în `R` sunt date în tabelul de mai jos:
+
+
+| Operatorul | Descriere |
+|:-------------------|:---------------------------------------------|
+| `+` | Adunare |
+| `-` | Scădere |
+| `*` | Înmulțire |
+| `/` | Împărțire |
+| `^` or `**` | Exponențiere |
+| `%/%` | Câtul împărțirii |
+| `%%` | Restul împărțirii | 
+
+Table: Tabelul 1. Operatii binare in R
+
 Pentru a șterge toate variabilele din memorie trebuie să folosim comanda următoare (funcția `ls()` listează numele obiectelor din memorie iar comanda `rm()` șterge obiectele; de asemenea se poate folosi și comanda `ls.str()` pentru a lista obiectele împreună cu o scurtă descriere a lor)
 
 
@@ -190,7 +205,7 @@ Următorul tabel prezintă funcțiile de ajutor, cel mai des utilizate:
 | `vignette()` | Listează toate vinietele disponibile |
 | `vignette("nume")` | Afișează vinietele corespunzătoare topicului *nume* |
 
-Table: Tabelul 1. Functii folosite pentru ajutor
+Table: Tabelul 2. Functii folosite pentru ajutor
 
 
 Documentații online:
@@ -207,7 +222,7 @@ Documentații online:
 | Pachetul ggplot2 | https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf|
 | Pachetul RMarkdown| https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf|
 
-Table: Tabelul 2. O serie de link-uri utile
+Table: Tabelul 3. O serie de link-uri utile
 
 # Tipuri și structuri de date 
 
@@ -341,6 +356,16 @@ seq(1, 10, length.out = 15)
  [8]  5.500000  6.142857  6.785714  7.428571  8.071429  8.714286  9.357143
 [15] 10.000000
 ```
+
+
+| Function| Example|Result |
+|:-------------------------|:-----------------------------|:----------|
+|     `c(a, b, ...)`|    `c(1, 5, 9)` |1, 5, 9     |
+|     `a:b`|    `1:5`|1, 2, 3, 4, 5    |
+|     `seq(from, to, by, length.out)`|    `seq(from = 0, to = 6, by = 2)`|0, 2, 4, 6     |
+|     `rep(x, times, each, length.out)`|    `rep(c(7, 8), times = 2, each = 2)`|7, 7, 8, 8, 7, 7, 8, 8     |
+
+Table: Tabelul 4. Functii utile pentru crearea unui vector
 
 ### Operații cu vectori 
 
@@ -510,7 +535,7 @@ O listă a operatorilor logici din R se găsește în tabelul următor:
 | `!` | Negație |
 | `%in%` |  În mulțimea |
 
-Table: Tabelul 3. Operatori logici
+Table: Tabelul 5. Operatori logici
 
 
 ```r
@@ -538,13 +563,15 @@ x %in% c(1,9)
 </div>\EndKnitrBlock{rmdexercise}
 
 
+
+
 ## Matrice
 
 Matricele sunt structuri de date care extind vectorii și sunt folosite la representarea datelor de același tip în două dimensiuni. Matricele sunt similare tablourilor din Excel și pot fi văzute ca vectori cu două atribute suplimentare: numărul de linii (*rows*) și numărul de coloane (*columns*).
 
 
 <div class="figure" style="text-align: center">
-<img src="Lab1_files/figure-html/unnamed-chunk-29-1.png" alt="Figura 3. Scalari, Vectori, Matrice" width="90%" />
+<img src="Lab1_files/figure-html/unnamed-chunk-30-1.png" alt="Figura 3. Scalari, Vectori, Matrice" width="90%" />
 <p class="caption">Figura 3. Scalari, Vectori, Matrice</p>
 </div>
 
@@ -558,7 +585,7 @@ Există mai multe moduri de creare a unei matrici în R. Funcțiile cele mai uzu
 |     `rbind(a, b, c)`| Combină vectorii ca și linii într-o matrice|`rbind(1:5, 6:10, 11:15)`    |
 |     `matrix(x, nrow, ncol, byrow)`| Crează o matrice dintr-un vector `x`   | `matrix(x = 1:12, nrow = 3, ncol = 4)` |
 
-Table: Tabelul 4. Functii care permit crearea matricelor
+Table: Tabelul 6. Functii care permit crearea matricelor
 
 Pentru a vedea ce obținem atunci când folosim funcțiile `cbind()` și `rbind()` să considerăm exemplele următoare:
 
@@ -622,6 +649,18 @@ matrix(data = 1:10,
 ```
 
 Operațiile uzuale cu vectori se aplică și matricelor. Pe lângă acestea avem la dispoziție și operații de algebră liniară clasice, cum ar fi determinarea dimensiunii acestora, transpunerea matricelor sau înmulțirea lor: 
+
+
+```r
+diag(M) # Diagonala matricei M
+dim(M) # Dimensiunile matricei M
+nrow(M) # Numarul de linii ale matricei M
+ncol(M) # Numarul de coloane ale matricei M
+t(M) # Transpusa
+colSums(M), rowSums(M) # Suma pe coloane si suma pe linii
+```
+
+De exemplu:
 
 
 ```r
@@ -931,7 +970,7 @@ R are mai multe funcții care permit vizualizarea structurilor de tip dataframe.
 | `rownames(), colnames(), names()` | Numele liniilor sau coloanelor.  | 
 | `str(x)` | Structura dataframe-ului | 
 
-Table: Tabelul 5. Exemple de functii necesare pentru intelegerea structurii dataframe-ului
+Table: Tabelul 7. Exemple de functii necesare pentru intelegerea structurii dataframe-ului
 
 
 ```r
@@ -1039,7 +1078,7 @@ O altă metodă de indexare este prin folosirea funcției `subset()`.
 |     `subset`| Un vector logic care indică liniile pe care le vrem  | 
 |     `select`| Coloanele pe care vrem să le păstrăm | 
 
-Table: Tabelul 6. Principalele argumente ale functiei subset()
+Table: Tabelul 8. Principalele argumente ale functiei subset()
 
 
 ```r
@@ -1125,7 +1164,7 @@ Sunt multe situațiile în care avem la dispoziție două sau mai multe seturi d
 |`by`| Un vector de caractere ce reprezintă una sau mai multe coloane după care se va face lipirea. De exemplu `by = "id"` va combina coloanele care au valori care se potrivesc într-o coloană care se numește `"id"`. `by = c("last.name", "first.name")` va combina coloanele care au valori care se potrivesc în ambele coloane `"last.name"` și `"first.name"`|
 |`all`| Un vector logic care indică dacă vrem să includem sau nu liniile care nu se potrivesc conform argumentului `by`. |
 
-Table: Tabelul 7. Argumentele functiei merge
+Table: Tabelul 9. Argumentele functiei merge
 
 Să presupunem că avem la dispoziție un set de date în care apar 5 studenți și notele pe care le-au obținut la examenul de statistică:
 
@@ -1168,7 +1207,7 @@ O a treia funcție care joacă un rol important în manipularea data frame-urilo
 |`data`| Data frame-ul care conține variabilele din `formula`|
 |`subset`| O submulțime din `data` pe care vrem să le analizăm. De exemplu, `subset(sex == "f" & age > 20)` va restrânge analiza la femei mai învârstă de 20 de ani.|
 
-Table: Tabelul 8. Argumentele functiei aggregate
+Table: Tabelul 10. Argumentele functiei aggregate
 
 Structura generală a funcției `aggregate()` este 
 
