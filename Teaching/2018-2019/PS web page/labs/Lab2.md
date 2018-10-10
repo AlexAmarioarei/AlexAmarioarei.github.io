@@ -20,12 +20,14 @@ output:
       in_header: tex/preamble.tex
     keep_tex: yes
     number_sections: yes
+    citation_package: natbib
   word_document:
     fig_caption: yes
     highlight: pygments
     keep_md: yes
     reference_docx: template/template.docx
     toc: no
+bibliography: references/ProbStat2019ref.bib
 ---
 
 <script>
@@ -55,7 +57,7 @@ $(document).ready(function ()  {
 });
 </script>
 
-Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul [R](https://cran.r-project.org/), care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. 
+Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul [R](https://cran.r-project.org/), care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. Pentru mai multe detalii se pot consulta [@Davies2016, @Matloff2011].
 
 
 
@@ -124,7 +126,7 @@ mes
 [1] 35
 ```
 
-În fucția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția `return()` care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă. 
+În funcția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția `return()` care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă. 
 
 Dacă utilizatorul nu specifică valoarea argumentului `mesaj` în funcția de mai sus atunci R-ul întoarce o eroare:
 
@@ -237,7 +239,7 @@ paste("Curs", "Probabilitati si Statistica", sep = ":")
 
 Structurile de control, în R, permit structurarea logică și controlul fluxului de execuție al unei serii de comenzi. Cele mai folosite structuri de control sunt:
 
-- `if` și`else`: testează o condiție și acționează asupra ei
+- `if` și `else`: testează o condiție și acționează asupra ei
 
 - `switch`: compară mai multe opțiuni și execută opțiunea pentru care avem potrivire
 
@@ -281,7 +283,7 @@ Avem următorul exemplu
 
 
 ```r
-## Generam un numar uniform in [0,1]
+## Generam un numar uniform in [0,10]
 x <- runif(1, 0, 10)  
 
 if(x > 3) {
@@ -1067,4 +1069,7 @@ text(x = 0, y = 1, labels = "Ceva text aleator")
 # Pasul 3
 dev.off()
 ```
+
+# Referințe
+
 

@@ -21,6 +21,7 @@ output:
       in_header: tex/preamble.tex
     keep_tex: yes
     number_sections: yes
+    citation_package: natbib
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -57,7 +58,7 @@ $(document).ready(function ()  {
 });
 </script>
 
-Obiectivul acestui laborator este de a prezenta o scurtă introducere în programul [R](https://cran.r-project.org/) (cu ajutorul interfeței grafice [RStudio](https://www.rstudio.com/)). O descriere detaliată a acestui program precum și versiunile disponibile pentru descărcat se găsesc pe site-ul [`www.r-project.org`](http://www.r-project.org).
+Obiectivul acestui laborator este de a prezenta o scurtă introducere în programul [R](https://cran.r-project.org/) (cu ajutorul interfeței grafice [RStudio](https://www.rstudio.com/)). O descriere detaliată a acestui program precum și versiunile disponibile pentru descărcat se găsesc pe site-ul [`www.r-project.org`](http://www.r-project.org). Pentru mai multe detalii se pot consulta [@Davies2016, @Matloff2011].
 
 
 
@@ -678,20 +679,106 @@ nrow(m) # numarul de linii
 [1] 2
 ncol(m) # numarul de coloane
 [1] 5
+```
 
-tpm = t(m) # transpusa
-tpm
-     [,1] [,2]
-[1,]    1    2
-[2,]    3    4
-[3,]    5    6
-[4,]    7    8
-[5,]    9   10
+Adunarea și scăderea matricelor se face pe componenete:
 
-m %*% tpm # inmultirea matricelor
-     [,1] [,2]
-[1,]  165  190
-[2,]  190  220
+
+```r
+A = matrix(c(1, 3, 2, 2, 2, 1, 3, 1, 3), ncol = 3)
+B = matrix(c(4, 6, 4, 5, 5, 6, 6, 4, 5), ncol = 3)
+a = 2
+
+A + a
+     [,1] [,2] [,3]
+[1,]    3    4    5
+[2,]    5    4    3
+[3,]    4    3    5
+A + B
+     [,1] [,2] [,3]
+[1,]    5    7    9
+[2,]    9    7    5
+[3,]    6    7    8
+A - B
+     [,1] [,2] [,3]
+[1,]   -3   -3   -3
+[2,]   -3   -3   -3
+[3,]   -2   -5   -2
+```
+
+Înmulțirea și împărțirea se face tot pe componenete
+
+
+```r
+A * a
+     [,1] [,2] [,3]
+[1,]    2    4    6
+[2,]    6    4    2
+[3,]    4    2    6
+A * B
+     [,1] [,2] [,3]
+[1,]    4   10   18
+[2,]   18   10    4
+[3,]    8    6   15
+A / B
+     [,1]      [,2] [,3]
+[1,] 0.25 0.4000000 0.50
+[2,] 0.50 0.4000000 0.25
+[3,] 0.50 0.1666667 0.60
+```
+
+Transpusa unei matrice ($A^\intercal$) se obține cu ajutorul funcției `t()`
+
+
+```r
+t(A)
+     [,1] [,2] [,3]
+[1,]    1    3    2
+[2,]    2    2    1
+[3,]    3    1    3
+```
+
+iar inversa ($A^{-1}$) cu ajutorul funcției `solve()`
+
+
+```r
+solve(A)
+            [,1]  [,2]       [,3]
+[1,] -0.41666667  0.25  0.3333333
+[2,]  0.58333333  0.25 -0.6666667
+[3,]  0.08333333 -0.25  0.3333333
+```
+
+Înmulțirea (uzuală) a matricelor se face folosind operatorul `%*%`
+
+
+```r
+A %*% B # inmultirea matricelor
+     [,1] [,2] [,3]
+[1,]   28   33   29
+[2,]   28   31   31
+[3,]   26   33   31
+```
+
+iar funcția `crossprod()` calculează produsul $A^\intercal B$ (mai repede decât folosind instrucțiunea `t(A) %*% B`)
+
+
+```r
+crossprod(A, B)
+     [,1] [,2] [,3]
+[1,]   30   32   28
+[2,]   24   26   25
+[3,]   30   38   37
+```
+
+Determinantul și urma unei matrice se obțin folosind funcțiile `det()` și respectiv `sum(diag())`
+
+
+```r
+det(A) # determinantul
+[1] -12
+sum(diag(A)) # urma matricei A
+[1] 6
 ```
 
 Metodele de indexare discutate pentru vectori se aplică și în cazul matricelor (`[,]`) numai că acum în loc să folosim un vector să indexăm putem să folosim doi vectori. Sintaxa are structura generală `m[linii, coloane]` unde `linii` și `coloane` sunt vectori cu valori întregi.
@@ -960,7 +1047,7 @@ str(survey)
  $ age  : num  99 46 23 54 23
 ```
 
-R are mai multe funcții care permit vizualizarea structurilor de tip dataframe. Table de mai jos include câteva astfel de funcții:
+R are mai multe funcții care permit vizualizarea structurilor de tip dataframe. Tabelul de mai jos include câteva astfel de funcții:
 
 | Funcție | Descriere | 
 |:------------------------|:-----------------------------------------|

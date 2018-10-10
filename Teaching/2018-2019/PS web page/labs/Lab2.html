@@ -282,7 +282,7 @@ $(document).ready(function ()  {
     var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
-<p>Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul <a href="https://cran.r-project.org/">R</a>, care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică.</p>
+<p>Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul <a href="https://cran.r-project.org/">R</a>, care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. Pentru mai multe detalii se pot consulta <span class="citation">(Davies 2016, <span class="citation">Matloff (2011)</span>)</span>.</p>
 <div id="elemente-de-programare-in-r" class="section level1">
 <h1><span class="header-section-number">1</span> Elemente de programare în R</h1>
 <div id="functii" class="section level2">
@@ -326,7 +326,7 @@ NULL</code></pre>
 mes = f(&quot;curs de statistica si probabilitati&quot;)
 mes
 [1] 35</code></pre>
-<p>În fucția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția <code>return()</code> care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă.</p>
+<p>În funcția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția <code>return()</code> care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă.</p>
 <p>Dacă utilizatorul nu specifică valoarea argumentului <code>mesaj</code> în funcția de mai sus atunci R-ul întoarce o eroare:</p>
 <pre class="r"><code>f()
 Error in nchar(mesaj): argument &quot;mesaj&quot; is missing, with no default</code></pre>
@@ -393,7 +393,7 @@ NULL</code></pre>
 <h2><span class="header-section-number">1.2</span> Structuri de control (<code>if-else</code>, <code>for</code>, etc.)</h2>
 <p>Structurile de control, în R, permit structurarea logică și controlul fluxului de execuție al unei serii de comenzi. Cele mai folosite structuri de control sunt:</p>
 <ul>
-<li><p><code>if</code> și<code>else</code>: testează o condiție și acționează asupra ei</p></li>
+<li><p><code>if</code> și <code>else</code>: testează o condiție și acționează asupra ei</p></li>
 <li><p><code>switch</code>: compară mai multe opțiuni și execută opțiunea pentru care avem potrivire</p></li>
 <li><p><code>for</code>: execută o acțiune repetitivă de un număr fix de ori</p></li>
 <li><p><code>while</code>: execută o acțiune repetitivă <em>cât timp</em> o condiție este adevărată</p></li>
@@ -420,7 +420,7 @@ else {
         ## executa instructiuni
 }</code></pre>
 <p>Avem următorul exemplu</p>
-<pre class="r"><code>## Generam un numar uniform in [0,1]
+<pre class="r"><code>## Generam un numar uniform in [0,10]
 x &lt;- runif(1, 0, 10)  
 
 if(x &gt; 3) {
@@ -1214,6 +1214,17 @@ text(x = 0, y = 1, labels = &quot;Ceva text aleator&quot;)
 
 # Pasul 3
 dev.off()</code></pre>
+</div>
+</div>
+<div id="referinte" class="section level1 unnumbered">
+<h1>Referințe</h1>
+<div id="refs" class="references">
+<div id="ref-Davies2016">
+<p>Davies, Tilman. 2016. <em>The Book of R. a First Course in Programming and Statistics.</em> 1st ed. No Starch Press, Inc.</p>
+</div>
+<div id="ref-Matloff2011">
+<p>Matloff, Norman. 2011. <em>The Art of R Programming. a Tour of Statistical Software Design.</em> 1st ed. No Starch Press, Inc.</p>
+</div>
 </div>
 </div>
 <div class="footnotes">

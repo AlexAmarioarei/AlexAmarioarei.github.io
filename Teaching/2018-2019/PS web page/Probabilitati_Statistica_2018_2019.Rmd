@@ -101,8 +101,8 @@ Mai jos găsiți o parte din laboratoarele cursului.
 lab1 = "[HTML](labs/Lab1.html)"
 pdf_lab1 = "[PDF](labs/Lab1.pdf)"
 
-# lab2 = "[HTML](labs/Lab_2.html)"
-# pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
+lab2 = "[HTML](labs/Lab2.html)"
+pdf_lab2 = "[PDF](labs/Lab2.pdf)"
 # 
 # lab3 = "[HTML](labs/Lab_3.html)"
 # pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
@@ -126,9 +126,12 @@ pdf_lab1 = "[PDF](labs/Lab1.pdf)"
 # pdf_lab_sup2= "[PDF](labs/Lab_Suplimentar_IPS.pdf)"
 
 tabLab = data.frame(Nr = c(1),
-                    Lab = c("Laborator 1"),
-                    Htmls = c(lab1),
-                    Pdfs = c(pdf_lab1))
+                    Lab = c("Laborator 1", 
+                            "Laborator 2"),
+                    Htmls = c(lab1, 
+                              lab2),
+                    Pdfs = c(pdf_lab1,
+                             pdf_lab2))
 
 # tabLab = data.frame(Nr = c(1,2,3,4,5,6,7,8,9),
 #                     Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6", "Laborator 7", "Laborator Suplimentar 1", "Laborator Suplimentar 2"),

@@ -28,6 +28,8 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{plainnat}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -452,7 +454,8 @@ programul \href{https://cran.r-project.org/}{R} (cu ajutorul interfeței
 grafice \href{https://www.rstudio.com/}{RStudio}). O descriere detaliată
 a acestui program precum și versiunile disponibile pentru descărcat se
 găsesc pe site-ul
-\href{http://www.r-project.org}{\texttt{www.r-project.org}}.
+\href{http://www.r-project.org}{\texttt{www.r-project.org}}. Pentru mai
+multe detalii se pot consulta \citep[\citet{Matloff2011}]{Davies2016}.
 
 \section{Introducere}\label{introducere}
 
@@ -1467,20 +1470,117 @@ De exemplu:
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{2}
 \KeywordTok{ncol}\NormalTok{(m) }\CommentTok{# numarul de coloane}
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
 
-\NormalTok{tpm =}\StringTok{ }\KeywordTok{t}\NormalTok{(m) }\CommentTok{# transpusa}
-\NormalTok{tpm}
-\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{]}
-\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{1}    \DecValTok{2}
-\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{3}    \DecValTok{4}
-\NormalTok{[}\DecValTok{3}\NormalTok{,]    }\DecValTok{5}    \DecValTok{6}
-\NormalTok{[}\DecValTok{4}\NormalTok{,]    }\DecValTok{7}    \DecValTok{8}
-\NormalTok{[}\DecValTok{5}\NormalTok{,]    }\DecValTok{9}   \DecValTok{10}
+Adunarea și scăderea matricelor se face pe componenete:
 
-\NormalTok{m }\OperatorTok{%*%}\StringTok{ }\NormalTok{tpm }\CommentTok{# inmultirea matricelor}
-\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{]}
-\NormalTok{[}\DecValTok{1}\NormalTok{,]  }\DecValTok{165}  \DecValTok{190}
-\NormalTok{[}\DecValTok{2}\NormalTok{,]  }\DecValTok{190}  \DecValTok{220}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{), }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{B =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{), }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{a =}\StringTok{ }\DecValTok{2}
+
+\NormalTok{A }\OperatorTok{+}\StringTok{ }\NormalTok{a}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{3}    \DecValTok{4}    \DecValTok{5}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{5}    \DecValTok{4}    \DecValTok{3}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]    }\DecValTok{4}    \DecValTok{3}    \DecValTok{5}
+\NormalTok{A }\OperatorTok{+}\StringTok{ }\NormalTok{B}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{5}    \DecValTok{7}    \DecValTok{9}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{9}    \DecValTok{7}    \DecValTok{5}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]    }\DecValTok{6}    \DecValTok{7}    \DecValTok{8}
+\NormalTok{A }\OperatorTok{-}\StringTok{ }\NormalTok{B}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]   }\OperatorTok{-}\DecValTok{3}   \OperatorTok{-}\DecValTok{3}   \OperatorTok{-}\DecValTok{3}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]   }\OperatorTok{-}\DecValTok{3}   \OperatorTok{-}\DecValTok{3}   \OperatorTok{-}\DecValTok{3}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]   }\OperatorTok{-}\DecValTok{2}   \OperatorTok{-}\DecValTok{5}   \OperatorTok{-}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+Înmulțirea și împărțirea se face tot pe componenete
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{*}\StringTok{ }\NormalTok{a}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{2}    \DecValTok{4}    \DecValTok{6}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{6}    \DecValTok{4}    \DecValTok{2}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]    }\DecValTok{4}    \DecValTok{2}    \DecValTok{6}
+\NormalTok{A }\OperatorTok{*}\StringTok{ }\NormalTok{B}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{4}   \DecValTok{10}   \DecValTok{18}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]   }\DecValTok{18}   \DecValTok{10}    \DecValTok{4}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]    }\DecValTok{8}    \DecValTok{6}   \DecValTok{15}
+\NormalTok{A }\OperatorTok{/}\StringTok{ }\NormalTok{B}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{]      [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{0.25} \FloatTok{0.4000000} \FloatTok{0.50}
+\NormalTok{[}\DecValTok{2}\NormalTok{,] }\FloatTok{0.50} \FloatTok{0.4000000} \FloatTok{0.25}
+\NormalTok{[}\DecValTok{3}\NormalTok{,] }\FloatTok{0.50} \FloatTok{0.1666667} \FloatTok{0.60}
+\end{Highlighting}
+\end{Shaded}
+
+Transpusa unei matrice (\(A^\intercal\)) se obține cu ajutorul funcției
+\texttt{t()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t}\NormalTok{(A)}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]    }\DecValTok{1}    \DecValTok{3}    \DecValTok{2}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]    }\DecValTok{2}    \DecValTok{2}    \DecValTok{1}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]    }\DecValTok{3}    \DecValTok{1}    \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+iar inversa (\(A^{-1}\)) cu ajutorul funcției \texttt{solve()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{solve}\NormalTok{(A)}
+\NormalTok{            [,}\DecValTok{1}\NormalTok{]  [,}\DecValTok{2}\NormalTok{]       [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\OperatorTok{-}\FloatTok{0.41666667}  \FloatTok{0.25}  \FloatTok{0.3333333}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]  }\FloatTok{0.58333333}  \FloatTok{0.25} \OperatorTok{-}\FloatTok{0.6666667}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]  }\FloatTok{0.08333333} \OperatorTok{-}\FloatTok{0.25}  \FloatTok{0.3333333}
+\end{Highlighting}
+\end{Shaded}
+
+Înmulțirea (uzuală) a matricelor se face folosind operatorul
+\texttt{\%*\%}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{%*%}\StringTok{ }\NormalTok{B }\CommentTok{# inmultirea matricelor}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]   }\DecValTok{28}   \DecValTok{33}   \DecValTok{29}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]   }\DecValTok{28}   \DecValTok{31}   \DecValTok{31}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]   }\DecValTok{26}   \DecValTok{33}   \DecValTok{31}
+\end{Highlighting}
+\end{Shaded}
+
+iar funcția \texttt{crossprod()} calculează produsul \(A^\intercal B\)
+(mai repede decât folosind instrucțiunea \texttt{t(A)\ \%*\%\ B})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{crossprod}\NormalTok{(A, B)}
+\NormalTok{     [,}\DecValTok{1}\NormalTok{] [,}\DecValTok{2}\NormalTok{] [,}\DecValTok{3}\NormalTok{]}
+\NormalTok{[}\DecValTok{1}\NormalTok{,]   }\DecValTok{30}   \DecValTok{32}   \DecValTok{28}
+\NormalTok{[}\DecValTok{2}\NormalTok{,]   }\DecValTok{24}   \DecValTok{26}   \DecValTok{25}
+\NormalTok{[}\DecValTok{3}\NormalTok{,]   }\DecValTok{30}   \DecValTok{38}   \DecValTok{37}
+\end{Highlighting}
+\end{Shaded}
+
+Determinantul și urma unei matrice se obțin folosind funcțiile
+\texttt{det()} și respectiv \texttt{sum(diag())}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{det}\NormalTok{(A) }\CommentTok{# determinantul}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\DecValTok{12}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{diag}\NormalTok{(A)) }\CommentTok{# urma matricei A}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{6}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1811,7 +1911,7 @@ caracter în factor, motiv pentru care trebuie să includem argumentul
 \end{Shaded}
 
 R are mai multe funcții care permit vizualizarea structurilor de tip
-dataframe. Table de mai jos include câteva astfel de funcții:
+dataframe. Tabelul de mai jos include câteva astfel de funcții:
 
 \begin{longtable}[]{@{}ll@{}}
 \caption{Exemple de functii necesare pentru intelegerea structurii
@@ -2317,6 +2417,8 @@ Considerați setul de date \texttt{mtcars}. Calculați:
   transmisie
 \end{enumerate}
 \end{rmdexercise}
+
+\bibliography{references/ProbStat2019ref.bib}
 
 
 \end{document}

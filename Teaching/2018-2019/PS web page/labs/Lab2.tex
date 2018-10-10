@@ -28,6 +28,8 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{plainnat}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -450,7 +452,8 @@ urlcolor=linkcol %couleur des liens pour les url
 Obiectivul acestui laborator este de a prezenta succint elementele de
 programare din programul \href{https://cran.r-project.org/}{R}, care
 este structura lor și cum le putem aplica. De asemenea, tot în acest
-laborator vom introduce și câteva elemente de grafică.
+laborator vom introduce și câteva elemente de grafică. Pentru mai multe
+detalii se pot consulta \citep[\citet{Matloff2011}]{Davies2016}.
 
 \section{Elemente de programare în R}\label{elemente-de-programare-in-r}
 
@@ -535,8 +538,8 @@ argument:
 \end{Highlighting}
 \end{Shaded}
 
-În fucția de mai sus nu am indicat nimic special pentru ca funcția să ne
-întoarcă numărul de caractere. În R, rezulatul unei funcții este
+În funcția de mai sus nu am indicat nimic special pentru ca funcția să
+ne întoarcă numărul de caractere. În R, rezulatul unei funcții este
 întotdeauna ultima expresie evaluată. De asemenea există funcția
 \texttt{return()} care poate fi folosită pentru a întoarce o valoare
 explicită, dar de multe ori această funcție este omisă.
@@ -701,7 +704,7 @@ structuri de control sunt:
 
 \begin{itemize}
 \item
-  \texttt{if} și\texttt{else}: testează o condiție și acționează asupra
+  \texttt{if} și \texttt{else}: testează o condiție și acționează asupra
   ei
 \item
   \texttt{switch}: compară mai multe opțiuni și execută opțiunea pentru
@@ -757,7 +760,7 @@ Avem următorul exemplu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{## Generam un numar uniform in [0,1]}
+\NormalTok{## Generam un numar uniform in [0,10]}
 \NormalTok{x <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)  }
 
 \ControlFlowTok{if}\NormalTok{(x }\OperatorTok{>}\StringTok{ }\DecValTok{3}\NormalTok{) \{}
@@ -1984,6 +1987,9 @@ Pentru a salva o imagine avem de parcurs următorii pași:
 \KeywordTok{dev.off}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\renewcommand\refname{Referințe}
+\bibliography{references/ProbStat2019ref.bib}
 
 
 \end{document}
