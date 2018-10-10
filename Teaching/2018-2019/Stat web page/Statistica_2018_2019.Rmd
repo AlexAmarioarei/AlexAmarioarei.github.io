@@ -101,8 +101,8 @@ Mai jos găsiți o parte din laboratoarele cursului.
 lab1 = "[HTML](labs/Lab1.html)"
 pdf_lab1 = "[PDF](labs/Lab1.pdf)"
 
-# lab2 = "[HTML](labs/Lab_2.html)"
-# pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
+lab2 = "[HTML](labs/Lab2.html)"
+pdf_lab2 = "[PDF](labs/Lab2.pdf)"
 # 
 # lab3 = "[HTML](labs/Lab_3.html)"
 # pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
@@ -122,8 +122,8 @@ pdf_lab1 = "[PDF](labs/Lab1.pdf)"
 # lab_sup = "[HTML](labs/Lab_Suplimentar_IPS.html)"
 # pdf_lab_sup = "[PDF](labs/Lab_Suplimentar_IPS.pdf)"
 
-tabLab = data.frame(Nr = c(1#,
-                           # 2, 
+tabLab = data.frame(Nr = c(1,
+                           2#,
                            # 3, 
                            # 4, 
                            # 5, 
@@ -131,8 +131,8 @@ tabLab = data.frame(Nr = c(1#,
                            # 7, 
                            # 8
                            ),
-                    Lab = c("Laborator 1"#, 
-                            # "Laborator 2", 
+                    Lab = c("Laborator 1", 
+                            "Laborator 2"#,
                             # "Laborator 3", 
                             # "Laborator 4", 
                             # "Laborator 5", 
@@ -140,8 +140,8 @@ tabLab = data.frame(Nr = c(1#,
                             # "Laborator 7", 
                             # "Laborator Suplimentar"
                             ),
-                    Htmls = c(lab1#, 
-                              # lab2, 
+                    Htmls = c(lab1, 
+                              lab2#,
                               # lab3, 
                               # lab4, 
                               # lab5, 
@@ -149,8 +149,8 @@ tabLab = data.frame(Nr = c(1#,
                               # lab7, 
                               # lab_sup
                               ),
-                    Pdfs = c(pdf_lab1#, 
-                             # pdf_lab2, 
+                    Pdfs = c(pdf_lab1, 
+                             pdf_lab2#,
                              # pdf_lab3, 
                              # pdf_lab4, 
                              # pdf_lab5, 

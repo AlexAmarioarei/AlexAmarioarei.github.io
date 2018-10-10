@@ -2,6 +2,13 @@
 title: "Laborator 2"
 subtitle: Elemente de programare și grafică în R
 output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: natbib
   html_document:
     code_folding: show
     css: lab_css/labs.css
@@ -14,12 +21,6 @@ output:
     includes:
       in_header: lab_header/lab_header.html
       after_body: lab_header/lab_footer.html
-  pdf_document:
-    includes:
-      before_body: tex/body.tex
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -56,7 +57,7 @@ $(document).ready(function ()  {
 });
 </script>
 
-Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul [R](https://cran.r-project.org/), care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. 
+Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul [R](https://cran.r-project.org/), care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. Pentru mai multe detalii se pot consulta [@Davies2016, @Matloff2011].
 
 ```{r, echo=FALSE}
 library(knitr)
@@ -151,7 +152,7 @@ mes = f("curs de statistica si probabilitati")
 mes
 ```
 
-În fucția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția `return()` care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă. 
+În funcția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția `return()` care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă. 
 
 Dacă utilizatorul nu specifică valoarea argumentului `mesaj` în funcția de mai sus atunci R-ul întoarce o eroare:
 
@@ -245,7 +246,7 @@ paste("Curs", "Probabilitati si Statistica", sep = ":")
 
 Structurile de control, în R, permit structurarea logică și controlul fluxului de execuție al unei serii de comenzi. Cele mai folosite structuri de control sunt:
 
-- `if` și`else`: testează o condiție și acționează asupra ei
+- `if` și `else`: testează o condiție și acționează asupra ei
 
 - `switch`: compară mai multe opțiuni și execută opțiunea pentru care avem potrivire
 
@@ -288,7 +289,7 @@ if(<conditie1>) {
 Avem următorul exemplu
 
 ```{r, prompt=FALSE}
-## Generam un numar uniform in [0,1]
+## Generam un numar uniform in [0,10]
 x <- runif(1, 0, 10)  
 
 if(x > 3) {
@@ -454,6 +455,28 @@ while(z >= 3 && z <= 10) {
 print(z)
 ```
 
+```{r, type = "rmdexercise", engine = engine_block}
+Scrieți un program, folosind bucle de tip `while`, care să permită calcularea radicalului numărului $a\in\mathbb{N}$ plecând de la relația de recurență:
+$$
+  2x_{n+1} = x_n + \frac{a}{x_n},\quad x_1 = \frac{a}{2}
+$$
+
+
+```
+
+De exemplu:
+
+```{r, eval = FALSE}
+# Calculul radicalului
+a = 12223
+
+# folosind while
+x = a/2
+while(abs(x^2 - a) > 1e-10){
+  x = (x + a/x)/2
+}
+```
+
 ### Bucle de tip `repeat`
 
 Acest tip de acțiuni repetitive nu sunt foarte des întâlnite, cel puțin în statistică sau analiză de date. O situație în care ar putea să apară este atunci când avem un algoritm iterativ în care căutăm o soluție și nu vrem să oprim algoritmul până când soluția nu este suficient de bună. 
@@ -472,6 +495,7 @@ repeat {
         } 
 }
 ```
+
 
 ### Comezile `break` și `next`
 
@@ -498,6 +522,19 @@ for(i in 1:10) {
               ## opreste dupa 5 iteratii
               break  
       }		
+}
+```
+
+Calculul radicalului unui număr cu ajutorul buclei de tip `repeat` și a comenzii `break` se scrie
+
+```{r, eval = FALSE}
+# folosind repeat
+a = 12223
+
+x = a/2
+repeat{
+  x = (x + a/x)/2
+  if (abs(x^2 - a) < 1e-10) break
 }
 ```
 
@@ -632,6 +669,37 @@ $$
   
   b) Trasați graficul curbei pe intervalul $[-\pi, \pi]$.
 
+
+```
+
+```{r, echo = FALSE, eval = FALSE}
+# punctul a)
+g1 = function(x){
+  if (x>0){
+    sin(x)^2*log(x)
+  }else{
+    x*sin(x)^2
+  }
+}
+
+g1 = Vectorize(g1, "x")
+
+g2 = function(x){
+  ifelse(x>0, sin(x)^2*log(x), x*sin(x)^2)
+}
+
+# punctul b)
+x = seq(-pi, pi, length.out = 100)
+y1 = g1(x)
+y2 = g2(x)
+
+plot(x, y1, 
+     type = "l", 
+     col = myblue, 
+     bty = "n", 
+     xlab = "x",
+     ylab = "g(x)",
+     main = "Graficul functiei g")
 
 ```
 
@@ -869,7 +937,7 @@ plot(x = mtcars$mpg[mtcars$am == 0],
 
 points(x = mtcars$mpg[mtcars$am == 1], 
       y = mtcars$hp[mtcars$am == 1], 
-      pch = 16, 
+      pch = 8, 
       cex = 2,
       col = myred)
 ```
@@ -968,48 +1036,6 @@ legend("bottomright",
        bty = "n")
 ```
 
-Un al doilea exemplu ar putea consta în afișarea diagramei de împrăștiere a mașinilor din setul de date mtcars în funcție de variabilele `mpg` și `wt` în care punctele sunt colorate în raport cu numărul de cilindrii (4, 6 sau 8), respectiv cu *roșu*, *orange* și *albastru* și în care afișăm numelor mașinilor care au transmisie manuală (`am = 1`):
-
-```{r, out.width=dimplot2}
-plot(mtcars$mpg, mtcars$wt,
-     col = myred, 
-     pch = 16,
-     cex = 1.3,
-     bty = "n",
-     xlab = "Mile pe Galon",
-     ylab = "Greutatea", 
-     main = "Graficul variabilelor: MPG vs Weight")
-
-points(mtcars$mpg[mtcars$cyl == 6], mtcars$wt[mtcars$cyl == 6],
-       col = "orange",
-       pch = 16,
-       cex = 1.3)
-
-points(mtcars$mpg[mtcars$cyl == 8], mtcars$wt[mtcars$cyl == 8],
-       col = myblue,
-       pch = 16, 
-       cex = 1.3)
-
-abline(h = mean(mtcars$wt),
-       lty = 2)
-
-abline(v = mean(mtcars$mpg),
-       lty = 2)
-
-text(mtcars$mpg[mtcars$am == 1],
-     mtcars$wt[mtcars$am == 1], 
-     labels = rownames(mtcars)[mtcars$am == 1],
-     pos = 3, 
-     cex = 0.8)
-
-legend("topright", 
-       legend = c("cyl = 4", "cyl = 6", "cyl = 8"),
-       title = "Nr. Cilindrii",
-       col = c(myred, "orange", myblue),
-       pch = c(16,16,16),
-       bty = "n")
-```
-
 ## Salvarea figurilor 
 
 Odată ce am creat un grafic putem să-l salvăm într-un fișier extern. Pentru aceasta folosim funcțiile `pdf()`, `png()` sau `jpeg()`. Aceste funcții vor salva figura ca fișier de tip .pdf, .png sau .jpeg.
@@ -1043,4 +1069,7 @@ text(x = 0, y = 1, labels = "Ceva text aleator")
 # Pasul 3
 dev.off()
 ```
+
+# Referințe
+
 

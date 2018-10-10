@@ -20,6 +20,7 @@ output:
       in_header: tex/preamble.tex
     keep_tex: yes
     number_sections: yes
+    citation_package: natbib
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -56,7 +57,7 @@ $(document).ready(function ()  {
 });
 </script>
 
-Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul [R](https://cran.r-project.org/), care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. 
+Obiectivul acestui laborator este de a prezenta succint elementele de programare din programul [R](https://cran.r-project.org/), care este structura lor și cum le putem aplica. De asemenea, tot în acest laborator vom introduce și câteva elemente de grafică. Pentru mai multe detalii se pot consulta [@Davies2016, @Matloff2011].
 
 
 
@@ -125,7 +126,7 @@ mes
 [1] 35
 ```
 
-În fucția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția `return()` care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă. 
+În funcția de mai sus nu am indicat nimic special pentru ca funcția să ne întoarcă numărul de caractere. În R, rezulatul unei funcții este întotdeauna ultima expresie evaluată. De asemenea există funcția `return()` care poate fi folosită pentru a întoarce o valoare explicită, dar de multe ori această funcție este omisă. 
 
 Dacă utilizatorul nu specifică valoarea argumentului `mesaj` în funcția de mai sus atunci R-ul întoarce o eroare:
 
@@ -238,7 +239,7 @@ paste("Curs", "Probabilitati si Statistica", sep = ":")
 
 Structurile de control, în R, permit structurarea logică și controlul fluxului de execuție al unei serii de comenzi. Cele mai folosite structuri de control sunt:
 
-- `if` și`else`: testează o condiție și acționează asupra ei
+- `if` și `else`: testează o condiție și acționează asupra ei
 
 - `switch`: compară mai multe opțiuni și execută opțiunea pentru care avem potrivire
 
@@ -282,7 +283,7 @@ Avem următorul exemplu
 
 
 ```r
-## Generam un numar uniform in [0,1]
+## Generam un numar uniform in [0,10]
 x <- runif(1, 0, 10)  
 
 if(x > 3) {
@@ -485,6 +486,27 @@ print(z)
 [1] 11
 ```
 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Scrieți un program, folosind bucle de tip `while`, care să permită calcularea radicalului numărului $a\in\mathbb{N}$ plecând de la relația de recurență:
+$$
+  2x_{n+1} = x_n + \frac{a}{x_n},\quad x_1 = \frac{a}{2}
+$$
+
+</div>\EndKnitrBlock{rmdexercise}
+
+De exemplu:
+
+
+```r
+# Calculul radicalului
+a = 12223
+
+# folosind while
+x = a/2
+while(abs(x^2 - a) > 1e-10){
+  x = (x + a/x)/2
+}
+```
+
 ### Bucle de tip `repeat`
 
 Acest tip de acțiuni repetitive nu sunt foarte des întâlnite, cel puțin în statistică sau analiză de date. O situație în care ar putea să apară este atunci când avem un algoritm iterativ în care căutăm o soluție și nu vrem să oprim algoritmul până când soluția nu este suficient de bună. 
@@ -504,6 +526,7 @@ repeat {
         } 
 }
 ```
+
 
 ### Comezile `break` și `next`
 
@@ -544,6 +567,20 @@ for(i in 1:10) {
 [1] 4
 [1] 5
 [1] 6
+```
+
+Calculul radicalului unui număr cu ajutorul buclei de tip `repeat` și a comenzii `break` se scrie
+
+
+```r
+# folosind repeat
+a = 12223
+
+x = a/2
+repeat{
+  x = (x + a/x)/2
+  if (abs(x^2 - a) < 1e-10) break
+}
 ```
 
 # Elemente de grafică în R
@@ -600,7 +637,7 @@ plot(x = 1:10,                         # x-coordonate
      cex = 1)                           # Marimea simbolului 
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-29-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" />
 
 În afară de vectorii `x` și `y` toate celelalte argumente sunt opționale, dacă nu sunt specificate atunci R-ul folosește valorile prestabilite. De exemplu dacă nu specificăm limitele `xlim` și `ylim`, R-ul calculează aceste limite astfel încât toate punctele să fie încadrați în interiorul graficului.
 
@@ -617,13 +654,13 @@ Tipul de simbol pe care vrem să-l folosim atunci când trasăm un grafic este s
 
 
 <div class="figure" style="text-align: center">
-<img src="Lab2_files/figure-html/unnamed-chunk-31-1.png" alt="Figura 1. Tipurile de simboluri asociate parametrului pch."  />
+<img src="Lab2_files/figure-html/unnamed-chunk-34-1.png" alt="Figura 1. Tipurile de simboluri asociate parametrului pch."  />
 <p class="caption">Figura 1. Tipurile de simboluri asociate parametrului pch.</p>
 </div>
 
 Următorul exemplu ilustrează câteva tipuri de simboluri:
 
-<img src="Lab2_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
 
 \BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm următoarea funcție $g:\mathbb{R}\to\mathbb{R}$, 
 
@@ -639,6 +676,8 @@ $$
   b) Trasați graficul curbei pe intervalul $[-\pi, \pi]$.
 
 </div>\EndKnitrBlock{rmdexercise}
+
+
 
 ## Culori
 
@@ -675,7 +714,7 @@ hist(x = ChickWeight$weight,
      xlim = c(0, 500))
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-34-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-38-1.png" width="90%" style="display: block; margin: auto;" />
 
 Putem modifica histograma de mai sus, schimbând numărul de bin-uri și culoarea acestora:
 
@@ -691,7 +730,7 @@ hist(x = ChickWeight$weight,
      border = "white") # Culoarea conturului
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-39-1.png" width="90%" style="display: block; margin: auto;" />
 
 Dacă vrem să ilustrăm două histograme pe aceeași figură, pentru a evidenția repartiția după două clase, putem folosi argumentul `add = TRUE` la cel de-al doilea plot:
 
@@ -712,7 +751,7 @@ hist(x = ChickWeight$weight[ChickWeight$Diet == 2],
      col = myred)
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-40-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Funcția `barplot`
 
@@ -746,7 +785,7 @@ barplot(height = weight_cars$wt,
         cex.main = 0.7)
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-41-1.png" width="90%" style="display: block; margin: auto;" />
 
 \BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Folosind setul de date `ChickWeight` afișați, cu ajutorul funcției `barplot`, greutatea medie a găinilor în raport cu numărul de zile de la naștere.
  </div>\EndKnitrBlock{rmdexercise}
@@ -785,7 +824,7 @@ barplot(carWeight,
         ylab = "Greutatea medie")
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-39-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-43-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Funcția `boxplot`
 
@@ -816,7 +855,7 @@ boxplot(mpg ~ cyl,
         main = "Consumul in functie de numarul de cilindrii")
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-40-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-44-1.png" width="90%" style="display: block; margin: auto;" />
 
 Putem să vedem această relație și în raport cu tipul de transmisie.
 
@@ -848,7 +887,7 @@ legend("bottomright" ,c("Manuala", "Automata"),
        fill = c("lightgray", "brown3"), bty = "n")
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-41-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-45-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Funcții pentru adăugarea unor elemente la un grafic 
 
@@ -883,12 +922,12 @@ plot(x = mtcars$mpg[mtcars$am == 0],
 
 points(x = mtcars$mpg[mtcars$am == 1], 
       y = mtcars$hp[mtcars$am == 1], 
-      pch = 16, 
+      pch = 8, 
       cex = 2,
       col = myred)
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-42-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" />
 
 Dacă vrem să adăugăm linii drepte la un grafic putem folosi comanda `abline()` sau `segments()`. De exemplu în figura de mai sus vrem să adăugăm o linie verticală și una orizontală care să marcheze media variabilelor de pe axa x și y.
 
@@ -907,7 +946,7 @@ abline(h = mean(mtcars$hp), lty = 2)
 abline(v = mean(mtcars$mpg), lty = 2)
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-43-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-47-1.png" width="90%" style="display: block; margin: auto;" />
 
 Pentru a adăuga numele mașinilor cu transmisie automată în fiecare punct putem folosi comanda `text()`. Argumentele principale ale acestei funcții sunt `x`, `y` care descriu coordonatele etichetelor și `labels` care reprezintă etichetele.
 
@@ -934,7 +973,7 @@ text(x = mtcars$mpg[mtcars$am == 1],
      cex = 0.6)
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-44-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-48-1.png" width="90%" style="display: block; margin: auto;" />
 
 Funcția `curve()` permite trasarea/adăugarea unei linii care descrie o funcție. Printre argumentele funcției regăsim `expr` care reprezintă expresia funcției care depinde de `x` (se pot folosi și funcții customizate), `from, to` care reprezintă intervalul de valori pentru `x` și `add` care permite adăugarea unei curbe la un grafic existent.
 
@@ -956,7 +995,7 @@ curve(expr = cos(x),
       lty = 2)
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-45-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-49-1.png" width="90%" style="display: block; margin: auto;" />
 
 Atunci când vrem să adăugăm o legendă la un grafic folosim funcția `legend()`. Argumentele acestei funcții se regăsesc în tabelul de mai jos.
 
@@ -994,52 +1033,7 @@ legend("bottomright",
        bty = "n")
 ```
 
-<img src="Lab2_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" />
-
-Un al doilea exemplu ar putea consta în afișarea diagramei de împrăștiere a mașinilor din setul de date mtcars în funcție de variabilele `mpg` și `wt` în care punctele sunt colorate în raport cu numărul de cilindrii (4, 6 sau 8), respectiv cu *roșu*, *orange* și *albastru* și în care afișăm numelor mașinilor care au transmisie manuală (`am = 1`):
-
-
-```r
-plot(mtcars$mpg, mtcars$wt,
-     col = myred, 
-     pch = 16,
-     cex = 1.3,
-     bty = "n",
-     xlab = "Mile pe Galon",
-     ylab = "Greutatea", 
-     main = "Graficul variabilelor: MPG vs Weight")
-
-points(mtcars$mpg[mtcars$cyl == 6], mtcars$wt[mtcars$cyl == 6],
-       col = "orange",
-       pch = 16,
-       cex = 1.3)
-
-points(mtcars$mpg[mtcars$cyl == 8], mtcars$wt[mtcars$cyl == 8],
-       col = myblue,
-       pch = 16, 
-       cex = 1.3)
-
-abline(h = mean(mtcars$wt),
-       lty = 2)
-
-abline(v = mean(mtcars$mpg),
-       lty = 2)
-
-text(mtcars$mpg[mtcars$am == 1],
-     mtcars$wt[mtcars$am == 1], 
-     labels = rownames(mtcars)[mtcars$am == 1],
-     pos = 3, 
-     cex = 0.8)
-
-legend("topright", 
-       legend = c("cyl = 4", "cyl = 6", "cyl = 8"),
-       title = "Nr. Cilindrii",
-       col = c(myred, "orange", myblue),
-       pch = c(16,16,16),
-       bty = "n")
-```
-
-<img src="Lab2_files/figure-html/unnamed-chunk-47-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab2_files/figure-html/unnamed-chunk-50-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Salvarea figurilor 
 
@@ -1075,4 +1069,7 @@ text(x = 0, y = 1, labels = "Ceva text aleator")
 # Pasul 3
 dev.off()
 ```
+
+# Referințe
+
 

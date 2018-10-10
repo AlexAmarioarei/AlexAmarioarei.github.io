@@ -30,6 +30,7 @@ output:
 bibliography: references/Stat2019ref.bib
 ---
 
+
 <script>
 $(document).ready(function ()  {
 
@@ -57,7 +58,7 @@ $(document).ready(function ()  {
 });
 </script>
 
-Obiectivul acestui laborator este de a prezenta o scurtă introducere în programul [R](https://cran.r-project.org/) (cu ajutorul interfeței grafice [RStudio](https://www.rstudio.com/)). O descriere detaliată a acestui program precum și versiunile disponibile pentru descărcat se găsesc pe site-ul [`www.r-project.org`](http://www.r-project.org).
+Obiectivul acestui laborator este de a prezenta o scurtă introducere în programul [R](https://cran.r-project.org/) (cu ajutorul interfeței grafice [RStudio](https://www.rstudio.com/)). O descriere detaliată a acestui program precum și versiunile disponibile pentru descărcat se găsesc pe site-ul [`www.r-project.org`](http://www.r-project.org). Pentru mai multe detalii se pot consulta [@Davies2016, @Matloff2011].
 
 
 
@@ -148,6 +149,21 @@ asq
 [1] 1.029086
 ```
 
+Operațiile binare în `R` sunt date în tabelul de mai jos:
+
+
+| Operatorul | Descriere |
+|:-------------------|:---------------------------------------------|
+| `+` | Adunare |
+| `-` | Scădere |
+| `*` | Înmulțire |
+| `/` | Împărțire |
+| `^` or `**` | Exponențiere |
+| `%/%` | Câtul împărțirii |
+| `%%` | Restul împărțirii | 
+
+Table: Tabelul 1. Operatii binare in R
+
 Pentru a șterge toate variabilele din memorie trebuie să folosim comanda următoare (funcția `ls()` listează numele obiectelor din memorie iar comanda `rm()` șterge obiectele; de asemenea se poate folosi și comanda `ls.str()` pentru a lista obiectele împreună cu o scurtă descriere a lor)
 
 
@@ -190,7 +206,7 @@ Următorul tabel prezintă funcțiile de ajutor, cel mai des utilizate:
 | `vignette()` | Listează toate vinietele disponibile |
 | `vignette("nume")` | Afișează vinietele corespunzătoare topicului *nume* |
 
-Table: Tabelul 1. Functii folosite pentru ajutor
+Table: Tabelul 2. Functii folosite pentru ajutor
 
 
 Documentații online:
@@ -207,7 +223,7 @@ Documentații online:
 | Pachetul ggplot2 | https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf|
 | Pachetul RMarkdown| https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf|
 
-Table: Tabelul 2. O serie de link-uri utile
+Table: Tabelul 3. O serie de link-uri utile
 
 # Tipuri și structuri de date 
 
@@ -341,6 +357,16 @@ seq(1, 10, length.out = 15)
  [8]  5.500000  6.142857  6.785714  7.428571  8.071429  8.714286  9.357143
 [15] 10.000000
 ```
+
+
+| Function| Example|Result |
+|:-------------------------|:-----------------------------|:----------|
+|     `c(a, b, ...)`|    `c(1, 5, 9)` |1, 5, 9     |
+|     `a:b`|    `1:5`|1, 2, 3, 4, 5    |
+|     `seq(from, to, by, length.out)`|    `seq(from = 0, to = 6, by = 2)`|0, 2, 4, 6     |
+|     `rep(x, times, each, length.out)`|    `rep(c(7, 8), times = 2, each = 2)`|7, 7, 8, 8, 7, 7, 8, 8     |
+
+Table: Tabelul 4. Functii utile pentru crearea unui vector
 
 ### Operații cu vectori 
 
@@ -510,7 +536,7 @@ O listă a operatorilor logici din R se găsește în tabelul următor:
 | `!` | Negație |
 | `%in%` |  În mulțimea |
 
-Table: Tabelul 3. Operatori logici
+Table: Tabelul 5. Operatori logici
 
 
 ```r
@@ -538,13 +564,15 @@ x %in% c(1,9)
 </div>\EndKnitrBlock{rmdexercise}
 
 
+
+
 ## Matrice
 
 Matricele sunt structuri de date care extind vectorii și sunt folosite la representarea datelor de același tip în două dimensiuni. Matricele sunt similare tablourilor din Excel și pot fi văzute ca vectori cu două atribute suplimentare: numărul de linii (*rows*) și numărul de coloane (*columns*).
 
 
 <div class="figure" style="text-align: center">
-<img src="Lab1_files/figure-html/unnamed-chunk-29-1.png" alt="Figura 3. Scalari, Vectori, Matrice" width="90%" />
+<img src="Lab1_files/figure-html/unnamed-chunk-30-1.png" alt="Figura 3. Scalari, Vectori, Matrice" width="90%" />
 <p class="caption">Figura 3. Scalari, Vectori, Matrice</p>
 </div>
 
@@ -558,7 +586,7 @@ Există mai multe moduri de creare a unei matrici în R. Funcțiile cele mai uzu
 |     `rbind(a, b, c)`| Combină vectorii ca și linii într-o matrice|`rbind(1:5, 6:10, 11:15)`    |
 |     `matrix(x, nrow, ncol, byrow)`| Crează o matrice dintr-un vector `x`   | `matrix(x = 1:12, nrow = 3, ncol = 4)` |
 
-Table: Tabelul 4. Functii care permit crearea matricelor
+Table: Tabelul 6. Functii care permit crearea matricelor
 
 Pentru a vedea ce obținem atunci când folosim funcțiile `cbind()` și `rbind()` să considerăm exemplele următoare:
 
@@ -625,6 +653,18 @@ Operațiile uzuale cu vectori se aplică și matricelor. Pe lângă acestea avem
 
 
 ```r
+diag(M) # Diagonala matricei M
+dim(M) # Dimensiunile matricei M
+nrow(M) # Numarul de linii ale matricei M
+ncol(M) # Numarul de coloane ale matricei M
+t(M) # Transpusa
+colSums(M), rowSums(M) # Suma pe coloane si suma pe linii
+```
+
+De exemplu:
+
+
+```r
 m = matrix(data = 1:10,
        nrow = 2,
        ncol = 5)
@@ -639,20 +679,106 @@ nrow(m) # numarul de linii
 [1] 2
 ncol(m) # numarul de coloane
 [1] 5
+```
 
-tpm = t(m) # transpusa
-tpm
-     [,1] [,2]
-[1,]    1    2
-[2,]    3    4
-[3,]    5    6
-[4,]    7    8
-[5,]    9   10
+Adunarea și scăderea matricelor se face pe componenete:
 
-m %*% tpm # inmultirea matricelor
-     [,1] [,2]
-[1,]  165  190
-[2,]  190  220
+
+```r
+A = matrix(c(1, 3, 2, 2, 2, 1, 3, 1, 3), ncol = 3)
+B = matrix(c(4, 6, 4, 5, 5, 6, 6, 4, 5), ncol = 3)
+a = 2
+
+A + a
+     [,1] [,2] [,3]
+[1,]    3    4    5
+[2,]    5    4    3
+[3,]    4    3    5
+A + B
+     [,1] [,2] [,3]
+[1,]    5    7    9
+[2,]    9    7    5
+[3,]    6    7    8
+A - B
+     [,1] [,2] [,3]
+[1,]   -3   -3   -3
+[2,]   -3   -3   -3
+[3,]   -2   -5   -2
+```
+
+Înmulțirea și împărțirea se face tot pe componenete
+
+
+```r
+A * a
+     [,1] [,2] [,3]
+[1,]    2    4    6
+[2,]    6    4    2
+[3,]    4    2    6
+A * B
+     [,1] [,2] [,3]
+[1,]    4   10   18
+[2,]   18   10    4
+[3,]    8    6   15
+A / B
+     [,1]      [,2] [,3]
+[1,] 0.25 0.4000000 0.50
+[2,] 0.50 0.4000000 0.25
+[3,] 0.50 0.1666667 0.60
+```
+
+Transpusa unei matrice ($A^\intercal$) se obține cu ajutorul funcției `t()`
+
+
+```r
+t(A)
+     [,1] [,2] [,3]
+[1,]    1    3    2
+[2,]    2    2    1
+[3,]    3    1    3
+```
+
+iar inversa ($A^{-1}$) cu ajutorul funcției `solve()`
+
+
+```r
+solve(A)
+            [,1]  [,2]       [,3]
+[1,] -0.41666667  0.25  0.3333333
+[2,]  0.58333333  0.25 -0.6666667
+[3,]  0.08333333 -0.25  0.3333333
+```
+
+Înmulțirea (uzuală) a matricelor se face folosind operatorul `%*%`
+
+
+```r
+A %*% B # inmultirea matricelor
+     [,1] [,2] [,3]
+[1,]   28   33   29
+[2,]   28   31   31
+[3,]   26   33   31
+```
+
+iar funcția `crossprod()` calculează produsul $A^\intercal B$ (mai repede decât folosind instrucțiunea `t(A) %*% B`)
+
+
+```r
+crossprod(A, B)
+     [,1] [,2] [,3]
+[1,]   30   32   28
+[2,]   24   26   25
+[3,]   30   38   37
+```
+
+Determinantul și urma unei matrice se obțin folosind funcțiile `det()` și respectiv `sum(diag())`
+
+
+```r
+det(A) # determinantul
+[1] -12
+sum(diag(A)) # urma matricei A
+[1] 6
 ```
 
 Metodele de indexare discutate pentru vectori se aplică și în cazul matricelor (`[,]`) numai că acum în loc să folosim un vector să indexăm putem să folosim doi vectori. Sintaxa are structura generală `m[linii, coloane]` unde `linii` și `coloane` sunt vectori cu valori întregi.
@@ -921,7 +1047,7 @@ str(survey)
  $ age  : num  99 46 23 54 23
 ```
 
-R are mai multe funcții care permit vizualizarea structurilor de tip dataframe. Table de mai jos include câteva astfel de funcții:
+R are mai multe funcții care permit vizualizarea structurilor de tip dataframe. Tabelul de mai jos include câteva astfel de funcții:
 
 | Funcție | Descriere | 
 |:------------------------|:-----------------------------------------|
@@ -931,7 +1057,7 @@ R are mai multe funcții care permit vizualizarea structurilor de tip dataframe.
 | `rownames(), colnames(), names()` | Numele liniilor sau coloanelor.  | 
 | `str(x)` | Structura dataframe-ului | 
 
-Table: Tabelul 5. Exemple de functii necesare pentru intelegerea structurii dataframe-ului
+Table: Tabelul 7. Exemple de functii necesare pentru intelegerea structurii dataframe-ului
 
 
 ```r
@@ -1039,7 +1165,7 @@ O altă metodă de indexare este prin folosirea funcției `subset()`.
 |     `subset`| Un vector logic care indică liniile pe care le vrem  | 
 |     `select`| Coloanele pe care vrem să le păstrăm | 
 
-Table: Tabelul 6. Principalele argumente ale functiei subset()
+Table: Tabelul 8. Principalele argumente ale functiei subset()
 
 
 ```r
@@ -1125,7 +1251,7 @@ Sunt multe situațiile în care avem la dispoziție două sau mai multe seturi d
 |`by`| Un vector de caractere ce reprezintă una sau mai multe coloane după care se va face lipirea. De exemplu `by = "id"` va combina coloanele care au valori care se potrivesc într-o coloană care se numește `"id"`. `by = c("last.name", "first.name")` va combina coloanele care au valori care se potrivesc în ambele coloane `"last.name"` și `"first.name"`|
 |`all`| Un vector logic care indică dacă vrem să includem sau nu liniile care nu se potrivesc conform argumentului `by`. |
 
-Table: Tabelul 7. Argumentele functiei merge
+Table: Tabelul 9. Argumentele functiei merge
 
 Să presupunem că avem la dispoziție un set de date în care apar 5 studenți și notele pe care le-au obținut la examenul de statistică:
 
@@ -1168,7 +1294,7 @@ O a treia funcție care joacă un rol important în manipularea data frame-urilo
 |`data`| Data frame-ul care conține variabilele din `formula`|
 |`subset`| O submulțime din `data` pe care vrem să le analizăm. De exemplu, `subset(sex == "f" & age > 20)` va restrânge analiza la femei mai învârstă de 20 de ani.|
 
-Table: Tabelul 8. Argumentele functiei aggregate
+Table: Tabelul 10. Argumentele functiei aggregate
 
 Structura generală a funcției `aggregate()` este 
 
@@ -1285,3 +1411,5 @@ aggregate(formula = weight ~ Diet + Time,  # DV este weight, IV sunt Diet și Ti
   
   c) Consumul mediu în funcție de numărul de cilindrii și tipul de transmisie
 </div>\EndKnitrBlock{rmdexercise}
+
+# Referințe

@@ -28,6 +28,8 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{plainnat}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -450,7 +452,8 @@ urlcolor=linkcol %couleur des liens pour les url
 Obiectivul acestui laborator este de a prezenta succint elementele de
 programare din programul \href{https://cran.r-project.org/}{R}, care
 este structura lor și cum le putem aplica. De asemenea, tot în acest
-laborator vom introduce și câteva elemente de grafică.
+laborator vom introduce și câteva elemente de grafică. Pentru mai multe
+detalii se pot consulta \citep[\citet{Matloff2011}]{Davies2016}.
 
 \section{Elemente de programare în R}\label{elemente-de-programare-in-r}
 
@@ -535,8 +538,8 @@ argument:
 \end{Highlighting}
 \end{Shaded}
 
-În fucția de mai sus nu am indicat nimic special pentru ca funcția să ne
-întoarcă numărul de caractere. În R, rezulatul unei funcții este
+În funcția de mai sus nu am indicat nimic special pentru ca funcția să
+ne întoarcă numărul de caractere. În R, rezulatul unei funcții este
 întotdeauna ultima expresie evaluată. De asemenea există funcția
 \texttt{return()} care poate fi folosită pentru a întoarce o valoare
 explicită, dar de multe ori această funcție este omisă.
@@ -701,7 +704,7 @@ structuri de control sunt:
 
 \begin{itemize}
 \item
-  \texttt{if} și\texttt{else}: testează o condiție și acționează asupra
+  \texttt{if} și \texttt{else}: testează o condiție și acționează asupra
   ei
 \item
   \texttt{switch}: compară mai multe opțiuni și execută opțiunea pentru
@@ -757,7 +760,7 @@ Avem următorul exemplu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{## Generam un numar uniform in [0,1]}
+\NormalTok{## Generam un numar uniform in [0,10]}
 \NormalTok{x <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)  }
 
 \ControlFlowTok{if}\NormalTok{(x }\OperatorTok{>}\StringTok{ }\DecValTok{3}\NormalTok{) \{}
@@ -1002,6 +1005,29 @@ de la stânga la dreapta)
 \end{Highlighting}
 \end{Shaded}
 
+\begin{rmdexercise}
+Scrieți un program, folosind bucle de tip \texttt{while}, care să
+permită calcularea radicalului numărului \(a\in\mathbb{N}\) plecând de
+la relația de recurență: \[
+  2x_{n+1} = x_n + \frac{a}{x_n},\quad x_1 = \frac{a}{2}
+\]
+\end{rmdexercise}
+
+De exemplu:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Calculul radicalului}
+\NormalTok{a =}\StringTok{ }\DecValTok{12223}
+
+\CommentTok{# folosind while}
+\NormalTok{x =}\StringTok{ }\NormalTok{a}\OperatorTok{/}\DecValTok{2}
+\ControlFlowTok{while}\NormalTok{(}\KeywordTok{abs}\NormalTok{(x}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }\NormalTok{a) }\OperatorTok{>}\StringTok{ }\FloatTok{1e-10}\NormalTok{)\{}
+\NormalTok{  x =}\StringTok{ }\NormalTok{(x }\OperatorTok{+}\StringTok{ }\NormalTok{a}\OperatorTok{/}\NormalTok{x)}\OperatorTok{/}\DecValTok{2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
 \subsubsection{\texorpdfstring{Bucle de tip
 \texttt{repeat}}{Bucle de tip repeat}}\label{bucle-de-tip-repeat}
 
@@ -1068,6 +1094,22 @@ Comanda \texttt{break} este folosită pentru a părăsi o buclă imediat
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{4}
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{5}
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+Calculul radicalului unui număr cu ajutorul buclei de tip
+\texttt{repeat} și a comenzii \texttt{break} se scrie
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# folosind repeat}
+\NormalTok{a =}\StringTok{ }\DecValTok{12223}
+
+\NormalTok{x =}\StringTok{ }\NormalTok{a}\OperatorTok{/}\DecValTok{2}
+\ControlFlowTok{repeat}\NormalTok{\{}
+\NormalTok{  x =}\StringTok{ }\NormalTok{(x }\OperatorTok{+}\StringTok{ }\NormalTok{a}\OperatorTok{/}\NormalTok{x)}\OperatorTok{/}\DecValTok{2}
+  \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{abs}\NormalTok{(x}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }\NormalTok{a) }\OperatorTok{<}\StringTok{ }\FloatTok{1e-10}\NormalTok{) }\ControlFlowTok{break}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1249,7 +1291,7 @@ mici.\strut
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 În afară de vectorii \texttt{x} și \texttt{y} toate celelalte argumente
 sunt opționale, dacă nu sunt specificate atunci R-ul folosește valorile
@@ -1271,16 +1313,16 @@ prezintă tipurile simboluri pe care atunci când atribuim argumentului
 
 \begin{figure}
 
-{\centering \includegraphics{Lab2_files/figure-latex/unnamed-chunk-31-1} 
+{\centering \includegraphics{Lab2_files/figure-latex/unnamed-chunk-34-1} 
 
 }
 
-\caption{Tipurile de simboluri asociate parametrului pch.}\label{fig:unnamed-chunk-31}
+\caption{Tipurile de simboluri asociate parametrului pch.}\label{fig:unnamed-chunk-34}
 \end{figure}
 
 Următorul exemplu ilustrează câteva tipuri de simboluri:
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-32-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 \begin{rmdexercise}
 Considerăm următoarea funcție \(g:\mathbb{R}\to\mathbb{R}\),
@@ -1391,7 +1433,7 @@ Putem crea o histogramă folosind setul de date \texttt{ChickWeight}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 Putem modifica histograma de mai sus, schimbând numărul de bin-uri și
 culoarea acestora:
@@ -1409,7 +1451,7 @@ culoarea acestora:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-39-1} \end{center}
 
 Dacă vrem să ilustrăm două histograme pe aceeași figură, pentru a
 evidenția repartiția după două clase, putem folosi argumentul
@@ -1432,7 +1474,7 @@ evidenția repartiția după două clase, putem folosi argumentul
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-40-1} \end{center}
 
 \subsection{\texorpdfstring{Funcția
 \texttt{barplot}}{Funcția barplot}}\label{functia-barplot}
@@ -1473,7 +1515,7 @@ greutatea medie a mașinilor în funcție de numărul de cilindrii:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-37-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 \begin{rmdexercise}
 Folosind setul de date \texttt{ChickWeight} afișați, cu ajutorul
@@ -1520,7 +1562,7 @@ cilindrii.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-43-1} \end{center}
 
 \subsection{\texorpdfstring{Funcția
 \texttt{boxplot}}{Funcția boxplot}}\label{functia-boxplot}
@@ -1612,7 +1654,7 @@ numărul de cilindrii (\texttt{cyl}) în cazul mașinilor din setul de date
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-44-1} \end{center}
 
 Putem să vedem această relație și în raport cu tipul de transmisie.
 
@@ -1645,7 +1687,7 @@ Putem să vedem această relație și în raport cu tipul de transmisie.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-41-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-45-1} \end{center}
 
 \subsection{Funcții pentru adăugarea unor elemente la un
 grafic}\label{functii-pentru-adaugarea-unor-elemente-la-un-grafic}
@@ -1698,13 +1740,13 @@ setul de date \texttt{mtcars} în raport cu tipul de transmisie.
 
 \KeywordTok{points}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{], }
       \DataTypeTok{y =}\NormalTok{ mtcars}\OperatorTok{$}\NormalTok{hp[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{], }
-      \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
+      \DataTypeTok{pch =} \DecValTok{8}\NormalTok{, }
       \DataTypeTok{cex =} \DecValTok{2}\NormalTok{,}
       \DataTypeTok{col =}\NormalTok{ myred)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-42-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-46-1} \end{center}
 
 Dacă vrem să adăugăm linii drepte la un grafic putem folosi comanda
 \texttt{abline()} sau \texttt{segments()}. De exemplu în figura de mai
@@ -1727,7 +1769,7 @@ media variabilelor de pe axa x și y.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-43-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-47-1} \end{center}
 
 Pentru a adăuga numele mașinilor cu transmisie automată în fiecare punct
 putem folosi comanda \texttt{text()}. Argumentele principale ale acestei
@@ -1758,7 +1800,7 @@ etichetelor și \texttt{labels} care reprezintă etichetele.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-48-1} \end{center}
 
 Funcția \texttt{curve()} permite trasarea/adăugarea unei linii care
 descrie o funcție. Printre argumentele funcției regăsim \texttt{expr}
@@ -1786,7 +1828,7 @@ adăugarea unei curbe la un grafic existent.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-49-1} \end{center}
 
 Atunci când vrem să adăugăm o legendă la un grafic folosim funcția
 \texttt{legend()}. Argumentele acestei funcții se regăsesc în tabelul de
@@ -1861,58 +1903,7 @@ specificăm care grafic corespunde funcției \(sin\) și care funcției
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-46-1} \end{center}
-
-Un al doilea exemplu ar putea consta în afișarea diagramei de
-împrăștiere a mașinilor din setul de date mtcars în funcție de
-variabilele \texttt{mpg} și \texttt{wt} în care punctele sunt colorate
-în raport cu numărul de cilindrii (4, 6 sau 8), respectiv cu
-\emph{roșu}, \emph{orange} și \emph{albastru} și în care afișăm numelor
-mașinilor care au transmisie manuală (\texttt{am\ =\ 1}):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg, mtcars}\OperatorTok{$}\NormalTok{wt,}
-     \DataTypeTok{col =}\NormalTok{ myred, }
-     \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
-     \DataTypeTok{cex =} \FloatTok{1.3}\NormalTok{,}
-     \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{,}
-     \DataTypeTok{xlab =} \StringTok{"Mile pe Galon"}\NormalTok{,}
-     \DataTypeTok{ylab =} \StringTok{"Greutatea"}\NormalTok{, }
-     \DataTypeTok{main =} \StringTok{"Graficul variabilelor: MPG vs Weight"}\NormalTok{)}
-
-\KeywordTok{points}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{], mtcars}\OperatorTok{$}\NormalTok{wt[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{],}
-       \DataTypeTok{col =} \StringTok{"orange"}\NormalTok{,}
-       \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
-       \DataTypeTok{cex =} \FloatTok{1.3}\NormalTok{)}
-
-\KeywordTok{points}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{8}\NormalTok{], mtcars}\OperatorTok{$}\NormalTok{wt[mtcars}\OperatorTok{$}\NormalTok{cyl }\OperatorTok{==}\StringTok{ }\DecValTok{8}\NormalTok{],}
-       \DataTypeTok{col =}\NormalTok{ myblue,}
-       \DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }
-       \DataTypeTok{cex =} \FloatTok{1.3}\NormalTok{)}
-
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{mean}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{wt),}
-       \DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
-
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{mean}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg),}
-       \DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
-
-\KeywordTok{text}\NormalTok{(mtcars}\OperatorTok{$}\NormalTok{mpg[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{],}
-\NormalTok{     mtcars}\OperatorTok{$}\NormalTok{wt[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{], }
-     \DataTypeTok{labels =} \KeywordTok{rownames}\NormalTok{(mtcars)[mtcars}\OperatorTok{$}\NormalTok{am }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{],}
-     \DataTypeTok{pos =} \DecValTok{3}\NormalTok{, }
-     \DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
-
-\KeywordTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }
-       \DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"cyl = 4"}\NormalTok{, }\StringTok{"cyl = 6"}\NormalTok{, }\StringTok{"cyl = 8"}\NormalTok{),}
-       \DataTypeTok{title =} \StringTok{"Nr. Cilindrii"}\NormalTok{,}
-       \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(myred, }\StringTok{"orange"}\NormalTok{, myblue),}
-       \DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{16}\NormalTok{),}
-       \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-47-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab2_files/figure-latex/unnamed-chunk-50-1} \end{center}
 
 \subsection{Salvarea figurilor}\label{salvarea-figurilor}
 
@@ -1996,6 +1987,9 @@ Pentru a salva o imagine avem de parcurs următorii pași:
 \KeywordTok{dev.off}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\renewcommand\refname{Referințe}
+\bibliography{references/Stat2019ref.bib}
 
 
 \end{document}
