@@ -249,12 +249,12 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Statistică*. Proiect
 
 ```{r echo = FALSE}
 gproj1_301 = "301"
-proj1_301 = "[Proiect HTML]() / [Proiect PDF]()"
+proj1_301 = "Proiect HTML"
 bproj1_301 = ""
 proj1data_301 = ""
 
 gproj1_311_321 = "311, 321"
-proj1_311_321 = "[Proiect HTML]() / [Proiect PDF]()"
+proj1_311_321 = "Proiect HTML"
 bproj1_311_321 = ""
 proj1data_311_321 = ""
 
