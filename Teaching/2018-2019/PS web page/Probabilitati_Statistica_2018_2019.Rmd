@@ -103,9 +103,9 @@ pdf_lab1 = "[PDF](labs/Lab1.pdf)"
 
 lab2 = "[HTML](labs/Lab2.html)"
 pdf_lab2 = "[PDF](labs/Lab2.pdf)"
-# 
-# lab3 = "[HTML](labs/Lab_3.html)"
-# pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
+
+lab3 = "[HTML](labs/Lab3.html)"
+pdf_lab3 = "[PDF](labs/Lab3.pdf)"
 # 
 # lab4 = "[HTML](labs/Lab_4.html)"
 # pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
@@ -127,11 +127,14 @@ pdf_lab2 = "[PDF](labs/Lab2.pdf)"
 
 tabLab = data.frame(Nr = c(1),
                     Lab = c("Laborator 1", 
-                            "Laborator 2"),
+                            "Laborator 2",
+                            "Laborator 3"),
                     Htmls = c(lab1, 
-                              lab2),
+                              lab2, 
+                              lab3),
                     Pdfs = c(pdf_lab1,
-                             pdf_lab2))
+                             pdf_lab2,
+                             pdf_lab3))
 
 # tabLab = data.frame(Nr = c(1,2,3,4,5,6,7,8,9),
 #                     Lab = c("Laborator 1", "Laborator 2", "Laborator 3", "Laborator 4", "Laborator 5", "Laborator 6", "Laborator 7", "Laborator Suplimentar 1", "Laborator Suplimentar 2"),
