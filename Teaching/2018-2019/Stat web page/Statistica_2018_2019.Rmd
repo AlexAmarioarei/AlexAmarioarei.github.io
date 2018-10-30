@@ -183,12 +183,12 @@ Vor fi 5 teme și acestea vor fi postate (aproape) din două în două săptăm�
 
 ```{r echo = FALSE}
 t1 = "[Tema 1](homework/Tema1.pdf)"
-t1sol = ""
+t1sol = "[Solutie](homework/Tema1_Sol.pdf)"
 t1data = "28 Octombrie"
 
-t2 = "Tema 2"
+t2 = "[Tema 2](homework/Tema2.pdf)"
 t2sol = ""
-t2data = ""
+t2data = "11 Noiembrie"
 
 t3 = "Tema 3"
 t3sol = ""
