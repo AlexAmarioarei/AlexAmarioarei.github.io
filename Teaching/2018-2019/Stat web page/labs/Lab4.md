@@ -67,9 +67,63 @@ Obiectivul acestui laborator este de a prezenta câteva probleme de simulare fol
 
 # Generarea variabilelor aleatoare discrete
 
-<div class="rmdexercise">
-<p>În acest exercițiu ne propunem să definim o funcție <code>rand_sample(n,x,p)</code> care permite generarea a <span class="math inline">\(n\)</span> observații dintr-o mulțime <span class="math inline">\(x\)</span> (vector numeric sau de caractere) cu probabilitatea <span class="math inline">\(p\)</span> pe <span class="math inline">\(x\)</span> (un vector de aceeași lungime ca <span class="math inline">\(x\)</span>).</p>
-</div>
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $X$ o variabilă aleatoare cu valori în mulțimea $\{1,2,3,4\}$. Repartiția $\nu$ a lui $X$ este 
+
+$$
+  \mathbb{P}(X = 1) = 0.2, \quad \mathbb{P}(X = 2) = 0.5, \quad \mathbb{P}(X = 3) = 0.1,  \quad \mathbb{P}(X = 4) = 0.2. 
+$$
+  
+  1. Simulați un eșantion $\boldsymbol u$ de $10000$ de variabile aleatoare i.i.d. repartizate $\mathcal{U}([0,1])$.
+
+  2. Plecând de la acest eșantion, construiți un eșantion $\boldsymbol x$ de variabile aleatoare i.i.d. repartizate conform $\nu$.
+  
+  3. Comparați, cu ajutorul *diagramei cu bare verticale* (`barplot`), repartiția eșantionului $\boldsymbol x$ și cea teoretică $\nu$.  
+
+</div>\EndKnitrBlock{rmdexercise}
+
+  1. Pentru a genera observații independente repartizate uniform vom folosi funcția `runif`:
+  
+
+```r
+n =  10000
+u = runif(n)
+```
+
+  2. Putem scrie 
+  
+
+```r
+x = 1 + (u > 0.2) + (u > 0.7) + (u > 0.8)
+```
+
+Trebuie remarcat că funcția `sample` din R permite simularea repartițiilor discrete. Pentru exemplul nostru putem să extragem, cu întoarcere, $n$ numere din mulțimea $\{1,2,3,4\}$ urmând un vector de probabilități `prob`:
+
+
+```r
+x = sample(1:4, n, replace = TRUE, 
+           prob = c(0.2, 0.5, 0.1, 0.2))
+```
+
+  3. Pentru început trebuie să determinăm câte observații sunt din fiecare valoare unică a lui $\boldsymbol x$. Putem face acest lucru folosind funcția `table`:
+  
+
+```r
+x.freq = table(x)/n
+
+par(mfrow = c(1,2))
+# diagrama cu bare verticale pentru esantion
+barplot(x.freq, main = "Repartitia esantionului")
+# diagrama cu bare verticale teoretica
+barplot(c(0.2, 0.5, 0.1, 0.2), names.arg = c(1,2,3,4),
+        main = "Repartitia teoretica")
+```
+
+<img src="Lab4_files/figure-html/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
+
+Observăm că eșationul este repartizat conform $\nu$.
+
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">În acest exercițiu ne propunem să definim o funcție `rand_sample(n,x,p)` care permite generarea a $n$ observații dintr-o mulțime $x$ (vector numeric sau de caractere) cu probabilitatea $p$ pe $x$ (un vector de aceeași lungime ca $x$).</div>\EndKnitrBlock{rmdexercise}
 
 Funcția se poate construi sub forma următoare:
 
@@ -107,7 +161,7 @@ Pentru a testa această funcție să considerăm două exemple:
 
 ```r
 rand_sample(10,c(1,2,3),c(0.2,0.3,0.5))
- [1] 3 1 2 2 3 2 1 3 1 2
+ [1] 3 3 3 3 2 3 1 1 2 3
 ```
 
   2. în acest caz: $n=15$, $x=[a,b,c,d]$ și $p=[0.15,0.35,0.15,0.45]$
@@ -115,7 +169,7 @@ rand_sample(10,c(1,2,3),c(0.2,0.3,0.5))
 
 ```r
 rand_sample(15,c('a','b','c','d'),c(0.15,0.35,0.15,0.45))
- [1] "b" "c" "a" "d" "b" "d" "b" "c" "d" "a" "b" "d" "b" "d" "d"
+ [1] "d" "d" "d" "d" "d" "b" "d" "b" "d" "d" "d" "b" "c" "b" "d"
 ```
 
 O funcție un pic mai generală este:
@@ -180,10 +234,10 @@ hist(GenerateDiscrete(10000, x = 0:50,
 lines(0:50,
       dpois(0:50, 5), 
       type = "l", 
-      col = myred, lty = 2, lwd = 2)
+      col = myred, lty = 2, lwd = 3)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" />
 
   b) Geometrică
   
@@ -203,23 +257,24 @@ hist(GenerateDiscrete(10000, x = 0:100,
 lines(0:100,
       dgeom(0:100, 0.3), 
       type = "l", 
-      col = myred, lty = 2, lwd = 2)
+      col = myred, lty = 2, lwd = 3)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" />
 
 # Generarea unei variabile aleatoare folosind metoda inversă
 
-<div class="rmdexercise">
-<p>Scrieți un program care să folosească metoda transformării inverse pentru a genera <span class="math inline">\(n\)</span> observații din densitatea</p>
-<p><span class="math display">\[
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Scrieți un program care să folosească metoda transformării inverse pentru a genera $n$ observații din densitatea 
+
+$$
   f(x) = \left\{\begin{array}{ll}
-        \frac{1}{x^2}, &amp; x\geq 1\\
-        0, &amp; \text{altfel}
+        \frac{1}{x^2}, & x\geq 1\\
+        0, & \text{altfel}
   \end{array}\right.
-\]</span></p>
-<p>Testați programul trasând o histogramă a <span class="math inline">\(10000\)</span> de observații aleatoare împreună cu densitatea teoretică <span class="math inline">\(f\)</span>.</p>
-</div>
+$$
+
+Testați programul trasând o histogramă a $10000$ de observații aleatoare împreună cu densitatea teoretică $f$. 
+</div>\EndKnitrBlock{rmdexercise}
 
 Primul pas este să determinăm funcția de repartiție $F$ corespunzătoare acestei densități. Pentru $x<1$ avem că $f(x)=0$ deci $F(x)=0$ iar pentru $x\geq 1$ avem 
 
@@ -247,27 +302,325 @@ Pentru a testa comparăm valorile simulate cu densitatea teoretică
 x = GenerateSampleX(10000)
 hist(x, freq=FALSE, breaks=seq(0, max(x)+1, 0.1),
      xlim=c(0,10), ylim=c(0,1),
+     ylab = "Densitatea",
      main=NULL, col="gray80", border="gray20")
 
 # densitatea teoretica
-y <- seq(0, 10, 0.01)
-f <- ifelse(y <= 1, 0, 1/y^2)
-lines(y, f, col = myred, lty = 2, lwd = 2)
+y = seq(0, 10, 0.01)
+f = ifelse(y <= 1, 0, 1/y^2)
+lines(y, f, col = myred, lty = 2, lwd = 3)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" />
 
-# Generarea unei repartiții normale 
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">  1. Folosind metoda inversă, simulați $10000$ de observații independente din repartiția $\mathcal{E}(\lambda)$, cu $\lambda = 1$. Trasați histograma acestui eșantion și comparați cu densitatea repartiției.
 
-<div class="rmdexercise">
-<p>Plecând cu o propunere de tip <span class="math inline">\(Exp(\lambda)\)</span> vrem să generăm, cu ajutorul metodei acceptării-respingerii, un eșantion din următoarea densitate (jumătate de normală):</p>
-<p><span class="math display">\[
+  2. Fie $X_1, \ldots, X_n$, $n$ variabile aleatoare i.i.d. repartizate $\mathcal{E}(\lambda)$. Atunci variabila aleatoare $S_n = X_1 + X_2 +\cdots+ X_n$ este repartizată $\Gamma(n, \lambda)$. Plecând de la acest rezultat, generați $10000$ de observații din repartiția $\Gamma(n, \lambda)$ ($n = 10$). Trasați histograma acestui eșantion și comparați cu densitatea legii.
+  
+  3. Dacă definim $N = \sup\{n\geq 1\,|\, S_n\leq 1\}$ (folosim convenția $N = 0$ și $S_1>1$), atunci $N$ este repartizată Poisson $Pois(\lambda)$. Plecând de la acest rezultat, generați $10000$ de observații independente din repartiția $Pois(\lambda)$, trasați histograma acestui eșantion și comparați cu repartiția teoretică. 
+
+</div>\EndKnitrBlock{rmdexercise}
+
+  1. Metoda funcției inverse conduce la $-\frac{\log(U)}{\lambda}\sim\mathcal{E}(\lambda)$, cu $U\sim\mathcal{U}([0,1])$. 
+  
+
+```r
+sim.exp = function(n, lambda = 1){
+  return(-log(runif(n))/lambda)
+}
+
+n = 10000
+
+x = sim.exp(n)
+```
+
+Pentru trasarea histogramei avem:
+
+
+```r
+hist(x, freq = FALSE, 
+     col="gray80", 
+     border="gray20",
+     main = "Histograma lui x", 
+     ylab = "", xlab = "")
+
+t = seq(0, max(x), 0.01)
+lines(t, dexp(t), 
+      col = myred, 
+      lty = 2, lwd = 3)
+legend("topright", 
+       "Densitatea exponentialei", 
+       box.lty = 0,
+       col = myred, 
+       lty = 2, lwd = 3, inset = 0.05)
+```
+
+<img src="Lab4_files/figure-html/unnamed-chunk-20-1.png" width="90%" style="display: block; margin: auto;" />
+
+Să observăm că în R putem folosi funcția `rexp(n, rate = ...)` pentru generarea de observații repartizate exponențial. 
+
+  2. Pentru generarea a $m$ variabile aleatoare i.i.d. repartizate $\Gamma(n, \lambda)$, simulăm $m\times n$ variabile repartizate exponențial pe care le stocăm într-o matrice cu $m$ linii și $n$ coloane. Suma elementelor de pe o linie reprezintă o realizate a repartiției $\Gamma(n, \lambda)$. 
+  
+
+```r
+sim.gamma = function(m, n, lambda = 1){
+  out = rowSums(matrix(sim.exp(m * n, lambda), m, n))
+  return(out)
+}
+```
+
+Din punct de vedere al costului de memorie, această metodă poate să nu fie optimă. Putem folosi o abordare mai simplă folosind bucla `for`:
+
+
+```r
+sim.gamma2 = function(m, n, lambda = 1){
+  out = numeric(m)
+  
+  for (i in 1:m){
+    out[i] = sum(sim.exp(n, lambda))
+  }
+  
+  return(out)
+}
+```
+
+Pentru verificare avem 
+
+
+```r
+n = 10
+m = 10000
+
+x = sim.gamma(m, n)
+t = seq(min(x), max(x), 0.01)
+
+hist(x, freq = FALSE, 
+     col="gray80", 
+     border="gray20",
+     main = "Histograma lui x", ylab = "", 
+     xlab = "")
+
+lines(t, dgamma(t, n), 
+      col = myred, lwd = 3, lty = 2)
+legend("topright", 
+       "Densitatea rep. gamma", 
+       box.lty = 0,
+       col = myred, 
+       lty = 2, lwd = 3, inset = 0.05)
+```
+
+<img src="Lab4_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" />
+
+  3. Umătoarea funcție generează observații repartizate Poisson conform enunțului:
+  
+
+```r
+sim.pois1 = function(n, lambda = 1){
+  out = numeric(n)
+  
+  for (i in 1:n){
+    out[i] = 0
+    s = -log(runif(1))/lambda
+    while(s<=1){
+      s = s - log(runif(1))/lambda 
+      out[i] = out[i] + 1
+    }
+  }
+  
+  return(out)
+}
+```
+
+Această funcție ar putea fi costisitoare în ceea ce privește timpul de execuție (R nu este foarte eficient atunci când avem bucle imbricate). Avem următoare funcție:
+
+
+```r
+sim.pois2 = function(n, lambda = 1){
+  x = sim.exp(n, lambda)
+  i = 0
+  l = which(x<=1)
+  # realizari cu valoarea 0
+  out = rep(0, sum(x > 1)) 
+  
+  while(length(l) > 0){
+    i = i + 1
+    x = x[l] + sim.exp(length(l), lambda)
+    l = which(x<=1)
+    # realizari cu valoarea i
+    out = c(out, rep(i, sum(x > 1))) 
+  }
+  
+  return(out)
+}
+```
+
+Pentru a compara cele două funcții:
+
+
+```r
+n = 100000
+
+start = proc.time()
+y = sim.pois1(n)
+proc.time() - start
+   user  system elapsed 
+   0.33    0.00    0.33 
+
+start = proc.time()
+x = sim.pois2(n)
+proc.time() - start
+   user  system elapsed 
+   0.03    0.00    0.03 
+```
+
+Eșantionul generat este repartizat conform repartiției Poisson de parametru $\lambda$:
+
+
+```r
+x.freq = table(x)/n
+
+par(mfrow = c(1,2))
+
+barplot(x.freq, 
+        main = "Repartitia esantionului")
+
+barplot(dpois(0:max(x), 1), names.arg = 0:max(x), 
+        main = "Repartitia teoretica")
+```
+
+<img src="Lab4_files/figure-html/unnamed-chunk-27-1.png" width="90%" style="display: block; margin: auto;" />
+
+# Generarea unei variabile aleatoare folosind metoda respingerii 
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Fie $f$ densitatea de repartiție definită prin 
+
+$$
+  f(x) = \frac{2}{\pi}\sqrt{1-x^2}\mathbf{1}_{[-1,1]}(x)
+$$
+  
+  1. Folosiți metoda respingerii pentru a genera $10000$ de observații repartizate cu densitatea $f$.
+
+  2. Trasați histograma acestui eșantion și comparați cu densitatea $f$.
+
+</div>\EndKnitrBlock{rmdexercise}
+
+  1. Observăm că 
+  
+$$
+  f(x) \leq \frac{2}{\pi}\mathbf{1}_{[-1,1]}(x) = \frac{4}{\pi}g(x)
+$$
+
+unde $g(x) = \frac{1}{2}\mathbf{1}_{[-1,1]}(x)$ este densitatea repartiției uniforme pe $[-1,1]$. Astfel metoda respingerii sugerează următorul algoritm:
+
+
+```r
+f = function(x){
+  return(2/pi * sqrt(1-x^2)*(abs(x) <= 1))
+}
+
+sim.resp1 = function(n){
+  x = rep(0, n)
+  
+  for (i in 1:n){
+    # generam obs din g
+    x[i] = runif(1, -1, 1)
+    
+    # generam uniforma
+    u = runif(1)
+    
+    while(u > pi * f(x[i])/2){
+      x[i] = runif(1, -1, 1)    
+      u = runif(1)
+    }
+  }
+  
+  return(x)
+}
+```
+
+Putem îmbunătății codul de mai sus (vrem să evităm să avem și bucla `for` și bucla `while` imbricate) dacă ținem cont de faptul că probabilitatea de acceptare este $p = \frac{\pi}{4}$ iar pentru a genera un eșantion de $m$ observații avem nevoie, în medie, de $\frac{m}{p}$ simulări. Avem 
+
+
+```r
+sim.resp2 = function(n){
+  out = c() # esantionul final
+  
+  # cate obs mai avem de generat
+  m = n
+  
+  # cat timp nu avem esantionul de talia dorita 
+  # continuam procedeul 
+  while (m>0){
+    # simulam m/p observatii
+    x = runif((4*m)%/%pi + 1, -1, 1)
+    u = runif((4*m)%/%pi + 1)
+    
+    # testam care obs sunt acceptate
+    y = (u <= pi * f(x)/2)
+    
+    # pastram doar punctele acceptate
+    out = c(out, x[which(y)])
+    m = n - length(out)
+  }
+  
+  return(out[1:n])
+}
+```
+
+Putem compara cele două metode, în funcție de timpul de execuție:
+
+
+```r
+n = 10000
+
+# Metoda 1
+star = proc.time()
+x = sim.resp1(n)
+proc.time() - start
+   user  system elapsed 
+   0.20    0.01    0.22 
+
+# Metoda 2
+star = proc.time()
+x = sim.resp2(n)
+proc.time() - start
+   user  system elapsed 
+   0.21    0.01    0.23 
+```
+
+  2. Putem valida algoritmul propus prin metoda respingerii trasând histograma eșantionului:
+  
+
+```r
+hist(x, freq = FALSE, 
+     col="gray80", 
+     border="gray20",
+     main = "Histograma lui x", ylab = "", 
+     xlab = "")
+
+t = seq(-1, 1, 0.01)
+lines(t, f(t), 
+      col = myred, lwd = 3, lty = 2)
+legend("topright", 
+       "f(x)", 
+       box.lty = 0,
+       col = myred, 
+       lty = 2, lwd = 3, inset = 0.05)
+```
+
+<img src="Lab4_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" />
+
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Plecând cu o propunere de tip $Exp(\lambda)$ vrem să generăm, cu ajutorul metodei acceptării-respingerii, un eșantion din următoarea densitate (jumătate de normală):
+
+$$
   f(x) = \left\{\begin{array}{ll}
-    \frac{2}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}, &amp; \mbox{dacă $x\geq0$}\\
-    0, &amp; \mbox{altfel}\\           
+    \frac{2}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}, & \mbox{dacă $x\geq0$}\\
+    0, & \mbox{altfel}\\           
   \end{array}\right.
-\]</span></p>
-</div>
+$$
+
+</div>\EndKnitrBlock{rmdexercise}
 
 Fie $g$ densitatea repartiției exponențiale de parametru $\lambda$,
 
@@ -351,15 +704,13 @@ hist(X,
      col="gray80", 
      border="gray20")
 
-curve(f, min(X), max(X), n=500, col = myred, lty = 2, lwd = 2, add=TRUE)
+curve(f, min(X), max(X), n=500, col = myred, lty = 2, lwd = 3, add=TRUE)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-15-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
 
 
-<div class="rmdexercise">
-<p>Modificați codul de la exercițiul precedent pentru a simula un eșantion dintr-o normală standard.</p>
-</div>
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Modificați codul de la exercițiul precedent pentru a simula un eșantion dintr-o normală standard.</div>\EndKnitrBlock{rmdexercise}
 
 Cum $f$ (din problema 1) este densitatea unei normale standard $X\sim\mathcal{N}(0,1)$ condiționată la $X>0$ și cum densitatea normală este simetrică față de medie (0 în acest caz) algoritmul se modifică acceptând $x_n$ și $-X_n$ cu probabilitatea de $0.5$. 
 
@@ -398,20 +749,19 @@ hist(X, breaks=50,
      main=NULL, 
      col="gray80", border="gray20")
 
-curve(f2, min(X), max(X), n=500,col = myred, lty = 2, lwd = 2, add=TRUE)
+curve(f2, min(X), max(X), n=500,col = myred, lty = 2, lwd = 3, add=TRUE)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-18-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-38-1.png" width="90%" style="display: block; margin: auto;" />
 
 # Simularea unei uniforme pe disc 
 
-<div class="rmdexercise">
-<p>Considerăm pătratul <span class="math inline">\(C = [0,L]^2\)</span> și discul <span class="math inline">\(D\)</span> de centru <span class="math inline">\((\frac{L}{2},\frac{L}{2})\)</span> și rază <span class="math inline">\(\frac{L}{2}\)</span>. Considerăm șirul de v.a. <span class="math inline">\(\left(Y_n\right)_{n\geq1}\)</span> pe <span class="math inline">\(\mathbb{R}^2\)</span> i.i.d. repartizate uniform pe pătratul <span class="math inline">\(C\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Aproximați valoarea lui <span class="math inline">\(\pi\)</span> prin ajutorul numărului de puncte <span class="math inline">\(Y_n\)</span> care cad în interiorul discului <span class="math inline">\(D\)</span> (Metoda respingerii)</p></li>
-<li><p>Simulați <span class="math inline">\(n\)</span> puncte uniforme pe disc.</p></li>
-</ol>
-</div>
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Considerăm pătratul $C = [0,L]^2$ și discul $D$ de centru $(\frac{L}{2},\frac{L}{2})$ și rază $\frac{L}{2}$. Considerăm șirul de v.a. $\left(Y_n\right)_{n\geq1}$ pe $\mathbb{R}^2$ i.i.d. repartizate uniform pe pătratul $C$.
+
+  1. Aproximați valoarea lui $\pi$ prin ajutorul numărului de puncte $Y_n$ care cad în interiorul discului $D$ (Metoda respingerii)
+  
+  2. Simulați $n$ puncte uniforme pe disc. 
+</div>\EndKnitrBlock{rmdexercise}
 
 1. Definim v.a. $X_n=\mathbf{1}_{\{Y_n\in D\}}$, $n\geq1$, care formează un șir de v.a. i.i.d. de lege $\mathcal{B}(\mathbb{P}(Y_n\in D))$, deoarece $\left(Y_n\right)_{n\geq1}$ este un șir de v.a. i.i.d. repartizate uniform pe $C$, $\mathcal{U}(C)$. Din *Legea Numerelor Mari* avem că 
   
@@ -453,7 +803,7 @@ estimate_pi = 4*sum(ind)/n # estimarea lui pi
 err = abs(estimate_pi-pi) # eroarea absoluta
 ```
 
-Aplicând acest procedeu obținem că valoarea estimată a lui $\pi$ prin generarea a $n=$ 2000 puncte este 3.156 iar eroarea absoluta este 0.01441.
+Aplicând acest procedeu obținem că valoarea estimată a lui $\pi$ prin generarea a $n=$ 2000 puncte este 3.14 iar eroarea absoluta este 0.001593.
 
 2. Una dintre metodele prin care putem simula puncte uniform repartizate pe suprafața discului $D$ este *Metoda respingerii*. Această metodă consistă în generarea de v.a. $Y_n$ repartizate uniform pe suprafața pătratului $C$, urmând ca apoi să testăm dacă $Y_n$ aparține discului $D$ (deoarece $D\subset C$). Dacă da, atunci le păstrăm dacă nu atunci mai generăm. Următoarea figură ilustrează această metodă:
   
@@ -474,7 +824,7 @@ points(xc, yc, col = myred, pch = 16)
 lines(xd, yd, col = myblue, lwd = 3)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-41-1.png" width="90%" style="display: block; margin: auto;" />
 
 Vom da mai jos o altă metodă de simulare a punctelor distribuite uniform pe discul $D$ de rază $L$. O primă idee ar fi să generăm cuplul de v.a. $(X_1,Y_1)$ așa încât $X_1,Y_1\sim\mathcal{U}([0,L])$ și ele să fie independente (ceea ce nu este adevărat în realitate). Vom vedea (printr-o ilustrație grafică) că această abordare este greșită (punctele sunt concentrate în centrul cercului). 
 
@@ -561,7 +911,7 @@ plot(x2, y2,
 lines(xc, yc, lwd = 3, col = myblue)
 ```
 
-<img src="Lab4_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="Lab4_files/figure-html/unnamed-chunk-42-1.png" width="90%" style="display: block; margin: auto;" />
 
 
 
