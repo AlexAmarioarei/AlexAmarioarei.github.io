@@ -1071,7 +1071,7 @@ aleatoare din \(n\), este:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myrandsample=}\ControlFlowTok{function}\NormalTok{(n,k)\{}
+\NormalTok{myrandsample =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n,k)\{}
   \CommentTok{# }
 \NormalTok{  x =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n}
 \NormalTok{  q =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,k)}
@@ -1098,6 +1098,257 @@ Pentru a vedea ce face această funcție putem scrie:
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{28} \DecValTok{19} \DecValTok{43}  \DecValTok{1} \DecValTok{41} \DecValTok{39}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{rmdexercise}
+Să presupunem acum că la extragerea loto de Duminică seara au fost alese
+numerele: \texttt{r\ set.seed(1223);\ myrandsample(49,\ 6)} și că toți
+cei \(100000\) de locuitori ai unui orășel și-au cumpărat un bilet. Care
+este probabilitate ca o persoană care poate completa o singură grilă să
+piardă ? (o persoană pierde dacă a nimerit cel mult două numere din cele
+extrase) Comparați rezultatul teoretic cu cel empiric.
+\end{rmdexercise}
+
+Pentru \(0\leq k \leq 6\), fie \(A_k\) evenimentul ca jucătorul să fi
+nimerit exact \(k\) numere din cele câștigătoare. Atunci, cum putem
+alege cele \(k\) numere din cele \(6\) în \(\binom{6}{k}\) moduri iar pe
+celelalte \(6 - k\) în \(\binom{43}{6-k}\) moduri, găsim că
+
+\[
+  \mathbb{P}(A_k) = \frac{\binom{6}{k}\binom{43}{6-k}}{\binom{49}{6}}.
+\]
+
+Prin urmare probabilitatea ca jucătorul să piardă este
+
+\[
+  \mathbb{P}(A_0) + \mathbb{P}(A_1) + \mathbb{P}(A_2) = \frac{\binom{6}{0}\binom{43}{6} + \binom{6}{1}\binom{43}{5} +\binom{6}{2}\binom{43}{4}}{\binom{49}{6}}
+\]
+
+adică \(\mathbb{P}(A_0) + \mathbb{P}(A_1) + \mathbb{P}(A_2)\approx\)
+0.9813625.
+
+Să testăm rezultatul empiric
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{42}\NormalTok{)}
+
+\NormalTok{n =}\StringTok{ }\DecValTok{100000}
+\NormalTok{u =}\StringTok{ }\KeywordTok{replicate}\NormalTok{(n, }\KeywordTok{sum}\NormalTok{(}\KeywordTok{myrandsample}\NormalTok{(}\DecValTok{49}\NormalTok{, }\DecValTok{6}\NormalTok{) }\OperatorTok{%in%}\StringTok{ }\NormalTok{a))}
+
+\CommentTok{# rezultatul}
+\NormalTok{res =}\StringTok{ }\KeywordTok{table}\NormalTok{(u)}\OperatorTok{/}\NormalTok{n}
+
+\CommentTok{# probabilitatea empirica de pierdere}
+\KeywordTok{sum}\NormalTok{(res[}\KeywordTok{c}\NormalTok{(}\StringTok{"0"}\NormalTok{, }\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{)])}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.98168}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Problema potrivirilor}\label{problema-potrivirilor}
+
+\begin{rmdexercise}
+Să ne imaginăm că \(20\) de persoane merg la operă și că fiecare
+persoană poartă o pălărie. În momentul în care ajung la intrare își lasă
+pălăria la garderobă. Pe parcursul reprezentării artistice, persoana
+responsabilă cu garderoba se încurcă, pierde lista cu numerele
+locațiilor și returnează în mod aleator pălăriile persoanelor la
+plecare. Care este probabilitatea ca cel puțin o persoană să fi primit
+pălăria cu care a venit?
+\end{rmdexercise}
+
+Să presupunem că persoanele și pălărie sunt numerotate de la \(1\) la
+\(n = 20\) și inițial persoana \(i\) a venit cu pălăria \(i\). Fie
+\(\Omega = S_n\) mulțimea permutărilor cu \(n\) elemente,
+\(\mathcal{F} = \mathcal{P}(\Omega)\) și \(\mathbb{P}\)
+echiprobabilitatea pe \((\Omega, \mathcal{F})\). Să notăm cu \(E_i\)
+evenimentul prin care a \(i\)-a persoană primește pălăria cu numărul
+\(i\), adică primește pălăria cu care a venit. Evenimentul \(A\) prin
+care cel puțin o persoană a primit pălăria cu care a venit este
+
+\[
+  A = E_1 \cup E_2 \cup\cdots\cup E_n.
+\]
+
+Cum \(E_i\) reprezintă mulțimea permutărilor \(\sigma\in\S_n = \Omega\)
+pentru care \(\sigma(i) = i\) avem că
+
+\[
+  \mathbb{P}(E_i) = \frac{(n-1)!}{n!} = \frac{1}{n}
+\]
+
+deoarece \(|\Omega| = n!\) iar cele \(n-1\) valori diferite de \(i\) pot
+fi așezate în \((n-1)!\) moduri. În mod similar,
+
+\[
+  \mathbb{P}(E_i\cap E_j) = \frac{(n-2)!}{n!}
+\]
+
+și în general
+
+\[
+  \mathbb{P}(E_{i_1}\cap E_{i_2}\cap\cdots\cap E_{i_k}) = \frac{(n-k)!}{n!}.
+\]
+
+Formula lui Poincare permite calcularea probabilității dorite
+
+\[
+  \mathbb{P}(A) = \mathbb{P}(E_1 \cup E_2 \cup\cdots\cup E_n) = \sum_{k = 1}^{n} (-1)^{k-1} \sum_{1\leq i_1<\cdots<i_k\leq n}\mathbb{P}(E_{i_1}\cap E_{i_2}\cap\cdots\cap E_{i_k})
+\]
+
+de unde
+
+\[
+  \mathbb{P}(A) = \sum_{k = 1}^{n} (-1)^{k-1} \binom{n}{k}\frac{(n-k)!}{n!} = \sum_{k = 1}^{n} \frac{(-1)^{k-1}}{k!} \to 1 - \frac{1}{e} \approx 0.63212
+\]
+
+Să vedem că același rezultat îl obținem și prin simulare:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# repetam experimentul de un nr mare de ori}
+\NormalTok{m =}\StringTok{ }\DecValTok{10000}
+
+\CommentTok{# nr de persoane }
+\NormalTok{n =}\StringTok{ }\DecValTok{20}
+
+\NormalTok{n.potriviri =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, m)}
+
+\NormalTok{persoane =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{m)\{}
+\NormalTok{  palarii =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, n)}
+\NormalTok{  n.potriviri[i] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(palarii }\OperatorTok{==}\StringTok{ }\NormalTok{persoane)}
+\NormalTok{\}}
+
+\CommentTok{# proportia persoanelor cu cel putin o potrivire }
+\KeywordTok{sum}\NormalTok{(n.potriviri }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{m}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{0.6366}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Ruina jucătorului}\label{ruina-jucatorului}
+
+\begin{rmdexercise}
+Un bărbat vrea să își cumpere un obiect (de exemplu o mașină sau o casă)
+care costă \(N\) unități monetare. Să presupunem că el are economisit un
+capital de \(0 < k < N\) unități monetare și încearcă să câștige restul
+jucând un joc de noroc cu managerul unei bănci. Jocul este următorul:
+bărbatul aruncă o monedă echilibrată în mod repetatș dacă moneda pică
+cap (\(H\)) atunci managerul îi dă o unitate monetară, în caz contrar
+bărbatul plătește o unitate monetară bancii. Jocul continuă până când
+unul din două evenimente se realizează: sau câștigă suma necesară și își
+cumpără obiectul dorit sau pierde banii și ajunge la faliment. Ne
+întrebăm care este probabilitatea să ajungă la faliment?
+\end{rmdexercise}
+
+Fie \(A\) evenimentul ca bărbatul să ajungă la ruină și \(B\)
+evenimentul ca la prima aruncare moneda a picat cap. Atunci din formula
+probabilității totale avem
+
+\[
+  \mathbb{P}_k(A) = \mathbb{P}_k(A|B)\mathbb{P}(B)+\mathbb{P}_k(A|B^c)\mathbb{P}(B^c)
+\]
+
+unde \(\mathbb{P}_k\) este probabilitatea calculată în funcție de
+valoarea \(k\) a capitalului inițial al jucătorului. Să observăm că
+\(\mathbb{P}_k(A|B)\) devine \(\mathbb{P}_{k+1}(A)\) deoarece dacă la
+prima aruncare avem cap atunci capitalul inițial a crescut la \(k+1\).
+În mod similar, dacă la prima aruncare am obținut coadă atunci
+\(\mathbb{P}_k(A|B^c) = \mathbb{P}_{k-1}(A)\). Notând cu
+\(p_k = \mathbb{P}_k(A|B)\) obținem următoarea ecuație
+
+\[
+  p_k = \frac{1}{2}p_{k+1} + \frac{1}{2}p_{k-1},
+\]
+
+cu valorile inițiale \(p_0=1\) (dacă jucătorul a pornit cu un capital
+inițial nul atunci el este în faliment) și respectiv \(p_N=0\) (dacă
+jucătorul are din start suma necesară pentru a achiziționa obiectul
+dorit atunci nu mai are loc jocul).
+
+O simulare a jocului pentru \(N = 50\) și \(k = 5\) este prezentată de
+următoarea funcție:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ruina =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(N, k)\{}
+\NormalTok{  flag =}\StringTok{ }\OtherTok{TRUE}
+
+\NormalTok{  joc =}\StringTok{ }\DecValTok{0}
+\NormalTok{  capital =}\StringTok{ }\NormalTok{k}
+\NormalTok{  y =}\StringTok{ }\NormalTok{capital}
+  
+  \ControlFlowTok{while}\NormalTok{(flag)\{}
+\NormalTok{    x =}\StringTok{ }\DecValTok{2}\OperatorTok{*}\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}\OperatorTok{-}\DecValTok{1}
+    
+\NormalTok{    capital =}\StringTok{ }\NormalTok{capital }\OperatorTok{+}\StringTok{ }\NormalTok{x}
+\NormalTok{    y =}\StringTok{ }\KeywordTok{c}\NormalTok{(y, capital)}
+    
+\NormalTok{    joc =}\StringTok{ }\NormalTok{joc }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+    
+    \ControlFlowTok{if}\NormalTok{ (capital }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{||}\StringTok{ }\NormalTok{capital }\OperatorTok{==}\StringTok{ }\NormalTok{N)\{}
+\NormalTok{      flag =}\StringTok{ }\OtherTok{FALSE}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+  \KeywordTok{return}\NormalTok{(y) }\CommentTok{# daca am 0 este ruina altfel este succes}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Putem ilustra grafic jocul după cum urmează:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{N =}\StringTok{ }\DecValTok{50}
+\NormalTok{k =}\StringTok{ }\DecValTok{5}
+
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+
+\NormalTok{y =}\StringTok{ }\KeywordTok{ruina}\NormalTok{(N, k)}
+\NormalTok{joc =}\StringTok{ }\KeywordTok{length}\NormalTok{(y) }\OperatorTok{-}\StringTok{ }\DecValTok{1} \CommentTok{# nr de jocuri}
+
+\KeywordTok{plot}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\NormalTok{joc, y, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+     \DataTypeTok{main =} \StringTok{"Ruina jucatorului"}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{"Numar de jocuri"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Capitalul jucaturului"}\NormalTok{,}
+     \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{,}
+     \DataTypeTok{lty =} \DecValTok{3}\NormalTok{, }\DataTypeTok{col =} \StringTok{"grey50"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,N), }\DataTypeTok{col =} \StringTok{"lightgrey"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{3}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\NormalTok{joc, y, }\DataTypeTok{col =}\NormalTok{ myblue,}
+       \DataTypeTok{pch =} \DecValTok{16}\NormalTok{,}
+       \DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(}\DecValTok{0}\NormalTok{, k, }\DataTypeTok{col =}\NormalTok{ myred, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{0}\NormalTok{, k, }\DataTypeTok{labels =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"k = "}\NormalTok{, k), }\DataTypeTok{pos =} \DecValTok{1}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{0.7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab3_files/figure-latex/unnamed-chunk-35-1} \end{center}
+
+Dacă definim \(b_k = p_k - p_{k-1}\) pentru \(k\geq 1\) atunci
+\(b_k = b_{k-1}\), \(\forall k\geq2\). Prin urmare \(b_k = b_1\) și
+\(p_k = b_1+p_{k-1} = kb_1+p_0\). Observând că
+\(b_1+\cdots+b_N=p_N-p_0=-1\) deducem că \(b_1=-\frac{1}{N}\) iar
+\(p_k=1-\frac{k}{N}\).
+
+Dorim să repetăm experimentul de \(M = 1000\) de ori (pentru valorile
+inițiale \(N = 50\) și \(k = 5\)) și ne interesăm de câte ori jucătorul
+a ajuns la faliment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{N =}\StringTok{ }\DecValTok{50}
+\NormalTok{k =}\StringTok{ }\DecValTok{5}
+\NormalTok{M =}\StringTok{ }\DecValTok{1000}
+\CommentTok{# Obs. - rezultatul functiei ruina trebuie modificat}
+\NormalTok{joc =}\StringTok{ }\KeywordTok{replicate}\NormalTok{(M, }\KeywordTok{ruina}\NormalTok{(N, k)) }\CommentTok{# repeta functia de M ori }
+
+\NormalTok{proba_ruina =}\StringTok{ }\KeywordTok{sum}\NormalTok{(joc }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}\OperatorTok{/}\NormalTok{M }
+\end{Highlighting}
+\end{Shaded}
+
+Am obținut că probabilitatea empirică de faliment este 0.9 iar cea
+teoretică este 0.9.
 
 \section{Aplicația 1: Verificarea egalității a două
 polinoame}\label{aplicatia-1-verificarea-egalitatii-a-doua-polinoame}
@@ -1218,7 +1469,7 @@ independente), atunci folosind regula de multiplicare avem
 
 \KeywordTok{comparePols}\NormalTok{(Fx, Gx)}
 \NormalTok{Cele doua polinoame sunt diferite }\OperatorTok{!}\StringTok{ }
-\NormalTok{Pentru r =}\StringTok{ }\DecValTok{246}\NormalTok{ avem ca }\KeywordTok{F}\NormalTok{(r)}\OperatorTok{!=}\KeywordTok{G}\NormalTok{(r) ( }\FloatTok{2.187693e+14} \OperatorTok{!=}\StringTok{ }\FloatTok{2.216208e+14}\NormalTok{ )}
+\NormalTok{Pentru r =}\StringTok{ }\DecValTok{438}\NormalTok{ avem ca }\KeywordTok{F}\NormalTok{(r)}\OperatorTok{!=}\KeywordTok{G}\NormalTok{(r) ( }\FloatTok{7.010787e+15} \OperatorTok{!=}\StringTok{ }\FloatTok{7.060649e+15}\NormalTok{ )}
 
 \KeywordTok{comparePols}\NormalTok{(Fx, Gx2)}
 \NormalTok{Polinoamele sunt egale. Eroarea este de }\FloatTok{1e-06}

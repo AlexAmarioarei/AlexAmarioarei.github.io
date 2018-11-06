@@ -629,7 +629,7 @@ Construiți în R o funcție care să simuleze jocul de loto <span class="math i
   return(u)
 }</code></pre>
 <p>Funcția care realizează extragerea fără întoarcere a <span class="math inline">\(k\)</span> numere aleatoare din <span class="math inline">\(n\)</span>, este:</p>
-<pre class="r"><code>myrandsample=function(n,k){
+<pre class="r"><code>myrandsample = function(n,k){
   # 
   x = 1:n
   q = rep(0,k)
@@ -648,6 +648,155 @@ k = 6
 
 myrandsample(n,k)
 [1] 28 19 43  1 41 39</code></pre>
+<div class="rmdexercise">
+<p>
+Să presupunem acum că la extragerea loto de Duminică seara au fost alese numerele: <code>r set.seed(1223); myrandsample(49, 6)</code> și că toți cei <span class="math inline"><span class="math inline">\(100000\)</span></span> de locuitori ai unui orășel și-au cumpărat un bilet. Care este probabilitate ca o persoană care poate completa o singură grilă să piardă ? (o persoană pierde dacă a nimerit cel mult două numere din cele extrase) Comparați rezultatul teoretic cu cel empiric.
+</p>
+</div>
+<p>Pentru <span class="math inline">\(0\leq k \leq 6\)</span>, fie <span class="math inline">\(A_k\)</span> evenimentul ca jucătorul să fi nimerit exact <span class="math inline">\(k\)</span> numere din cele câștigătoare. Atunci, cum putem alege cele <span class="math inline">\(k\)</span> numere din cele <span class="math inline">\(6\)</span> în <span class="math inline">\(\binom{6}{k}\)</span> moduri iar pe celelalte <span class="math inline">\(6 - k\)</span> în <span class="math inline">\(\binom{43}{6-k}\)</span> moduri, găsim că</p>
+<p><span class="math display">\[
+  \mathbb{P}(A_k) = \frac{\binom{6}{k}\binom{43}{6-k}}{\binom{49}{6}}.
+\]</span></p>
+<p>Prin urmare probabilitatea ca jucătorul să piardă este</p>
+<p><span class="math display">\[
+  \mathbb{P}(A_0) + \mathbb{P}(A_1) + \mathbb{P}(A_2) = \frac{\binom{6}{0}\binom{43}{6} + \binom{6}{1}\binom{43}{5} +\binom{6}{2}\binom{43}{4}}{\binom{49}{6}}
+\]</span></p>
+<p>adică <span class="math inline">\(\mathbb{P}(A_0) + \mathbb{P}(A_1) + \mathbb{P}(A_2)\approx\)</span> 0.9813625.</p>
+<p>Să testăm rezultatul empiric</p>
+<pre class="r"><code>a = c(31, 7, 17, 15, 10, 42)
+
+n = 100000
+u = replicate(n, sum(myrandsample(49, 6) %in% a))
+
+# rezultatul
+res = table(u)/n
+
+# probabilitatea empirica de pierdere
+sum(res[c(&quot;0&quot;, &quot;1&quot;, &quot;2&quot;)])
+[1] 0.98168</code></pre>
+</div>
+<div id="problema-potrivirilor" class="section level2">
+<h2><span class="header-section-number">2.5</span> Problema potrivirilor</h2>
+<div class="rmdexercise">
+<p>
+Să ne imaginăm că <span class="math inline"><span class="math inline">\(20\)</span></span> de persoane merg la operă și că fiecare persoană poartă o pălărie. În momentul în care ajung la intrare își lasă pălăria la garderobă. Pe parcursul reprezentării artistice, persoana responsabilă cu garderoba se încurcă, pierde lista cu numerele locațiilor și returnează în mod aleator pălăriile persoanelor la plecare. Care este probabilitatea ca cel puțin o persoană să fi primit pălăria cu care a venit?
+</p>
+</div>
+<p>Să presupunem că persoanele și pălărie sunt numerotate de la <span class="math inline">\(1\)</span> la <span class="math inline">\(n = 20\)</span> și inițial persoana <span class="math inline">\(i\)</span> a venit cu pălăria <span class="math inline">\(i\)</span>. Fie <span class="math inline">\(\Omega = S_n\)</span> mulțimea permutărilor cu <span class="math inline">\(n\)</span> elemente, <span class="math inline">\(\mathcal{F} = \mathcal{P}(\Omega)\)</span> și <span class="math inline">\(\mathbb{P}\)</span> echiprobabilitatea pe <span class="math inline">\((\Omega, \mathcal{F})\)</span>. Să notăm cu <span class="math inline">\(E_i\)</span> evenimentul prin care a <span class="math inline">\(i\)</span>-a persoană primește pălăria cu numărul <span class="math inline">\(i\)</span>, adică primește pălăria cu care a venit. Evenimentul <span class="math inline">\(A\)</span> prin care cel puțin o persoană a primit pălăria cu care a venit este</p>
+<p><span class="math display">\[
+  A = E_1 \cup E_2 \cup\cdots\cup E_n.
+\]</span></p>
+<p>Cum <span class="math inline">\(E_i\)</span> reprezintă mulțimea permutărilor <span class="math inline">\(\sigma\in\S_n = \Omega\)</span> pentru care <span class="math inline">\(\sigma(i) = i\)</span> avem că</p>
+<p><span class="math display">\[
+  \mathbb{P}(E_i) = \frac{(n-1)!}{n!} = \frac{1}{n}
+\]</span></p>
+<p>deoarece <span class="math inline">\(|\Omega| = n!\)</span> iar cele <span class="math inline">\(n-1\)</span> valori diferite de <span class="math inline">\(i\)</span> pot fi așezate în <span class="math inline">\((n-1)!\)</span> moduri. În mod similar,</p>
+<p><span class="math display">\[
+  \mathbb{P}(E_i\cap E_j) = \frac{(n-2)!}{n!}
+\]</span></p>
+<p>și în general</p>
+<p><span class="math display">\[
+  \mathbb{P}(E_{i_1}\cap E_{i_2}\cap\cdots\cap E_{i_k}) = \frac{(n-k)!}{n!}.
+\]</span></p>
+<p>Formula lui Poincare permite calcularea probabilității dorite</p>
+<p><span class="math display">\[
+  \mathbb{P}(A) = \mathbb{P}(E_1 \cup E_2 \cup\cdots\cup E_n) = \sum_{k = 1}^{n} (-1)^{k-1} \sum_{1\leq i_1&lt;\cdots&lt;i_k\leq n}\mathbb{P}(E_{i_1}\cap E_{i_2}\cap\cdots\cap E_{i_k})
+\]</span></p>
+<p>de unde</p>
+<p><span class="math display">\[
+  \mathbb{P}(A) = \sum_{k = 1}^{n} (-1)^{k-1} \binom{n}{k}\frac{(n-k)!}{n!} = \sum_{k = 1}^{n} \frac{(-1)^{k-1}}{k!} \to 1 - \frac{1}{e} \approx 0.63212
+\]</span></p>
+<p>Să vedem că același rezultat îl obținem și prin simulare:</p>
+<pre class="r"><code># repetam experimentul de un nr mare de ori
+m = 10000
+
+# nr de persoane 
+n = 20
+
+n.potriviri = rep(0, m)
+
+persoane = 1:n
+
+for (i in 1:m){
+  palarii = sample(1:n, n)
+  n.potriviri[i] = sum(palarii == persoane)
+}
+
+# proportia persoanelor cu cel putin o potrivire 
+sum(n.potriviri &gt; 0) / m
+[1] 0.6366</code></pre>
+</div>
+<div id="ruina-jucatorului" class="section level2">
+<h2><span class="header-section-number">2.6</span> Ruina jucătorului</h2>
+<div class="rmdexercise">
+<p>
+Un bărbat vrea să își cumpere un obiect (de exemplu o mașină sau o casă) care costă <span class="math inline"><span class="math inline">\(N\)</span></span> unități monetare. Să presupunem că el are economisit un capital de <span class="math inline"><span class="math inline">\(0 &amp;lt; k &amp;lt; N\)</span></span> unități monetare și încearcă să câștige restul jucând un joc de noroc cu managerul unei bănci. Jocul este următorul: bărbatul aruncă o monedă echilibrată în mod repetatș dacă moneda pică cap (<span class="math inline"><span class="math inline">\(H\)</span></span>) atunci managerul îi dă o unitate monetară, în caz contrar bărbatul plătește o unitate monetară bancii. Jocul continuă până când unul din două evenimente se realizează: sau câștigă suma necesară și își cumpără obiectul dorit sau pierde banii și ajunge la faliment. Ne întrebăm care este probabilitatea să ajungă la faliment?
+</p>
+</div>
+<p>Fie <span class="math inline">\(A\)</span> evenimentul ca bărbatul să ajungă la ruină și <span class="math inline">\(B\)</span> evenimentul ca la prima aruncare moneda a picat cap. Atunci din formula probabilității totale avem</p>
+<p><span class="math display">\[
+  \mathbb{P}_k(A) = \mathbb{P}_k(A|B)\mathbb{P}(B)+\mathbb{P}_k(A|B^c)\mathbb{P}(B^c)
+\]</span></p>
+<p>unde <span class="math inline">\(\mathbb{P}_k\)</span> este probabilitatea calculată în funcție de valoarea <span class="math inline">\(k\)</span> a capitalului inițial al jucătorului. Să observăm că <span class="math inline">\(\mathbb{P}_k(A|B)\)</span> devine <span class="math inline">\(\mathbb{P}_{k+1}(A)\)</span> deoarece dacă la prima aruncare avem cap atunci capitalul inițial a crescut la <span class="math inline">\(k+1\)</span>. În mod similar, dacă la prima aruncare am obținut coadă atunci <span class="math inline">\(\mathbb{P}_k(A|B^c) = \mathbb{P}_{k-1}(A)\)</span>. Notând cu <span class="math inline">\(p_k = \mathbb{P}_k(A|B)\)</span> obținem următoarea ecuație</p>
+<p><span class="math display">\[
+  p_k = \frac{1}{2}p_{k+1} + \frac{1}{2}p_{k-1},
+\]</span></p>
+<p>cu valorile inițiale <span class="math inline">\(p_0=1\)</span> (dacă jucătorul a pornit cu un capital inițial nul atunci el este în faliment) și respectiv <span class="math inline">\(p_N=0\)</span> (dacă jucătorul are din start suma necesară pentru a achiziționa obiectul dorit atunci nu mai are loc jocul).</p>
+<p>O simulare a jocului pentru <span class="math inline">\(N = 50\)</span> și <span class="math inline">\(k = 5\)</span> este prezentată de următoarea funcție:</p>
+<pre class="r"><code>ruina = function(N, k){
+  flag = TRUE
+
+  joc = 0
+  capital = k
+  y = capital
+  
+  while(flag){
+    x = 2*rbinom(1,1,0.5)-1
+    
+    capital = capital + x
+    y = c(y, capital)
+    
+    joc = joc + 1
+    
+    if (capital == 0 || capital == N){
+      flag = FALSE
+    }
+  }
+  
+  return(y) # daca am 0 este ruina altfel este succes
+}</code></pre>
+<p>Putem ilustra grafic jocul după cum urmează:</p>
+<pre class="r"><code>N = 50
+k = 5
+
+set.seed(1234)
+
+y = ruina(N, k)
+joc = length(y) - 1 # nr de jocuri
+
+plot(0:joc, y, type = &quot;l&quot;,
+     main = &quot;Ruina jucatorului&quot;,
+     xlab = &quot;Numar de jocuri&quot;,
+     ylab = &quot;Capitalul jucaturului&quot;,
+     bty = &quot;n&quot;,
+     lty = 3, col = &quot;grey50&quot;)
+abline(h = c(0,N), col = &quot;lightgrey&quot;, lty = 3)
+points(0:joc, y, col = myblue,
+       pch = 16,
+       cex = 0.5)
+points(0, k, col = myred, pch = 16)
+text(0, k, labels = paste0(&quot;k = &quot;, k), pos = 1, cex = 0.7)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAMAAABNUi8GAAAAz1BMVEUAAAAAADoAAGYAM1oAOjoAOmYAOpAAZpAAZrYhaaQ6AAA6ADo6AGY6OgA6OmY6OpA6ZpA6ZrY6kLY6kNtaf39mAABmADpmOgBmOjpmkLZmkNtmtrZmtttmtv9tRxx/f3+QOgCQOjqQZgCQZjqQkGaQkLaQtpCQttuQ29uQ2/+2ZgC2Zjq2ZpC2kDq2kGa225C227a229u22/+2/7a2///T09PbkDrbtmbbtpDb27bb29vb/7bb///fTET/tmb/25D/27b/29v//7b//9v///+3XpTXAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAV+UlEQVR4nO2di3rjuHlA6cmO4/F2d5O6mk2aOFLTtBsrTZtsJsrNI28kvf8zleBFIiVCIkiA+H/inO+zLYokAFHHuJEAsgOAYLLYCQC4BoKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQVAQDYKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQVAQDYKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQVAQDYKCaBAURIOgIBoEBdEgKIgGQUE0CAqiQdAO9qus4O7r7y923L/eOPP6AccD/+dTn2S0A+sd+oxA0A5qQXNFX853+BH0h2/fIWgvELSDk6DZQ5gY1tkQQVMEQTuozXh7NH9LmXaL7Knascnufvu7LHtf5K5//TbX+OuX1pmNM3L+8lWWffHL1rFr47455q8/y/f93MSVB/rf32bvvr+I7eKNtEDQDo4irC2Cnsr/bbsq0CHoujziqXlsLWgVkolsU71C0DYI2sHNHDR7/735Xbzx41dz3FPzzKaguZX/+vrDIn+neWx5RBl+EZD5ff/94e+XsSEonNOogx5lagv6XNhVVlD/9r9fHeuql4KWrzc/+WPr2PLdqia6rjLT58OhIzYEhXNOgj68dgpqSvT8jdy0/X+2GlNXnWocWxxR7yvC21TVBARtg6Ad1IK+/85sHYvjDkHNke//62+LLkHrMx4aodbHFkfsqtO2JvNsC9qI7eKNtEDQDgoR9r8vWy9XBS1rlLurgtZONY+9lYMiaA2CdlCJsClL7k3dXO8QdFtXR1uNpMYZlV/br79rHdtVBy0FtcTWeCMtELSDWoR1oVTRyv5h1Slo0Q43+1o5aOMMY9ZPX03p/tw8tgyi3YqvBb2I7eyNtEDQDhrdTHnelv+uW/SdddDLRlLjjGM/aPvYbUc/aCnoRWwXb6QFgnbQ6Kg3Nr19m2U/+YO9Ff/+u01957I683TGobqT9O+H1rH73xV9qeWdJLPvKOhFbJdvJAWCeqXRaAcvIKhXflggqF8Q1Cfrqt4J3kBQj5hm0E9jJ2JmICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEI02QT986LUBc0GZoB8+NDy0b8BsQFAQjTJBKeJTQ5ugkBjaBF3224C5oE/QZZ8NmAvaBCUPTQx9gkJSKBOU7DM1FAq6vL0Bs0GZoAZy0ZRQKCikhC5ByTyTQ6Ogy1sbMB90CVpCPpoQGgWFhNAlKHlncqgSdNn8a9+AGaFK0CPkpMngJuh+lRW8+xQoOQBtnATdZE/li239YlrIONPDRdD96qjl5v41QGJusGy+sm/AnHARdLd4rl9uIxfy5KWpoCkHhQRxrINWWWicOijZZoK4teJ3i7IVHyP/7DngmNHH80JNP2jPKRuYv2Fm+BE0O+IluC4QNE08GxUwQ6aITxI9gvZtCdFgmhVu/aCnotzSDyqhSouhc8LJqP3qVv+8BEFhTrg+LPLgMzgnyBiTxNGobfZ8db8EQTF5TihqJPUGQ2fEHAWFGaFGULLFNJmjoLg8I9QI6gKGzodZCgrzQYugZIqJMktBsXk+aBHUCQSdD7MUFOaDEkHJE1NlnoLi82xQIqgjCDob5ikozAYdgpIjJstMBcXouaBDUGcQdC7IEdQ+XnjASGIGH88FMYLaZ1wYMBcD0zfMBgQF0YgRlCIeupAjqB1aPAkjR1C7hgiaMJIE9SoiVs8DOYJ6dgpB54EkQS2gWsqIEZQqKHQhSlDKeDhHjKAGv05h6BwQJWgneJY0UgSlCgqdyBKUSiicIUXQEiqhcIYsQTvAsrQRIihVUOhGmKBUQqGNEEFrqIRCG2GCXoBjiSNDUKqgYKE0ard4Oq5zeGsxuR7BubLsfOkB9FaPjBz0BIJCCzej1ln2sF/l2axtvTnfdVAMS52jUX2K+M39a+7oQ1EluBGcAx8+LJsbtj1DYHCnes6N2l7xc7/KtdzevRxKVfsE14PWGHb7xhAYHq+fC6PW9vWMd4vn2uAzj0/ryLunAEHhChdGXclCw+Sg56W6bWMI+KmeC6M2feqghaq9gusDvaBg5dyo3cJexAdqxS+vbo4ExZVz0Yq3lN2uwQ0HQaGBtI76FtgFAgSlCgp24gt6YSFlPJyoHxY59WRGeFikDYLCifg5qB3cAgGCUgWFKzg9LOIQXG86LKSMhyMuD4sMCG4QCApHXB4WGRLcCDAL3B4WGRLcTaiCwjWcHhYZENxNujRkdDzUuD0s4hzcMKiEQo28h0Vq8AoO8ftBqYLCVY5GWZ9BHhZcX7o1pBIKFY0i3vYQ8qDgxkElFCpORo3soj8PbixYBYbItzqpgsJ1IjeSbBpSCYWSqIJ6XSJ+SDQgnphFvH1eBa8zLjB9g2ZiPs2EoHCTqE8zUcTDLaI/zTQJNJPUEv1pJoBrRH2aiYwNbhH1aabJBOU/QS2xn2aaCAzVyikH/fhS/J1lIwnUciHohI0ksjW4SWXU+jT1zajHQl0EndRP/hmUcpGDegpOGgiqlEQaSaCVk1F1P9NkdVAyNbjNyaj1/evm4fD2OGrkh4OgE/vJv4NOGh31T4ft/at1gRnH4MSBoDppDZp7+5dPxY+H4AC80Bp2bFrykwlKlgY9OBlleujXT5MV8ZP7yT+EShpGrR9MS17A/KBhQFCV0A8KooklKPkZ9KJZxOe1z+24W/GiBeV/QiOtjvrDzcVk8xrq22OW3dnu20su4hFUIxeTh117HrTw88uXKzON9RQ0yjjLIZHGSGjAOBWOb72YfvHK86DmZlM1LNnWGdVP0Cgj1YdEGiOhAePUOENAox+0WAT+7dFeCTX5ZuXxWT57epq0V6QIGidO3YIWlUt77dJgcs+NhxyUIj5SnPr8dGvV7BbvPhVZ6NbmseRG0hCiNKyWNOdOOBq1LQtya0u/Z3BqvoE4CQ0Wq5rrfiLO7HaRLtSQaBV+p3aW+j6OxLU6g6FD0KAxqhdU0FqdAohTBVWoUTiizG6n5vrHSmigeNVc9wZRZreLdqF0lPHBWB70fRyRa3UGQ4OggeNTK6i4tToFEKsKqk+jcMR4HlTN1Y+X0CAxq7nuTRITVEMZH4xl47caEhvyIV/Q4LGpFHS3eDreSRo1wZ10QZ2IVwVVp1E4uowa0dMkvYh3ImY6Q8St5bq36DJqO7wl30fQqNdJfhkfjOXZXx0kVgcVL+gUcakyNDVBHYhZBVVmUUAiCKrl0sdNp//YtVz3NtMLGvk6SS/jg7HseKWA5Ip42YJOE5MmQ+t+0FMnKOsklcStguqyKCAT5KCfP39ubmq58LHT6Tv+2J9nIOEF/fy5aWj0ga89E9A6zG+i7UH33AgYmjyCD5r7/LlpaPSpA3omoHWY30Tbg+65ETA0gQQfNIegvYNG0A6CD5prCxq/dKGIF/AlOBB+0Fy7Diqgqi6qo6nnLCKjD1te2RLNBIPmzlrx0Ykt6NK6eS0W2z6/ocljkkFzei7HkYBJtk/vYZdtWGgKr/sFkwyaU9j9PNX0Hj2zuWGHKbzuF0x8q1PEdYpdxreD7RPy6MPO3xbxPfQiuXvxh9iCXoTU8wm77r1+QxPINIKquRw1Qaug7rINDU3ddb9kmodF1I02mGh6jxvRjD5M3XW/JFQO+vbNeWNrnbv/b35jG4qYSuiyX8ijD7OrK57JBN3/x7XZ76clpqAd4Sz7xdC1329oEjkJWhfzfor4XNBNo0d1OXKZ74kJXAV1lW14aFo0tNNaaS5X6u3RskSXY3Bv3/ylXK/GOP+cX6jtF4/Zj8YEPSXBv9ee+ow+TL+mjY76p2JAvKf14t8ez3Pif74efjVKfo8IqYS6lcbDD+uZX4uktRSiKYbHFcWNHPT3zRy0ZDNupVp/xBPU3obp2QgKGJpIWksh7j6++BP0Hx+braLl1iwCJiUHvUHwKqibbGNCU6KhncZSiHmZvH7yVsR/89qaQWdpupmkZKC3mOBb7dmNPvow9d31zfXiH0xLPuAyNIIulIhKqOtdyaGH9bxvJZMU78Uf4glqf5aj58MgAUOTyamRVFUZQy1Do+NyFIRL6rLz5bU4r6WlV2iKrnsnF4KGWoZG0eOzkyS05/UYfZii695JZdTaZXrlK53514p4URdKQCW0ZzY3+rAhmbMcLnLQK/R45skuqLCRhD2HSfbc0zfOZXPDtscep/2cnnvsQYvFqVWzLbPXITmosLHYPQea99wzIM6phr2H+zgT4dbs3i1M3+aloKec1XamsMuBoNK+ERuXq3xcbySt716G1UGFXY04RXyvjSHnjA5aLM4dl5vsaWAjSQkT3Of0E8Lo0FS0ktyNenv8AkEFhKxCr/E0jCoK+R534verbA6CCuhogtucjNremX6mzd2okRkIGpb0MuHG43Zltrj28zSTWkRXQZtheAhNlaCh78VrgSqoLC5yUE/PgypAZRmfHI06aNH02dgbQG7ByUeloMllw5dz1I8aeaxJ0E6EV0E9j+XQJKjI4KaHKqgwUhZUZRmfGqFmFtGASkFTy4hDzSyiFPFV0DocT6EpEtTzzCJKUSBoiNAEE2pmERWoLOMTI9TMIirQKajXFMT/ODcINbOITlSU8F4nC1EkaPiZReSjQlD/oUkm5X5QrWV8UiDoFOf4JalKaG3UfmUm7H57HDkBnTJBz1BSwnudLESJoOV44tPfkcEpRYmg8q3ySD31Te2l6a8fH5wWhqyiHn+Er9fQ/I5r9j+UuTTKdIJWpNTN1HOKg57nTDVHgtfQ/M4MEWAyiHrihuMd+JSGfCCoHkFPOWhCglLEayniTSd9RWKjOr12NOlvuyztn23AHh9URh2fskvtcbvRguqfzHjIRM3us5EOpTaqmllxM3IlDnWCNhjmas8JkAXjPjfzlPM5N55mMo/TP1w71iU4hXgo7XVPZmzwm516IO1bnQevlVDt08EXH8z62dz3eAFBx56z7HxXE/ZPMGqPH5IX9MhQU3ucJ1zd7uTZP9uQPYNB0BovZX1nIML9PMM+M8SQPaNBUG+V0ADZx8Qsj7987PEDgvqqhCp20/4JRuzxBIJWDPf05pni1e1KoP2zDdkzHASt8FTSB89RwiNFzRIE9aumNhub+C3pPYGgniqhms303DryeikQtGSMpTfOVaCuny6lIJ1NCFritbNpdMhxEdJFX4Kgnrvo9flY4/eOpy8Q1E8lVK+XBfZPMHCPNxC0YKSjV05XYu7SuulhzxgQtMBbFfTa16YGGY8ql7gZtcmycpka29A6nYJ60HNp26EGOZlmCyejzEKeu4V56n5egg4Zi2gdzBh4lGMgxA7udDGqnN5hvzIThc9J0CGjua3DwUOPEw+D3OHxLkbV0zuY5Rbagp7WAPOVrilB0JkIepwgZ/0wqxyUIn4mRfyxYLdPxKxTUPCNvyaTayu+LOT3KwTthdYm/Wi8fXD6Qf0zQedLOiCof7DSIwgKIaCIV0HCeamvj46gAQj/EFo6IGgA8NIfCApBoIhXQNI5qacPj6AhCD4YNx0QNASY6Q0EhTBQxMsn6YwUQSWjf7IRKSBoGJDTEwgKgfDzP4qg4Ug8F0VQyeifbEQICBoI9PQDgkIovPyPImgwks9DEVQyagYch8PLJUDQMKiZsiEcfi4BgoYBQRFUNsn7SREPKYCgIBoEhXB46GhCUAgHgsLcQVAQDYJCQMaX8QgKIRltKIKCaBAURIOgEBKKeJDNWEMRFESDoCAaBIWgUMSDbEYaiqAgGgQF0SAoBGZcGY+gEJgpBd2vylXhLUvJIij4xm057qxaMH5bvxgVHCTBuMGdLkbtV0ctN/evo4ODJBg5PN7FqN3iuX65bRfyWc2f/3w48MNP46cQtGuff0F75KAA50xXxOd10CoLtdZBAfziVmncLcqSnPwTJoJWDYgGQUE0CAqiQVAQDYKCaBAURIOgIBoEBdFMIWgGkA00bRJBJ4hDdgJIweAEICgpEJ0ABCUFohOAoKRAdAIQlBSITgCCkgLRCUBQUiA6AQhKCkQnAEFJgegERE83wDUQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIJrig2yy7ewkdiYViUZKn2KlYF7OpRkvB22OWPRwipmCTfwnPgxMQWtBtnqRtJDf2qzzijfl2YqZiW0z3Gy0F2zz23SLiNdiYeI2hwxIQWNByWvv1Q9hYLLw9mn/czbtPMVOxWxhBo6WgjDjiNdivHsp4ByYgsKBHR8JGc438nzZmKjb3v84FjZaCty+rLCtWCo6CDkxAaEGL67ONKej63aeIqcijNnXQaCnYvvvToqiHR0tBXcQPTEBgQcs6R6zqX5GC/NuJlwpTrhlBo6VgY5atNLlYvGtQtY0GJmDugm7rNlKcVJj1pOIKelflW9FSkJdgefE+OJeYeRFfLugULRVFxFGL+LLOl9f/YqXgWPWUWcRHbiRVq99GS8WmmnnwOVoKSiFyOWKl4JhxymwkRe1mOq6MFzcV65jdTOX6qtt43Uyll8MTMOeOelPziZ+K8k5StBRs6n+PWCmo66AyO+qLUi6WGVUBa6KPmIrqVme0FGzr272xUrAelQAeFgHRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAjqwH5VTh5YzrbUn/Mps8oZ365QzkkHBwR1Yr8qVxwaKyj0B0Ed2K++KKYJRtDpQFAH9quHTbGoyv1rUQjnv94ef2FW0TDLuZlSeV2uqrb7+JusmkrYzDn4m2oGyKyar7Qo4pvTIuYZcx1gceqfKOJrENSBXNDCo5agxWp2uY1mcmszf7BZtmC3qPNYM33r1kyLad6uZ9Q1gpqVWYoV4Mrjn46CLoql4RC0AkEdMMu5VOt2nAR9qqZyzq3bfXwp7cuFK88om0Pru5fynWoJgfzdckLsbb3jcMpBzTaCHkFQB4yg1cpHJ0GfKw2rpvk2K7LGSrDSyNzDshpaHWMW3SheHV80BX1G0AYI6kCxrF/unFXQvDr57v8eG4JujoLW632Yd49emgCqtQoRtBsEdaBad/LJJuhxw5aDVpCD9gdBHSgFffvyKyPoU9tJ86vQcdss4qvFgUxVs6Fcdx20qsciaAsEdaAU9LDO7l/3K/OTXeagu0X21BCsXEq1asWb1pJ586IVnwdcB4igbRDUgUrQqicoy37RUQe9e1m38stWP2jVN9rVD1oHiKBtEDQCN+/FwxEEjUDdcofbIOj0rLNIq4ZqBEFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFESDoCAaBAXRICiIBkFBNAgKokFQEA2CgmgQFETz/yHjKAxCcZ82AAAAAElFTkSuQmCC" width="90%" style="display: block; margin: auto;" /></p>
+<p>Dacă definim <span class="math inline">\(b_k = p_k - p_{k-1}\)</span> pentru <span class="math inline">\(k\geq 1\)</span> atunci <span class="math inline">\(b_k = b_{k-1}\)</span>, <span class="math inline">\(\forall k\geq2\)</span>. Prin urmare <span class="math inline">\(b_k = b_1\)</span> și <span class="math inline">\(p_k = b_1+p_{k-1} = kb_1+p_0\)</span>. Observând că <span class="math inline">\(b_1+\cdots+b_N=p_N-p_0=-1\)</span> deducem că <span class="math inline">\(b_1=-\frac{1}{N}\)</span> iar <span class="math inline">\(p_k=1-\frac{k}{N}\)</span>.</p>
+<p>Dorim să repetăm experimentul de <span class="math inline">\(M = 1000\)</span> de ori (pentru valorile inițiale <span class="math inline">\(N = 50\)</span> și <span class="math inline">\(k = 5\)</span>) și ne interesăm de câte ori jucătorul a ajuns la faliment.</p>
+<pre class="r"><code>N = 50
+k = 5
+M = 1000
+# Obs. - rezultatul functiei ruina trebuie modificat
+joc = replicate(M, ruina(N, k)) # repeta functia de M ori 
+
+proba_ruina = sum(joc == 0)/M </code></pre>
+<p>Am obținut că probabilitatea empirică de faliment este 0.9 iar cea teoretică este 0.9.</p>
 </div>
 </div>
 <div id="aplicatia-1-verificarea-egalitatii-a-doua-polinoame" class="section level1">
@@ -717,7 +866,7 @@ comparePols = function(Fx, Gx){
 
 comparePols(Fx, Gx)
 Cele doua polinoame sunt diferite ! 
-Pentru r = 246 avem ca F(r)!=G(r) ( 2.187693e+14 != 2.216208e+14 )
+Pentru r = 438 avem ca F(r)!=G(r) ( 7.010787e+15 != 7.060649e+15 )
 
 comparePols(Fx, Gx2)
 Polinoamele sunt egale. Eroarea este de 1e-06</code></pre>

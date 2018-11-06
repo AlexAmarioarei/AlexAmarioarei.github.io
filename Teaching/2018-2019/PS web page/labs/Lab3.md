@@ -539,7 +539,7 @@ Funcția care realizează extragerea fără întoarcere a $k$ numere aleatoare d
 
 
 ```r
-myrandsample=function(n,k){
+myrandsample = function(n,k){
   # 
   x = 1:n
   q = rep(0,k)
@@ -565,6 +565,202 @@ myrandsample(n,k)
 [1] 28 19 43  1 41 39
 ```
 
+<div class="rmdexercise">
+<p>Să presupunem acum că la extragerea loto de Duminică seara au fost alese numerele: <code>r set.seed(1223); myrandsample(49, 6)</code> și că toți cei <span class="math inline">\(100000\)</span> de locuitori ai unui orășel și-au cumpărat un bilet. Care este probabilitate ca o persoană care poate completa o singură grilă să piardă ? (o persoană pierde dacă a nimerit cel mult două numere din cele extrase) Comparați rezultatul teoretic cu cel empiric.</p>
+</div>
+
+Pentru $0\leq k \leq 6$, fie $A_k$ evenimentul ca jucătorul să fi nimerit exact $k$ numere din cele câștigătoare. Atunci, cum putem alege cele $k$ numere din cele $6$ în $\binom{6}{k}$ moduri iar pe celelalte $6 - k$ în $\binom{43}{6-k}$ moduri, găsim că 
+
+$$
+  \mathbb{P}(A_k) = \frac{\binom{6}{k}\binom{43}{6-k}}{\binom{49}{6}}.
+$$
+
+Prin urmare probabilitatea ca jucătorul să piardă este 
+
+$$
+  \mathbb{P}(A_0) + \mathbb{P}(A_1) + \mathbb{P}(A_2) = \frac{\binom{6}{0}\binom{43}{6} + \binom{6}{1}\binom{43}{5} +\binom{6}{2}\binom{43}{4}}{\binom{49}{6}}
+$$
+
+adică $\mathbb{P}(A_0) + \mathbb{P}(A_1) + \mathbb{P}(A_2)\approx$ 0.9813625.
+
+Să testăm rezultatul empiric
+
+
+```r
+a = c(31, 7, 17, 15, 10, 42)
+
+n = 100000
+u = replicate(n, sum(myrandsample(49, 6) %in% a))
+
+# rezultatul
+res = table(u)/n
+
+# probabilitatea empirica de pierdere
+sum(res[c("0", "1", "2")])
+[1] 0.98168
+```
+
+## Problema potrivirilor
+
+<div class="rmdexercise">
+<p>Să ne imaginăm că <span class="math inline">\(20\)</span> de persoane merg la operă și că fiecare persoană poartă o pălărie. În momentul în care ajung la intrare își lasă pălăria la garderobă. Pe parcursul reprezentării artistice, persoana responsabilă cu garderoba se încurcă, pierde lista cu numerele locațiilor și returnează în mod aleator pălăriile persoanelor la plecare. Care este probabilitatea ca cel puțin o persoană să fi primit pălăria cu care a venit?</p>
+</div>
+
+Să presupunem că persoanele și pălărie sunt numerotate de la $1$ la $n = 20$ și inițial persoana $i$ a venit cu pălăria $i$. Fie $\Omega = S_n$ mulțimea permutărilor cu $n$ elemente, $\mathcal{F} = \mathcal{P}(\Omega)$ și $\mathbb{P}$ echiprobabilitatea pe $(\Omega, \mathcal{F})$. Să notăm cu $E_i$ evenimentul prin care a $i$-a persoană primește pălăria cu numărul $i$, adică primește pălăria cu care a venit. Evenimentul $A$ prin care cel puțin o persoană a primit pălăria cu care a venit este 
+
+$$
+  A = E_1 \cup E_2 \cup\cdots\cup E_n.
+$$
+
+Cum $E_i$ reprezintă mulțimea permutărilor $\sigma\in\S_n = \Omega$ pentru care $\sigma(i) = i$ avem că 
+
+$$
+  \mathbb{P}(E_i) = \frac{(n-1)!}{n!} = \frac{1}{n}
+$$
+
+deoarece $|\Omega| = n!$ iar cele $n-1$ valori diferite de $i$ pot fi așezate în $(n-1)!$ moduri. În mod similar, 
+
+$$
+  \mathbb{P}(E_i\cap E_j) = \frac{(n-2)!}{n!}
+$$
+
+și în general 
+
+$$
+  \mathbb{P}(E_{i_1}\cap E_{i_2}\cap\cdots\cap E_{i_k}) = \frac{(n-k)!}{n!}.
+$$
+
+Formula lui Poincare permite calcularea probabilității dorite 
+
+$$
+  \mathbb{P}(A) = \mathbb{P}(E_1 \cup E_2 \cup\cdots\cup E_n) = \sum_{k = 1}^{n} (-1)^{k-1} \sum_{1\leq i_1<\cdots<i_k\leq n}\mathbb{P}(E_{i_1}\cap E_{i_2}\cap\cdots\cap E_{i_k})
+$$
+
+de unde 
+
+$$
+  \mathbb{P}(A) = \sum_{k = 1}^{n} (-1)^{k-1} \binom{n}{k}\frac{(n-k)!}{n!} = \sum_{k = 1}^{n} \frac{(-1)^{k-1}}{k!} \to 1 - \frac{1}{e} \approx 0.63212
+$$
+
+Să vedem că același rezultat îl obținem și prin simulare: 
+
+
+```r
+# repetam experimentul de un nr mare de ori
+m = 10000
+
+# nr de persoane 
+n = 20
+
+n.potriviri = rep(0, m)
+
+persoane = 1:n
+
+for (i in 1:m){
+  palarii = sample(1:n, n)
+  n.potriviri[i] = sum(palarii == persoane)
+}
+
+# proportia persoanelor cu cel putin o potrivire 
+sum(n.potriviri > 0) / m
+[1] 0.6366
+```
+
+
+## Ruina jucătorului 
+
+<div class="rmdexercise">
+<p>Un bărbat vrea să își cumpere un obiect (de exemplu o mașină sau o casă) care costă <span class="math inline">\(N\)</span> unități monetare. Să presupunem că el are economisit un capital de <span class="math inline">\(0 &lt; k &lt; N\)</span> unități monetare și încearcă să câștige restul jucând un joc de noroc cu managerul unei bănci. Jocul este următorul: bărbatul aruncă o monedă echilibrată în mod repetatș dacă moneda pică cap (<span class="math inline">\(H\)</span>) atunci managerul îi dă o unitate monetară, în caz contrar bărbatul plătește o unitate monetară bancii. Jocul continuă până când unul din două evenimente se realizează: sau câștigă suma necesară și își cumpără obiectul dorit sau pierde banii și ajunge la faliment. Ne întrebăm care este probabilitatea să ajungă la faliment?</p>
+</div>
+
+Fie $A$ evenimentul ca bărbatul să ajungă la ruină și $B$ evenimentul ca la prima aruncare moneda a picat cap. Atunci din formula probabilității totale avem 
+
+$$
+  \mathbb{P}_k(A) = \mathbb{P}_k(A|B)\mathbb{P}(B)+\mathbb{P}_k(A|B^c)\mathbb{P}(B^c)
+$$
+
+unde $\mathbb{P}_k$ este probabilitatea calculată în funcție de valoarea $k$ a capitalului inițial al jucătorului. Să observăm că $\mathbb{P}_k(A|B)$ devine $\mathbb{P}_{k+1}(A)$ deoarece dacă la prima aruncare avem cap atunci capitalul inițial a crescut la $k+1$. În mod similar, dacă la prima aruncare am obținut coadă atunci $\mathbb{P}_k(A|B^c) = \mathbb{P}_{k-1}(A)$. Notând cu $p_k = \mathbb{P}_k(A|B)$ obținem următoarea ecuație 
+
+$$
+  p_k = \frac{1}{2}p_{k+1} + \frac{1}{2}p_{k-1},
+$$
+
+cu valorile inițiale $p_0=1$ (dacă jucătorul a pornit cu un capital inițial nul atunci el este în faliment) și respectiv $p_N=0$ (dacă jucătorul are din start suma necesară pentru a achiziționa obiectul dorit atunci nu mai are loc jocul). 
+
+O simulare a jocului pentru $N = 50$ și $k = 5$ este prezentată de următoarea funcție: 
+
+
+```r
+ruina = function(N, k){
+  flag = TRUE
+
+  joc = 0
+  capital = k
+  y = capital
+  
+  while(flag){
+    x = 2*rbinom(1,1,0.5)-1
+    
+    capital = capital + x
+    y = c(y, capital)
+    
+    joc = joc + 1
+    
+    if (capital == 0 || capital == N){
+      flag = FALSE
+    }
+  }
+  
+  return(y) # daca am 0 este ruina altfel este succes
+}
+```
+
+Putem ilustra grafic jocul după cum urmează:
+
+
+```r
+N = 50
+k = 5
+
+set.seed(1234)
+
+y = ruina(N, k)
+joc = length(y) - 1 # nr de jocuri
+
+plot(0:joc, y, type = "l",
+     main = "Ruina jucatorului",
+     xlab = "Numar de jocuri",
+     ylab = "Capitalul jucaturului",
+     bty = "n",
+     lty = 3, col = "grey50")
+abline(h = c(0,N), col = "lightgrey", lty = 3)
+points(0:joc, y, col = myblue,
+       pch = 16,
+       cex = 0.5)
+points(0, k, col = myred, pch = 16)
+text(0, k, labels = paste0("k = ", k), pos = 1, cex = 0.7)
+```
+
+<img src="Lab3_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" />
+
+Dacă definim $b_k = p_k - p_{k-1}$ pentru $k\geq 1$ atunci $b_k = b_{k-1}$, $\forall k\geq2$. Prin urmare $b_k = b_1$ și $p_k = b_1+p_{k-1} = kb_1+p_0$. Observând că $b_1+\cdots+b_N=p_N-p_0=-1$ deducem că $b_1=-\frac{1}{N}$ iar $p_k=1-\frac{k}{N}$.
+
+Dorim să repetăm experimentul de $M = 1000$ de ori (pentru valorile inițiale $N = 50$ și $k = 5$) și ne interesăm de câte ori jucătorul a ajuns la faliment. 
+
+
+
+
+```r
+N = 50
+k = 5
+M = 1000
+# Obs. - rezultatul functiei ruina trebuie modificat
+joc = replicate(M, ruina(N, k)) # repeta functia de M ori 
+
+proba_ruina = sum(joc == 0)/M 
+```
+
+Am obținut că probabilitatea empirică de faliment este 0.9 iar cea teoretică este 0.9. 
 
 
 # Aplicația 1: Verificarea egalității a două polinoame
@@ -645,7 +841,7 @@ comparePols = function(Fx, Gx){
 
 comparePols(Fx, Gx)
 Cele doua polinoame sunt diferite ! 
-Pentru r = 246 avem ca F(r)!=G(r) ( 2.187693e+14 != 2.216208e+14 )
+Pentru r = 438 avem ca F(r)!=G(r) ( 7.010787e+15 != 7.060649e+15 )
 
 comparePols(Fx, Gx2)
 Polinoamele sunt egale. Eroarea este de 1e-06
