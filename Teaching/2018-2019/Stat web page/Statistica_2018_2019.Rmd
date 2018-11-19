@@ -187,12 +187,12 @@ t1sol = "[Solutie](homework/Tema1_Sol.pdf)"
 t1data = "28 Octombrie"
 
 t2 = "[Tema 2](homework/Tema2.pdf)"
-t2sol = ""
+t2sol = "[Solutie](homework/Tema2_Sol.pdf)"
 t2data = "~~11 Noiembrie~~18 Noiembrie"
 
-t3 = "Tema 3"
+t3 = "[Tema 3](homework/Tema3.pdf)"
 t3sol = ""
-t3data = ""
+t3data = "2 Decembrie"
 
 t4 = "Tema 4"
 t4sol = ""
