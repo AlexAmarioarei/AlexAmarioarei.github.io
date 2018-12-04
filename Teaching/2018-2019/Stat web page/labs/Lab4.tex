@@ -592,7 +592,7 @@ Pentru a testa această funcție să considerăm două exemple:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{rand_sample}\NormalTok{(}\DecValTok{10}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.3}\NormalTok{,}\FloatTok{0.5}\NormalTok{))}
-\NormalTok{ [}\DecValTok{1}\NormalTok{] }\DecValTok{1} \DecValTok{3} \DecValTok{3} \DecValTok{2} \DecValTok{2} \DecValTok{3} \DecValTok{3} \DecValTok{2} \DecValTok{2} \DecValTok{3}
+\NormalTok{ [}\DecValTok{1}\NormalTok{] }\DecValTok{3} \DecValTok{2} \DecValTok{3} \DecValTok{3} \DecValTok{1} \DecValTok{1} \DecValTok{1} \DecValTok{3} \DecValTok{1} \DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -607,7 +607,7 @@ Pentru a testa această funcție să considerăm două exemple:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{rand_sample}\NormalTok{(}\DecValTok{15}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{,}\StringTok{'b'}\NormalTok{,}\StringTok{'c'}\NormalTok{,}\StringTok{'d'}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.35}\NormalTok{,}\FloatTok{0.15}\NormalTok{,}\FloatTok{0.45}\NormalTok{))}
-\NormalTok{ [}\DecValTok{1}\NormalTok{] }\StringTok{"b"} \StringTok{"d"} \StringTok{"b"} \StringTok{"d"} \StringTok{"d"} \StringTok{"d"} \StringTok{"b"} \StringTok{"d"} \StringTok{"c"} \StringTok{"d"} \StringTok{"a"} \StringTok{"b"} \StringTok{"b"} \StringTok{"b"} \StringTok{"b"}
+\NormalTok{ [}\DecValTok{1}\NormalTok{] }\StringTok{"d"} \StringTok{"d"} \StringTok{"d"} \StringTok{"d"} \StringTok{"a"} \StringTok{"a"} \StringTok{"d"} \StringTok{"c"} \StringTok{"b"} \StringTok{"a"} \StringTok{"a"} \StringTok{"c"} \StringTok{"d"} \StringTok{"a"} \StringTok{"b"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -796,7 +796,7 @@ Pentru a testa comparăm valorile simulate cu densitatea teoretică
   densitatea legii.
 \item
   Dacă definim \(N = \sup\{n\geq 1\,|\, S_n\leq 1\}\) (folosim convenția
-  \(N = 0\) și \(S_1>1\)), atunci \(N\) este repartizată Poisson
+  \(N = 0\) dacă \(S_1>1\)), atunci \(N\) este repartizată Poisson
   \(Pois(\lambda)\). Plecând de la acest rezultat, generați \(10000\) de
   observații independente din repartiția \(Pois(\lambda)\), trasați
   histograma acestui eșantion și comparați cu repartiția teoretică.
@@ -982,13 +982,13 @@ Pentru a compara cele două funcții:
 \NormalTok{y =}\StringTok{ }\KeywordTok{sim.pois1}\NormalTok{(n)}
 \KeywordTok{proc.time}\NormalTok{() }\OperatorTok{-}\StringTok{ }\NormalTok{start}
 \NormalTok{   user  system elapsed }
-   \FloatTok{0.32}    \FloatTok{0.01}    \FloatTok{0.32} 
+   \FloatTok{0.32}    \FloatTok{0.00}    \FloatTok{0.31} 
 
 \NormalTok{start =}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
 \NormalTok{x =}\StringTok{ }\KeywordTok{sim.pois2}\NormalTok{(n)}
 \KeywordTok{proc.time}\NormalTok{() }\OperatorTok{-}\StringTok{ }\NormalTok{start}
 \NormalTok{   user  system elapsed }
-   \FloatTok{0.01}    \FloatTok{0.00}    \FloatTok{0.02} 
+   \FloatTok{0.03}    \FloatTok{0.00}    \FloatTok{0.03} 
 \end{Highlighting}
 \end{Shaded}
 
@@ -1118,14 +1118,14 @@ Putem compara cele două metode, în funcție de timpul de execuție:
 \NormalTok{x =}\StringTok{ }\KeywordTok{sim.resp1}\NormalTok{(n)}
 \KeywordTok{proc.time}\NormalTok{() }\OperatorTok{-}\StringTok{ }\NormalTok{start}
 \NormalTok{   user  system elapsed }
-   \FloatTok{0.17}    \FloatTok{0.00}    \FloatTok{0.24} 
+   \FloatTok{0.18}    \FloatTok{0.00}    \FloatTok{0.22} 
 
 \CommentTok{# Metoda 2}
 \NormalTok{star =}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
 \NormalTok{x =}\StringTok{ }\KeywordTok{sim.resp2}\NormalTok{(n)}
 \KeywordTok{proc.time}\NormalTok{() }\OperatorTok{-}\StringTok{ }\NormalTok{start}
 \NormalTok{   user  system elapsed }
-   \FloatTok{0.18}    \FloatTok{0.00}    \FloatTok{0.25} 
+   \FloatTok{0.20}    \FloatTok{0.00}    \FloatTok{0.24} 
 \end{Highlighting}
 \end{Shaded}
 
@@ -1394,8 +1394,8 @@ lui \(n\).
 \end{Shaded}
 
 Aplicând acest procedeu obținem că valoarea estimată a lui \(\pi\) prin
-generarea a \(n=\) 2000 puncte este 3.188 iar eroarea absoluta este
-0.04641.
+generarea a \(n=\) 2000 puncte este 3.162 iar eroarea absoluta este
+0.02041.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

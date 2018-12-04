@@ -161,7 +161,7 @@ Pentru a testa această funcție să considerăm două exemple:
 
 ```r
 rand_sample(10,c(1,2,3),c(0.2,0.3,0.5))
- [1] 3 3 3 3 2 3 1 1 2 3
+ [1] 1 3 3 3 1 3 1 3 3 3
 ```
 
   2. în acest caz: $n=15$, $x=[a,b,c,d]$ și $p=[0.15,0.35,0.15,0.45]$
@@ -169,7 +169,7 @@ rand_sample(10,c(1,2,3),c(0.2,0.3,0.5))
 
 ```r
 rand_sample(15,c('a','b','c','d'),c(0.15,0.35,0.15,0.45))
- [1] "d" "d" "d" "d" "d" "b" "d" "b" "d" "d" "d" "b" "c" "b" "d"
+ [1] "b" "b" "c" "d" "b" "a" "c" "b" "c" "d" "c" "a" "a" "b" "d"
 ```
 
 O funcție un pic mai generală este:
@@ -317,7 +317,7 @@ lines(y, f, col = myred, lty = 2, lwd = 3)
 
   2. Fie $X_1, \ldots, X_n$, $n$ variabile aleatoare i.i.d. repartizate $\mathcal{E}(\lambda)$. Atunci variabila aleatoare $S_n = X_1 + X_2 +\cdots+ X_n$ este repartizată $\Gamma(n, \lambda)$. Plecând de la acest rezultat, generați $10000$ de observații din repartiția $\Gamma(n, \lambda)$ ($n = 10$). Trasați histograma acestui eșantion și comparați cu densitatea legii.
   
-  3. Dacă definim $N = \sup\{n\geq 1\,|\, S_n\leq 1\}$ (folosim convenția $N = 0$ și $S_1>1$), atunci $N$ este repartizată Poisson $Pois(\lambda)$. Plecând de la acest rezultat, generați $10000$ de observații independente din repartiția $Pois(\lambda)$, trasați histograma acestui eșantion și comparați cu repartiția teoretică. 
+  3. Dacă definim $N = \sup\{n\geq 1\,|\, S_n\leq 1\}$ (folosim convenția $N = 0$ dacă $S_1>1$), atunci $N$ este repartizată Poisson $Pois(\lambda)$. Plecând de la acest rezultat, generați $10000$ de observații independente din repartiția $Pois(\lambda)$, trasați histograma acestui eșantion și comparați cu repartiția teoretică. 
 
 </div>\EndKnitrBlock{rmdexercise}
 
@@ -464,7 +464,7 @@ start = proc.time()
 y = sim.pois1(n)
 proc.time() - start
    user  system elapsed 
-   0.33    0.00    0.33 
+   0.30    0.02    0.31 
 
 start = proc.time()
 x = sim.pois2(n)
@@ -578,14 +578,14 @@ star = proc.time()
 x = sim.resp1(n)
 proc.time() - start
    user  system elapsed 
-   0.20    0.01    0.22 
+   0.19    0.06    0.25 
 
 # Metoda 2
 star = proc.time()
 x = sim.resp2(n)
 proc.time() - start
    user  system elapsed 
-   0.21    0.01    0.23 
+   0.20    0.06    0.26 
 ```
 
   2. Putem valida algoritmul propus prin metoda respingerii trasând histograma eșantionului:
@@ -803,7 +803,7 @@ estimate_pi = 4*sum(ind)/n # estimarea lui pi
 err = abs(estimate_pi-pi) # eroarea absoluta
 ```
 
-Aplicând acest procedeu obținem că valoarea estimată a lui $\pi$ prin generarea a $n=$ 2000 puncte este 3.14 iar eroarea absoluta este 0.001593.
+Aplicând acest procedeu obținem că valoarea estimată a lui $\pi$ prin generarea a $n=$ 2000 puncte este 3.19 iar eroarea absoluta este 0.04841.
 
 2. Una dintre metodele prin care putem simula puncte uniform repartizate pe suprafața discului $D$ este *Metoda respingerii*. Această metodă consistă în generarea de v.a. $Y_n$ repartizate uniform pe suprafața pătratului $C$, urmând ca apoi să testăm dacă $Y_n$ aparține discului $D$ (deoarece $D\subset C$). Dacă da, atunci le păstrăm dacă nu atunci mai generăm. Următoarea figură ilustrează această metodă:
   

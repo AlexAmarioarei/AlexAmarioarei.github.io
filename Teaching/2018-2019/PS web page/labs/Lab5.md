@@ -1,6 +1,6 @@
 ---
 title: "Laborator 5"
-subtitle: Exemple de algoritmi randomizați
+subtitle: Problema colecționarului de cupoane și algoritmul Quicksort
 output:
   html_document:
     code_folding: show
@@ -56,11 +56,148 @@ $(document).ready(function ()  {
 });
 </script>
 
-Obiectivul acestui laborator este de prezenta algoritmul randomizat QuickSort și de a determina timpul mediu de execuție a acestuia.
+Obiectivul acestui laborator este de prezenta problema Colecționarului de cupoane și algoritmul randomizat QuickSort și de a determina timpul mediu de execuție a acestuia.
 
 
 
 
+
+
+# Problema colecționarului de cupoane
+
+\BeginKnitrBlock{rmdexercise}<div class="rmdexercise">Să presupunem că fiecare cutie de cereale conține unul dintre cele $n$ cupoane diferite existente. Odată ce o persoană a colecționat toate cele $n$ cupoane poate să le trimită pentru a revendica un premiu. De asemenea, presupunem că fiecare cupon este ales uniform și independent din cele $n$ posibilități existente și colecționarul nu colaborează cu alte persoane pentru a completa colecția. Întrebarea care se pune este câte cutii de cereale trebuie cumpărate, în medie, pentru a obține cel puțin unul din fiecare cupon?
+
+</div>\EndKnitrBlock{rmdexercise}
+
+Pentru a rezolva această problemă, să notăm cu $X$ variabila aleatoare care descrie numărul de cutii de cereale cumpărate până când obținem toate cupoanele. Vrem să determinăm $\mathbb{E}[X]$. 
+
+Să notăm cu $X_i$ numărul suplimentar de cutii de cereale pe care trebuie să le cumpărăm atunci când avem $i-1$ cupoane colecționate pentru a avea $i$ cupoane diferite, $i\geq 1$. Astfel putem scrie 
+
+$$
+  X = \sum_{i = 1}^{n}X_i,
+$$
+
+de unde $\mathbb{E}[X] = \sum_{i = 1}^{n}\mathbb{E}[X_i]$. Rămâne să determinăm $\mathbb{E}[X_i]$ pentru $i\in\{1,2,\ldots,n\}$. 
+
+Să remarcăm faptul că atunci când avem colectate $i-1$ cupoane ne mai rămân $n-i+1$ cupoane de colecționat, prin urmare probabilitatea de a alege un nou cupon este $p_i=\frac{n-i+1}{n}$ și cum $X_i\sim\text{Geom}(p_i)$ deducem că $\mathbb{E}[X_i] = \frac{1}{p_i}$.
+
+Avem 
+
+$$
+  \mathbb{E}[X] = \sum_{i = 1}^{n}\mathbb{E}[X_i] = \sum_{i = 1}^{n}\frac{1}{p_i} = \sum_{i = 1}^{n}\frac{n}{n-i+1} = n\sum_{i = 1}^{n}\frac{1}{i} = nH_n
+$$
+
+ceea ce implică $\mathbb{E}[X] = n\left(\log(n) + \mathcal{O}(1)\right)$ deoarece $H_n = \log(n)+O(1)$^[A se vedea pagina de wikipedia [armonic_number](https://en.wikipedia.org/wiki/Harmonic_number)]).
+
+Următorul cod R simulează problema colecționarului de cupoane: 
+
+
+```r
+simcollect = function(n) {
+  
+coupons = 1:n # multimea cupoanelor
+collect = numeric(n)
+
+nums = 0
+
+while (sum(collect)<n)
+{
+  # extragere cu intoarcere
+	i = sample(coupons, 1)
+	collect[i] = 1
+	nums = nums + 1
+}
+return(nums)
+}
+```
+
+Pentru calculul mediei vom considera $n = 20$ și vom repeta procedeul $N = 10000$ de ori. Vom compara rezultatul empiric cu cel teoretic:
+
+
+```r
+## Calculul mediei
+n = 20
+Nrep = 10000
+simlist = replicate(Nrep, simcollect(n))
+
+# media empirica
+mean(simlist)
+[1] 72.1214
+
+# media teoretica
+n*sum(1/(1:n))
+[1] 71.95479
+```
+
+Pentru calculul varianței avem că $Var(X_i) = \frac{1-p_i}{p_i^2}$ și cum $X_i$ sunt independente rezultă că 
+
+$$
+  Var(X) = \sum_{i = 1}^{n}Var(X_i) = \sum_{i = 1}^{n}\frac{1-p_i}{p_i} = n\sum_{i = 1}^{n}\frac{i-1}{(n-i+1)^2}.
+$$
+
+Pentru compararea rezultatului empiric cu cel teoretic avem:
+
+
+```r
+# varianta empirica
+var(simlist)
+[1] 572.5519
+
+# varianta teoretica
+n*sum((0:(n-1))/((n:1)^2))
+[1] 566.5105
+```
+
+O aplicație a problemei colecționarului de cupoane este următoarea: să presupunem că într-un parc național din India, o cameră video automată fotografiază $n$ tigrii care trec prin dreptul ei pe parcursul unui an și analizând fotografiile se constată că $t$ dintre aceștia sunt diferiți. Ne propunem să estimăm (aproximăm) numărul total de tigrii din parc. În contextul problemei colecționarului de cupoane, presupunem că avem $n$ cupoane diferite și că am cumpărat $t$ cutii de cereale și ne întrebăm care este numărul mediu de cupoane distincte din cele $t$.
+
+Fie $Y$ variabila aleatoare care ne dă numărul de cupoane distincte după $t$ cutii cumpărate. Atunci putem scrie 
+
+$$
+  Y = I_1 + I_2 +\cdots+I_n
+$$
+
+unde pentru $j \in\{1,2,\ldots,n\}$
+
+$$
+  I_j = \left\{\begin{array}{ll}
+          1, \text{cuponul j se află printre cele t}\\
+          0, \text{altfel}
+  \end{array}\right.
+$$
+
+Astfel,
+
+$$
+  \mathbb{E}[I_j] = \mathbb{P}(\text{cuponul j se află printre cele t}) = 1 - \mathbb{P}(\text{cuponul j nu se află printre cele t}) = 1 - \left(1 - \frac{1}{n}\right)^t
+$$
+
+ceea ce conduce la 
+
+$$
+  \mathbb{E}[Y] = \sum_{j = 1}^{n}\mathbb{E}[I_j] = n\left[1 - \left(1 - \frac{1}{n}\right)^t\right].
+$$
+
+Pentru a determina numărul de tigrii din parc trebuie să găsim valoarea lui $n$ știind numărul $t$ de tigrii fotografiați de camera automată și de numărul mediu de tigrii distincți $d$ determinați manual, deci trebuie să rezolvăm ecuația:
+
+$$
+  d\approx \mathbb{E}[Y] = n\left[1 - \left(1 - \frac{1}{n}\right)^t\right]
+$$
+
+Ecuația nu are o soluție explicită dar poate fi determinată numeric folosind funcția `uniroot` care permite găsirea unei rădăcini într-un interval dat a unei funcții reale:
+
+
+```r
+f = function(n, t = 100, d = 50){
+  n*(1 - (1 - 1/n)^t) - d
+}
+
+# pentru 100 de tigrii fotografiati dintre care 50 diferiti
+ans = uniroot(f, c(50, 200), t = 100, d = 50)
+ans$root
+[1] 62.40844
+```
+
+Pentru $t = 100$ și $d = 50$ estimăm în jur de 62 tigrii in parc. 
 
 
 # Timpul mediu de execuție al algoritmului Quicksort
@@ -122,7 +259,7 @@ Cum pivoții sunt aleși de manieră independentă și uniform din fiecare subli
          &= \sum_{k = 2}^{n}(n+1-k)\frac{2}{k} = (2n+2)\sum_{k = 1}^{n}\frac{1}{k} - 4n.
 \end{align*}
 
-Prin urmare $\mathbb{E}[X] = 2(n+1)H_n - 4n = 2n\log(n) + O(n)$ (am folosit faptul că $H_n = \log(n)+O(1)$^[A se vedea pagina de wikipedia [armonic_number](https://en.wikipedia.org/wiki/Harmonic_number)]). 
+Prin urmare $\mathbb{E}[X] = 2(n+1)H_n - 4n = 2n\log(n) + O(n)$ (am folosit faptul că $H_n = \log(n)+O(1)$. 
 
 Următorul cod implementează algoritmul *Quicksort randomizat*:
 
@@ -156,8 +293,8 @@ n = 25
 S = sample(1:n, n, replace = FALSE)
 # lista neordonata
 S
- [1]  4 12 11  7 19 23 17 25 20 14 21 18  2 13  8 22 15  3  1  9  6 10 24
-[24]  5 16
+ [1] 13  5 10 15 24 16  6 17  7 14  8 23 18 22  3 11  1 25 21 12 20  9  4
+[24]  2 19
 # lista ordonata
 quickSort(S)
  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
@@ -165,10 +302,6 @@ quickSort(S)
 ```
 
 Numărul mediu de comparații pe care le efectuează algoritmul *Quicksort randomizat*, versiunea empirică versus cea teoretică de mai sus, este ilustrat în figura următoare:
-
-<img src="Lab5_files/figure-html/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
-
-Pentru a reproduce figura de mai sus trebuie modificat codul funcției `quickSort` pentru a returna și numărul de comparații efectuate:
 
 
 ```r
@@ -181,8 +314,7 @@ countQuickSort <- function(vect) {
     return(vect)
   }
   
-  # intoarce numarul de comaparatii efectuate
-  count <<- count + length(vect) - 1 
+  count <<- count + length(vect) - 1 # imi intoarce numarul de comaparatii efectuate
   
   # alege pivotul
   ide = sample(1:length(vect),1)
@@ -210,12 +342,14 @@ for (i in 1:N){
   
   y[i] = count
 }
-```
 
-iar graficul se realizează apelând următorul cod:
+# Functia care calculeaza numarul de operatii teoretice
+T_n = function(n){
+  return(2*(n+1)*sum(1/(1:n))-4*n)
+}
 
+theo_T = sapply(1:N, function(x){T_n(x)})
 
-```r
 # Graficul
 plot(1:N, y, type = "l", 
      col = "grey80",
@@ -235,5 +369,7 @@ legend('bottomright',
        fill = c("royalblue", "brown3"),
        bty = "n")
 ```
+
+<img src="Lab5_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
 
 

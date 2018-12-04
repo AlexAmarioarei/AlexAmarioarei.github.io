@@ -116,7 +116,7 @@
   \title{Laborator 5}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \subtitle{Exemple de algoritmi randomizați}
+  \subtitle{Problema colecționarului de cupoane și algoritmul Quicksort}
   \author{}
     \preauthor{}\postauthor{}
     \date{}
@@ -446,8 +446,184 @@ urlcolor=linkcol %couleur des liens pour les url
 %%%%%%%%%%%%%%%%%%%%%%%%
 \thispagestyle{fancy}
 
-Obiectivul acestui laborator este de prezenta algoritmul randomizat
-QuickSort și de a determina timpul mediu de execuție a acestuia.
+Obiectivul acestui laborator este de prezenta problema Colecționarului
+de cupoane și algoritmul randomizat QuickSort și de a determina timpul
+mediu de execuție a acestuia.
+
+\section{Problema colecționarului de
+cupoane}\label{problema-colectionarului-de-cupoane}
+
+\begin{rmdexercise}
+Să presupunem că fiecare cutie de cereale conține unul dintre cele \(n\)
+cupoane diferite existente. Odată ce o persoană a colecționat toate cele
+\(n\) cupoane poate să le trimită pentru a revendica un premiu. De
+asemenea, presupunem că fiecare cupon este ales uniform și independent
+din cele \(n\) posibilități existente și colecționarul nu colaborează cu
+alte persoane pentru a completa colecția. Întrebarea care se pune este
+câte cutii de cereale trebuie cumpărate, în medie, pentru a obține cel
+puțin unul din fiecare cupon?
+\end{rmdexercise}
+
+Pentru a rezolva această problemă, să notăm cu \(X\) variabila aleatoare
+care descrie numărul de cutii de cereale cumpărate până când obținem
+toate cupoanele. Vrem să determinăm \(\mathbb{E}[X]\).
+
+Să notăm cu \(X_i\) numărul suplimentar de cutii de cereale pe care
+trebuie să le cumpărăm atunci când avem \(i-1\) cupoane colecționate
+pentru a avea \(i\) cupoane diferite, \(i\geq 1\). Astfel putem scrie
+
+\[
+  X = \sum_{i = 1}^{n}X_i,
+\]
+
+de unde \(\mathbb{E}[X] = \sum_{i = 1}^{n}\mathbb{E}[X_i]\). Rămâne să
+determinăm \(\mathbb{E}[X_i]\) pentru \(i\in\{1,2,\ldots,n\}\).
+
+Să remarcăm faptul că atunci când avem colectate \(i-1\) cupoane ne mai
+rămân \(n-i+1\) cupoane de colecționat, prin urmare probabilitatea de a
+alege un nou cupon este \(p_i=\frac{n-i+1}{n}\) și cum
+\(X_i\sim\text{Geom}(p_i)\) deducem că
+\(\mathbb{E}[X_i] = \frac{1}{p_i}\).
+
+Avem
+
+\[
+  \mathbb{E}[X] = \sum_{i = 1}^{n}\mathbb{E}[X_i] = \sum_{i = 1}^{n}\frac{1}{p_i} = \sum_{i = 1}^{n}\frac{n}{n-i+1} = n\sum_{i = 1}^{n}\frac{1}{i} = nH_n
+\]
+
+ceea ce implică
+\(\mathbb{E}[X] = n\left(\log(n) + \mathcal{O}(1)\right)\) deoarece
+\(H_n = \log(n)+O(1)\)\footnote{A se vedea pagina de wikipedia
+  \href{https://en.wikipedia.org/wiki/Harmonic_number}{armonic\_number}}).
+
+Următorul cod R simulează problema colecționarului de cupoane:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simcollect =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+  
+\NormalTok{coupons =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n }\CommentTok{# multimea cupoanelor}
+\NormalTok{collect =}\StringTok{ }\KeywordTok{numeric}\NormalTok{(n)}
+
+\NormalTok{nums =}\StringTok{ }\DecValTok{0}
+
+\ControlFlowTok{while}\NormalTok{ (}\KeywordTok{sum}\NormalTok{(collect)}\OperatorTok{<}\NormalTok{n)}
+\NormalTok{\{}
+  \CommentTok{# extragere cu intoarcere}
+\NormalTok{    i =}\StringTok{ }\KeywordTok{sample}\NormalTok{(coupons, }\DecValTok{1}\NormalTok{)}
+\NormalTok{    collect[i] =}\StringTok{ }\DecValTok{1}
+\NormalTok{    nums =}\StringTok{ }\NormalTok{nums }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{\}}
+\KeywordTok{return}\NormalTok{(nums)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Pentru calculul mediei vom considera \(n = 20\) și vom repeta procedeul
+\(N = 10000\) de ori. Vom compara rezultatul empiric cu cel teoretic:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## Calculul mediei}
+\NormalTok{n =}\StringTok{ }\DecValTok{20}
+\NormalTok{Nrep =}\StringTok{ }\DecValTok{10000}
+\NormalTok{simlist =}\StringTok{ }\KeywordTok{replicate}\NormalTok{(Nrep, }\KeywordTok{simcollect}\NormalTok{(n))}
+
+\CommentTok{# media empirica}
+\KeywordTok{mean}\NormalTok{(simlist)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{72.2046}
+
+\CommentTok{# media teoretica}
+\NormalTok{n}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n))}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{71.95479}
+\end{Highlighting}
+\end{Shaded}
+
+Pentru calculul varianței avem că \(Var(X_i) = \frac{1-p_i}{p_i^2}\) și
+cum \(X_i\) sunt independente rezultă că
+
+\[
+  Var(X) = \sum_{i = 1}^{n}Var(X_i) = \sum_{i = 1}^{n}\frac{1-p_i}{p_i} = n\sum_{i = 1}^{n}\frac{i-1}{(n-i+1)^2}.
+\]
+
+Pentru compararea rezultatului empiric cu cel teoretic avem:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# varianta empirica}
+\KeywordTok{var}\NormalTok{(simlist)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{559.2615}
+
+\CommentTok{# varianta teoretica}
+\NormalTok{n}\OperatorTok{*}\KeywordTok{sum}\NormalTok{((}\DecValTok{0}\OperatorTok{:}\NormalTok{(n}\OperatorTok{-}\DecValTok{1}\NormalTok{))}\OperatorTok{/}\NormalTok{((n}\OperatorTok{:}\DecValTok{1}\NormalTok{)}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{566.5105}
+\end{Highlighting}
+\end{Shaded}
+
+O aplicație a problemei colecționarului de cupoane este următoarea: să
+presupunem că într-un parc național din India, o cameră video automată
+fotografiază \(n\) tigrii care trec prin dreptul ei pe parcursul unui an
+și analizând fotografiile se constată că \(t\) dintre aceștia sunt
+diferiți. Ne propunem să estimăm (aproximăm) numărul total de tigrii din
+parc. În contextul problemei colecționarului de cupoane, presupunem că
+avem \(n\) cupoane diferite și că am cumpărat \(t\) cutii de cereale și
+ne întrebăm care este numărul mediu de cupoane distincte din cele \(t\).
+
+Fie \(Y\) variabila aleatoare care ne dă numărul de cupoane distincte
+după \(t\) cutii cumpărate. Atunci putem scrie
+
+\[
+  Y = I_1 + I_2 +\cdots+I_n
+\]
+
+unde pentru \(j \in\{1,2,\ldots,n\}\)
+
+\[
+  I_j = \left\{\begin{array}{ll}
+          1, \text{cuponul j se află printre cele t}\\
+          0, \text{altfel}
+  \end{array}\right.
+\]
+
+Astfel,
+
+\[
+  \mathbb{E}[I_j] = \mathbb{P}(\text{cuponul j se află printre cele t}) = 1 - \mathbb{P}(\text{cuponul j nu se află printre cele t}) = 1 - \left(1 - \frac{1}{n}\right)^t
+\]
+
+ceea ce conduce la
+
+\[
+  \mathbb{E}[Y] = \sum_{j = 1}^{n}\mathbb{E}[I_j] = n\left[1 - \left(1 - \frac{1}{n}\right)^t\right].
+\]
+
+Pentru a determina numărul de tigrii din parc trebuie să găsim valoarea
+lui \(n\) știind numărul \(t\) de tigrii fotografiați de camera automată
+și de numărul mediu de tigrii distincți \(d\) determinați manual, deci
+trebuie să rezolvăm ecuația:
+
+\[
+  d\approx \mathbb{E}[Y] = n\left[1 - \left(1 - \frac{1}{n}\right)^t\right]
+\]
+
+Ecuația nu are o soluție explicită dar poate fi determinată numeric
+folosind funcția \texttt{uniroot} care permite găsirea unei rădăcini
+într-un interval dat a unei funcții reale:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{t =} \DecValTok{100}\NormalTok{, }\DataTypeTok{d =} \DecValTok{50}\NormalTok{)\{}
+\NormalTok{  n}\OperatorTok{*}\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{n)}\OperatorTok{^}\NormalTok{t) }\OperatorTok{-}\StringTok{ }\NormalTok{d}
+\NormalTok{\}}
+
+\CommentTok{# pentru 100 de tigrii fotografiati dintre care 50 diferiti}
+\NormalTok{ans =}\StringTok{ }\KeywordTok{uniroot}\NormalTok{(f, }\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{200}\NormalTok{), }\DataTypeTok{t =} \DecValTok{100}\NormalTok{, }\DataTypeTok{d =} \DecValTok{50}\NormalTok{)}
+\NormalTok{ans}\OperatorTok{$}\NormalTok{root}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{62.40844}
+\end{Highlighting}
+\end{Shaded}
+
+Pentru \(t = 100\) și \(d = 50\) estimăm în jur de 62 tigrii in parc.
 
 \section{Timpul mediu de execuție al algoritmului
 Quicksort}\label{timpul-mediu-de-executie-al-algoritmului-quicksort}
@@ -584,9 +760,7 @@ probabilitatea ca \(y_i\) sau \(y_j\) să fie primul pivot ales este
 \end{align*}
 
 Prin urmare \(\mathbb{E}[X] = 2(n+1)H_n - 4n = 2n\log(n) + O(n)\) (am
-folosit faptul că \(H_n = \log(n)+O(1)\)\footnote{A se vedea pagina de
-  wikipedia
-  \href{https://en.wikipedia.org/wiki/Harmonic_number}{armonic\_number}}).
+folosit faptul că \(H_n = \log(n)+O(1)\).
 
 Următorul cod implementează algoritmul \emph{Quicksort randomizat}:
 
@@ -620,8 +794,8 @@ Următorul cod implementează algoritmul \emph{Quicksort randomizat}:
 \NormalTok{S =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, n, }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{)}
 \CommentTok{# lista neordonata}
 \NormalTok{S}
-\NormalTok{ [}\DecValTok{1}\NormalTok{] }\DecValTok{20}  \DecValTok{8} \DecValTok{13}  \DecValTok{5} \DecValTok{15}  \DecValTok{9} \DecValTok{22} \DecValTok{11}  \DecValTok{4} \DecValTok{18} \DecValTok{19}  \DecValTok{6}  \DecValTok{2} \DecValTok{14} \DecValTok{21} \DecValTok{23}  \DecValTok{3} \DecValTok{16} \DecValTok{24} \DecValTok{17} \DecValTok{12} \DecValTok{25}  \DecValTok{7}
-\NormalTok{[}\DecValTok{24}\NormalTok{]  }\DecValTok{1} \DecValTok{10}
+\NormalTok{ [}\DecValTok{1}\NormalTok{] }\DecValTok{11} \DecValTok{18} \DecValTok{20}  \DecValTok{4}  \DecValTok{3}  \DecValTok{7} \DecValTok{15} \DecValTok{25} \DecValTok{19} \DecValTok{17} \DecValTok{10} \DecValTok{23}  \DecValTok{9} \DecValTok{14} \DecValTok{12}  \DecValTok{2} \DecValTok{24} \DecValTok{13}  \DecValTok{1} \DecValTok{21}  \DecValTok{6}  \DecValTok{5}  \DecValTok{8}
+\NormalTok{[}\DecValTok{24}\NormalTok{] }\DecValTok{22} \DecValTok{16}
 \CommentTok{# lista ordonata}
 \KeywordTok{quickSort}\NormalTok{(S)}
 \NormalTok{ [}\DecValTok{1}\NormalTok{]  }\DecValTok{1}  \DecValTok{2}  \DecValTok{3}  \DecValTok{4}  \DecValTok{5}  \DecValTok{6}  \DecValTok{7}  \DecValTok{8}  \DecValTok{9} \DecValTok{10} \DecValTok{11} \DecValTok{12} \DecValTok{13} \DecValTok{14} \DecValTok{15} \DecValTok{16} \DecValTok{17} \DecValTok{18} \DecValTok{19} \DecValTok{20} \DecValTok{21} \DecValTok{22} \DecValTok{23}
@@ -632,11 +806,6 @@ Următorul cod implementează algoritmul \emph{Quicksort randomizat}:
 Numărul mediu de comparații pe care le efectuează algoritmul
 \emph{Quicksort randomizat}, versiunea empirică versus cea teoretică de
 mai sus, este ilustrat în figura următoare:
-
-\begin{center}\includegraphics[width=0.8\linewidth]{Lab5_files/figure-latex/unnamed-chunk-7-1} \end{center}
-
-Pentru a reproduce figura de mai sus trebuie modificat codul funcției
-\texttt{quickSort} pentru a returna și numărul de comparații efectuate:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -649,8 +818,7 @@ Pentru a reproduce figura de mai sus trebuie modificat codul funcției
     \KeywordTok{return}\NormalTok{(vect)}
 \NormalTok{  \}}
   
-  \CommentTok{# intoarce numarul de comaparatii efectuate}
-\NormalTok{  count <<-}\StringTok{ }\NormalTok{count }\OperatorTok{+}\StringTok{ }\KeywordTok{length}\NormalTok{(vect) }\OperatorTok{-}\StringTok{ }\DecValTok{1} 
+\NormalTok{  count <<-}\StringTok{ }\NormalTok{count }\OperatorTok{+}\StringTok{ }\KeywordTok{length}\NormalTok{(vect) }\OperatorTok{-}\StringTok{ }\DecValTok{1} \CommentTok{# imi intoarce numarul de comaparatii efectuate}
   
   \CommentTok{# alege pivotul}
 \NormalTok{  ide =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(vect),}\DecValTok{1}\NormalTok{)}
@@ -678,13 +846,14 @@ Pentru a reproduce figura de mai sus trebuie modificat codul funcției
   
 \NormalTok{  y[i] =}\StringTok{ }\NormalTok{count}
 \NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
 
-iar graficul se realizează apelând următorul cod:
+\CommentTok{# Functia care calculeaza numarul de operatii teoretice}
+\NormalTok{T_n =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n)\{}
+  \KeywordTok{return}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{(n}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{sum}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n))}\OperatorTok{-}\DecValTok{4}\OperatorTok{*}\NormalTok{n)}
+\NormalTok{\}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
+\NormalTok{theo_T =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{N, }\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{T_n}\NormalTok{(x)\})}
+
 \CommentTok{# Graficul}
 \KeywordTok{plot}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{N, y, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }
      \DataTypeTok{col =} \StringTok{"grey80"}\NormalTok{,}
@@ -705,6 +874,8 @@ iar graficul se realizează apelând următorul cod:
        \DataTypeTok{bty =} \StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Lab5_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 
 \end{document}

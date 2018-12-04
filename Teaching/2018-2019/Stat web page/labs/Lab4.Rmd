@@ -335,7 +335,7 @@ lines(y, f, col = myred, lty = 2, lwd = 3)
 
   2. Fie $X_1, \ldots, X_n$, $n$ variabile aleatoare i.i.d. repartizate $\mathcal{E}(\lambda)$. Atunci variabila aleatoare $S_n = X_1 + X_2 +\cdots+ X_n$ este repartizată $\Gamma(n, \lambda)$. Plecând de la acest rezultat, generați $10000$ de observații din repartiția $\Gamma(n, \lambda)$ ($n = 10$). Trasați histograma acestui eșantion și comparați cu densitatea legii.
   
-  3. Dacă definim $N = \sup\{n\geq 1\,|\, S_n\leq 1\}$ (folosim convenția $N = 0$ și $S_1>1$), atunci $N$ este repartizată Poisson $Pois(\lambda)$. Plecând de la acest rezultat, generați $10000$ de observații independente din repartiția $Pois(\lambda)$, trasați histograma acestui eșantion și comparați cu repartiția teoretică. 
+  3. Dacă definim $N = \sup\{n\geq 1\,|\, S_n\leq 1\}$ (folosim convenția $N = 0$ dacă $S_1>1$), atunci $N$ este repartizată Poisson $Pois(\lambda)$. Plecând de la acest rezultat, generați $10000$ de observații independente din repartiția $Pois(\lambda)$, trasați histograma acestui eșantion și comparați cu repartiția teoretică. 
 
 
 ```
