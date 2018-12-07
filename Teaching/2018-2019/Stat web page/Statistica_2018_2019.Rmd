@@ -112,9 +112,9 @@ pdf_lab4 = "[PDF](labs/Lab4.pdf)"
 
 lab5 = "[HTML](labs/Lab5.html)"
 pdf_lab5 = "[PDF](labs/Lab5.pdf)"
-# 
-# lab6 = "[HTML](labs/Lab_6.html)"
-# pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
+
+lab6 = "[HTML](labs/Lab6.html)"
+pdf_lab6 = "[PDF](labs/Lab6.pdf)"
 # 
 # lab7 = "[HTML](labs/Lab_7.html)"
 # pdf_lab7 = "[PDF](labs/Lab_7.pdf)"
@@ -126,8 +126,8 @@ tabLab = data.frame(Nr = c(1,
                            2,
                            3,
                            4,
-                           5#,
-                           # 6, 
+                           5,
+                           6#, 
                            # 7, 
                            # 8
                            ),
@@ -135,8 +135,8 @@ tabLab = data.frame(Nr = c(1,
                             "Laborator 2",
                             "Laborator 3",
                             "Laborator 4",
-                            "Laborator 5"#,
-                            # "Laborator 6", 
+                            "Laborator 5",
+                            "Laborator 6"#,
                             # "Laborator 7", 
                             # "Laborator Suplimentar"
                             ),
@@ -144,8 +144,8 @@ tabLab = data.frame(Nr = c(1,
                               lab2,
                               lab3,
                               lab4,
-                              lab5#,
-                              # lab6, 
+                              lab5,
+                              lab6#,
                               # lab7, 
                               # lab_sup
                               ),
@@ -153,8 +153,8 @@ tabLab = data.frame(Nr = c(1,
                              pdf_lab2,
                              pdf_lab3,
                              pdf_lab4,
-                             pdf_lab5#,
-                             # pdf_lab6, 
+                             pdf_lab5,
+                             pdf_lab6#,
                              # pdf_lab7, 
                              # pdf_lab_sup
                              ))
