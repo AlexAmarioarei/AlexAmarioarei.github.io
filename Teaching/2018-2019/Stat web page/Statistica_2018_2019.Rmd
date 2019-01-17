@@ -170,7 +170,7 @@ kableExtra::kable(tabLab,
 ## Notarea
 ***
 
-Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, proiect de laborator (20%) și examen final (50%). Bonus aveți și $1$ punct din oficiu:
+Notarea se va face după cum urmează: teme (30%) distribuite în mod egal, ~~proiect de laborator (20%)~~ și examen final (70%). Bonus aveți și $1$ punct din oficiu:
 
 <!-- $$ -->
 <!--   T = \min\left(1+0.5\times E + 0.2\times P + 0.06\times\sum_{i=1}^{5}T_i, 10\right) -->
@@ -251,19 +251,19 @@ Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare
 ***
 
 ```{block, type = 'rmdcaution'}
-Anul acesta nu va mai fi niciun **proiect de laborator** ! Punctajul acestuia se reportează la nota de la examen.  
+Anul acesta **proiectul de laborator** valorează 1.5p și este bonus! Punctajul acestuia se adaugă la nota de la examen calculată mai sus.  
 ```
 
 Mai jos găsiți proiectele de laborator pentru cursul de *Statistică*. Proiectele sunt individuale iar copierea proiectelor este __strict interzisă__.
 
 ```{r echo = FALSE}
 gproj1_301 = "301"
-proj1_301 = "~~Proiect HTML~~"
+proj1_301 = "[HTML](projects/Proiect_301.html) / [PDF](projects/Proiect_301.pdf)"
 bproj1_301 = ""
-proj1data_301 = ""
+proj1data_301 = "30 Ianuarie"
 
 gproj1_311_321 = "311, 321"
-proj1_311_321 = "~~Proiect HTML~~"
+proj1_311_321 = "[HTML](projects/Proiect_311_321.html) / [PDF](projects/Proiect_311_321.pdf)"
 bproj1_311_321 = ""
 proj1data_311_321 = ""
 
@@ -274,7 +274,7 @@ tabProiecte = data.frame(Tema = c(gproj1_301, gproj1_311_321),
                          Solution = c(proj1data_301, proj1data_311_321))
 
 kableExtra::kable(tabProiecte, 
-      col.names = c("Grupa", "Proiect Nr.", "Barem", "Data de predare"),
+      col.names = c("Grupa", "Proiect", "Barem", "Data de predare"),
       align = "cccc") %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
