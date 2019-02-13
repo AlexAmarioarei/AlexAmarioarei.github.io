@@ -187,3 +187,16 @@ hr{
   vertical-align: top;
 }
 
+
+/* for results table */
+
+td.details-control{
+  background: url(../results/imgs/details_open_16.png) no-repeat center center;
+  cursor: pointer;
+}
+
+.shown td.details-control{
+  background: url(../results/imgs/details_close_16.png) no-repeat center center;
+
+}
+
