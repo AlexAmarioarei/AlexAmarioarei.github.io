@@ -330,13 +330,13 @@ datatable(
 
 ```{r, echo= FALSE, message=FALSE, warning=FALSE}
 library(readxl)
-stat_tab_E1 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx")
+stat_tab_E1 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx")
 
 stat_tab_E1 = stat_tab_E1[,1:10]
 stat_tab_E1$Total[stat_tab_E1$Examen == 0] = "Absent"
 
 # tema 1
-stat_tab_E1_t1 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx", 
+stat_tab_E1_t1 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx", 
                                  sheet = 2)
 
 stat_tab_E1_t1[is.na(stat_tab_E1_t1)] = 0
@@ -348,7 +348,7 @@ tema1 = paste0(" Ex1 - ", stat_tab_E1_t1$Ex1, "; Ex2 - ", stat_tab_E1_t1$Ex2,
        "; Ex9 - ", stat_tab_E1_t1$Ex9)
 
 # tema 2
-stat_tab_E1_t2 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx", 
+stat_tab_E1_t2 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx", 
                                  sheet = 3)
 
 stat_tab_E1_t2[is.na(stat_tab_E1_t2)] = 0
@@ -358,7 +358,7 @@ tema2 = paste0(" Ex1 - ", stat_tab_E1_t2$Ex1, "; Ex2 - ", stat_tab_E1_t2$Ex2,
        "; Ex5 - ", stat_tab_E1_t2$Ex5, "; Ex6 - ", stat_tab_E1_t2$Ex6)
 
 # tema 3
-stat_tab_E1_t3 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx", 
+stat_tab_E1_t3 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx", 
                                  sheet = 4)
 
 stat_tab_E1_t3[is.na(stat_tab_E1_t3)] = 0
@@ -369,7 +369,7 @@ tema3 = paste0(" Ex1 - ", stat_tab_E1_t3$Ex1, "; Ex2 - ", stat_tab_E1_t3$Ex2,
        "; Ex7 - ", stat_tab_E1_t3$Ex7)
 
 # tema 4
-stat_tab_E1_t4 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx", 
+stat_tab_E1_t4 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx", 
                                  sheet = 5)
 
 stat_tab_E1_t4[is.na(stat_tab_E1_t4)] = 0
@@ -379,7 +379,7 @@ tema4 = paste0(" Ex1 - ", stat_tab_E1_t4$Ex1, "; Ex2 - ", stat_tab_E1_t4$Ex2,
        "; Ex5 - ", stat_tab_E1_t4$Ex5, "; Ex6 - ", stat_tab_E1_t4$Ex6)
 
 # tema 5
-stat_tab_E1_t5 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx", 
+stat_tab_E1_t5 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx", 
                                  sheet = 6)
 
 stat_tab_E1_t5[is.na(stat_tab_E1_t5)] = 0
@@ -389,7 +389,7 @@ tema5 = paste0(" Ex1 - ", stat_tab_E1_t5$Ex1, "; Ex2 - ", stat_tab_E1_t5$Ex2,
        "; Ex5 - ", stat_tab_E1_t5$Ex5, "; Ex6 - ", stat_tab_E1_t5$Ex6)
 
 # examen
-stat_tab_E1_ex = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v2.xlsx", 
+stat_tab_E1_ex = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_v3.xlsx", 
                                  sheet = 7)
 
 stat_tab_E1_ex[is.na(stat_tab_E1_ex)] = 0
