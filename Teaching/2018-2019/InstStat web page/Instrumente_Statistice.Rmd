@@ -1,0 +1,370 @@
+---
+title: ""
+author: ""
+date: ""
+output:
+  html_document:
+    css: css/styles.css
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+    includes:
+      in_header: header/InstStat_header.html
+      after_body: footer/include_footer.html
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 3
+---
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 155
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, include=FALSE}
+library(knitr)
+library(DT)
+library(tidyverse)
+library(kableExtra)
+```
+
+## Informații generale
+***
+
+Acest curs prezintă o serie de metode statistice ce pot fi aplicate în finanțe și este adresat studenților de Master anul I de la Facultatea de Matematică și Informatică a Universității din București.  
+
+
+```{r, fig.align='center', out.width="30%", echo=FALSE}
+knitr::include_graphics("images/null_hypothesis.png")
+```
+
+
+## Informații de contact 
+***
+
+### Curs 
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
+
+ *  _Orar_ : Vineri 17.00 - 19.00
+
+ *  _Sala_ : 305
+
+
+### Seminar/Laborator
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
+ 
+ *  _Orar_ : Vineri 19.00 - 20.00
+
+ *  _Sala_ : 204
+ 
+ 
+## Note de laborator 
+***
+
+Mai jos găsiți o parte din laboratoarele cursului. 
+
+
+```{r echo = FALSE}
+lab1 = "[HTML](labs/Lab_1.html)"
+pdf_lab1 = "[PDF](labs/Lab_1.pdf)"
+data_lab1 = ""
+readings_lab1 = ""
+
+lab2 = "[HTML](labs/Lab_2.html)"
+pdf_lab2 = "[PDF](labs/Lab_2.pdf)"
+data_lab2 = ""
+readings_lab2 = ""
+readings_lab2_b = ""
+
+# lab3 = "[HTML](labs/Lab_3.html)"
+# pdf_lab3 = "[PDF](labs/Lab_3.pdf)"
+# data_lab3 = "[Google Data](labs/dataIn/google_data.csv) | [Apple Data](labs/dataIn/apple_data.csv) | [Microsoft Data](labs/dataIn/msft_data.csv)"
+# data_lab3_b = "[studFMI.txt](labs/dataIn/studFMI.txt)"
+# readings_lab3 = "[Sample quantiles in statistical packages](labs/readings/Sample Quantiles.pdf)"
+# readings_lab3_b = "[On optimal and data based histograms](labs/readings/histo-bin-size-scott.pdf)"
+# 
+# lab4 = "[HTML](labs/Lab_4.html)"
+# pdf_lab4 = "[PDF](labs/Lab_4.pdf)"
+# data_lab4 = ""
+# readings_lab4 = "[An empirical power comparison of univariate goodness-of-fit tests for normality](labs/readings/Romao An empirical power comparison of univariat.pdf)"
+# 
+# lab5 = "[HTML](labs/Lab_5.html)"
+# pdf_lab5 = "[PDF](labs/Lab_5.pdf)"
+# data_lab5 = "[advertising.csv](labs/dataIn/advertising.csv)"
+# readings_lab5 = ""
+# 
+# lab6 = "[HTML](labs/Lab_6.html)"
+# pdf_lab6 = "[PDF](labs/Lab_6.pdf)"
+# data_lab6 = ""
+# readings_lab6 = "[Species number and endemism](labs/readings/Species.pdf)"
+
+# tabLab = data.frame(Nr = c(1,
+#                            2,
+#                            3, "",
+#                            4,
+#                            5,
+#                            6),
+#                     Lab = c("Laborator 1",
+#                             "Laborator 2",
+#                             "Laborator 3", "",
+#                             "Laborator 4",
+#                             "Laborator 5",
+#                             "Laborator 6"),
+#                     Htmls = c(lab1,
+#                               lab2,
+#                               lab3, "",
+#                               lab4,
+#                               lab5,
+#                               lab6),
+#                     Pdfs = c(pdf_lab1,
+#                              pdf_lab2,
+#                              pdf_lab3, "",
+#                              pdf_lab4,
+#                              pdf_lab5,
+#                              pdf_lab6),
+#                     data = c(data_lab1,
+#                              data_lab2,
+#                              data_lab3, data_lab3_b,
+#                              data_lab4,
+#                              data_lab5,
+#                              data_lab6),
+#                     readings = c(readings_lab1,
+#                                  readings_lab2,
+#                                  readings_lab3, readings_lab3_b,
+#                                  readings_lab4,
+#                                  readings_lab5,
+#                                  readings_lab6))
+
+tabLab = data.frame(Nr = c(1,
+                           2),
+                    Lab = c("Laborator 1",
+                            "Laborator 2"),
+                    Htmls = c(lab1, 
+                              lab2),
+                    Pdfs = c(pdf_lab1,
+                             pdf_lab2),
+                    data = c(data_lab1,
+                             data_lab2),
+                    readings = c(readings_lab1, 
+                                 readings_lab2))
+
+# kable(tabLab, 
+#       col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
+#       align = "cccccl", 
+#       booktabs = TRUE)
+
+kableExtra::kable(tabLab, "html",
+      col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
+      align = "cccccl", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
+## Note de seminar 
+***
+
+Mai jos găsiți o parte din notele de seminar. 
+
+
+```{r echo = FALSE}
+# sem1 = "[HTML](labs/Sem_1.html)"
+# pdf_sem1 = "[PDF](labs/Sem_1.pdf)"
+# data_sem1 = "[ex_Greene.csv](labs/dataIn/ex_Greene.csv)"
+# readings_sem1 = "Greene 2012, Capitolul 14"
+
+# sem2 = "[HTML](labs/Sem_2.html)"
+# pdf_sem2 = "[PDF](labs/Sem_2.pdf)"
+# data_sem2 = ""
+# readings_sem2 = ""
+
+sem1 = ""
+pdf_sem1 = ""
+data_sem1 = ""
+readings_sem1 = ""
+
+# tabSem = data.frame(Nr = c(1,
+#                            2),
+#                     Lab = c("Seminar 1",
+#                             "Seminar 2"),
+#                     Htmls = c(sem1,
+#                               sem2),
+#                     Pdfs = c(pdf_sem1,
+#                              pdf_sem2),
+#                     data = c(data_sem1,
+#                              data_sem2), 
+#                     readings = c(readings_sem1,
+#                                  readings_sem2))
+
+tabSem = data.frame(Nr = c(1),
+                    Lab = c("Seminar 1"),
+                    Htmls = c(sem1),
+                    Pdfs = c(pdf_sem1),
+                    data = c(data_sem1), 
+                    readings = c(readings_sem1))
+
+
+kableExtra::kable(tabSem, "html",
+      col.names = c("Nr", "Seminar", "HTML", "PDFs", "Set Date", "Readings"),
+      align = "cccccl", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+```
+
+> **TABELE STATISTICE** Vizualizați versiunea [HTML](tables/Tabele_Statistice.html) sau [PDF](tables/Tabele_Statistice_v2_stat.pdf).
+
+
+## Proiect de laborator
+
+Mai jos găsiți proiectul cursului de *Instrumente Statistice pentru Finanțe*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
+
+```{r echo = FALSE}
+proj1_403 = "-"
+dproj1_403 = "-"
+proj1data_403 = "-"
+
+
+tabProiecte = data.frame(Proiect = c(proj1_403), 
+                         Data = c(dproj1_403), 
+                         Time = c(proj1data_403))
+
+kableExtra::kable(tabProiecte, "html",
+      col.names = c("Proiect", "Date", "Data de predare"),
+      align = "ccc", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+# kable(tabProiecte, 
+#       col.names = c("Proiect", "Date", "Data de predare"),
+#       align = "ccc")
+```
+
+Trimiterea proiectelor se va face pe adresa de **Dropbox** (conform instrucțiunilor de la curs) până la *data de predare* din tabel, dar cel târziu până la ora 23:59. 
+
+Studenții trebuie să trimită proiectele în folderele cu numele lor. Fiecare proiect va fi trimis în format **PDF** sau **MSWord** și va fi generat cu ajutorul pachetului [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile. Fișierul final va conține și codul `R` (documentat) și va avea numele: *Proiect_Nume_Prenume_grupa_503.pdf*.
+
+## Notarea
+
+Notarea se va face după cum urmează: proiect (50%) și examen final (50%).
+
+## Subiect / Barem Examen
+
+Va urma ...
+
+## Rezultate 
+
+
+```{r, echo= FALSE}
+col_pass = "#50C878" # blue #60cbf2
+col_fail = "#f78080"
+col_absent = "#ffff99"
+
+stat_tab = read.csv("students/Tabel_Instrumente_Stat.csv", stringsAsFactors = FALSE)
+
+stat_tab = stat_tab[1:20,-c(1, 7:9)]
+stat_tab$Total[stat_tab$Examen == 0] = "Absent"
+# stat_tab$Total[stat_tab$Total<5] = 4
+
+# create 19 breaks and 20 rgb color values ranging from white to red
+# brks <- quantile(as.numeric(stat_tab$Total), probs = seq(.05, .95, .05), na.rm = TRUE)
+# clrs <- round(seq(255, 40, length.out = length(brks) + 1), 0) %>%
+# {paste0("rgb(255,", ., ",", ., ")")}
+
+# fix some left 2 columns and right 1 column
+datatable(
+  stat_tab, class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 2:5)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    fixedColumns = list(leftColumns = 2, rightColumns = 1),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#3cb371', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE,
+    scrollY = 300,
+    scroller = TRUE
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c(col_absent, col_fail, col_fail, col_pass, col_pass, col_pass, col_pass, col_pass, col_pass)),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c(col_fail, col_fail, col_absent)))
+```
+
+
+## Bibliografie
+
+  1. Bennett, Hugen - *Financial Analytics with R, building a Laptop for Data Science*, Cambridge Univ., 2016
+  2. Miller - *Mathematics and Statistics for Financial Risk Management*, Wiley, 2014
+  3. Ruppert - *Statistics and Finance an Introduction*, Springer, 2004
+  4. Durbin, Koopman - *Time Series Analysis by State Space Methods*, Oxford, 2011
+  5. Greene, William - *Econometric Analysis*, Prentice Hall, 2012
+  
+
+## Link-uri utile
+
+### R
+  1. Programul R - [CRAN](https://cran.r-project.org/)
+  2. Interfața grafică [RStudio](https://www.rstudio.com/)
+  3. Documentație R (în engleză) - [R-Intro](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+  4. Documentație R (în română) - [R pentru începători ](ftp://cran.r-project.org/pub/R/doc/contrib/Paradis-rdebuts_RO.pdf)
+  5. Documentație R (în română) - [Inițiere în R pentru persoane cu pregătire matematică ](http://www.edumanager.ro/community/documente/initiere_in_r.pdf)
+  
+### Latex
+  1. Introducere în Latex (în romană) - [Manual Wikibooks](https://ro.wikibooks.org/wiki/LaTeX_(carte))
+  2. Introducere în Latex (în engleză) - [Wikibooks Latex Manual](https://en.wikibooks.org/wiki/LaTeX) în special secțiunile de [matematică](https://en.wikibooks.org/wiki/LaTeX/Mathematics), [liste](https://en.wikibooks.org/wiki/LaTeX/List_Structures), [grafice](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics) și [figuri](https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions)
+  3. Tutoriale Latex (în engleză) - [video](https://www.youtube.com/playlist?list=PLDD406480D35CE390)
+  4. Editoarele: [Texmaker](http://www.xm1math.net/texmaker/download.html) și [TeXnicCenter](http://www.texniccenter.org/) 
+  5. Mediul latex [MiKTeX](https://miktex.org/)
+
+### Rmarkdown
+  1. Pachetul [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile
+
