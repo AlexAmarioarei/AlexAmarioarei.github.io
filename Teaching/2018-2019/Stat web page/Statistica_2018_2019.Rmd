@@ -548,11 +548,11 @@ pl1
 ```
 
 
-> **Grupa 301**: dintr-un total de `r length(gr301$Total)` stundeți înscriși, `r sum(gr301$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr301$Total>4)/(length(gr301$Total)-sum(gr301$Examen == 0))*100, digits = 2), "%")`.
+> **Grupa 301**: dintr-un total de `r length(gr301$Total)` stundeți înscriși, `r sum(gr301$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr301$Total[gr301$Examen != 0] != "4")/(length(gr301$Total)-sum(gr301$Examen == 0))*100, digits = 2), "%")`.
 
-> **Grupa 311**: dintr-un total de `r length(gr311$Total)` stundeți înscriși, `r sum(gr311$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr311$Total>4)/(length(gr311$Total)-sum(gr311$Examen == 0))*100, digits = 2), "%")`.
+> **Grupa 311**: dintr-un total de `r length(gr311$Total)` stundeți înscriși, `r sum(gr311$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr311$Total[gr311$Examen != 0] != "4")/(length(gr311$Total)-sum(gr311$Examen == 0))*100, digits = 2), "%")`.
 
-> **Grupa 321**: dintr-un total de `r length(gr321$Total)` stundeți înscriși, `r sum(gr321$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr321$Total>4)/(length(gr321$Total)-sum(gr321$Examen == 0))*100, digits = 2), "%")`.
+> **Grupa 321**: dintr-un total de `r length(gr321$Total)` stundeți înscriși, `r sum(gr321$Examen == 0)` au fost absenți la examen, prin urmare promovabilitatea celor prezenți la examen a fost în procent de `r paste0(format(sum(gr321$Total[gr321$Examen != 0] != "4")/(length(gr321$Total)-sum(gr321$Examen == 0))*100, digits = 2), "%")`.
 
 
 ## Bibliografie
