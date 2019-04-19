@@ -1,5 +1,5 @@
 ---
-title: ""
+pagetitle: "Instrumente Statistice"
 author: ""
 date: ""
 output:
@@ -207,20 +207,21 @@ Mai jos găsiți o parte din notele de seminar.
 
 
 ```{r echo = FALSE}
-# sem1 = "[HTML](labs/Sem_1.html)"
-# pdf_sem1 = "[PDF](labs/Sem_1.pdf)"
-# data_sem1 = "[ex_Greene.csv](labs/dataIn/ex_Greene.csv)"
-# readings_sem1 = "Greene 2012, Capitolul 14"
+sem1 = "[HTML](labs/Sem_1.html)"
+pdf_sem1 = "[PDF](labs/Sem_1.pdf)"
+rmd_sem1 = "[RMD](labs/sem1.zip)"
+data_sem1 = "[ex_Greene.csv](labs/dataIn/ex_Greene.csv)"
+readings_sem1 = "Greene 2012, Capitolul 14"
 
 # sem2 = "[HTML](labs/Sem_2.html)"
 # pdf_sem2 = "[PDF](labs/Sem_2.pdf)"
 # data_sem2 = ""
 # readings_sem2 = ""
 
-sem1 = ""
-pdf_sem1 = ""
-data_sem1 = ""
-readings_sem1 = ""
+# sem1 = ""
+# pdf_sem1 = ""
+# data_sem1 = ""
+# readings_sem1 = ""
 
 # tabSem = data.frame(Nr = c(1,
 #                            2),
@@ -231,7 +232,7 @@ readings_sem1 = ""
 #                     Pdfs = c(pdf_sem1,
 #                              pdf_sem2),
 #                     data = c(data_sem1,
-#                              data_sem2), 
+#                              data_sem2),
 #                     readings = c(readings_sem1,
 #                                  readings_sem2))
 
@@ -239,13 +240,14 @@ tabSem = data.frame(Nr = c(1),
                     Lab = c("Seminar 1"),
                     Htmls = c(sem1),
                     Pdfs = c(pdf_sem1),
+                    Rmds = c(rmd_sem1),
                     data = c(data_sem1), 
                     readings = c(readings_sem1))
 
 
 kableExtra::kable(tabSem, "html",
-      col.names = c("Nr", "Seminar", "HTML", "PDFs", "Set Date", "Readings"),
-      align = "cccccl", 
+      col.names = c("Nr", "Seminar", "HTML", "PDFs", "RMDs", "Set Date", "Readings"),
+      align = "ccccccl", 
       booktabs = TRUE) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 
