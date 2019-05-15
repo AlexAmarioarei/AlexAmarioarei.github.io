@@ -322,6 +322,148 @@ Trimiterea proiectelor se va face pe adresa de **Dropbox** (conform instrucțiun
 
 Studenții trebuie să trimită proiectele în folderele cu grupele corespunzătoare. Fiecare proiect va fi trimis în format **PDF** sau **MSWord** și va fi generat cu ajutorul pachetului [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile. Fișierul final va conține și codul `R` (documentat) și va avea numele: *Proiect_Nume_Prenume_grupa_x.pdf*, unde *x* este numărul grupei. 
 
+## Rezultate Sesiunea Mai 2019
+***
+
+```{r, echo= FALSE, message=FALSE, warning=FALSE}
+library(readxl)
+stat_tab_E1 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx")
+
+stat_tab_E1 = stat_tab_E1[,1:10]
+stat_tab_E1$Total[stat_tab_E1$Examen == 0] = "Absent"
+
+# tema 1
+stat_tab_E1_t1 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx", 
+                                 sheet = 2)
+
+stat_tab_E1_t1[is.na(stat_tab_E1_t1)] = 0
+
+tema1 = paste0(" Ex1 - ", stat_tab_E1_t1$Ex1, "; Ex2 - ", stat_tab_E1_t1$Ex2, 
+       "; Ex3 - ", stat_tab_E1_t1$Ex3, "; Ex4 - ", stat_tab_E1_t1$Ex4,
+       "; Ex5 - ", stat_tab_E1_t1$Ex5, "; Ex6 - ", stat_tab_E1_t1$Ex6,
+       "; Ex7 - ", stat_tab_E1_t1$Ex7, "; Ex8 - ", stat_tab_E1_t1$Ex8,
+       "; Ex9 - ", stat_tab_E1_t1$Ex9)
+
+# tema 2
+stat_tab_E1_t2 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx", 
+                                 sheet = 3)
+
+stat_tab_E1_t2[is.na(stat_tab_E1_t2)] = 0
+
+tema2 = paste0(" Ex1 - ", stat_tab_E1_t2$Ex1, "; Ex2 - ", stat_tab_E1_t2$Ex2, 
+       "; Ex3 - ", stat_tab_E1_t2$Ex3, "; Ex4 - ", stat_tab_E1_t2$Ex4,
+       "; Ex5 - ", stat_tab_E1_t2$Ex5, "; Ex6 - ", stat_tab_E1_t2$Ex6)
+
+# tema 3
+stat_tab_E1_t3 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx", 
+                                 sheet = 4)
+
+stat_tab_E1_t3[is.na(stat_tab_E1_t3)] = 0
+
+tema3 = paste0(" Ex1 - ", stat_tab_E1_t3$Ex1, "; Ex2 - ", stat_tab_E1_t3$Ex2, 
+       "; Ex3 - ", stat_tab_E1_t3$Ex3, "; Ex4 - ", stat_tab_E1_t3$Ex4,
+       "; Ex5 - ", stat_tab_E1_t3$Ex5, "; Ex6 - ", stat_tab_E1_t3$Ex6,
+       "; Ex7 - ", stat_tab_E1_t3$Ex7)
+
+# tema 4
+stat_tab_E1_t4 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx", 
+                                 sheet = 5)
+
+stat_tab_E1_t4[is.na(stat_tab_E1_t4)] = 0
+
+tema4 = paste0(" Ex1 - ", stat_tab_E1_t4$Ex1, "; Ex2 - ", stat_tab_E1_t4$Ex2, 
+       "; Ex3 - ", stat_tab_E1_t4$Ex3, "; Ex4 - ", stat_tab_E1_t4$Ex4,
+       "; Ex5 - ", stat_tab_E1_t4$Ex5, "; Ex6 - ", stat_tab_E1_t4$Ex6)
+
+# tema 5
+stat_tab_E1_t5 = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx", 
+                                 sheet = 6)
+
+stat_tab_E1_t5[is.na(stat_tab_E1_t5)] = 0
+
+tema5 = paste0(" Ex1 - ", stat_tab_E1_t5$Ex1, "; Ex2 - ", stat_tab_E1_t5$Ex2, 
+       "; Ex3 - ", stat_tab_E1_t5$Ex3, "; Ex4 - ", stat_tab_E1_t5$Ex4,
+       "; Ex5 - ", stat_tab_E1_t5$Ex5, "; Ex6 - ", stat_tab_E1_t5$Ex6)
+
+# examen
+stat_tab_E1_ex = readxl::read_xlsx("results/Tabel_Statistica_2018_2019_restanta_Mai.xlsx", 
+                                 sheet = 7)
+
+stat_tab_E1_ex[is.na(stat_tab_E1_ex)] = 0
+
+examen = paste0(" Ex1 - ", stat_tab_E1_ex$Ex1, "; Ex2 - ", stat_tab_E1_ex$Ex2, 
+       "; Ex3 - ", stat_tab_E1_ex$Ex3, "; Ex4 - ", stat_tab_E1_ex$Ex4)
+
+# 
+stat_tab_E1$Tema_1_label = tema1
+stat_tab_E1$Tema_2_label = tema2
+stat_tab_E1$Tema_3_label = tema3
+stat_tab_E1$Tema_4_label = tema4
+stat_tab_E1$Tema_5_label = tema5
+
+stat_tab_E1$ex_label = examen
+
+# fix some left 2 columns and right 1 column
+
+DT::datatable(
+  cbind(' ' = '', stat_tab_E1), 
+  escape = -2,
+  class = 'cell-border stripe',
+  # style = 'bootstrap',
+  extensions = c('FixedColumns', 'Buttons', 'Scroller'),
+  options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 3:11),
+                      list(visible = FALSE, targets = c(0, 12:17)),
+                      list(orderable = FALSE, className = 'details-control', targets = 1)),
+    dom = c('Bfrtip'),
+    scrollX = TRUE,
+    # fixedColumns = list(leftColumns = 1, rightColumns = 6),
+    buttons = c('csv', 'excel', 'pdf', 'print'),
+    initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2f7acd', 'color': '#fff'});",
+    "}"),
+    deferRender = TRUE
+  ),
+  callback = JS("
+  table.column(1).nodes().to$().css({cursor: 'pointer'});
+  var format = function(d) {
+    return '<div style=\"background-color:#fafafa; padding: .5em; font-size: 0.85em;\"> ' +
+            '<u><em style = \"font-size: 1.25em;\">Detalii notare</em></u>: <br> ' + 
+           '<strong>Tema 1</strong>:' + d[12] + '<br> ' + 
+           '<strong>Tema 2</strong>:' + d[13] + '<br> ' + 
+           '<strong>Tema 3</strong>:' + d[14] + '<br> ' + 
+           '<strong>Tema 4</strong>:' + d[15] + '<br> ' + 
+           '<strong>Tema 5</strong>:' + d[16] + '<br> ' + 
+           '<strong>Examen Restanta</strong>:' + d[17] + '</div>';
+  };
+  table.on('click', 'td.details-control', function() {
+    var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+  });"
+  )
+)%>% formatStyle('Total', 
+                 # backgroundColor = styleInterval(4.9, c('#f78080', '#60cbf2')),
+                 backgroundColor = styleEqual(c("Absent", "3", "4", "5", "6", "7", "8", "9", "10"), 
+                                              c('#ffff99', '#f78080', '#f78080', '#9ddcff', '#9ddcff', '#9ddcff', '#9ddcff', '#9ddcff', '#9ddcff')),
+                 fontWeight = 'bold') %>%
+  formatStyle('Total', 
+              target = 'row',
+                 backgroundColor = styleEqual(c("3", "4", "Absent"), c('#f78080', '#f78080', '#ffff99'))) %>%
+  formatStyle(columns = c(3:10), fontSize = '75%')
+```
+
 ## Rezultate Sesiunea Februarie 2019
 ***
 
