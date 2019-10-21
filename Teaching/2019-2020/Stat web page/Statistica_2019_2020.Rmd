@@ -191,9 +191,9 @@ Promovare: $E\geq 2.5$ și $T\geq 5$
 Vor fi 5 teme și acestea vor fi postate (aproape) din două în două săptămâni (de obicei Duminică seara). Este încurajată colaborarea între studenți dar fiecare student trebuie să își scrie propriile soluții. Copierea temei este __interzisă__.
 
 ```{r echo = FALSE}
-t1 = "[Tema 1]()"
+t1 = "[Tema 1](homework/Tema_1.pdf)"
 t1sol = ""
-t1data = ""
+t1data = "3 Noiembrie"
 # 
 # t2 = "[Tema 2](homework/Tema2.pdf)"
 # t2sol = "[Solutie](homework/Tema2_Sol.pdf)"
