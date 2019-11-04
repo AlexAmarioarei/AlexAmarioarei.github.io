@@ -194,10 +194,10 @@ Vor fi 5 teme și acestea vor fi postate (aproape) din două în două săptăm�
 t1 = "[Tema 1](homework/Tema_1.pdf)"
 t1sol = ""
 t1data = "3 Noiembrie"
-# 
-# t2 = "[Tema 2](homework/Tema2.pdf)"
-# t2sol = "[Solutie](homework/Tema2_Sol.pdf)"
-# t2data = "~~11 Noiembrie~~18 Noiembrie"
+
+t2 = "[Tema 2](homework/Tema_2.pdf)"
+t2sol = ""
+t2data = "17 Noiembrie"
 # 
 # t3 = "[Tema 3](homework/Tema3.pdf)"
 # t3sol = "[Solutie](homework/Tema3_Sol.pdf)"
@@ -216,9 +216,9 @@ t1data = "3 Noiembrie"
 # t6data = "--"
 
 
-tab = data.frame(Tema = c(t1), 
-                 Data = c(t1data), 
-                 Solution = c(t1sol))
+tab = data.frame(Tema = c(t1, t2), 
+                 Data = c(t1data, t2data), 
+                 Solution = c(t1sol, t2sol))
 
 # 
 # tab = data.frame(Tema = c(t1, 
