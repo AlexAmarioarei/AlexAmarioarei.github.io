@@ -498,10 +498,11 @@ Fie $f$ densitatea de repartiție definită prin
 $$
   f(x) = \frac{2}{\pi}\sqrt{1-x^2}\mathbf{1}_{[-1,1]}(x)
 $$
-  
-  1. Folosiți metoda respingerii pentru a genera $10000$ de observații repartizate cu densitatea $f$.
 
-  2. Trasați histograma acestui eșantion și comparați cu densitatea $f$.
+\begin{itemize}
+  \item[1.] Folosiți metoda respingerii pentru a genera $10000$ de observații repartizate cu densitatea $f$.
+  \item[2.] Trasați histograma acestui eșantion și comparați cu densitatea $f$.
+\end{itemize}
 
 
 ```
@@ -749,9 +750,12 @@ curve(f2, min(X), max(X), n=500,col = myred, lty = 2, lwd = 3, add=TRUE)
 ```{r, type = "rmdexercise", engine = engine_block}
 Considerăm pătratul $C = [0,L]^2$ și discul $D$ de centru $(\frac{L}{2},\frac{L}{2})$ și rază $\frac{L}{2}$. Considerăm șirul de v.a. $\left(Y_n\right)_{n\geq1}$ pe $\mathbb{R}^2$ i.i.d. repartizate uniform pe pătratul $C$.
 
-  1. Aproximați valoarea lui $\pi$ prin ajutorul numărului de puncte $Y_n$ care cad în interiorul discului $D$ (Metoda respingerii)
+\begin{itemize}
+  \item[1.] Aproximați valoarea lui $\pi$ prin ajutorul numărului de puncte $Y_n$ care cad în interiorul discului $D$ (Metoda respingerii)
   
-  2. Simulați $n$ puncte uniforme pe disc. 
+  \item[2.] Simulați $n$ puncte uniforme pe disc. 
+\end{itemize}
+
 
 ```
 

@@ -161,7 +161,7 @@ Pentru a testa această funcție să considerăm două exemple:
 
 ```r
 rand_sample(10,c(1,2,3),c(0.2,0.3,0.5))
- [1] 1 3 3 3 1 3 1 3 3 3
+ [1] 3 1 2 2 3 3 3 1 3 1
 ```
 
   2. în acest caz: $n=15$, $x=[a,b,c,d]$ și $p=[0.15,0.35,0.15,0.45]$
@@ -169,7 +169,7 @@ rand_sample(10,c(1,2,3),c(0.2,0.3,0.5))
 
 ```r
 rand_sample(15,c('a','b','c','d'),c(0.15,0.35,0.15,0.45))
- [1] "b" "b" "c" "d" "b" "a" "c" "b" "c" "d" "c" "a" "a" "b" "d"
+ [1] "a" "d" "a" "b" "c" "a" "a" "b" "b" "c" "b" "b" "b" "c" "c"
 ```
 
 O funcție un pic mai generală este:
@@ -464,7 +464,7 @@ start = proc.time()
 y = sim.pois1(n)
 proc.time() - start
    user  system elapsed 
-   0.30    0.02    0.31 
+   0.72    0.00    0.76 
 
 start = proc.time()
 x = sim.pois2(n)
@@ -578,14 +578,14 @@ star = proc.time()
 x = sim.resp1(n)
 proc.time() - start
    user  system elapsed 
-   0.19    0.06    0.25 
+   0.33    0.05    0.39 
 
 # Metoda 2
 star = proc.time()
 x = sim.resp2(n)
 proc.time() - start
    user  system elapsed 
-   0.20    0.06    0.26 
+   0.34    0.05    0.41 
 ```
 
   2. Putem valida algoritmul propus prin metoda respingerii trasând histograma eșantionului:
@@ -803,7 +803,7 @@ estimate_pi = 4*sum(ind)/n # estimarea lui pi
 err = abs(estimate_pi-pi) # eroarea absoluta
 ```
 
-Aplicând acest procedeu obținem că valoarea estimată a lui $\pi$ prin generarea a $n=$ 2000 puncte este 3.19 iar eroarea absoluta este 0.04841.
+Aplicând acest procedeu obținem că valoarea estimată a lui $\pi$ prin generarea a $n=$ 2000 puncte este 3.164 iar eroarea absoluta este 0.02241.
 
 2. Una dintre metodele prin care putem simula puncte uniform repartizate pe suprafața discului $D$ este *Metoda respingerii*. Această metodă consistă în generarea de v.a. $Y_n$ repartizate uniform pe suprafața pătratului $C$, urmând ca apoi să testăm dacă $Y_n$ aparține discului $D$ (deoarece $D\subset C$). Dacă da, atunci le păstrăm dacă nu atunci mai generăm. Următoarea figură ilustrează această metodă:
   

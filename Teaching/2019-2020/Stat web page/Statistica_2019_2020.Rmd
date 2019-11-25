@@ -107,12 +107,12 @@ pdf_lab2 = "[PDF](labs/Lab2.pdf)"
 lab3 = "[HTML](labs/Lab3.html)"
 pdf_lab3 = "[PDF](labs/Lab3.pdf)"
 
-# lab4 = "[HTML](labs/Lab4.html)"
-# pdf_lab4 = "[PDF](labs/Lab4.pdf)"
-# 
-# lab5 = "[HTML](labs/Lab5.html)"
-# pdf_lab5 = "[PDF](labs/Lab5.pdf)"
-# 
+lab4 = "[HTML](labs/Lab4.html)"
+pdf_lab4 = "[PDF](labs/Lab4.pdf)"
+
+lab5 = "[HTML](labs/Lab5.html)"
+pdf_lab5 = "[PDF](labs/Lab5.pdf)"
+
 # lab6 = "[HTML](labs/Lab6.html)"
 # pdf_lab6 = "[PDF](labs/Lab6.pdf)"
 # 
@@ -124,36 +124,36 @@ pdf_lab3 = "[PDF](labs/Lab3.pdf)"
 
 tabLab = data.frame(Nr = c(1,
                            2,
-                           3#,
-                           # 4,
-                           # 5,
+                           3,
+                           4,
+                           5#,
                            # 6#, 
                            # 7, 
                            # 8
                            ),
                     Lab = c("Laborator 1", 
                             "Laborator 2",
-                            "Laborator 3"#,
-                            # "Laborator 4",
-                            # "Laborator 5",
+                            "Laborator 3",
+                            "Laborator 4",
+                            "Laborator 5"#,
                             # "Laborator 6"#,
                             # "Laborator 7", 
                             # "Laborator Suplimentar"
                             ),
                     Htmls = c(lab1, 
                               lab2,
-                              lab3#,
-                              # lab4,
-                              # lab5,
+                              lab3,
+                              lab4,
+                              lab5#,
                               # lab6#,
                               # lab7, 
                               # lab_sup
                               ),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2,
-                             pdf_lab3#,
-                             # pdf_lab4,
-                             # pdf_lab5,
+                             pdf_lab3,
+                             pdf_lab4,
+                             pdf_lab5#,
                              # pdf_lab6#,
                              # pdf_lab7, 
                              # pdf_lab_sup
@@ -198,11 +198,11 @@ t1data = "3 Noiembrie"
 t2 = "[Tema 2](homework/Tema_2.pdf)"
 t2sol = ""
 t2data = "17 Noiembrie"
-# 
-# t3 = "[Tema 3](homework/Tema3.pdf)"
-# t3sol = "[Solutie](homework/Tema3_Sol.pdf)"
-# t3data = "~~2 Decembrie~~ 8 Decembrie"
-# 
+
+t3 = "[Tema 3](homework/Tema_3.pdf)"
+t3sol = ""
+t3data = "8 Decembrie"
+
 # t4 = "[Tema 4](homework/Tema4.pdf)"
 # t4sol = "[Solutie](homework/Tema4_Sol.pdf)"
 # t4data = "29 Decembrie"
@@ -216,9 +216,9 @@ t2data = "17 Noiembrie"
 # t6data = "--"
 
 
-tab = data.frame(Tema = c(t1, t2), 
-                 Data = c(t1data, t2data), 
-                 Solution = c(t1sol, t2sol))
+tab = data.frame(Tema = c(t1, t2, t3), 
+                 Data = c(t1data, t2data, t3data), 
+                 Solution = c(t1sol, t2sol, t3sol))
 
 # 
 # tab = data.frame(Tema = c(t1, 

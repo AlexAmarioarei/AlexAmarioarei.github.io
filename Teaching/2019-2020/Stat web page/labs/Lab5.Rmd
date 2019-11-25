@@ -2,6 +2,12 @@
 title: "Laborator 5"
 subtitle: Funcția de repartiție și cuantilele empirice
 output:
+  pdf_document:
+    includes:
+      before_body: tex/body.tex
+      in_header: tex/preamble.tex
+    keep_tex: yes
+    number_sections: yes
   html_document:
     code_folding: show
     css: lab_css/labs.css
@@ -14,12 +20,6 @@ output:
     includes:
       in_header: lab_header/lab_header.html
       after_body: lab_header/lab_footer.html
-  pdf_document:
-    includes:
-      before_body: tex/body.tex
-      in_header: tex/preamble.tex
-    keep_tex: yes
-    number_sections: yes
   word_document:
     fig_caption: yes
     highlight: pygments
@@ -289,13 +289,17 @@ unde folosim convențiile $\inf\mathbb{R} = -\infty$ și $\inf\emptyset = +\inft
 ```{r, type = "rmdinsight", engine = engine_block}
 Funcția cuantilă $F^{-1}$ verifică următoarele proprietăți:
 
-  1) Valoarea în $0$: $F^{-1}(0) = -\infty$
-  2) Monotonie: $F^{-1}$ este crescătoare
-  3) Continuitate: $F^{-1}$ este continuă la stânga
-  4) Echivalență: pentru $\forall u\in[0,1]$ avem $F(x)\geq u \iff x\geq F^{-1}(u)$
-  5) Inversabilitate: $\forall u\in[0,1]$ avem $(F\circ F^{-1})(u)\geq u$. În plus
-    a) dacă $F$ este continuă atunci $F\circ F^{-1} = Id$ dar dacă nu este injectivă atunci există $x_0$ așa încât $(F^{-1}\circ F)(x_0)<x_0$
-    b) dacă $F$ este injectivă atunci $F^{-1}\circ F = Id$ dar dacă nu este continuă atunci există $u_0$ astfel că $(F\circ F^{-1})(u_0)>u_0$
+\begin{itemize}
+  \item[1)] Valoarea în $0$: $F^{-1}(0) = -\infty$
+  \item[2)] Monotonie: $F^{-1}$ este crescătoare
+  \item[3)] Continuitate: $F^{-1}$ este continuă la stânga
+  \item[4)] Echivalență: pentru $\forall u\in[0,1]$ avem $F(x)\geq u \iff x\geq F^{-1}(u)$
+  \item[5)] Inversabilitate: $\forall u\in[0,1]$ avem $(F\circ F^{-1})(u)\geq u$. În plus
+    \begin{itemize}
+      \item[a)] dacă $F$ este continuă atunci $F\circ F^{-1} = Id$ dar dacă nu este injectivă atunci există $x_0$ așa încât $(F^{-1}\circ F)(x_0)<x_0$
+      \item[b]) dacă $F$ este injectivă atunci $F^{-1}\circ F = Id$ dar dacă nu este continuă atunci există $u_0$ astfel că $(F\circ F^{-1})(u_0)>u_0$
+    \end{itemize}
+\end{itemize}
 
 
 ```
