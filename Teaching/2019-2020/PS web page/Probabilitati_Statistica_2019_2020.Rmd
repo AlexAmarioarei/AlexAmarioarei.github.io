@@ -214,10 +214,10 @@ t3 = "[Tema 3](homework/Tema_3.pdf)"
 t3sol = ""
 t3data = "8 Decembrie"
 
-# t4 = "[Tema 4](homework/Tema4.pdf)"
-# t4sol = "[Solutie](homework/Tema4_Sol.pdf)"
-# t4data = "22 Decembrie"
-# 
+t4 = "[Tema 4](homework/Tema_4.pdf)"
+t4sol = ""
+t4data = "22 Decembrie"
+
 # t5 = "[Tema 5](homework/Tema5.pdf)"
 # t5sol = "[Solutie](homework/Tema5_Sol.pdf)"
 # t5data = "~~22 Ianuarie~~ 26 Ianuarie"
@@ -242,9 +242,9 @@ t3data = "8 Decembrie"
 # t5sol = "[Solutie Tema 5](homework/Tema5_Sol.pdf)"
 # t5data = "~~13 Ianuarie~~ 16 Ianuarie"
 
-tab = data.frame(Tema = c(t1, t2, t3), 
-                 Data = c(t1data, t2data, t3data), 
-                 Solution = c(t1sol, t2sol, t3sol))
+tab = data.frame(Tema = c(t1, t2, t3, t4), 
+                 Data = c(t1data, t2data, t3data, t4data), 
+                 Solution = c(t1sol, t2sol, t3sol, t4sol))
 
 # tab = data.frame(Tema = c(t1, t2, t3, t4, t5), 
 #                  Data = c(t1data, t2data, t3data, t4data, t5data), 
