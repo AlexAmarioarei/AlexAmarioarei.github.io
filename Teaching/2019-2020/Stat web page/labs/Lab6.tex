@@ -1,33 +1,46 @@
-\documentclass[]{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Laborator 6},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Laborator 6},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -37,37 +50,37 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -77,51 +90,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Laborator 6}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-  \subtitle{Elemente de estimare punctuală}
-  \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{framed,color}
@@ -417,7 +393,7 @@ urlcolor=linkcol %couleur des liens pour les url
 \fancyhf{}
 \rhead{Universitatea din Bucure\c sti\\ Facultatea de Matematic\u a \c si Informatic\u a}
 % \lhead{\textit{Curs}: Tehnici alternative în predarea matematicii (2018)\\ \textit{Instructori}: A. Am\u arioarei, M. Patriche}
-\lhead{\textit{Curs}: Statistică (2018-2019)\\ \textit{Instructor}: A. Am\u arioarei}
+\lhead{\textit{Curs}: Statistică (2019-2020)\\ \textit{Instructori}: A. Am\u arioarei, S. Cojocea}
 \rfoot{Pagina \thepage}
 \lfoot{Grupele: 301, 311, 321}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -429,7 +405,6 @@ urlcolor=linkcol %couleur des liens pour les url
 \usepackage{longtable}
 \usepackage{array}
 \usepackage{multirow}
-\usepackage[table]{xcolor}
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage{colortbl}
@@ -439,6 +414,18 @@ urlcolor=linkcol %couleur des liens pour les url
 \usepackage{threeparttablex}
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
+\usepackage{xcolor}
+
+\title{Laborator 6}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Elemente de estimare punctuală}
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 \maketitle
@@ -449,11 +436,13 @@ urlcolor=linkcol %couleur des liens pour les url
 Obiectivul acestui laborator este de a ilustra noțiunea de consistență a
 unui estimator precum și de a compara mai mulți estimatori.
 
+\hypertarget{proprietux103ux21bi-ale-estimatorilor}{%
 \section{Proprietăți ale
-estimatorilor}\label{proprietati-ale-estimatorilor}
+estimatorilor}\label{proprietux103ux21bi-ale-estimatorilor}}
 
+\hypertarget{exemplu-de-comparare-a-trei-estimatori}{%
 \subsection{Exemplu de comparare a trei
-estimatori}\label{exemplu-de-comparare-a-trei-estimatori}
+estimatori}\label{exemplu-de-comparare-a-trei-estimatori}}
 
 \begin{rmdexercise}
 Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
@@ -512,8 +501,8 @@ Pentru a ilustra grafic histogramele celor trei estimatori, considerăm
 \NormalTok{S =}\StringTok{ }\DecValTok{10000}
 
 \NormalTok{a =}\StringTok{ }\KeywordTok{norm_estimators}\NormalTok{(n, mu, sigma, S)}
-\NormalTok{         var_mu1     var_mu2    var_mu3}
-\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{0.001007792} \FloatTok{0.001555904} \FloatTok{0.06088803}
+\NormalTok{          var_mu1     var_mu2    var_mu3}
+\NormalTok{[}\DecValTok{1}\NormalTok{,] }\FloatTok{0.0009916917} \FloatTok{0.001546501} \FloatTok{0.06069873}
 
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
 \KeywordTok{hist}\NormalTok{(a[,}\DecValTok{1}\NormalTok{], }\DataTypeTok{freq=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{hat}\NormalTok{(mu)[}\DecValTok{1}\NormalTok{]), }
@@ -538,8 +527,9 @@ Pentru a ilustra grafic histogramele celor trei estimatori, considerăm
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab6_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
+\hypertarget{ilustrarea-consistenux21bei-unui-estimator}{%
 \subsection{Ilustrarea consistenței unui
-estimator}\label{ilustrarea-consistentei-unui-estimator}
+estimator}\label{ilustrarea-consistenux21bei-unui-estimator}}
 
 \begin{rmdexercise}
 Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
@@ -576,13 +566,13 @@ Considerând \(\theta = 3\) și \(n\in\{10,25,50,100\}\) avem:
 
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
 \NormalTok{a1 =}\StringTok{ }\KeywordTok{pois_est1}\NormalTok{(}\DecValTok{10}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 10 varianta estimatorului este 2.32279898758267"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 10 varianta estimatorului este 2.30244438915425"}
 \NormalTok{a2 =}\StringTok{ }\KeywordTok{pois_est1}\NormalTok{(}\DecValTok{25}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 25 varianta estimatorului este 0.860500639921736"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 25 varianta estimatorului este 0.870906680642053"}
 \NormalTok{a3 =}\StringTok{ }\KeywordTok{pois_est1}\NormalTok{(}\DecValTok{50}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 50 varianta estimatorului este 0.424701461962554"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 50 varianta estimatorului este 0.428041768952562"}
 \NormalTok{a4 =}\StringTok{ }\KeywordTok{pois_est1}\NormalTok{(}\DecValTok{100}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 100 varianta estimatorului este 0.210584878706376"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 100 varianta estimatorului este 0.212316756387859"}
 
 
 \KeywordTok{hist}\NormalTok{(a1, }\DataTypeTok{freq=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{hat}\NormalTok{(theta)[n]), }
@@ -634,13 +624,13 @@ Pentru \(\tilde{\theta}_n\) avem
 
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
 \NormalTok{a1 =}\StringTok{ }\KeywordTok{pois_est2}\NormalTok{(}\DecValTok{10}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 10 varianta estimatorului este 0.297341012356247"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 10 varianta estimatorului este 0.299715966123322"}
 \NormalTok{a2 =}\StringTok{ }\KeywordTok{pois_est2}\NormalTok{(}\DecValTok{25}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 25 varianta estimatorului este 0.119584909394188"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 25 varianta estimatorului este 0.121187195338147"}
 \NormalTok{a3 =}\StringTok{ }\KeywordTok{pois_est2}\NormalTok{(}\DecValTok{50}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 50 varianta estimatorului este 0.059446994450129"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 50 varianta estimatorului este 0.0600944942898858"}
 \NormalTok{a4 =}\StringTok{ }\KeywordTok{pois_est2}\NormalTok{(}\DecValTok{100}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 100 varianta estimatorului este 0.0298516208133763"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 100 varianta estimatorului este 0.0300141779183984"}
 
 
 \KeywordTok{hist}\NormalTok{(a1, }\DataTypeTok{freq=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{tilde}\NormalTok{(theta)[n]), }
@@ -689,13 +679,13 @@ iar pentru \(\dot{\theta}_n\) avem
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
 
 \NormalTok{a1 =}\StringTok{ }\KeywordTok{pois_est3}\NormalTok{(}\DecValTok{10}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 10 varianta estimatorului este 0.77122002126572"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 10 varianta estimatorului este 0.774312512559173"}
 \NormalTok{a2 =}\StringTok{ }\KeywordTok{pois_est3}\NormalTok{(}\DecValTok{25}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 25 varianta estimatorului este 0.301130156456421"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 25 varianta estimatorului este 0.300199856748503"}
 \NormalTok{a3 =}\StringTok{ }\KeywordTok{pois_est3}\NormalTok{(}\DecValTok{50}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 50 varianta estimatorului este 0.148527285657167"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 50 varianta estimatorului este 0.151213574285"}
 \NormalTok{a4 =}\StringTok{ }\KeywordTok{pois_est3}\NormalTok{(}\DecValTok{100}\NormalTok{, theta, }\DecValTok{50000}\NormalTok{)}
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 100 varianta estimatorului este 0.0755824026406487"}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"Pentru n = 100 varianta estimatorului este 0.0752523336106622"}
 
 
 \KeywordTok{hist}\NormalTok{(a1, }\DataTypeTok{freq=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(}\KeywordTok{dot}\NormalTok{(theta)[n]), }
@@ -722,12 +712,14 @@ iar pentru \(\dot{\theta}_n\) avem
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab6_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
+\hypertarget{estimare-prin-metoda-verosimilitux103ux21bii-maxime}{%
 \section{Estimare prin metoda verosimilității
-maxime}\label{estimare-prin-metoda-verosimilitatii-maxime}
+maxime}\label{estimare-prin-metoda-verosimilitux103ux21bii-maxime}}
 
+\hypertarget{exemplu-evm-nu-este-uxeentotdeauna-media-eux219antionului-chiar-dacux103-mathbbe_thetahattheta_n-theta}{%
 \subsection{\texorpdfstring{Exemplu: EVM nu este întotdeauna media
 eșantionului chiar dacă
-\(\mathbb{E}_{\theta}[\hat{\theta}_n] = \theta\)}{Exemplu: EVM nu este întotdeauna media eșantionului chiar dacă \textbackslash{}mathbb\{E\}\_\{\textbackslash{}theta\}{[}\textbackslash{}hat\{\textbackslash{}theta\}\_n{]} = \textbackslash{}theta}}\label{exemplu-evm-nu-este-intotdeauna-media-esantionului-chiar-daca-mathbbe_thetahattheta_n-theta}
+\(\mathbb{E}_{\theta}[\hat{\theta}_n] = \theta\)}{Exemplu: EVM nu este întotdeauna media eșantionului chiar dacă \textbackslash mathbb\{E\}\_\{\textbackslash theta\}{[}\textbackslash hat\{\textbackslash theta\}\_n{]} = \textbackslash theta}}\label{exemplu-evm-nu-este-uxeentotdeauna-media-eux219antionului-chiar-dacux103-mathbbe_thetahattheta_n-theta}}
 
 \begin{rmdexercise}
 Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
@@ -742,7 +734,7 @@ Laplace \(L(\theta, c)\) a cărei densitate este dată de formula
 \item
   Ilustrați grafic densitatea și funcția de repartiție a repartiției
   Laplace pentru diferite valori ale parametrilor \(\theta\) (de
-  locație) și \(c\) (de scală), e.g. \(\theta\in\{0, 3\}\) și
+  locație) și \(c\) (de scală), e.g.~\(\theta\in\{0, 3\}\) și
   \(c\in\{1,2,3,4\}\).
 \item
   Determinați estimatorul de verosimilitate maximă \(\hat{\theta}_n\)
@@ -913,7 +905,7 @@ repartizate Laplace).
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab6_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 Observăm că dacă \(\theta\) se află între statistica de ordine de rang
-\(m\) și cea de rang \(m+1\), i.e. \(X_{(m)}\leq \theta\leq X_{(m+1)}\),
+\(m\) și cea de rang \(m+1\), i.e.~\(X_{(m)}\leq \theta\leq X_{(m+1)}\),
 atunci am avea că \(X_{(i)} \leq X_{(m)} \leq \theta\) dacă \(i\leq m\)
 și \(\theta\leq X_{(m+1)}\leq X_{(i)}\) dacă \(m+1\leq i\leq n\), prin
 urmare
@@ -940,8 +932,8 @@ Dacă \(n = 2k\) este par atunci, raționând asemănător, deducem că
 \(M(\theta)\) este minimizată pentru orice punct din intervalul
 \((X_{(k)}, X_{(k+1)})\), deci orice punct din acest interval va
 maximiza și funcția de verosimilitate. Prin convenție alegem estimatorul
-de verosimilitate maximă să fie mijlocul acestui interval, i.e.
-\(\theta = \frac{X_{(k)} + X_{(k+1)}}{2}\).
+de verosimilitate maximă să fie mijlocul acestui interval,
+i.e.~\(\theta = \frac{X_{(k)} + X_{(k+1)}}{2}\).
 
 Prin urmare am găsit că estimatorul de verosimilitate maximă este
 mediana eșantionului
@@ -1008,8 +1000,9 @@ eșantion de volum par (stânga) și unul de volum impar (dreapta):
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Lab6_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
+\hypertarget{exemplu-de-evm-determinat-prin-soluux21bii-numerice}{%
 \subsection{Exemplu de EVM determinat prin soluții
-numerice}\label{exemplu-de-evm-determinat-prin-solutii-numerice}
+numerice}\label{exemplu-de-evm-determinat-prin-soluux21bii-numerice}}
 
 \begin{rmdexercise}
 Fie \(X_1,X_2,\ldots,X_n\) un eșantion de talie \(n\) dintr-o populație
@@ -1327,6 +1320,5 @@ repartiția logistică:
 și aplicănd metoda lui Newton găsim estimatorul de verosimilitate maximă
 \(\hat{\theta}_n=\) 7.7933 după numai 3 iterații (datele au fost
 simulate folosin \(\theta = 7.5\)).
-
 
 \end{document}

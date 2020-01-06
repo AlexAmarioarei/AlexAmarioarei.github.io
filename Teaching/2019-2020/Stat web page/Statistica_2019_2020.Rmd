@@ -113,9 +113,9 @@ pdf_lab4 = "[PDF](labs/Lab4.pdf)"
 lab5 = "[HTML](labs/Lab5.html)"
 pdf_lab5 = "[PDF](labs/Lab5.pdf)"
 
-# lab6 = "[HTML](labs/Lab6.html)"
-# pdf_lab6 = "[PDF](labs/Lab6.pdf)"
-# 
+lab6 = "[HTML](labs/Lab6.html)"
+pdf_lab6 = "[PDF](labs/Lab6.pdf)"
+
 # lab7 = "[HTML](labs/Lab_7.html)"
 # pdf_lab7 = "[PDF](labs/Lab_7.pdf)"
 # 
@@ -126,8 +126,8 @@ tabLab = data.frame(Nr = c(1,
                            2,
                            3,
                            4,
-                           5#,
-                           # 6#, 
+                           5,
+                           6#, 
                            # 7, 
                            # 8
                            ),
@@ -135,8 +135,8 @@ tabLab = data.frame(Nr = c(1,
                             "Laborator 2",
                             "Laborator 3",
                             "Laborator 4",
-                            "Laborator 5"#,
-                            # "Laborator 6"#,
+                            "Laborator 5",
+                            "Laborator 6"#,
                             # "Laborator 7", 
                             # "Laborator Suplimentar"
                             ),
@@ -144,8 +144,8 @@ tabLab = data.frame(Nr = c(1,
                               lab2,
                               lab3,
                               lab4,
-                              lab5#,
-                              # lab6#,
+                              lab5,
+                              lab6#,
                               # lab7, 
                               # lab_sup
                               ),
@@ -153,8 +153,8 @@ tabLab = data.frame(Nr = c(1,
                              pdf_lab2,
                              pdf_lab3,
                              pdf_lab4,
-                             pdf_lab5#,
-                             # pdf_lab6#,
+                             pdf_lab5,
+                             pdf_lab6#,
                              # pdf_lab7, 
                              # pdf_lab_sup
                              ))
@@ -205,7 +205,7 @@ t3data = "8 Decembrie"
 
 t4 = "[Tema 4](homework/Tema_4.pdf)"
 t4sol = ""
-t4data = "22 Decembrie"
+t4data = "~~22 Decembrie~~ 29 Decembrie"
 # 
 # t5 = "[Tema 5](homework/Tema5.pdf)"
 # t5sol = "[Solutie](homework/Tema5_Sol.pdf)"
@@ -264,14 +264,14 @@ Mai jos găsiți proiectele de laborator pentru cursul de *Statistică*. Proiect
 
 ```{r echo = FALSE}
 gproj1_301 = "301"
-proj1_301 = "[HTML]() / [PDF]()"
+proj1_301 = "[HTML](projects/Proiect_301.html) / [PDF](projects/Proiect_301.pdf)"
 bproj1_301 = ""
-proj1data_301 = ""
+proj1data_301 = "4 Februarie"
 
 gproj1_311_321 = "311, 321"
-proj1_311_321 = "[HTML]() / [PDF]()"
+proj1_311_321 = "[HTML](projects/Proiect_311_321.html) / [PDF](projects/Proiect_311_321.pdf)"
 bproj1_311_321 = ""
-proj1data_311_321 = ""
+proj1data_311_321 = "4 Februarie"
 
 
 tabProiecte = data.frame(Tema = c(gproj1_301, gproj1_311_321), 

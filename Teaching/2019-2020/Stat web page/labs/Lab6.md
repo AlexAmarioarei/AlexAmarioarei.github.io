@@ -119,8 +119,8 @@ n = 1000
 S = 10000
 
 a = norm_estimators(n, mu, sigma, S)
-          var_mu1    var_mu2   var_mu3
-[1,] 0.0009811971 0.00153254 0.0628843
+         var_mu1     var_mu2    var_mu3
+[1,] 0.001008125 0.001592722 0.06114948
 
 par(mfrow = c(1,3))
 hist(a[,1], freq=FALSE, xlab=expression(hat(mu)[1]), 
@@ -176,13 +176,13 @@ theta = 3
 
 par(mfrow=c(2,2))
 a1 = pois_est1(10, theta, 50000)
-[1] "Pentru n = 10 varianta estimatorului este 2.33107726785034"
+[1] "Pentru n = 10 varianta estimatorului este 2.31930698594569"
 a2 = pois_est1(25, theta, 50000)
-[1] "Pentru n = 25 varianta estimatorului este 0.870281787101515"
+[1] "Pentru n = 25 varianta estimatorului este 0.885293999565142"
 a3 = pois_est1(50, theta, 50000)
-[1] "Pentru n = 50 varianta estimatorului este 0.423188937042729"
+[1] "Pentru n = 50 varianta estimatorului este 0.423058776783767"
 a4 = pois_est1(100, theta, 50000)
-[1] "Pentru n = 100 varianta estimatorului este 0.211874123663987"
+[1] "Pentru n = 100 varianta estimatorului este 0.209569576627799"
 
 
 hist(a1, freq=FALSE, xlab=expression(hat(theta)[n]), 
@@ -232,13 +232,13 @@ theta = 3
 
 par(mfrow=c(2,2))
 a1 = pois_est2(10, theta, 50000)
-[1] "Pentru n = 10 varianta estimatorului este 0.298223154463089"
+[1] "Pentru n = 10 varianta estimatorului este 0.301917405544111"
 a2 = pois_est2(25, theta, 50000)
-[1] "Pentru n = 25 varianta estimatorului este 0.119814809674753"
+[1] "Pentru n = 25 varianta estimatorului este 0.1199014219798"
 a3 = pois_est2(50, theta, 50000)
-[1] "Pentru n = 50 varianta estimatorului este 0.0595498988226165"
+[1] "Pentru n = 50 varianta estimatorului este 0.0599939938536371"
 a4 = pois_est2(100, theta, 50000)
-[1] "Pentru n = 100 varianta estimatorului este 0.0298212793372267"
+[1] "Pentru n = 100 varianta estimatorului este 0.0300199328900178"
 
 
 hist(a1, freq=FALSE, xlab=expression(tilde(theta)[n]), 
@@ -286,13 +286,13 @@ theta = 3
 par(mfrow=c(2,2))
 
 a1 = pois_est3(10, theta, 50000)
-[1] "Pentru n = 10 varianta estimatorului este 0.763137128921971"
+[1] "Pentru n = 10 varianta estimatorului este 0.766905371107466"
 a2 = pois_est3(25, theta, 50000)
-[1] "Pentru n = 25 varianta estimatorului este 0.304068956486992"
+[1] "Pentru n = 25 varianta estimatorului este 0.303932882238837"
 a3 = pois_est3(50, theta, 50000)
-[1] "Pentru n = 50 varianta estimatorului este 0.150081300384082"
+[1] "Pentru n = 50 varianta estimatorului este 0.150669062463398"
 a4 = pois_est3(100, theta, 50000)
-[1] "Pentru n = 100 varianta estimatorului este 0.0746835833587039"
+[1] "Pentru n = 100 varianta estimatorului este 0.0755209870524949"
 
 
 hist(a1, freq=FALSE, xlab=expression(dot(theta)[n]), 

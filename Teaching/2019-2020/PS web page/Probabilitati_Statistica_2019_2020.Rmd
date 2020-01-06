@@ -115,34 +115,40 @@ pdf_lab4 = "[PDF](labs/Lab4.pdf)"
 lab5 = "[HTML](labs/Lab5.html)"
 pdf_lab5 = "[PDF](labs/Lab5.pdf)"
 
-# lab6 = "[HTML](labs/Lab6.html)"
-# pdf_lab6= "[PDF](labs/Lab6.pdf)"
-# 
-# lab7 = "[HTML](labs/Lab7.html)"
-# pdf_lab7= "[PDF](labs/Lab7.pdf)"
-# 
+lab6 = "[HTML](labs/Lab6.html)"
+pdf_lab6= "[PDF](labs/Lab6.pdf)"
+
+lab7 = "[HTML](labs/Lab7.html)"
+pdf_lab7= "[PDF](labs/Lab7.pdf)"
+
 # lab_sup1 = "[HTML](labs/Lab_Suplimentar.html)"
 # pdf_lab_sup1= "[PDF](labs/Lab_Suplimentar.pdf)"
 # 
 # lab_sup2 = "[HTML](labs/Lab_Suplimentar_IPS.html)"
 # pdf_lab_sup2= "[PDF](labs/Lab_Suplimentar_IPS.pdf)"
 
-tabLab = data.frame(Nr = c(1:5),
+tabLab = data.frame(Nr = c(1:7),
                     Lab = c("Laborator 1", 
                             "Laborator 2",
                             "Laborator 3",
                             "Laborator 4",
-                            "Laborator 5"),
+                            "Laborator 5", 
+                            "Laborator 6", 
+                            "Laborator 7"),
                     Htmls = c(lab1, 
                               lab2,
                               lab3,
                               lab4,
-                              lab5),
+                              lab5, 
+                              lab6, 
+                              lab7),
                     Pdfs = c(pdf_lab1,
                              pdf_lab2,
                              pdf_lab3,
                              pdf_lab4,
-                             pdf_lab5))
+                             pdf_lab5,
+                             pdf_lab6,
+                             pdf_lab7))
 
 # tabLab = data.frame(Nr = c(1:7),
 #                     Lab = c("Laborator 1", 
@@ -216,7 +222,7 @@ t3data = "8 Decembrie"
 
 t4 = "[Tema 4](homework/Tema_4.pdf)"
 t4sol = ""
-t4data = "22 Decembrie"
+t4data = "~~22 Decembrie~~ 29 Decembrie"
 
 # t5 = "[Tema 5](homework/Tema5.pdf)"
 # t5sol = "[Solutie](homework/Tema5_Sol.pdf)"
@@ -273,12 +279,18 @@ Studenții trebuie să trimită temele în folderele cu grupele corespunzătoare
 Mai jos găsiți proiectele de laborator pentru cursul de *Probabilități și Statistică*. Proiectele sunt individuale iar copierea proiectelor este __strict interzisă__.
 
 ```{r echo = FALSE}
-gproj1 = "241, 242, 243, 244"
-proj1 = "[Proiect HTML]() / [Proiect PDF]()"
-proj1data = ""
+gproj1 = "241, 242"
+proj1 = "[Proiect HTML](projects/Proiect_241_242.html) / [Proiect PDF](projects/Proiect_241_242.pdf)"
+proj1data = "4 Februarie"
+
+gproj2 = "243, 244"
+proj2 = "[Proiect HTML](projects/Proiect_243_244.html) / [Proiect PDF](projects/Proiect_243_244.pdf)"
+proj2data = "4 Februarie"
 
 
-tabProiecte = data.frame(Tema = c(gproj1), Data = c(proj1), Solution = c(proj1data))
+tabProiecte = data.frame(Tema = c(gproj1, gproj2), 
+                         Data = c(proj1, proj2), 
+                         Solution = c(proj1data, proj1data))
 
 kableExtra::kable(tabProiecte, 
       col.names = c("Grupa", "Proiect Nr.", "Data de predare"),
