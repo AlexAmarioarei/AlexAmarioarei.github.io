@@ -1,0 +1,245 @@
+---
+pagetitle: "Instrumente Statistice"
+author: ""
+date: ""
+output:
+  html_document:
+    css: css/styles.css
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+    includes:
+      in_header: header/InstStat_header.html
+      after_body: footer/include_footer.html
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 3
+---
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 155
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, include=FALSE}
+library(knitr)
+library(DT)
+library(tidyverse)
+library(kableExtra)
+```
+
+## Informații generale
+***
+
+Acest curs prezintă o serie de metode statistice ce pot fi aplicate în finanțe și este adresat studenților de Master anul I de la Facultatea de Matematică și Informatică a Universității din București.  
+
+
+```{r, fig.align='center', out.width="30%", echo=FALSE}
+knitr::include_graphics("images/null_hypothesis.png")
+```
+
+
+## Informații de contact 
+***
+
+### Curs 
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
+
+
+### Seminar/Laborator
+
+ *  _Instructor_ : [Alexandru Amărioarei](https://alexamarioarei.github.io/)
+
+ *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
+
+
+## Note de curs 
+***
+
+Mai jos găsiți o serie de note de curs. 
+
+
+```{r echo = FALSE}
+pdf_note1 = "[PDF](notes/Chap_MLE.pdf)"
+
+tabNote = data.frame(Nr = c(1),
+                    Sem = c("Note de curs partea 1"),
+                    Pdfs = c(pdf_note1))
+
+
+kableExtra::kable(tabNote, "html",
+      col.names = c("Nr", "Note de curs", "PDFs"),
+      align = "ccc", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
+## Note de seminar
+***
+
+Mai jos regăsiți notele de seminar corespunzătoare cursului. 
+
+
+```{r echo = FALSE}
+sem1 = "[HTML](seminar/ISeminar_P1.html)"
+pdf_sem1 = "[PDF](seminar/Seminar_P1.pdf)"
+data_sem1 = "[ex_Greene.csv](seminar/dataIn/ex_Greene.csv)"
+readings_sem1 = "Greene 2012, Capitolul 14"
+
+
+tabSem = data.frame(Nr = c(1),
+                    Sem = c("Seminar partea 1"),
+                    Htmls = c(sem1),
+                    Pdfs = c(pdf_sem1),
+                    data = c(data_sem1),
+                    readings = c(readings_sem1))
+
+
+kableExtra::kable(tabSem, "html",
+      col.names = c("Nr", "Seminar", "HTML", "PDFs", "Set Date", "Readings"),
+      align = "cccccl", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
+
+## Note de laborator 
+***
+
+Mai jos găsiți o parte din laboratoarele cursului. 
+
+```{r echo = FALSE}
+lab1 = "[HTML](labs/Intro_R.html)"
+pdf_lab1 = "[PDF](labs/Intro_R_tex.pdf)"
+data_lab1 = ""
+readings_lab1 = ""
+
+lab2 = "[HTML](labs/Intro_Tidyverse.html)"
+pdf_lab2 = "[PDF](labs/Intro_Tidyverse.pdf)"
+data_lab2 = ""
+readings_lab2 = ""
+readings_lab2_b = ""
+
+tabLab = data.frame(Nr = c(1,
+                           2),
+                    Lab = c("Introducere in R",
+                            "Introducere in Tidyverse"),
+                    Htmls = c(lab1, 
+                              lab2),
+                    Pdfs = c(pdf_lab1,
+                             pdf_lab2),
+                    data = c(data_lab1,
+                             data_lab2),
+                    readings = c(readings_lab1, 
+                                 readings_lab2))
+
+kableExtra::kable(tabLab, "html",
+      col.names = c("Nr", "Laborator", "HTML", "PDFs", "Set Date", "Readings"),
+      align = "cccccl", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
+
+> **TABELE STATISTICE** Vizualizați versiunea [HTML](tables/Tabele_Statistice.html) sau [PDF](tables/Tabele_Statistice_v2_stat.pdf).
+
+
+## Proiect de laborator
+
+Mai jos găsiți proiectul cursului de *Instrumente Statistice pentru Finanțe*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
+
+```{r echo = FALSE}
+proj1_403 = "-"
+dproj1_403 = "-"
+proj1data_403 = "-"
+
+
+tabProiecte = data.frame(Proiect = c(proj1_403), 
+                         Data = c(dproj1_403), 
+                         Time = c(proj1data_403))
+
+kableExtra::kable(tabProiecte, "html",
+      col.names = c("Proiect", "Date", "Data de predare"),
+      align = "ccc", 
+      booktabs = TRUE) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+# kable(tabProiecte, 
+#       col.names = c("Proiect", "Date", "Data de predare"),
+#       align = "ccc")
+```
+
+Trimiterea proiectelor se va face pe adresa de **Dropbox** (conform instrucțiunilor de la curs) până la *data de predare* din tabel, dar cel târziu până la ora 23:59. 
+
+Studenții trebuie să trimită proiectele în folderele cu numele lor. Fiecare proiect va fi trimis în format **PDF** sau **MSWord** și va fi generat cu ajutorul pachetului [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile. Fișierul final va conține și codul `R` (documentat) și va avea numele: *Proiect_Nume_Prenume_grupa_403.pdf*.
+
+## Notarea
+
+Notarea se va face după cum urmează: prezentare și susținere proiect.
+
+
+## Bibliografie
+
+  1. Bennett, Hugen - *Financial Analytics with R, building a Laptop for Data Science*, Cambridge Univ., 2016
+  2. Miller - *Mathematics and Statistics for Financial Risk Management*, Wiley, 2014
+  3. Ruppert - *Statistics and Finance an Introduction*, Springer, 2004
+  4. Durbin, Koopman - *Time Series Analysis by State Space Methods*, Oxford, 2011
+  5. Greene, William - *Econometric Analysis*, Prentice Hall, 2012
+  
+
+## Link-uri utile
+
+### R
+  1. Programul R - [CRAN](https://cran.r-project.org/)
+  2. Interfața grafică [RStudio](https://www.rstudio.com/)
+  3. Documentație R (în engleză) - [R-Intro](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+  4. Documentație R (în română) - [R pentru începători ](ftp://cran.r-project.org/pub/R/doc/contrib/Paradis-rdebuts_RO.pdf)
+  5. Documentație R (în română) - [Inițiere în R pentru persoane cu pregătire matematică ](http://www.edumanager.ro/community/documente/initiere_in_r.pdf)
+  
+### Latex
+  1. Introducere în Latex (în romană) - [Manual Wikibooks](https://ro.wikibooks.org/wiki/LaTeX_(carte))
+  2. Introducere în Latex (în engleză) - [Wikibooks Latex Manual](https://en.wikibooks.org/wiki/LaTeX) în special secțiunile de [matematică](https://en.wikibooks.org/wiki/LaTeX/Mathematics), [liste](https://en.wikibooks.org/wiki/LaTeX/List_Structures), [grafice](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics) și [figuri](https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions)
+  3. Tutoriale Latex (în engleză) - [video](https://www.youtube.com/playlist?list=PLDD406480D35CE390)
+  4. Editoarele: [Texmaker](http://www.xm1math.net/texmaker/download.html) și [TeXnicCenter](http://www.texniccenter.org/) 
+  5. Mediul latex [MiKTeX](https://miktex.org/)
+
+### Rmarkdown
+  1. Pachetul [Rmarkdown](http://rmarkdown.rstudio.com/index.html) pentru documente reproductibile
+
