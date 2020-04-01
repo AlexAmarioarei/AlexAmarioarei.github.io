@@ -126,15 +126,22 @@ pdf_lab1 = "[PDF](Laboratoare/Intro_R_tex.pdf)"
 lab2 = "[HTML](Laboratoare/Intro_Tidyverse.html)"
 pdf_lab2 = "[PDF](Laboratoare/Intro_Tidyverse.pdf)"
 
+lab3 = "[HTML](Laboratoare/Intro_ggplot.html)"
+pdf_lab3 = "[PDF](Laboratoare/Intro_ggplot.pdf)"
+
 
 tabLab = data.frame(Nr = c(1,
-                           2),
+                           2,
+                           3),
                     Lab = c("Introducere in R", 
-                            "Laborator manipulare/vizualizare date"),
+                            "Laborator manipulare date", 
+                            "Laborator vizualizare date"),
                     Htmls = c(lab1, 
-                              lab2),
+                              lab2, 
+                              lab3),
                     Pdfs = c(pdf_lab1, 
-                             pdf_lab2))
+                             pdf_lab2,
+                             pdf_lab3))
 
 
 kableExtra::kable(tabLab, 

@@ -118,7 +118,7 @@ Mai jos regăsiți notele de seminar corespunzătoare cursului.
 
 
 ```{r echo = FALSE}
-sem1 = "[HTML](seminar/ISeminar_P1.html)"
+sem1 = "[HTML](seminar/Seminar_P1.html)"
 pdf_sem1 = "[PDF](seminar/Seminar_P1.pdf)"
 data_sem1 = "[ex_Greene.csv](seminar/dataIn/ex_Greene.csv)"
 readings_sem1 = "Greene 2012, Capitolul 14"
