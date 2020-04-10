@@ -107,7 +107,7 @@ tabLab = data.frame(Nr = c(1),
 
 kableExtra::kable(tabLab, 
       col.names = c("Nr", "Note de curs", "HTML", "PDFs"),
-      align = "cccc", 
+      align = "clcc", 
       booktabs = TRUE) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
@@ -129,24 +129,30 @@ pdf_lab2 = "[PDF](Laboratoare/Intro_Tidyverse.pdf)"
 lab3 = "[HTML](Laboratoare/Intro_ggplot.html)"
 pdf_lab3 = "[PDF](Laboratoare/Intro_ggplot.pdf)"
 
+lab4 = "[HTML](Laboratoare/LabSimpleReg.html)"
+pdf_lab4 = "[PDF](Laboratoare/LabSimpleReg.pdf)"
 
 tabLab = data.frame(Nr = c(1,
                            2,
-                           3),
+                           3,
+                           4),
                     Lab = c("Introducere in R", 
                             "Laborator manipulare date", 
-                            "Laborator vizualizare date"),
+                            "Laborator vizualizare date",
+                            "Laborator regresie liniara simpla"),
                     Htmls = c(lab1, 
                               lab2, 
-                              lab3),
+                              lab3,
+                              lab4),
                     Pdfs = c(pdf_lab1, 
                              pdf_lab2,
-                             pdf_lab3))
+                             pdf_lab3,
+                             pdf_lab4))
 
 
 kableExtra::kable(tabLab, 
       col.names = c("Nr", "Laborator", "HTML", "PDFs"),
-      align = "cccc", 
+      align = "clcc", 
       booktabs = TRUE) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
