@@ -92,7 +92,19 @@ knitr::include_graphics("images/boyfriend.png")
  *  _Email_ : alexandru [dot] amarioarei [at] fmi [dot] unibuc [dot] ro
  
  *  _Sala_ : L 204 - Grupele 241 și 242
- 
+
+
+## <span style="color: red; font-weight: bold;">IMPORTANT: INFORMAȚIE RESTANȚE</span> 
+***
+
+Din cauza situației speciale existente **examenele de restanță** se vor desfășura online. Modalitatea de examinare se va desfășura după cum urmează:
+
+ - pentru fiecare student restanțier se va crea un folder pe Dropbox cu numele studentului la care acesta (și numai acesta) va avea acces; 
+ - în ziua/ora examenului programat  fiecare student va primi simultan, în folder-ul specificat, subiectul propus spre rezolvare și cu timpul alocat; 
+ - rezolvările vor fi depuse în format pdf în același folder în timpul specificat
+ - orice problemă tehnică care poate să apară va fi menționată prin email (alexandru[dot]amariarei[at]fmi[dot]unibuc[dot]ro)
+
+
 ## Note de laborator 
 ***
 
