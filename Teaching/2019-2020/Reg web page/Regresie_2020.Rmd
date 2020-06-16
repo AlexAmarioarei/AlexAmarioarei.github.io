@@ -97,12 +97,15 @@ Mai jos veți regăsiți o parte din notele de curs:
 curs1 = "[HTML](Notite curs/IntroSimpleReg.html)"
 pdf_curs1 = "[PDF](Notite curs/IntroSimpleReg.pdf)"
 
+curs2 = "[HTML](Notite curs/IntroMultipleReg_web.html)"
+pdf_curs2 = "[PDF](Notite curs/IntroMultipleReg.pdf)"
 
 
-tabLab = data.frame(Nr = c(1),
-                    Lab = c("Regresia liniara simpla"),
-                    Htmls = c(curs1),
-                    Pdfs = c(pdf_curs1))
+
+tabLab = data.frame(Nr = c(1, 2),
+                    Lab = c("Regresia liniara simpla", "Regresia liniara multipla"),
+                    Htmls = c(curs1, curs2),
+                    Pdfs = c(pdf_curs1, pdf_curs2))
 
 
 kableExtra::kable(tabLab, 
