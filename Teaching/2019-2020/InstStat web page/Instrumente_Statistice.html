@@ -1652,6 +1652,17 @@ Note de curs partea 1
 <a href="notes/Chap_MLE.pdf">PDF</a>
 </td>
 </tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+Regresie liniara
+</td>
+<td style="text-align:center;">
+<a href="notes/IntroSimpleMultipleReg.pdf">PDF</a>
+</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1778,7 +1789,7 @@ Introducere in Tidyverse
 </div>
 <div id="proiect-de-laborator" class="section level2">
 <h2>Proiect de laborator</h2>
-<p>Mai jos găsiți proiectul cursului de <em>Instrumente Statistice pentru Finanțe</em>. Proiectul este individual iar copierea proiectelor este <strong>strict interzisă</strong>.</p>
+<p>Mai jos găsiți un exemplu de proiect pentru cursul de <em>Instrumente Statistice pentru Finanțe</em>. Proiectul este individual iar copierea proiectelor este <strong>strict interzisă</strong>.</p>
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1786,30 +1797,33 @@ Introducere in Tidyverse
 Proiect
 </th>
 <th style="text-align:center;">
-Date
+HTML
 </th>
 <th style="text-align:center;">
-Data de predare
+PDF
+</th>
+<th style="text-align:center;">
+RMD
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center;">
-<ul>
-<li></td>
+Metode pentru verificarea proprietatii de normalitate a datelor
+</td>
 <td style="text-align:center;">
-<ul>
-<li></td>
+<a href="labs/Proiect_exemplu.html">HTML</a>
+</td>
 <td style="text-align:center;">
-<ul>
-<li></td>
+<a href="labs/Proiect_exemplu.pdf">PDF</a>
+</td>
+<td style="text-align:center;">
+<a href="labs/Proiect_exemplu.Rmd">RMD</a>
+</td>
 </tr>
 </tbody>
-</table></li>
-</ul></li>
-</ul></li>
-</ul>
+</table>
 <p>Trimiterea proiectelor se va face pe adresa de <strong>Dropbox</strong> (conform instrucțiunilor de la curs) până la <em>data de predare</em> din tabel, dar cel târziu până la ora 23:59.</p>
 <p>Studenții trebuie să trimită proiectele în folderele cu numele lor. Fiecare proiect va fi trimis în format <strong>PDF</strong> sau <strong>MSWord</strong> și va fi generat cu ajutorul pachetului <a href="http://rmarkdown.rstudio.com/index.html">Rmarkdown</a> pentru documente reproductibile. Fișierul final va conține și codul <code>R</code> (documentat) și va avea numele: <em>Proiect_Nume_Prenume_grupa_403.pdf</em>.</p>
 </div>
@@ -1945,7 +1959,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

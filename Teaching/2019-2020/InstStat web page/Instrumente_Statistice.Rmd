@@ -98,10 +98,11 @@ Mai jos găsiți o serie de note de curs.
 
 ```{r echo = FALSE}
 pdf_note1 = "[PDF](notes/Chap_MLE.pdf)"
+pdf_note2 = "[PDF](notes/IntroSimpleMultipleReg.pdf)"
 
-tabNote = data.frame(Nr = c(1),
-                    Sem = c("Note de curs partea 1"),
-                    Pdfs = c(pdf_note1))
+tabNote = data.frame(Nr = c(1, 2),
+                    Sem = c("Note de curs partea 1", "Regresie liniară"),
+                    Pdfs = c(pdf_note1, pdf_note2))
 
 
 kableExtra::kable(tabNote, "html",
@@ -183,20 +184,21 @@ kableExtra::kable(tabLab, "html",
 
 ## Proiect de laborator
 
-Mai jos găsiți proiectul cursului de *Instrumente Statistice pentru Finanțe*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
+Mai jos găsiți un exemplu de proiect pentru cursul de *Instrumente Statistice pentru Finanțe*. Proiectul este individual iar copierea proiectelor este __strict interzisă__.
 
 ```{r echo = FALSE}
-proj1_403 = "-"
-dproj1_403 = "-"
-proj1data_403 = "-"
+proj1_403 = "[HTML](labs/Proiect_exemplu.html)"
+pdf_proj1 = "[PDF](labs/Proiect_exemplu.pdf)"
+rmd_proj1 = "[RMD](labs/Proiect_exemplu.Rmd)"
 
 
-tabProiecte = data.frame(Proiect = c(proj1_403), 
-                         Data = c(dproj1_403), 
-                         Time = c(proj1data_403))
+tabProiecte = data.frame(proiect = c("Metode pentru verificarea proprietatii de normalitate a datelor"), 
+                         html = c(proj1_403), 
+                         pdf = c(pdf_proj1), 
+                         rmd = c(rmd_proj1))
 
 kableExtra::kable(tabProiecte, "html",
-      col.names = c("Proiect", "Date", "Data de predare"),
+      col.names = c("Proiect", "HTML", "PDF", "RMD"),
       align = "ccc", 
       booktabs = TRUE) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
