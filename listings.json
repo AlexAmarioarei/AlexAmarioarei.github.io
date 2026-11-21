@@ -1,0 +1,26 @@
+[
+  {
+    "listing": "/teaching.html",
+    "items": []
+  },
+  {
+    "listing": "/projects.html",
+    "items": []
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/posts/2026-11-20-exemplu/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/blog/posts/2026-11-20-exemplu/index.html"
+    ]
+  },
+  {
+    "listing": "/research.html",
+    "items": []
+  }
+]

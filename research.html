@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Research topics, publications and talks of Alexandru Amărioarei: scan statistics, dependent models, Monte Carlo methods, applications in biology and ecology.">
+
+<title>Research – Alexandru Amărioarei</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assets/img/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-278b381e4eb370a9418af996ad7b5391.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-844fe5bbc5ede653dfd980ef950b7d18.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-278b381e4eb370a9418af996ad7b5391.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-4b5f431aa750e1299ae121b225b14301.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-53390f7336e454e8475be8676e3bea93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4b5f431aa750e1299ae121b225b14301.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-talks-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-event','listing-place','listing-note',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-event","listing-place","listing-note"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-talks-list'] = new List('listing-talks-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-seminars .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-title','listing-event','listing-place','listing-authors',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-title","listing-event","listing-place","listing-authors"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-seminars'] = new List('listing-seminars', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-posters .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-event','listing-place',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-event","listing-place"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-posters'] = new List('listing-posters', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-pubs-journal .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-venue','listing-details','listing-doi','listing-selected','listing-arxiv',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-venue","listing-details","listing-doi","listing-selected","listing-arxiv"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-pubs-journal'] = new List('listing-pubs-journal', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-pubs-chapter .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-venue','listing-doi','listing-selected','listing-details',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-venue","listing-doi","listing-selected","listing-details"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-pubs-chapter'] = new List('listing-pubs-chapter', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-pubs-proceedings .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-venue','listing-doi','listing-details',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-venue","listing-doi","listing-details"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-pubs-proceedings'] = new List('listing-pubs-proceedings', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-pubs-other .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-venue','listing-details',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-venue","listing-details"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-pubs-other'] = new List('listing-pubs-other', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-pubs-thesis .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-venue',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-venue"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-pubs-thesis'] = new List('listing-pubs-thesis', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-pubs-preprint .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-type','listing-year','listing-authors','listing-title','listing-venue','listing-arxiv',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-type","listing-year","listing-authors","listing-title","listing-venue","listing-arxiv"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-pubs-preprint'] = new List('listing-pubs-preprint', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<meta name="alt-lang-href" content="ro/research.html" data-lang="ro">
+<link rel="alternate" hreflang="en" href="https://alexamarioarei.github.io/research.html">
+<link rel="alternate" hreflang="ro" href="https://alexamarioarei.github.io/ro/research.html">
+<link rel="alternate" hreflang="x-default" href="https://alexamarioarei.github.io/research.html">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Research – Alexandru Amărioarei">
+<meta property="og:description" content="Research topics, publications and talks of Alexandru Amărioarei: scan statistics, dependent models, Monte Carlo methods, applications in biology and ecology.">
+<meta property="og:image" content="https://alexamarioarei.github.io/assets/img/og-card.png">
+<meta property="og:site_name" content="Alexandru Amărioarei">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Alexandru Amărioarei</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./research.html" aria-current="page"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./teaching.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./experience.html"> 
+<span class="menu-text">Experience</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ro/index.html" rel="alternate"> <i class="bi bi-translate" role="img" aria-label="Romanian version of this page">
+</i> 
+<span class="menu-text">Română</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Research</h1>
+<p class="subtitle lead">Scan statistics, approximations for dependent models, and applications</p>
+</div>
+
+<div>
+  <div class="description">
+    Research topics, publications and talks of Alexandru Amărioarei: scan statistics, dependent models, Monte Carlo methods, applications in biology and ecology.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="tabset-margin-container"></div><div class="panel-tabset research-tabs">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Topics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Publications</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Talks</a></li></ul>
+<div class="tab-content research-tabs">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><span id="topics"></span></p>
+<section id="research-topics" class="level3">
+<h3 class="anchored" data-anchor-id="research-topics">Research topics</h3>
+<p>My research focuses on <strong>scan statistics</strong> and the applied probability problems around them. A scan statistic records the largest number of events seen in a window of fixed shape that “scans” a sequence, an image or a volume. It is used to decide whether a cluster of events can be explained by chance.</p>
+<p>For a random field <span class="math inline">\(\{X_{s,t}\}\)</span> on the grid <span class="math inline">\(\{1,\dots,N_1\}\times\{1,\dots,N_2\}\)</span> and a window of size <span class="math inline">\(m_1\times m_2\)</span>, the two-dimensional discrete scan statistic is</p>
+<p><span class="math display">\[
+S_{m_1,m_2}(N_1,N_2) \;=\; \max_{\substack{1\le i\le N_1-m_1+1\\ 1\le j\le N_2-m_2+1}} \;\sum_{s=i}^{i+m_1-1}\,\sum_{t=j}^{j+m_2-1} X_{s,t}.
+\]</span></p>
+<p>The exact distribution of <span class="math inline">\(S\)</span> is rarely available, so the focus shifts to accurate approximations with explicit error bounds.</p>
+<p>Main directions:</p>
+<ul>
+<li><strong>Multidimensional discrete scan statistics.</strong> Approximations for the distribution of the scan statistic in two and three dimensions, based on the method of 1-dependent stationary sequences, with error bounds.</li>
+<li><strong>Dependent models.</strong> Block-factor random fields and models with local dependence, beyond the independence assumption.</li>
+<li><strong>Windows of arbitrary shape.</strong> Scan statistics whose window can take any shape, which increase the power to detect local changes in models that allow dependent data.</li>
+<li><strong>Continuous scan statistics.</strong> Approximations for the scan statistic of multidimensional Poisson processes.</li>
+<li><strong>Runs and patterns.</strong> The distribution of the longest monotone run; the Markov chain imbedding technique.</li>
+<li><strong>Simulation methods.</strong> Efficient Monte Carlo methods for estimating the distribution of scan statistics.</li>
+</ul>
+</section>
+<section id="applications-and-collaborations" class="level3">
+<h3 class="anchored" data-anchor-id="applications-and-collaborations">Applications and collaborations</h3>
+<p>Beyond scan statistics, my work in mathematical and computational statistical modelling has followed three applied lines:</p>
+<ul>
+<li><strong>Uncertainty of nonlinear transformations.</strong> With B. Strîmbu (University of Oregon), modelling the uncertainty of nonlinear transformations, which describe relationships within and between systems, and correcting the bias that appears when a transformed variable is back-transformed, for example in forestry practice when the original data are no longer available. The result is an unbiased procedure for modelling complex relationships that is more parsimonious than current approaches.</li>
+<li><strong>DNA self-assembly.</strong> In the MoDASyS project at the National Institute of Research and Development for Biological Sciences, computational statistical models for a mesh-assembly dynamical system that mimics DNA self-assembly, and a rule-based modelling methodology that gives new insight into the assembly process and its control.</li>
+<li><strong>Patient pathways in hospitals.</strong> In the ClinMine project at Inria Lille, modelling the dynamics of patients’ pathways through hospitals with functional data analysis.</li>
+</ul>
+<p>Other applications include detecting disease clusters (for example, Crohn’s disease) with spatial scan statistics, aquatic ecology and bibliometric assessments of research. See <a href="#publications">Publications</a> and <a href="./projects.html">Projects</a> for details.</p>
+</section>
+<section id="ongoing-directions" class="level3">
+<h3 class="anchored" data-anchor-id="ongoing-directions">Ongoing directions</h3>
+<p>Work in preparation:</p>
+<ul>
+<li>Approximations for the distribution of the longest monotone run, using a scan statistics approach.</li>
+<li>Approximations for multidimensional continuous scan statistics of Poisson processes (with C. Preda).</li>
+</ul>
+</section>
+<section id="phd-thesis" class="level3">
+<h3 class="anchored" data-anchor-id="phd-thesis">PhD thesis</h3>
+<p><em>Approximations for multidimensional discrete scan statistics</em>, Université Lille 1 – Sciences et Technologies, defended in September 2014. Advisor: Prof.&nbsp;Cristian Preda. Referees: Joseph Glaz, Claude Lefèvre. Committee: Stéphane Robin, Azzouz Dermoune, George Haiman, Manuela Sidoroff.</p>
+</section>
+<section id="software" class="level3">
+<h3 class="anchored" data-anchor-id="software">Software</h3>
+<p><strong>Scan Statistics Simulator</strong>: a MATLAB graphical interface for estimating the distribution of the discrete scan statistic in one, two and three dimensions, for several models of the underlying random field. The code will be published on GitHub.</p>
+</section>
+<section id="reviewing-and-memberships" class="level3">
+<h3 class="anchored" data-anchor-id="reviewing-and-memberships">Reviewing and memberships</h3>
+<p>Reviewer for <em>Methodology and Computing in Applied Probability</em>, <em>Physica A</em>, <em>Statistics &amp; Probability Letters</em>, <em>Romanian Journal of Information Science and Technology</em> and <em>Mathematical Reports</em>.</p>
+<p>Member of the Romanian Society of Probability and Statistics and associate member of the Romanian team of The R Project for Statistical Computing.</p>
+<p>Profiles: <a href="https://orcid.org/0000-0002-3722-7351">ORCID</a>, <a href="https://scholar.google.com/citations?user=QGjXKxAAAAAJ">Google Scholar</a>, <a href="https://www.webofscience.com/wos/author/record/AAT-2866-2021">Web of Science</a> (ResearcherID AAT-2866-2021), Brainmap ID U-1700-038S-5236.</p>
+</section>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><span id="publications"></span></p>
+<p>DOI links point to the published version and arXiv links to preprints. The same list, with citation counts, is on <a href="https://scholar.google.com/citations?user=QGjXKxAAAAAJ">Google Scholar</a> and <a href="https://orcid.org/0000-0002-3722-7351">ORCID</a>.</p>
+<section id="journal-articles" class="level3">
+<h3 class="anchored" data-anchor-id="journal-articles">Journal articles</h3>
+<div id="listing-pubs-journal" class="quarto-listing quarto-listing-container-custom">
+
+<div class="pub-list">
+
+<section class="year-group">
+  <div class="year">2025</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors">B. Oancea, M. Necula, E. C. Milea, <strong>A. Amărioarei</strong>, I. Petre, M. M. Păun</span>.
+      <span class="pub-title">Machine learning meets Raman spectroscopy: a systematic review of literature in cancer diagnostics</span>.
+      <span class="pub-venue">Procedia Computer Science</span>, 270, 2666–2675.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2021</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors">O. Pacioglu, <strong>A. Amărioarei</strong>, L. T. Duțu et al</span>.
+      <span class="pub-title">The structure and functionality of communities and food webs in streams along the epigean–hypogean continuum: unifying ecological stoichiometry and metabolic theory of ecology</span>.
+      <span class="pub-venue">Aquatic Sciences</span>, 83, 63.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1007/s00027-021-00815-6" aria-label="DOI: The structure and functionality of communities and food webs in streams along the epigean–hypogean continuum: unifying ecological stoichiometry and metabolic theory of ecology">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">B. Strîmbu, A. Păun, <strong>A. Amărioarei</strong>, M. Păun, V. F. Strîmbu</span>.
+      <span class="pub-title">Efficient synthetic generation of ecological data with preset spatial association of individuals</span>.
+      <span class="pub-venue">Canadian Journal of Forest Research</span>.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1139/cjfr-2020-0490" aria-label="DOI: Efficient synthetic generation of ecological data with preset spatial association of individuals">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, F. Spencer, G. Barad, A.-M. Gheorghe, C. Iţcuş, I. Tuşa, A.-M. Prelipcean, A. Păun, M. Păun, A. Rodriguez-Paton, R. Trandafir, E. Czeizler</span>.
+      <span class="pub-title">DNA-guided assembly for fibril proteins</span>.
+      <span class="pub-venue">Mathematics</span>, 9(4), 404.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.3390/math9040404" aria-label="DOI: DNA-guided assembly for fibril proteins">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">B. Strîmbu, <strong>A. Amărioarei</strong>, M. Păun</span>.
+      <span class="pub-title">Nonlinear parsimonious forest modeling assuming normal distribution of residuals</span>.
+      <span class="pub-venue">European Journal of Forest Research</span>.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1007/s10342-021-01355-2" aria-label="DOI: Nonlinear parsimonious forest modeling assuming normal distribution of residuals">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2020</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, G. Barad, E. Czeizler, A. Păun, R. Trandafir</span>.
+      <span class="pub-title">Probabilistic modelling of the self-assembly of the 1-dimensional DNA structures</span>.
+      <span class="pub-venue">Romanian Journal of Information Science and Technology</span>, 23(3), 311–329.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">L. Popa, A. M. Dobre, C. Iţcuş, <strong>A. Amărioarei</strong>, A. Păun, M. Păun, F. Pop, I. Tuşa, M. Nguyen, A. Kuzyk, E. Czeizler</span>.
+      <span class="pub-title">DNA origami design and implementation: the Romanian map</span>.
+      <span class="pub-venue">Romanian Biotechnological Letters</span>, 25(4), 1816–1822.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, M. Păun, B. Strîmbu</span>.
+      <span class="pub-title">Development of nonlinear parsimonious forest models using efficient expansion of the Taylor series: applications to site productivity and taper</span>.
+      <span class="pub-venue">Forests</span>, 11, 458.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.3390/f11040458" aria-label="DOI: Development of nonlinear parsimonious forest models using efficient expansion of the Taylor series: applications to site productivity and taper">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>.
+      <span class="pub-title">One dimensional discrete scan statistics for dependent models and some related problems</span>.
+      <span class="pub-venue">Mathematics</span>, 8, 576.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.3390/math8040576" aria-label="DOI: One dimensional discrete scan statistics for dependent models and some related problems">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2018</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors">C. Iţcuş, <strong>A. Amărioarei</strong>, G. Barad, E. Czeizler, A. Dobre, V. Mitrana, F. Negre, A. Păun, M. Păun, M. Sidoroff, R. Trandafir, I. Tuşa</span>.
+      <span class="pub-title">3D DNA origami map structure simulation</span>.
+      <span class="pub-venue">Romanian Journal of Information Science and Technology</span>, 21(3), 249–255.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, G. Barad, E. Czeizler, E. Czeizler, A. M. Dobre, C. Iţcuş, A. Păun, M. Păun, R. Trandafir, I. Tuşa</span>.
+      <span class="pub-title">One dimensional DNA tiles self-assembly model simulation</span>.
+      <span class="pub-venue">International Journal of Unconventional Computing</span>, 13(4–5), 399–415.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Iţcuş, I. Tuşa, M. Sidoroff, M. Păun</span>.
+      <span class="pub-title">Classification of Romanian saltwater lakes by statistical methods</span>.
+      <span class="pub-venue">Journal of Environmental Protection and Ecology</span>, 19(1), 1–14.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">C. Dhaenens, J. Jacques, V. Vandewalle, M. Vandromme, E. Chazard, C. Preda, <strong>A. Amărioarei</strong>, P. Chaiwuttisak, C. Cozma, G. Ficheur, M.-E. Kessaci, R. Perichon, J. Taillard, R. Bordet, A. Lansiaux, L. Jourdan, D. Delerue, A. Hansske</span>.
+      <span class="pub-title">ClinMine: optimizing the management of patients in hospital</span>.
+      <span class="pub-venue">IRBM</span>.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1016/j.irbm.2017.12.002" aria-label="DOI: ClinMine: optimizing the management of patients in hospital">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2017</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors">B. Strîmbu, <strong>A. Amărioarei</strong>, M. Păun</span>.
+      <span class="pub-title">A parsimonious approach for modeling uncertainty within complex nonlinear relationships</span>.
+      <span class="pub-venue">Ecosphere</span>, 8(9).
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1002/ecs2.1945" aria-label="DOI: A parsimonious approach for modeling uncertainty within complex nonlinear relationships">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">B. Strîmbu, <strong>A. Amărioarei</strong>, M. Păun, J. P. McTague</span>.
+      <span class="pub-title">A posteriori bias correction of three models used for environmental reporting</span>.
+      <span class="pub-venue">Forestry: An International Journal of Forest Research</span>, 91(1), 49–62.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1093/forestry/cpx032" aria-label="DOI: A posteriori bias correction of three models used for environmental reporting">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Iţcuş, M. Păun</span>.
+      <span class="pub-title">Phytoremediation research — how Romania is placed worldwide</span>.
+      <span class="pub-venue">Romanian Biotechnological Letters</span>, 22(3), 12651–12660.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2016</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, M. Păun</span>.
+      <span class="pub-title">Two decades of research collaboration: a keyword Scopus evaluation</span>.
+      <span class="pub-venue">Romanian Statistical Review</span>, No. 4, 49–66.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">M. Sidoroff, M. Paraschiv, <strong>A. Amărioarei</strong>, M. Păun</span>.
+      <span class="pub-title">Measuring funded research performance for multidisciplinary research in the Danube Basin</span>.
+      <span class="pub-venue">Journal of Environmental Protection and Ecology</span>, 17(2), 638–647.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2015</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>.
+      <span class="pub-title">Approximation for the distribution of three-dimensional discrete scan statistic</span>.
+      <span class="pub-venue">Methodology and Computing in Applied Probability</span>, 17(3), 565–578.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1007/s11009-013-9382-3" aria-label="DOI: Approximation for the distribution of three-dimensional discrete scan statistic">DOI</a>
+        <a href="https://arxiv.org/abs/1303.3775" aria-label="arXiv: Approximation for the distribution of three-dimensional discrete scan statistic">arXiv</a>
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2014</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>.
+      <span class="pub-title">Approximations for two-dimensional discrete scan statistics in some block-factor type dependent models</span>.
+      <span class="pub-venue">Journal of Statistical Planning and Inference</span>, 151–152, 107–120.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1016/j.jspi.2014.05.002" aria-label="DOI: Approximations for two-dimensional discrete scan statistics in some block-factor type dependent models">DOI</a>
+        <a href="https://arxiv.org/abs/1401.2822" aria-label="arXiv: Approximations for two-dimensional discrete scan statistics in some block-factor type dependent models">arXiv</a>
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="book-chapters" class="level3">
+<h3 class="anchored" data-anchor-id="book-chapters">Book chapters</h3>
+<div id="listing-pubs-chapter" class="quarto-listing quarto-listing-container-custom">
+
+<div class="pub-list">
+
+<section class="year-group">
+  <div class="year">2024</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, M. Genin, C. Preda</span>.
+      <span class="pub-title">Two-dimensional discrete scan statistics with arbitrary window shape</span>.
+      <span class="pub-venue">Handbook of Scan Statistics (J. Glaz, M. V. Koutras, eds.), Springer, New York</span>.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1007/978-1-4614-8033-4_52" aria-label="DOI: Two-dimensional discrete scan statistics with arbitrary window shape">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2017</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors">M. Sidoroff, I. Tuşa, <strong>A. Amărioarei</strong>, M. Păun</span>.
+      <span class="pub-title">Public perception and socio-economic analysis on the impact of DANUBIUS-RI</span>.
+      <span class="pub-venue">Lower Danube Basin. Approaches to Macroregional Sustainability, Editura Academiei Române</span>, 69–78.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="conference-proceedings" class="level3">
+<h3 class="anchored" data-anchor-id="conference-proceedings">Conference proceedings</h3>
+<div id="listing-pubs-proceedings" class="quarto-listing quarto-listing-container-custom">
+
+<div class="pub-list">
+
+<section class="year-group">
+  <div class="year">2019</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors">G. Barad, <strong>A. Amărioarei</strong>, M. Păun, A. M. Dobre, C. Iţcuş, I. Tuşa, R. Trandafir, E. Czeizler</span>.
+      <span class="pub-title">Simulation of one-dimensional staged DNA tile assembly by the signal-passing hierarchical TAM</span>.
+      <span class="pub-venue">KES 2019, 23rd International Conference on Knowledge-Based and Intelligent Information &amp; Engineering Systems (Procedia Computer Science)</span>.
+      
+      
+      <div class="item-links">
+        <a href="https://doi.org/10.1016/j.procs.2019.09.364" aria-label="DOI: Simulation of one-dimensional staged DNA tile assembly by the signal-passing hierarchical TAM">DOI</a>
+        
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2018</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, G. Barad, E. Czeizler, A. Dobre, C. Iţcuş, V. Mitrana, A. Păun, M. Păun, F. Spencer, R. Trandafir, I. Tuşa</span>.
+      <span class="pub-title">DNA-guided assembly of nanocellulose meshes</span>.
+      <span class="pub-venue">Theory and Practice of Natural Computing, TPNC 2018 (D. Fagan, C. Martín-Vide, M. O'Neill, M. Vega-Rodríguez, eds.), Lecture Notes in Computer Science 11324, Springer, Cham</span>.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2016</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, R. Jibotean, I. Tuşa, C. Iţcuş, M. Butu</span>.
+      <span class="pub-title">Trends in Romanian medicinal plants scientific research</span>.
+      <span class="pub-venue">Analele Ştiinţifice ale Universităţii Al. I. Cuza Iaşi, s. II a. Biologie vegetală</span>, 62(1), 62–63.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2013</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>.
+      <span class="pub-title">Approximation for two-dimensional discrete scan statistics in some dependent models</span>.
+      <span class="pub-venue">Proceedings of the 15th Conference of the Applied Stochastic Models and Data Analysis (ASMDA) International Society, Barcelona</span>, 45–52.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="other-publications" class="level3">
+<h3 class="anchored" data-anchor-id="other-publications">Other publications</h3>
+<div id="listing-pubs-other" class="quarto-listing quarto-listing-container-custom">
+
+<div class="pub-list">
+
+<section class="year-group">
+  <div class="year">2016</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, R. Jibotean, I. Tuşa, C. Iţcuş, M. Păun</span>.
+      <span class="pub-title">Assessment of the Romanian medicinal plant research — from European to national level</span>.
+      <span class="pub-venue">Analele Ştiinţifice ale Universităţii Al. I. Cuza Iaşi, Biologie Vegetală</span>, 62(2), 5–17.
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">M. Butu, R. Jibotean, C. Iţcuş, M. Pasachiv, I. Tuşa, <strong>A. Amărioarei</strong></span>.
+      <span class="pub-title">Conceptual framework for bioeconomic potential indicators in Danube Delta</span>.
+      <span class="pub-venue">Studia Universitatis Vasile Goldiş, Seria Ştiinţele Vieţii</span>, 26(2), 235–242.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">2009</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, M. Sidoroff</span>.
+      <span class="pub-title">A first step in scan statistics</span>.
+      <span class="pub-venue">Romanian Biological Sciences</span>, VII(1–4).
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors">J. Jack, M. Sidoroff, I. Stanciu, <strong>A. Amărioarei</strong>, V. Boşcaiu, S. Popescu, M. Ciucu, A. Păun</span>.
+      <span class="pub-title">Modeling of biochemical signaling with the Memory NWT algorithm</span>.
+      <span class="pub-venue">Romanian Biological Sciences</span>, VII(1–4).
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="thesis" class="level3">
+<h3 class="anchored" data-anchor-id="thesis">Thesis</h3>
+<div id="listing-pubs-thesis" class="quarto-listing quarto-listing-container-custom">
+
+<div class="pub-list">
+
+<section class="year-group">
+  <div class="year">2014</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong></span>.
+      <span class="pub-title">Approximations for multidimensional discrete scan statistics</span>.
+      <span class="pub-venue">PhD thesis in Applied Mathematics, Université Lille 1 – Sciences et Technologies (advisor: C. Preda)</span>.
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="preprints-and-work-in-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="preprints-and-work-in-preparation">Preprints and work in preparation</h3>
+<div id="listing-pubs-preprint" class="quarto-listing quarto-listing-container-custom">
+
+<div class="pub-list">
+
+<section class="year-group">
+  <div class="year">2012</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong></span>.
+      <span class="pub-title">Approximation for the distribution of extremes of one dependent stationary sequences of random variables</span>.
+      <span class="pub-venue">arXiv preprint</span>.
+      
+      
+      <div class="item-links">
+        
+        <a href="https://arxiv.org/abs/1211.5456" aria-label="arXiv: Approximation for the distribution of extremes of one dependent stationary sequences of random variables">arXiv</a>
+        
+        
+      </div>
+      
+    </li>
+  
+  </ol>
+</section>
+
+<section class="year-group">
+  <div class="year">In preparation</div>
+  <ol>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong></span>.
+      <span class="pub-title">Approximations for the distribution of the longest monotone runs based on a scan statistic approach</span>.
+      
+      
+      
+    </li>
+  
+    <li class="pub">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>.
+      <span class="pub-title">Approximations for multidimensional continuous scan statistics over Poisson processes</span>.
+      
+      
+      
+    </li>
+  
+  </ol>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><span id="talks"></span></p>
+<section id="conference-talks" class="level3">
+<h3 class="anchored" data-anchor-id="conference-talks">Conference talks</h3>
+<div id="listing-talks-list" class="quarto-listing quarto-listing-container-custom">
+
+<div class="talk-list">
+
+<section class="year-group">
+  <div class="year">2025</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximations for the distribution of scan statistics and applications</span>.
+      <span class="talk-event">Statistical Modeling and Applications (StatMod 2025), Piraeus, Greece.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2020</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Scan statistics for some dependent models. Applications</span>.
+      <span class="talk-event">Statistical Modeling and Applications (StatMod 2020), Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2019</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">An integrated approach to multidimensional discrete scan statistics with applications</span>.
+      <span class="talk-event">7th IMS-China International Conference on Statistics and Probability, Dalian, China.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2018</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Multidimensional discrete scan statistics with arbitrary windows</span>.
+      <span class="talk-event">9th International Workshop on Applied Probability (IWAP 2018), Budapest, Hungary.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2017</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Extensions of the classical scan statistics framework with applications</span>.
+      <span class="talk-event">6th IMS-China International Conference on Statistics and Probability, Nanning, China.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Extensions of the classical scan statistics framework with applications</span>.
+      <span class="talk-event">154th ICB Seminar — Statistics and Clinical Practice, Warsaw, Poland.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Approximations for the distribution of the three-dimensional continuous scan statistics</span>.
+      <span class="talk-event">20th Conference of the Romanian Society of Probability and Statistics, Brașov, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2016</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Discrete scan statistics with windows of arbitrary shape</span>.
+      <span class="talk-event">8th International Workshop on Applied Probability (IWAP 2016), Toronto, Canada.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Statistical techniques for local cluster detection</span>.
+      <span class="talk-event">2nd BIS Workshop: bioinformatic and statistical tools for data analysis, Bucharest, Romania.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors">B. Strîmbu, <strong>A. Amărioarei</strong>, G. Marin, M. Păun</span>. 
+      <span class="pub-title">Resuscitating old forest models to meet present environmental reporting needs</span>.
+      <span class="talk-event">World Conference on Natural Resource Modeling, Flagstaff, Arizona, USA (presented by B. Strîmbu).</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Approximations for the distribution of the discrete scan statistics when the scanning window has arbitrary shape</span>.
+      <span class="talk-event">19th Conference of the Romanian Society of Probability and Statistics, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2015</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Scan statistics for some dependent models. Applications</span>.
+      <span class="talk-event">16th Conference of the Applied Stochastic Models and Data Analysis International Society (ASMDA 2015), Athens, Greece.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Approximations for the length of the longest monotone run in a sequence of i.i.d. random variables</span>.
+      <span class="talk-event">18th Conference of the Romanian Society of Probability and Statistics, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2014</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Survey on approximation methods for scan statistics: a software illustration</span>.
+      <span class="talk-event">7th International Workshop on Applied Probability (IWAP 2014), Antalya, Turkey.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors">C. Preda, <strong>A. Amărioarei</strong>, M. Genin</span>. 
+      <span class="pub-title">Two-dimensional discrete scan statistics with arbitrary scanning window</span>.
+      <span class="talk-event">7th International Workshop on Applied Probability (IWAP 2014), Antalya, Turkey.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors">C. Preda, <strong>A. Amărioarei</strong></span>. 
+      <span class="pub-title">Approximation for the scan statistics distribution of a three-dimensional Poisson process</span>.
+      <span class="talk-event">7th International Workshop on Applied Probability (IWAP 2014), Antalya, Turkey.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Efficient simulation methods for scan statistics: a comparison study</span>.
+      <span class="talk-event">17th Conference of the Romanian Society of Probability and Statistics, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2013</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximation for two-dimensional discrete scan statistics in some block-factor dependent models</span>.
+      <span class="talk-event">IMS-China International Conference on Statistics and Probability, Chengdu, China.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximation for two-dimensional discrete scan statistics in some dependent models</span>.
+      <span class="talk-event">15th Conference of the Applied Stochastic Models and Data Analysis International Society (ASMDA 2013), Barcelona, Spain.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximation for two-dimensional discrete scan statistics in some dependent models</span>.
+      <span class="talk-event">16th Conference of the Romanian Society of Probability and Statistics, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2012</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximations for the three-dimensional discrete scan statistics</span>.
+      <span class="talk-event">International Workshop on Applied Probability (IWAP 2012), Jerusalem, Israel.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximations for the three-dimensional discrete scan statistics</span>.
+      <span class="talk-event">15th Conference of the Romanian Society of Probability and Statistics, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2011</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Approximations for the three-dimensional discrete scan statistics</span>.
+      <span class="talk-event">International Conference on Advances in Probability and Statistics — Theory and Applications (in honour of N. Balakrishnan), Hong Kong SAR, China.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">The Markov chain imbedding technique — applications to scan statistics</span>.
+      <span class="talk-event">14th Conference of the Romanian Society of Probability and Statistics, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="invited-seminars" class="level3">
+<h3 class="anchored" data-anchor-id="invited-seminars">Invited seminars</h3>
+<div id="listing-seminars" class="quarto-listing quarto-listing-container-custom">
+
+<div class="talk-list">
+
+<section class="year-group">
+  <div class="year">2018</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Extensions of the classical scan statistics with applications</span>.
+      <span class="talk-event">ISMMA Seminar, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2017</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Preda</span>. 
+      <span class="pub-title">Scan statistics for some dependent models and applications</span>.
+      <span class="talk-event">MODAL's Days Seminar, Le Touquet-Paris-Plage, France.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2015</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Approximations for the distribution of scan statistics and applications</span>.
+      <span class="talk-event">Séminaire de Statistique, IRMA, Strasbourg, France.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2014</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Approximations for one- and two-dimensional scan statistics with applications</span>.
+      <span class="talk-event">Statistics for Systems Biology Seminar, Paris, France.</span>
+    </li>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Scan statistics: theory and applications</span>.
+      <span class="talk-event">Séminaire de Probabilités et Statistique, Laboratoire Paul Painlevé, Lille, France.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2012</div>
+  <ul>
+  
+    <li class="talk">
+      
+      <span class="pub-title">Approximations for the distribution of the three-dimensional scan statistics</span>.
+      <span class="talk-event">MODAL's Days Seminar, Albiez, France.</span>
+    </li>
+  
+  </ul>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="posters" class="level3">
+<h3 class="anchored" data-anchor-id="posters">Posters</h3>
+<div id="listing-posters" class="quarto-listing quarto-listing-container-custom">
+
+<div class="talk-list">
+
+<section class="year-group">
+  <div class="year">2018</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, F. Spencer, R. Trandafir, G. Barad, A. Dobre, C. Iţcuş, I. Tuşa, A. Păun, M. Păun, E. Czeizler</span>. 
+      <span class="pub-title">Computational approaches for the programmed assembly of nanocellulose meshes</span>.
+      <span class="talk-event">Verification of Engineered Molecular Devices and Programs (VEMDP), Oxford, UK.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2017</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, C. Iţcuş, I. Tuşa, M. Sidoroff, M. Păun</span>. 
+      <span class="pub-title">Statistical evaluation of the Romanian therapeutic lakes through their biochemical characteristics</span>.
+      <span class="talk-event">PROMARE 2017, Constanța, Romania.</span>
+    </li>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, I. Tuşa, C. Iţcuş, M. Sidoroff, M. Păun</span>. 
+      <span class="pub-title">River ecosystem classification through heavy metal assessment</span>.
+      <span class="talk-event">PROMARE 2017, Constanța, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2015</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors">E. Tarnoveanu, A. Ursu, P. Ichim, <strong>A. Amărioarei</strong></span>. 
+      <span class="pub-title">Ethological study of the rook (Corvus frugilegus L.) in Iași metropolitan area and its ecological requirements assessment</span>.
+      <span class="talk-event">International Zoological Congress of the “Grigore Antipa” Museum, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+<section class="year-group">
+  <div class="year">2014</div>
+  <ul>
+  
+    <li class="talk">
+      <span class="pub-authors"><strong>A. Amărioarei</strong>, M. Genin, C. Gower, C. Preda, M. Sidoroff</span>. 
+      <span class="pub-title">Detecting Crohn's disease clusters using spatial scan statistics</span>.
+      <span class="talk-event">Symposium on Modern Biotechnological Advances for Human Health, Bucharest, Romania.</span>
+    </li>
+  
+  </ul>
+</section>
+
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/alexamarioarei\.github\.io\/(?!curs-)");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Alexandru Amărioarei</p>
+</div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://fmi.unibuc.ro/">
+<p>Faculty of Mathematics and Computer Science, University of Bucharest</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alexandru.amarioarei@fmi.unibuc.ro">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/alexamarioarei">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=QGjXKxAAAAAJ">
+      <i class="bi bi-mortarboard" role="img" aria-label="Google Scholar">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://orcid.org/0000-0002-3722-7351">
+      <i class="bi bi-person-badge" role="img" aria-label="ORCID">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/site.js"></script>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

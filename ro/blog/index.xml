@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Alexandru Amărioarei</title>
+<link>https://alexamarioarei.github.io/ro/blog/</link>
+<atom:link href="https://alexamarioarei.github.io/ro/blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>Note, tutoriale și noutăți din cercetare: probabilități, statistică, R și predare.</description>
+<generator>quarto-1.10.19</generator>
+<lastBuildDate>Thu, 19 Nov 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Exemplu: estimarea repartiției statisticii de scanare prin simulare</title>
+  <dc:creator>Alexandru Amărioarei</dc:creator>
+  <link>https://alexamarioarei.github.io/ro/blog/posts/2026-11-20-exemplu/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Notă</span>Aceasta este o postare-exemplu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Arată cum arată o notă pe acest blog: text, formule LaTeX, cod R, un tabel și un enunț numerotat. Pentru o postare nouă, copiați acest director, schimbați data și titlul și rescrieți textul. Postarea poate fi ștearsă oricând (directorul <code>ro/blog/posts/2026-11-20-exemplu/</code> și perechea lui din <code>blog/posts/</code>).</p>
+</div>
+</div>
+<section id="problema" class="level2">
+<h2 class="anchored" data-anchor-id="problema">Problema</h2>
+<p>Fie <img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cdots,%20X_N"> variabile aleatoare independente, cu repartiția Bernoulli de parametru <img src="https://latex.codecogs.com/png.latex?p">. Pentru o fereastră de lungime <img src="https://latex.codecogs.com/png.latex?m">, statistica de scanare unidimensională discretă este</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS_m(N)%20=%20%5Cmax_%7B1%20%5Cle%20i%20%5Cle%20N-m+1%7D%20%5C;%20%5Csum_%7Bk=i%7D%5E%7Bi+m-1%7D%20X_k%20.%0A"></p>
+<p>Ne interesează probabilitatea <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BP%7D%5Cbig(S_m(N)%20%5Cge%20k%5Cbig)">, adică șansa ca, undeva în secvență, o fereastră de lungime <img src="https://latex.codecogs.com/png.latex?m"> să conțină cel puțin <img src="https://latex.codecogs.com/png.latex?k"> succese.</p>
+<div id="def-scan" class="theorem definition">
+<p><span class="theorem-title"><strong>Definiția 1 (Statistica de scanare)</strong></span> Pentru un șir <img src="https://latex.codecogs.com/png.latex?(X_k)"> și o lungime <img src="https://latex.codecogs.com/png.latex?m">, numim <em>statistică de scanare</em> numărul maxim de succese conținute într-o fereastră de <img src="https://latex.codecogs.com/png.latex?m"> observații consecutive.</p>
+</div>
+</section>
+<section id="estimare-monte-carlo-în-r" class="level2">
+<h2 class="anchored" data-anchor-id="estimare-monte-carlo-în-r">Estimare Monte Carlo în R</h2>
+<p>Cel mai simplu estimator este frecvența relativă dintr-un număr mare de simulări independente:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cwidehat%7BP%7D_n%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Br=1%7D%5E%7Bn%7D%20%5Cmathbf%7B1%7D%5C%7BS%5E%7B(r)%7D_m(N)%20%5Cge%20k%5C%7D,%0A%5Cqquad%0A%5Coperatorname%7Bse%7D%5Cbig(%5Cwidehat%7BP%7D_n%5Cbig)%20%5Capprox%20%5Csqrt%7B%5Cfrac%7B%5Cwidehat%7BP%7D_n%20(1-%5Cwidehat%7BP%7D_n)%7D%7Bn%7D%7D%20.%0A"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">scan_1d <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x, m) {</span>
+<span id="cb1-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># sumele pe ferestre de lungime m, calculate cu sume cumulate</span></span>
+<span id="cb1-3">  s <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, x))</span>
+<span id="cb1-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(s[(m <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(s)] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> s[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(s) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> m)])</span>
+<span id="cb1-5">}</span>
+<span id="cb1-6"></span>
+<span id="cb1-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>)</span>
+<span id="cb1-8">N <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>; m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>; p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.05</span>; k <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span></span>
+<span id="cb1-9">S <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replicate</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scan_1d</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbinom</span>(N, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, p), m))</span>
+<span id="cb1-10"></span>
+<span id="cb1-11">p_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(S <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> k)</span>
+<span id="cb1-12">se    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(p_hat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> p_hat) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(S))</span>
+<span id="cb1-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">estimat =</span> p_hat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">eroare_standard =</span> se)</span></code></pre></div></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Sfat</span>Cod R executabil
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Blocul de mai sus este doar afișat. Pentru ca R să ruleze codul la randare și să includă rezultatele (inclusiv grafice), scrieți blocul ca <code>```{r}</code>. Rezultatele sunt păstrate în <code>_freeze/</code>, astfel încât site-ul poate fi reconstruit și fără R.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ce-mai-poate-conține-o-notă" class="level2">
+<h2 class="anchored" data-anchor-id="ce-mai-poate-conține-o-notă">Ce mai poate conține o notă</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Sintaxă Quarto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Formulă</td>
+<td><code>$...$</code> și <code>$$...$$</code></td>
+</tr>
+<tr class="even">
+<td>Teoremă</td>
+<td><code>::: {#thm-nume} ... :::</code></td>
+</tr>
+<tr class="odd">
+<td>Figură</td>
+<td><code>![Legendă](figura.png)</code></td>
+</tr>
+<tr class="even">
+<td>Cod R / Python</td>
+<td><code>```{r}</code> / <code>```{python}</code></td>
+</tr>
+<tr class="odd">
+<td>Notă de subsol</td>
+<td><code>text[^1]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Trimiterile încrucișate funcționează automat: de exemplu, Definiția&nbsp;1 de mai sus.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Înapoi sus</a> ]]></description>
+  <category>exemplu</category>
+  <category>statistici de scanare</category>
+  <category>R</category>
+  <guid>https://alexamarioarei.github.io/ro/blog/posts/2026-11-20-exemplu/</guid>
+  <pubDate>Thu, 19 Nov 2026 22:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
