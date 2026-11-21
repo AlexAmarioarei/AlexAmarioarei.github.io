@@ -1,0 +1,10 @@
+---
+title: "Page not found"
+subtitle: "Pagina nu a fost găsită"
+toc: false
+alt-lang: index.qmd
+---
+
+The page you are looking for does not exist or has moved. Use the search in the navigation bar or go to the [homepage](/).
+
+Adresa căutată nu există sau a fost mutată. Puteți folosi căutarea din bara de navigare sau puteți reveni la [pagina principală în limba română](/ro/).

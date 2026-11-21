@@ -1,0 +1,53 @@
+---
+title: "Predare"
+subtitle: "Cursuri de probabilități și statistică la Facultatea de Matematică și Informatică"
+description: "Cursurile lui Alexandru Amărioarei la Universitatea din București: Probabilități și statistică, Statistică. Materiale în limba română, laboratoare în R."
+toc: true
+listing:
+  - id: courses-current
+    contents: ../data/courses.yml
+    template: ../templates/courses.ejs
+    include: { status: current }
+    sort: "order"
+---
+
+Predau la Facultatea de Matematică și Informatică a Universității din București din 2016. Cursurile combină partea teoretică cu seminarii de probleme și laboratoare în R. Fiecare curs are propriul site, cu note de curs, fișe de seminar și laborator, informații despre evaluare și materiale introductive pentru R.
+
+## Cursuri în anul universitar 2026–2027
+
+::: {#courses-current}
+:::
+
+## Niveluri și coordonare
+
+Predau la nivel de licență (Probabilități și statistică, Statistică, Modele de regresie) și de master (Instrumente statistice pentru finanțe, Biostatistică). Am predat și cursuri de nivel doctoral în cadrul Școlii doctorale interdisciplinare și al Școlii de vară regionale franco-române de matematici aplicate de la Sinaia.
+
+Am coordonat peste 10 lucrări de disertație și 20 de lucrări de licență.
+
+## Cursuri predate anterior
+
+### Universitatea din București (din 2016)
+
+Cursuri și laboratoare (în R):
+
+- Introducere în probabilități și statistică
+- Introducere în statistica matematică
+- Introducere în analiza regresiei
+- Instrumente statistice pentru finanțe
+- Introducere în biostatistică
+- Biostatistică I
+
+### Polytech'Lille, Franța (2013–2015)
+
+Asistent universitar (ATER) la departamentul Inginerie Software și Statistică, la nivel de licență și master: seminarii și laboratoare pentru formarea inițială și prin ucenicie, plus un laborator de MATLAB pentru departamentul de Inginerie Electrică și Informatică.
+
+- Analiză matematică (curs și seminar)
+- Calcul diferențial pentru funcții de mai multe variabile (seminar)
+- Introducere în probabilități I și II (seminar și laborator în R)
+- Introducere în statistica inferențială (seminar și laborator în SAS și R)
+- Lanțuri Markov (seminar, laborator în R și proiecte)
+- Analiză numerică (laborator în MATLAB)
+
+### Școli de vară
+
+- *Elements of computational statistics / Éléments de statistique computationnelle*, École d'été régionale franco-roumaine en mathématiques appliquées, Sinaia, iulie 2018.

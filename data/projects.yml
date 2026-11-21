@@ -1,0 +1,148 @@
+# =====================================================================
+#  Research projects — shown on projects.qmd and ro/projects.qmd.
+#  Fields (Romanian / English versions with -en):
+#    title, title-en, start, end ("" if ongoing), role, role-en,
+#    programme (funding scheme / code), url (optional),
+#    status: ongoing | completed
+#  Source: Europass CV (2026) and CoEx CV (project links).
+# =====================================================================
+
+- title: "Design and Implementation of Base-Relief DNA Origami: A multi-level approach to DNA Nanotechnology (BASE-DNA)"
+  title-en: "Design and Implementation of Base-Relief DNA Origami: A multi-level approach to DNA Nanotechnology (BASE-DNA)"
+  start: 2023
+  end: 2026
+  role: "membru"
+  role-en: "member"
+  programme: "PNRR-III-C9-2022–I8-CF53"
+  url: "https://proiecte.incdsb.ro/basedna/"
+  status: ongoing
+
+- title: "Consolidarea capacității de cercetare a INCDSB în contextul necesității recuperării decalajului generat de pandemia de COVID-19"
+  title-en: "Strengthening the research capacity of NIRDBS in the context of recovering the gap caused by the COVID-19 pandemic"
+  start: 2021
+  end: 2024
+  role: "director de proiect"
+  role-en: "project director"
+  programme: "2PFE/2021"
+  url: "https://proiecte.incdsb.ro/PFE2-2021/"
+  status: completed
+
+- title: "Water-ForCE: Water scenarios For Copernicus Exploitation"
+  title-en: "Water-ForCE: Water scenarios For Copernicus Exploitation"
+  start: 2021
+  end: 2023
+  role: "membru"
+  role-en: "member"
+  programme: "H2020-EU.2.1.6, ID 101004186"
+  url: "https://waterforce.eu/"
+  status: completed
+
+- title: "Modelare, design și analiză a sistemelor sintetice bazate pe auto-asamblare (MoDASyS)"
+  title-en: "Modelling, design and analysis of synthetic self-assembly systems (MoDASyS)"
+  start: 2017
+  end: 2020
+  role: "membru în echipa de implementare"
+  role-en: "member of the implementation team"
+  programme: "POC-A1-A1.1.4-E-2015, ANCSI"
+  url: "https://proiecte.incdsb.ro/MODASYS/index.html"
+  status: completed
+
+- title: "Strategii și acțiuni pentru pregătirea participării naționale la proiectul DANUBIUS-RI"
+  title-en: "Strategies and actions to prepare the national participation in DANUBIUS-RI"
+  start: 2018
+  end: 2019
+  role: "membru în echipa de implementare"
+  role-en: "member of the implementation team"
+  programme: "contract nr. 4/07.05.2018"
+  status: completed
+
+- title: "Preparatory phase for the pan-European research infrastructure DANUBIUS-RI — The International Centre for Advanced Studies on River-Sea Systems"
+  title-en: "Preparatory phase for the pan-European research infrastructure DANUBIUS-RI — The International Centre for Advanced Studies on River-Sea Systems"
+  start: 2016
+  end: 2019
+  role: "membru în echipa de implementare"
+  role-en: "member of the implementation team"
+  programme: "H2020-INFRADEV-2016-2, ID 739562"
+  url: "https://danubius-pp.eu/"
+  status: completed
+
+- title: "Proiect suport de management pentru pregătirea Preparatory Phase – H2020 a Centrului Internațional de Studii Avansate pentru sisteme râuri – mări"
+  title-en: "Management support project for the H2020 Preparatory Phase of the International Centre for Advanced Studies on River-Sea Systems"
+  start: 2016
+  end: 2017
+  role: "membru"
+  role-en: "member"
+  programme: "PNIII 5/5.4/DANUBIUS, ANCSI"
+  status: completed
+
+- title: "ClinMine (colaborare cu echipa MODAL, Inria Lille – Nord Europe)"
+  title-en: "ClinMine (collaboration with the MODAL team, Inria Lille – Nord Europe)"
+  start: 2016
+  end: 2017
+  role: "colaborator"
+  role-en: "collaborator"
+  programme: ""
+  status: completed
+
+- title: "Cercetări privind identificarea priorităților de dezvoltare a bioeconomiei în România pentru perioada 2016–2030"
+  title-en: "Identifying development priorities for the bioeconomy in Romania, 2016–2030"
+  start: 2016
+  end: 2017
+  role: "membru cheie"
+  role-en: "key member"
+  programme: "Plan Sectorial, contract nr. 12S/08.10.2015"
+  status: completed
+
+- title: "Potențialul bioeconomic al Deltei Dunării – DANUBIUS-RI"
+  title-en: "The bioeconomic potential of the Danube Delta – DANUBIUS-RI"
+  start: 2016
+  end: 2017
+  role: "membru și responsabil de fază (fazele II–IV)"
+  role-en: "member and phase leader (phases II–IV)"
+  programme: "Programul Nucleu, cod 16-190105 (BIODIVERS PN 105)"
+  status: completed
+
+- title: "Proiect de consultanță pentru Administrația Națională „Apele Române”"
+  title-en: "Consultancy project for the National Administration “Romanian Waters”"
+  start: 2016
+  end: 2016
+  role: "membru"
+  role-en: "member"
+  programme: ""
+  status: completed
+
+- title: "BIOSIS — Bioinformatics system for protein conformation analysis"
+  title-en: "BIOSIS — Bioinformatics system for protein conformation analysis"
+  start: 2010
+  end: 2010
+  role: "membru în echipa de implementare"
+  role-en: "member of the implementation team"
+  programme: "62-056/2008"
+  status: completed
+
+- title: "Participare la elaborarea și depunerea propunerii MedPlaNet"
+  title-en: "Contribution to preparing and submitting the MedPlaNet proposal"
+  start: 2010
+  end: 2010
+  role: "membru"
+  role-en: "member"
+  programme: ""
+  status: completed
+
+- title: "Simulation of cells using Membrane Systems"
+  title-en: "Simulation of cells using Membrane Systems"
+  start: 2009
+  end: 2010
+  role: "membru în echipa de implementare"
+  role-en: "member of the implementation team"
+  programme: "PN II, contract nr. 11-066/2007"
+  status: completed
+
+- title: "Proiect nucleu BIODIV"
+  title-en: "BIODIV core programme project"
+  start: 2009
+  end: 2010
+  role: "membru în echipa de implementare"
+  role-en: "member of the implementation team"
+  programme: "Programul Nucleu"
+  status: completed

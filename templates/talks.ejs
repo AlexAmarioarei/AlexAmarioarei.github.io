@@ -1,0 +1,30 @@
+```{=html}
+<%
+// Language comes from `template-params: {lang: en}` in the page YAML (default: Romanian)
+const en = typeof templateParams !== "undefined" && templateParams && templateParams.lang === "en";
+const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const me = (s) => esc(String(s ?? "").replace(/\.$/, "")).replace(/(A\. Amărioarei)/g, "<strong>$1</strong>");
+const groups = [];
+for (const item of items) {
+  const y = String(item.year ?? "");
+  if (!groups.length || groups[groups.length - 1].year !== y) groups.push({ year: y, items: [] });
+  groups[groups.length - 1].items.push(item);
+}
+%>
+<div class="talk-list">
+<% for (const g of groups) { %>
+<section class="year-group">
+  <div class="year"><%- g.year %></div>
+  <ul>
+  <% for (const item of g.items) { %>
+    <li class="talk">
+      <% if (item.authors) { %><span class="pub-authors"><%= me(item.authors) %></span>. <% } %>
+      <% if (item.url) { %><a href="<%- item.url %>"><%- item.title %></a><% } else { %><span class="pub-title"><%- item.title %></span><% } %>.
+      <span class="talk-event"><%- item.event %><% if (item.place) { %>, <%- item.place %><% } %><% if (item.note) { %> (<%- item.note %>)<% } %>.</span>
+    </li>
+  <% } %>
+  </ul>
+</section>
+<% } %>
+</div>
+```

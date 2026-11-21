@@ -1,0 +1,23 @@
+```{=html}
+<%
+// Language comes from `template-params: {lang: en}` in the page YAML (default: Romanian)
+const en = typeof templateParams !== "undefined" && templateParams && templateParams.lang === "en";
+const t = (item, key) => (en && item[key + "-en"]) ? item[key + "-en"] : item[key];
+const L = en ? { role: "Role", web: "Project website" } : { role: "Rol", web: "Site-ul proiectului" };
+const period = (item) => (String(item.start) === String(item.end) || !item.end) ? String(item.start) : item.start + "–" + item.end;
+%>
+<div class="project-list">
+<% for (const item of items) { %>
+  <article class="project">
+    <div class="period"><%- period(item) %></div>
+    <div>
+      <div class="project-title"><%- t(item, "title") %></div>
+      <div class="project-meta">
+        <%- L.role %>: <span class="role"><%- t(item, "role") %></span><% if (item.programme) { %>. <%- item.programme %><% } %>.
+      </div>
+      <% if (item.url) { %><div class="item-links"><a href="<%- item.url %>"><%- L.web %></a></div><% } %>
+    </div>
+  </article>
+<% } %>
+</div>
+```

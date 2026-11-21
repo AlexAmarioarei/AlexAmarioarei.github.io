@@ -1,0 +1,47 @@
+---
+title: "Contact"
+description: "Date de contact pentru Alexandru Amărioarei, Facultatea de Matematică și Informatică, Universitatea din București."
+---
+
+**E-mail:** [alexandru.amarioarei@fmi.unibuc.ro](mailto:alexandru.amarioarei@fmi.unibuc.ro)
+
+## Facultatea de Matematică și Informatică
+
+Universitatea din București\
+PB Tower, Bd. Iuliu Maniu nr. 15G, sector 6, 061075 București, România\
+Birou: Decanat\
+Program de consultații în semestrul curent: vineri 9:00–10:00 ([Probabilități și statistică](https://alexamarioarei.github.io/curs-ps-fmi/contact/contact.html)) și vineri 12:00–13:00 ([Statistică](https://alexamarioarei.github.io/curs-stat-fmi/contact/contact.html)). Programul actualizat se găsește pe site-ul fiecărui curs.\
+[fmi.unibuc.ro](https://fmi.unibuc.ro/)
+
+```{=html}
+<figure class="map">
+  <iframe title="Hartă: Facultatea de Matematică și Informatică, PB Tower, Bd. Iuliu Maniu 15G" src="https://www.openstreetmap.org/export/embed.html?bbox=26.03579%2C44.43178%2C26.04579%2C44.43638&amp;layer=mapnik&amp;marker=44.43408%2C26.04079" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  <figcaption><a href="https://www.openstreetmap.org/?mlat=44.43408&amp;mlon=26.04079#map=17/44.43408/26.04079">Deschide în OpenStreetMap</a> <a href="https://www.google.com/maps/search/?api=1&amp;query=44.43408,26.04079">Deschide în Google Maps</a></figcaption>
+</figure>
+```
+
+## Institutul Național de Cercetare-Dezvoltare pentru Științe Biologice
+
+Departamentul de Bioinformatică\
+Splaiul Independenței 296, sector 6, 060031 București, România\
+Telefon: +40 21 220 77 80\
+[incdsb.ro](https://www.incdsb.ro)
+
+```{=html}
+<figure class="map">
+  <iframe title="Hartă: Institutul Național de Cercetare-Dezvoltare pentru Științe Biologice, Splaiul Independenței 296" src="https://www.openstreetmap.org/export/embed.html?bbox=26.04099%2C44.44500%2C26.05099%2C44.44960&amp;layer=mapnik&amp;marker=44.4473%2C26.04599" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  <figcaption><a href="https://www.openstreetmap.org/?mlat=44.4473&amp;mlon=26.04599#map=17/44.4473/26.04599">Deschide în OpenStreetMap</a> <a href="https://www.google.com/maps/search/?api=1&amp;query=44.4473,26.04599">Deschide în Google Maps</a></figcaption>
+</figure>
+```
+
+## Profiluri
+
+- GitHub: [github.com/alexamarioarei](https://github.com/alexamarioarei)
+- ORCID: [0000-0002-3722-7351](https://orcid.org/0000-0002-3722-7351)
+- Google Scholar: [profil](https://scholar.google.com/citations?user=QGjXKxAAAAAJ)
+- Web of Science ResearcherID: [AAT-2866-2021](https://www.webofscience.com/wos/author/record/AAT-2866-2021)
+- Brainmap ID: U-1700-038S-5236
+
+## Pentru studenți
+
+Programa, regulile de evaluare și materialele fiecărui curs se găsesc pe site-ul cursului (vezi [Predare](teaching.qmd)).

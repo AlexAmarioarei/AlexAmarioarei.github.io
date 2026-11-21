@@ -1,0 +1,546 @@
+/*-- scss:defaults --*/
+// Structure and typography shared by both colour modes.
+// Colours live in light.scss / dark.scss (they override these defaults).
+
+$scan-accent: #C98A0B !default;
+$scan-accent-text: #8A5A00 !default;
+$rule-color: #DDE2EA !default;
+$surface: #F1F3F8 !default;
+$cell-empty: #D3D9E3 !default;
+$text-muted: #586273 !default;
+
+$font-serif: "Source Serif 4 Variable", "Source Serif Pro", Charter, "Iowan Old Style", Georgia, serif;
+$font-ui:    "Public Sans Variable", "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+$font-mono:  "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+$font-family-sans-serif: $font-ui;
+$font-family-base: $font-serif;
+$font-family-monospace: $font-mono;
+$headings-font-family: $font-serif;
+$toc-font-size: 0.875rem;
+$grid-body-width: 860px;   // main text column (Quarto default 800px)
+
+// Type scale (a classical 16/18/21/24/30/36/48 progression)
+$font-size-root: 16px;
+$font-size-base: 1.125rem;      // 18px body, serif
+$line-height-base: 1.62;
+$h1-font-size: 2.25rem;
+$h2-font-size: 1.6875rem;
+$h3-font-size: 1.3125rem;
+$h4-font-size: 1.125rem;
+$headings-font-weight: 600;
+$headings-line-height: 1.2;
+$small-font-size: 0.875em;
+
+$border-radius: 0.375rem;
+$border-radius-sm: 0.25rem;
+$border-radius-lg: 0.5rem;
+
+$btn-font-family: $font-ui;
+$btn-font-weight: 550;
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.05rem;
+$btn-font-size: 0.95rem;
+$input-font-family: $font-ui;
+
+$navbar-font-family: $font-ui;
+$footer-font-family: $font-ui;
+
+$link-decoration: underline;
+$link-underline-offset: 0.18em;
+
+/*-- scss:rules --*/
+
+:root {
+  --scan-accent: #{$scan-accent};
+  --scan-accent-text: #{$scan-accent-text};
+  --rule: #{$rule-color};
+  --surface: #{$surface};
+  --cell-empty: #{$cell-empty};
+  --cell-on: #{$primary};
+  --ink: #{$body-color};
+  --muted: #{$text-muted};
+  --font-ui: #{inspect($font-ui)};
+}
+
+body {
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  hanging-punctuation: first;
+}
+
+a {
+  text-decoration-thickness: 0.06em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  &:hover { text-decoration-color: currentColor; }
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3 {
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+h1.title, .quarto-title h1.title {
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.quarto-title .subtitle, p.subtitle {
+  font-family: $font-ui;
+  font-size: 1.05rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+#title-block-header { margin-bottom: 2rem; }
+// the page description is kept for search engines and link previews only
+#title-block-header .description { display: none; }
+.quarto-title-meta, .quarto-title-meta-heading, .quarto-title-meta-contents,
+.listing-date, .listing-categories, .listing-reading-time, .quarto-categories {
+  font-family: $font-ui;
+}
+
+main h2 {
+  margin-top: 2.75rem;
+  padding-top: 0;
+  border-bottom: 0;
+}
+main h3 { margin-top: 2rem; }
+p, li { hyphens: auto; }
+
+// Interface text in the UI face
+.navbar, .nav-footer, .sidebar, #TOC, #toc-title, .btn, .badge, figcaption,
+.quarto-listing-category-title, .listing-actions-group, .callout-title-container,
+.table, .ui {
+  font-family: $font-ui;
+}
+
+// ---------- Navbar ----------
+.navbar {
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
+  .navbar-brand .navbar-title {
+    font-family: $font-serif;
+    font-weight: 620;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  .nav-link {
+    font-size: 0.95rem;
+    font-weight: 480;
+  }
+  .nav-link.active {
+    font-weight: 620;
+    box-shadow: inset 0 -2px 0 var(--scan-accent);
+  }
+  // Language switcher: visible, but quiet
+  a.nav-link[rel~="alternate"] {
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem !important;
+    margin-left: 0.35rem;
+    .bi { margin-right: 0.15rem; }
+    &:hover { border-color: currentColor; }
+  }
+}
+.lang-compact { display: none; }
+@media (max-width: 991.98px) {
+  .navbar a.nav-link[rel~="alternate"] { display: inline-block; margin: 0.4rem 0 0.4rem 0; }
+  .navbar .lang-compact {
+    display: inline-flex;
+    align-items: center;
+    font-family: $font-ui;
+    font-size: 0.8rem;
+    font-weight: 650;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+    margin-right: 0.35rem;
+  }
+}
+
+// ---------- Footer ----------
+.nav-footer {
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  .nav-footer-center a { text-decoration: none; }
+}
+
+// ---------- Accessibility ----------
+:focus-visible {
+  outline: 2px solid var(--scan-accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+// ---------- Placeholders: content still to be filled in ----------
+.todo {
+  font-family: $font-ui;
+  font-size: 0.85em;
+  border: 1px dashed var(--scan-accent);
+  color: var(--scan-accent-text);
+  border-radius: $border-radius-sm;
+  padding: 0.05rem 0.4rem;
+  white-space: normal;
+}
+
+// ---------- Code, math, tables ----------
+div.sourceCode, pre.sourceCode { border-radius: $border-radius; border: 1px solid var(--rule); }
+code { font-size: 0.86em; }
+pre code { font-size: 0.84rem; line-height: 1.55; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+.table { font-size: 0.92rem; }
+.callout { border-radius: $border-radius; }
+.theorem, .proof, .definition { margin: 1.5rem 0; }
+
+// =====================================================================
+// Homepage
+// =====================================================================
+.page-home #title-block-header { display: none; }
+.page-home main.content { padding-top: 0; }
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  padding: clamp(2rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3.5rem);
+  border-bottom: 1px solid var(--rule);
+
+  h1.hero-name {
+    font-size: clamp(2.6rem, 1.6rem + 4.2vw, 4.6rem);
+    line-height: 1.02;
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem 0;
+    font-variation-settings: "opsz" 60;
+    .anchorjs-link { display: none; }
+  }
+  h1.hero-name:has(+ .hero-subtitle) { margin-bottom: 0.4rem; }
+  .hero-subtitle {
+    font-family: $font-serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 1rem + 0.7vw, 1.5rem);
+    line-height: 1.3;
+    color: var(--muted);
+    margin: 0 0 1.5rem 0;
+  }
+  .hero-role {
+    font-family: $font-ui;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 46ch;
+    margin-bottom: 1.25rem;
+  }
+  .hero-lede {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    max-width: 38ch;
+    margin-bottom: 1.75rem;
+  }
+  p { hyphens: manual; }
+  .hero-actions p { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; }
+}
+
+.btn-quiet {
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  background: transparent;
+  &:hover { border-color: var(--ink); color: var(--ink); }
+}
+
+// The scan lattice (built by assets/js/site.js)
+.scan-figure {
+  margin: 0;
+  .scan-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: $border-radius;
+  }
+  svg { display: block; width: 100%; height: auto; }
+  .cell { fill: var(--cell-empty); }
+  .cell.on { fill: var(--cell-on); }
+  .cell.inside:not(.on) { fill: color-mix(in srgb, var(--scan-accent) 28%, var(--cell-empty)); }
+  .window {
+    fill: none;
+    stroke: var(--scan-accent);
+    stroke-width: 2.5;
+    transition: x 420ms cubic-bezier(.2,.7,.2,1), y 420ms cubic-bezier(.2,.7,.2,1);
+  }
+  .window-tab { fill: var(--scan-accent-text); }
+  .window-label {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 700;
+    fill: #{$body-bg};
+  }
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+}
+
+.home-section {
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-bottom: 1px solid var(--rule);
+  &:last-child { border-bottom: 0; }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+  }
+  section.level2 { margin: 0; }
+}
+
+// Three areas of activity: a quiet grid, separated by a rule above each
+.areas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  .area {
+    border-top: 2px solid var(--ink);
+    padding-top: 0.9rem;
+    h3 { margin: 0 0 0.5rem 0; font-size: 1.25rem; }
+    h3 a { text-decoration: none; color: inherit; }
+    h3 a:hover { color: $primary; }
+    p { font-size: 1rem; margin-bottom: 0.5rem; }
+    .anchorjs-link { display: none; }
+  }
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+  .portrait img, .portrait svg {
+    width: 9rem; height: 9rem; object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+  }
+}
+
+.positions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  li {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .when { font-family: $font-ui; font-size: 0.88rem; color: var(--muted); padding-top: 0.15rem; font-variant-numeric: tabular-nums; }
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+
+}
+
+.more-link {
+  font-family: $font-ui;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 991.98px) {
+  .home-hero { grid-template-columns: 1fr; }
+  .home-hero .scan-figure { max-width: 34rem; }
+  .areas { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 575.98px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .positions li { grid-template-columns: 1fr; gap: 0.1rem; }
+}
+
+// =====================================================================
+// Data-driven lists (templates/*.ejs)
+// =====================================================================
+.year-group {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  gap: 1rem;
+  border-top: 1px solid var(--rule);
+  padding: 0.9rem 0 0.4rem;
+  .year {
+    font-family: $font-ui;
+    font-weight: 650;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  ol, ul { list-style: none; padding: 0; margin: 0; }
+}
+@media (max-width: 575.98px) {
+  .year-group { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+
+.pub {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  .pub-title { font-weight: 560; }
+  .pub-authors strong { font-weight: 650; }
+  .pub-venue { font-style: italic; }
+  .pub-note { color: var(--muted); font-size: 0.92em; }
+}
+.item-links {
+  font-family: $font-ui;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  a {
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    border-radius: $border-radius-sm;
+    padding: 0.05rem 0.45rem;
+    &:hover { border-color: currentColor; }
+  }
+}
+.pub-compact .pub { margin-bottom: 0.85rem; }
+.pub-compact .pub .pub-year { font-family: $font-ui; color: var(--muted); font-size: 0.85rem; margin-right: 0.35rem; font-variant-numeric: tabular-nums; }
+
+.talk { margin-bottom: 0.7rem; line-height: 1.5; .talk-event { color: var(--muted); } }
+
+// Courses: one block per course
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1.25rem;
+  margin: 1rem 0 2rem;
+}
+.course {
+  border: 1px solid var(--rule);
+  border-top: 3px solid $primary;
+  border-radius: $border-radius;
+  padding: 1.1rem 1.25rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  h3 { margin: 0 0 0.35rem 0; font-size: 1.3rem; }
+  h3 a { color: inherit; text-decoration: none; }
+  .course-meta { font-family: $font-ui; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; }
+  p { font-size: 1rem; }
+  .course-link { margin-top: auto; }
+}
+
+// Projects
+.project {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 1rem;
+  border-top: 1px solid var(--rule);
+  padding: 0.9rem 0;
+  .period { font-family: $font-ui; font-size: 0.88rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.2rem; }
+  .project-title { font-weight: 600; }
+  .project-meta { font-family: $font-ui; font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+  .role { color: var(--ink); font-weight: 550; }
+}
+@media (max-width: 575.98px) { .project { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+// Experience timeline (plain Markdown divs)
+.cv-entry {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 1rem;
+  border-top: 1px solid var(--rule);
+  padding: 0.85rem 0 0.35rem;
+  > .when { font-family: $font-ui; font-size: 0.88rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.2rem; }
+  > .what p { margin-bottom: 0.35rem; }
+  .what strong { font-weight: 620; }
+  .where { color: var(--muted); }
+}
+@media (max-width: 575.98px) { .cv-entry { grid-template-columns: 1fr; gap: 0.1rem; } }
+
+// Blog listing
+.quarto-listing-default .listing-title { font-family: $font-serif; font-weight: 600; }
+.quarto-post .listing-title { font-size: 1.3rem; }
+.quarto-post .body { font-size: 1rem; }
+
+// R and Python code must look exactly as typed: no "<-" -> arrow ligatures
+code, pre, kbd, .sourceCode { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+
+// No all-caps labels
+.quarto-category, .listing-category, .quarto-title-meta-heading, .quarto-title .quarto-categories .quarto-category {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.quarto-title-meta-heading { color: var(--muted); font-size: 0.85rem; }
+#title-block-header.quarto-title-block.default .quarto-title-meta-heading {
+  text-transform: none;
+  font-size: 0.85rem;
+  opacity: 1;
+  color: var(--muted);
+}
+.quarto-title .quarto-categories .quarto-category { font-size: 0.75em; opacity: 0.85; }
+
+// Maps on the Contact page (OpenStreetMap embeds)
+figure.map {
+  margin: 1.25rem 0 0.5rem;
+  iframe {
+    display: block;
+    width: 100%;
+    height: 320px;
+    border: 1px solid var(--rule);
+    border-radius: $border-radius;
+  }
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-family: $font-ui;
+    font-size: 0.85rem;
+  }
+}
+// OpenStreetMap has no dark tiles: soften them in dark mode
+body.quarto-dark figure.map iframe { filter: invert(0.9) hue-rotate(180deg) saturate(0.6); }
+
+// Research page: Topics / Publications / Talks tabs
+.panel-tabset.research-tabs {
+  margin-top: 0.25rem;
+  .nav-tabs {
+    font-family: $font-ui;
+    border-bottom: 1px solid var(--rule);
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    .nav-link {
+      font-size: 1.02rem;
+      font-weight: 550;
+      color: var(--muted);
+      background: none;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      border-radius: 0;
+      padding: 0.6rem 1.1rem 0.55rem;
+      margin-bottom: -1px;
+      &:hover { color: var(--ink); }
+      &.active { color: var(--ink); border-bottom-color: var(--scan-accent); background: none; }
+    }
+  }
+  .tab-content {
+    border: 0;
+    padding: 1.25rem 0 0;
+  }
+  .tab-pane > p:first-child:has(> span[id]:only-child) { margin: 0; height: 0; }
+  h3 { margin-top: 2.25rem; font-size: 1.45rem; }
+  .tab-pane > h3:first-of-type { margin-top: 0.75rem; }
+}

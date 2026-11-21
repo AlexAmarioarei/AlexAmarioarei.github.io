@@ -1,0 +1,155 @@
+---
+title: "Alexandru Amărioarei"
+pagetitle: "Pagină web personală"
+open-graph:
+  title: "Alexandru Amărioarei | Pagină web personală"
+description: "Matematician și statistician: statistici de scanare, aproximări pentru modele dependente, metode Monte Carlo. Lector la Facultatea de Matematică și Informatică, Universitatea din București."
+page-layout: full
+body-classes: page-home
+toc: false
+listing:
+  - id: home-pubs
+    contents: ../data/publications.yml
+    template: ../templates/publications-compact.ejs
+    include:
+      selected: true
+    sort: "year desc"
+    max-items: 4
+  - id: home-posts
+    contents: blog/posts
+    type: default
+    fields: [date, title, description]
+    sort: "date desc"
+    max-items: 3
+    date-format: "DD.MM.YYYY"
+---
+
+::: {.home-hero}
+
+::: {.hero-text}
+
+```{=html}
+<h1 class="hero-name">Alexandru Amărioarei</h1>
+<p class="hero-subtitle">Pagină web personală</p>
+```
+
+::: {.hero-role}
+Lector universitar și prodecan la Facultatea de Matematică și Informatică, Universitatea din București. Cercetător științific gradul II la Institutul Național de Cercetare-Dezvoltare pentru Științe Biologice.
+:::
+
+::: {.hero-lede}
+Lucrez în modelare matematică și statistică computațională, în principal pe statistici de scanare: aproximări precise și limite de eroare pentru detectarea aglomerărilor de evenimente și a schimbărilor în repartiție în câmpuri aleatoare dependente, cu aplicații în biologie, ecologie și sănătate.
+:::
+
+::: {.hero-actions}
+[Cercetare](research.qmd){.btn .btn-primary} [Publicații](research.qmd#publications){.btn .btn-quiet} [Cursuri](teaching.qmd){.btn .btn-quiet}
+:::
+
+:::
+
+::: {.hero-figure}
+```{=html}
+<figure class="scan-figure">
+  <div id="scan-lattice"></div>
+  <figcaption>Statistica de scanare bidimensională: fereastra cu cele mai multe evenimente dintr-un câmp aleator.</figcaption>
+</figure>
+```
+:::
+
+:::
+
+::: {.home-section}
+
+## Activitate
+
+::: {.areas}
+
+::: {.area}
+### [Cercetare](research.qmd)
+Statistici de scanare pentru detectarea aglomerărilor și a schimbărilor locale în una, două și trei dimensiuni, cu ferestre de formă arbitrară și date dependente. De asemenea, modele neliniare cu corecția deplasării și modele ale auto-asamblării ADN.
+:::
+
+::: {.area}
+### [Predare](teaching.qmd)
+Probabilități, statistică și modele de regresie la licență, instrumente statistice pentru finanțe și biostatistică la master, cu laboratoare în R. Peste 10 lucrări de disertație și 20 de lucrări de licență coordonate.
+:::
+
+::: {.area}
+### [Proiecte](projects.qmd)
+Proiecte naționale și europene în bioinformatică, nanotehnologie ADN și științe ale mediului. Director al proiectului de dezvoltare instituțională 2PFE/2021 la INCDSB.
+:::
+
+:::
+
+:::
+
+::: {.home-section}
+
+::: {.two-col}
+
+::: {}
+## Despre
+
+::: {.about-grid}
+
+::: {.portrait}
+![](../assets/img/portrait.svg){fig-alt="Fotografie de profil (de înlocuit)"}
+:::
+
+::: {}
+Am peste zece ani de experiență în cercetare și predare, dezvoltând metode de modelare matematică și statistică computațională pentru probleme complexe din diverse domenii aplicative.
+
+Am obținut doctoratul în matematici aplicate în 2014 la Laboratorul Paul Painlevé, Université Lille 1, sub îndrumarea prof. Cristian Preda. Teza mea a dat aproximări precise și limite de eroare pentru repartiția statisticilor de scanare discrete multidimensionale. În timpul doctoratului am fost membru cu drepturi depline al echipei MODAL de la Inria Lille – Nord Europe și am predat la Polytech'Lille. Între septembrie 2016 și februarie 2017 am revenit la Inria ca cercetător postdoctoral în proiectul ClinMine, modelând parcursul pacienților în spitale cu ajutorul analizei datelor funcționale.
+
+La Universitatea din București predau și coordonez lucrări de licență și disertație, iar din 2020 sunt prodecan pentru acreditări, internaționalizare și raportări anuale. La Institutul Național de Cercetare-Dezvoltare pentru Științe Biologice modelez auto-asamblarea ADN și colaborez cu cercetători din străinătate, de exemplu cu B. Strîmbu, pe modele neliniare în silvicultură.
+
+[Parcurs complet](experience.qmd){.more-link}
+:::
+
+:::
+
+:::
+
+::: {}
+## Poziții actuale
+
+```{=html}
+<ul class="positions">
+  <li><span class="when">din 2020</span><span>Prodecan, Facultatea de Matematică și Informatică, Universitatea din București</span></li>
+  <li><span class="when">din 2017</span><span>Lector universitar, Facultatea de Matematică și Informatică, Universitatea din București</span></li>
+  <li><span class="when">din 2019</span><span>Cercetător științific gradul II, Departamentul de Bioinformatică, INCDSB</span></li>
+</ul>
+```
+
+[Contact](contact.qmd){.more-link}
+:::
+
+:::
+
+:::
+
+::: {.home-section}
+
+::: {.two-col}
+
+::: {}
+## Publicații selectate
+
+::: {#home-pubs}
+:::
+
+[Toate publicațiile](research.qmd#publications){.more-link}
+:::
+
+::: {}
+## Din blog
+
+::: {#home-posts}
+:::
+
+[Toate notele](blog/index.qmd){.more-link}
+:::
+
+:::
+
+:::

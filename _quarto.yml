@@ -1,0 +1,111 @@
+# =====================================================================
+#  English site (default language)  ->  rendered to _site/
+#  The Romanian site lives in ro/ and is rendered to _site/ro/
+#  automatically after this project (see scripts/render-ro.ts).
+#  Run everything with:   quarto render
+# =====================================================================
+
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "!ro/"
+  resources:
+    - "assets/**"
+    - "robots.txt"
+  post-render: scripts/render-ro.ts
+
+lang: en
+
+# Used by filters/site.lua: which language sits at the site root, which
+# one in a subfolder (named after the language), and the public address.
+site-langs:
+  default: en
+  other: ro
+site-root: "https://alexamarioarei.github.io"
+
+website:
+  title: "Alexandru Amărioarei"
+  description: "Academic website of Alexandru Amărioarei: probability, statistics, scan statistics, courses and research projects."
+  site-url: "https://alexamarioarei.github.io"
+  favicon: assets/img/favicon.svg
+  open-graph:
+    locale: en_GB
+    image: assets/img/og-card.png
+  search:
+    location: navbar
+    type: overlay
+  back-to-top-navigation: true
+  page-navigation: false
+  bread-crumbs: false
+  navbar:
+    title: "Alexandru Amărioarei"
+    collapse-below: lg
+    left:
+      - href: research.qmd
+        text: Research
+      - href: teaching.qmd
+        text: Teaching
+      - href: projects.qmd
+        text: Projects
+      - href: experience.qmd
+        text: Experience
+      - href: blog/index.qmd
+        text: Blog
+    right:
+      - href: contact.qmd
+        text: Contact
+      # Language switcher: site.js points this link to the Romanian
+      # version of the current page (falls back to the Romanian homepage).
+      - href: ro/index.html
+        text: Română
+        icon: translate
+        rel: alternate
+        aria-label: "Romanian version of this page"
+  page-footer:
+    left: "© 2026 Alexandru Amărioarei"
+    center:
+      - text: "Faculty of Mathematics and Computer Science, University of Bucharest"
+        href: https://fmi.unibuc.ro/
+    right:
+      - icon: envelope
+        href: mailto:alexandru.amarioarei@fmi.unibuc.ro
+        aria-label: Email
+      - icon: github
+        href: https://github.com/alexamarioarei
+        aria-label: GitHub
+      - icon: mortarboard
+        href: https://scholar.google.com/citations?user=QGjXKxAAAAAJ
+        aria-label: Google Scholar
+      - icon: person-badge
+        href: https://orcid.org/0000-0002-3722-7351
+        aria-label: ORCID
+
+format:
+  html:
+    theme:
+      light: [default, theme/site.scss, theme/light.scss]
+      dark: [default, theme/site.scss, theme/dark.scss]
+    respect-user-color-scheme: true
+    highlight-style:
+      light: a11y
+      dark: a11y-dark
+    filters:
+      - filters/site.lua
+    toc: false
+    toc-location: right
+    anchor-sections: true
+    smooth-scroll: true
+    email-obfuscation: javascript
+    html-math-method: mathjax
+    code-copy: true
+    # Links to other websites open in a new tab. Links to this site stay in
+    # the same tab; the course sites (/curs-...) count as other websites.
+    link-external-newwindow: true
+    link-external-icon: false
+    link-external-filter: '^(?:http:|https:)\/\/alexamarioarei\.github\.io\/(?!curs-)'
+    lightbox: true
+
+execute:
+  freeze: auto

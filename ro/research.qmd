@@ -1,0 +1,191 @@
+---
+title: Cercetare
+subtitle: Statistici de scanare, aproximări pentru modele dependente și aplicații
+description: 'Teme de cercetare, publicații și prezentări: statistici de scanare, modele dependente, metode Monte Carlo, aplicații în biologie și ecologie.'
+toc: false
+listing:
+- id: talks-list
+  contents: ../data/talks.yml
+  template: ../templates/talks.ejs
+  include:
+    type: talk
+  sort: year desc
+- id: seminars
+  contents: ../data/talks.yml
+  template: ../templates/talks.ejs
+  include:
+    type: seminar
+  sort: year desc
+- id: posters
+  contents: ../data/talks.yml
+  template: ../templates/talks.ejs
+  include:
+    type: poster
+  sort: year desc
+- id: pubs-journal
+  contents: ../data/publications.yml
+  template: ../templates/publications.ejs
+  include:
+    type: journal
+  sort: year desc
+- id: pubs-chapter
+  contents: ../data/publications.yml
+  template: ../templates/publications.ejs
+  include:
+    type: chapter
+  sort: year desc
+- id: pubs-proceedings
+  contents: ../data/publications.yml
+  template: ../templates/publications.ejs
+  include:
+    type: proceedings
+  sort: year desc
+- id: pubs-other
+  contents: ../data/publications.yml
+  template: ../templates/publications.ejs
+  include:
+    type: other
+  sort: year desc
+- id: pubs-thesis
+  contents: ../data/publications.yml
+  template: ../templates/publications.ejs
+  include:
+    type: thesis
+- id: pubs-preprint
+  contents: ../data/publications.yml
+  template: ../templates/publications.ejs
+  include:
+    type: preprint
+---
+
+::: {.panel-tabset .research-tabs}
+
+## Teme
+
+[]{#topics}
+
+### Teme de cercetare
+
+
+Cercetarea mea se concentrează pe **statisticile de scanare** (*scan statistics*) și pe problemele de probabilități aplicate legate de acestea. O statistică de scanare măsoară cel mai mare număr de evenimente observate într-o fereastră de formă fixă care „scanează” o secvență, o imagine sau un volum. Ea este folosită pentru a decide dacă o aglomerare de evenimente (un *cluster*) poate fi explicată prin hazard.
+
+Pentru un câmp aleator $\{X_{s,t}\}$ definit pe grila $\{1,\dots,N_1\}\times\{1,\dots,N_2\}$ și o fereastră de dimensiune $m_1\times m_2$, statistica de scanare bidimensională discretă este
+
+$$
+S_{m_1,m_2}(N_1,N_2) \;=\; \max_{\substack{1\le i\le N_1-m_1+1\\ 1\le j\le N_2-m_2+1}} \;\sum_{s=i}^{i+m_1-1}\,\sum_{t=j}^{j+m_2-1} X_{s,t}.
+$$
+
+Repartiția exactă a lui $S$ este rareori accesibilă, așa că interesul se mută spre aproximări precise și spre margini de eroare explicite.
+
+Principalele direcții:
+
+- **Statistici de scanare discrete multidimensionale.** Aproximări pentru repartiția statisticii de scanare în două și trei dimensiuni, bazate pe metoda secvențelor staționare 1-dependente, cu margini de eroare.
+- **Modele dependente.** Câmpuri aleatoare de tip *block-factor* și modele cu dependență locală, dincolo de ipoteza de independență.
+- **Ferestre de formă arbitrară.** Statistici de scanare cu ferestre de orice formă, care cresc puterea de detectare a schimbărilor locale în modele cu date dependente.
+- **Statistici de scanare continue.** Aproximări pentru statistica de scanare a proceselor Poisson multidimensionale.
+- **Secvențe și tipare** (*runs and patterns*). Repartiția celei mai lungi secvențe monotone, tehnica de scufundare într-un lanț Markov (*Markov chain imbedding*).
+- **Metode de simulare.** Metode Monte Carlo eficiente pentru estimarea repartiției statisticilor de scanare.
+
+### Aplicații și colaborări
+
+
+Dincolo de statisticile de scanare, activitatea mea de modelare matematică și statistică computațională a urmat trei direcții aplicate:
+
+- **Incertitudinea transformărilor neliniare.** Împreună cu B. Strîmbu (Universitatea din Oregon), modelarea incertitudinii transformărilor neliniare, care descriu relații în și între sisteme, și corectarea deplasării care apare la transformarea inversă a unor variabile de interes, de exemplu în practica forestieră, atunci când datele originale nu mai sunt disponibile. Rezultatul este o procedură nedeplasată pentru modelarea relațiilor complexe, mai parcimonioasă decât abordările actuale.
+- **Auto-asamblarea ADN.** În proiectul MoDASyS de la Institutul Național de Cercetare-Dezvoltare pentru Științe Biologice, modele statistice și computaționale pentru un sistem dinamic care imită procesul de auto-asamblare al ADN-ului, precum și o metodologie de modelare bazată pe reguli, care oferă noi perspective asupra procesului de asamblare și asupra controlului acestuia.
+- **Parcursul pacienților în spitale.** În proiectul ClinMine de la Inria Lille, modelarea dinamicii parcursului pacienților în spitale cu ajutorul analizei datelor funcționale.
+
+Alte aplicații: detectarea clusterelor de boală (de exemplu, boala Crohn) cu statistici de scanare spațiale, ecologie acvatică și evaluări bibliometrice ale cercetării. Detaliile sunt în secțiunea [Publicații](#publications) și în pagina [Proiecte](projects.qmd).
+
+### Direcții în desfășurare
+
+
+Lucrări în pregătire:
+
+- Aproximări pentru repartiția celei mai lungi secvențe monotone, printr-o abordare bazată pe statistici de scanare.
+- Aproximări pentru statistici de scanare continue multidimensionale ale proceselor Poisson (cu C. Preda).
+
+### Teza de doctorat
+
+
+*Approximations for multidimensional discrete scan statistics*, Université Lille 1 – Sciences et Technologies, susținută în septembrie 2014. Conducător științific: prof. Cristian Preda. Referenți: Joseph Glaz, Claude Lefèvre. Comisie: Stéphane Robin, Azzouz Dermoune, George Haiman, Manuela Sidoroff.
+
+### Software
+
+
+**Scan Statistics Simulator**: o interfață grafică în MATLAB pentru estimarea repartiției statisticii de scanare discrete în una, două și trei dimensiuni, pentru diverse modele ale câmpului aleator. Codul va fi publicat pe GitHub.
+
+### Activitate editorială și afilieri
+
+
+Recenzent pentru *Methodology and Computing in Applied Probability*, *Physica A*, *Statistics & Probability Letters*, *Romanian Journal of Information Science and Technology* și *Mathematical Reports*.
+
+Membru al Societății de Probabilități și Statistică din România și membru asociat al echipei românești The R Project for Statistical Computing.
+
+Profiluri: [ORCID](https://orcid.org/0000-0002-3722-7351), [Google Scholar](https://scholar.google.com/citations?user=QGjXKxAAAAAJ), [Web of Science](https://www.webofscience.com/wos/author/record/AAT-2866-2021) (ResearcherID AAT-2866-2021), Brainmap ID U-1700-038S-5236.
+
+## Publicații
+
+[]{#publications}
+
+Linkurile DOI duc la versiunea publicată, iar linkurile arXiv la preprinturi. Aceeași listă, cu numărul de citări, se găsește pe [Google Scholar](https://scholar.google.com/citations?user=QGjXKxAAAAAJ) și [ORCID](https://orcid.org/0000-0002-3722-7351).
+
+### Articole în reviste
+
+
+::: {#pubs-journal}
+:::
+
+### Capitole de carte
+
+
+::: {#pubs-chapter}
+:::
+
+### Lucrări în volumele conferințelor
+
+
+::: {#pubs-proceedings}
+:::
+
+### Alte lucrări
+
+
+::: {#pubs-other}
+:::
+
+### Teză
+
+
+::: {#pubs-thesis}
+:::
+
+### Preprinturi și lucrări în pregătire
+
+
+::: {#pubs-preprint}
+:::
+
+## Prezentări
+
+[]{#talks}
+
+### Prezentări la conferințe
+
+
+::: {#talks-list}
+:::
+
+### Seminarii invitate
+
+
+::: {#seminars}
+:::
+
+### Postere
+
+
+::: {#posters}
+:::
+
+:::

@@ -1,0 +1,104 @@
+# =====================================================================
+#  Romanian site  ->  rendered to ../_site/ro/
+#  Normally you do not render this directly: `quarto render` in the
+#  parent folder renders the English site and then this one.
+#  Every page here mirrors a page with the same path in the parent
+#  folder (e.g. ro/research.qmd <-> research.qmd).
+# =====================================================================
+
+project:
+  type: website
+  output-dir: ../_site/ro
+  render:
+    - "*.qmd"
+
+lang: ro
+language: ../theme/_language-ro.yml
+
+site-langs:
+  default: en
+  other: ro
+site-root: "https://alexamarioarei.github.io"
+
+website:
+  title: "Alexandru Amărioarei"
+  description: "Pagina academică a lui Alexandru Amărioarei: probabilități, statistică, statistici de scanare, cursuri și proiecte de cercetare."
+  site-url: "https://alexamarioarei.github.io/ro"
+  favicon: ../assets/img/favicon.svg
+  open-graph:
+    locale: ro_RO
+    image: ../assets/img/og-card.png
+  search:
+    location: navbar
+    type: overlay
+  back-to-top-navigation: true
+  page-navigation: false
+  bread-crumbs: false
+  navbar:
+    title: "Alexandru Amărioarei"
+    collapse-below: lg
+    left:
+      - href: research.qmd
+        text: Cercetare
+      - href: teaching.qmd
+        text: Predare
+      - href: projects.qmd
+        text: Proiecte
+      - href: experience.qmd
+        text: Parcurs
+      - href: blog/index.qmd
+        text: Blog
+    right:
+      - href: contact.qmd
+        text: Contact
+      - href: ../index.html
+        text: English
+        icon: translate
+        rel: alternate
+        aria-label: "Versiunea în limba engleză a acestei pagini"
+  page-footer:
+    left: "© 2026 Alexandru Amărioarei"
+    center:
+      - text: "Facultatea de Matematică și Informatică, Universitatea din București"
+        href: https://fmi.unibuc.ro/
+    right:
+      - icon: envelope
+        href: mailto:alexandru.amarioarei@fmi.unibuc.ro
+        aria-label: E-mail
+      - icon: github
+        href: https://github.com/alexamarioarei
+        aria-label: GitHub
+      - icon: mortarboard
+        href: https://scholar.google.com/citations?user=QGjXKxAAAAAJ
+        aria-label: Google Scholar
+      - icon: person-badge
+        href: https://orcid.org/0000-0002-3722-7351
+        aria-label: ORCID
+
+format:
+  html:
+    theme:
+      light: [default, ../theme/site.scss, ../theme/light.scss]
+      dark: [default, ../theme/site.scss, ../theme/dark.scss]
+    respect-user-color-scheme: true
+    highlight-style:
+      light: a11y
+      dark: a11y-dark
+    filters:
+      - ../filters/site.lua
+    toc: false
+    toc-location: right
+    anchor-sections: true
+    smooth-scroll: true
+    email-obfuscation: javascript
+    html-math-method: mathjax
+    code-copy: true
+    # Links to other websites open in a new tab. Links to this site stay in
+    # the same tab; the course sites (/curs-...) count as other websites.
+    link-external-newwindow: true
+    link-external-icon: false
+    link-external-filter: '^(?:http:|https:)\/\/alexamarioarei\.github\.io\/(?!curs-)'
+    lightbox: true
+
+execute:
+  freeze: auto

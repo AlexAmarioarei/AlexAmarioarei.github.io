@@ -1,0 +1,23 @@
+/*-- scss:defaults --*/
+// Light palette — Okabe–Ito (colour-blind-safe; same colours as
+// palette.colors() in R): blue for links and the lattice, vermillion
+// for the scan window. Contrast on the background: text 16:1,
+// links 5.1:1, vermillion 3.8:1 (graphics).
+$body-bg:        #FCFCFC;   // paper
+$body-color:     #1B1F24;   // ink
+$primary:        #0072B2;   // Okabe–Ito blue (links, actions, lattice)
+$scan-accent:    #D55E00;   // Okabe–Ito vermillion: scan window, focus rings
+$scan-accent-text: #B84F00; // darker vermillion, readable as text / under white text
+$text-muted:     #5A6370;
+$rule-color:     #DDE1E6;
+$surface:        #F1F3F5;   // subtle panels (code, callouts)
+$cell-empty:     #D8DCE1;
+
+$navbar-bg:      $body-bg;
+$navbar-fg:      $body-color;
+$navbar-hl:      $primary;
+$footer-bg:      $body-bg;
+$footer-fg:      $text-muted;
+$code-block-bg:  $surface;
+$code-color:     #9C4F7D;   // Okabe–Ito reddish purple, darkened for contrast
+$link-color:     $primary;

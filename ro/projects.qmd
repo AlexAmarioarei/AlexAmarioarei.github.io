@@ -1,0 +1,37 @@
+---
+title: "Proiecte"
+subtitle: "Proiecte de cercetare naționale și internaționale"
+description: "Proiecte de cercetare la care a participat Alexandru Amărioarei: nanotehnologie ADN, bioinformatică, DANUBIUS-RI, Water-ForCE."
+toc: true
+listing:
+  - id: projects-ongoing
+    contents: ../data/projects.yml
+    template: ../templates/projects.ejs
+    include: { status: ongoing }
+    sort: "start desc"
+  - id: projects-completed
+    contents: ../data/projects.yml
+    template: ../templates/projects.ejs
+    include: { status: completed }
+    sort: "start desc"
+---
+
+Majoritatea proiectelor s-au desfășurat la Institutul Național de Cercetare-Dezvoltare pentru Științe Biologice (INCDSB), în Departamentul de Bioinformatică, și în colaborare cu echipa MODAL de la Inria Lille – Nord Europe.
+
+## În desfășurare
+
+::: {#projects-ongoing}
+:::
+
+## Încheiate
+
+::: {#projects-completed}
+:::
+
+## Organizare de evenimente științifice
+
+- Co-chair, Simpozionul *Biotehnologii moderne în dezvoltarea durabilă a Deltei Dunării* (IUBMB), 31 mai – 2 iunie 2016, Murighiol.
+- Membru în comitetul de organizare: International Conference BioHub *Biological Sciences: Challenges & Perspectives*, aniversarea a 25 de ani a INCDSB, București.
+- Membru în comitetul de organizare: workshopul MoDaSyS AlgoNano *Metode algoritmice și computaționale în biomedicină și nanotehnologie*, București.
+- Membru în comitetul de organizare: workshopul *Modern Biotechnological Advances for Human Health*, București.
+- Membru în comitetul de organizare: al 12-lea Simpozion național cu participare internațională *Plante medicinale – prezent și perspective*, 6–9 septembrie 2016, Piatra Neamț.

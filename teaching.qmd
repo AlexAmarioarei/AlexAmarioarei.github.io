@@ -1,0 +1,54 @@
+---
+title: "Teaching"
+subtitle: "Probability and statistics courses at the Faculty of Mathematics and Computer Science"
+description: "Courses taught by Alexandru Amărioarei at the University of Bucharest: Probability and Statistics, Statistics. Materials in Romanian, labs in R."
+toc: true
+listing:
+  - id: courses-current
+    contents: data/courses.yml
+    template: templates/courses.ejs
+    template-params: { lang: en }
+    include: { status: current }
+    sort: "order"
+---
+
+I have taught at the Faculty of Mathematics and Computer Science of the University of Bucharest since 2016. The courses combine theory with problem seminars and labs in R. Each course has its own website with lecture notes, seminar and lab worksheets, assessment rules and introductory material for R. The course materials are in Romanian.
+
+## Courses in 2026–2027
+
+::: {#courses-current}
+:::
+
+## Levels and supervision
+
+I teach at bachelor's level (Probability and Statistics, Statistics, Regression Models) and at master's level (Statistical Tools for Finance, Biostatistics). I have also taught doctoral-level courses at the Interdisciplinary Doctoral School and at the Franco-Romanian regional summer school in applied mathematics in Sinaia.
+
+I have supervised more than 10 master's dissertations and 20 bachelor's theses.
+
+## Previously taught
+
+### University of Bucharest (since 2016)
+
+Lectures and labs (in R):
+
+- Introduction to Probability and Statistics
+- Introduction to Mathematical Statistics
+- Introduction to Regression Analysis
+- Statistical Tools for Finance
+- Introduction to Biostatistics
+- Biostatistics I
+
+### Polytech'Lille, France (2013–2015)
+
+Teaching assistant (ATER) in the Software Engineering and Statistics department, at bachelor's and master's level: tutorials and labs for the initial and apprenticeship programmes, plus a MATLAB lab for the Electrical and Computer Engineering department.
+
+- Calculus (lectures and tutorials)
+- Multivariable Calculus (tutorials)
+- Introduction to Probability I and II (tutorials and labs in R)
+- Introduction to Inferential Statistics (tutorials and labs in SAS and R)
+- Markov Chains (tutorials, labs in R and projects)
+- Numerical Analysis (labs in MATLAB)
+
+### Summer schools
+
+- *Elements of computational statistics / Éléments de statistique computationnelle*, École d'été régionale franco-roumaine en mathématiques appliquées, Sinaia, July 2018.

@@ -1,0 +1,21 @@
+```{=html}
+<%
+// Language comes from `template-params: {lang: en}` in the page YAML (default: Romanian)
+const en = typeof templateParams !== "undefined" && templateParams && templateParams.lang === "en";
+const t = (item, key) => (en && item[key + "-en"]) ? item[key + "-en"] : item[key];
+const L = en
+  ? { open: "Open the course website", edition: "Edition", lang: "Course materials in Romanian" }
+  : { open: "Deschide site-ul cursului", edition: "Ediția", lang: "" };
+%>
+<div class="course-list">
+<% for (const item of items) { %>
+  <article class="course">
+    <h3><a href="<%- item.url %>"><%- t(item, "title") %></a></h3>
+    <div class="course-meta"><%- t(item, "audience") %>. <%- L.edition %> <%- item.edition %><% if (item.tools) { %>. <%- item.tools %><% } %>.</div>
+    <p><%- t(item, "description") %></p>
+    <% if (L.lang) { %><p class="course-meta"><%- L.lang %>.</p><% } %>
+    <div class="course-link"><a class="btn btn-quiet btn-sm" href="<%- item.url %>"><%- L.open %></a></div>
+  </article>
+<% } %>
+</div>
+```

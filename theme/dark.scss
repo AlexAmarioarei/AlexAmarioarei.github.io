@@ -1,0 +1,22 @@
+/*-- scss:defaults --*/
+// Dark palette — Okabe–Ito: sky blue for links and the lattice,
+// orange for the scan window. Contrast on the background:
+// text 15:1, links 8:1, orange 8.2:1.
+$body-bg:        #111418;
+$body-color:     #E6E8EB;
+$primary:        #56B4E9;   // Okabe–Ito sky blue
+$scan-accent:    #E69F00;   // Okabe–Ito orange
+$scan-accent-text: #E69F00;
+$text-muted:     #9BA4B0;
+$rule-color:     #262C34;
+$surface:        #181D23;
+$cell-empty:     #2A3038;
+
+$navbar-bg:      $body-bg;
+$navbar-fg:      $body-color;
+$navbar-hl:      $primary;
+$footer-bg:      $body-bg;
+$footer-fg:      $text-muted;
+$code-block-bg:  $surface;
+$code-color:     #CC79A7;   // Okabe–Ito reddish purple
+$link-color:     $primary;

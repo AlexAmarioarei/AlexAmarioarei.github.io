@@ -1,0 +1,247 @@
+# =====================================================================
+#  Talks, seminars, posters and schools — shared by both languages.
+#  type: talk | seminar | poster | school
+#  Fields: year, title, event, place, authors (optional), url (optional),
+#          note (optional)
+#  Source: Europass CV (2026).
+# =====================================================================
+
+# ---------- Invited and contributed talks ----------
+- type: talk
+  year: 2025
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximations for the distribution of scan statistics and applications"
+  event: "Statistical Modeling and Applications (StatMod 2025)"
+  place: "Piraeus, Greece"
+
+- type: talk
+  year: 2020
+  authors: "A. Amărioarei, C. Preda"
+  title: "Scan statistics for some dependent models. Applications"
+  event: "Statistical Modeling and Applications (StatMod 2020)"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2019
+  title: "An integrated approach to multidimensional discrete scan statistics with applications"
+  event: "7th IMS-China International Conference on Statistics and Probability"
+  place: "Dalian, China"
+
+- type: talk
+  year: 2018
+  title: "Multidimensional discrete scan statistics with arbitrary windows"
+  event: "9th International Workshop on Applied Probability (IWAP 2018)"
+  place: "Budapest, Hungary"
+
+- type: talk
+  year: 2017
+  title: "Extensions of the classical scan statistics framework with applications"
+  event: "6th IMS-China International Conference on Statistics and Probability"
+  place: "Nanning, China"
+
+- type: talk
+  year: 2017
+  title: "Extensions of the classical scan statistics framework with applications"
+  event: "154th ICB Seminar — Statistics and Clinical Practice"
+  place: "Warsaw, Poland"
+
+- type: talk
+  year: 2017
+  title: "Approximations for the distribution of the three-dimensional continuous scan statistics"
+  event: "20th Conference of the Romanian Society of Probability and Statistics"
+  place: "Brașov, Romania"
+
+- type: talk
+  year: 2016
+  title: "Discrete scan statistics with windows of arbitrary shape"
+  event: "8th International Workshop on Applied Probability (IWAP 2016)"
+  place: "Toronto, Canada"
+
+- type: talk
+  year: 2016
+  title: "Statistical techniques for local cluster detection"
+  event: "2nd BIS Workshop: bioinformatic and statistical tools for data analysis"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2016
+  authors: "B. Strîmbu, A. Amărioarei, G. Marin, M. Păun"
+  title: "Resuscitating old forest models to meet present environmental reporting needs"
+  event: "World Conference on Natural Resource Modeling"
+  place: "Flagstaff, Arizona, USA"
+  note: "presented by B. Strîmbu"
+
+- type: talk
+  year: 2016
+  title: "Approximations for the distribution of the discrete scan statistics when the scanning window has arbitrary shape"
+  event: "19th Conference of the Romanian Society of Probability and Statistics"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2015
+  authors: "A. Amărioarei, C. Preda"
+  title: "Scan statistics for some dependent models. Applications"
+  event: "16th Conference of the Applied Stochastic Models and Data Analysis International Society (ASMDA 2015)"
+  place: "Athens, Greece"
+
+- type: talk
+  year: 2015
+  title: "Approximations for the length of the longest monotone run in a sequence of i.i.d. random variables"
+  event: "18th Conference of the Romanian Society of Probability and Statistics"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2014
+  authors: "A. Amărioarei, C. Preda"
+  title: "Survey on approximation methods for scan statistics: a software illustration"
+  event: "7th International Workshop on Applied Probability (IWAP 2014)"
+  place: "Antalya, Turkey"
+
+- type: talk
+  year: 2014
+  authors: "C. Preda, A. Amărioarei, M. Genin"
+  title: "Two-dimensional discrete scan statistics with arbitrary scanning window"
+  event: "7th International Workshop on Applied Probability (IWAP 2014)"
+  place: "Antalya, Turkey"
+
+- type: talk
+  year: 2014
+  authors: "C. Preda, A. Amărioarei"
+  title: "Approximation for the scan statistics distribution of a three-dimensional Poisson process"
+  event: "7th International Workshop on Applied Probability (IWAP 2014)"
+  place: "Antalya, Turkey"
+
+- type: talk
+  year: 2014
+  title: "Efficient simulation methods for scan statistics: a comparison study"
+  event: "17th Conference of the Romanian Society of Probability and Statistics"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2013
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximation for two-dimensional discrete scan statistics in some block-factor dependent models"
+  event: "IMS-China International Conference on Statistics and Probability"
+  place: "Chengdu, China"
+
+- type: talk
+  year: 2013
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximation for two-dimensional discrete scan statistics in some dependent models"
+  event: "15th Conference of the Applied Stochastic Models and Data Analysis International Society (ASMDA 2013)"
+  place: "Barcelona, Spain"
+
+- type: talk
+  year: 2013
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximation for two-dimensional discrete scan statistics in some dependent models"
+  event: "16th Conference of the Romanian Society of Probability and Statistics"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2012
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximations for the three-dimensional discrete scan statistics"
+  event: "International Workshop on Applied Probability (IWAP 2012)"
+  place: "Jerusalem, Israel"
+
+- type: talk
+  year: 2012
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximations for the three-dimensional discrete scan statistics"
+  event: "15th Conference of the Romanian Society of Probability and Statistics"
+  place: "Bucharest, Romania"
+
+- type: talk
+  year: 2011
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximations for the three-dimensional discrete scan statistics"
+  event: "International Conference on Advances in Probability and Statistics — Theory and Applications (in honour of N. Balakrishnan)"
+  place: "Hong Kong SAR, China"
+
+- type: talk
+  year: 2011
+  title: "The Markov chain imbedding technique — applications to scan statistics"
+  event: "14th Conference of the Romanian Society of Probability and Statistics"
+  place: "Bucharest, Romania"
+
+# ---------- Invited seminars ----------
+- type: seminar
+  year: 2018
+  title: "Extensions of the classical scan statistics with applications"
+  event: "ISMMA Seminar"
+  place: "Bucharest, Romania"
+
+- type: seminar
+  year: 2017
+  authors: "A. Amărioarei, C. Preda"
+  title: "Scan statistics for some dependent models and applications"
+  event: "MODAL's Days Seminar"
+  place: "Le Touquet-Paris-Plage, France"
+
+- type: seminar
+  year: 2015
+  title: "Approximations for the distribution of scan statistics and applications"
+  event: "Séminaire de Statistique, IRMA"
+  place: "Strasbourg, France"
+
+- type: seminar
+  year: 2014
+  title: "Approximations for one- and two-dimensional scan statistics with applications"
+  event: "Statistics for Systems Biology Seminar"
+  place: "Paris, France"
+
+- type: seminar
+  year: 2014
+  title: "Scan statistics: theory and applications"
+  event: "Séminaire de Probabilités et Statistique, Laboratoire Paul Painlevé"
+  place: "Lille, France"
+
+- type: seminar
+  year: 2012
+  title: "Approximations for the distribution of the three-dimensional scan statistics"
+  event: "MODAL's Days Seminar"
+  place: "Albiez, France"
+
+# ---------- Posters ----------
+- type: poster
+  year: 2018
+  authors: "A. Amărioarei, F. Spencer, R. Trandafir, G. Barad, A. Dobre, C. Iţcuş, I. Tuşa, A. Păun, M. Păun, E. Czeizler"
+  title: "Computational approaches for the programmed assembly of nanocellulose meshes"
+  event: "Verification of Engineered Molecular Devices and Programs (VEMDP)"
+  place: "Oxford, UK"
+
+- type: poster
+  year: 2017
+  authors: "A. Amărioarei, C. Iţcuş, I. Tuşa, M. Sidoroff, M. Păun"
+  title: "Statistical evaluation of the Romanian therapeutic lakes through their biochemical characteristics"
+  event: "PROMARE 2017"
+  place: "Constanța, Romania"
+
+- type: poster
+  year: 2017
+  authors: "A. Amărioarei, I. Tuşa, C. Iţcuş, M. Sidoroff, M. Păun"
+  title: "River ecosystem classification through heavy metal assessment"
+  event: "PROMARE 2017"
+  place: "Constanța, Romania"
+
+- type: poster
+  year: 2015
+  authors: "E. Tarnoveanu, A. Ursu, P. Ichim, A. Amărioarei"
+  title: "Ethological study of the rook (Corvus frugilegus L.) in Iași metropolitan area and its ecological requirements assessment"
+  event: "International Zoological Congress of the “Grigore Antipa” Museum"
+  place: "Bucharest, Romania"
+
+- type: poster
+  year: 2014
+  authors: "A. Amărioarei, M. Genin, C. Gower, C. Preda, M. Sidoroff"
+  title: "Detecting Crohn's disease clusters using spatial scan statistics"
+  event: "Symposium on Modern Biotechnological Advances for Human Health"
+  place: "Bucharest, Romania"
+
+# ---------- Summer schools (lecturer) ----------
+- type: school
+  year: 2018
+  title: "Elements of computational statistics / Éléments de statistique computationnelle"
+  event: "École d'été régionale franco-roumaine en mathématiques appliquées"
+  place: "Sinaia, Romania"

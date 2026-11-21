@@ -1,0 +1,209 @@
+---
+title: Research
+subtitle: Scan statistics, approximations for dependent models, and applications
+description: 'Research topics, publications and talks of Alexandru Amărioarei: scan statistics, dependent models, Monte Carlo methods, applications in biology and ecology.'
+toc: false
+listing:
+- id: talks-list
+  contents: data/talks.yml
+  template: templates/talks.ejs
+  template-params:
+    lang: en
+  include:
+    type: talk
+  sort: year desc
+- id: seminars
+  contents: data/talks.yml
+  template: templates/talks.ejs
+  template-params:
+    lang: en
+  include:
+    type: seminar
+  sort: year desc
+- id: posters
+  contents: data/talks.yml
+  template: templates/talks.ejs
+  template-params:
+    lang: en
+  include:
+    type: poster
+  sort: year desc
+- id: pubs-journal
+  contents: data/publications.yml
+  template: templates/publications.ejs
+  template-params:
+    lang: en
+  include:
+    type: journal
+  sort: year desc
+- id: pubs-chapter
+  contents: data/publications.yml
+  template: templates/publications.ejs
+  template-params:
+    lang: en
+  include:
+    type: chapter
+  sort: year desc
+- id: pubs-proceedings
+  contents: data/publications.yml
+  template: templates/publications.ejs
+  template-params:
+    lang: en
+  include:
+    type: proceedings
+  sort: year desc
+- id: pubs-other
+  contents: data/publications.yml
+  template: templates/publications.ejs
+  template-params:
+    lang: en
+  include:
+    type: other
+  sort: year desc
+- id: pubs-thesis
+  contents: data/publications.yml
+  template: templates/publications.ejs
+  template-params:
+    lang: en
+  include:
+    type: thesis
+- id: pubs-preprint
+  contents: data/publications.yml
+  template: templates/publications.ejs
+  template-params:
+    lang: en
+  include:
+    type: preprint
+---
+
+::: {.panel-tabset .research-tabs}
+
+## Topics
+
+[]{#topics}
+
+### Research topics
+
+
+My research focuses on **scan statistics** and the applied probability problems around them. A scan statistic records the largest number of events seen in a window of fixed shape that "scans" a sequence, an image or a volume. It is used to decide whether a cluster of events can be explained by chance.
+
+For a random field $\{X_{s,t}\}$ on the grid $\{1,\dots,N_1\}\times\{1,\dots,N_2\}$ and a window of size $m_1\times m_2$, the two-dimensional discrete scan statistic is
+
+$$
+S_{m_1,m_2}(N_1,N_2) \;=\; \max_{\substack{1\le i\le N_1-m_1+1\\ 1\le j\le N_2-m_2+1}} \;\sum_{s=i}^{i+m_1-1}\,\sum_{t=j}^{j+m_2-1} X_{s,t}.
+$$
+
+The exact distribution of $S$ is rarely available, so the focus shifts to accurate approximations with explicit error bounds.
+
+Main directions:
+
+- **Multidimensional discrete scan statistics.** Approximations for the distribution of the scan statistic in two and three dimensions, based on the method of 1-dependent stationary sequences, with error bounds.
+- **Dependent models.** Block-factor random fields and models with local dependence, beyond the independence assumption.
+- **Windows of arbitrary shape.** Scan statistics whose window can take any shape, which increase the power to detect local changes in models that allow dependent data.
+- **Continuous scan statistics.** Approximations for the scan statistic of multidimensional Poisson processes.
+- **Runs and patterns.** The distribution of the longest monotone run; the Markov chain imbedding technique.
+- **Simulation methods.** Efficient Monte Carlo methods for estimating the distribution of scan statistics.
+
+### Applications and collaborations
+
+
+Beyond scan statistics, my work in mathematical and computational statistical modelling has followed three applied lines:
+
+- **Uncertainty of nonlinear transformations.** With B. Strîmbu (University of Oregon), modelling the uncertainty of nonlinear transformations, which describe relationships within and between systems, and correcting the bias that appears when a transformed variable is back-transformed, for example in forestry practice when the original data are no longer available. The result is an unbiased procedure for modelling complex relationships that is more parsimonious than current approaches.
+- **DNA self-assembly.** In the MoDASyS project at the National Institute of Research and Development for Biological Sciences, computational statistical models for a mesh-assembly dynamical system that mimics DNA self-assembly, and a rule-based modelling methodology that gives new insight into the assembly process and its control.
+- **Patient pathways in hospitals.** In the ClinMine project at Inria Lille, modelling the dynamics of patients' pathways through hospitals with functional data analysis.
+
+Other applications include detecting disease clusters (for example, Crohn's disease) with spatial scan statistics, aquatic ecology and bibliometric assessments of research. See [Publications](#publications) and [Projects](projects.qmd) for details.
+
+### Ongoing directions
+
+
+Work in preparation:
+
+- Approximations for the distribution of the longest monotone run, using a scan statistics approach.
+- Approximations for multidimensional continuous scan statistics of Poisson processes (with C. Preda).
+
+### PhD thesis
+
+
+*Approximations for multidimensional discrete scan statistics*, Université Lille 1 – Sciences et Technologies, defended in September 2014. Advisor: Prof. Cristian Preda. Referees: Joseph Glaz, Claude Lefèvre. Committee: Stéphane Robin, Azzouz Dermoune, George Haiman, Manuela Sidoroff.
+
+### Software
+
+
+**Scan Statistics Simulator**: a MATLAB graphical interface for estimating the distribution of the discrete scan statistic in one, two and three dimensions, for several models of the underlying random field. The code will be published on GitHub.
+
+### Reviewing and memberships
+
+
+Reviewer for *Methodology and Computing in Applied Probability*, *Physica A*, *Statistics & Probability Letters*, *Romanian Journal of Information Science and Technology* and *Mathematical Reports*.
+
+Member of the Romanian Society of Probability and Statistics and associate member of the Romanian team of The R Project for Statistical Computing.
+
+Profiles: [ORCID](https://orcid.org/0000-0002-3722-7351), [Google Scholar](https://scholar.google.com/citations?user=QGjXKxAAAAAJ), [Web of Science](https://www.webofscience.com/wos/author/record/AAT-2866-2021) (ResearcherID AAT-2866-2021), Brainmap ID U-1700-038S-5236.
+
+## Publications
+
+[]{#publications}
+
+DOI links point to the published version and arXiv links to preprints. The same list, with citation counts, is on [Google Scholar](https://scholar.google.com/citations?user=QGjXKxAAAAAJ) and [ORCID](https://orcid.org/0000-0002-3722-7351).
+
+### Journal articles
+
+
+::: {#pubs-journal}
+:::
+
+### Book chapters
+
+
+::: {#pubs-chapter}
+:::
+
+### Conference proceedings
+
+
+::: {#pubs-proceedings}
+:::
+
+### Other publications
+
+
+::: {#pubs-other}
+:::
+
+### Thesis
+
+
+::: {#pubs-thesis}
+:::
+
+### Preprints and work in preparation
+
+
+::: {#pubs-preprint}
+:::
+
+## Talks
+
+[]{#talks}
+
+### Conference talks
+
+
+::: {#talks-list}
+:::
+
+### Invited seminars
+
+
+::: {#seminars}
+:::
+
+### Posters
+
+
+::: {#posters}
+:::
+
+:::

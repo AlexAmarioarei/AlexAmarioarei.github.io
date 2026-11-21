@@ -1,0 +1,191 @@
+---
+title: "Experience"
+subtitle: "Academic positions, administrative roles and education"
+description: "Career of Alexandru Amărioarei: University of Bucharest, NIRDBS, Inria Lille – Nord Europe, Polytech'Lille."
+toc: true
+---
+
+<!-- CV link (add later): put the PDF in assets/files/ and replace this comment with [CV (PDF)](assets/files/cv-amarioarei-en.pdf) -->
+
+## Academic and research positions
+
+::: {.cv-entry}
+::: {.when}
+2020 – present
+:::
+
+::: {.what}
+**Vice-Dean for accreditation, internationalisation and annual reporting**\
+[Faculty of Mathematics and Computer Science, University of Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2017 – present
+:::
+
+::: {.what}
+**Assistant Professor (Lecturer)**\
+[Faculty of Mathematics and Computer Science, University of Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2019 – present
+:::
+
+::: {.what}
+**Senior Researcher (CS II)**\
+[Department of Bioinformatics, National Institute of R&D for Biological Sciences (NIRDBS), Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2021 – 2022
+:::
+
+::: {.what}
+**Scientific Director**\
+[National Institute of R&D for Biological Sciences (NIRDBS), Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2017 – 2019
+:::
+
+::: {.what}
+**Researcher (CS III)**\
+[Department of Bioinformatics, NIRDBS, Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2016 – 2017
+:::
+
+::: {.what}
+**Assistant Professor (Lecturer), hourly paid**\
+[Faculty of Mathematics and Computer Science, University of Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2016 – 2017
+:::
+
+::: {.what}
+**Postdoctoral researcher**\
+[MODAL team (*Models for data analysis and learning*), Inria Lille – Nord Europe, France]{.where}
+
+September 2016 – February 2017, in the ClinMine project (*Optimizing the management of patients in hospital*): modelling the dynamics of patients' pathways through hospitals with functional data analysis.
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2015 – 2017
+:::
+
+::: {.what}
+**Research scientist**\
+[Department of Bioinformatics, NIRDBS, Bucharest]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2013 – 2015
+:::
+
+::: {.what}
+**Teaching assistant (ATER)**\
+[Department of Statistics and Software Engineering, Polytech'Lille, France]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2010 – 2015
+:::
+
+::: {.what}
+**Research assistant**\
+[MODAL team, Inria Lille – Nord Europe, and Laboratoire Paul Painlevé (Probability and Statistics team), Université Lille 1, France]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2009 – 2010
+:::
+
+::: {.what}
+**Research assistant**\
+[Department of Bioinformatics, NIRDBS, Bucharest]{.where}
+:::
+:::
+
+## Administrative roles
+
+- Vice-Dean for accreditation, internationalisation and annual reporting, Faculty of Mathematics and Computer Science, University of Bucharest (since 2020), and member of the Faculty Council.
+- Scientific Director of NIRDBS (2021–2022).
+- Director of project 2PFE/2021 on strengthening the research capacity of NIRDBS (2021–2024).
+- Member of the organising committees of several scientific events (see [Projects](projects.qmd#organisation-of-scientific-events)).
+
+## Education
+
+::: {.cv-entry}
+::: {.when}
+2010 – 2014
+:::
+
+::: {.what}
+**PhD in Applied Mathematics**\
+[Université Lille 1 – Sciences et Technologies, France]{.where}
+
+Thesis: *Approximations for multidimensional discrete scan statistics*. Advisor: Cristian Preda.
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2008 – 2010
+:::
+
+::: {.what}
+**Master's degree in Applied Mathematics**, programme *Stochastic Calculus, Applied Statistics and Optimization*\
+[University of Bucharest]{.where}
+
+Thesis: *Markov chains with applications in biology*. Advisor: Acad. Ioan Cuculescu.
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2004 – 2008
+:::
+
+::: {.what}
+**Bachelor's degree in Mathematics**\
+[University of Bucharest]{.where}
+
+Thesis: *Semi-Riemannian concepts*. Advisor: Stere Ianuș.
+:::
+:::
+
+## Further training
+
+- BigDat 2018 winter school (about 47 hours of lectures).
+- ICGEB Bioinformatics Course, Trieste, Italy, June 2010.
+
+## Skills
+
+**Languages:** Romanian (native), English, French.\
+**Software:** R (including R Markdown, Quarto and Shiny), MATLAB, SAS, Mathematica, Maple; LaTeX, TikZ, Asymptote; HTML, CSS, JavaScript.

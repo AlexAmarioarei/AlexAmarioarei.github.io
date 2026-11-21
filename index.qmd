@@ -1,0 +1,156 @@
+---
+title: "Alexandru Amărioarei"
+pagetitle: "Personal webpage"
+open-graph:
+  title: "Alexandru Amărioarei | Personal webpage"
+description: "Mathematician and statistician: scan statistics, approximations for dependent models, Monte Carlo methods. Assistant Professor (Lecturer) at the Faculty of Mathematics and Computer Science, University of Bucharest."
+page-layout: full
+body-classes: page-home
+toc: false
+listing:
+  - id: home-pubs
+    contents: data/publications.yml
+    template: templates/publications-compact.ejs
+    template-params: { lang: en }
+    include:
+      selected: true
+    sort: "year desc"
+    max-items: 4
+  - id: home-posts
+    contents: blog/posts
+    type: default
+    fields: [date, title, description]
+    sort: "date desc"
+    max-items: 3
+    date-format: "D MMMM YYYY"
+---
+
+::: {.home-hero}
+
+::: {.hero-text}
+
+```{=html}
+<h1 class="hero-name">Alexandru Amărioarei</h1>
+<p class="hero-subtitle">Personal webpage</p>
+```
+
+::: {.hero-role}
+Assistant Professor (Lecturer) and Vice-Dean at the Faculty of Mathematics and Computer Science, University of Bucharest. Senior researcher at the National Institute of Research and Development for Biological Sciences.
+:::
+
+::: {.hero-lede}
+I work in mathematical modelling and computational statistics, mainly on scan statistics: sharp approximations and error bounds for detecting clusters and changes in distribution in dependent random fields, with applications in biology, ecology and health.
+:::
+
+::: {.hero-actions}
+[Research](research.qmd){.btn .btn-primary} [Publications](research.qmd#publications){.btn .btn-quiet} [Courses](teaching.qmd){.btn .btn-quiet}
+:::
+
+:::
+
+::: {.hero-figure}
+```{=html}
+<figure class="scan-figure">
+  <div id="scan-lattice"></div>
+  <figcaption>Two-dimensional discrete scan statistic: the window with the most events in a random field.</figcaption>
+</figure>
+```
+:::
+
+:::
+
+::: {.home-section}
+
+## Activity
+
+::: {.areas}
+
+::: {.area}
+### [Research](research.qmd)
+Scan statistics for detecting clusters and local changes in one, two and three dimensions, with windows of arbitrary shape and dependent data. Also nonlinear models with bias correction, and models of DNA self-assembly.
+:::
+
+::: {.area}
+### [Teaching](teaching.qmd)
+Probability, statistics and regression at bachelor's level, statistical tools for finance and biostatistics at master's level, with R labs. More than 10 master's dissertations and 20 bachelor's theses supervised.
+:::
+
+::: {.area}
+### [Projects](projects.qmd)
+National and European projects in bioinformatics, DNA nanotechnology and environmental science. Director of the institutional development project 2PFE/2021 at NIRDBS.
+:::
+
+:::
+
+:::
+
+::: {.home-section}
+
+::: {.two-col}
+
+::: {}
+## About
+
+::: {.about-grid}
+
+::: {.portrait}
+![](assets/img/portrait.svg){fig-alt="Profile photo (to be replaced)"}
+:::
+
+::: {}
+I have more than ten years of experience in research and teaching, developing methods of mathematical modelling and computational statistics for complex problems in several applied fields.
+
+I received my PhD in applied mathematics in 2014 from the Laboratoire Paul Painlevé, Université Lille 1, supervised by Prof. Cristian Preda. My thesis gave sharp approximations and error bounds for the distribution of multidimensional discrete scan statistics. During the PhD I was a full member of the MODAL team at Inria Lille – Nord Europe and taught at Polytech'Lille. From September 2016 to February 2017 I returned to Inria as a postdoctoral researcher in the ClinMine project, modelling patients' pathways through hospitals with functional data analysis.
+
+At the University of Bucharest I teach and supervise theses, and since 2020 I have been Vice-Dean for accreditation, internationalisation and annual reporting. At the National Institute of Research and Development for Biological Sciences I model DNA self-assembly and work with researchers abroad, such as B. Strîmbu on nonlinear models in forestry.
+
+[Full background](experience.qmd){.more-link}
+:::
+
+:::
+
+:::
+
+::: {}
+## Current positions
+
+```{=html}
+<ul class="positions">
+  <li><span class="when">since 2020</span><span>Vice-Dean, Faculty of Mathematics and Computer Science, University of Bucharest</span></li>
+  <li><span class="when">since 2017</span><span>Assistant Professor (Lecturer), Faculty of Mathematics and Computer Science, University of Bucharest</span></li>
+  <li><span class="when">since 2019</span><span>Senior Researcher (CS II), Department of Bioinformatics, NIRDBS</span></li>
+</ul>
+```
+
+[Contact](contact.qmd){.more-link}
+:::
+
+:::
+
+:::
+
+::: {.home-section}
+
+::: {.two-col}
+
+::: {}
+## Selected publications
+
+::: {#home-pubs}
+:::
+
+[All publications](research.qmd#publications){.more-link}
+:::
+
+::: {}
+## From the blog
+
+::: {#home-posts}
+:::
+
+[All posts](blog/index.qmd){.more-link}
+:::
+
+:::
+
+:::

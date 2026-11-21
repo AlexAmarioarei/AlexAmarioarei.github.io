@@ -1,0 +1,47 @@
+---
+title: "Contact"
+description: "Contact details for Alexandru Amărioarei, Faculty of Mathematics and Computer Science, University of Bucharest."
+---
+
+**Email:** [alexandru.amarioarei@fmi.unibuc.ro](mailto:alexandru.amarioarei@fmi.unibuc.ro)
+
+## Faculty of Mathematics and Computer Science
+
+University of Bucharest\
+PB Tower, 15G Iuliu Maniu Boulevard, District 6, 061075 Bucharest, Romania\
+Office: Dean's office (Decanat)\
+Office hours in the current semester: Friday 9:00–10:00 ([Probability and Statistics](https://alexamarioarei.github.io/curs-ps-fmi/contact/contact.html)) and Friday 12:00–13:00 ([Statistics](https://alexamarioarei.github.io/curs-stat-fmi/contact/contact.html)). Each course site has the up-to-date schedule.\
+[fmi.unibuc.ro](https://fmi.unibuc.ro/)
+
+```{=html}
+<figure class="map">
+  <iframe title="Map: Faculty of Mathematics and Computer Science, PB Tower, Iuliu Maniu Boulevard 15G" src="https://www.openstreetmap.org/export/embed.html?bbox=26.03579%2C44.43178%2C26.04579%2C44.43638&amp;layer=mapnik&amp;marker=44.43408%2C26.04079" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  <figcaption><a href="https://www.openstreetmap.org/?mlat=44.43408&amp;mlon=26.04079#map=17/44.43408/26.04079">Open in OpenStreetMap</a> <a href="https://www.google.com/maps/search/?api=1&amp;query=44.43408,26.04079">Open in Google Maps</a></figcaption>
+</figure>
+```
+
+## National Institute of Research and Development for Biological Sciences
+
+Department of Bioinformatics\
+296 Splaiul Independenței, District 6, 060031 Bucharest, Romania\
+Phone: +40 21 220 77 80\
+[incdsb.ro](https://www.incdsb.ro/en/)
+
+```{=html}
+<figure class="map">
+  <iframe title="Map: National Institute of Research and Development for Biological Sciences, Splaiul Independenței 296" src="https://www.openstreetmap.org/export/embed.html?bbox=26.04099%2C44.44500%2C26.05099%2C44.44960&amp;layer=mapnik&amp;marker=44.4473%2C26.04599" loading="lazy" referrerpolicy="no-referrer"></iframe>
+  <figcaption><a href="https://www.openstreetmap.org/?mlat=44.4473&amp;mlon=26.04599#map=17/44.4473/26.04599">Open in OpenStreetMap</a> <a href="https://www.google.com/maps/search/?api=1&amp;query=44.4473,26.04599">Open in Google Maps</a></figcaption>
+</figure>
+```
+
+## Profiles
+
+- GitHub: [github.com/alexamarioarei](https://github.com/alexamarioarei)
+- ORCID: [0000-0002-3722-7351](https://orcid.org/0000-0002-3722-7351)
+- Google Scholar: [profile](https://scholar.google.com/citations?user=QGjXKxAAAAAJ)
+- Web of Science ResearcherID: [AAT-2866-2021](https://www.webofscience.com/wos/author/record/AAT-2866-2021)
+- Brainmap ID: U-1700-038S-5236
+
+## For students
+
+The syllabus, assessment rules and materials of each course are on the course website (see [Teaching](teaching.qmd)).

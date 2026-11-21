@@ -1,0 +1,13 @@
+---
+title: "Blog"
+subtitle: "Note despre probabilități, statistică, R și predare"
+description: "Note, tutoriale și noutăți din cercetare: probabilități, statistică, R și predare."
+listing:
+  contents: posts
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+  fields: [date, title, description, categories, reading-time]
+  date-format: "DD.MM.YYYY"
+---

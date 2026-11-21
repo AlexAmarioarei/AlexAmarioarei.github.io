@@ -1,0 +1,13 @@
+---
+title: "Blog"
+subtitle: "Notes on probability, statistics, R and teaching"
+description: "Notes, tutorials and research updates: probability, statistics, R and teaching."
+listing:
+  contents: posts
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+  fields: [date, title, description, categories, reading-time]
+  date-format: "D MMMM YYYY"
+---

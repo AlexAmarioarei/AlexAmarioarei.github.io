@@ -1,0 +1,44 @@
+# =====================================================================
+#  Course websites — shown on teaching.qmd and ro/teaching.qmd.
+#  To add a new course website, copy a block and edit it.
+#  Text fields have a Romanian version and an English version (-en).
+#    status: current | archived
+#    order:  display order (smaller first)
+# =====================================================================
+
+- title: "Probabilități și statistică"
+  title-en: "Probability and Statistics"
+  url: "https://alexamarioarei.github.io/curs-ps-fmi/"
+  audience: "Informatică, anul II"
+  audience-en: "Computer Science, 2nd year"
+  edition: "2026–2027"
+  description: "Modelarea fenomenelor aleatoare (spații de probabilitate, variabile aleatoare discrete și continue, legi limită) și metode statistice de bază: estimare, intervale de încredere, teste de ipoteze, regresie liniară. Seminarii cu probleme și laboratoare în R."
+  description-en: "Modelling random phenomena (probability spaces, discrete and continuous random variables, limit theorems) and basic statistical methods: estimation, confidence intervals, hypothesis testing, linear regression. Problem seminars and R labs."
+  tools: "R, Quarto"
+  status: current
+  order: 1
+
+- title: "Statistică"
+  title-en: "Statistics"
+  url: "https://alexamarioarei.github.io/curs-stat-fmi/"
+  audience: "Matematică, Matematică-Informatică, Matematici Aplicate, anul III"
+  audience-en: "Mathematics, Mathematics and Computer Science, Applied Mathematics, 3rd year"
+  edition: "2026–2027"
+  description: "Introducere în statistica inferențială, din perspectivă matematică și metodologică: eșantionare, simulare, estimatori și proprietățile lor, informația Fisher, inegalitatea Rao–Cramér, intervale de încredere și teste de ipoteze. Seminarii și laboratoare în R."
+  description-en: "An introduction to inferential statistics from a mathematical and methodological perspective: sampling, simulation, estimators and their properties, Fisher information, the Rao–Cramér inequality, confidence intervals and hypothesis testing. Seminars and R labs."
+  tools: "R, Quarto"
+  status: current
+  order: 2
+
+# Template for the next course (remove the leading "# " to activate):
+# - title: "Titlul cursului"
+#   title-en: "Course title"
+#   url: "https://alexamarioarei.github.io/<repo>/"
+#   audience: "Programul, anul"
+#   audience-en: "Programme, year"
+#   edition: "2027–2028"
+#   description: "Descriere scurtă."
+#   description-en: "Short description."
+#   tools: "R"
+#   status: current
+#   order: 3

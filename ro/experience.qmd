@@ -1,0 +1,191 @@
+---
+title: "Parcurs profesional"
+subtitle: "Poziții academice, responsabilități administrative și formare"
+description: "Parcursul profesional al lui Alexandru Amărioarei: Universitatea din București, INCDSB, Inria Lille – Nord Europe, Polytech'Lille."
+toc: true
+---
+
+<!-- CV link (add later): put the PDF in assets/files/ and replace this comment with [CV (PDF)](../assets/files/cv-amarioarei-ro.pdf) -->
+
+## Poziții academice și de cercetare
+
+::: {.cv-entry}
+::: {.when}
+2020 – prezent
+:::
+
+::: {.what}
+**Prodecan pentru acreditări, internaționalizare și raportări anuale**\
+[Facultatea de Matematică și Informatică, Universitatea din București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2017 – prezent
+:::
+
+::: {.what}
+**Lector universitar**\
+[Facultatea de Matematică și Informatică, Universitatea din București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2019 – prezent
+:::
+
+::: {.what}
+**Cercetător științific gradul II**\
+[Departamentul de Bioinformatică, Institutul Național de C-D pentru Științe Biologice (INCDSB), București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2021 – 2022
+:::
+
+::: {.what}
+**Director științific**\
+[Institutul Național de C-D pentru Științe Biologice (INCDSB), București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2017 – 2019
+:::
+
+::: {.what}
+**Cercetător științific gradul III**\
+[Departamentul de Bioinformatică, INCDSB, București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2016 – 2017
+:::
+
+::: {.what}
+**Lector (plata cu ora)**\
+[Facultatea de Matematică și Informatică, Universitatea din București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2016 – 2017
+:::
+
+::: {.what}
+**Cercetător postdoctoral**\
+[Echipa MODAL (*Models for data analysis and learning*), Inria Lille – Nord Europe, Franța]{.where}
+
+Septembrie 2016 – februarie 2017, în proiectul ClinMine (*Optimizing the management of patients in hospital*): modelarea dinamicii parcursului pacienților în spitale cu ajutorul analizei datelor funcționale.
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2015 – 2017
+:::
+
+::: {.what}
+**Cercetător științific**\
+[Departamentul de Bioinformatică, INCDSB, București]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2013 – 2015
+:::
+
+::: {.what}
+**Asistent universitar (ATER)**\
+[Departamentul de Statistică și Inginerie Software, Polytech'Lille, Franța]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2010 – 2015
+:::
+
+::: {.what}
+**Asistent de cercetare**\
+[Echipa MODAL, Inria Lille – Nord Europe, și Laboratoire Paul Painlevé (echipa de Probabilități și Statistică), Université Lille 1, Franța]{.where}
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2009 – 2010
+:::
+
+::: {.what}
+**Asistent de cercetare**\
+[Departamentul de Bioinformatică, INCDSB, București]{.where}
+:::
+:::
+
+## Responsabilități administrative
+
+- Prodecan pentru acreditări, internaționalizare și raportări anuale, Facultatea de Matematică și Informatică, Universitatea din București (din 2020), și membru al Consiliului Facultății.
+- Director științific al INCDSB (2021–2022).
+- Director al proiectului 2PFE/2021 pentru consolidarea capacității de cercetare a INCDSB (2021–2024).
+- Membru în comitetele de organizare ale mai multor evenimente științifice (vezi [Proiecte](projects.qmd#organizare-de-evenimente-științifice)).
+
+## Studii
+
+::: {.cv-entry}
+::: {.when}
+2010 – 2014
+:::
+
+::: {.what}
+**Doctorat în matematici aplicate**\
+[Université Lille 1 – Sciences et Technologies, Franța]{.where}
+
+Teza: *Approximations for multidimensional discrete scan statistics*. Conducător: Cristian Preda.
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2008 – 2010
+:::
+
+::: {.what}
+**Master în matematici aplicate**, programul *Calcul stocastic, statistică aplicată și optimizări*\
+[Universitatea din București]{.where}
+
+Lucrarea: *Markov chains with applications in biology*. Coordonator: acad. Ioan Cuculescu.
+:::
+:::
+
+::: {.cv-entry}
+::: {.when}
+2004 – 2008
+:::
+
+::: {.what}
+**Licență în matematică**\
+[Universitatea din București]{.where}
+
+Lucrarea: *Semi-riemannian concepts*. Coordonator: Stere Ianuș.
+:::
+:::
+
+## Formare suplimentară
+
+- Școala de iarnă BigDat 2018 (aproximativ 47 de ore de curs).
+- ICGEB Bioinformatics Course, Trieste, Italia, iunie 2010.
+
+## Competențe
+
+**Limbi:** română (limba maternă), engleză, franceză.\
+**Software:** R (inclusiv R Markdown, Quarto și Shiny), MATLAB, SAS, Mathematica, Maple; LaTeX, TikZ, Asymptote; HTML, CSS, JavaScript.

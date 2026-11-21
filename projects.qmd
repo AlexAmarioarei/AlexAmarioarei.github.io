@@ -1,0 +1,39 @@
+---
+title: "Projects"
+subtitle: "National and international research projects"
+description: "Research projects of Alexandru Amărioarei: DNA nanotechnology, bioinformatics, DANUBIUS-RI, Water-ForCE."
+toc: true
+listing:
+  - id: projects-ongoing
+    contents: data/projects.yml
+    template: templates/projects.ejs
+    template-params: { lang: en }
+    include: { status: ongoing }
+    sort: "start desc"
+  - id: projects-completed
+    contents: data/projects.yml
+    template: templates/projects.ejs
+    template-params: { lang: en }
+    include: { status: completed }
+    sort: "start desc"
+---
+
+Most projects took place at the National Institute of Research and Development for Biological Sciences (NIRDBS), in the Department of Bioinformatics, and in collaboration with the MODAL team at Inria Lille – Nord Europe.
+
+## Ongoing
+
+::: {#projects-ongoing}
+:::
+
+## Completed
+
+::: {#projects-completed}
+:::
+
+## Organisation of scientific events
+
+- Co-chair, IUBMB Symposium *Modern Biotechnologies in Sustainable Development of the Danube Delta*, 31 May – 2 June 2016, Murighiol, Romania.
+- Organising committee member: International Conference BioHub *Biological Sciences: Challenges & Perspectives*, 25th anniversary of NIRDBS, Bucharest.
+- Organising committee member: MoDaSyS AlgoNano workshop *Algorithmic and Computational Methods in Biomedicine and Nanotechnology*, Bucharest.
+- Organising committee member: workshop *Modern Biotechnological Advances for Human Health*, Bucharest.
+- Organising committee member: 12th National Symposium with International Participation *Medicinal Plants – Present and Perspectives*, 6–9 September 2016, Piatra Neamț, Romania.

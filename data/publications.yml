@@ -1,0 +1,270 @@
+# =====================================================================
+#  Publications — one list for both languages.
+#  Shown in the Publications tab of research.qmd and ro/research.qmd (and on the homepage).
+#
+#  To add a publication, copy a block and edit it. Fields:
+#    type:    journal | chapter | proceedings | other | thesis | preprint
+#    year:    publication year (lists are grouped by year)
+#    authors: as they should appear; "A. Amărioarei" is highlighted
+#    title, venue (journal / book / conference), details (vol, pages)
+#    optional links: doi (without https://doi.org/), arxiv (id), url,
+#                    pdf (e.g. assets/files/paper.pdf)
+#    optional: note (short remark), selected: true (show on homepage)
+#
+#  Source: Europass CV (2026) and the previous website. DOIs were
+#  checked against Crossref; entries without a DOI still need one
+#  where it exists.
+# =====================================================================
+
+# ---------- Journal articles ----------
+- type: journal
+  year: 2025
+  authors: "B. Oancea, M. Necula, E. C. Milea, A. Amărioarei, I. Petre, M. M. Păun"
+  title: "Machine learning meets Raman spectroscopy: a systematic review of literature in cancer diagnostics"
+  venue: "Procedia Computer Science"
+  details: "270, 2666–2675"
+
+- type: journal
+  year: 2021
+  authors: "O. Pacioglu, A. Amărioarei, L. T. Duțu et al."
+  title: "The structure and functionality of communities and food webs in streams along the epigean–hypogean continuum: unifying ecological stoichiometry and metabolic theory of ecology"
+  venue: "Aquatic Sciences"
+  details: "83, 63"
+  doi: "10.1007/s00027-021-00815-6"
+
+- type: journal
+  year: 2021
+  authors: "B. Strîmbu, A. Păun, A. Amărioarei, M. Păun, V. F. Strîmbu"
+  title: "Efficient synthetic generation of ecological data with preset spatial association of individuals"
+  venue: "Canadian Journal of Forest Research"
+  doi: "10.1139/cjfr-2020-0490"
+
+- type: journal
+  year: 2021
+  authors: "A. Amărioarei, F. Spencer, G. Barad, A.-M. Gheorghe, C. Iţcuş, I. Tuşa, A.-M. Prelipcean, A. Păun, M. Păun, A. Rodriguez-Paton, R. Trandafir, E. Czeizler"
+  title: "DNA-guided assembly for fibril proteins"
+  venue: "Mathematics"
+  details: "9(4), 404"
+  doi: "10.3390/math9040404"
+  selected: true
+
+- type: journal
+  year: 2021
+  authors: "B. Strîmbu, A. Amărioarei, M. Păun"
+  title: "Nonlinear parsimonious forest modeling assuming normal distribution of residuals"
+  venue: "European Journal of Forest Research"
+  doi: "10.1007/s10342-021-01355-2"
+
+- type: journal
+  year: 2020
+  authors: "A. Amărioarei, G. Barad, E. Czeizler, A. Păun, R. Trandafir"
+  title: "Probabilistic modelling of the self-assembly of the 1-dimensional DNA structures"
+  venue: "Romanian Journal of Information Science and Technology"
+  details: "23(3), 311–329"
+
+- type: journal
+  year: 2020
+  authors: "L. Popa, A. M. Dobre, C. Iţcuş, A. Amărioarei, A. Păun, M. Păun, F. Pop, I. Tuşa, M. Nguyen, A. Kuzyk, E. Czeizler"
+  title: "DNA origami design and implementation: the Romanian map"
+  venue: "Romanian Biotechnological Letters"
+  details: "25(4), 1816–1822"
+
+- type: journal
+  year: 2020
+  authors: "A. Amărioarei, M. Păun, B. Strîmbu"
+  title: "Development of nonlinear parsimonious forest models using efficient expansion of the Taylor series: applications to site productivity and taper"
+  venue: "Forests"
+  details: "11, 458"
+  doi: "10.3390/f11040458"
+
+- type: journal
+  year: 2020
+  authors: "A. Amărioarei, C. Preda"
+  title: "One dimensional discrete scan statistics for dependent models and some related problems"
+  venue: "Mathematics"
+  details: "8, 576"
+  doi: "10.3390/math8040576"
+  selected: true
+
+- type: journal
+  year: 2018
+  authors: "C. Iţcuş, A. Amărioarei, G. Barad, E. Czeizler, A. Dobre, V. Mitrana, F. Negre, A. Păun, M. Păun, M. Sidoroff, R. Trandafir, I. Tuşa"
+  title: "3D DNA origami map structure simulation"
+  venue: "Romanian Journal of Information Science and Technology"
+  details: "21(3), 249–255"
+
+- type: journal
+  year: 2018
+  authors: "A. Amărioarei, G. Barad, E. Czeizler, E. Czeizler, A. M. Dobre, C. Iţcuş, A. Păun, M. Păun, R. Trandafir, I. Tuşa"
+  title: "One dimensional DNA tiles self-assembly model simulation"
+  venue: "International Journal of Unconventional Computing"
+  details: "13(4–5), 399–415"
+
+- type: journal
+  year: 2018
+  authors: "A. Amărioarei, C. Iţcuş, I. Tuşa, M. Sidoroff, M. Păun"
+  title: "Classification of Romanian saltwater lakes by statistical methods"
+  venue: "Journal of Environmental Protection and Ecology"
+  details: "19(1), 1–14"
+
+- type: journal
+  year: 2018
+  authors: "C. Dhaenens, J. Jacques, V. Vandewalle, M. Vandromme, E. Chazard, C. Preda, A. Amărioarei, P. Chaiwuttisak, C. Cozma, G. Ficheur, M.-E. Kessaci, R. Perichon, J. Taillard, R. Bordet, A. Lansiaux, L. Jourdan, D. Delerue, A. Hansske"
+  title: "ClinMine: optimizing the management of patients in hospital"
+  venue: "IRBM"
+  doi: "10.1016/j.irbm.2017.12.002"
+
+- type: journal
+  year: 2017
+  authors: "B. Strîmbu, A. Amărioarei, M. Păun"
+  title: "A parsimonious approach for modeling uncertainty within complex nonlinear relationships"
+  venue: "Ecosphere"
+  details: "8(9)"
+  doi: "10.1002/ecs2.1945"
+
+- type: journal
+  year: 2017
+  authors: "B. Strîmbu, A. Amărioarei, M. Păun, J. P. McTague"
+  title: "A posteriori bias correction of three models used for environmental reporting"
+  venue: "Forestry: An International Journal of Forest Research"
+  details: "91(1), 49–62"
+  doi: "10.1093/forestry/cpx032"
+
+- type: journal
+  year: 2017
+  authors: "A. Amărioarei, C. Iţcuş, M. Păun"
+  title: "Phytoremediation research — how Romania is placed worldwide"
+  venue: "Romanian Biotechnological Letters"
+  details: "22(3), 12651–12660"
+
+- type: journal
+  year: 2016
+  authors: "A. Amărioarei, M. Păun"
+  title: "Two decades of research collaboration: a keyword Scopus evaluation"
+  venue: "Romanian Statistical Review"
+  details: "No. 4, 49–66"
+
+- type: journal
+  year: 2016
+  authors: "M. Sidoroff, M. Paraschiv, A. Amărioarei, M. Păun"
+  title: "Measuring funded research performance for multidisciplinary research in the Danube Basin"
+  venue: "Journal of Environmental Protection and Ecology"
+  details: "17(2), 638–647"
+
+- type: journal
+  year: 2015
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximation for the distribution of three-dimensional discrete scan statistic"
+  venue: "Methodology and Computing in Applied Probability"
+  details: "17(3), 565–578"
+  doi: "10.1007/s11009-013-9382-3"
+  arxiv: "1303.3775"
+  selected: true
+
+- type: journal
+  year: 2014
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximations for two-dimensional discrete scan statistics in some block-factor type dependent models"
+  venue: "Journal of Statistical Planning and Inference"
+  details: "151–152, 107–120"
+  doi: "10.1016/j.jspi.2014.05.002"
+  arxiv: "1401.2822"
+  selected: true
+
+# ---------- Book chapters ----------
+- type: chapter
+  year: 2024
+  authors: "A. Amărioarei, M. Genin, C. Preda"
+  title: "Two-dimensional discrete scan statistics with arbitrary window shape"
+  venue: "Handbook of Scan Statistics (J. Glaz, M. V. Koutras, eds.), Springer, New York"
+  doi: "10.1007/978-1-4614-8033-4_52"
+  selected: true
+
+- type: chapter
+  year: 2017
+  authors: "M. Sidoroff, I. Tuşa, A. Amărioarei, M. Păun"
+  title: "Public perception and socio-economic analysis on the impact of DANUBIUS-RI"
+  venue: "Lower Danube Basin. Approaches to Macroregional Sustainability, Editura Academiei Române"
+  details: "69–78"
+
+# ---------- Conference proceedings ----------
+- type: proceedings
+  year: 2019
+  authors: "G. Barad, A. Amărioarei, M. Păun, A. M. Dobre, C. Iţcuş, I. Tuşa, R. Trandafir, E. Czeizler"
+  title: "Simulation of one-dimensional staged DNA tile assembly by the signal-passing hierarchical TAM"
+  venue: "KES 2019, 23rd International Conference on Knowledge-Based and Intelligent Information & Engineering Systems (Procedia Computer Science)"
+  doi: "10.1016/j.procs.2019.09.364"
+
+- type: proceedings
+  year: 2018
+  authors: "A. Amărioarei, G. Barad, E. Czeizler, A. Dobre, C. Iţcuş, V. Mitrana, A. Păun, M. Păun, F. Spencer, R. Trandafir, I. Tuşa"
+  title: "DNA-guided assembly of nanocellulose meshes"
+  venue: "Theory and Practice of Natural Computing, TPNC 2018 (D. Fagan, C. Martín-Vide, M. O'Neill, M. Vega-Rodríguez, eds.), Lecture Notes in Computer Science 11324, Springer, Cham"
+
+- type: proceedings
+  year: 2016
+  authors: "A. Amărioarei, R. Jibotean, I. Tuşa, C. Iţcuş, M. Butu"
+  title: "Trends in Romanian medicinal plants scientific research"
+  venue: "Analele Ştiinţifice ale Universităţii Al. I. Cuza Iaşi, s. II a. Biologie vegetală"
+  details: "62(1), 62–63"
+
+- type: proceedings
+  year: 2013
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximation for two-dimensional discrete scan statistics in some dependent models"
+  venue: "Proceedings of the 15th Conference of the Applied Stochastic Models and Data Analysis (ASMDA) International Society, Barcelona"
+  details: "45–52"
+
+# ---------- Other publications ----------
+- type: other
+  year: 2016
+  authors: "A. Amărioarei, R. Jibotean, I. Tuşa, C. Iţcuş, M. Păun"
+  title: "Assessment of the Romanian medicinal plant research — from European to national level"
+  venue: "Analele Ştiinţifice ale Universităţii Al. I. Cuza Iaşi, Biologie Vegetală"
+  details: "62(2), 5–17"
+
+- type: other
+  year: 2016
+  authors: "M. Butu, R. Jibotean, C. Iţcuş, M. Pasachiv, I. Tuşa, A. Amărioarei"
+  title: "Conceptual framework for bioeconomic potential indicators in Danube Delta"
+  venue: "Studia Universitatis Vasile Goldiş, Seria Ştiinţele Vieţii"
+  details: "26(2), 235–242"
+
+- type: other
+  year: 2009
+  authors: "A. Amărioarei, M. Sidoroff"
+  title: "A first step in scan statistics"
+  venue: "Romanian Biological Sciences"
+  details: "VII(1–4)"
+
+- type: other
+  year: 2009
+  authors: "J. Jack, M. Sidoroff, I. Stanciu, A. Amărioarei, V. Boşcaiu, S. Popescu, M. Ciucu, A. Păun"
+  title: "Modeling of biochemical signaling with the Memory NWT algorithm"
+  venue: "Romanian Biological Sciences"
+  details: "VII(1–4)"
+
+# ---------- Thesis ----------
+- type: thesis
+  year: 2014
+  authors: "A. Amărioarei"
+  title: "Approximations for multidimensional discrete scan statistics"
+  venue: "PhD thesis in Applied Mathematics, Université Lille 1 – Sciences et Technologies (advisor: C. Preda)"
+
+# ---------- Preprints and work in preparation ----------
+- type: preprint
+  year: 2012
+  authors: "A. Amărioarei"
+  title: "Approximation for the distribution of extremes of one dependent stationary sequences of random variables"
+  venue: "arXiv preprint"
+  arxiv: "1211.5456"
+
+- type: preprint
+  year: "—"            # "—" = in preparation (shown as such in both languages)
+  authors: "A. Amărioarei"
+  title: "Approximations for the distribution of the longest monotone runs based on a scan statistic approach"
+
+- type: preprint
+  year: "—"
+  authors: "A. Amărioarei, C. Preda"
+  title: "Approximations for multidimensional continuous scan statistics over Poisson processes"

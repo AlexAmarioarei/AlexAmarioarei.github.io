@@ -1,5 +1,22 @@
-.Rproj.user
+# Rendered website (built locally or by GitHub Actions; never committed)
+/_site/
+
+# Quarto caches
+.quarto/
+**/*.quarto_ipynb
+
+# R / RStudio / Positron
 .Rhistory
 .RData
-.Ruserdata
-./Teaching/2017-2018/Instrumente Statistice web page/labs/Sem_2.Rmd
+.Rproj.user/
+.positron/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Keep _freeze/ in git: it stores the results of R code so the site can be
+# rebuilt on GitHub without R.
+
+/.quarto/

@@ -1,0 +1,44 @@
+```{=html}
+<%
+// NOTE: Quarto listing templates use lodash syntax: "<%" + "-" escapes, "<%" + "=" inserts raw HTML.
+// Publications grouped by year. Language comes from `template-params: {lang: en}`
+const en = typeof templateParams !== "undefined" && templateParams && templateParams.lang === "en";
+const L = en ? { prep: "In preparation" } : { prep: "În pregătire" };
+const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const me = (s) => esc(String(s ?? "").replace(/\.$/, "")).replace(/(A\. Amărioarei)/g, "<strong>$1</strong>");
+// local files (e.g. "assets/files/paper.pdf") are relative to the site root;
+// English pages are at the root, Romanian pages one level down (ro/)
+const local = (u) => (/^(https?:)?\/\//.test(u) || u.startsWith("/")) ? u : (en ? "" : "../") + u;
+const groups = [];
+for (const item of items) {
+  const y = String(item.year ?? "");
+  if (!groups.length || groups[groups.length - 1].year !== y) groups.push({ year: y, items: [] });
+  groups[groups.length - 1].items.push(item);
+}
+%>
+<div class="pub-list">
+<% for (const g of groups) { %>
+<section class="year-group">
+  <div class="year"><%- g.year === "—" ? L.prep : g.year %></div>
+  <ol>
+  <% for (const item of g.items) { %>
+    <li class="pub">
+      <span class="pub-authors"><%= me(item.authors) %></span>.
+      <span class="pub-title"><%- item.title %></span>.
+      <% if (item.venue) { %><span class="pub-venue"><%- item.venue %></span><% if (item.details) { %>, <%- item.details %><% } %>.<% } %>
+      <% if (item.note) { %><span class="pub-note"><%- item.note %></span><% } %>
+      <% if (item.doi || item.arxiv || item.url || item.pdf) { %>
+      <div class="item-links">
+        <% if (item.doi) { %><a href="https://doi.org/<%- item.doi %>" aria-label="DOI: <%- item.title %>">DOI</a><% } %>
+        <% if (item.arxiv) { %><a href="https://arxiv.org/abs/<%- item.arxiv %>" aria-label="arXiv: <%- item.title %>">arXiv</a><% } %>
+        <% if (item.url) { %><a href="<%- local(item.url) %>">Link</a><% } %>
+        <% if (item.pdf) { %><a href="<%- local(item.pdf) %>">PDF</a><% } %>
+      </div>
+      <% } %>
+    </li>
+  <% } %>
+  </ol>
+</section>
+<% } %>
+</div>
+```
