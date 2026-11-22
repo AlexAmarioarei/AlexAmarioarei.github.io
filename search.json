@@ -100,37 +100,30 @@
   {
     "objectID": "blog/posts/2026-11-20-exemplu/index.html",
     "href": "blog/posts/2026-11-20-exemplu/index.html",
-    "title": "Example: estimating the distribution of a scan statistic by simulation",
+    "title": "Estimating the distribution of a scan statistic by simulation",
     "section": "",
-    "text": "NoteThis is a sample post\n\n\n\nIt shows what a post on this blog looks like: text, LaTeX formulas, R code, a table and a numbered statement. To write a new post, copy this folder, change the date and title, and rewrite the text. The post can be deleted at any time (the folder blog/posts/2026-11-20-exemplu/ and its Romanian counterpart in ro/blog/posts/)."
+    "text": "This is the first post on this blog, and it starts with the question behind scan statistics: when a sequence of observations shows a cluster of events, how surprising is that cluster under pure chance?"
   },
   {
     "objectID": "blog/posts/2026-11-20-exemplu/index.html#the-problem",
     "href": "blog/posts/2026-11-20-exemplu/index.html#the-problem",
-    "title": "Example: estimating the distribution of a scan statistic by simulation",
+    "title": "Estimating the distribution of a scan statistic by simulation",
     "section": "The problem",
-    "text": "The problem\nLet \\(X_1, X_2, \\dots, X_N\\) be independent Bernoulli random variables with parameter \\(p\\). For a window of length \\(m\\), the one-dimensional discrete scan statistic is\n\\[\nS_m(N) = \\max_{1 \\le i \\le N-m+1} \\; \\sum_{k=i}^{i+m-1} X_k .\n\\]\nWe are interested in \\(\\mathbb{P}\\big(S_m(N) \\ge k\\big)\\), the probability that somewhere in the sequence a window of length \\(m\\) contains at least \\(k\\) successes.\n\nDefinition 1 (Scan statistic) For a sequence \\((X_k)\\) and a length \\(m\\), the scan statistic is the largest number of successes contained in a window of \\(m\\) consecutive observations."
+    "text": "The problem\nLet \\(X_1, X_2, \\dots, X_N\\) be independent Bernoulli random variables with parameter \\(p\\). For a window of length \\(m\\), the one-dimensional discrete scan statistic is\n\\[\nS_m(N) = \\max_{1 \\le i \\le N-m+1} \\; \\sum_{k=i}^{i+m-1} X_k .\n\\]\nWe are interested in \\(\\mathbb{P}\\big(S_m(N) \\ge k\\big)\\), the probability that somewhere in the sequence a window of length \\(m\\) contains at least \\(k\\) successes.\n\nDefinition 1 (Scan statistic) For a sequence \\((X_k)\\) and a length \\(m\\), the scan statistic is the largest number of successes contained in a window of \\(m\\) consecutive observations.\n\nSimulation is the most direct way to estimate this probability, and a useful check for exact formulas and approximations."
   },
   {
     "objectID": "blog/posts/2026-11-20-exemplu/index.html#monte-carlo-estimation-in-r",
     "href": "blog/posts/2026-11-20-exemplu/index.html#monte-carlo-estimation-in-r",
-    "title": "Example: estimating the distribution of a scan statistic by simulation",
+    "title": "Estimating the distribution of a scan statistic by simulation",
     "section": "Monte Carlo estimation in R",
-    "text": "Monte Carlo estimation in R\nThe simplest estimator is the relative frequency over a large number of independent simulations:\n\\[\n\\widehat{P}_n = \\frac{1}{n} \\sum_{r=1}^{n} \\mathbf{1}\\{S^{(r)}_m(N) \\ge k\\},\n\\qquad\n\\operatorname{se}\\big(\\widehat{P}_n\\big) \\approx \\sqrt{\\frac{\\widehat{P}_n (1-\\widehat{P}_n)}{n}} .\n\\]\nscan_1d &lt;- function(x, m) {\n  # window sums of length m, computed from cumulative sums\n  s &lt;- cumsum(c(0, x))\n  max(s[(m + 1):length(s)] - s[1:(length(s) - m)])\n}\n\nset.seed(2026)\nN &lt;- 1000; m &lt;- 20; p &lt;- 0.05; k &lt;- 6\nS &lt;- replicate(10000, scan_1d(rbinom(N, 1, p), m))\n\np_hat &lt;- mean(S &gt;= k)\nse    &lt;- sqrt(p_hat * (1 - p_hat) / length(S))\nc(estimate = p_hat, std_error = se)\n\n\n\n\n\n\nTipExecutable R code\n\n\n\n\n\nThe block above is only displayed. To have R run the code when the site is rendered and include its output (figures too), write the block as ```{r}. The results are stored in _freeze/, so the site can be rebuilt without R."
-  },
-  {
-    "objectID": "blog/posts/2026-11-20-exemplu/index.html#what-else-a-post-can-contain",
-    "href": "blog/posts/2026-11-20-exemplu/index.html#what-else-a-post-can-contain",
-    "title": "Example: estimating the distribution of a scan statistic by simulation",
-    "section": "What else a post can contain",
-    "text": "What else a post can contain\n\n\n\nElement\nQuarto syntax\n\n\n\n\nFormula\n$...$ and $$...$$\n\n\nTheorem\n::: {#thm-name} ... :::\n\n\nFigure\n![Caption](figure.png)\n\n\nR / Python code\n```{r} / ```{python}\n\n\nFootnote\ntext[^1]\n\n\n\nCross-references work automatically: for example, Definition 1 above."
+    "text": "Monte Carlo estimation in R\nThe simplest estimator is the relative frequency over \\(n\\) independent simulations:\n\\[\n\\widehat{P}_n = \\frac{1}{n} \\sum_{r=1}^{n} \\mathbf{1}\\{S^{(r)}_m(N) \\ge k\\},\n\\qquad\n\\operatorname{se}\\big(\\widehat{P}_n\\big) \\approx \\sqrt{\\frac{\\widehat{P}_n (1-\\widehat{P}_n)}{n}} .\n\\]\nThe window sums are obtained from cumulative sums, so each simulated sequence is scanned in linear time.\n\nscan_1d &lt;- function(x, m) {\n  # window sums of length m, computed from cumulative sums\n  s &lt;- cumsum(c(0, x))\n  max(s[(m + 1):length(s)] - s[1:(length(s) - m)])\n}\n\nset.seed(2026)\nN &lt;- 1000; m &lt;- 20; p &lt;- 0.05; k &lt;- 6\nS &lt;- replicate(10000, scan_1d(rbinom(N, 1, p), m))\n\np_hat &lt;- mean(S &gt;= k)\nse    &lt;- sqrt(p_hat * (1 - p_hat) / length(S))\nround(c(estimate = p_hat, std_error = se), 4)\n\n estimate std_error \n   0.0709    0.0026 \n\n\nFor \\(N = 1000\\), \\(m = 20\\) and \\(p = 0.05\\), the probability that some window contains at least \\(k = 6\\) successes is estimated at 0.0709, with a standard error of 0.0026. Within a single window the expected number of successes is only \\(mp = 1\\), so it is the scanning over \\(N - m + 1\\) overlapping windows that makes such a cluster likely.\nFigure 1 shows the whole simulated distribution of \\(S_{20}(1000)\\); the values at or above \\(k = 6\\) are highlighted.\n\nfreq &lt;- table(factor(S, levels = 0:max(S))) / length(S)\ncols &lt;- ifelse(as.integer(names(freq)) &gt;= k, \"#D55E00\", \"#0072B2\")\npar(mar = c(4, 4, 1, 1), las = 1)\nbarplot(freq, col = cols, border = NA, space = 0.15,\n        xlab = \"value of the scan statistic\", ylab = \"relative frequency\")\n\n\n\n\n\n\n\nFigure 1: Empirical distribution of \\(S_{20}(1000)\\) for \\(p = 0.05\\) (10 000 simulations). Values \\(\\ge 6\\) in orange.\n\n\n\n\n\nThe same simulations give the whole tail at once (Table 1).\n\nks  &lt;- 4:9\nest &lt;- sapply(ks, function(j) mean(S &gt;= j))\nknitr::kable(\n  data.frame(k = ks, estimate = est,\n             std_error = sqrt(est * (1 - est) / length(S))),\n  digits = 4, col.names = c(\"$k$\", \"estimate\", \"standard error\")\n)\n\n\n\nTable 1: Estimated tail probabilities \\(\\mathbb{P}\\big(S_{20}(1000) \\ge k\\big)\\) and their standard errors.\n\n\n\n\n\n\n\\(k\\)\nestimate\nstandard error\n\n\n\n\n4\n0.8767\n0.0033\n\n\n5\n0.3543\n0.0048\n\n\n6\n0.0709\n0.0026\n\n\n7\n0.0079\n0.0009\n\n\n8\n0.0011\n0.0003\n\n\n9\n0.0001\n0.0001\n\n\n\n\n\n\n\n\nThe same approach carries over to two and three dimensions, where the window becomes a rectangle or a box and simulation is often the most practical way to obtain reference values."
   },
   {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Example: estimating the distribution of a scan statistic by simulation\n\n\n\nexample\n\nscan statistics\n\nR\n\n\n\nA sample post showing what the blog supports: formulas, R code, tables, numbered statements. It can be deleted or replaced.\n\n\n\n\n\n20 November 2026\n\n3 min\n\n\n\n\nNo matching items\n Back to top"
+    "text": "Estimating the distribution of a scan statistic by simulation\n\n\n\nscan statistics\n\nMonte Carlo\n\nR\n\n\n\nA first post: a Monte Carlo estimate of the probability that a one-dimensional scan statistic reaches a given level, in a few lines of R.\n\n\n\n\n\n20 November 2026\n\n3 min\n\n\n\n\nNo matching items\n Back to top"
   },
   {
     "objectID": "contact.html",
@@ -207,7 +200,7 @@
     "href": "index.html#from-the-blog",
     "title": "Alexandru Amărioarei",
     "section": "From the blog",
-    "text": "From the blog\n\n\n\n\n\nExample: estimating the distribution of a scan statistic by simulation\n\n\nA sample post showing what the blog supports: formulas, R code, tables, numbered statements. It can be deleted or replaced.\n\n\n\n\n\n20 November 2026\n\n\n\n\n\nNo matching items\n\nAll posts"
+    "text": "From the blog\n\n\n\n\n\nEstimating the distribution of a scan statistic by simulation\n\n\nA first post: a Monte Carlo estimate of the probability that a one-dimensional scan statistic reaches a given level, in a few lines of R.\n\n\n\n\n\n20 November 2026\n\n\n\n\n\nNo matching items\n\nAll posts"
   },
   {
     "objectID": "research.html",

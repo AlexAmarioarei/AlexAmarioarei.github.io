@@ -12,7 +12,7 @@
 <generator>quarto-1.10.19</generator>
 <lastBuildDate>Thu, 19 Nov 2026 22:00:00 GMT</lastBuildDate>
 <item>
-  <title>Exemplu: estimarea repartiției statisticii de scanare prin simulare</title>
+  <title>Estimarea repartiției statisticii de scanare prin simulare</title>
   <dc:creator>Alexandru Amărioarei</dc:creator>
   <link>https://alexamarioarei.github.io/ro/blog/posts/2026-11-20-exemplu/</link>
   <description><![CDATA[ 
@@ -21,19 +21,7 @@
 
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Notă</span>Aceasta este o postare-exemplu
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Arată cum arată o notă pe acest blog: text, formule LaTeX, cod R, un tabel și un enunț numerotat. Pentru o postare nouă, copiați acest director, schimbați data și titlul și rescrieți textul. Postarea poate fi ștearsă oricând (directorul <code>ro/blog/posts/2026-11-20-exemplu/</code> și perechea lui din <code>blog/posts/</code>).</p>
-</div>
-</div>
+<p>Aceasta este prima postare de pe acest blog și pornește de la întrebarea din spatele statisticilor de scanare: atunci când într-un șir de observații apare o aglomerare de evenimente, cât de surprinzătoare este ea dacă totul se datorează doar întâmplării?</p>
 <section id="problema" class="level2">
 <h2 class="anchored" data-anchor-id="problema">Problema</h2>
 <p>Fie <img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cdots,%20X_N"> variabile aleatoare independente, cu repartiția Bernoulli de parametru <img src="https://latex.codecogs.com/png.latex?p">. Pentru o fereastră de lungime <img src="https://latex.codecogs.com/png.latex?m">, statistica de scanare unidimensională discretă este</p>
@@ -42,12 +30,15 @@
 <div id="def-scan" class="theorem definition">
 <p><span class="theorem-title"><strong>Definiția 1 (Statistica de scanare)</strong></span> Pentru un șir <img src="https://latex.codecogs.com/png.latex?(X_k)"> și o lungime <img src="https://latex.codecogs.com/png.latex?m">, numim <em>statistică de scanare</em> numărul maxim de succese conținute într-o fereastră de <img src="https://latex.codecogs.com/png.latex?m"> observații consecutive.</p>
 </div>
+<p>Simularea este calea cea mai directă de a estima această probabilitate și o verificare utilă pentru formulele exacte și pentru aproximări.</p>
 </section>
 <section id="estimare-monte-carlo-în-r" class="level2">
 <h2 class="anchored" data-anchor-id="estimare-monte-carlo-în-r">Estimare Monte Carlo în R</h2>
-<p>Cel mai simplu estimator este frecvența relativă dintr-un număr mare de simulări independente:</p>
+<p>Cel mai simplu estimator este frecvența relativă din <img src="https://latex.codecogs.com/png.latex?n"> simulări independente:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cwidehat%7BP%7D_n%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Br=1%7D%5E%7Bn%7D%20%5Cmathbf%7B1%7D%5C%7BS%5E%7B(r)%7D_m(N)%20%5Cge%20k%5C%7D,%0A%5Cqquad%0A%5Coperatorname%7Bse%7D%5Cbig(%5Cwidehat%7BP%7D_n%5Cbig)%20%5Capprox%20%5Csqrt%7B%5Cfrac%7B%5Cwidehat%7BP%7D_n%20(1-%5Cwidehat%7BP%7D_n)%7D%7Bn%7D%7D%20.%0A"></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">scan_1d <span class="ot" style="color: #003B4F;
+<p>Sumele pe ferestre se obțin din sume cumulate, astfel încât fiecare secvență simulată este scanată în timp liniar.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">scan_1d <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -148,68 +139,247 @@ background-color: null;
 font-style: inherit;">length</span>(S))</span>
 <span id="cb1-13"><span class="fu" style="color: #4758AB;
 background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
 font-style: inherit;">c</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">estimat =</span> p_hat, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">eroare_standard =</span> se)</span></code></pre></div></div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Sfat</span>Cod R executabil
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Blocul de mai sus este doar afișat. Pentru ca R să ruleze codul la randare și să includă rezultatele (inclusiv grafice), scrieți blocul ca <code>```{r}</code>. Rezultatele sunt păstrate în <code>_freeze/</code>, astfel încât site-ul poate fi reconstruit și fără R.</p>
+font-style: inherit;">eroare_standard =</span> se), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        estimat eroare_standard 
+         0.0709          0.0026 </code></pre>
 </div>
 </div>
+<p>Pentru <img src="https://latex.codecogs.com/png.latex?N%20=%201000">, <img src="https://latex.codecogs.com/png.latex?m%20=%2020"> și <img src="https://latex.codecogs.com/png.latex?p%20=%200%7B,%7D05">, probabilitatea ca o fereastră să conțină cel puțin <img src="https://latex.codecogs.com/png.latex?k%20=%206"> succese este estimată la 0,0709, cu o eroare standard de 0,0026. Într-o singură fereastră numărul mediu de succese este doar <img src="https://latex.codecogs.com/png.latex?mp%20=%201">; scanarea celor <img src="https://latex.codecogs.com/png.latex?N%20-%20m%20+%201"> ferestre suprapuse face ca o asemenea aglomerare să devină probabilă.</p>
+<p>Figura&nbsp;1 arată întreaga repartiție simulată a lui <img src="https://latex.codecogs.com/png.latex?S_%7B20%7D(1000)">; valorile mai mari sau egale cu <img src="https://latex.codecogs.com/png.latex?k%20=%206"> sunt evidențiate.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">freq <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">table</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(S, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(S))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(S)</span>
+<span id="cb3-2">cols <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(freq)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> k, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#D55E00"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#0072B2"</span>)</span>
+<span id="cb3-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mar =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">las =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">barplot</span>(freq, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> cols, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">border =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">space =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.15</span>,</span>
+<span id="cb3-5">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"valoarea statisticii de scanare"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"frecvența relativă"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div id="fig-scan" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-scan-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;1: Repartiția empirică a lui S_{20}(1000) pentru p = 0{,}05 (10 000 de simulări). Valorile \ge 6 sunt marcate cu portocaliu."><img src="https://alexamarioarei.github.io/ro/blog/posts/2026-11-20-exemplu/index_files/figure-html/fig-scan-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-</section>
-<section id="ce-mai-poate-conține-o-notă" class="level2">
-<h2 class="anchored" data-anchor-id="ce-mai-poate-conține-o-notă">Ce mai poate conține o notă</h2>
-<table class="caption-top table">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Repartiția empirică a lui <img src="https://latex.codecogs.com/png.latex?S_%7B20%7D(1000)"> pentru <img src="https://latex.codecogs.com/png.latex?p%20=%200%7B,%7D05"> (10 000 de simulări). Valorile <img src="https://latex.codecogs.com/png.latex?%5Cge%206"> sunt marcate cu portocaliu.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Aceleași simulări dau dintr-odată întreaga coadă a repartiției (Tabelul&nbsp;1).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ks  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span></span>
+<span id="cb4-2">est <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(ks, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(j) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(S <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> j))</span>
+<span id="cb4-3">knitr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(</span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">k =</span> ks, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">estimat =</span> est,</span>
+<span id="cb4-5">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">eroare =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(est <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> est) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(S))),</span>
+<span id="cb4-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">digits =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.names =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"$k$"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"estimare"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"eroare standard"</span>),</span>
+<span id="cb4-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format.args =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">decimal.mark =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">","</span>)</span>
+<span id="cb4-8">)</span></code></pre></div></div>
+<div id="tbl-tail" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabelul&nbsp;1: Probabilitățile estimate <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BP%7D%5Cbig(S_%7B20%7D(1000)%20%5Cge%20k%5Cbig)"> și erorile lor standard.
+</figcaption>
+<div aria-describedby="tbl-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th>Element</th>
-<th>Sintaxă Quarto</th>
+<th style="text-align: right;"><img src="https://latex.codecogs.com/png.latex?k"></th>
+<th style="text-align: right;">estimare</th>
+<th style="text-align: right;">eroare standard</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Formulă</td>
-<td><code>$...$</code> și <code>$$...$$</code></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0,8767</td>
+<td style="text-align: right;">0,0033</td>
 </tr>
 <tr class="even">
-<td>Teoremă</td>
-<td><code>::: {#thm-nume} ... :::</code></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0,3543</td>
+<td style="text-align: right;">0,0048</td>
 </tr>
 <tr class="odd">
-<td>Figură</td>
-<td><code>![Legendă](figura.png)</code></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0,0709</td>
+<td style="text-align: right;">0,0026</td>
 </tr>
 <tr class="even">
-<td>Cod R / Python</td>
-<td><code>```{r}</code> / <code>```{python}</code></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0,0079</td>
+<td style="text-align: right;">0,0009</td>
 </tr>
 <tr class="odd">
-<td>Notă de subsol</td>
-<td><code>text[^1]</code></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0,0011</td>
+<td style="text-align: right;">0,0003</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0,0001</td>
+<td style="text-align: right;">0,0001</td>
 </tr>
 </tbody>
 </table>
-<p>Trimiterile încrucișate funcționează automat: de exemplu, Definiția&nbsp;1 de mai sus.</p>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Aceeași abordare se extinde la două și trei dimensiuni, unde fereastra devine un dreptunghi sau un paralelipiped, iar simularea este adesea calea cea mai practică pentru a obține valori de referință.</p>
 
 
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Înapoi sus</a> ]]></description>
-  <category>exemplu</category>
   <category>statistici de scanare</category>
+  <category>Monte Carlo</category>
   <category>R</category>
   <guid>https://alexamarioarei.github.io/ro/blog/posts/2026-11-20-exemplu/</guid>
   <pubDate>Thu, 19 Nov 2026 22:00:00 GMT</pubDate>

@@ -100,37 +100,30 @@
   {
     "objectID": "blog/posts/2026-11-20-exemplu/index.html",
     "href": "blog/posts/2026-11-20-exemplu/index.html",
-    "title": "Exemplu: estimarea repartiției statisticii de scanare prin simulare",
+    "title": "Estimarea repartiției statisticii de scanare prin simulare",
     "section": "",
-    "text": "NotăAceasta este o postare-exemplu\n\n\n\nArată cum arată o notă pe acest blog: text, formule LaTeX, cod R, un tabel și un enunț numerotat. Pentru o postare nouă, copiați acest director, schimbați data și titlul și rescrieți textul. Postarea poate fi ștearsă oricând (directorul ro/blog/posts/2026-11-20-exemplu/ și perechea lui din blog/posts/)."
+    "text": "Aceasta este prima postare de pe acest blog și pornește de la întrebarea din spatele statisticilor de scanare: atunci când într-un șir de observații apare o aglomerare de evenimente, cât de surprinzătoare este ea dacă totul se datorează doar întâmplării?"
   },
   {
     "objectID": "blog/posts/2026-11-20-exemplu/index.html#problema",
     "href": "blog/posts/2026-11-20-exemplu/index.html#problema",
-    "title": "Exemplu: estimarea repartiției statisticii de scanare prin simulare",
+    "title": "Estimarea repartiției statisticii de scanare prin simulare",
     "section": "Problema",
-    "text": "Problema\nFie \\(X_1, X_2, \\dots, X_N\\) variabile aleatoare independente, cu repartiția Bernoulli de parametru \\(p\\). Pentru o fereastră de lungime \\(m\\), statistica de scanare unidimensională discretă este\n\\[\nS_m(N) = \\max_{1 \\le i \\le N-m+1} \\; \\sum_{k=i}^{i+m-1} X_k .\n\\]\nNe interesează probabilitatea \\(\\mathbb{P}\\big(S_m(N) \\ge k\\big)\\), adică șansa ca, undeva în secvență, o fereastră de lungime \\(m\\) să conțină cel puțin \\(k\\) succese.\n\nDefiniția 1 (Statistica de scanare) Pentru un șir \\((X_k)\\) și o lungime \\(m\\), numim statistică de scanare numărul maxim de succese conținute într-o fereastră de \\(m\\) observații consecutive."
+    "text": "Problema\nFie \\(X_1, X_2, \\dots, X_N\\) variabile aleatoare independente, cu repartiția Bernoulli de parametru \\(p\\). Pentru o fereastră de lungime \\(m\\), statistica de scanare unidimensională discretă este\n\\[\nS_m(N) = \\max_{1 \\le i \\le N-m+1} \\; \\sum_{k=i}^{i+m-1} X_k .\n\\]\nNe interesează probabilitatea \\(\\mathbb{P}\\big(S_m(N) \\ge k\\big)\\), adică șansa ca, undeva în secvență, o fereastră de lungime \\(m\\) să conțină cel puțin \\(k\\) succese.\n\nDefiniția 1 (Statistica de scanare) Pentru un șir \\((X_k)\\) și o lungime \\(m\\), numim statistică de scanare numărul maxim de succese conținute într-o fereastră de \\(m\\) observații consecutive.\n\nSimularea este calea cea mai directă de a estima această probabilitate și o verificare utilă pentru formulele exacte și pentru aproximări."
   },
   {
     "objectID": "blog/posts/2026-11-20-exemplu/index.html#estimare-monte-carlo-în-r",
     "href": "blog/posts/2026-11-20-exemplu/index.html#estimare-monte-carlo-în-r",
-    "title": "Exemplu: estimarea repartiției statisticii de scanare prin simulare",
+    "title": "Estimarea repartiției statisticii de scanare prin simulare",
     "section": "Estimare Monte Carlo în R",
-    "text": "Estimare Monte Carlo în R\nCel mai simplu estimator este frecvența relativă dintr-un număr mare de simulări independente:\n\\[\n\\widehat{P}_n = \\frac{1}{n} \\sum_{r=1}^{n} \\mathbf{1}\\{S^{(r)}_m(N) \\ge k\\},\n\\qquad\n\\operatorname{se}\\big(\\widehat{P}_n\\big) \\approx \\sqrt{\\frac{\\widehat{P}_n (1-\\widehat{P}_n)}{n}} .\n\\]\nscan_1d &lt;- function(x, m) {\n  # sumele pe ferestre de lungime m, calculate cu sume cumulate\n  s &lt;- cumsum(c(0, x))\n  max(s[(m + 1):length(s)] - s[1:(length(s) - m)])\n}\n\nset.seed(2026)\nN &lt;- 1000; m &lt;- 20; p &lt;- 0.05; k &lt;- 6\nS &lt;- replicate(10000, scan_1d(rbinom(N, 1, p), m))\n\np_hat &lt;- mean(S &gt;= k)\nse    &lt;- sqrt(p_hat * (1 - p_hat) / length(S))\nc(estimat = p_hat, eroare_standard = se)\n\n\n\n\n\n\nSfatCod R executabil\n\n\n\n\n\nBlocul de mai sus este doar afișat. Pentru ca R să ruleze codul la randare și să includă rezultatele (inclusiv grafice), scrieți blocul ca ```{r}. Rezultatele sunt păstrate în _freeze/, astfel încât site-ul poate fi reconstruit și fără R."
-  },
-  {
-    "objectID": "blog/posts/2026-11-20-exemplu/index.html#ce-mai-poate-conține-o-notă",
-    "href": "blog/posts/2026-11-20-exemplu/index.html#ce-mai-poate-conține-o-notă",
-    "title": "Exemplu: estimarea repartiției statisticii de scanare prin simulare",
-    "section": "Ce mai poate conține o notă",
-    "text": "Ce mai poate conține o notă\n\n\n\nElement\nSintaxă Quarto\n\n\n\n\nFormulă\n$...$ și $$...$$\n\n\nTeoremă\n::: {#thm-nume} ... :::\n\n\nFigură\n![Legendă](figura.png)\n\n\nCod R / Python\n```{r} / ```{python}\n\n\nNotă de subsol\ntext[^1]\n\n\n\nTrimiterile încrucișate funcționează automat: de exemplu, Definiția 1 de mai sus."
+    "text": "Estimare Monte Carlo în R\nCel mai simplu estimator este frecvența relativă din \\(n\\) simulări independente:\n\\[\n\\widehat{P}_n = \\frac{1}{n} \\sum_{r=1}^{n} \\mathbf{1}\\{S^{(r)}_m(N) \\ge k\\},\n\\qquad\n\\operatorname{se}\\big(\\widehat{P}_n\\big) \\approx \\sqrt{\\frac{\\widehat{P}_n (1-\\widehat{P}_n)}{n}} .\n\\]\nSumele pe ferestre se obțin din sume cumulate, astfel încât fiecare secvență simulată este scanată în timp liniar.\n\nscan_1d &lt;- function(x, m) {\n  # sumele pe ferestre de lungime m, calculate cu sume cumulate\n  s &lt;- cumsum(c(0, x))\n  max(s[(m + 1):length(s)] - s[1:(length(s) - m)])\n}\n\nset.seed(2026)\nN &lt;- 1000; m &lt;- 20; p &lt;- 0.05; k &lt;- 6\nS &lt;- replicate(10000, scan_1d(rbinom(N, 1, p), m))\n\np_hat &lt;- mean(S &gt;= k)\nse    &lt;- sqrt(p_hat * (1 - p_hat) / length(S))\nround(c(estimat = p_hat, eroare_standard = se), 4)\n\n        estimat eroare_standard \n         0.0709          0.0026 \n\n\nPentru \\(N = 1000\\), \\(m = 20\\) și \\(p = 0{,}05\\), probabilitatea ca o fereastră să conțină cel puțin \\(k = 6\\) succese este estimată la 0,0709, cu o eroare standard de 0,0026. Într-o singură fereastră numărul mediu de succese este doar \\(mp = 1\\); scanarea celor \\(N - m + 1\\) ferestre suprapuse face ca o asemenea aglomerare să devină probabilă.\nFigura 1 arată întreaga repartiție simulată a lui \\(S_{20}(1000)\\); valorile mai mari sau egale cu \\(k = 6\\) sunt evidențiate.\n\nfreq &lt;- table(factor(S, levels = 0:max(S))) / length(S)\ncols &lt;- ifelse(as.integer(names(freq)) &gt;= k, \"#D55E00\", \"#0072B2\")\npar(mar = c(4, 4, 1, 1), las = 1)\nbarplot(freq, col = cols, border = NA, space = 0.15,\n        xlab = \"valoarea statisticii de scanare\", ylab = \"frecvența relativă\")\n\n\n\n\n\n\n\nFigura 1: Repartiția empirică a lui \\(S_{20}(1000)\\) pentru \\(p = 0{,}05\\) (10 000 de simulări). Valorile \\(\\ge 6\\) sunt marcate cu portocaliu.\n\n\n\n\n\nAceleași simulări dau dintr-odată întreaga coadă a repartiției (Tabelul 1).\n\nks  &lt;- 4:9\nest &lt;- sapply(ks, function(j) mean(S &gt;= j))\nknitr::kable(\n  data.frame(k = ks, estimat = est,\n             eroare = sqrt(est * (1 - est) / length(S))),\n  digits = 4, col.names = c(\"$k$\", \"estimare\", \"eroare standard\"),\n  format.args = list(decimal.mark = \",\")\n)\n\n\n\nTabelul 1: Probabilitățile estimate \\(\\mathbb{P}\\big(S_{20}(1000) \\ge k\\big)\\) și erorile lor standard.\n\n\n\n\n\n\n\\(k\\)\nestimare\neroare standard\n\n\n\n\n4\n0,8767\n0,0033\n\n\n5\n0,3543\n0,0048\n\n\n6\n0,0709\n0,0026\n\n\n7\n0,0079\n0,0009\n\n\n8\n0,0011\n0,0003\n\n\n9\n0,0001\n0,0001\n\n\n\n\n\n\n\n\nAceeași abordare se extinde la două și trei dimensiuni, unde fereastra devine un dreptunghi sau un paralelipiped, iar simularea este adesea calea cea mai practică pentru a obține valori de referință."
   },
   {
     "objectID": "blog/index.html",
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Exemplu: estimarea repartiției statisticii de scanare prin simulare\n\n\n\nexemplu\n\nstatistici de scanare\n\nR\n\n\n\nPostare-model care arată ce suportă blogul: formule, cod R, tabele, teoreme. Poate fi ștearsă sau înlocuită.\n\n\n\n\n\n20.11.2026\n\n3 min\n\n\n\n\nNiciun articol găsit\n Înapoi sus"
+    "text": "Estimarea repartiției statisticii de scanare prin simulare\n\n\n\nstatistici de scanare\n\nMonte Carlo\n\nR\n\n\n\nO primă postare: estimarea Monte Carlo a probabilității ca statistica de scanare unidimensională să atingă un anumit nivel, în câteva linii de R.\n\n\n\n\n\n20.11.2026\n\n3 min\n\n\n\n\nNiciun articol găsit\n Înapoi sus"
   },
   {
     "objectID": "contact.html",
@@ -207,7 +200,7 @@
     "href": "index.html#din-blog",
     "title": "Alexandru Amărioarei",
     "section": "Din blog",
-    "text": "Din blog\n\n\n\n\n\nExemplu: estimarea repartiției statisticii de scanare prin simulare\n\n\nPostare-model care arată ce suportă blogul: formule, cod R, tabele, teoreme. Poate fi ștearsă sau înlocuită.\n\n\n\n\n\n20.11.2026\n\n\n\n\n\nNiciun articol găsit\n\nToate notele"
+    "text": "Din blog\n\n\n\n\n\nEstimarea repartiției statisticii de scanare prin simulare\n\n\nO primă postare: estimarea Monte Carlo a probabilității ca statistica de scanare unidimensională să atingă un anumit nivel, în câteva linii de R.\n\n\n\n\n\n20.11.2026\n\n\n\n\n\nNiciun articol găsit\n\nToate notele"
   },
   {
     "objectID": "research.html",

@@ -8,9 +8,9 @@
 
 <meta name="author" content="Alexandru Amărioarei">
 <meta name="dcterms.date" content="2026-11-20">
-<meta name="description" content="A sample post showing what the blog supports: formulas, R code, tables, numbered statements. It can be deleted or replaced.">
+<meta name="description" content="A first post: a Monte Carlo estimate of the probability that a one-dimensional scan statistic reaches a given level, in a few lines of R.">
 
-<title>Example: estimating the distribution of a scan statistic by simulation – Alexandru Amărioarei</title>
+<title>Estimating the distribution of a scan statistic by simulation – Alexandru Amărioarei</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -86,9 +86,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-278b381e4eb370a9418af996ad7b5391.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4b5f431aa750e1299ae121b225b14301.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-53390f7336e454e8475be8676e3bea93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-4b5f431aa750e1299ae121b225b14301.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-a34edd72b86f12255afbe45a190fbda2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-67f0680ab4b9ef9e508bd1bdf01e3ff3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-a34edd72b86f12255afbe45a190fbda2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -152,8 +155,8 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Example: estimating the distribution of a scan statistic by simulation – Alexandru Amărioarei">
-<meta property="og:description" content="A sample post showing what the blog supports: formulas, R code, tables, numbered statements. It can be deleted or replaced.">
+<meta property="og:title" content="Estimating the distribution of a scan statistic by simulation – Alexandru Amărioarei">
+<meta property="og:description" content="A first post: a Monte Carlo estimate of the probability that a one-dimensional scan statistic reaches a given level, in a few lines of R.">
 <meta property="og:image" content="https://alexamarioarei.github.io/blog/posts/2026-11-20-exemplu/assets/img/og-card.png">
 <meta property="og:site_name" content="Alexandru Amărioarei">
 <meta property="og:locale" content="en_GB">
@@ -397,7 +400,6 @@ window.Quarto = {
   <ul>
   <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The problem</a></li>
   <li><a href="#monte-carlo-estimation-in-r" id="toc-monte-carlo-estimation-in-r" class="nav-link" data-scroll-target="#monte-carlo-estimation-in-r">Monte Carlo estimation in R</a></li>
-  <li><a href="#what-else-a-post-can-contain" id="toc-what-else-a-post-can-contain" class="nav-link" data-scroll-target="#what-else-a-post-can-contain">What else a post can contain</a></li>
   </ul>
 </nav>
     </div>
@@ -407,17 +409,17 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Example: estimating the distribution of a scan statistic by simulation</h1>
+<h1 class="title">Estimating the distribution of a scan statistic by simulation</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">example</div>
     <div class="quarto-category">scan statistics</div>
+    <div class="quarto-category">Monte Carlo</div>
     <div class="quarto-category">R</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A sample post showing what the blog supports: formulas, R code, tables, numbered statements. It can be deleted or replaced.
+    A first post: a Monte Carlo estimate of the probability that a one-dimensional scan statistic reaches a given level, in a few lines of R.
   </div>
 </div>
 
@@ -446,19 +448,7 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>This is a sample post
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It shows what a post on this blog looks like: text, LaTeX formulas, R code, a table and a numbered statement. To write a new post, copy this folder, change the date and title, and rewrite the text. The post can be deleted at any time (the folder <code>blog/posts/2026-11-20-exemplu/</code> and its Romanian counterpart in <code>ro/blog/posts/</code>).</p>
-</div>
-</div>
+<p>This is the first post on this blog, and it starts with the question behind scan statistics: when a sequence of observations shows a cluster of events, how surprising is that cluster under pure chance?</p>
 <section id="the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
 <p>Let <span class="math inline">\(X_1, X_2, \dots, X_N\)</span> be independent Bernoulli random variables with parameter <span class="math inline">\(p\)</span>. For a window of length <span class="math inline">\(m\)</span>, the one-dimensional discrete scan statistic is</p>
@@ -469,16 +459,19 @@ S_m(N) = \max_{1 \le i \le N-m+1} \; \sum_{k=i}^{i+m-1} X_k .
 <div id="def-scan" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Scan statistic)</strong></span> For a sequence <span class="math inline">\((X_k)\)</span> and a length <span class="math inline">\(m\)</span>, the <em>scan statistic</em> is the largest number of successes contained in a window of <span class="math inline">\(m\)</span> consecutive observations.</p>
 </div>
+<p>Simulation is the most direct way to estimate this probability, and a useful check for exact formulas and approximations.</p>
 </section>
 <section id="monte-carlo-estimation-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="monte-carlo-estimation-in-r">Monte Carlo estimation in R</h2>
-<p>The simplest estimator is the relative frequency over a large number of independent simulations:</p>
+<p>The simplest estimator is the relative frequency over <span class="math inline">\(n\)</span> independent simulations:</p>
 <p><span class="math display">\[
 \widehat{P}_n = \frac{1}{n} \sum_{r=1}^{n} \mathbf{1}\{S^{(r)}_m(N) \ge k\},
 \qquad
 \operatorname{se}\big(\widehat{P}_n\big) \approx \sqrt{\frac{\widehat{P}_n (1-\widehat{P}_n)}{n}} .
 \]</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>scan_1d <span class="ot">&lt;-</span> <span class="cf">function</span>(x, m) {</span>
+<p>The window sums are obtained from cumulative sums, so each simulated sequence is scanned in linear time.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>scan_1d <span class="ot">&lt;-</span> <span class="cf">function</span>(x, m) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># window sums of length m, computed from cumulative sums</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(<span class="fu">c</span>(<span class="dv">0</span>, x))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(s[(m <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(s)] <span class="sc">-</span> s[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(s) <span class="sc">-</span> m)])</span>
@@ -490,57 +483,96 @@ S_m(N) = \max_{1 \le i \le N-m+1} \; \sum_{k=i}^{i+m-1} X_k .
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(S <span class="sc">&gt;=</span> k)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>se    <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">/</span> <span class="fu">length</span>(S))</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">estimate =</span> p_hat, <span class="at">std_error =</span> se)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Executable R code
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The block above is only displayed. To have R run the code when the site is rendered and include its output (figures too), write the block as <code>```{r}</code>. The results are stored in <code>_freeze/</code>, so the site can be rebuilt without R.</p>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">estimate =</span> p_hat, <span class="at">std_error =</span> se), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> estimate std_error 
+   0.0709    0.0026 </code></pre>
 </div>
 </div>
+<p>For <span class="math inline">\(N = 1000\)</span>, <span class="math inline">\(m = 20\)</span> and <span class="math inline">\(p = 0.05\)</span>, the probability that some window contains at least <span class="math inline">\(k = 6\)</span> successes is estimated at 0.0709, with a standard error of 0.0026. Within a single window the expected number of successes is only <span class="math inline">\(mp = 1\)</span>, so it is the scanning over <span class="math inline">\(N - m + 1\)</span> overlapping windows that makes such a cluster likely.</p>
+<p><a href="#fig-scan" class="quarto-xref">Figure&nbsp;1</a> shows the whole simulated distribution of <span class="math inline">\(S_{20}(1000)\)</span>; the values at or above <span class="math inline">\(k = 6\)</span> are highlighted.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">factor</span>(S, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="fu">max</span>(S))) <span class="sc">/</span> <span class="fu">length</span>(S)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">as.integer</span>(<span class="fu">names</span>(freq)) <span class="sc">&gt;=</span> k, <span class="st">"#D55E00"</span>, <span class="st">"#0072B2"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">las =</span> <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(freq, <span class="at">col =</span> cols, <span class="at">border =</span> <span class="cn">NA</span>, <span class="at">space =</span> <span class="fl">0.15</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"value of the scan statistic"</span>, <span class="at">ylab =</span> <span class="st">"relative frequency"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scan" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-scan-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Empirical distribution of S_{20}(1000) for p = 0.05 (10 000 simulations). Values \ge 6 in orange."><img src="index_files/figure-html/fig-scan-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-</section>
-<section id="what-else-a-post-can-contain" class="level2">
-<h2 class="anchored" data-anchor-id="what-else-a-post-can-contain">What else a post can contain</h2>
-<table class="caption-top table">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Empirical distribution of <span class="math inline">\(S_{20}(1000)\)</span> for <span class="math inline">\(p = 0.05\)</span> (10 000 simulations). Values <span class="math inline">\(\ge 6\)</span> in orange.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The same simulations give the whole tail at once (<a href="#tbl-tail" class="quarto-xref">Table&nbsp;1</a>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ks  <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">9</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ks, <span class="cf">function</span>(j) <span class="fu">mean</span>(S <span class="sc">&gt;=</span> j))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">k =</span> ks, <span class="at">estimate =</span> est,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">std_error =</span> <span class="fu">sqrt</span>(est <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> est) <span class="sc">/</span> <span class="fu">length</span>(S))),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"$k$"</span>, <span class="st">"estimate"</span>, <span class="st">"standard error"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-tail" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Estimated tail probabilities <span class="math inline">\(\mathbb{P}\big(S_{20}(1000) \ge k\big)\)</span> and their standard errors.
+</figcaption>
+<div aria-describedby="tbl-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th>Element</th>
-<th>Quarto syntax</th>
+<th style="text-align: right;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">standard error</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Formula</td>
-<td><code>$...$</code> and <code>$$...$$</code></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.8767</td>
+<td style="text-align: right;">0.0033</td>
 </tr>
 <tr class="even">
-<td>Theorem</td>
-<td><code>::: {#thm-name} ... :::</code></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.3543</td>
+<td style="text-align: right;">0.0048</td>
 </tr>
 <tr class="odd">
-<td>Figure</td>
-<td><code>![Caption](figure.png)</code></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.0709</td>
+<td style="text-align: right;">0.0026</td>
 </tr>
 <tr class="even">
-<td>R / Python code</td>
-<td><code>```{r}</code> / <code>```{python}</code></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.0079</td>
+<td style="text-align: right;">0.0009</td>
 </tr>
 <tr class="odd">
-<td>Footnote</td>
-<td><code>text[^1]</code></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.0011</td>
+<td style="text-align: right;">0.0003</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.0001</td>
+<td style="text-align: right;">0.0001</td>
 </tr>
 </tbody>
 </table>
-<p>Cross-references work automatically: for example, <a href="#def-scan" class="quarto-xref">Definition&nbsp;1</a> above.</p>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The same approach carries over to two and three dimensions, where the window becomes a rectangle or a box and simulation is often the most practical way to obtain reference values.</p>
 
 
 </section>
@@ -1010,6 +1042,38 @@ S_m(N) = \max_{1 \le i \le N-m+1} \; \sum_{k=i}^{i+m-1} X_k .
   </div>
 </footer>
 <script src="../../../assets/js/site.js"></script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alexandru Amărioarei">
-<meta name="description" content="Postare-model care arată ce suportă blogul: formule, cod R, tabele, teoreme. Poate fi ștearsă sau înlocuită.">
+<meta name="description" content="O primă postare: estimarea Monte Carlo a probabilității ca statistica de scanare unidimensională să atingă un anumit nivel, în câteva linii de R.">
 
-<title>Exemplu: estimarea repartiției statisticii de scanare prin simulare – Alexandru Amărioarei</title>
+<title>Estimarea repartiției statisticii de scanare prin simulare – Alexandru Amărioarei</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -85,9 +85,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-278b381e4eb370a9418af996ad7b5391.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4b5f431aa750e1299ae121b225b14301.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-53390f7336e454e8475be8676e3bea93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-4b5f431aa750e1299ae121b225b14301.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-a34edd72b86f12255afbe45a190fbda2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-67f0680ab4b9ef9e508bd1bdf01e3ff3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-a34edd72b86f12255afbe45a190fbda2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -151,8 +154,8 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Exemplu: estimarea repartiției statisticii de scanare prin simulare – Alexandru Amărioarei">
-<meta property="og:description" content="Postare-model care arată ce suportă blogul: formule, cod R, tabele, teoreme. Poate fi ștearsă sau înlocuită.">
+<meta property="og:title" content="Estimarea repartiției statisticii de scanare prin simulare – Alexandru Amărioarei">
+<meta property="og:description" content="O primă postare: estimarea Monte Carlo a probabilității ca statistica de scanare unidimensională să atingă un anumit nivel, în câteva linii de R.">
 <meta property="og:image" content="https://alexamarioarei.github.io/ro/blog/posts/assets/img/og-card.png">
 <meta property="og:site_name" content="Alexandru Amărioarei">
 <meta property="og:locale" content="ro_RO">
@@ -396,7 +399,6 @@ window.Quarto = {
   <ul>
   <li><a href="#problema" id="toc-problema" class="nav-link active" data-scroll-target="#problema">Problema</a></li>
   <li><a href="#estimare-monte-carlo-în-r" id="toc-estimare-monte-carlo-în-r" class="nav-link" data-scroll-target="#estimare-monte-carlo-în-r">Estimare Monte Carlo în R</a></li>
-  <li><a href="#ce-mai-poate-conține-o-notă" id="toc-ce-mai-poate-conține-o-notă" class="nav-link" data-scroll-target="#ce-mai-poate-conține-o-notă">Ce mai poate conține o notă</a></li>
   </ul>
 </nav>
     </div>
@@ -406,17 +408,17 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exemplu: estimarea repartiției statisticii de scanare prin simulare</h1>
+<h1 class="title">Estimarea repartiției statisticii de scanare prin simulare</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">exemplu</div>
     <div class="quarto-category">statistici de scanare</div>
+    <div class="quarto-category">Monte Carlo</div>
     <div class="quarto-category">R</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Postare-model care arată ce suportă blogul: formule, cod R, tabele, teoreme. Poate fi ștearsă sau înlocuită.
+    O primă postare: estimarea Monte Carlo a probabilității ca statistica de scanare unidimensională să atingă un anumit nivel, în câteva linii de R.
   </div>
 </div>
 
@@ -445,19 +447,7 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Notă</span>Aceasta este o postare-exemplu
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Arată cum arată o notă pe acest blog: text, formule LaTeX, cod R, un tabel și un enunț numerotat. Pentru o postare nouă, copiați acest director, schimbați data și titlul și rescrieți textul. Postarea poate fi ștearsă oricând (directorul <code>ro/blog/posts/2026-11-20-exemplu/</code> și perechea lui din <code>blog/posts/</code>).</p>
-</div>
-</div>
+<p>Aceasta este prima postare de pe acest blog și pornește de la întrebarea din spatele statisticilor de scanare: atunci când într-un șir de observații apare o aglomerare de evenimente, cât de surprinzătoare este ea dacă totul se datorează doar întâmplării?</p>
 <section id="problema" class="level2">
 <h2 class="anchored" data-anchor-id="problema">Problema</h2>
 <p>Fie <span class="math inline">\(X_1, X_2, \dots, X_N\)</span> variabile aleatoare independente, cu repartiția Bernoulli de parametru <span class="math inline">\(p\)</span>. Pentru o fereastră de lungime <span class="math inline">\(m\)</span>, statistica de scanare unidimensională discretă este</p>
@@ -468,16 +458,19 @@ S_m(N) = \max_{1 \le i \le N-m+1} \; \sum_{k=i}^{i+m-1} X_k .
 <div id="def-scan" class="theorem definition">
 <p><span class="theorem-title"><strong>Definiția 1 (Statistica de scanare)</strong></span> Pentru un șir <span class="math inline">\((X_k)\)</span> și o lungime <span class="math inline">\(m\)</span>, numim <em>statistică de scanare</em> numărul maxim de succese conținute într-o fereastră de <span class="math inline">\(m\)</span> observații consecutive.</p>
 </div>
+<p>Simularea este calea cea mai directă de a estima această probabilitate și o verificare utilă pentru formulele exacte și pentru aproximări.</p>
 </section>
 <section id="estimare-monte-carlo-în-r" class="level2">
 <h2 class="anchored" data-anchor-id="estimare-monte-carlo-în-r">Estimare Monte Carlo în R</h2>
-<p>Cel mai simplu estimator este frecvența relativă dintr-un număr mare de simulări independente:</p>
+<p>Cel mai simplu estimator este frecvența relativă din <span class="math inline">\(n\)</span> simulări independente:</p>
 <p><span class="math display">\[
 \widehat{P}_n = \frac{1}{n} \sum_{r=1}^{n} \mathbf{1}\{S^{(r)}_m(N) \ge k\},
 \qquad
 \operatorname{se}\big(\widehat{P}_n\big) \approx \sqrt{\frac{\widehat{P}_n (1-\widehat{P}_n)}{n}} .
 \]</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>scan_1d <span class="ot">&lt;-</span> <span class="cf">function</span>(x, m) {</span>
+<p>Sumele pe ferestre se obțin din sume cumulate, astfel încât fiecare secvență simulată este scanată în timp liniar.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>scan_1d <span class="ot">&lt;-</span> <span class="cf">function</span>(x, m) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sumele pe ferestre de lungime m, calculate cu sume cumulate</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(<span class="fu">c</span>(<span class="dv">0</span>, x))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(s[(m <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(s)] <span class="sc">-</span> s[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(s) <span class="sc">-</span> m)])</span>
@@ -489,57 +482,97 @@ S_m(N) = \max_{1 \le i \le N-m+1} \; \sum_{k=i}^{i+m-1} X_k .
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(S <span class="sc">&gt;=</span> k)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>se    <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">/</span> <span class="fu">length</span>(S))</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">estimat =</span> p_hat, <span class="at">eroare_standard =</span> se)</span></code></pre></div><button title="Copiază în clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Sfat</span>Cod R executabil
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Blocul de mai sus este doar afișat. Pentru ca R să ruleze codul la randare și să includă rezultatele (inclusiv grafice), scrieți blocul ca <code>```{r}</code>. Rezultatele sunt păstrate în <code>_freeze/</code>, astfel încât site-ul poate fi reconstruit și fără R.</p>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">estimat =</span> p_hat, <span class="at">eroare_standard =</span> se), <span class="dv">4</span>)</span></code></pre></div><button title="Copiază în clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        estimat eroare_standard 
+         0.0709          0.0026 </code></pre>
 </div>
 </div>
+<p>Pentru <span class="math inline">\(N = 1000\)</span>, <span class="math inline">\(m = 20\)</span> și <span class="math inline">\(p = 0{,}05\)</span>, probabilitatea ca o fereastră să conțină cel puțin <span class="math inline">\(k = 6\)</span> succese este estimată la 0,0709, cu o eroare standard de 0,0026. Într-o singură fereastră numărul mediu de succese este doar <span class="math inline">\(mp = 1\)</span>; scanarea celor <span class="math inline">\(N - m + 1\)</span> ferestre suprapuse face ca o asemenea aglomerare să devină probabilă.</p>
+<p><a href="#fig-scan" class="quarto-xref">Figura&nbsp;1</a> arată întreaga repartiție simulată a lui <span class="math inline">\(S_{20}(1000)\)</span>; valorile mai mari sau egale cu <span class="math inline">\(k = 6\)</span> sunt evidențiate.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">factor</span>(S, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="fu">max</span>(S))) <span class="sc">/</span> <span class="fu">length</span>(S)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">as.integer</span>(<span class="fu">names</span>(freq)) <span class="sc">&gt;=</span> k, <span class="st">"#D55E00"</span>, <span class="st">"#0072B2"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">las =</span> <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(freq, <span class="at">col =</span> cols, <span class="at">border =</span> <span class="cn">NA</span>, <span class="at">space =</span> <span class="fl">0.15</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"valoarea statisticii de scanare"</span>, <span class="at">ylab =</span> <span class="st">"frecvența relativă"</span>)</span></code></pre></div><button title="Copiază în clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-scan" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-scan-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;1: Repartiția empirică a lui S_{20}(1000) pentru p = 0{,}05 (10 000 de simulări). Valorile \ge 6 sunt marcate cu portocaliu."><img src="index_files/figure-html/fig-scan-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
-</section>
-<section id="ce-mai-poate-conține-o-notă" class="level2">
-<h2 class="anchored" data-anchor-id="ce-mai-poate-conține-o-notă">Ce mai poate conține o notă</h2>
-<table class="caption-top table">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Repartiția empirică a lui <span class="math inline">\(S_{20}(1000)\)</span> pentru <span class="math inline">\(p = 0{,}05\)</span> (10 000 de simulări). Valorile <span class="math inline">\(\ge 6\)</span> sunt marcate cu portocaliu.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Aceleași simulări dau dintr-odată întreaga coadă a repartiției (<a href="#tbl-tail" class="quarto-xref">Tabelul&nbsp;1</a>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ks  <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">9</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ks, <span class="cf">function</span>(j) <span class="fu">mean</span>(S <span class="sc">&gt;=</span> j))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">k =</span> ks, <span class="at">estimat =</span> est,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">eroare =</span> <span class="fu">sqrt</span>(est <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> est) <span class="sc">/</span> <span class="fu">length</span>(S))),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"$k$"</span>, <span class="st">"estimare"</span>, <span class="st">"eroare standard"</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">decimal.mark =</span> <span class="st">","</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiază în clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-tail" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabelul&nbsp;1: Probabilitățile estimate <span class="math inline">\(\mathbb{P}\big(S_{20}(1000) \ge k\big)\)</span> și erorile lor standard.
+</figcaption>
+<div aria-describedby="tbl-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th>Element</th>
-<th>Sintaxă Quarto</th>
+<th style="text-align: right;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: right;">estimare</th>
+<th style="text-align: right;">eroare standard</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Formulă</td>
-<td><code>$...$</code> și <code>$$...$$</code></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0,8767</td>
+<td style="text-align: right;">0,0033</td>
 </tr>
 <tr class="even">
-<td>Teoremă</td>
-<td><code>::: {#thm-nume} ... :::</code></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0,3543</td>
+<td style="text-align: right;">0,0048</td>
 </tr>
 <tr class="odd">
-<td>Figură</td>
-<td><code>![Legendă](figura.png)</code></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0,0709</td>
+<td style="text-align: right;">0,0026</td>
 </tr>
 <tr class="even">
-<td>Cod R / Python</td>
-<td><code>```{r}</code> / <code>```{python}</code></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0,0079</td>
+<td style="text-align: right;">0,0009</td>
 </tr>
 <tr class="odd">
-<td>Notă de subsol</td>
-<td><code>text[^1]</code></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0,0011</td>
+<td style="text-align: right;">0,0003</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0,0001</td>
+<td style="text-align: right;">0,0001</td>
 </tr>
 </tbody>
 </table>
-<p>Trimiterile încrucișate funcționează automat: de exemplu, <a href="#def-scan" class="quarto-xref">Definiția&nbsp;1</a> de mai sus.</p>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Aceeași abordare se extinde la două și trei dimensiuni, unde fereastra devine un dreptunghi sau un paralelipiped, iar simularea este adesea calea cea mai practică pentru a obține valori de referință.</p>
 
 
 </section>
@@ -1009,6 +1042,38 @@ S_m(N) = \max_{1 \le i \le N-m+1} \; \sum_{k=i}^{i+m-1} X_k .
   </div>
 </footer>
 <script src="../../../../assets/js/site.js"></script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
